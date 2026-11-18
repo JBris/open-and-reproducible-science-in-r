@@ -1,0 +1,123 @@
+---
+title: "Introduction"
+subtitle: "Open and Reproducible Science in R"
+author:
+  - name: "James Bristow"
+    affiliation: "Massey University"
+  - name: "Hana Liang"
+    affiliation: "Bioeconomy Science Institute"
+---
+
+## About the workshop
+
+Open and reproducible science helps research be understood, evaluated, reused,
+and extended by others. This workshop introduces a practical research workflow
+that connects R with GitHub, renv, Docker, targets, Quarto, pins, vetiver, and Zenodo.
+
+Participants will explore how the tools work together throughout the research
+lifecycle: versioning code, recording dependencies, capturing the computational
+environment, organising analyses, managing dataset and model versions,
+communicating results, and preserving outputs. A focused extension will explore
+synthetic data and differential privacy when the original data cannot be shared.
+The emphasis is on developing a connected workflow that can be shared,
+reproduced, and archived.
+
+The expanded teaching plan is under development. It uses
+one prepared research project, with a two-hour format and a shorter adaptation.
+
+The workshop is presented by [James Bristow](2_coordinators.qmd#james-bristow),
+Massey University, with co-author [Hana Liang](2_coordinators.qmd#hana-liang),
+Bioeconomy Science Institute.
+
+## Learning objectives
+
+By the end of the workshop, participants should be able to:
+
+- Explain how the tools support different parts of a reproducible research workflow.
+- Record metadata and provenance for a dataset and retrieve an earlier version.
+- Link a fitted model to its dataset version, input requirements, and software environment.
+- Develop a workflow that can be shared, reproduced, and archived.
+- Explain the privacy–utility trade-off and the limits of synthetic data for verifying findings.
+- Identify common barriers to reproducibility and practical strategies for addressing them.
+
+## Building a connected workflow
+
+The core workflow will bring together eight complementary tools:
+
+1. **Version and share with [GitHub](https://github.com/).** Track changes to code
+   and materials, collaborate with others, and make the project openly available.
+2. **Record dependencies with [renv](https://rstudio.github.io/renv/).** Capture
+   the R package dependencies needed to restore the project's software environment.
+3. **Capture the environment with [Docker](https://www.docker.com/).** Package
+   the computational environment so that it can be used beyond the original machine.
+4. **Organise the analysis with [targets](https://docs.ropensci.org/targets/).**
+   Express dependencies between analysis steps and track which outputs need to be rebuilt.
+5. **Version research data with [pins](https://pins.rstudio.com/articles/pins.html).**
+   Store datasets with descriptive metadata and retrieve specific versions.
+6. **Version fitted models with [vetiver](https://vetiver.posit.co/get-started/version.html).**
+   Store a model with its input requirements and prediction dependencies, and
+   record the dataset version used to fit it.
+7. **Communicate results with [Quarto](https://quarto.org/).** Connect code,
+   analysis, results, and narrative in reproducible reports.
+8. **Preserve outputs with [Zenodo](https://zenodo.org/).** Archive research
+   outputs and assign persistent identifiers so they can be cited and found later.
+
+Together, these tools support a workflow whose history, dependencies, analytical
+steps, and outputs can be inspected and reused by other researchers.
+
+## Managing datasets and fitted models
+
+The main versioning exercise will use `pins`, with versioning explicitly enabled
+on a local board. Participants will record a dataset's source, licence, variable
+descriptions, and processing history, then retrieve an earlier version by its
+identifier. A short `vetiver` demonstration will show how to associate a fitted
+model with the dataset version, model settings, and software environment used
+to produce it. Provenance relationships need to be recorded explicitly.
+
+An optional [codebook](https://cran.r-project.org/package=codebook) exercise
+will extend variable descriptions into a data dictionary.
+Deploying a model as an API is outside the core workshop scope.
+
+## Reproducibility when data cannot be shared
+
+Open science can include restricted-access data. Researchers can document their
+methods, code, and access conditions while restricting the original observations.
+
+The privacy extension will use public demonstration data treated as restricted
+for the exercise. It will introduce differentially private synthesis and compare
+how changes in the privacy budget affect selected summaries and model results.
+`DPSynth` is a candidate for this demonstration, pending method and implementation
+review; `diffpriv` can help illustrate the underlying mechanisms. The practical
+implementation is still to be developed.
+
+Synthetic data alone does not provide a differential privacy guarantee. The
+guarantee depends on the mechanism, its assumptions, and privacy accounting.
+Making the workflow runnable with synthetic data also does not mean that an
+independent researcher can verify findings calculated from the restricted
+originals. See [NIST's introduction to differentially private synthetic data](https://www.nist.gov/blogs/cybersecurity-insights/differentially-private-synthetic-data).
+
+## Principles to put into practice
+
+Throughout the session, consider whether another researcher could:
+
+- **Understand** the purpose of the project and follow the analysis decisions.
+- **Reproduce** the environment and rerun the workflow on another machine.
+- **Audit** the history of changes and the relationship between inputs and outputs.
+- **Trace** a reported result to the versions of its data, fitted model, and software environment.
+- **Reuse and extend** the code and materials with clear documentation and licensing.
+- **Assess sharing limits** and distinguish a runnable workflow from verification of restricted-data findings.
+- **Find and cite** a preserved version of the research outputs.
+
+We will consider common barriers to these goals, including undocumented
+dependencies, manual analysis steps, and assumptions tied to a single computing
+environment.
+
+## Getting started
+
+Some familiarity with R will help participants follow the examples. The
+[workshop README](../README.md) describes the environment and available access
+options, including [Docker setup](../README.md#usage-with-docker). Browser-based
+Binder access is still being prepared.
+
+For upcoming workshops, dates, and venues, see the
+[workshop announcements](../ANNOUNCEMENTS.md).

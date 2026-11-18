@@ -1,0 +1,14 @@
+cff-version: 1.2.0
+message: If you use this software, please cite it using these metadata.
+authors:
+  - family-names: "Bristow"
+    given-names: "James"
+    orcid: "https://orcid.org/0009-0002-3381-7466"
+  - family-names: "Liang"
+    given-names: "Hana"
+    orcid: "https://orcid.org/0009-0008-3342-5028"
+title: "Open and Reproducible Science in R"
+version: 1.0.0
+date-released: 2026-12-02
+license: MIT
+url: "https://github.com/JBris/open-and-reproducible-science-in-r"

@@ -1,0 +1,81 @@
+FROM rocker/binder:4.4.1 AS base
+
+ARG BUILD_DATE
+
+ARG APP_VERSION
+
+ARG HOME=/home/rstudio
+
+LABEL maintainer="j.bristow2@massey.ac.nz"
+LABEL org.label-schema.build-date=$BUILD_DATE
+LABEL version=$APP_VERSION
+LABEL org.opencontainers.image.title="Binder for Open and Reproducible Science in R"
+LABEL org.opencontainers.image.description="Binder image for Open and Reproducible Science in R workshop."
+
+ENV HOME=$HOME
+
+WORKDIR ${HOME}
+
+USER root
+
+COPY README.md README.md
+
+ENV DEBIAN_FRONTEND=noninteractive \
+    RENV_PATHS_ROOT=${HOME}/renv \
+    RENV_PATHS_LIBRARY=${HOME}/renv/library \
+    RENV_PATHS_CACHE=${HOME}/renv/.cache \
+    RENV_CONFIG_REPOS_OVERRIDE=https://cloud.r-project.org
+
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends pandoc libsodium-dev graphviz \
+    libglpk-dev cmake libnng-dev libmbedtls-dev openssh-client liblzma-dev libpq-dev libcurl4-openssl-dev \
+    libbz2-dev software-properties-common build-essential libmagic-dev libmagick++-dev curl g++ make \
+    libharfbuzz-dev libfribidi-dev graphviz-dev \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/* \
+    && rm -rf /tmp/downloaded_packages \
+    && install2.r -e -n -1 --skipinstalled remotes \
+    && R -e 'remotes::install_version("renv","1.0.11", repos = "https://cran.rstudio.com/")' \
+    && R -e 'remotes::install_version("pak","0.8.0", repos = "https://cran.rstudio.com/")'
+
+FROM base AS r_builder
+
+COPY renv.lock .renvignore .Rprofile ./
+
+COPY renv ${HOME}/renv
+
+RUN mkdir -p $RENV_PATHS_LIBRARY \
+    && mkdir -p $RENV_PATHS_CACHE \
+    &&  R -e \
+    "options(renv.config.pak.enabled=TRUE, renv.consent=TRUE); renv::restore()"
+
+FROM base AS runtime
+
+ENV R_LIBS=${HOME}/renv/library/R-4.4/x86_64-pc-linux-gnu \
+    R_LIBS_SITE=${HOME}/renv/library/linux-ubuntu-jammy/R-4.4/x86_64-pc-linux-gnu
+
+COPY --chown=${NB_USER}:${NB_USER} ./R ${HOME}/R
+
+COPY --chown=${NB_USER}:${NB_USER} ./pages ${HOME}/pages
+
+COPY --chown=${NB_USER}:${NB_USER} ./pipelines ${HOME}/pipelines
+
+COPY --chown=${NB_USER}:${NB_USER} \
+    _quarto.yml styles.css VERSION CITATION.cff LICENSE .lintr \
+    ANNOUNCEMENTS.md CHANGELOG.md CONTRIBUTING.md CODE_OF_CONDUCT.md \
+    SECURITY.md AI_POLICY.md ${HOME}/
+
+COPY --chown=${NB_USER}:${NB_USER} open-and-reproducible-science-in-r.Rproj .
+
+COPY --chown=${NB_USER}:${NB_USER} .here .
+
+COPY --from=r_builder --chown=${NB_USER}:${NB_USER} ${HOME} .
+
+RUN chown -R ${NB_USER}:${NB_USER} ${HOME} \
+    && chmod -R 755 ${HOME} \
+    && echo '.libPaths(c("/home/rstudio/renv/library/linux-ubuntu-jammy/R-4.4/x86_64-pc-linux-gnu", .libPaths()))' \
+    >> /usr/local/lib/R/etc/Rprofile.site
+
+USER ${NB_USER}
+
+EXPOSE 8787 8787

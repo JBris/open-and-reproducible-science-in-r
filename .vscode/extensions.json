@@ -1,0 +1,10 @@
+{
+  "recommendations": [
+    "REditorSupport.r",
+    "quarto.quarto",
+    "docker.docker",
+    "redhat.vscode-yaml",
+    "ms-vscode-remote.remote-containers",
+    "openai.chatgpt"
+  ]
+}

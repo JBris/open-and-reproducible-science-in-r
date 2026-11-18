@@ -1,0 +1,36 @@
+services:
+  rstudio:
+    image: ghcr.io/jbris/open-reproducible-science-r:${APP_VERSION:-latest}
+    build:
+      context: .
+      dockerfile: ./dockerfiles/rstudio/Dockerfile.${APP_VERSION}
+      args:
+        BUILD_DATE: ${BUILD_DATE:-unknown}
+        APP_VERSION: $APP_VERSION
+      tags:
+        - ghcr.io/jbris/open-reproducible-science-r:latest
+    restart: always
+    stop_grace_period: 10s
+    ports:
+      - "127.0.0.1:8787:8787"
+    environment:
+      PASSWORD: password
+      ROOT: "true"
+      DISABLE_AUTH: "true"
+    command: /init
+
+  binder:
+    image: ghcr.io/jbris/binder-open-reproducible-science-r:${APP_VERSION:-latest}
+    build:
+      context: .
+      dockerfile: ./dockerfiles/binder/Dockerfile.${APP_VERSION}
+      args:
+        BUILD_DATE: ${BUILD_DATE:-unknown}
+        APP_VERSION: $APP_VERSION
+      tags:
+        - ghcr.io/jbris/binder-open-reproducible-science-r:latest
+
+networks:
+  default:
+    name: open-reproducible-science-r
+    driver: bridge

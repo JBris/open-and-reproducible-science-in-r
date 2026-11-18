@@ -1,0 +1,7 @@
+services:
+  rstudio:
+    image: ghcr.io/jbris/open-reproducible-science-r:${APP_VERSION:-latest}
+    command: sleep infinity
+    volumes:
+      - .:/workspace
+    tty: true

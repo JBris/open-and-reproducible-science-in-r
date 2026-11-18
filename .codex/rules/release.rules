@@ -1,0 +1,17 @@
+# These rules apply to execution outside the sandbox. They are not a complete
+# command firewall, and they do not grant publication authorization.
+prefix_rule(
+    pattern = ["docker", "push"],
+    decision = "prompt",
+    justification = "Confirm the image and registry before publishing a Docker image.",
+    match = ["docker push ghcr.io/jbris/open-reproducible-science-r:1.0.0"],
+    not_match = ["docker build .", "docker pull rocker/rstudio:4.4.2"],
+)
+
+prefix_rule(
+    pattern = ["docker", "compose", "push"],
+    decision = "prompt",
+    justification = "Confirm the services and registry before publishing Compose images.",
+    match = ["docker compose push rstudio", "docker compose push binder"],
+    not_match = ["docker compose config --quiet", "docker compose build rstudio"],
+)
