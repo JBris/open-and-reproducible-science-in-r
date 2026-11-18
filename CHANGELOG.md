@@ -10,6 +10,7 @@
 
 ### Changed
 
+- Point documentation links and website metadata to the GitHub Pages workshop site.
 - Expanded the planned workshop scope to include dataset and model metadata, provenance, and versioning with pins and vetiver.
 - Added a focused extension on differentially private synthetic data, privacy–utility trade-offs, and the limits of reproducing restricted-data findings.
 - Read and validate VERSION in both image build workflows, including checks against release tags.

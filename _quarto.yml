@@ -12,6 +12,7 @@ project:
 
 website:
   title: "Open and Reproducible Science in R"
+  site-url: https://jbris.github.io/open-and-reproducible-science-in-r/
   repo-url: https://github.com/JBris/open-and-reproducible-science-in-r
   repo-actions: [issue]
   page-navigation: true

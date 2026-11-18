@@ -2,12 +2,13 @@
 
 [![R](https://img.shields.io/badge/R-4.4.1-blue)](https://www.r-project.org/)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.24342489.svg)](https://doi.org/10.5281/zenodo.24342489)
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/JBris/open-and-reproducible-science-in-r.git/HEAD)
 [![Build RStudio](https://github.com/JBris/open-and-reproducible-science-in-r/actions/workflows/build-rstudio.yaml/badge.svg)](https://github.com/JBris/open-and-reproducible-science-in-r/actions/workflows/build-rstudio.yaml)
 [![Build Binder](https://github.com/JBris/open-and-reproducible-science-in-r/actions/workflows/build-binder.yaml/badge.svg)](https://github.com/JBris/open-and-reproducible-science-in-r/actions/workflows/build-binder.yaml)
 
-[**Workshop materials**](pages/)
-| [**Changelog**](CHANGELOG.md)
+[**Documentation**](https://jbris.github.io/open-and-reproducible-science-in-r/)
+| [**Changelog**](https://jbris.github.io/open-and-reproducible-science-in-r/CHANGELOG.html)
 | [**Releases**](https://github.com/JBris/open-and-reproducible-science-in-r/releases)
 | [**Docker configuration**](docker-compose.yaml)
 | [**Binder**](https://mybinder.org/v2/gh/JBris/open-and-reproducible-science-in-r.git/HEAD)
@@ -52,8 +53,10 @@ environment.
 | Where | CO 119, Kelburn Campus, Victoria University of Wellington |
 | Format | Workshop |
 
-Workshop materials are being prepared in the [pages directory](pages/), with
-Quarto used to organise the workshop website and reports.
+Read the [workshop materials](https://jbris.github.io/open-and-reproducible-science-in-r/pages/1_introduction.html)
+on the [workshop website](https://jbris.github.io/open-and-reproducible-science-in-r/).
+Quarto is used to organise the website and reports, with sources in the
+[pages directory](pages/).
 
 The [draft teaching plan](https://github.com/JBris/open-and-reproducible-science-in-r/blob/main/draft/3_workshop_plan.qmd) develops the expanded scope around
 one prepared research project, with a two-hour format and a shorter 90-minute
@@ -153,7 +156,8 @@ once the workshop image is published.
 
 ## Announcements
 
-See [ANNOUNCEMENTS.md](ANNOUNCEMENTS.md) for workshop updates.
+See the [workshop announcements](https://jbris.github.io/open-and-reproducible-science-in-r/ANNOUNCEMENTS.html)
+for updates.
 
 ## Communication
 
@@ -165,9 +169,9 @@ See [ANNOUNCEMENTS.md](ANNOUNCEMENTS.md) for workshop updates.
 ## Contributions and support
 
 Contributions to the workshop materials, examples, and documentation are welcome.
-See the [contribution guidelines](CONTRIBUTING.md),
-[community code of conduct](CODE_OF_CONDUCT.md), and
-[AI-assisted development policy](AI_POLICY.md).
+See the [contribution guidelines](https://jbris.github.io/open-and-reproducible-science-in-r/CONTRIBUTING.html),
+[community code of conduct](https://jbris.github.io/open-and-reproducible-science-in-r/CODE_OF_CONDUCT.html), and
+[AI-assisted development policy](https://jbris.github.io/open-and-reproducible-science-in-r/AI_POLICY.html).
 
 Contributors using Codex can refer to the [development setup](.codex/README.md)
 and [project instructions](AGENTS.md) for repository skills, subagents, hooks,
