@@ -1,0 +1,71 @@
+{
+  "version": "2.0.0",
+  "options": {
+    "cwd": "${workspaceFolder}"
+  },
+  "presentation": {
+    "reveal": "always",
+    "panel": "dedicated"
+  },
+  "tasks": [
+    {
+      "label": "R: Check syntax",
+      "type": "process",
+      "command": "Rscript",
+      "args": [
+        "--vanilla",
+        "${workspaceFolder}/.codex/scripts/check-r.R"
+      ],
+      "problemMatcher": [],
+      "detail": "Parse maintained R scripts without executing code or project startup files."
+    },
+    {
+      "label": "Quarto: Render website (HTML)",
+      "type": "process",
+      "command": "quarto",
+      "args": ["render", "--to", "html"],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "problemMatcher": [],
+      "detail": "Render the workshop website as HTML using _quarto.yml."
+    },
+    {
+      "label": "Quarto: Preview website",
+      "type": "process",
+      "command": "quarto",
+      "args": ["preview", "--no-browser"],
+      "problemMatcher": [],
+      "detail": "Start a website preview. Use Terminal: Terminate Task to stop it."
+    },
+    {
+      "label": "Codex: Test project hooks",
+      "type": "process",
+      "command": "python3",
+      "args": [
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "${workspaceFolder}/.codex/tests",
+        "-v"
+      ],
+      "windows": {
+        "command": "py",
+        "args": [
+          "-3",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "${workspaceFolder}/.codex/tests",
+          "-v"
+        ]
+      },
+      "group": "test",
+      "problemMatcher": [],
+      "detail": "Run the existing lifecycle hook tests in isolated temporary repositories."
+    }
+  ]
+}

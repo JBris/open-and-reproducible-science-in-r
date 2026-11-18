@@ -1,0 +1,46 @@
+{
+  "editor.rulers": [120],
+  "files.insertFinalNewline": true,
+  "files.trimTrailingWhitespace": true,
+  "r.bracketedPaste": true,
+  "r.sessionWatcher": true,
+  "[r]": {
+    "editor.defaultFormatter": "REditorSupport.r",
+    "editor.insertSpaces": true,
+    "editor.tabSize": 2
+  },
+  "[quarto]": {
+    "editor.insertSpaces": true,
+    "editor.tabSize": 2,
+    "editor.wordWrap": "on",
+    "files.trimTrailingWhitespace": false
+  },
+  "[markdown]": {
+    "editor.wordWrap": "on",
+    "files.trimTrailingWhitespace": false
+  },
+  "[yaml]": {
+    "editor.insertSpaces": true,
+    "editor.tabSize": 2
+  },
+  "search.exclude": {
+    "**/.Rproj.user/**": true,
+    "**/.quarto/**": true,
+    "**/__pycache__/**": true,
+    "**/_site/**": true,
+    "**/_targets/**": true,
+    "**/renv/.cache/**": true,
+    "**/renv/library/**": true,
+    "**/renv/staging/**": true
+  },
+  "files.watcherExclude": {
+    "**/.Rproj.user/**": true,
+    "**/.quarto/**": true,
+    "**/__pycache__/**": true,
+    "**/_site/**": true,
+    "**/_targets/**": true,
+    "**/renv/.cache/**": true,
+    "**/renv/library/**": true,
+    "**/renv/staging/**": true
+  }
+}

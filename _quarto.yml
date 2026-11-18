@@ -1,0 +1,65 @@
+project:
+  type: website
+  output-dir: _site
+  preview:
+    browser: true
+  render:
+    - "*.qmd"
+    - "*.md"
+    - "!AGENTS.md"
+    - "!draft/"
+    - "!*.rmd"
+
+website:
+  title: "Open and Reproducible Science in R"
+  repo-url: https://github.com/JBris/open-and-reproducible-science-in-r
+  repo-actions: [issue]
+  page-navigation: true
+  description: Content for the Open and Reproducible Science in R workshop.
+  open-graph: true
+  twitter-card: true
+  search:
+    limit: 15
+    type: overlay
+  cookie-consent: false
+  sidebar:
+    style: "docked"
+    search: true
+    contents:
+      - section: "Workshop Introduction"
+        contents:
+          - pages/1_introduction.qmd
+          - pages/2_coordinators.qmd
+      - section: "Communications and Community"
+        contents:
+          - ANNOUNCEMENTS.md
+          - CODE_OF_CONDUCT.md
+          - CONTRIBUTING.md
+          - SECURITY.md
+          - AI_POLICY.md
+          - CHANGELOG.md
+  comments:
+    hypothesis:
+      theme: clean
+      openSidebar: false
+
+format:
+  html:
+    theme:
+      light: flatly
+      dark: darkly
+    css: styles.css
+    toc: true
+
+  pdf:
+    documentclass: article
+    toc: true
+    number-sections: true
+    colorlinks: true
+    geometry:
+      - margin=1in
+
+editor: visual
+
+execute:
+  eval: false

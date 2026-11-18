@@ -1,0 +1,31 @@
+{
+  "description": "Lightweight, local checks for the R/Quarto workshop. No installs, formatting, or publication.",
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "^(startup|resume|clear|compact)$",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 \"$(git rev-parse --show-toplevel)/.codex/hooks/project.py\" session-start",
+            "timeout": 10,
+            "statusMessage": "Checking workshop development environment",
+            "additionalContextLimit": 1000
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3 \"$(git rev-parse --show-toplevel)/.codex/hooks/project.py\" stop",
+            "timeout": 45,
+            "statusMessage": "Checking working tree and R syntax"
+          }
+        ]
+      }
+    ]
+  }
+}

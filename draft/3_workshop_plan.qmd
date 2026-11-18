@@ -1,0 +1,160 @@
+---
+title: "Workshop plan"
+subtitle: "Research workflows, versioned objects, and responsible sharing"
+author:
+  - name: "James Bristow"
+    affiliation: "Massey University"
+  - name: "Hana Liang"
+    affiliation: "Bioeconomy Science Institute"
+---
+
+## Scope and development status
+
+This is the teaching plan for the expanded workshop. The example project,
+dataset/model versioning exercises, and privacy demonstration still need to be
+developed and tested. The package choices below describe planned roles; they are
+not a record of dependencies already restored in the project environment.
+
+The workshop will follow one research project from inputs to archived outputs.
+Participants will receive a prepared R project and computing environment so that
+most of the practical time can be spent using the workflow. Detailed tool
+installation, production model deployment, and a full treatment of differential
+privacy are outside the core scope.
+
+## Proposed revised abstract
+
+Open and reproducible science is increasingly important for ensuring that
+research can be understood, evaluated, reused, and extended by others. This
+workshop provides a practical introduction to developing reproducible research
+workflows using R and open-source tools.
+
+Participants will develop an integrated workflow incorporating GitHub, renv,
+Docker, targets, Quarto, pins, vetiver, and Zenodo. The workshop will demonstrate
+how these tools work together throughout the research lifecycle, from capturing
+dependencies and computational environments to organising analyses, producing
+reports, and preserving research outputs.
+
+The workshop will introduce research data and model management, including
+documenting metadata, tracking provenance, and maintaining versioned datasets
+and fitted models with pins and vetiver. Recognising that original research
+data cannot always be shared, a focused extension will explore differentially
+private synthetic data and the trade-offs between privacy, analytical utility,
+and reproducibility. Participants will consider what a shared synthetic dataset
+allows others to reproduce and what remains unverifiable without the originals.
+
+Finally, Zenodo will demonstrate the preservation and archiving of permitted
+research outputs with persistent identifiers. Throughout the workshop, the
+emphasis will be on transparent, portable, auditable, reusable, and accessible
+research, with clear documentation of any limits on data access and reuse.
+
+## One practical research project
+
+Use a public, redistributable tabular dataset and a simple fitted model throughout
+the exercises. Treat the original data as restricted only for the teaching
+scenario; participants will not need confidential data.
+
+1. **Describe and version the inputs.** Record the source, licence, variables,
+   units, and processing decisions. Create a local `pins` board with versioning
+   enabled, write two dataset versions, and retrieve a specified earlier version.
+2. **Run the analysis.** Use `targets` to connect data preparation, model fitting,
+   and reporting. Make the selected dataset version an explicit input rather
+   than silently reading whichever version is newest.
+3. **Record the fitted model.** Demonstrate `vetiver` model storage and retrieval,
+   including its input requirements and prediction dependencies. Record the
+   training-data version, code revision, model settings, and relevant metrics.
+4. **Report the provenance.** Use Quarto to connect the methods and results to
+   the dataset and model version identifiers. Keep `renv` and Docker as the
+   supporting package and computing environments.
+5. **Explore a synthetic-data branch.** Demonstrate a reviewed differential
+   privacy method on the public teaching data, compare selected utility measures,
+   and rerun the same analysis/reporting workflow on the synthetic output.
+   Record which results came from original versus synthetic inputs.
+6. **Prepare a permitted release.** Assemble code, documentation, approved data
+   and model objects, and a report for sharing through GitHub and archiving with
+   Zenodo. Use a prepared example of the archive process rather than requiring
+   every participant to publish a live record.
+
+Versioning and metadata do not automatically make a dataset or model appropriate
+for public release. A model fitted to restricted originals can itself contain
+or reveal sensitive information. Treat original-data models, private evaluation
+results, and metadata as separate release decisions; a synthetic dataset does
+not confer privacy protection on those other objects.
+
+## Packages and scope
+
+| Package | Planned teaching role | Scope |
+| --- | --- | --- |
+| [pins](https://pins.rstudio.com/articles/pins.html) | Dataset metadata, explicit version identifiers, hashes, and historical retrieval | Core hands-on exercise |
+| [vetiver](https://vetiver.posit.co/get-started/version.html) | Fitted-model versions, input requirements, and prediction dependencies | Short practical demonstration |
+| [codebook](https://cran.r-project.org/package=codebook) | Variable descriptions and data dictionaries | Optional metadata extension |
+| [DPSynth](https://cran.r-project.org/package=DPSynth) | Candidate for differentially private tabular synthesis | Extension, pending method and implementation review |
+| [diffpriv](https://cran.r-project.org/package=diffpriv) | Mechanisms for differentially private statistics and related computations | Optional explanation of underlying principles |
+
+`pins` and `vetiver` support versioned storage, but project-specific provenance
+links still need to be supplied as metadata. Enable versioning explicitly for a
+local folder board. Use the `renv` lockfile to capture the computational package
+environment alongside the model's prediction dependencies.
+
+The privacy package is not yet selected as a tested workshop dependency. Review
+its method, privacy assumptions, supported data types, installation requirements,
+and behaviour under the project's R version before preparing the exercise. A
+package description or a utility/risk score is not an independent verification
+of a differential privacy guarantee.
+
+## Teaching formats
+
+### Two-hour format
+
+| Activity | Minutes | Intended result |
+| --- | --- | --- |
+| Principles and prepared-project walkthrough | 15 | Understand the project and environment |
+| Reproducible analysis and reporting | 40 | Run the targets pipeline and Quarto report |
+| Dataset and model metadata, provenance, and versioning | 25 | Retrieve a dataset version and inspect a linked model version |
+| Synthetic data and differential privacy demonstration | 20 | Compare selected utility measures and discuss privacy accounting |
+| Sharing, archiving, and discussion | 20 | Identify permitted outputs and inspect an archive example |
+| **Total** | **120** | |
+
+### Shorter 90-minute format
+
+| Activity | Minutes |
+| --- | --- |
+| Principles and prepared-project walkthrough | 15 |
+| Reproducible analysis and reporting | 30 |
+| Dataset versioning exercise and model demonstration | 25 |
+| Privacy and synthetic-data overview | 10 |
+| Archiving demonstration and discussion | 10 |
+| **Total** | **90** |
+
+For the shorter format, supply completed pipeline/report scaffolding and use
+prepared outputs for the privacy overview. Move the fuller synthetic-data
+exercise and optional data dictionary to follow-up material. These are reusable
+teaching formats; dates, venues, and announced session details belong in
+[announcements](../ANNOUNCEMENTS.md).
+
+## Questions for the privacy extension
+
+- Which unit is protected, and what does it mean for two datasets to be neighbours?
+- What bounds, preprocessing steps, mechanism, and privacy parameters are used?
+- How is privacy loss accounted for when several results or datasets are released?
+- Which distributions, relationships, and model results remain useful after synthesis?
+- Which analyses can be rerun, and which original-data findings cannot be independently verified?
+
+Ordinary synthesis and adding arbitrary noise are not sufficient to establish
+differential privacy. A classroom run on public data can illustrate these
+concepts, but its utility comparisons do not establish a privacy guarantee.
+Review how randomness and any reproducibility seed are handled before presenting
+the exercise as an example of a private release.
+
+Background: [NIST's synthetic-data overview](https://www.nist.gov/blogs/cybersecurity-insights/differentially-private-synthetic-data)
+and [guidelines for evaluating differential privacy guarantees](https://csrc.nist.gov/pubs/sp/800/226/final).
+
+## Development work
+
+- Select and document the public teaching dataset and simple modelling task.
+- Prepare the targets pipeline, Quarto report, and expected outputs.
+- Add dataset versioning and explicit model-to-data provenance exercises.
+- Select, review, and test the privacy demonstration and its teaching assumptions.
+- Test the selected package versions before recording them in `renv.lock` and
+  rebuilding the workshop environment.
+- Prepare permitted release examples, participant instructions, and a reduced
+  path for the shorter teaching format.
