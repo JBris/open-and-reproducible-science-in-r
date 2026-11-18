@@ -39,8 +39,8 @@ RUN apt-get update \
     && rm -rf /var/lib/apt/lists/* \
     && rm -rf /tmp/downloaded_packages \
     && install2.r -e -n -1 --skipinstalled remotes \
-    && R -e 'remotes::install_version("renv","1.0.11", repos = "https://cran.rstudio.com/")' \
-    && R -e 'remotes::install_version("pak","0.8.0", repos = "https://cran.rstudio.com/")'
+    && R -e 'remotes::install_version("renv","1.0.7", repos = "https://cran.rstudio.com/")' \
+    && R -e 'remotes::install_version("pak","0.7.2", repos = "https://cran.rstudio.com/")'
 
 FROM base AS r_builder
 
