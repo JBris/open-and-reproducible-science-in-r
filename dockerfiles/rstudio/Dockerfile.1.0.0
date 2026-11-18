@@ -39,8 +39,8 @@ RUN apt-get update \
     && rm -rf /var/lib/apt/lists/* \
     && rm -rf /tmp/downloaded_packages \
     && install2.r -e -n -1 --skipinstalled remotes \
-    && R -e 'remotes::install_version("renv","1.0.11", repos = "https://cran.rstudio.com/")' \
-    && R -e 'remotes::install_version("pak","0.8.0", repos = "https://cran.rstudio.com/")'
+    && R -e 'remotes::install_version("renv","1.0.7", repos = "https://cran.rstudio.com/")' \
+    && R -e 'remotes::install_version("pak","0.7.2", repos = "https://cran.rstudio.com/")'
 
 FROM base AS r_builder
 
@@ -67,7 +67,7 @@ COPY --chown=${NB_USER}:${NB_USER} ./pipelines ${HOME}/pipelines
 COPY --chown=${NB_USER}:${NB_USER} \
     _quarto.yml styles.css VERSION CITATION.cff LICENSE .lintr \
     ANNOUNCEMENTS.md CHANGELOG.md CONTRIBUTING.md CODE_OF_CONDUCT.md \
-    SECURITY.md AI_POLICY.md ${HOME}/
+    ACCESSIBILITY.md SECURITY.md AI_POLICY.md ${HOME}/
 
 COPY --chown=${NB_USER}:${NB_USER} open-and-reproducible-science-in-r.Rproj .
 

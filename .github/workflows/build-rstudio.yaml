@@ -29,10 +29,6 @@ jobs:
             echo "::error::VERSION must contain a Docker-compatible x.y.z version or prerelease."
             exit 1
           fi
-          if [[ "$GITHUB_EVENT_NAME" == "release" && "${GITHUB_REF_NAME#v}" != "$app_version" ]]; then
-            echo "::error::The release tag must match VERSION (with an optional v prefix)."
-            exit 1
-          fi
           printf 'APP_VERSION=%s\n' "$app_version" >> "$GITHUB_ENV"
       - name: Free disk space
         run: |

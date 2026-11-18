@@ -8,7 +8,9 @@ authors:
     given-names: "Hana"
     orcid: "https://orcid.org/0009-0008-3342-5028"
 title: "Open and Reproducible Science in R"
+doi: "10.5281/zenodo.24342489"
 version: 1.0.0
 date-released: 2026-12-02
 license: MIT
-url: "https://github.com/JBris/open-and-reproducible-science-in-r"
+url: "https://jbris.github.io/open-and-reproducible-science-in-r/"
+repository-code: "https://github.com/JBris/open-and-reproducible-science-in-r"
