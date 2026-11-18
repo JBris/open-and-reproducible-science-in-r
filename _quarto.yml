@@ -36,6 +36,7 @@ website:
           - ANNOUNCEMENTS.md
           - CODE_OF_CONDUCT.md
           - CONTRIBUTING.md
+          - ACCESSIBILITY.md
           - SECURITY.md
           - AI_POLICY.md
           - CHANGELOG.md
