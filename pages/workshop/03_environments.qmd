@@ -1,18 +1,18 @@
 ---
 title: "Reproducible computational environments"
-subtitle: "17–30 minutes · renv and Docker"
+subtitle: "17–30 minutes · renv, Docker and Binder"
 editor: visual
 ---
 
 ## Learning objectives
 
-By the end of this activity, you should be able to distinguish R package
-restoration from containerised computing, inspect the project's lockfile, and
-record the environment used to load the teaching data.
+By the end of this activity, you should be able to inspect the project's R
+lockfile, explain how a Docker image becomes a Binder session, and record the
+environment used to load the teaching data.
 
-Prerequisite: [preparation](00_preparation.qmd), including completed downloads
-and initial renv setup. Use a prepared environment during these 13 minutes;
-image builds and full installations belong before the session.
+Complete [preparation](00_preparation.qmd) before the session, including the
+data download and environment checks. Run the R activities in a prepared
+MyBinder session or an existing local R environment.
 
 ## Why this matters
 
@@ -28,10 +28,10 @@ the data version.
 | Code and configuration | The revision used for the run | Git commit |
 | Actual session | Versions loaded when the activity ran | `sessionInfo()` |
 
-renv restores the R packages described by a lockfile. It does not install the
-specified R interpreter or capture every system dependency. Docker packages a
-wider environment, but a Dockerfile alone does not establish that an image
-builds, starts, or reproduces every result.
+renv restores the R packages described by a lockfile. A Docker image can also
+include the R interpreter, operating-system libraries, and rendering tools.
+Reproducing a result still requires the analysis code, the input data, and a
+successful rerun.
 
 ## Inspect the current environment
 
@@ -68,49 +68,64 @@ The usual collaboration cycle is:
 3. Collaborators use `renv::restore()` to obtain the recorded packages.
 4. The analysis is tested in the restored environment.
 
-For this activity, inspect the existing lockfile. If restoration is needed,
-follow the [preparation instructions](00_preparation.qmd) and run this in the
-R Console before the workshop.
+For this activity, inspect the existing lockfile. The Binder image is built
+with the restored library. If you are setting up local R, follow the
+[preparation instructions](00_preparation.qmd) to restore it before the workshop.
 
-```r
-renv::restore()
-```
+## From a Dockerfile to RStudio on MyBinder {#environments-docker}
 
-## Inspect the Docker route {#environments-docker}
+Allow about four minutes. Participants need a browser to use MyBinder. The
+build commands below show what runs on GitHub Actions, so you can follow along
+without installing Docker or running a build.
 
-Allow about four minutes. Run these commands in a **Terminal** at the project
-root. They read the repository's configured image version:
+### Read the Dockerfile
+
+A **Dockerfile** is a set of instructions for building a Docker image. Find
+these instructions in the workshop's [Binder image Dockerfile](https://github.com/JBris/open-and-reproducible-science-in-r/blob/main/dockerfiles/binder/Dockerfile.1.0.0).
+
+| Instruction | What it does in this project |
+| --- | --- |
+| `FROM rocker/binder:4.4.1 AS base` | Starts from Rocker’s Binder image for R 4.4.1. |
+| `RUN` | Executes build steps such as installing system libraries and restoring R packages from `renv.lock`. |
+| `COPY` | Adds files such as the lockfile and workshop lessons to the image. |
+
+A **Docker build** uses these instructions and the repository files to produce
+an **image**. A **container** is a running instance of an image. The image
+provides the environment, and each participant runs the workshop in their own
+container.
+
+### Follow the GitHub Actions build pipelines
+
+The repository has two workflows that run when a GitHub release is published
+or when a maintainer starts them manually. [Build Binder](https://github.com/JBris/open-and-reproducible-science-in-r/actions/workflows/build-binder.yaml)
+builds the image MyBinder uses. [Build RStudio](https://github.com/JBris/open-and-reproducible-science-in-r/actions/workflows/build-rstudio.yaml)
+builds a separate image for people running RStudio with Docker locally.
+
+Each workflow checks out the source, reads `VERSION` into `APP_VERSION`, and
+records a UTC build date. Docker Compose uses `APP_VERSION` to select the
+Dockerfile and tag the image. The binder job includes these two steps.
 
 ```bash
-export APP_VERSION="$(cat VERSION)"
-docker compose config --quiet
+docker compose build binder
+docker compose push binder
 ```
 
-Successful configuration resolution checks the Compose inputs. It does not
-verify that the image has been published or that a server can start.
+The first command builds the image. The second publishes the image with its
+version tag to GitHub Container Registry (`ghcr.io`). The image version comes
+from `VERSION` and can differ from the GitHub release tag. Open a completed
+workflow run and find its build and push output if you want to see the process
+in the Actions log.
 
-For pre-workshop setup, once the instructor confirms that the image is
-available, use:
+### Launch the published environment
 
-```bash
-docker compose pull rstudio
-docker compose up --no-build rstudio
-```
+MyBinder reads the small [Binder entry point](https://github.com/JBris/open-and-reproducible-science-in-r/blob/main/binder/Dockerfile),
+which selects the published Binder image with `FROM`. MyBinder prepares the
+launch image and starts a container on its servers. The launch link’s
+`urlpath=rstudio` setting opens the RStudio interface in your browser.
 
-Open [RStudio at localhost:8787](http://localhost:8787). Leave the terminal open
-while working; press **Ctrl+C** there to stop the service. If your environment
-is already running, use the existing session during the workshop.
-
-The repository is mounted at
-`/home/rstudio/open-reproducible-science-r`. Open the project and save your work
-in that checkout. The RStudio service binds its port to localhost and disables
-login authentication for this local workshop configuration.
-
-The image version selected by `VERSION` is separate from GitHub release tags
-such as `v0.2.0`. Do not assume that a release tag identifies a matching image.
-For stronger provenance, also record the resolved image digest when the prepared
-image is distributed. A mounted checkout can differ from the code originally
-copied into an image, so retain the checkout's Git revision too.
+Use the session you opened during [preparation](00_preparation.qmd#choose-your-computing-environment)
+to run the R exercises. Keep your project files and outputs together in that
+session, and download your work before it ends.
 
 ## Try it yourself: restart, reload, record
 
@@ -142,13 +157,16 @@ writeLines(
 ```
 
 Inspect `outputs/session-info.txt`. Add a short sentence to your existing
-`WORKSHOP_NOTES.md` recording the R version and whether you used local R or
-Docker. Keep the raw data and generated session record separate from code
-changes; only stage files deliberately when making a later commit.
+`WORKSHOP_NOTES.md` recording the R version and whether you used MyBinder or
+local R. If you used MyBinder, record the image tag from `binder/Dockerfile`
+and the project revision from `git rev-parse HEAD` in the **Terminal**. Keep
+the raw data and generated session record separate from code changes.
 
 ## Checkpoint {#environments-checkpoint}
 
 - You can explain which parts of the environment renv and Docker capture.
+- You can trace how GitHub Actions builds and publishes the Binder image and
+  how MyBinder uses it to start RStudio.
 - You can distinguish the lockfile's requested R version from the running version.
 - The dataset reloads after a restart, and you have a session record on disk.
 - You can identify the workshop package versions recorded in the lockfile.
@@ -162,4 +180,5 @@ FAIR metadata with codebook and dataspice.
 
 - Sharing a project environment with renv [@renv-collaborating].
 - Configuring services with Docker Compose [@docker-compose].
-- [Workshop Docker setup](https://github.com/JBris/open-and-reproducible-science-in-r#usage-with-docker).
+- [Dockerfile reference](https://docs.docker.com/reference/dockerfile/).
+- [Configuring the Binder user interface](https://mybinder.readthedocs.io/en/latest/howto/user_interface.html).

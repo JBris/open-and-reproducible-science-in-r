@@ -214,5 +214,8 @@ cython_debug/
 
 **/_targets
 /outputs/health-wellbeing/
-figure-html
-figure-pdf
+figure-html/
+figure-pdf/
+
+# GitHub Pages serves the rendered book, including its chapter images.
+!/docs/**/figure-html/
