@@ -1,17 +1,32 @@
 project:
-  type: website
+  type: book
   output-dir: _site
   preview:
     browser: true
   render:
-    - "*.qmd"
-    - "*.md"
+    - index.qmd
+    - pages/*.qmd
+    - ANNOUNCEMENTS.md
+    - CODE_OF_CONDUCT.md
+    - CONTRIBUTING.md
+    - ACCESSIBILITY.md
+    - SECURITY.md
+    - AI_POLICY.md
+    - CHANGELOG.md
     - "!AGENTS.md"
     - "!draft/"
     - "!*.rmd"
 
-website:
+book:
   title: "Open and Reproducible Science in R"
+  author:
+    - name: "James Bristow"
+      affiliation: "Massey University"
+    - name: "Hana Liang"
+      affiliation: "Bioeconomy Science Institute"
+  doi: "10.5281/zenodo.24342489"
+  output-file: open-and-reproducible-science-in-r
+  downloads: [pdf]
   site-url: https://jbris.github.io/open-and-reproducible-science-in-r/
   repo-url: https://github.com/JBris/open-and-reproducible-science-in-r
   repo-actions: [issue]
@@ -24,26 +39,27 @@ website:
     type: overlay
   cookie-consent: false
   sidebar:
-    style: "docked"
-    search: true
-    contents:
-      - section: "Workshop Introduction"
-        contents:
-          - pages/1_introduction.qmd
-          - pages/2_coordinators.qmd
-      - section: "Communications and Community"
-        contents:
-          - ANNOUNCEMENTS.md
-          - CODE_OF_CONDUCT.md
-          - CONTRIBUTING.md
-          - ACCESSIBILITY.md
-          - SECURITY.md
-          - AI_POLICY.md
-          - CHANGELOG.md
-  comments:
-    hypothesis:
-      theme: clean
-      openSidebar: false
+    style: docked
+  chapters:
+    - index.qmd
+    - part: "Workshop Introduction"
+      chapters:
+        - pages/1_introduction.qmd
+        - pages/2_coordinators.qmd
+    - part: "Communications and Community"
+      chapters:
+        - ANNOUNCEMENTS.md
+        - CODE_OF_CONDUCT.md
+        - CONTRIBUTING.md
+        - ACCESSIBILITY.md
+        - SECURITY.md
+        - AI_POLICY.md
+        - CHANGELOG.md
+
+comments:
+  hypothesis:
+    theme: clean
+    openSidebar: false
 
 format:
   html:
@@ -52,16 +68,17 @@ format:
       dark: darkly
     css: styles.css
     toc: true
-
   pdf:
-    documentclass: article
+    documentclass: scrreprt
+    pdf-engine: lualatex
+    papersize: a4
     toc: true
     number-sections: true
     colorlinks: true
     geometry:
       - margin=1in
 
-editor: visual
+editor: source
 
 execute:
   eval: false

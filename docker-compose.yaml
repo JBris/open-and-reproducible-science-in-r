@@ -18,6 +18,8 @@ services:
       ROOT: "true"
       DISABLE_AUTH: "true"
     command: /init
+    volumes:
+      - .:/home/rstudio/open-reproducible-science-r
 
   binder:
     image: ghcr.io/jbris/binder-open-reproducible-science-r:${APP_VERSION:-latest}

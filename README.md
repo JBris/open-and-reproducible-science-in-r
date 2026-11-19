@@ -18,16 +18,20 @@
 
 ## Table of contents
 
-- [Introduction](#introduction)
-- [Workshop](#workshop)
-- [Usage with Docker](#usage-with-docker)
-- [Usage with Binder](#usage-with-binder)
-- [Coordinators](#coordinators)
-- [Announcements](#announcements)
-- [Communication](#communication)
-- [Contributions and support](#contributions-and-support)
-- [Citation](#citation)
-- [License](#license)
+- [Open and Reproducible Science in R](#open-and-reproducible-science-in-r)
+  - [Table of contents](#table-of-contents)
+  - [Introduction](#introduction)
+  - [Workshop](#workshop)
+    - [Research objects and responsible sharing](#research-objects-and-responsible-sharing)
+  - [Usage with Docker](#usage-with-docker)
+  - [Usage with Binder](#usage-with-binder)
+  - [Render the book](#render-the-book)
+  - [Coordinators](#coordinators)
+  - [Announcements](#announcements)
+  - [Communication](#communication)
+  - [Contributions and support](#contributions-and-support)
+  - [Citation](#citation)
+  - [License](#license)
 
 ## Introduction
 
@@ -46,35 +50,35 @@ environment.
 
 ## Workshop
 
-| Detail | Information |
-| --- | --- |
-| Conference | AIMOS2026 |
-| When | Wednesday, 09:00–10:30 |
-| Where | CO 119, Kelburn Campus, Victoria University of Wellington |
-| Format | Workshop |
+| Detail     | Information                                               |
+| ---------- | --------------------------------------------------------- |
+| Conference | AIMOS2026                                                 |
+| When       | Wednesday, 09:00–10:30                                    |
+| Where      | CO 119, Kelburn Campus, Victoria University of Wellington |
+| Format     | Workshop                                                  |
 
 Read the [workshop materials](https://jbris.github.io/open-and-reproducible-science-in-r/pages/1_introduction.html)
 on the [workshop website](https://jbris.github.io/open-and-reproducible-science-in-r/).
 Quarto is used to organise the website and reports, with sources in the
 [pages directory](pages/).
 
-The [draft teaching plan](https://github.com/JBris/open-and-reproducible-science-in-r/blob/main/draft/3_workshop_plan.qmd) develops the expanded scope around
+The [draft teaching plan](https://github.com/JBris/open-and-reproducible-science-in-r/blob/main/draft/workshop_plan.qmd) develops the expanded scope around
 one prepared research project, with a two-hour format and a shorter 90-minute
 adaptation. The practical examples and privacy demonstration remain under
 development; the announced conference session details above are unchanged.
 
 The core workflow will combine the following tools:
 
-| Tool | Role in the workflow |
-| --- | --- |
-| [GitHub](https://github.com/) | Version control, collaboration, and open sharing of code and materials |
-| [renv](https://rstudio.github.io/renv/) | Recording and restoring R package dependencies |
-| [Docker](https://www.docker.com/) | Capturing the computational environment in a portable container |
-| [targets](https://docs.ropensci.org/targets/) | Organising analysis steps and tracking which outputs need to be rebuilt |
-| [pins](https://pins.rstudio.com/articles/pins.html) | Versioning datasets and recording metadata, hashes, and provenance links |
+| Tool                                                         | Role in the workflow                                                         |
+| ------------------------------------------------------------ | ---------------------------------------------------------------------------- |
+| [GitHub](https://github.com/)                                | Version control, collaboration, and open sharing of code and materials       |
+| [renv](https://rstudio.github.io/renv/)                      | Recording and restoring R package dependencies                               |
+| [Docker](https://www.docker.com/)                            | Capturing the computational environment in a portable container              |
+| [targets](https://docs.ropensci.org/targets/)                | Organising analysis steps and tracking which outputs need to be rebuilt      |
+| [pins](https://pins.rstudio.com/articles/pins.html)          | Versioning datasets and recording metadata, hashes, and provenance links     |
 | [vetiver](https://vetiver.posit.co/get-started/version.html) | Versioning fitted models with input requirements and prediction dependencies |
-| [Quarto](https://quarto.org/) | Connecting code, analysis, results, and narrative in reproducible reports |
-| [Zenodo](https://zenodo.org/) | Archiving research outputs and assigning persistent identifiers |
+| [Quarto](https://quarto.org/)                                | Connecting code, analysis, results, and narrative in reproducible reports    |
+| [Zenodo](https://zenodo.org/)                                | Archiving research outputs and assigning persistent identifiers              |
 
 By the end of the workshop, participants should be able to:
 
@@ -101,7 +105,7 @@ the exercise. `DPSynth` is a candidate for a synthetic-data demonstration, pendi
 review and testing of the chosen method and its privacy accounting; `diffpriv`
 can support an explanation of underlying mechanisms. These are planned teaching
 choices, not yet configured project dependencies. See the
-[draft package and development plan](https://github.com/JBris/open-and-reproducible-science-in-r/blob/main/draft/3_workshop_plan.qmd).
+[draft package and development plan](https://github.com/JBris/open-and-reproducible-science-in-r/blob/main/draft/workshop_plan.qmd).
 
 Open science can include restricted-access data. Synthetic data can help others
 run an analysis workflow, but does not establish that they can verify results
@@ -135,8 +139,8 @@ Open [RStudio at localhost:8787](http://localhost:8787) in your browser. Press
 
 The supplied configuration uses Rocker's `/init` startup, disables RStudio
 authentication, and binds port 8787 to localhost for local workshop use.
-It does not mount a local project directory;
-changes made inside the container remain in that container.
+The local repository is mounted at `/home/rstudio/open-reproducible-science-r`.
+Save workshop changes in that directory to keep them in your local checkout.
 
 ## Usage with Binder
 
@@ -147,6 +151,29 @@ a [Binder entry point](binder/Dockerfile) and a
 [Binder image build workflow](.github/workflows/build-binder.yaml); the launch
 configuration still needs to be completed and verified. Use the Docker option
 once the workshop image is published.
+
+## Render the book
+
+The Quarto project produces an HTML book website and one PDF containing all
+configured chapters. Install [Quarto](https://quarto.org/docs/get-started/) and a
+LaTeX distribution such as TinyTeX, then run:
+
+```bash
+# Install TinyTeX if a LaTeX distribution is not already available.
+quarto install tinytex
+
+# Build both configured formats.
+quarto render --to all
+```
+
+The HTML home page is `_site/index.html`; the PDF is
+`_site/open-and-reproducible-science-in-r.pdf`. The HTML navigation includes a
+PDF download. To build a single format, use `quarto render --to html` or
+`quarto render --to pdf`. Preview the HTML book with `quarto preview --to html`.
+
+Code evaluation remains disabled in `_quarto.yml`. These commands render the
+materials without running the developing analysis examples. The draft teaching
+plan is excluded from the book.
 
 ## Coordinators
 

@@ -19,18 +19,24 @@ Dockerfiles, and the build workflows under `.github/workflows/`.
 - Check the image tag, build argument, versioned Dockerfile path, labels, and
   `binder/Dockerfile` parent tag together. A tag fallback to `latest` does not
   supply a missing build argument or versioned filename.
-- Both build workflows read `VERSION` after checkout, validate a Docker-compatible
-  release version, and export `APP_VERSION` using `$GITHUB_ENV`. Preserve the
-  check that release tags match the version, allowing a leading `v`. Inspect
-  `build.tags` before changing release/development tagging or publication.
+- Both build workflows validate `VERSION` and export `APP_VERSION` and a UTC
+  `BUILD_DATE` through `$GITHUB_ENV`. Image versions follow `VERSION`; release
+  tags may differ. Check that Compose passes both values into the final labels.
+  Inspect `build.tags` before changing tagging or publication.
 - Compare the container R version with `renv.lock`. Confirm that every `COPY`
   source exists, including `renv/activate.R` for environment restoration. The
-  current R and pipeline files are placeholders; their presence does not establish
-  that the analysis exists. Do not invent bootstrap files to make a build pass.
+  bootstrap is committed for renv 1.0.7, but the lockfile currently records only
+  renv. The R and pipeline files remain placeholders. Do not infer that a runnable
+  analysis or restored dependency environment exists from those files.
 - Preserve the dependency-builder/runtime separation. Runtime images need the
-  lesson sources, `_quarto.yml`, styling, version/citation/licence metadata, and
+  `index.qmd`, configured book chapters, `_quarto.yml`, styling, metadata, and
   root community documents. `.github/` is excluded by `.dockerignore`, so policy
   pages must be copied from their root locations.
+- Keep TinyTeX installation and PDF package/font preparation in separate runtime
+  layers before project copies. Run preparation as the rendering user so its
+  caches are reusable at runtime. Preserve cache boundaries: project content and
+  volatile `BUILD_DATE`/`APP_VERSION` declarations belong after installation.
+  Normal multiple LuaLaTeX passes are still needed for contents and references.
 - Keep Rocker's `/init` startup for the RStudio service. Its `PASSWORD`, `ROOT`,
   and `DISABLE_AUTH` options are applied during that initialisation. With local
   authentication disabled, preserve the localhost port binding. Use the image's

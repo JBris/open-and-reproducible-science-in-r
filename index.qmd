@@ -1,0 +1,29 @@
+# Welcome {.unnumbered}
+
+This book contains the **Open and Reproducible Science in R** workshop materials.
+It introduces a connected research workflow using GitHub, renv, Docker, targets,
+Quarto, pins, vetiver, and Zenodo, with a focused extension on responsible sharing
+and differentially private synthetic data.
+
+The practical examples and expanded teaching activities are under development.
+The current R and pipeline helpers are placeholders.
+
+## Getting started
+
+Start with the [introduction](pages/1_introduction.qmd) for the learning objectives,
+workflow, and prerequisites. Some familiarity with R will help you follow the
+material. The [repository README](https://github.com/JBris/open-and-reproducible-science-in-r#usage-with-docker)
+describes Docker setup and the available computing environments.
+
+Use the book navigation to move between chapters. A PDF download is available
+from the HTML book's download menu once both output formats have been rendered.
+The PDF contains the same configured chapters in a single document.
+
+## People and community
+
+See the [coordinators](pages/2_coordinators.qmd) for presenter and co-author
+information. Event dates and venues are listed in the
+[workshop announcements](ANNOUNCEMENTS.md).
+
+The community chapters contain contribution, accessibility, conduct, security,
+and AI-assisted development policies, followed by the changelog.
