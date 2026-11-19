@@ -7,6 +7,7 @@
 - VS Code workspace settings, extension recommendations, and tasks for R syntax checks, Quarto, and Codex hook tests.
 - An expanded teaching plan with two-hour and 90-minute formats built around one research project.
 - No-op R and pipeline helper placeholders for the developing workshop project.
+- An attribution page acknowledging contributors and reference materials.
 
 ### Changed
 

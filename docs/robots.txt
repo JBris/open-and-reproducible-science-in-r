@@ -1,0 +1,1 @@
+Sitemap: https://jbris.github.io/open-and-reproducible-science-in-r/sitemap.xml
