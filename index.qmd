@@ -11,7 +11,7 @@ include brief examples of synthetic data and model versioning.
 
 Read the learning objectives and set up your environment before the
 session. Some familiarity with R will help you follow the material.
-[Introduction](pages/1_introduction.qmd) ·
+[Introduction](pages/index.qmd) ·
 [Preparation](pages/workshop/00_preparation.qmd)
 
 Use the book navigation to move between chapters. A PDF download is available
