@@ -1,7 +1,7 @@
 ---
 title: "Workshop page plan"
 subtitle: "Planned Quarto chapters for the 90-minute programme"
-editor: source
+editor: visual
 ---
 
 ## Shared teaching example

@@ -39,14 +39,17 @@ summary makes it possible to review the same result in R and HTML.
 In the Terminal at the project root, copy the source beside its
 input and render the copy. Quarto runs the report as a standalone
 document. The HTML output embeds its resources and can be opened
-directly in a browser.
+directly in a browser. The explicit execution directory lets the
+standalone report read its adjacent CSV, while workshop chapters run
+from the project root.
 
 ```bash
 report_dir="outputs/health-wellbeing"
 if [ ! -f "$report_dir/health_wellbeing_report.qmd" ]; then
   cp pipelines/health_wellbeing_report.qmd "$report_dir/"
 fi
-quarto render "$report_dir/health_wellbeing_report.qmd" --to html
+quarto render "$report_dir/health_wellbeing_report.qmd" --to html \
+  --execute-dir "$report_dir"
 ```
 
 Open `outputs/health-wellbeing/health_wellbeing_report.html` in your
@@ -73,6 +76,46 @@ from data with reuse conditions. The report source, versioned analysis
 code, metadata, and environment record help others understand how the
 published HTML was made.
 
+## Quarto extensions for journal articles
+
+Quarto extensions add formats and templates for particular publishing
+workflows. During the publishing demonstration, browse the
+[Journal Articles extension listing](https://quarto.org/docs/extensions/listing-journals.html)
+and find a format relevant to your field. Examples include:
+
+| Extension | Article style or publisher |
+| --- | --- |
+| `apaquarto` | American Psychological Association, seventh edition |
+| `elsevier` | Elsevier journals |
+| `plos` | Public Library of Science |
+| `jss` | Journal of Statistical Software |
+
+Open an extension's repository to check its supported formats,
+required software, author metadata, and usage instructions. Compare
+the template with the target journal's current submission guidance.
+
+For follow-up, create a separate article directory and start from the
+[PLOS template](https://github.com/quarto-journals/plos). Run these
+commands in the Terminal from the project root and follow the prompts:
+
+```bash
+mkdir health-wellbeing-article
+cd health-wellbeing-article
+quarto use template quarto-journals/plos
+```
+
+The template supplies an example QMD, bibliography, and extension
+files. PLOS supports `plos-html` and `plos-pdf`; the PDF format also
+requires a LaTeX installation. Adapt the article to read the same
+pipeline summary and retain its methods and provenance fields.
+
+Extensions are stored locally in `_extensions/`. Include that
+folder with the article source in Git, and record the Quarto and
+extension versions used for a release. `renv.lock` records R packages;
+it does not capture these extension files. See
+[Managing Extensions](https://quarto.org/docs/extensions/managing.html)
+for installation and version-control guidance.
+
 ## Checkpoint {#quarto-checkpoint}
 
 The HTML shows 29 studies and their pooled estimate when the CSV is
@@ -88,3 +131,4 @@ Next we will inspect how to cite a preserved release.
 
 - [Quarto with R](https://quarto.org/docs/computations/r.html).
 - [Quarto publishing](https://quarto.org/docs/publishing/).
+- [Quarto journal article extensions](https://quarto.org/docs/extensions/listing-journals.html).

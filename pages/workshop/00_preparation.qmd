@@ -1,7 +1,7 @@
 ---
 title: "Preparation"
 subtitle: "Complete before the workshop"
-editor: source
+editor: visual
 ---
 
 ## Learning objectives
@@ -76,7 +76,7 @@ terminal commands and R Console commands rooted in this project directory.
 The project's `.Rprofile` activates renv; first startup may download renv.
 Complete that startup and any restoration before the session. In the R Console:
 
-```r
+```{r health-preparation-environment, include = TRUE, echo = TRUE, message = FALSE, warning = FALSE, cache = TRUE, output = TRUE, eval = TRUE}
 R.version.string
 renv::restore()
 renv::status()
@@ -87,15 +87,15 @@ unrecorded workshop packages or install the R version named by the lockfile.
 
 ## Download and verify the raw data {#preparation-data}
 
-Run the following in the **R Console** from the project root. R blocks in these
-chapters are examples to run yourself; rendering the teaching pages does not
-run them.
+Run the following in the **R Console** from the project root. The R chunks
+are also configured to run during rendering; setup chunks are uncached and
+other R chunks use the cache.
 
 The download comes from the resource linked in the book. The checksum identifies
 the exact file used to prepare these lessons. If you already have a different
 copy, keep it and ask the instructor to resolve the difference.
 
-```r
+```{r health-preparation-download, include = TRUE, echo = TRUE, message = FALSE, warning = FALSE, cache = TRUE, output = TRUE, eval = TRUE}
 raw_file <- file.path("data", "raw", "healthwellbeing.rda")
 source_url <- paste0(
   "https://www.protectlab.org/meta-analysis-in-r/data/",
@@ -116,7 +116,7 @@ actual_md5
 Load into a separate environment so the file does not silently replace objects
 in your working session. Use an explicit name for the dataset you will inspect.
 
-```r
+```{r health-preparation-load, include = TRUE, echo = TRUE, message = FALSE, warning = FALSE, cache = TRUE, output = TRUE, eval = TRUE}
 data_env <- new.env(parent = baseenv())
 loaded_names <- load(raw_file, envir = data_env)
 stopifnot(identical(loaded_names, "HealthWellbeing"))

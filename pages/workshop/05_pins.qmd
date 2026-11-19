@@ -32,7 +32,7 @@ We enable versioning so the board retains both writes. We use RDS, an
 R format that preserves the column types. The board lives inside our
 local workshop outputs.
 
-```{r health-pins-setup, cache = FALSE}
+```{r health-pins-setup, include = TRUE, echo = TRUE, message = FALSE, warning = FALSE, cache = FALSE, output = TRUE, eval = TRUE}
 box::use(
   pins[board_folder, pin_exists, pin_meta, pin_read, pin_versions,
        pin_write],
@@ -54,7 +54,7 @@ selection_file <- file.path(workshop_dir, "analysis-data-version.txt")
 We verify the checksum, load the table from that file, and write it
 with its source and checksum in the pin metadata.
 
-```{r health-pins-write-full, cache = FALSE}
+```{r health-pins-write-full, include = TRUE, echo = TRUE, message = FALSE, warning = FALSE, cache = TRUE, output = TRUE, eval = TRUE}
 stopifnot(!pin_exists(data_board, pin_name))
 
 source_url <- paste0(
@@ -89,7 +89,7 @@ by population. The subset inherits its source and checksum from that
 pin. The filter and parent version account for the 11 excluded
 studies. The published example uses the full set.
 
-```{r health-pins-write-general, cache = FALSE}
+```{r health-pins-write-general, include = TRUE, echo = TRUE, message = FALSE, warning = FALSE, cache = TRUE, output = TRUE, eval = TRUE}
 full_metadata <- pin_meta(data_board, pin_name, version = full_version)
 health_general <- pin_read(data_board, pin_name, version = full_version) |>
   subset(population == "general population")
@@ -130,7 +130,7 @@ Retrieve the full dataset by its recorded identifier and inspect
 its source metadata. The selection file tells the pipeline which
 version to use when we start the next activity.
 
-```{r health-pins-read-version, cache = FALSE}
+```{r health-pins-read-version, include = TRUE, echo = TRUE, message = FALSE, warning = FALSE, cache = TRUE, output = TRUE, eval = TRUE}
 versions <- read.csv(versions_file, colClasses = "character")
 full_version <- versions$version[versions$scope == "all"]
 stopifnot(length(full_version) == 1L)

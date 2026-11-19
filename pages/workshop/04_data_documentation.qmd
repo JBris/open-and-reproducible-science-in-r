@@ -24,9 +24,10 @@ it. Definitions, provenance, and reuse terms help people work out
 whether the data suit their question. Access can have conditions.
 [FAIR Guiding Principles](https://www.go-fair.org/fair-principles/)
 
-Start with the verified file and the `health` object from the data
-loading steps. Run the R chunks in the Console from the project root
-with *box*, *codebook*, and *dataspice* available. Your instructor can
+Start with the verified raw file from the preparation lesson. This
+page loads its own `health` object so it can render in a fresh R
+session. Run the chunks in the Console from the project root with
+*box*, *codebook*, and *dataspice* available. Your instructor can
 provide the completed CSV and JSON-LD files for discussion.
 [Preparation](00_preparation.qmd#preparation-data)
 
@@ -35,11 +36,30 @@ provide the completed CSV and JSON-LD files for discussion.
 We first load the functions used in this lesson. We label a copy of
 the table and keep the downloaded file unchanged.
 
-```{r health-metadata-setup, cache = FALSE}
+```{r health-metadata-setup, include = TRUE, echo = TRUE, message = FALSE, warning = FALSE, cache = FALSE, output = TRUE, eval = TRUE}
 box::use(
   codebook[codebook_table],
   dataspice[create_spice, write_spice],
   utils[read.csv, write.csv]
+)
+
+raw_file <- file.path("data", "raw", "healthwellbeing.rda")
+stopifnot(
+  file.exists(raw_file),
+  identical(
+    unname(tools::md5sum(raw_file)),
+    "0d74964b0b7168379a2b015cb648b326"
+  )
+)
+data_env <- new.env(parent = baseenv())
+loaded_names <- load(raw_file, envir = data_env)
+stopifnot(identical(loaded_names, "HealthWellbeing"))
+health <- data_env[["HealthWellbeing"]]
+stopifnot(
+  is.data.frame(health),
+  nrow(health) == 29L,
+  identical(names(health), c("author", "cor", "n", "population", "country")),
+  !anyNA(health)
 )
 ```
 
@@ -62,7 +82,7 @@ In R, `codebook_table()` combines variable labels with summaries. We
 will keep the three columns we need for the exercise and save them as
 a CSV.
 
-```{r health-codebook, cache = FALSE}
+```{r health-codebook, include = TRUE, echo = TRUE, message = FALSE, warning = FALSE, cache = TRUE, output = TRUE, eval = TRUE}
 workshop_dir <- file.path("outputs", "health-wellbeing")
 dir.create(workshop_dir, recursive = TRUE, showWarnings = FALSE)
 
@@ -98,7 +118,7 @@ worksheets and leave unknown fields blank. The dataset documentation
 credits Mathias Harrer for the teaching object. Keep the original
 review citation and the book section with the provenance notes.
 
-```{r health-dataspice-templates, cache = FALSE}
+```{r health-dataspice-templates, include = TRUE, echo = TRUE, message = FALSE, warning = FALSE, cache = TRUE, output = TRUE, eval = TRUE}
 metadata_dir <- file.path(workshop_dir, "metadata")
 create_spice(dir = workshop_dir)
 
@@ -156,7 +176,7 @@ the JSON-LD. Keep `biblio.csv` and `WORKSHOP_NOTES.md` with the JSON-LD so
 readers have the original citation, source URL, date of retrieval, and
 checksum.
 
-```{r health-dataspice-export, cache = FALSE}
+```{r health-dataspice-export, include = TRUE, echo = TRUE, message = FALSE, warning = FALSE, cache = TRUE, output = TRUE, eval = TRUE}
 write_spice(path = metadata_dir)
 file.exists(file.path(metadata_dir, "dataspice.json"))
 ```

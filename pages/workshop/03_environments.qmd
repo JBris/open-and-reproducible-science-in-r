@@ -1,7 +1,7 @@
 ---
 title: "Reproducible computational environments"
 subtitle: "17–30 minutes · renv and Docker"
-editor: source
+editor: visual
 ---
 
 ## Learning objectives
@@ -37,7 +37,7 @@ builds, starts, or reproduces every result.
 
 Allow about two minutes. In the **R Console**, with the project open:
 
-```r
+```{r health-environments-session, include = TRUE, echo = TRUE, message = FALSE, warning = FALSE, cache = TRUE, output = TRUE, eval = TRUE}
 R.version.string
 .libPaths()
 packageVersion("renv")
@@ -50,7 +50,7 @@ record the difference; a lockfile does not switch your running R session.
 
 Allow about four minutes. Use the project's active renv environment:
 
-```r
+```{r health-environments-lockfile, include = TRUE, echo = TRUE, message = FALSE, warning = FALSE, cache = TRUE, output = TRUE, eval = TRUE}
 lock <- renv::lockfile_read("renv.lock")
 lock$R$Version
 names(lock$Packages)
@@ -73,7 +73,7 @@ For this activity, inspect the existing lockfile. You do not need to initialise
 renv again or change the snapshot. If restoration is needed, complete this
 before the workshop, or watch the instructor demonstrate it:
 
-```r
+```{r health-environments-restore, include = TRUE, echo = TRUE, message = FALSE, warning = FALSE, cache = TRUE, output = TRUE, eval = TRUE}
 renv::restore()
 ```
 
@@ -119,7 +119,7 @@ Allow about three minutes. Restart R, reopen the project if necessary, and load
 the data from its explicit path. This checks that the input does not depend on
 an object left over from an earlier Console session.
 
-```r
+```{r health-environments-reload, include = TRUE, echo = TRUE, message = FALSE, warning = FALSE, cache = TRUE, output = TRUE, eval = TRUE}
 raw_file <- file.path("data", "raw", "healthwellbeing.rda")
 stopifnot(
   file.exists(raw_file),

@@ -148,9 +148,12 @@ The HTML home page is `_site/index.html`; the PDF is
 PDF download. To build a single format, use `quarto render --to html` or
 `quarto render --to pdf`. Preview the HTML book with `quarto preview --to html`.
 
-Code evaluation remains disabled in `_quarto.yml`. These commands render the
-materials without running the developing analysis examples. The draft teaching
-plan is excluded from the book.
+Code evaluation is disabled by default in `_quarto.yml`, but workshop R
+chunks explicitly enable it. Rendering those chapters runs their examples,
+including restoration, downloads, and analysis, or reuses cached results.
+Use the prepared workshop environment. Workshop chapters execute from the
+project root; the standalone report command specifies its own input directory.
+The draft teaching plan is excluded from the book.
 
 ## Coordinators
 
