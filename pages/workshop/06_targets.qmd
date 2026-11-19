@@ -58,7 +58,7 @@ In the R Console at the project root, load the commands used to
 inspect and run the pipeline. The store path keeps this exercise's
 cache separate from other pipelines.
 
-```{r health-targets-setup, cache = FALSE}
+```{r health-targets-setup, include = TRUE, echo = TRUE, message = FALSE, warning = FALSE, cache = FALSE, output = TRUE, eval = TRUE}
 box::use(
   targets[tar_make, tar_outdated, tar_read, tar_visnetwork],
   utils[read.csv]
@@ -73,7 +73,7 @@ selection_file <- file.path(workshop_dir, "analysis-data-version.txt")
 Use the graph to predict which targets depend on the selector. If
 you're using the PDF, follow the text diagram above.
 
-```{r health-targets-graph, cache = FALSE}
+```{r health-targets-graph, include = TRUE, echo = TRUE, message = FALSE, warning = FALSE, cache = TRUE, output = TRUE, eval = TRUE}
 tar_visnetwork(
   script = pipeline_script,
   store = pipeline_store,
@@ -84,7 +84,7 @@ tar_visnetwork(
 
 We will build the targets and inspect the cached result.
 
-```{r health-targets-run, cache = FALSE}
+```{r health-targets-run, include = TRUE, echo = TRUE, message = FALSE, warning = FALSE, cache = TRUE, output = TRUE, eval = TRUE}
 tar_make(script = pipeline_script, store = pipeline_store)
 tar_read(result, store = pipeline_store)
 ```
@@ -95,7 +95,7 @@ Change the selector from all studies to the 18 general-population
 studies. Predict which branches of the graph are affected, then ask
 *targets* which targets are outdated and rebuild.
 
-```{r health-targets-change-input, cache = FALSE}
+```{r health-targets-change-input, include = TRUE, echo = TRUE, message = FALSE, warning = FALSE, cache = TRUE, output = TRUE, eval = TRUE}
 versions <- read.csv(
   file.path(workshop_dir, "dataset-versions.csv"),
   colClasses = "character"
@@ -117,7 +117,7 @@ in study precision and heterogeneity.
 Switch back to the full version for the reporting activity so everyone
 can compare with the same example.
 
-```{r health-targets-restore-full, cache = FALSE}
+```{r health-targets-restore-full, include = TRUE, echo = TRUE, message = FALSE, warning = FALSE, cache = TRUE, output = TRUE, eval = TRUE}
 full_version <- versions$version[versions$scope == "all"]
 stopifnot(length(full_version) == 1L)
 writeLines(full_version, selection_file)

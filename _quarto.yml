@@ -1,5 +1,6 @@
 project:
   type: book
+  execute-dir: project
   output-dir: _site
   preview:
     browser: true
@@ -92,7 +93,7 @@ format:
     geometry:
       - margin=1in
 
-editor: source
+editor: visual
 
 execute:
   eval: false

@@ -1,7 +1,7 @@
 ---
 title: "Introduction"
 subtitle: "Open and Reproducible Science in R"
-editor: source
+editor: visual
 author:
   - name: "James Bristow"
     affiliation: "Massey University"

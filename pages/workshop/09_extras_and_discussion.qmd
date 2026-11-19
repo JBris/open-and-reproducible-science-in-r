@@ -25,7 +25,7 @@ Run the setup from the project root with *box* and *pins*. Use the
 versions CSV and board from the dataset versioning exercise.
 [Dataset storage and versioning](05_pins.qmd#pins-checkpoint)
 
-```{r health-extras-data, cache = FALSE}
+```{r health-extras-data, include = TRUE, echo = TRUE, message = FALSE, warning = FALSE, cache = FALSE, output = TRUE, eval = TRUE}
 box::use(pins[board_folder, pin_read], utils[read.csv])
 
 workshop_dir <- file.path("outputs", "health-wellbeing")
@@ -65,7 +65,7 @@ We convert the generated values to the original scales and give
 the new rows synthetic labels. The generated sample sizes describe
 synthetic rows.
 
-```{r health-synthetic-data, cache = FALSE}
+```{r health-synthetic-data, include = TRUE, echo = TRUE, message = FALSE, warning = FALSE, cache = FALSE, output = TRUE, eval = TRUE}
 box::use(synthpop[compare, syn])
 
 synthetic <- syn(
@@ -101,10 +101,13 @@ size as a predictor. Both regressions give each study equal weight
 and serve to illustrate model versioning. The core meta-analysis
 uses study precision and between-study variance when pooling effects.
 
-Use a fresh local model board for these writes. Keep the version
-identifiers to repeat the reads.
+Reuse the local model board across renders and keep the version
+identifiers for each pair of fits. Cached model chunks reuse their
+recorded identifiers. Refreshing the cache fits a new pair and retains
+earlier versions in the board. Keep the board with its document cache;
+if you remove the board, refresh the cache when rendering again.
 
-```{r health-vetiver-setup, cache = FALSE}
+```{r health-vetiver-setup, include = TRUE, echo = TRUE, message = FALSE, warning = FALSE, cache = FALSE, output = TRUE, eval = TRUE}
 box::use(
   pins[pin_exists, pin_versions],
   stats[lm],
@@ -116,7 +119,6 @@ model_board <- board_folder(
   versioned = TRUE
 )
 model_name <- "health_wellbeing"
-stopifnot(!pin_exists(model_board, model_name))
 
 code_revision <- system2("git", c("rev-parse", "HEAD"), stdout = TRUE)
 stopifnot(length(code_revision) == 1L, grepl("^[0-9a-f]{40}$", code_revision))
@@ -128,7 +130,13 @@ model_source <- list(
 )
 ```
 
-```{r health-vetiver-versions, cache = FALSE}
+```{r health-vetiver-versions, include = TRUE, echo = TRUE, message = FALSE, warning = FALSE, cache = TRUE, output = TRUE, eval = TRUE, cache.extra = get0("model_source")}
+previous_versions <- if (pin_exists(model_board, model_name)) {
+  pin_versions(model_board, model_name)$version
+} else {
+  character()
+}
+
 model_v1 <- lm(z ~ population, data = original)
 v1 <- vetiver_model(
   model_v1,
@@ -137,7 +145,10 @@ v1 <- vetiver_model(
   metadata = model_source
 )
 vetiver_pin_write(model_board, v1)
-first_version <- pin_versions(model_board, model_name)$version
+first_version <- setdiff(
+  pin_versions(model_board, model_name)$version, previous_versions
+)
+stopifnot(length(first_version) == 1L)
 
 model_v2 <- lm(z ~ population + log_n, data = original)
 v2 <- vetiver_model(
@@ -149,7 +160,9 @@ v2 <- vetiver_model(
 vetiver_pin_write(model_board, v2)
 
 model_history <- pin_versions(model_board, model_name)
-second_version <- setdiff(model_history$version, first_version)
+second_version <- setdiff(
+  model_history$version, c(previous_versions, first_version)
+)
 stopifnot(length(first_version) == 1L, length(second_version) == 1L)
 model_history
 ```
@@ -159,7 +172,7 @@ board's current version. Pass an explicit identifier when you want
 to reproduce a previous prediction or inspect its input requirements.
 Compare the input columns of the two retrieved models.
 
-```{r health-vetiver-read, cache = FALSE}
+```{r health-vetiver-read, include = TRUE, echo = TRUE, message = FALSE, warning = FALSE, cache = TRUE, output = TRUE, eval = TRUE, cache.extra = list(get0("first_version"), get0("second_version"))}
 stored_v1 <- vetiver_pin_read(
   model_board, model_name, version = first_version
 )
