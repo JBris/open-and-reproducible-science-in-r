@@ -46,7 +46,7 @@ book:
     - index.qmd
     - part: "Workshop Introduction"
       chapters:
-        - pages/index.qmd
+        - pages/introduction.qmd
         - pages/2_coordinators.qmd
         - pages/3_attribution.qmd
     - part: "Workshop"

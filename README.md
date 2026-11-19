@@ -51,7 +51,7 @@ a report and an archive.
 | Where      | CO 119, Kelburn Campus, Victoria University of Wellington |
 | Format     | Workshop                                                  |
 
-Read the [workshop materials](https://jbris.github.io/open-and-reproducible-science-in-r/pages/index.html)
+Read the [workshop materials](https://jbris.github.io/open-and-reproducible-science-in-r/pages/introduction.html)
 on the [workshop website](https://jbris.github.io/open-and-reproducible-science-in-r/).
 Quarto is used to organise the website and reports, with sources in the
 [pages directory](pages/).

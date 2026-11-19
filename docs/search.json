@@ -1,7 +1,7 @@
 [
   {
-    "objectID": "pages/index.html",
-    "href": "pages/index.html",
+    "objectID": "pages/introduction.html",
+    "href": "pages/introduction.html",
     "title": "1  Introduction",
     "section": "",
     "text": "1.1 About the workshop\nOpen and reproducible science helps others understand, evaluate, reuse, and extend research. In this 90-minute workshop, we follow one prepared R project from its source data to an archived result. We use HealthWellbeing to pool published correlations between health and well-being. Teaching dataset\nThe workshop is presented by James Bristow, Massey University, with co-author Hana Liang, Bioeconomy Science Institute.",
@@ -11,8 +11,8 @@
     ]
   },
   {
-    "objectID": "pages/index.html#learning-objectives",
-    "href": "pages/index.html#learning-objectives",
+    "objectID": "pages/introduction.html#learning-objectives",
+    "href": "pages/introduction.html#learning-objectives",
     "title": "1  Introduction",
     "section": "1.2 Learning objectives",
     "text": "1.2 Learning objectives\nBy the end of the workshop, participants should be able to:\n\nExplain how the tools support different parts of a reproducible research workflow.\nDescribe dataset variables, provenance, licensing, and access conditions using a codebook and structured FAIR metadata.\nStore a dataset with pins and retrieve a specific version.\nTrace a result through a targets pipeline and a Quarto report.\nIdentify the files and metadata needed for a citable archive.",
@@ -22,8 +22,8 @@
     ]
   },
   {
-    "objectID": "pages/index.html#building-a-connected-workflow",
-    "href": "pages/index.html#building-a-connected-workflow",
+    "objectID": "pages/introduction.html#building-a-connected-workflow",
+    "href": "pages/introduction.html#building-a-connected-workflow",
     "title": "1  Introduction",
     "section": "1.3 Building a connected workflow",
     "text": "1.3 Building a connected workflow\n\nTrack changes with Git and review a change on GitHub. Version control and collaboration\nRecord R dependencies with renv and inspect the wider environment captured by Docker. Computational environments\nDescribe variables with codebook and record dataset metadata with dataspice. Dataset documentation and FAIR metadata\nStore the full dataset and a teaching subset with pins, then retrieve a specific version. Dataset storage and versioning\nRun the correlation meta-analysis with targets and inspect what rebuilds when the dataset version changes. Analytical pipelines\nRender and inspect the analysis report in Quarto. Reporting and publishing\nFind and cite a specific archive version on Zenodo. Research archiving\n\nTogether, these tools support a workflow whose history, dependencies, analytical steps, and outputs can be inspected and reused by other researchers.",
@@ -33,8 +33,8 @@
     ]
   },
   {
-    "objectID": "pages/index.html#optional-closing-examples",
-    "href": "pages/index.html#optional-closing-examples",
+    "objectID": "pages/introduction.html#optional-closing-examples",
+    "href": "pages/introduction.html#optional-closing-examples",
     "title": "1  Introduction",
     "section": "1.4 Optional closing examples",
     "text": "1.4 Optional closing examples\nThe final five minutes include discussion and brief demonstrations if time allows. synthpop illustrates synthetic study summaries and vetiver shows how to link model versions to their training data. Optional extras and concluding discussion",
@@ -44,8 +44,8 @@
     ]
   },
   {
-    "objectID": "pages/index.html#reproducibility-when-data-cannot-be-shared",
-    "href": "pages/index.html#reproducibility-when-data-cannot-be-shared",
+    "objectID": "pages/introduction.html#reproducibility-when-data-cannot-be-shared",
+    "href": "pages/introduction.html#reproducibility-when-data-cannot-be-shared",
     "title": "1  Introduction",
     "section": "1.5 Reproducibility when data cannot be shared",
     "text": "1.5 Reproducibility when data cannot be shared\nOpen science can include restricted-access data. Researchers can document their methods, code, and access conditions while restricting the original observations.\nSynthetic data can help readers test whether a workflow runs. Verifying findings based on original observations requires access to those observations. A differential privacy claim requires a validated mechanism and privacy accounting. NIST’s introduction to differentially private synthetic data",
@@ -55,8 +55,8 @@
     ]
   },
   {
-    "objectID": "pages/index.html#principles-to-put-into-practice",
-    "href": "pages/index.html#principles-to-put-into-practice",
+    "objectID": "pages/introduction.html#principles-to-put-into-practice",
+    "href": "pages/introduction.html#principles-to-put-into-practice",
     "title": "1  Introduction",
     "section": "1.6 Principles to put into practice",
     "text": "1.6 Principles to put into practice\nThroughout the session, consider whether another researcher could:\n\nUnderstand the purpose of the project and follow the analysis decisions.\nReproduce the environment and rerun the workflow on another machine.\nAudit the history of changes and the relationship between inputs and outputs.\nTrace a reported result to the versions of its data, fitted model, and software environment.\nReuse and extend the code and materials with clear documentation and licensing.\nAssess sharing limits and distinguish a runnable workflow from verification of restricted-data findings.\nFind and cite a preserved version of the research outputs.\n\nWe will consider common barriers to these goals, including undocumented dependencies, manual analysis steps, and assumptions tied to a single computing environment.",
@@ -66,8 +66,8 @@
     ]
   },
   {
-    "objectID": "pages/index.html#getting-started",
-    "href": "pages/index.html#getting-started",
+    "objectID": "pages/introduction.html#getting-started",
+    "href": "pages/introduction.html#getting-started",
     "title": "1  Introduction",
     "section": "1.7 Getting started",
     "text": "1.7 Getting started\nSome familiarity with R will help you follow the examples. Set up the environment and verify the teaching dataset before the timed session. Preparation\nFor upcoming workshops, dates, and venues, see the workshop announcements.",

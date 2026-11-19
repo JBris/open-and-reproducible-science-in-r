@@ -46,7 +46,7 @@ To delegate, ask for named roles and bounded tasks:
 
 ```text
 Use r_developer to implement the assigned helper in R/dummy.R and lesson_editor
-to update its explanation in pages/index.qmd. Give each agent ownership
+to update its explanation in pages/introduction.qmd. Give each agent ownership
 of its file. Then ask reproducibility_reviewer to review the combined change,
 wait for the findings, and verify the final result. State which checks ran and
 whether human review is still pending.
