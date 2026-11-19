@@ -32,4 +32,4 @@ ORCID: [0009-0008-3342-5028](https://orcid.org/0009-0008-3342-5028).
 
 For workshop questions, use [GitHub Discussions](https://github.com/JBris/open-and-reproducible-science-in-r/discussions). Report problems with the materials through [GitHub Issues](https://github.com/JBris/open-and-reproducible-science-in-r/issues).
 
-See the [introduction](introduction.qmd) for the workshop overview and [announcements](../ANNOUNCEMENTS.md) for session updates.
+See the [introduction](1_introduction.qmd) for the workshop overview and [announcements](../ANNOUNCEMENTS.md) for session updates.
