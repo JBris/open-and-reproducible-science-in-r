@@ -46,6 +46,7 @@ book:
       chapters:
         - pages/1_introduction.qmd
         - pages/2_coordinators.qmd
+        - pages/3_attribution.qmd
     - part: "Communications and Community"
       chapters:
         - ANNOUNCEMENTS.md

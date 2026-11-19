@@ -1,0 +1,21 @@
+---
+title: "Attribution"
+subtitle: "Open and Reproducible Science in R"
+---
+
+## Workshop inspiration
+
+We acknowledge
+[Olivia Angelin-Bonnet](https://orcid.org/0000-0002-7708-2919),
+[Lindy Guo](https://orcid.org/0000-0002-8666-2173), and
+[Jingjing Zhang](https://orcid.org/0000-0001-8809-3405), all from
+Bioeconomy Science Institute, for inspiration on reproducible workflows in R, and for providing valuable feedback regarding these materials.
+
+## Reference e-book
+
+The following R e-book is also acknowledged as a reference for these materials:
+
+Harrer, M., Cuijpers, P., Furukawa, T. A., & Ebert, D. D. (2021).
+[*Doing Meta-Analysis with R: A Hands-On Guide*](https://doing-meta.guide/).
+Boca Raton, FL and London: Chapman & Hall/CRC Press.
+ISBN 978-0-367-61007-4.
