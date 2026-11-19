@@ -1,1 +1,18 @@
 data
+draft
+
+# Generated analysis outputs and targets stores
+/outputs/
+**/_targets/
+
+# Rendered book and document caches
+/_site/
+/docs/
+/.quarto/
+**/*_cache/
+**/*_files/
+
+# Editor state and agent tooling
+/.Rproj.user/
+/.agents/
+/.codex/
