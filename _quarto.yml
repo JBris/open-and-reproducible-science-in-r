@@ -6,6 +6,7 @@ project:
   render:
     - index.qmd
     - pages/*.qmd
+    - pages/workshop/*.qmd
     - ANNOUNCEMENTS.md
     - CODE_OF_CONDUCT.md
     - CONTRIBUTING.md
@@ -47,6 +48,12 @@ book:
         - pages/1_introduction.qmd
         - pages/2_coordinators.qmd
         - pages/3_attribution.qmd
+    - part: "Workshop"
+      chapters:
+        - pages/workshop/00_preparation.qmd
+        - pages/workshop/01_open_science.qmd
+        - pages/workshop/02_git_github.qmd
+        - pages/workshop/03_environments.qmd
     - part: "Communications and Community"
       chapters:
         - ANNOUNCEMENTS.md

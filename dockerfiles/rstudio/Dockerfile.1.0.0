@@ -16,7 +16,8 @@ ENV DEBIAN_FRONTEND=noninteractive \
     RENV_PATHS_ROOT=${HOME}/renv \
     RENV_PATHS_LIBRARY=${HOME}/renv/library \
     RENV_PATHS_CACHE=${HOME}/renv/.cache \
-    RENV_CONFIG_REPOS_OVERRIDE=https://cloud.r-project.org
+    RENV_CONFIG_REPOS_OVERRIDE=https://cloud.r-project.org  \
+    RENV_CONFIG_PAK_ENABLED=TRUE
 
 RUN apt-get update \
     && apt-get install -y --no-install-recommends pandoc libsodium-dev graphviz \

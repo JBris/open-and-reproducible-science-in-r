@@ -1,6 +1,6 @@
 ---
 title: "Workshop plan"
-subtitle: "Research workflows, versioned objects, and responsible sharing"
+subtitle: "Recommended 90-minute programme and development plan"
 author:
   - name: "James Bristow"
     affiliation: "Massey University"
@@ -10,151 +10,209 @@ author:
 
 ## Scope and development status
 
-This is the teaching plan for the expanded workshop. The example project,
-dataset/model versioning exercises, and privacy demonstration still need to be
-developed and tested. The package choices below describe planned roles; they are
-not a record of dependencies already restored in the project environment.
+This draft follows the recommended 90-minute programme below, replacing the
+earlier two-hour format. Dataset documentation and FAIR metadata are core
+activities; `synthpop` and `vetiver` are optional extras in the final five-minute
+discussion. Installation, production model deployment, and a full treatment of
+differential privacy are outside the timed programme.
 
-The workshop will follow one research project from inputs to archived outputs.
-Participants will receive a prepared R project and computing environment so that
-most of the practical time can be spent using the workflow. Detailed tool
-installation, production model deployment, and a full treatment of differential
-privacy are outside the core scope.
+The example project and exercises still need to be developed and tested. The
+current R and pipeline helpers are placeholders, and `renv.lock` records only
+renv 1.0.7 under R 4.4.1. The tools below describe planned teaching roles, not
+dependencies already restored in the project environment.
+
+Participants should have basic familiarity with R and receive a prepared
+project and verified computing environment before the session. The intended
+result is one documented workflow with a versioned input, tracked analysis,
+reproducible report, and prepared archive record.
+
+## Learning objectives
+
+By the end of the core programme, participants should be able to:
+
+- Explain how Git/GitHub, renv, and Docker support collaboration and reproducibility.
+- Document dataset variables, provenance, licensing, and access conditions using
+  a codebook and structured metadata that support FAIR principles.
+- Store dataset versions with `pins` and retrieve a specified version.
+- Trace inputs and outputs through a `targets` pipeline and a Quarto report.
+- Identify the materials and metadata needed for an archived, citable release.
+
+Independent model versioning and synthetic-data generation are follow-up options
+rather than required participant outcomes.
+
+## Recommended 90-minute workshop programme
+
+| Time | Duration | Topic | Tools |
+| --- | --- | --- | --- |
+| 0–5 min | 5 min | Introduction to open and reproducible science | R |
+| 5–17 min | 12 min | Version control, collaboration and sharing | Git, GitHub |
+| 17–30 min | 13 min | Reproducible computational environments | renv, Docker |
+| 30–42 min | 12 min | Dataset documentation and FAIR metadata | codebook, dataspice |
+| 42–50 min | 8 min | Dataset storage and versioning | pins |
+| 50–68 min | 18 min | Reproducible analytical pipelines | targets |
+| 68–80 min | 12 min | Reproducible reporting and publishing | Quarto |
+| 80–85 min | 5 min | Research archiving and persistent identifiers | Zenodo |
+| 85–90 min | 5 min | Optional extras and concluding discussion | synthpop, vetiver |
+| **Total** | **90 min** | | |
+
+### Delivery and pacing
+
+- **0–5 minutes:** introduce the research question and show the prepared project.
+  Connect each later step to a reproducibility problem.
+- **5–17 minutes:** inspect the repository, make one small change and commit, and
+  demonstrate GitHub collaboration and sharing using a prepared example.
+- **17–30 minutes:** inspect the lockfile and Docker configuration. Explain R
+  package dependencies versus the wider computing environment. Complete full
+  dependency restoration and image builds before the session.
+- **30–42 minutes:** inspect a prepared `codebook` output, complete a few variable
+  descriptions and units, and connect them to `dataspice` metadata for creators,
+  access, and dataset description. Discuss findability, accessibility,
+  interoperability, and reusability (FAIR), including licence and access conditions.
+- **42–50 minutes:** write two small dataset versions to a prepared local `pins`
+  board and retrieve an earlier version by its identifier.
+- **50–68 minutes:** run a small, scaffolded `targets` pipeline, inspect its
+  dependency graph, change one input, and observe which outputs need rebuilding.
+- **68–80 minutes:** render a prepared Quarto report from the pipeline outputs,
+  inspect provenance, and show a prepared publishing example rather than requiring
+  every participant to deploy a site.
+- **80–85 minutes:** inspect a prepared Zenodo deposit and its citation metadata.
+  Explain persistent identifiers and versioned releases without requiring live
+  publication by participants.
+- **85–90 minutes:** briefly signpost `synthpop` and `vetiver`, using prepared
+  outputs if time permits, then invite questions and identify follow-up resources.
+
+Use one small participant action per segment and supply completed checkpoints
+and example outputs for anyone who falls behind. Each allocation includes its
+explanation, activity, and transition; there is no separate setup buffer. Keep
+concluding discussion even if optional demonstrations are skipped. Dates, venues,
+and announced session details belong in [announcements](../ANNOUNCEMENTS.md).
 
 ## Proposed revised abstract
 
-Open and reproducible science is increasingly important for ensuring that
-research can be understood, evaluated, reused, and extended by others. This
-workshop provides a practical introduction to developing reproducible research
-workflows using R and open-source tools.
+Open and reproducible science helps research be understood, evaluated, reused,
+and extended by others. This 90-minute workshop introduces a practical research
+workflow using R and open-source tools.
 
-Participants will develop an integrated workflow incorporating GitHub, renv,
-Docker, targets, Quarto, pins, vetiver, and Zenodo. The workshop will demonstrate
-how these tools work together throughout the research lifecycle, from capturing
-dependencies and computational environments to organising analyses, producing
-reports, and preserving research outputs.
+Participants will follow one prepared project through version control and
+collaboration with Git and GitHub, reproducible environments with renv and
+Docker, and dataset documentation using codebook and dataspice. They will explore
+how variable descriptions, provenance, licensing, and access metadata support
+FAIR research data.
 
-The workshop will introduce research data and model management, including
-documenting metadata, tracking provenance, and maintaining versioned datasets
-and fitted models with pins and vetiver. Recognising that original research
-data cannot always be shared, a focused extension will explore differentially
-private synthetic data and the trade-offs between privacy, analytical utility,
-and reproducibility. Participants will consider what a shared synthetic dataset
-allows others to reproduce and what remains unverifiable without the originals.
+The workflow connects dataset storage and versioning with pins to analytical
+pipelines with targets and reproducible reporting and publishing with Quarto.
+A short Zenodo demonstration introduces archiving and persistent identifiers.
+Optional closing examples signpost synthetic data with synthpop and model
+versioning with vetiver.
 
-Finally, Zenodo will demonstrate the preservation and archiving of permitted
-research outputs with persistent identifiers. Throughout the workshop, the
-emphasis will be on transparent, portable, auditable, reusable, and accessible
-research, with clear documentation of any limits on data access and reuse.
+The emphasis is on transparent, portable, auditable, reusable, and accessible
+research, with clear documentation of limits on data access and reuse. Activities
+use public teaching data and prepared scaffolding so participants can focus on
+the connections between the tools.
 
 ## One practical research project
 
-Use a public, redistributable tabular dataset and a simple fitted model throughout
-the exercises. Treat the original data as restricted only for the teaching
-scenario; participants will not need confidential data.
+Use a small public, redistributable tabular dataset and a simple research
+question throughout. Preserve raw observations and explain cleaning,
+missing-value handling, and modelling assumptions. Participants will not need
+confidential data.
 
-1. **Describe and version the inputs.** Record the source, licence, variables,
-   units, and processing decisions. Create a local `pins` board with versioning
-   enabled, write two dataset versions, and retrieve a specified earlier version.
-2. **Run the analysis.** Use `targets` to connect data preparation, model fitting,
-   and reporting. Make the selected dataset version an explicit input rather
-   than silently reading whichever version is newest.
-3. **Record the fitted model.** Demonstrate `vetiver` model storage and retrieval,
-   including its input requirements and prediction dependencies. Record the
-   training-data version, code revision, model settings, and relevant metrics.
-4. **Report the provenance.** Use Quarto to connect the methods and results to
-   the dataset and model version identifiers. Keep `renv` and Docker as the
-   supporting package and computing environments.
-5. **Explore a synthetic-data branch.** Demonstrate a reviewed differential
-   privacy method on the public teaching data, compare selected utility measures,
-   and rerun the same analysis/reporting workflow on the synthetic output.
-   Record which results came from original versus synthetic inputs.
-6. **Prepare a permitted release.** Assemble code, documentation, approved data
-   and model objects, and a report for sharing through GitHub and archiving with
-   Zenodo. Use a prepared example of the archive process rather than requiring
-   every participant to publish a live record.
+1. **Track the project and environment.** Provide a Git repository containing
+   analysis helpers, metadata templates, a lockfile, and Docker configuration.
+   Participants inspect the prepared files and record a small change.
+2. **Document the dataset.** Use `codebook` to inspect variable descriptions and
+   summaries, and `dataspice` to prepare structured dataset metadata. Record the
+   source, creators, licence, access conditions, units, and processing decisions.
+   These tools support FAIR practices; using them does not by itself establish
+   that a dataset meets every FAIR principle.
+3. **Store and retrieve versions.** Prepare a local `pins` board with versioning
+   explicitly enabled. Write two dataset versions and retrieve a specified
+   earlier version. Keep metadata linked to the matching data version.
+4. **Run the analytical pipeline.** Use `targets` to connect the selected dataset
+   version, preparation, a simple analysis or model, and output files. Make the
+   version identifier an explicit input rather than silently reading whichever
+   version is newest. Supply short-running targets and completed checkpoints.
+5. **Report and publish.** Use Quarto to read the tracked output files and explain
+   methods and results. Record the dataset version, code revision, analytical
+   settings, and environment information needed to trace each result.
+6. **Prepare an archive.** Assemble code, documentation, permitted data, and the
+   report for a GitHub release and a prepared Zenodo deposit. Inspect authorship,
+   licensing, version information, and the persistent identifier.
 
-Versioning and metadata do not automatically make a dataset or model appropriate
-for public release. A model fitted to restricted originals can itself contain
-or reveal sensitive information. Treat original-data models, private evaluation
-results, and metadata as separate release decisions; a synthetic dataset does
-not confer privacy protection on those other objects.
+Optional closing examples can reuse the dataset and any simple fitted model.
+Neither synthetic-data generation nor separate model storage is required to
+complete the core workflow.
 
-## Packages and scope
+## Tools and scope
 
-| Package | Planned teaching role | Scope |
+| Tool | Planned teaching role | Scope |
 | --- | --- | --- |
-| [pins](https://pins.rstudio.com/articles/pins.html) | Dataset metadata, explicit version identifiers, hashes, and historical retrieval | Core hands-on exercise |
-| [vetiver](https://vetiver.posit.co/get-started/version.html) | Fitted-model versions, input requirements, and prediction dependencies | Short practical demonstration |
-| [codebook](https://cran.r-project.org/package=codebook) | Variable descriptions and data dictionaries | Optional metadata extension |
-| [DPSynth](https://cran.r-project.org/package=DPSynth) | Candidate for differentially private tabular synthesis | Extension, pending method and implementation review |
-| [diffpriv](https://cran.r-project.org/package=diffpriv) | Mechanisms for differentially private statistics and related computations | Optional explanation of underlying principles |
+| [R](https://www.r-project.org/) | Shared language and prepared project | Core introduction |
+| [Git](https://git-scm.com/), [GitHub](https://github.com/) | Change history, collaboration, and sharing | Core, 12 minutes |
+| [renv](https://rstudio.github.io/renv/), [Docker](https://www.docker.com/) | R dependencies and the wider computing environment | Core, 13 minutes; setup completed beforehand |
+| [codebook](https://cran.r-project.org/package=codebook) | Variable descriptions, labelled missing values, and summaries | Core metadata segment, shared 12 minutes |
+| [dataspice](https://docs.ropensci.org/dataspice/) | Structured metadata using CSV templates and Schema.org descriptions | Core metadata segment, shared 12 minutes |
+| [pins](https://pins.rstudio.com/articles/pins.html) | Dataset storage, version identifiers, and historical retrieval | Core, 8 minutes |
+| [targets](https://docs.ropensci.org/targets/) | Analysis dependencies, tracked outputs, and selective rebuilding | Core, 18 minutes |
+| [Quarto](https://quarto.org/) | Reproducible reporting and publishing | Core, 12 minutes |
+| [Zenodo](https://zenodo.org/) | Archiving and persistent identifiers | Core demonstration, 5 minutes |
+| [synthpop](https://www.synthpop.org.uk/) | Synthetic-data illustration and limits on interpretation and sharing | Optional closing example within the final 5 minutes |
+| [vetiver](https://vetiver.posit.co/get-started/version.html) | Model storage, input requirements, and prediction dependencies | Optional closing example within the final 5 minutes |
 
 `pins` and `vetiver` support versioned storage, but project-specific provenance
 links still need to be supplied as metadata. Enable versioning explicitly for a
-local folder board. Use the `renv` lockfile to capture the computational package
-environment alongside the model's prediction dependencies.
+local folder board. Capture the computational package environment with `renv`
+alongside the model's prediction dependencies.
 
-The privacy package is not yet selected as a tested workshop dependency. Review
-its method, privacy assumptions, supported data types, installation requirements,
-and behaviour under the project's R version before preparing the exercise. A
-package description or a utility/risk score is not an independent verification
-of a differential privacy guarantee.
+Test the chosen package versions together before adding them to the workshop
+lockfile. Prepare `codebook` output and partially completed `dataspice` templates
+in advance so the metadata activity fits its time allocation.
 
-## Teaching formats
+## Optional extras and responsible sharing
 
-### Two-hour format
+The final five minutes combine optional examples with concluding discussion;
+they are not two additional practical exercises. Use prepared outputs and
+provide fuller material for follow-up.
 
-| Activity | Minutes | Intended result |
-| --- | --- | --- |
-| Principles and prepared-project walkthrough | 15 | Understand the project and environment |
-| Reproducible analysis and reporting | 40 | Run the targets pipeline and Quarto report |
-| Dataset and model metadata, provenance, and versioning | 25 | Retrieve a dataset version and inspect a linked model version |
-| Synthetic data and differential privacy demonstration | 20 | Compare selected utility measures and discuss privacy accounting |
-| Sharing, archiving, and discussion | 20 | Identify permitted outputs and inspect an archive example |
-| **Total** | **120** | |
+- **synthpop:** show a synthetic version of the public teaching data and one
+  comparison with the original. A runnable synthetic-data workflow does not let
+  others verify findings computed from inaccessible originals. Ordinary synthesis
+  with `synthpop` must not be presented as a differential privacy guarantee;
+  utility or disclosure-risk scores do not establish one.
+- **vetiver:** show a prepared model record with its dataset version, code
+  revision, settings, input requirements, and prediction dependencies. Creating
+  a model API or deploying a service is follow-up work.
 
-### Shorter 90-minute format
+Versioning and metadata do not automatically make a dataset or fitted model
+appropriate for public release. A model trained on restricted data can reveal
+sensitive information, and synthetic data does not confer privacy protection
+on related models, evaluation results, or metadata.
 
-| Activity | Minutes |
-| --- | --- |
-| Principles and prepared-project walkthrough | 15 |
-| Reproducible analysis and reporting | 30 |
-| Dataset versioning exercise and model demonstration | 25 |
-| Privacy and synthetic-data overview | 10 |
-| Archiving demonstration and discussion | 10 |
-| **Total** | **90** |
-
-For the shorter format, supply completed pipeline/report scaffolding and use
-prepared outputs for the privacy overview. Move the fuller synthetic-data
-exercise and optional data dictionary to follow-up material. These are reusable
-teaching formats; dates, venues, and announced session details belong in
-[announcements](../ANNOUNCEMENTS.md).
-
-## Questions for the privacy extension
-
-- Which unit is protected, and what does it mean for two datasets to be neighbours?
-- What bounds, preprocessing steps, mechanism, and privacy parameters are used?
-- How is privacy loss accounted for when several results or datasets are released?
-- Which distributions, relationships, and model results remain useful after synthesis?
-- Which analyses can be rerun, and which original-data findings cannot be independently verified?
-
-Ordinary synthesis and adding arbitrary noise are not sufficient to establish
-differential privacy. A classroom run on public data can illustrate these
-concepts, but its utility comparisons do not establish a privacy guarantee.
-Review how randomness and any reproducibility seed are handled before presenting
-the exercise as an example of a private release.
+A fuller differential privacy extension, if developed later, needs a separate
+review of its mechanism, assumptions, privacy accounting, and randomness before
+any guarantee is claimed. It is outside the timed programme.
 
 Background: [NIST's synthetic-data overview](https://www.nist.gov/blogs/cybersecurity-insights/differentially-private-synthetic-data)
 and [guidelines for evaluating differential privacy guarantees](https://csrc.nist.gov/pubs/sp/800/226/final).
 
 ## Development work
 
-- Select and document the public teaching dataset and simple modelling task.
-- Prepare the targets pipeline, Quarto report, and expected outputs.
-- Add dataset versioning and explicit model-to-data provenance exercises.
-- Select, review, and test the privacy demonstration and its teaching assumptions.
-- Test the selected package versions before recording them in `renv.lock` and
-  rebuilding the workshop environment.
-- Prepare permitted release examples, participant instructions, and a reduced
-  path for the shorter teaching format.
+- Select and document the public dataset, research question, and simple analysis.
+- Prepare the Git/GitHub activity and verify the participant environment before
+  the session, including the required dependencies under R 4.4.1.
+- Prepare a `codebook` output and partially completed `dataspice` templates with
+  source, licence, access, and variable metadata for the 12-minute activity.
+- Build the eight-minute `pins` exercise with two versions and explicit
+  historical retrieval, preserving raw data.
+- Implement the short-running `targets` pipeline, dependency graph, and
+  selective-rebuild activity for the 18-minute segment.
+- Prepare the Quarto report, publishing example, and provenance fields.
+- Prepare a permitted archive example and citation metadata for the five-minute
+  Zenodo demonstration.
+- Test package versions before recording them in `renv.lock` and rebuilding the
+  workshop environment; do not treat current placeholders as working examples.
+- Prepare optional `synthpop` and `vetiver` outputs and follow-up resources, with
+  reproducible seeds for ordinary stochastic teaching examples and clear limits
+  on privacy claims.
+- Rehearse the exact 90-minute sequence, including transitions, checkpoints,
+  fallback outputs, and concluding discussion.

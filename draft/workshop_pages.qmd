@@ -1,0 +1,86 @@
+---
+title: "Workshop page plan"
+subtitle: "Planned Quarto chapters for the 90-minute programme"
+editor: source
+---
+
+## Shared teaching example
+
+The workshop uses `HealthWellbeing` from
+[section 4.2.4, Correlations](https://doing-meta.guide/pooling-es#correlations),
+of *Doing Meta-Analysis with R: A Hands-On Guide* by Harrer, Cuijpers, Furukawa,
+and Ebert (2021). The dataset contains 29 study-level summaries, with the fields
+`author`, `cor`, `n`, `population`, and `country`.
+
+Follow this dataset from source attribution and environment preparation through
+metadata, storage, analysis, reporting, and archiving. The
+[workshop teaching plan](workshop_plan.qmd) gives the full learning objectives
+and delivery guidance. This page is an unpublished planning document.
+
+## Planned QMD pages
+
+Paths are relative to the repository root. A **drafted** page has teaching text
+and examples; that status does not establish a complete, tested workshop
+analysis or completed human review. **Planned** pages have not yet been created.
+
+| QMD file | Time | Duration | Topic and tools | Planned content | Status |
+| --- | --- | --- | --- | --- | --- |
+| `pages/workshop/00_preparation.qmd` | Before the session | Outside the 90 minutes | Project and environment setup; R, Git, GitHub, renv, Docker | Get a project copy; choose local R or Docker; download and verify the raw dataset; record its source; complete setup checks. | Drafted |
+| `pages/workshop/01_open_science.qmd` | 0–5 min | 5 min | Introduction to open and reproducible science; R | Introduce the research question, study-level unit of observation, shared dataset, and traceable workflow. | Drafted |
+| `pages/workshop/02_git_github.qmd` | 5–17 min | 12 min | Version control, collaboration and sharing; Git, GitHub | Create a working branch; write a dataset provenance note; inspect and commit the change; demonstrate a pull request within a participant's fork. | Drafted |
+| `pages/workshop/03_environments.qmd` | 17–30 min | 13 min | Reproducible computational environments; renv, Docker | Inspect the lockfile and running R version; explain restoration and containers; reload data after a restart; save a session record. | Drafted |
+| `pages/workshop/04_data_documentation.qmd` | 30–42 min | 12 min | Dataset documentation and FAIR metadata; codebook, dataspice | Describe variables, units, missing values, creators, provenance, licensing, and access conditions using prepared codebook output and metadata templates. | Planned |
+| `pages/workshop/05_pins.qmd` | 42–50 min | 8 min | Dataset storage and versioning; pins | Use a local board with versioning enabled; store two dataset versions; retrieve an explicit version and retain its provenance. | Planned |
+| `pages/workshop/06_targets.qmd` | 50–68 min | 18 min | Reproducible analytical pipelines; targets | Connect the selected data version to preparation, correlation meta-analysis, and output files; inspect the dependency graph and selective rebuilding. | Planned |
+| `pages/workshop/07_quarto.qmd` | 68–80 min | 12 min | Reproducible reporting and publishing; Quarto | Combine methods, tracked results, and provenance in a prepared report; render HTML and demonstrate publishing. | Planned |
+| `pages/workshop/08_zenodo.qmd` | 80–85 min | 5 min | Research archiving and persistent identifiers; Zenodo | Inspect a prepared deposit, versioned release, citation metadata, licence, and DOI; identify the permitted archive contents. | Planned |
+| `pages/workshop/09_extras_and_discussion.qmd` | 85–90 min | 5 min | Optional extras and concluding discussion; synthpop, vetiver | Use prepared synthetic-data and model-version examples; explain their limits; invite questions and identify follow-up resources. | Planned |
+| **Timed programme total** | **0–90 min** | **90 min** | | | |
+
+## Structure within a practical page
+
+Use learning objectives, a short explanation of why the step matters, a worked
+example, one participant action, an expected-result checkpoint, key takeaways,
+and further reading. Opening, archiving, and closing pages can use a short
+demonstration or discussion instead of a full practical exercise.
+
+Use prepared inputs and fallback outputs to keep activities within their time
+allocation. Complete installations, downloads, and image builds before the
+session. Keep the closing discussion even if optional demonstrations are skipped.
+
+## Supplied examples for the optional closing page
+
+Retain the supplied snippets as the basis for page 09, with the
+preparation in this order:
+
+1. Load the verified `HealthWellbeing` snapshot, either from the raw file used
+   throughout the workshop or from `dmetar` when that package is available.
+2. Define `original` with a factor `population`, `z = atanh(cor)`, and
+   `log_n = log(n)`. Both optional examples depend on this object.
+3. Use `synthpop::syn()` with CART and seed 123; convert synthetic `z` and
+   `log_n` back with `tanh()` and rounded `exp()`; generate synthetic study
+   labels; inspect distributions with `compare()`. Label all generated records
+   as synthetic, including their generated sample sizes.
+4. Fit the illustrative regressions `z ~ population` and
+   `z ~ population + log_n`. Store them using `vetiver_model()` and
+   `vetiver_pin_write()` on a versioned local `pins` board named `model_store`,
+   with the model name `health_wellbeing`.
+5. Inspect `pin_versions()` and demonstrate `vetiver_pin_read()`. The supplied
+   read retrieves the latest version; reproducible follow-up should record and
+   retrieve a specified version and link it to the training data and environment.
+
+These unweighted regressions illustrate model storage and alternative
+specifications; they are not the correlation meta-analysis taught in the core
+pipeline. The synthesis example is not a differential privacy guarantee, and a
+distribution comparison does not establish one. Both examples share the final
+five-minute slot with discussion; fuller execution belongs in follow-up material.
+
+## Development and validation status
+
+Only pages 00–03 are being added in the current authoring task. The remaining
+pages and their dependencies need implementation and validation. The current
+lockfile records renv 1.0.7 under R 4.4.1; do not infer that the packages named
+in the plan have already been installed or locked.
+
+Codex assisted with this page plan and the initial chapters. Agent checks do
+not constitute human review; human review is pending.
