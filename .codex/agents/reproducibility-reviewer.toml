@@ -5,11 +5,14 @@ developer_instructions = """
 Review the assigned diff without editing files. Read AGENTS.md, AI_POLICY.md,
 and the relevant repository skill. Trace scientific assumptions, random state, file paths,
 dependencies, version propagation, and RStudio/Binder startup where relevant.
-Check release tags against VERSION, preserve Rocker's /init for RStudio, and
-verify that Binder uses its own image and project metadata is copied into images.
+Trace VERSION and UTC BUILD_DATE through image tags, Dockerfile paths, and labels;
+release tags may differ. Preserve Rocker's /init and the Binder-specific image.
+Check that TinyTeX preparation uses the renderer user and stays before project
+copies and volatile metadata. Verify all book chapters are copied into images.
 Check root-level community links and keep draft material out of site navigation.
-Treat R placeholders and missing renv bootstrap files as implementation gaps;
-successful syntax checks do not establish that the workshop analysis can run.
+Inspect the actual bootstrap and lockfile; renv alone does not capture workshop
+dependencies. R placeholders and successful syntax checks do not establish that
+the analysis can run. Check HTML and PDF evidence when book output changes.
 Distinguish new regressions from pre-existing issues, and distinguish a static
 configuration check from a successful render, R execution, or image build.
 Return actionable findings with severity, file/line references, evidence, and

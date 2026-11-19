@@ -20,24 +20,57 @@
       "detail": "Parse maintained R scripts without executing code or project startup files."
     },
     {
-      "label": "Quarto: Render website (HTML)",
+      "label": "Quarto: Render book (all formats)",
       "type": "process",
       "command": "quarto",
-      "args": ["render", "--to", "html"],
+      "args": [
+        "render",
+        "--to",
+        "all"
+      ],
       "group": {
         "kind": "build",
         "isDefault": true
       },
       "problemMatcher": [],
-      "detail": "Render the workshop website as HTML using _quarto.yml."
+      "detail": "Render the HTML website and the complete book PDF."
     },
     {
-      "label": "Quarto: Preview website",
+      "label": "Quarto: Render book (PDF)",
       "type": "process",
       "command": "quarto",
-      "args": ["preview", "--no-browser"],
+      "args": [
+        "render",
+        "--to",
+        "pdf"
+      ],
       "problemMatcher": [],
-      "detail": "Start a website preview. Use Terminal: Terminate Task to stop it."
+      "detail": "Render the complete book as a PDF; requires LaTeX such as TinyTeX."
+    },
+    {
+      "label": "Quarto: Render book (HTML)",
+      "type": "process",
+      "command": "quarto",
+      "args": [
+        "render",
+        "--to",
+        "html"
+      ],
+      "problemMatcher": [],
+      "detail": "Render the HTML book website using _quarto.yml."
+    },
+    {
+      "label": "Quarto: Preview book (HTML)",
+      "type": "process",
+      "command": "quarto",
+      "args": [
+        "preview",
+        "--to",
+        "html",
+        "--no-browser"
+      ],
+      "problemMatcher": [],
+      "detail": "Preview the HTML book. Use Terminal: Terminate Task to stop it."
     },
     {
       "label": "Codex: Test project hooks",

@@ -25,11 +25,11 @@ the latter is not a runnable targets pipeline.
   from ordinary classroom reproducibility before claiming a private release.
 - Follow local style and `.lintr`. Keep code readable for learners and reuse
   existing dependencies when practical.
-- Check `renv/activate.R` before relying on `.Rprofile`. Missing bootstrap files
-  and the empty lockfile package list are known setup gaps, not evidence of a
-  working environment. Restore or add dependencies when that work is assigned,
-  and inspect resulting lockfile changes. Do not invent package records or
-  initialise renv during unrelated tasks.
+- `.Rprofile` uses the committed renv 1.0.7 bootstrap. The lockfile currently
+  records renv only, so workshop dependencies are not yet captured. Inspect
+  bootstrap files and the actual lockfile before relying on project startup.
+  Restore or add dependencies when assigned and inspect resulting lockfile
+  changes. Do not invent package records or initialise renv during unrelated work.
 - Parse affected standalone scripts with
   `Rscript --vanilla .codex/scripts/check-r.R path/to/script.R`. This performs no
   evaluation. Validate inline Quarto chunks with the lesson workflow.

@@ -1,6 +1,6 @@
 ---
 name: quarto-workshop
-description: Create or revise Quarto workshop lessons, exercises, navigation, and HTML or PDF output in this repository.
+description: Create or revise this workshop's Quarto book chapters, navigation, and HTML/PDF output.
 ---
 
 # Quarto workshop development
@@ -11,15 +11,19 @@ Connect examples to open and reproducible science and verify new factual claims
 and citations against appropriate sources.
 
 - Keep `pages/` reusable across workshops. Event names, dates, and venues belong
-  in `ANNOUNCEMENTS.md`. The unpublished plan is `draft/3_workshop_plan.qmd`;
+  in `ANNOUNCEMENTS.md`. The unpublished plan is `draft/workshop_plan.qmd`;
   preserve the draft render exclusion and keep it out of the sidebar. Link to
   repository source when referring to an unpublished draft from the README.
 - Root `CONTRIBUTING.md`, `CODE_OF_CONDUCT.md`, `SECURITY.md`, and `AI_POLICY.md`
   are website inputs. Update README/sidebar references when moving published
   documents. GitHub workflows and issue/PR templates keep their discovery paths
   under `.github/` and are not workshop pages.
-- Check that referenced lessons exist. Keep paths, sidebar entries, headings,
-  links, and figure references consistent.
+- `book.chapters` defines the reading order; `index.qmd` is required. Keep the
+  configured chapters available in both runtime image COPY lists. Preserve
+  `_site/` output, the single-PDF filename, and its HTML download link.
+- Check that referenced lessons exist. Keep chapter paths, headings, links, and
+  figure references consistent. Link Markdown references with unique labels
+  because PDF rendering combines chapters into one document.
 - Distinguish planned pins/vetiver metadata and versioning exercises and the
   differential privacy extension from implemented examples. The R and pipeline
   helpers currently contain no-op placeholders.
@@ -29,8 +33,9 @@ and citations against appropriate sources.
 - The project sets `execute.eval: false`. Preserve that default unless execution
   is requested. Static rendering does not verify R results.
 - Render changed lessons as HTML with `quarto render path/to/lesson.qmd --to html`
-  when the toolchain is available. For shared configuration changes, render the
-  website and inspect navigation. Check PDF when the task affects that format.
+  when the toolchain is available. For shared book configuration changes, run
+  `quarto render --to all`, inspect HTML navigation/downloads, and check the PDF.
+  Check that generated local links resolve and drafts stay outside both formats.
 - For requested execution, inspect code and required data first and use the
   restored project environment. Report missing prerequisites and failures.
 - Keep generated output and agent instructions out of the published site.

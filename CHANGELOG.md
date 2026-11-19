@@ -10,10 +10,14 @@
 
 ### Changed
 
+- Convert the workshop to a Quarto book with HTML website and single-PDF output, a landing page, and PDF downloads.
+- Install TinyTeX through Quarto in a separate runtime layer; keep project content and volatile build metadata after installation layers.
+- Preinstall common LuaLaTeX packages and generate the rendering user's font database during Docker builds.
+- Export a UTC BUILD_DATE from both image workflows for Docker build labels.
 - Point documentation links and website metadata to the GitHub Pages workshop site.
 - Expanded the planned workshop scope to include dataset and model metadata, provenance, and versioning with pins and vetiver.
 - Added a focused extension on differentially private synthetic data, privacy–utility trade-offs, and the limits of reproducing restricted-data findings.
-- Read and validate VERSION in both image build workflows, including checks against release tags.
+- Read and validate VERSION in both image build workflows; image versions follow this file independently of GitHub release tags.
 - Restore Rocker's RStudio initialisation and use the Binder-specific image for Binder launches.
 - Include website configuration, styling, project metadata, and community documents in both runtime images.
 - Move community documents to the repository root and rewrite the AI policy for this workshop.

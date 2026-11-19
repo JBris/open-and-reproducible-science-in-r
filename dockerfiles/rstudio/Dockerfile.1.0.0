@@ -1,18 +1,8 @@
 FROM rocker/rstudio:4.4.1 AS base
 
-ARG BUILD_DATE
-
-ARG APP_VERSION
-
 ARG HOME=/home/rstudio
 
 ARG NB_USER=rstudio
-
-LABEL maintainer="j.bristow2@massey.ac.nz"
-LABEL org.label-schema.build-date=$BUILD_DATE
-LABEL version=$APP_VERSION
-LABEL org.opencontainers.image.title="Open and Reproducible Science in R"
-LABEL org.opencontainers.image.description="Image for Open and Reproducible Science in R workshop."
 
 ENV HOME=$HOME
 
@@ -21,8 +11,6 @@ ENV NB_USER=$NB_USER
 WORKDIR ${HOME}
 
 USER root
-
-COPY README.md README.md
 
 ENV DEBIAN_FRONTEND=noninteractive \
     RENV_PATHS_ROOT=${HOME}/renv \
@@ -55,6 +43,17 @@ RUN mkdir -p $RENV_PATHS_LIBRARY \
 
 FROM base AS runtime
 
+USER ${NB_USER}
+RUN quarto install tinytex --no-prompt
+
+RUN tinytex_bin="$(find "${HOME}/.TinyTeX/bin" -mindepth 1 -maxdepth 1 -type d -print -quit)" \
+    && test -x "${tinytex_bin}/tlmgr" \
+    && export PATH="${tinytex_bin}:${PATH}" \
+    && tlmgr update --self --all \
+    && tlmgr install koma-script selnolig nameref luatexbase caption \
+    && luaotfload-tool --update --force
+USER root
+
 ENV R_LIBS=${HOME}/renv/library/R-4.4/x86_64-pc-linux-gnu \
     R_LIBS_SITE=${HOME}/renv/library/linux-ubuntu-jammy/R-4.4/x86_64-pc-linux-gnu
 
@@ -65,7 +64,7 @@ COPY --chown=${NB_USER}:${NB_USER} ./pages ${HOME}/pages
 COPY --chown=${NB_USER}:${NB_USER} ./pipelines ${HOME}/pipelines
 
 COPY --chown=${NB_USER}:${NB_USER} \
-    _quarto.yml styles.css VERSION CITATION.cff LICENSE .lintr \
+    README.md index.qmd _quarto.yml styles.css VERSION CITATION.cff LICENSE .lintr \
     ANNOUNCEMENTS.md CHANGELOG.md CONTRIBUTING.md CODE_OF_CONDUCT.md \
     ACCESSIBILITY.md SECURITY.md AI_POLICY.md ${HOME}/
 
@@ -75,9 +74,17 @@ COPY --chown=${NB_USER}:${NB_USER} .here .
 
 COPY --from=r_builder --chown=${NB_USER}:${NB_USER} ${HOME} .
 
-RUN chown -R ${NB_USER}:${NB_USER} ${HOME} \
-    && chmod -R 755 ${HOME} \
-    && echo '.libPaths(c("/home/rstudio/renv/library/linux-ubuntu-jammy/R-4.4/x86_64-pc-linux-gnu", .libPaths()))' \
+RUN echo '.libPaths(c("/home/rstudio/renv/library/linux-ubuntu-jammy/R-4.4/x86_64-pc-linux-gnu", .libPaths()))' \
     >> /usr/local/lib/R/etc/Rprofile.site
+
+ARG BUILD_DATE
+ARG APP_VERSION
+LABEL maintainer="j.bristow2@massey.ac.nz"
+LABEL org.label-schema.build-date=$BUILD_DATE
+LABEL version=$APP_VERSION
+LABEL org.opencontainers.image.title="Open and Reproducible Science in R"
+LABEL org.opencontainers.image.description="Image for Open and Reproducible Science in R workshop."
+LABEL org.opencontainers.image.created=$BUILD_DATE
+LABEL org.opencontainers.image.version=$APP_VERSION
 
 EXPOSE 8787 8787

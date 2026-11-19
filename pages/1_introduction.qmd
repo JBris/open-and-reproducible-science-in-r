@@ -115,9 +115,9 @@ environment.
 ## Getting started
 
 Some familiarity with R will help participants follow the examples. The
-[workshop README](../README.md) describes the environment and available access
-options, including [Docker setup](../README.md#usage-with-docker). Browser-based
-Binder access is still being prepared.
+[getting-started guide](../index.qmd#getting-started) links to the environment
+and access instructions, including [Docker setup](https://github.com/JBris/open-and-reproducible-science-in-r#usage-with-docker).
+Browser-based Binder access is still being prepared.
 
 For upcoming workshops, dates, and venues, see the
 [workshop announcements](../ANNOUNCEMENTS.md).

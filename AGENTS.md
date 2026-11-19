@@ -1,36 +1,42 @@
 # Working in this repository
 
 This repository contains the **Open and Reproducible Science in R** workshop,
-published as a Quarto website. It is an R project, not an R package; do not add
-package scaffolding or use `R CMD check` unless the task introduces a package.
+published as a Quarto book with HTML website and PDF output. It is an R project,
+not an R package; do not add package scaffolding or use `R CMD check` unless the
+task introduces a package.
 
 ## Project context
 
-- `_quarto.yml` controls rendering, navigation, and the HTML/PDF formats.
+- `_quarto.yml` defines the book chapters, navigation, and HTML/PDF formats.
+  `index.qmd` is the landing chapter; generated output stays under `_site/`.
   Code execution is disabled globally with `execute.eval: false`.
 - `renv.lock` and the container base images currently specify R 4.4.1.
-  The lockfile's package list is empty; inspect it before claiming dependencies
-  are available.
-- `.Rprofile` sources `renv/activate.R`. That bootstrap file may be absent in a
-  fresh checkout. Report this accurately; do not silently initialize or replace
-  the environment during unrelated work.
+  The lockfile currently records renv 1.0.7 only; the planned workshop packages
+  are not yet locked. Inspect it before claiming dependencies are available.
+- `.Rprofile` sources the committed `renv/activate.R` bootstrap for renv 1.0.7.
+  First startup can download/install renv. Use `Rscript --vanilla` for
+  dependency-free checks; do not initialise or replace the environment during
+  unrelated work.
 - `VERSION` is the project release version. Read it when supplying `APP_VERSION`
-  to Compose. The image build workflows read this file and require release tags
-  to match it, allowing a leading `v`. `.Rproj`'s `Version` is the project-file
-  format version.
+  to Compose. Image workflows validate/export it and a UTC `BUILD_DATE`; GitHub
+  release tags may differ from the image version. `.Rproj`'s `Version` is the
+  project-file format version.
 - `dockerfiles/rstudio/` and `dockerfiles/binder/` contain versioned Dockerfiles.
   `binder/Dockerfile` is the Binder repository entry point.
 - `R/dummy.R` and `pipelines/_targets_dummy.R` contain no-op placeholders.
   They are not completed examples or a runnable targets pipeline.
 - `pages/` contains reusable teaching material. Keep event names, dates, and
-  venues in `ANNOUNCEMENTS.md`. `draft/3_workshop_plan.qmd` is an unpublished
+  venues in `ANNOUNCEMENTS.md`. `draft/workshop_plan.qmd` is an unpublished
   plan and is excluded from website rendering and navigation.
-- `CONTRIBUTING.md`, `CODE_OF_CONDUCT.md`, `SECURITY.md`, and `AI_POLICY.md`
-  live at the repository root so Quarto can render them. GitHub workflow, issue,
+- `CONTRIBUTING.md`, `CODE_OF_CONDUCT.md`, `ACCESSIBILITY.md`, `SECURITY.md`, and
+  `AI_POLICY.md` live at the repository root so Quarto can render them. GitHub workflow, issue,
   and PR templates retain their discovery locations under `.github/`.
 - The RStudio Compose service uses Rocker's `/init`, with authentication disabled
   and port 8787 bound to localhost. Binder uses the separately built Binder image
   and its Jupyter/RStudio proxy startup, not the RStudio-only image.
+- TinyTeX installation, PDF packages, and the renderer user's font cache are
+  prepared before runtime project copies. Keep volatile build arguments and
+  labels after installation layers so timestamps do not invalidate those caches.
 
 ## Working approach
 
@@ -99,6 +105,7 @@ logic where useful. There is currently no established R test suite.
 
 For lesson edits, render the affected document as HTML with `quarto render
 path/to/lesson.qmd --to html` when Quarto and its dependencies are available.
+For whole-book changes, use `quarto render --to all` to validate both formats.
 Render PDF only when the task affects PDF output. Missing tools or referenced
 source files are limitations to report, not passing checks.
 
