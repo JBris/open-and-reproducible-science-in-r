@@ -2,27 +2,68 @@
 
 ## [Unreleased]
 
+## [0.5.0] - 2026-11-20
+
 ### Added
 
-- VS Code workspace settings, extension recommendations, and tasks for R syntax checks, Quarto, and Codex hook tests.
-- A 90-minute workshop sequence built around the `HealthWellbeing` teaching dataset.
-- A targets pipeline for correlation meta-analysis and a standalone Quarto report.
-- No-op R and pipeline helper placeholders for the developing workshop project.
-- An attribution page acknowledging contributors and reference materials.
+- Add a shared bibliography and a References chapter to the workshop book.
+- Publish the full workshop PDF alongside the HTML book on GitHub Pages.
 
 ### Changed
 
-- Convert the workshop to a Quarto book with HTML website and single-PDF output, a landing page, and PDF downloads.
-- Install TinyTeX through Quarto in a separate runtime layer; keep project content and volatile build metadata after installation layers.
-- Preinstall common LuaLaTeX packages and generate the rendering user's font database during Docker builds.
-- Export a UTC BUILD_DATE from both image workflows for Docker build labels.
-- Point documentation links and website metadata to the GitHub Pages workshop site.
-- Cover dataset documentation with codebook and dataspice and versioning with pins in the core programme.
+- Make MyBinder the browser-based route for workshop participants, with a direct RStudio launch link and instructions for saving work.
+- Explain Dockerfiles, Docker image builds, and the Binder and RStudio GitHub Actions workflows. Refresh the published HTML, PDF, search index, and sitemap with the revised lesson.
+
+### Fixed
+
+- Include the observed-versus-synthetic comparison plot in the published extras chapter. Allow generated figure assets under `docs/` to be tracked.
+
+## [0.4.0] - 2026-11-20
+
+### Added
+
+- Include a checksum-verified copy of the `HealthWellbeing` teaching data.
+
+### Changed
+
+- Move `renv::restore()` into workshop setup so lesson renders use the prepared library.
+- Reuse matching dataset pins across renders and record the configured pipeline script path when running targets with local `crew` workers.
+
+### Fixed
+
+- Restore executable rendering of the targets chapter with an interactive `visNetwork` graph in HTML and a text diagram in PDF. Pin `visNetwork` 2.1.4.
+- Direct the published workshop homepage to the Introduction chapter.
+
+## [0.3.0] - 2026-11-19
+
+### Added
+
+- Add the full 90-minute workshop sequence built around the `HealthWellbeing` teaching dataset. Cover Git and GitHub, renv and Docker, codebook and dataspice, pins, targets, Quarto, and Zenodo.
+- Add a targets pipeline for correlation meta-analysis and a standalone Quarto report that records data versions, analysis settings, the Git revision, and software provenance.
 - Include optional synthpop and vetiver examples in the closing discussion on responsible sharing.
-- Read and validate VERSION in both image build workflows; image versions follow this file independently of GitHub release tags.
-- Restore Rocker's RStudio initialisation and use the Binder-specific image for Binder launches.
-- Include website configuration, styling, project metadata, and community documents in both runtime images.
-- Move community documents to the repository root and rewrite the AI policy for this workshop.
+- Document Quarto journal-format extensions with a PLOS example and describe automatic GitHub release archiving with Zenodo.
+
+### Changed
+
+- Expand the R 4.4.1 lockfile to 184 package records, configure local `crew` workers, and add system libraries for the workshop dependencies.
+- Enable the workshop's R examples during rendering with explicit display and cache settings. Run them from the project root and preserve model versions across renders.
+
+## [0.2.0] - 2026-11-19
+
+### Added
+
+- Add an attribution chapter and ORCID links for coordinators and acknowledged contributors.
+- Publish the rendered HTML site, search index, sitemap, and bundled assets under `docs/`.
+- Add reusable accessibility guidance and commit the renv 1.0.7 bootstrap.
+
+### Changed
+
+- Convert the workshop to a Quarto book with chapter navigation, a landing page, and configured HTML and PDF output.
+- Install TinyTeX and common LuaLaTeX packages in reusable build layers. Prepare the renderer's font cache before copying project files and applying build labels.
+- Point documentation links and site metadata to the GitHub Pages workshop site and link the Zenodo record.
+- Allow GitHub release tags to differ from the image version in `VERSION`. Export a UTC `BUILD_DATE` for image labels.
+- Mount the workshop checkout into the local RStudio service. Include the book's landing page and accessibility guidance in both runtime images.
+- Expand the AI assistance policy.
 - Refresh Codex guidance, agent roles, and skills for the current project structure and development policy.
 
 ## [0.1.0] - 2026-11-19
@@ -31,8 +72,10 @@
 
 - Initial Quarto workshop website with introduction and coordinator pages.
 - Workshop README covering learning objectives, setup, communication, and citation.
-- R project configuration and an initial renv lockfile specifying R 4.4.2.
+- R project configuration, an initial renv lockfile specifying R 4.4.1, and placeholder R and pipeline helpers.
 - RStudio and Binder Dockerfiles, Docker Compose configuration, and GitHub Actions image build workflows.
+- Local RStudio startup through Rocker's `/init` and a dedicated image for Binder launches.
+- VS Code workspace settings, extension recommendations, and tasks for R syntax checks, Quarto, and Codex hook tests.
 - Codex project instructions, skills, subagents, command rules, lifecycle hooks, and validation tools.
 - AIMOS2026 workshop announcement with the session details, venue, presenters, and abstract.
 - Contribution guidelines, community and security policies, citation metadata, and an MIT license.
@@ -41,3 +84,10 @@
 
 - Replaced earlier modelling workshop content with an integrated reproducibility workflow using GitHub, renv, Docker, targets, Quarto, and Zenodo.
 - Generalised the workshop pages for reuse across events, with event-specific details in announcements.
+
+[Unreleased]: https://github.com/JBris/open-and-reproducible-science-in-r/compare/v0.5.0...main
+[0.5.0]: https://github.com/JBris/open-and-reproducible-science-in-r/releases/tag/v0.5.0
+[0.4.0]: https://github.com/JBris/open-and-reproducible-science-in-r/releases/tag/v0.4.0
+[0.3.0]: https://github.com/JBris/open-and-reproducible-science-in-r/releases/tag/v0.3.0
+[0.2.0]: https://github.com/JBris/open-and-reproducible-science-in-r/releases/tag/v0.2.0
+[0.1.0]: https://github.com/JBris/open-and-reproducible-science-in-r/releases/tag/v0.1.0
