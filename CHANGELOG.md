@@ -5,7 +5,8 @@
 ### Added
 
 - VS Code workspace settings, extension recommendations, and tasks for R syntax checks, Quarto, and Codex hook tests.
-- An expanded teaching plan with two-hour and 90-minute formats built around one research project.
+- A 90-minute workshop sequence built around the `HealthWellbeing` teaching dataset.
+- A targets pipeline for correlation meta-analysis and a standalone Quarto report.
 - No-op R and pipeline helper placeholders for the developing workshop project.
 - An attribution page acknowledging contributors and reference materials.
 
@@ -16,8 +17,8 @@
 - Preinstall common LuaLaTeX packages and generate the rendering user's font database during Docker builds.
 - Export a UTC BUILD_DATE from both image workflows for Docker build labels.
 - Point documentation links and website metadata to the GitHub Pages workshop site.
-- Expanded the planned workshop scope to include dataset and model metadata, provenance, and versioning with pins and vetiver.
-- Added a focused extension on differentially private synthetic data, privacy–utility trade-offs, and the limits of reproducing restricted-data findings.
+- Cover dataset documentation with codebook and dataspice and versioning with pins in the core programme.
+- Include optional synthpop and vetiver examples in the closing discussion on responsible sharing.
 - Read and validate VERSION in both image build workflows; image versions follow this file independently of GitHub release tags.
 - Restore Rocker's RStudio initialisation and use the Binder-specific image for Binder launches.
 - Include website configuration, styling, project metadata, and community documents in both runtime images.

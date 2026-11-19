@@ -1,0 +1,74 @@
+---
+title: "Research archiving and persistent identifiers"
+subtitle: "80–85 minutes · Zenodo"
+editor:
+  markdown:
+    wrap: 72
+link-citations: true
+---
+
+## Introduction
+
+In this five-minute demonstration, we will work out what a reader
+should cite to find the materials for a particular analysis. We will
+use a prepared Zenodo record and inspect its metadata together.
+
+A Git commit identifies a repository revision. A GitHub release gives
+a tagged revision a name and a place for release notes and assets.
+Zenodo can archive a copy of selected files and issue a DOI. An
+archive makes the cited files available under the access conditions
+of that record.
+[Zenodo records and DOIs](https://help.zenodo.org/docs/deposit/describe-records/reserve-doi/)
+
+## Inspect a record
+
+Open the workshop's archived `v0.2.0` release. Find the creators,
+access conditions, and the ZIP of that revision. Compare the Zenodo
+version DOI with the GitHub release tag and the concept DOI in
+`CITATION.cff`. Cite the version DOI for the files supporting a
+result. Cite the concept DOI when referring to the evolving project.
+[Version archive](https://doi.org/10.5281/zenodo.24357028) ·
+[Concept DOI](https://doi.org/10.5281/zenodo.24342489) ·
+[GitHub release](https://github.com/JBris/open-and-reproducible-science-in-r/releases/tag/v0.2.0)
+
+## Decide what to archive
+
+For the `HealthWellbeing` analysis, assemble a candidate list:
+
+-   The exact code revision, pipeline script, and Quarto report source.
+-   The report and summary CSV, where upstream terms permit sharing.
+-   The lockfile, actual environment record, and container digest if
+    the run used a container.
+-   The source citation, download URL, checksum, pin version and
+    study inclusion rule, plus the relevant metadata and reuse terms.
+
+The upstream download is publicly accessible. Confirm its reuse terms
+before including the raw file, pinned copies, or derivatives in a
+deposit. If you cannot include a copy, document how an authorised
+reader can obtain the source and recreate the selected input. A pin
+version identifies an object in a particular board. Preserving a
+version identifier with the checksum and filter lets another reader
+understand what that object contained.
+
+## Try it yourself
+
+Point to the DOI you would cite for the files you inspected.
+Identify one item that would help a reader recreate the precise
+version of the input. Explain how you would document its access
+conditions. We will discuss the deposit together during the
+demonstration.
+
+## Checkpoint {#zenodo-checkpoint}
+
+You can connect a cited archive to a specific version, distinguish
+its DOI from a GitHub release tag, and list the files and metadata
+a reader needs. Use the archive's own citation for the record you
+inspected and cite the original review separately for the study data.
+
+We will finish with optional extensions and discussion.
+[Optional extras and concluding discussion](09_extras_and_discussion.qmd)
+
+## Further reading
+
+- [Managing versions on Zenodo](https://help.zenodo.org/docs/deposit/manage-versions/).
+- [Archiving a GitHub repository](https://docs.github.com/en/repositories/archiving-a-github-repository/referencing-and-citing-content).

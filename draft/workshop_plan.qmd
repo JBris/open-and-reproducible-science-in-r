@@ -16,10 +16,10 @@ activities; `synthpop` and `vetiver` are optional extras in the final five-minut
 discussion. Installation, production model deployment, and a full treatment of
 differential privacy are outside the timed programme.
 
-The example project and exercises still need to be developed and tested. The
-current R and pipeline helpers are placeholders, and `renv.lock` records only
-renv 1.0.7 under R 4.4.1. The tools below describe planned teaching roles, not
-dependencies already restored in the project environment.
+The [page plan](workshop_pages.qmd) tracks the drafted lessons, the
+`HealthWellbeing` pipeline, the report template, and the optional
+examples. A timed rehearsal and the prepared participant environment
+are pending. The lockfile currently records renv 1.0.7 under R 4.4.1.
 
 Participants should have basic familiarity with R and receive a prepared
 project and verified computing environment before the session. The intended
@@ -112,10 +112,11 @@ the connections between the tools.
 
 ## One practical research project
 
-Use a small public, redistributable tabular dataset and a simple research
-question throughout. Preserve raw observations and explain cleaning,
-missing-value handling, and modelling assumptions. Participants will not need
-confidential data.
+Use the publicly accessible `HealthWellbeing` teaching dataset and
+pool the study correlations. Preserve the raw file and explain
+cleaning, missing-value checks, and modelling assumptions. Check
+upstream reuse terms before adding data to an archive.
+[Section 4.2.4, Correlations](https://doing-meta.guide/pooling-es#correlations)
 
 1. **Track the project and environment.** Provide a Git repository containing
    analysis helpers, metadata templates, a lockfile, and Docker configuration.
@@ -197,7 +198,7 @@ and [guidelines for evaluating differential privacy guarantees](https://csrc.nis
 
 ## Development work
 
-- Select and document the public dataset, research question, and simple analysis.
+- Review the dataset documentation, analysis assumptions, and reuse terms.
 - Prepare the Git/GitHub activity and verify the participant environment before
   the session, including the required dependencies under R 4.4.1.
 - Prepare a `codebook` output and partially completed `dataspice` templates with

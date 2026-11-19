@@ -47,10 +47,15 @@ Docker environment for this workshop.
 
 ## Current development status
 
-The committed lockfile currently records only renv 1.0.7. The dataset loading in
-chapters 00–03 uses base R; later metadata, pipeline, and modelling dependencies
-still need to be prepared and tested by the instructor. The existing R and
-pipeline helpers are placeholders.
+The committed lockfile records renv 1.0.7. For lessons 04–07, use
+the instructor's prepared environment with `box`, `codebook`,
+`dataspice`, `pins`, `targets`, `meta`, `visNetwork`, `knitr`, and
+`rmarkdown`. Ask about `synthpop` and `vetiver` if you plan to run
+the optional exercises. On Linux, building the `dataspice`
+dependency `jqr` from source needs the jq development library.
+
+Run the lesson chunks in the R Console. Use Quarto with `knitr` and
+`rmarkdown` when you are ready to render the standalone report.
 
 ## Get your own project copy
 

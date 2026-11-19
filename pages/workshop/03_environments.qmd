@@ -157,6 +157,7 @@ changes; only stage files deliberately when making a later commit.
 **Takeaway:** a documented environment supports reproducibility, and a successful
 rerun supplies evidence. Next, the programme turns to dataset documentation and
 FAIR metadata with codebook and dataspice.
+[Dataset documentation](04_data_documentation.qmd)
 
 ## Further reading
 

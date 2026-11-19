@@ -1,0 +1,180 @@
+---
+title: "Dataset documentation and FAIR metadata"
+subtitle: "30–42 minutes · codebook and dataspice"
+editor:
+  markdown:
+    wrap: 72
+link-citations: true
+execute:
+  warning: false
+  message: false
+---
+
+## Introduction
+
+We will describe the `HealthWellbeing` dataset so a collaborator can
+interpret the five columns and find the original teaching file. By the
+end of these 12 minutes, you should be able to read a data dictionary
+and explain what the dataset metadata adds.
+
+FAIR stands for **Findable, Accessible, Interoperable, and Reusable**.
+An identifiable source helps people find the data. Access instructions
+explain how to obtain it. Structured metadata helps software interpret
+it. Definitions, provenance, and reuse terms help people work out
+whether the data suit their question. Access can have conditions.
+[FAIR Guiding Principles](https://www.go-fair.org/fair-principles/)
+
+Start with the verified file and the `health` object from the data
+loading steps. Run the R chunks in the Console from the project root
+with *box*, *codebook*, and *dataspice* available. Your instructor can
+provide the completed CSV and JSON-LD files for discussion.
+[Preparation](00_preparation.qmd#preparation-data)
+
+## Data dictionary
+
+We first load the functions used in this lesson. We label a copy of
+the table and keep the downloaded file unchanged.
+
+```{r health-metadata-setup, cache = FALSE}
+box::use(
+  codebook[codebook_table],
+  dataspice[create_spice, write_spice],
+  utils[read.csv, write.csv]
+)
+```
+
+| Column | What it records | Unit or values |
+| --- | --- | --- |
+| `author` | Study label with first author and year | Text |
+| `cor` | Pearson correlation of health and well-being | Unitless |
+| `n` | Study sample size | Count of observations |
+| `population` | Type of study sample | Chronic condition or general population |
+| `country` | Country where the study was conducted | Country name |
+
+A row represents one study summary. The supplied snapshot has 29 rows
+and no missing values. A zero correlation would describe a study result.
+Use a missing value marker such as `NA` for unavailable values in a
+future release. The column definitions and original citation come
+from the published teaching documentation.
+[HealthWellbeing documentation](https://dmetar.protectlab.org/reference/healthwellbeing)
+
+In R, `codebook_table()` combines variable labels with summaries. We
+will keep the three columns we need for the exercise and save them as
+a CSV.
+
+```{r health-codebook, cache = FALSE}
+workshop_dir <- file.path("outputs", "health-wellbeing")
+dir.create(workshop_dir, recursive = TRUE, showWarnings = FALSE)
+
+labels <- c(
+  author = "Study label (first author and year)",
+  cor = "Pearson correlation of health and well-being",
+  n = "Number of observations in the study",
+  population = "Type of study sample",
+  country = "Country where the study was conducted"
+)
+
+labelled_health <- health
+for (column in names(labels)) {
+  attr(labelled_health[[column]], "label") <- labels[[column]]
+}
+
+dictionary <- codebook_table(labelled_health) |>
+  subset(select = c(name, label, n_missing))
+write.csv(
+  dictionary,
+  file.path(workshop_dir, "codebook.csv"),
+  row.names = FALSE
+)
+dictionary
+```
+
+## Dataset metadata
+
+A dataset record also needs a title, creator, source, access route, and
+any verified licence. *Dataspice* produces a Schema.org Dataset
+description in JSON-LD from four CSV files. We will prepare the
+worksheets and leave unknown fields blank. The dataset documentation
+credits Mathias Harrer for the teaching object. Keep the original
+review citation and the book section with the provenance notes.
+
+```{r health-dataspice-templates, cache = FALSE}
+metadata_dir <- file.path(workshop_dir, "metadata")
+create_spice(dir = workshop_dir)
+
+biblio_path <- file.path(metadata_dir, "biblio.csv")
+biblio <- read.csv(biblio_path, fileEncoding = "UTF-8-BOM")
+biblio[1L, ] <- NA
+biblio$title <- "HealthWellbeing teaching snapshot"
+biblio$description <- paste(
+  "Study summaries of health and well-being correlations.",
+  "Teaching file from section 4.2.4 of Doing Meta-Analysis with R."
+)
+biblio$citation <- "Ngamaba, Panagioti, and Armitage (2017)"
+biblio$keywords <- "health, well-being, meta-analysis"
+write.csv(biblio, biblio_path, row.names = FALSE, na = "")
+
+raw_name <- "healthwellbeing.rda"
+data_url <- paste0(
+  "https://www.protectlab.org/meta-analysis-in-r/data/", raw_name
+)
+write.csv(
+  data.frame(
+    fileName = raw_name,
+    name = "HealthWellbeing teaching data",
+    contentUrl = data_url,
+    encodingFormat = "application/octet-stream"
+  ),
+  file.path(metadata_dir, "access.csv"),
+  row.names = FALSE
+)
+write.csv(
+  data.frame(name = "Mathias Harrer"),
+  file.path(metadata_dir, "creators.csv"),
+  row.names = FALSE
+)
+
+attributes <- data.frame(
+  fileName = raw_name,
+  variableName = names(labels),
+  description = unname(labels),
+  unitText = c(NA, "unitless", "observations", NA, NA)
+)
+write.csv(
+  attributes,
+  file.path(metadata_dir, "attributes.csv"),
+  row.names = FALSE,
+  na = ""
+)
+```
+
+## Try it yourself
+
+Open `attributes.csv` and add the two population categories to the
+description for `population`. Save the edited worksheet, then regenerate
+the JSON-LD. Keep `biblio.csv` and `WORKSHOP_NOTES.md` with the JSON-LD so
+readers have the original citation, source URL, date of retrieval, and
+checksum.
+
+```{r health-dataspice-export, cache = FALSE}
+write_spice(path = metadata_dir)
+file.exists(file.path(metadata_dir, "dataspice.json"))
+```
+
+## Checkpoint {#metadata-checkpoint}
+
+Your codebook has five variables and zero missing values in each.
+Look for the dataset title, variable descriptions, and source
+download in `metadata/dataspice.json`. Review the draft export for
+template placeholders in the coverage fields. Check the provider's
+reuse terms before completing the licence field or sharing the data.
+With a completed worksheet, explain why someone needs both the
+meaning of `n` and the original download link.
+
+Next we will store and retrieve versions of the documented dataset.
+[Dataset storage and versioning](05_pins.qmd)
+
+## Further reading
+
+- [codebook table reference](https://rubenarslan.github.io/codebook/reference/codebook_table.html).
+- [Dataspice workflow](https://docs.ropensci.org/dataspice/).

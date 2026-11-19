@@ -11,11 +11,12 @@ author:
 
 ## About the workshop
 
-Open and reproducible science helps research be understood, evaluated, reused, and extended by others. This workshop introduces a practical research workflow that connects R with GitHub, renv, Docker, targets, Quarto, pins, vetiver, and Zenodo.
-
-Participants will explore how the tools work together throughout the research lifecycle: versioning code, recording dependencies, capturing the computational environment, organising analyses, managing dataset and model versions, communicating results, and preserving outputs. A focused extension will explore synthetic data and differential privacy when the original data cannot be shared. The emphasis is on developing a connected workflow that can be shared, reproduced, and archived.
-
-The expanded teaching plan is under development. It uses one prepared research project, with a two-hour format and a shorter adaptation.
+Open and reproducible science helps others understand, evaluate, reuse,
+and extend research. In this 90-minute workshop, we follow one prepared
+R project from its source data to an archived result. We use
+`HealthWellbeing` to pool published correlations between health and
+well-being.
+[Teaching dataset](workshop/00_preparation.qmd#preparation-data)
 
 The workshop is presented by [James Bristow](2_coordinators.qmd#james-bristow), Massey University, with co-author [Hana Liang](2_coordinators.qmd#hana-liang), Bioeconomy Science Institute.
 
@@ -24,40 +25,51 @@ The workshop is presented by [James Bristow](2_coordinators.qmd#james-bristow), 
 By the end of the workshop, participants should be able to:
 
 -   Explain how the tools support different parts of a reproducible research workflow.
--   Record metadata and provenance for a dataset and retrieve an earlier version.
--   Link a fitted model to its dataset version, input requirements, and software environment.
--   Develop a workflow that can be shared, reproduced, and archived.
--   Explain the privacy–utility trade-off and the limits of synthetic data for verifying findings.
--   Identify common barriers to reproducibility and practical strategies for addressing them.
+-   Describe dataset variables, provenance, licensing, and access
+    conditions using a codebook and structured FAIR metadata.
+-   Store a dataset with `pins` and retrieve a specific version.
+-   Trace a result through a `targets` pipeline and a Quarto report.
+-   Identify the files and metadata needed for a citable archive.
 
 ## Building a connected workflow
 
-The core workflow will bring together eight complementary tools:
-
-1.  **Version and share with [GitHub](https://github.com/).** Track changes to code and materials, collaborate with others, and make the project openly available.
-2.  **Record dependencies with [renv](https://rstudio.github.io/renv/).** Capture the R package dependencies needed to restore the project's software environment.
-3.  **Capture the environment with [Docker](https://www.docker.com/).** Package the computational environment so that it can be used beyond the original machine.
-4.  **Organise the analysis with [targets](https://docs.ropensci.org/targets/).** Express dependencies between analysis steps and track which outputs need to be rebuilt.
-5.  **Version research data with [pins](https://pins.rstudio.com/articles/pins.html).** Store datasets with descriptive metadata and retrieve specific versions.
-6.  **Version fitted models with [vetiver](https://vetiver.posit.co/get-started/version.html).** Store a model with its input requirements and prediction dependencies, and record the dataset version used to fit it.
-7.  **Communicate results with [Quarto](https://quarto.org/).** Connect code, analysis, results, and narrative in reproducible reports.
-8.  **Preserve outputs with [Zenodo](https://zenodo.org/).** Archive research outputs and assign persistent identifiers so they can be cited and found later.
+1.  Track changes with Git and review a change on GitHub.
+    [Version control and collaboration](workshop/02_git_github.qmd)
+2.  Record R dependencies with renv and inspect the wider environment
+    captured by Docker.
+    [Computational environments](workshop/03_environments.qmd)
+3.  Describe variables with `codebook` and record dataset metadata with
+    `dataspice`.
+    [Dataset documentation and FAIR metadata](workshop/04_data_documentation.qmd)
+4.  Store the full dataset and a teaching subset with `pins`, then
+    retrieve a specific version.
+    [Dataset storage and versioning](workshop/05_pins.qmd)
+5.  Run the correlation meta-analysis with `targets` and inspect what
+    rebuilds when the dataset version changes.
+    [Analytical pipelines](workshop/06_targets.qmd)
+6.  Render and inspect the analysis report in Quarto.
+    [Reporting and publishing](workshop/07_quarto.qmd)
+7.  Find and cite a specific archive version on Zenodo.
+    [Research archiving](workshop/08_zenodo.qmd)
 
 Together, these tools support a workflow whose history, dependencies, analytical steps, and outputs can be inspected and reused by other researchers.
 
-## Managing datasets and fitted models
+## Optional closing examples
 
-The main versioning exercise will use `pins`, with versioning explicitly enabled on a local board. Participants will record a dataset's source, licence, variable descriptions, and processing history, then retrieve an earlier version by its identifier. A short `vetiver` demonstration will show how to associate a fitted model with the dataset version, model settings, and software environment used to produce it. Provenance relationships need to be recorded explicitly.
-
-An optional [codebook](https://cran.r-project.org/package=codebook) exercise will extend variable descriptions into a data dictionary. Deploying a model as an API is outside the core workshop scope.
+The final five minutes include discussion and brief demonstrations if
+time allows. `synthpop` illustrates synthetic study summaries and
+`vetiver` shows how to link model versions to their training data.
+[Optional extras and concluding discussion](workshop/09_extras_and_discussion.qmd)
 
 ## Reproducibility when data cannot be shared
 
 Open science can include restricted-access data. Researchers can document their methods, code, and access conditions while restricting the original observations.
 
-The privacy extension will use public demonstration data treated as restricted for the exercise. It will introduce differentially private synthesis and compare how changes in the privacy budget affect selected summaries and model results. `DPSynth` is a candidate for this demonstration, pending method and implementation review; `diffpriv` can help illustrate the underlying mechanisms. The practical implementation is still to be developed.
-
-Synthetic data alone does not provide a differential privacy guarantee. The guarantee depends on the mechanism, its assumptions, and privacy accounting. Making the workflow runnable with synthetic data also does not mean that an independent researcher can verify findings calculated from the restricted originals. See [NIST's introduction to differentially private synthetic data](https://www.nist.gov/blogs/cybersecurity-insights/differentially-private-synthetic-data).
+Synthetic data can help readers test whether a workflow runs. Verifying
+findings based on original observations requires access to those
+observations. A differential privacy claim requires a validated
+mechanism and privacy accounting.
+[NIST's introduction to differentially private synthetic data](https://www.nist.gov/blogs/cybersecurity-insights/differentially-private-synthetic-data)
 
 ## Principles to put into practice
 
@@ -75,6 +87,8 @@ We will consider common barriers to these goals, including undocumented dependen
 
 ## Getting started
 
-Some familiarity with R will help participants follow the examples. The [getting-started guide](../index.qmd#getting-started) links to the environment and access instructions, including [Docker setup](https://github.com/JBris/open-and-reproducible-science-in-r#usage-with-docker). Browser-based Binder access is still being prepared.
+Some familiarity with R will help you follow the examples. Set up the
+environment and verify the teaching dataset before the timed session.
+[Preparation](workshop/00_preparation.qmd)
 
 For upcoming workshops, dates, and venues, see the [workshop announcements](../ANNOUNCEMENTS.md).
