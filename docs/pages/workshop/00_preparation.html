@@ -404,13 +404,13 @@ div.csl-indent {
 </section>
 <section id="choose-your-computing-environment" class="level2" data-number="4.3">
 <h2 data-number="4.3" class="anchored" data-anchor-id="choose-your-computing-environment"><span class="header-section-number">4.3</span> Choose your computing environment</h2>
-<p>Use one of these routes:</p>
-<ul>
-<li><strong>Local R:</strong> install R and an editor such as RStudio. The reference environment uses <strong>R 4.4.1</strong>. Record any difference if you use another version.</li>
-<li><strong>Docker:</strong> use the workshop RStudio image confirmed by the instructor. Follow the <a href="../../pages/workshop/03_environments.html#environments-docker">Docker instructions</a> before the session; downloading an image can take time.</li>
-</ul>
-<p>Both routes need Git for the local version-control activity. A GitHub account lets you practise sharing from your own fork. Install Quarto before the session if you will render reports locally later; HTML reporting does not require LaTeX.</p>
-<p>Browser-based Binder access is still being prepared. Use a verified local or Docker environment for this workshop.</p>
+<p>Use MyBinder to run the workshop in your browser. The remote workshop image provides RStudio, R, Git, and the R packages. A local Docker installation is optional and is covered in the <a href="https://github.com/JBris/open-and-reproducible-science-in-r#usage-with-docker">repository setup guide</a>.</p>
+<ol type="1">
+<li><a href="https://mybinder.org/v2/gh/JBris/open-and-reproducible-science-in-r/HEAD?urlpath=rstudio">Open RStudio on MyBinder</a> or use the link supplied by your instructor. Allow time for startup before the workshop.</li>
+<li>Once RStudio opens, use its <strong>Terminal</strong> to follow the project setup below. Run R commands and lesson exercises in the <strong>Console</strong> in the same browser session.</li>
+<li>Download work you want to keep using <strong>More → Export</strong> in the RStudio <strong>Files</strong> pane. MyBinder sessions are temporary, and files in a session are lost when it ends.</li>
+</ol>
+<p>You can also use an existing local RStudio setup. Have Git available for the version-control activity and Quarto for rendering reports. The reference environment uses <strong>R 4.4.1</strong>. Record any difference if you use another version. If MyBinder fails to start, let the instructor know so you can use a prepared environment.</p>
 </section>
 <section id="workshop-packages" class="level2" data-number="4.4">
 <h2 data-number="4.4" class="anchored" data-anchor-id="workshop-packages"><span class="header-section-number">4.4</span> Workshop packages</h2>
@@ -419,16 +419,14 @@ div.csl-indent {
 </section>
 <section id="get-your-own-project-copy" class="level2" data-number="4.5">
 <h2 data-number="4.5" class="anchored" data-anchor-id="get-your-own-project-copy"><span class="header-section-number">4.5</span> Get your own project copy</h2>
-<ol type="1">
-<li>Open the <a href="https://github.com/JBris/open-and-reproducible-science-in-r">workshop repository</a> and use <strong>Fork</strong> to create a copy in your GitHub account.</li>
-<li>In your fork, select <strong>Code</strong>, copy its HTTPS clone URL, and clone it with Git. Replace <code>YOUR-USERNAME</code> below with your GitHub username.</li>
-</ol>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone https://github.com/YOUR-USERNAME/open-and-reproducible-science-in-r.git</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> open-and-reproducible-science-in-r</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Open <code>open-and-reproducible-science-in-r.Rproj</code> in RStudio. For Docker, open the project in the mounted checkout described in the environment chapter. Keep terminal commands and R Console commands rooted in this project directory.</p>
-<p>The project’s <code>.Rprofile</code> activates renv; first startup may download renv. Restore the project library in the R Console before the session or before rendering locally. Repeat this step after updating <code>renv.lock</code>.</p>
+<p>Clone the project in the <strong>Terminal</strong> in RStudio. If you have a GitHub account and want to practise pushing changes, use <strong>Fork</strong> on the <a href="https://github.com/JBris/open-and-reproducible-science-in-r">workshop repository</a> and replace <code>JBris</code> in the command with your GitHub username.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> ~</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone https://github.com/JBris/open-and-reproducible-science-in-r.git</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> open-and-reproducible-science-in-r</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>In RStudio’s <strong>Files</strong> pane, open the new <code>open-and-reproducible-science-in-r</code> folder in your home directory and open <code>open-and-reproducible-science-in-r.Rproj</code>. Keep Terminal and Console commands rooted in this project directory.</p>
+<p>The project’s <code>.Rprofile</code> activates renv. If you are using local R, restore the project library in the Console before the session and after updating <code>renv.lock</code>.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>renv<span class="sc">::</span><span class="fu">restore</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Check your R version and the state of the restored library.</p>
+<p>In either environment, check your R version and the state of the library. If the library in your MyBinder session differs from the lockfile, check with the instructor before proceeding.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>R.version.string</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">

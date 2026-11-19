@@ -361,7 +361,12 @@ div.csl-indent {
   <li><a href="#why-this-matters" id="toc-why-this-matters" class="nav-link" data-scroll-target="#why-this-matters"><span class="header-section-number">7.2</span> Why this matters</a></li>
   <li><a href="#inspect-the-current-environment" id="toc-inspect-the-current-environment" class="nav-link" data-scroll-target="#inspect-the-current-environment"><span class="header-section-number">7.3</span> Inspect the current environment</a></li>
   <li><a href="#inspect-and-restore-a-lockfile" id="toc-inspect-and-restore-a-lockfile" class="nav-link" data-scroll-target="#inspect-and-restore-a-lockfile"><span class="header-section-number">7.4</span> Inspect and restore a lockfile</a></li>
-  <li><a href="#environments-docker" id="toc-environments-docker" class="nav-link" data-scroll-target="#environments-docker"><span class="header-section-number">7.5</span> Inspect the Docker route</a></li>
+  <li><a href="#environments-docker" id="toc-environments-docker" class="nav-link" data-scroll-target="#environments-docker"><span class="header-section-number">7.5</span> From a Dockerfile to RStudio on MyBinder</a>
+  <ul class="collapse">
+  <li><a href="#read-the-dockerfile" id="toc-read-the-dockerfile" class="nav-link" data-scroll-target="#read-the-dockerfile"><span class="header-section-number">7.5.1</span> Read the Dockerfile</a></li>
+  <li><a href="#follow-the-github-actions-build-pipelines" id="toc-follow-the-github-actions-build-pipelines" class="nav-link" data-scroll-target="#follow-the-github-actions-build-pipelines"><span class="header-section-number">7.5.2</span> Follow the GitHub Actions build pipelines</a></li>
+  <li><a href="#launch-the-published-environment" id="toc-launch-the-published-environment" class="nav-link" data-scroll-target="#launch-the-published-environment"><span class="header-section-number">7.5.3</span> Launch the published environment</a></li>
+  </ul></li>
   <li><a href="#try-it-yourself-restart-reload-record" id="toc-try-it-yourself-restart-reload-record" class="nav-link" data-scroll-target="#try-it-yourself-restart-reload-record"><span class="header-section-number">7.6</span> Try it yourself: restart, reload, record</a></li>
   <li><a href="#environments-checkpoint" id="toc-environments-checkpoint" class="nav-link" data-scroll-target="#environments-checkpoint"><span class="header-section-number">7.7</span> Checkpoint</a></li>
   <li><a href="#further-reading" id="toc-further-reading" class="nav-link" data-scroll-target="#further-reading"><span class="header-section-number">7.8</span> Further reading</a></li>
@@ -374,7 +379,7 @@ div.csl-indent {
 <header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../pages/workshop/00_preparation.html">Workshop</a></li><li class="breadcrumb-item"><a href="../../pages/workshop/03_environments.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Reproducible computational environments</span></a></li></ol></nav>
 <div class="quarto-title">
 <h1 class="title"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Reproducible computational environments</span></h1>
-<p class="subtitle lead">17–30 minutes · renv and Docker</p>
+<p class="subtitle lead">17–30 minutes · renv, Docker and Binder</p>
 </div>
 
 
@@ -393,8 +398,8 @@ div.csl-indent {
 
 <section id="learning-objectives" class="level2" data-number="7.1">
 <h2 data-number="7.1" class="anchored" data-anchor-id="learning-objectives"><span class="header-section-number">7.1</span> Learning objectives</h2>
-<p>By the end of this activity, you should be able to distinguish R package restoration from containerised computing, inspect the project’s lockfile, and record the environment used to load the teaching data.</p>
-<p>Prerequisite: <a href="../../pages/workshop/00_preparation.html">preparation</a>, including completed downloads and initial renv setup. Use a prepared environment during these 13 minutes; image builds and full installations belong before the session.</p>
+<p>By the end of this activity, you should be able to inspect the project’s R lockfile, explain how a Docker image becomes a Binder session, and record the environment used to load the teaching data.</p>
+<p>Complete <a href="../../pages/workshop/00_preparation.html">preparation</a> before the session, including the data download and environment checks. Run the R activities in a prepared MyBinder session or an existing local R environment.</p>
 </section>
 <section id="why-this-matters" class="level2" data-number="7.2">
 <h2 data-number="7.2" class="anchored" data-anchor-id="why-this-matters"><span class="header-section-number">7.2</span> Why this matters</h2>
@@ -440,7 +445,7 @@ div.csl-indent {
 </tr>
 </tbody>
 </table>
-<p>renv restores the R packages described by a lockfile. It does not install the specified R interpreter or capture every system dependency. Docker packages a wider environment, but a Dockerfile alone does not establish that an image builds, starts, or reproduces every result.</p>
+<p>renv restores the R packages described by a lockfile. A Docker image can also include the R interpreter, operating-system libraries, and rendering tools. Reproducing a result still requires the analysis code, the input data, and a successful rerun.</p>
 </section>
 <section id="inspect-the-current-environment" class="level2" data-number="7.3">
 <h2 data-number="7.3" class="anchored" data-anchor-id="inspect-the-current-environment"><span class="header-section-number">7.3</span> Inspect the current environment</h2>
@@ -534,53 +539,88 @@ div.csl-indent {
 <li>Collaborators use <code>renv::restore()</code> to obtain the recorded packages.</li>
 <li>The analysis is tested in the restored environment.</li>
 </ol>
-<p>For this activity, inspect the existing lockfile. If restoration is needed, follow the <a href="../../pages/workshop/00_preparation.html">preparation instructions</a> and run this in the R Console before the workshop.</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>renv<span class="sc">::</span><span class="fu">restore</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>For this activity, inspect the existing lockfile. The Binder image is built with the restored library. If you are setting up local R, follow the <a href="../../pages/workshop/00_preparation.html">preparation instructions</a> to restore it before the workshop.</p>
 </section>
 <section id="environments-docker" class="level2" data-number="7.5">
-<h2 data-number="7.5" class="anchored" data-anchor-id="environments-docker"><span class="header-section-number">7.5</span> Inspect the Docker route</h2>
-<p>Allow about four minutes. Run these commands in a <strong>Terminal</strong> at the project root. They read the repository’s configured image version:</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="bu">export</span> <span class="va">APP_VERSION</span><span class="op">=</span><span class="st">"</span><span class="va">$(</span><span class="fu">cat</span> VERSION<span class="va">)</span><span class="st">"</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> compose config <span class="at">--quiet</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Successful configuration resolution checks the Compose inputs. It does not verify that the image has been published or that a server can start.</p>
-<p>For pre-workshop setup, once the instructor confirms that the image is available, use:</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> compose pull rstudio</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> compose up <span class="at">--no-build</span> rstudio</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Open <a href="http://localhost:8787">RStudio at localhost:8787</a>. Leave the terminal open while working; press <strong>Ctrl+C</strong> there to stop the service. If your environment is already running, use the existing session during the workshop.</p>
-<p>The repository is mounted at <code>/home/rstudio/open-reproducible-science-r</code>. Open the project and save your work in that checkout. The RStudio service binds its port to localhost and disables login authentication for this local workshop configuration.</p>
-<p>The image version selected by <code>VERSION</code> is separate from GitHub release tags such as <code>v0.2.0</code>. Do not assume that a release tag identifies a matching image. For stronger provenance, also record the resolved image digest when the prepared image is distributed. A mounted checkout can differ from the code originally copied into an image, so retain the checkout’s Git revision too.</p>
+<h2 data-number="7.5" class="anchored" data-anchor-id="environments-docker"><span class="header-section-number">7.5</span> From a Dockerfile to RStudio on MyBinder</h2>
+<p>Allow about four minutes. Participants need a browser to use MyBinder. The build commands below show what runs on GitHub Actions, so you can follow along without installing Docker or running a build.</p>
+<section id="read-the-dockerfile" class="level3" data-number="7.5.1">
+<h3 data-number="7.5.1" class="anchored" data-anchor-id="read-the-dockerfile"><span class="header-section-number">7.5.1</span> Read the Dockerfile</h3>
+<p>A <strong>Dockerfile</strong> is a set of instructions for building a Docker image. Find these instructions in the workshop’s <a href="https://github.com/JBris/open-and-reproducible-science-in-r/blob/main/dockerfiles/binder/Dockerfile.1.0.0">Binder image Dockerfile</a>.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Instruction</th>
+<th>What it does in this project</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>FROM rocker/binder:4.4.1 AS base</code></td>
+<td>Starts from Rocker’s Binder image for R 4.4.1.</td>
+</tr>
+<tr class="even">
+<td><code>RUN</code></td>
+<td>Executes build steps such as installing system libraries and restoring R packages from <code>renv.lock</code>.</td>
+</tr>
+<tr class="odd">
+<td><code>COPY</code></td>
+<td>Adds files such as the lockfile and workshop lessons to the image.</td>
+</tr>
+</tbody>
+</table>
+<p>A <strong>Docker build</strong> uses these instructions and the repository files to produce an <strong>image</strong>. A <strong>container</strong> is a running instance of an image. The image provides the environment, and each participant runs the workshop in their own container.</p>
+</section>
+<section id="follow-the-github-actions-build-pipelines" class="level3" data-number="7.5.2">
+<h3 data-number="7.5.2" class="anchored" data-anchor-id="follow-the-github-actions-build-pipelines"><span class="header-section-number">7.5.2</span> Follow the GitHub Actions build pipelines</h3>
+<p>The repository has two workflows that run when a GitHub release is published or when a maintainer starts them manually. <a href="https://github.com/JBris/open-and-reproducible-science-in-r/actions/workflows/build-binder.yaml">Build Binder</a> builds the image MyBinder uses. <a href="https://github.com/JBris/open-and-reproducible-science-in-r/actions/workflows/build-rstudio.yaml">Build RStudio</a> builds a separate image for people running RStudio with Docker locally.</p>
+<p>Each workflow checks out the source, reads <code>VERSION</code> into <code>APP_VERSION</code>, and records a UTC build date. Docker Compose uses <code>APP_VERSION</code> to select the Dockerfile and tag the image. The binder job includes these two steps.</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> compose build binder</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> compose push binder</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The first command builds the image. The second publishes the image with its version tag to GitHub Container Registry (<code>ghcr.io</code>). The image version comes from <code>VERSION</code> and can differ from the GitHub release tag. Open a completed workflow run and find its build and push output if you want to see the process in the Actions log.</p>
+</section>
+<section id="launch-the-published-environment" class="level3" data-number="7.5.3">
+<h3 data-number="7.5.3" class="anchored" data-anchor-id="launch-the-published-environment"><span class="header-section-number">7.5.3</span> Launch the published environment</h3>
+<p>MyBinder reads the small <a href="https://github.com/JBris/open-and-reproducible-science-in-r/blob/main/binder/Dockerfile">Binder entry point</a>, which selects the published Binder image with <code>FROM</code>. MyBinder prepares the launch image and starts a container on its servers. The launch link’s <code>urlpath=rstudio</code> setting opens the RStudio interface in your browser.</p>
+<p>Use the session you opened during <a href="../../pages/workshop/00_preparation.html#choose-your-computing-environment">preparation</a> to run the R exercises. Keep your project files and outputs together in that session, and download your work before it ends.</p>
+</section>
 </section>
 <section id="try-it-yourself-restart-reload-record" class="level2" data-number="7.6">
 <h2 data-number="7.6" class="anchored" data-anchor-id="try-it-yourself-restart-reload-record"><span class="header-section-number">7.6</span> Try it yourself: restart, reload, record</h2>
 <p>Allow about three minutes. Restart R, reopen the project if necessary, and load the data from its explicit path. This checks that the input does not depend on an object left over from an earlier Console session.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>raw_file <span class="ot">&lt;-</span> <span class="fu">file.path</span>(<span class="st">"data"</span>, <span class="st">"raw"</span>, <span class="st">"healthwellbeing.rda"</span>)</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(</span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">file.exists</span>(raw_file),</span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">identical</span>(</span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">unname</span>(tools<span class="sc">::</span><span class="fu">md5sum</span>(raw_file)),</span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"0d74964b0b7168379a2b015cb648b326"</span></span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>data_env <span class="ot">&lt;-</span> <span class="fu">new.env</span>(<span class="at">parent =</span> <span class="fu">baseenv</span>())</span>
-<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>loaded_names <span class="ot">&lt;-</span> <span class="fu">load</span>(raw_file, <span class="at">envir =</span> data_env)</span>
-<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(<span class="fu">identical</span>(loaded_names, <span class="st">"HealthWellbeing"</span>))</span>
-<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>health <span class="ot">&lt;-</span> data_env[[<span class="st">"HealthWellbeing"</span>]]</span>
-<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(<span class="fu">nrow</span>(health) <span class="sc">==</span> <span class="dv">29</span>L, <span class="fu">ncol</span>(health) <span class="sc">==</span> <span class="dv">5</span>L)</span>
-<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>output_dir <span class="ot">&lt;-</span> <span class="st">"outputs"</span></span>
-<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a><span class="fu">dir.create</span>(output_dir, <span class="at">showWarnings =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a><span class="fu">writeLines</span>(</span>
-<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">capture.output</span>(<span class="fu">sessionInfo</span>()),</span>
-<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">file.path</span>(output_dir, <span class="st">"session-info.txt"</span>)</span>
-<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>raw_file <span class="ot">&lt;-</span> <span class="fu">file.path</span>(<span class="st">"data"</span>, <span class="st">"raw"</span>, <span class="st">"healthwellbeing.rda"</span>)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">file.exists</span>(raw_file),</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">identical</span>(</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">unname</span>(tools<span class="sc">::</span><span class="fu">md5sum</span>(raw_file)),</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"0d74964b0b7168379a2b015cb648b326"</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>data_env <span class="ot">&lt;-</span> <span class="fu">new.env</span>(<span class="at">parent =</span> <span class="fu">baseenv</span>())</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>loaded_names <span class="ot">&lt;-</span> <span class="fu">load</span>(raw_file, <span class="at">envir =</span> data_env)</span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(<span class="fu">identical</span>(loaded_names, <span class="st">"HealthWellbeing"</span>))</span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>health <span class="ot">&lt;-</span> data_env[[<span class="st">"HealthWellbeing"</span>]]</span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(<span class="fu">nrow</span>(health) <span class="sc">==</span> <span class="dv">29</span>L, <span class="fu">ncol</span>(health) <span class="sc">==</span> <span class="dv">5</span>L)</span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>output_dir <span class="ot">&lt;-</span> <span class="st">"outputs"</span></span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a><span class="fu">dir.create</span>(output_dir, <span class="at">showWarnings =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a><span class="fu">writeLines</span>(</span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">capture.output</span>(<span class="fu">sessionInfo</span>()),</span>
+<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">file.path</span>(output_dir, <span class="st">"session-info.txt"</span>)</span>
+<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Inspect <code>outputs/session-info.txt</code>. Add a short sentence to your existing <code>WORKSHOP_NOTES.md</code> recording the R version and whether you used local R or Docker. Keep the raw data and generated session record separate from code changes; only stage files deliberately when making a later commit.</p>
+<p>Inspect <code>outputs/session-info.txt</code>. Add a short sentence to your existing <code>WORKSHOP_NOTES.md</code> recording the R version and whether you used MyBinder or local R. If you used MyBinder, record the image tag from <code>binder/Dockerfile</code> and the project revision from <code>git rev-parse HEAD</code> in the <strong>Terminal</strong>. Keep the raw data and generated session record separate from code changes.</p>
 </section>
 <section id="environments-checkpoint" class="level2" data-number="7.7">
 <h2 data-number="7.7" class="anchored" data-anchor-id="environments-checkpoint"><span class="header-section-number">7.7</span> Checkpoint</h2>
 <ul>
 <li>You can explain which parts of the environment renv and Docker capture.</li>
+<li>You can trace how GitHub Actions builds and publishes the Binder image and how MyBinder uses it to start RStudio.</li>
 <li>You can distinguish the lockfile’s requested R version from the running version.</li>
 <li>The dataset reloads after a restart, and you have a session record on disk.</li>
 <li>You can identify the workshop package versions recorded in the lockfile.</li>
@@ -592,7 +632,8 @@ div.csl-indent {
 <ul>
 <li>Sharing a project environment with renv <span class="citation" data-cites="renv-collaborating">(<a href="../4_references.html#ref-renv-collaborating" role="doc-biblioref">Posit, n.d.</a>)</span>.</li>
 <li>Configuring services with Docker Compose <span class="citation" data-cites="docker-compose">(<a href="../4_references.html#ref-docker-compose" role="doc-biblioref">Docker, n.d.</a>)</span>.</li>
-<li><a href="https://github.com/JBris/open-and-reproducible-science-in-r#usage-with-docker">Workshop Docker setup</a>.</li>
+<li><a href="https://docs.docker.com/reference/dockerfile/">Dockerfile reference</a>.</li>
+<li><a href="https://mybinder.readthedocs.io/en/latest/howto/user_interface.html">Configuring the Binder user interface</a>.</li>
 </ul>
 
 

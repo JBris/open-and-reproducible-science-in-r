@@ -1,5 +1,93 @@
 [
   {
+    "objectID": "pages/workshop/03_environments.html",
+    "href": "pages/workshop/03_environments.html",
+    "title": "7  Reproducible computational environments",
+    "section": "",
+    "text": "7.1 Learning objectives\nBy the end of this activity, you should be able to inspect the project’s R lockfile, explain how a Docker image becomes a Binder session, and record the environment used to load the teaching data.\nComplete preparation before the session, including the data download and environment checks. Run the R activities in a prepared MyBinder session or an existing local R environment.",
+    "crumbs": [
+      "Workshop",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Reproducible computational environments</span>"
+    ]
+  },
+  {
+    "objectID": "pages/workshop/03_environments.html#why-this-matters",
+    "href": "pages/workshop/03_environments.html#why-this-matters",
+    "title": "7  Reproducible computational environments",
+    "section": "7.2 Why this matters",
+    "text": "7.2 Why this matters\nThe same script can behave differently when package versions or system libraries change. We need to describe the environment alongside the code and the data version.\n\n\n\n\n\n\n\n\nLayer\nWhat we record\nTool or file\n\n\n\n\nR runtime\nR version\nrenv.lock, runtime information, container base image\n\n\nR packages\nPackage versions and sources\nrenv and renv.lock\n\n\nWider environment\nOperating-system libraries and rendering tools\nDockerfile and image\n\n\nCode and configuration\nThe revision used for the run\nGit commit\n\n\nActual session\nVersions loaded when the activity ran\nsessionInfo()\n\n\n\nrenv restores the R packages described by a lockfile. A Docker image can also include the R interpreter, operating-system libraries, and rendering tools. Reproducing a result still requires the analysis code, the input data, and a successful rerun.",
+    "crumbs": [
+      "Workshop",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Reproducible computational environments</span>"
+    ]
+  },
+  {
+    "objectID": "pages/workshop/03_environments.html#inspect-the-current-environment",
+    "href": "pages/workshop/03_environments.html#inspect-the-current-environment",
+    "title": "7  Reproducible computational environments",
+    "section": "7.3 Inspect the current environment",
+    "text": "7.3 Inspect the current environment\nAllow about two minutes. In the R Console, with the project open:\n\nR.version.string\n\n[1] \"R version 4.4.1 (2024-06-14)\"\n\n.libPaths()\n\n[1] \"/home/rstudio/renv/library/linux-ubuntu-jammy/R-4.4/x86_64-pc-linux-gnu\"                  \n[2] \"/home/rstudio/.cache/R/renv/sandbox/linux-ubuntu-jammy/R-4.4/x86_64-pc-linux-gnu/25ebdc09\"\n\npackageVersion(\"renv\")\n\n[1] '1.0.7'\n\n\nCompare your R version with the reference version, 4.4.1. If it differs, record the difference; a lockfile does not switch your running R session.",
+    "crumbs": [
+      "Workshop",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Reproducible computational environments</span>"
+    ]
+  },
+  {
+    "objectID": "pages/workshop/03_environments.html#inspect-and-restore-a-lockfile",
+    "href": "pages/workshop/03_environments.html#inspect-and-restore-a-lockfile",
+    "title": "7  Reproducible computational environments",
+    "section": "7.4 Inspect and restore a lockfile",
+    "text": "7.4 Inspect and restore a lockfile\nAllow about four minutes. Use the project’s active renv environment:\n\nlock &lt;- renv::lockfile_read(\"renv.lock\")\nlock$R$Version\n\n[1] \"4.4.1\"\n\nnames(lock$Packages)\n\n  [1] \"CompQuadForm\"  \"EML\"           \"GPArotation\"   \"KernSmooth\"   \n  [5] \"MASS\"          \"Matrix\"        \"R6\"            \"RColorBrewer\" \n  [9] \"Rcpp\"          \"RcppArmadillo\" \"RcppEigen\"     \"Rdpack\"       \n [13] \"Rsolnp\"        \"S7\"            \"TH.data\"       \"V8\"           \n [17] \"askpass\"       \"backports\"     \"base64enc\"     \"base64url\"    \n [21] \"bit\"           \"bit64\"         \"boot\"          \"box\"          \n [25] \"broman\"        \"bslib\"         \"bundle\"        \"butcher\"      \n [29] \"cachem\"        \"callr\"         \"cereal\"        \"class\"        \n [33] \"classInt\"      \"cli\"           \"clipr\"         \"cmm\"          \n [37] \"codebook\"      \"codetools\"     \"coin\"          \"collections\"  \n [41] \"commonmark\"    \"cpp11\"         \"crayon\"        \"crew\"         \n [45] \"curl\"          \"data.table\"    \"dataspice\"     \"digest\"       \n [49] \"dplyr\"         \"e1071\"         \"emld\"          \"evaluate\"     \n [53] \"farver\"        \"fastmap\"       \"fontawesome\"   \"forcats\"      \n [57] \"foreign\"       \"fs\"            \"future\"        \"future.apply\" \n [61] \"generics\"      \"ggplot2\"       \"globals\"       \"glue\"         \n [65] \"gridExtra\"     \"gtable\"        \"hardhat\"       \"haven\"        \n [69] \"here\"          \"highr\"         \"hms\"           \"htmltools\"    \n [73] \"htmlwidgets\"   \"httpuv\"        \"httr\"          \"igraph\"       \n [77] \"isoband\"       \"jqr\"           \"jquerylib\"     \"jsonld\"       \n [81] \"jsonlite\"      \"knitr\"         \"labeling\"      \"labelled\"     \n [85] \"later\"         \"lattice\"       \"lazyeval\"      \"libcoin\"      \n [89] \"lifecycle\"     \"likert\"        \"listenv\"       \"lme4\"         \n [93] \"lobstr\"        \"magrittr\"      \"mathjaxr\"      \"matrixStats\"  \n [97] \"memoise\"       \"meta\"          \"metabook\"      \"metadat\"      \n[101] \"metafor\"       \"mime\"          \"minqa\"         \"mipfp\"        \n[105] \"mirai\"         \"mnormt\"        \"modeltools\"    \"multcomp\"     \n[109] \"mvtnorm\"       \"nanonext\"      \"nlme\"          \"nloptr\"       \n[113] \"nnet\"          \"numDeriv\"      \"openssl\"       \"otel\"         \n[117] \"parallelly\"    \"party\"         \"pbapply\"       \"pillar\"       \n[121] \"pins\"          \"pkgconfig\"     \"plyr\"          \"polspline\"    \n[125] \"prettyunits\"   \"processx\"      \"progress\"      \"promises\"     \n[129] \"proto\"         \"proxy\"         \"ps\"            \"psych\"        \n[133] \"purrr\"         \"randomForest\"  \"ranger\"        \"rapidoc\"      \n[137] \"rappdirs\"      \"rbibutils\"     \"readr\"         \"reformulas\"   \n[141] \"renv\"          \"repr\"          \"reshape2\"      \"rhandsontable\"\n[145] \"rlang\"         \"rmarkdown\"     \"rmdpartials\"   \"rmutil\"       \n[149] \"rpart\"         \"rprojroot\"     \"sandwich\"      \"sass\"         \n[153] \"scales\"        \"secretbase\"    \"shiny\"         \"skimr\"        \n[157] \"sourcetools\"   \"sparsevctrs\"   \"stringi\"       \"stringr\"      \n[161] \"strucchange\"   \"survival\"      \"synthpop\"      \"sys\"          \n[165] \"targets\"       \"tibble\"        \"tidyr\"         \"tidyselect\"   \n[169] \"tinytex\"       \"truncnorm\"     \"tzdb\"          \"utf8\"         \n[173] \"uuid\"          \"vctrs\"         \"vetiver\"       \"viridisLite\"  \n[177] \"visNetwork\"    \"vroom\"         \"whisker\"       \"withr\"        \n[181] \"xfun\"          \"xml2\"          \"xtable\"        \"yaml\"         \n[185] \"zoo\"          \n\nrenv::status()\n\nNo issues found -- the project is in a consistent state.\n\n\nThe lockfile names R 4.4.1 and records package versions for the workshop, including meta, codebook, dataspice, pins, and targets. Use renv::status() to check whether your active library matches the lockfile.\nThe usual collaboration cycle is:\n\nA maintainer prepares and tests the required packages.\nThe maintainer uses renv::snapshot() and reviews the resulting lockfile.\nCollaborators use renv::restore() to obtain the recorded packages.\nThe analysis is tested in the restored environment.\n\nFor this activity, inspect the existing lockfile. The Binder image is built with the restored library. If you are setting up local R, follow the preparation instructions to restore it before the workshop.",
+    "crumbs": [
+      "Workshop",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Reproducible computational environments</span>"
+    ]
+  },
+  {
+    "objectID": "pages/workshop/03_environments.html#environments-docker",
+    "href": "pages/workshop/03_environments.html#environments-docker",
+    "title": "7  Reproducible computational environments",
+    "section": "7.5 From a Dockerfile to RStudio on MyBinder",
+    "text": "7.5 From a Dockerfile to RStudio on MyBinder\nAllow about four minutes. Participants need a browser to use MyBinder. The build commands below show what runs on GitHub Actions, so you can follow along without installing Docker or running a build.\n\n7.5.1 Read the Dockerfile\nA Dockerfile is a set of instructions for building a Docker image. Find these instructions in the workshop’s Binder image Dockerfile.\n\n\n\n\n\n\n\nInstruction\nWhat it does in this project\n\n\n\n\nFROM rocker/binder:4.4.1 AS base\nStarts from Rocker’s Binder image for R 4.4.1.\n\n\nRUN\nExecutes build steps such as installing system libraries and restoring R packages from renv.lock.\n\n\nCOPY\nAdds files such as the lockfile and workshop lessons to the image.\n\n\n\nA Docker build uses these instructions and the repository files to produce an image. A container is a running instance of an image. The image provides the environment, and each participant runs the workshop in their own container.\n\n\n7.5.2 Follow the GitHub Actions build pipelines\nThe repository has two workflows that run when a GitHub release is published or when a maintainer starts them manually. Build Binder builds the image MyBinder uses. Build RStudio builds a separate image for people running RStudio with Docker locally.\nEach workflow checks out the source, reads VERSION into APP_VERSION, and records a UTC build date. Docker Compose uses APP_VERSION to select the Dockerfile and tag the image. The binder job includes these two steps.\ndocker compose build binder\ndocker compose push binder\nThe first command builds the image. The second publishes the image with its version tag to GitHub Container Registry (ghcr.io). The image version comes from VERSION and can differ from the GitHub release tag. Open a completed workflow run and find its build and push output if you want to see the process in the Actions log.\n\n\n7.5.3 Launch the published environment\nMyBinder reads the small Binder entry point, which selects the published Binder image with FROM. MyBinder prepares the launch image and starts a container on its servers. The launch link’s urlpath=rstudio setting opens the RStudio interface in your browser.\nUse the session you opened during preparation to run the R exercises. Keep your project files and outputs together in that session, and download your work before it ends.",
+    "crumbs": [
+      "Workshop",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Reproducible computational environments</span>"
+    ]
+  },
+  {
+    "objectID": "pages/workshop/03_environments.html#try-it-yourself-restart-reload-record",
+    "href": "pages/workshop/03_environments.html#try-it-yourself-restart-reload-record",
+    "title": "7  Reproducible computational environments",
+    "section": "7.6 Try it yourself: restart, reload, record",
+    "text": "7.6 Try it yourself: restart, reload, record\nAllow about three minutes. Restart R, reopen the project if necessary, and load the data from its explicit path. This checks that the input does not depend on an object left over from an earlier Console session.\n\nraw_file &lt;- file.path(\"data\", \"raw\", \"healthwellbeing.rda\")\nstopifnot(\n  file.exists(raw_file),\n  identical(\n    unname(tools::md5sum(raw_file)),\n    \"0d74964b0b7168379a2b015cb648b326\"\n  )\n)\ndata_env &lt;- new.env(parent = baseenv())\nloaded_names &lt;- load(raw_file, envir = data_env)\nstopifnot(identical(loaded_names, \"HealthWellbeing\"))\nhealth &lt;- data_env[[\"HealthWellbeing\"]]\nstopifnot(nrow(health) == 29L, ncol(health) == 5L)\n\noutput_dir &lt;- \"outputs\"\ndir.create(output_dir, showWarnings = FALSE)\nwriteLines(\n  capture.output(sessionInfo()),\n  file.path(output_dir, \"session-info.txt\")\n)\n\nInspect outputs/session-info.txt. Add a short sentence to your existing WORKSHOP_NOTES.md recording the R version and whether you used MyBinder or local R. If you used MyBinder, record the image tag from binder/Dockerfile and the project revision from git rev-parse HEAD in the Terminal. Keep the raw data and generated session record separate from code changes.",
+    "crumbs": [
+      "Workshop",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Reproducible computational environments</span>"
+    ]
+  },
+  {
+    "objectID": "pages/workshop/03_environments.html#environments-checkpoint",
+    "href": "pages/workshop/03_environments.html#environments-checkpoint",
+    "title": "7  Reproducible computational environments",
+    "section": "7.7 Checkpoint",
+    "text": "7.7 Checkpoint\n\nYou can explain which parts of the environment renv and Docker capture.\nYou can trace how GitHub Actions builds and publishes the Binder image and how MyBinder uses it to start RStudio.\nYou can distinguish the lockfile’s requested R version from the running version.\nThe dataset reloads after a restart, and you have a session record on disk.\nYou can identify the workshop package versions recorded in the lockfile.\n\nTakeaway: a documented environment supports reproducibility, and a successful rerun supplies evidence. Next, the programme turns to dataset documentation and FAIR metadata with codebook and dataspice. Dataset documentation",
+    "crumbs": [
+      "Workshop",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Reproducible computational environments</span>"
+    ]
+  },
+  {
+    "objectID": "pages/workshop/03_environments.html#further-reading",
+    "href": "pages/workshop/03_environments.html#further-reading",
+    "title": "7  Reproducible computational environments",
+    "section": "7.8 Further reading",
+    "text": "7.8 Further reading\n\nSharing a project environment with renv (Posit, n.d.).\nConfiguring services with Docker Compose (Docker, n.d.).\nDockerfile reference.\nConfiguring the Binder user interface.\n\n\n\n\n\nDocker. n.d. “Docker Compose.” https://docs.docker.com/compose/.\n\n\nPosit. n.d. “Collaborating with renv.” https://rstudio.github.io/renv/articles/collaborating.html.",
+    "crumbs": [
+      "Workshop",
+      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Reproducible computational environments</span>"
+    ]
+  },
+  {
     "objectID": "ANNOUNCEMENTS.html",
     "href": "ANNOUNCEMENTS.html",
     "title": "14  Announcements",
@@ -488,7 +576,7 @@
     "href": "pages/workshop/00_preparation.html#choose-your-computing-environment",
     "title": "4  Preparation",
     "section": "4.3 Choose your computing environment",
-    "text": "4.3 Choose your computing environment\nUse one of these routes:\n\nLocal R: install R and an editor such as RStudio. The reference environment uses R 4.4.1. Record any difference if you use another version.\nDocker: use the workshop RStudio image confirmed by the instructor. Follow the Docker instructions before the session; downloading an image can take time.\n\nBoth routes need Git for the local version-control activity. A GitHub account lets you practise sharing from your own fork. Install Quarto before the session if you will render reports locally later; HTML reporting does not require LaTeX.\nBrowser-based Binder access is still being prepared. Use a verified local or Docker environment for this workshop.",
+    "text": "4.3 Choose your computing environment\nUse MyBinder to run the workshop in your browser. The remote workshop image provides RStudio, R, Git, and the R packages. A local Docker installation is optional and is covered in the repository setup guide.\n\nOpen RStudio on MyBinder or use the link supplied by your instructor. Allow time for startup before the workshop.\nOnce RStudio opens, use its Terminal to follow the project setup below. Run R commands and lesson exercises in the Console in the same browser session.\nDownload work you want to keep using More → Export in the RStudio Files pane. MyBinder sessions are temporary, and files in a session are lost when it ends.\n\nYou can also use an existing local RStudio setup. Have Git available for the version-control activity and Quarto for rendering reports. The reference environment uses R 4.4.1. Record any difference if you use another version. If MyBinder fails to start, let the instructor know so you can use a prepared environment.",
     "crumbs": [
       "Workshop",
       "<span class='chapter-number'>4</span>  <span class='chapter-title'>Preparation</span>"
@@ -510,7 +598,7 @@
     "href": "pages/workshop/00_preparation.html#get-your-own-project-copy",
     "title": "4  Preparation",
     "section": "4.5 Get your own project copy",
-    "text": "4.5 Get your own project copy\n\nOpen the workshop repository and use Fork to create a copy in your GitHub account.\nIn your fork, select Code, copy its HTTPS clone URL, and clone it with Git. Replace YOUR-USERNAME below with your GitHub username.\n\ngit clone https://github.com/YOUR-USERNAME/open-and-reproducible-science-in-r.git\ncd open-and-reproducible-science-in-r\nOpen open-and-reproducible-science-in-r.Rproj in RStudio. For Docker, open the project in the mounted checkout described in the environment chapter. Keep terminal commands and R Console commands rooted in this project directory.\nThe project’s .Rprofile activates renv; first startup may download renv. Restore the project library in the R Console before the session or before rendering locally. Repeat this step after updating renv.lock.\nrenv::restore()\nCheck your R version and the state of the restored library.\n\nR.version.string\n\n[1] \"R version 4.4.1 (2024-06-14)\"\n\nrenv::status()\n\nNo issues found -- the project is in a consistent state.",
+    "text": "4.5 Get your own project copy\nClone the project in the Terminal in RStudio. If you have a GitHub account and want to practise pushing changes, use Fork on the workshop repository and replace JBris in the command with your GitHub username.\ncd ~\ngit clone https://github.com/JBris/open-and-reproducible-science-in-r.git\ncd open-and-reproducible-science-in-r\nIn RStudio’s Files pane, open the new open-and-reproducible-science-in-r folder in your home directory and open open-and-reproducible-science-in-r.Rproj. Keep Terminal and Console commands rooted in this project directory.\nThe project’s .Rprofile activates renv. If you are using local R, restore the project library in the Console before the session and after updating renv.lock.\nrenv::restore()\nIn either environment, check your R version and the state of the library. If the library in your MyBinder session differs from the lockfile, check with the instructor before proceeding.\n\nR.version.string\n\n[1] \"R version 4.4.1 (2024-06-14)\"\n\nrenv::status()\n\nNo issues found -- the project is in a consistent state.",
     "crumbs": [
       "Workshop",
       "<span class='chapter-number'>4</span>  <span class='chapter-title'>Preparation</span>"
@@ -712,94 +800,6 @@
     "crumbs": [
       "Workshop",
       "<span class='chapter-number'>6</span>  <span class='chapter-title'>Version control, collaboration and sharing</span>"
-    ]
-  },
-  {
-    "objectID": "pages/workshop/03_environments.html",
-    "href": "pages/workshop/03_environments.html",
-    "title": "7  Reproducible computational environments",
-    "section": "",
-    "text": "7.1 Learning objectives\nBy the end of this activity, you should be able to distinguish R package restoration from containerised computing, inspect the project’s lockfile, and record the environment used to load the teaching data.\nPrerequisite: preparation, including completed downloads and initial renv setup. Use a prepared environment during these 13 minutes; image builds and full installations belong before the session.",
-    "crumbs": [
-      "Workshop",
-      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Reproducible computational environments</span>"
-    ]
-  },
-  {
-    "objectID": "pages/workshop/03_environments.html#why-this-matters",
-    "href": "pages/workshop/03_environments.html#why-this-matters",
-    "title": "7  Reproducible computational environments",
-    "section": "7.2 Why this matters",
-    "text": "7.2 Why this matters\nThe same script can behave differently when package versions or system libraries change. We need to describe the environment alongside the code and the data version.\n\n\n\n\n\n\n\n\nLayer\nWhat we record\nTool or file\n\n\n\n\nR runtime\nR version\nrenv.lock, runtime information, container base image\n\n\nR packages\nPackage versions and sources\nrenv and renv.lock\n\n\nWider environment\nOperating-system libraries and rendering tools\nDockerfile and image\n\n\nCode and configuration\nThe revision used for the run\nGit commit\n\n\nActual session\nVersions loaded when the activity ran\nsessionInfo()\n\n\n\nrenv restores the R packages described by a lockfile. It does not install the specified R interpreter or capture every system dependency. Docker packages a wider environment, but a Dockerfile alone does not establish that an image builds, starts, or reproduces every result.",
-    "crumbs": [
-      "Workshop",
-      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Reproducible computational environments</span>"
-    ]
-  },
-  {
-    "objectID": "pages/workshop/03_environments.html#inspect-the-current-environment",
-    "href": "pages/workshop/03_environments.html#inspect-the-current-environment",
-    "title": "7  Reproducible computational environments",
-    "section": "7.3 Inspect the current environment",
-    "text": "7.3 Inspect the current environment\nAllow about two minutes. In the R Console, with the project open:\n\nR.version.string\n\n[1] \"R version 4.4.1 (2024-06-14)\"\n\n.libPaths()\n\n[1] \"/home/rstudio/renv/library/linux-ubuntu-jammy/R-4.4/x86_64-pc-linux-gnu\"                  \n[2] \"/home/rstudio/.cache/R/renv/sandbox/linux-ubuntu-jammy/R-4.4/x86_64-pc-linux-gnu/25ebdc09\"\n\npackageVersion(\"renv\")\n\n[1] '1.0.7'\n\n\nCompare your R version with the reference version, 4.4.1. If it differs, record the difference; a lockfile does not switch your running R session.",
-    "crumbs": [
-      "Workshop",
-      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Reproducible computational environments</span>"
-    ]
-  },
-  {
-    "objectID": "pages/workshop/03_environments.html#inspect-and-restore-a-lockfile",
-    "href": "pages/workshop/03_environments.html#inspect-and-restore-a-lockfile",
-    "title": "7  Reproducible computational environments",
-    "section": "7.4 Inspect and restore a lockfile",
-    "text": "7.4 Inspect and restore a lockfile\nAllow about four minutes. Use the project’s active renv environment:\n\nlock &lt;- renv::lockfile_read(\"renv.lock\")\nlock$R$Version\n\n[1] \"4.4.1\"\n\nnames(lock$Packages)\n\n  [1] \"CompQuadForm\"  \"EML\"           \"GPArotation\"   \"KernSmooth\"   \n  [5] \"MASS\"          \"Matrix\"        \"R6\"            \"RColorBrewer\" \n  [9] \"Rcpp\"          \"RcppArmadillo\" \"RcppEigen\"     \"Rdpack\"       \n [13] \"Rsolnp\"        \"S7\"            \"TH.data\"       \"V8\"           \n [17] \"askpass\"       \"backports\"     \"base64enc\"     \"base64url\"    \n [21] \"bit\"           \"bit64\"         \"boot\"          \"box\"          \n [25] \"broman\"        \"bslib\"         \"bundle\"        \"butcher\"      \n [29] \"cachem\"        \"callr\"         \"cereal\"        \"class\"        \n [33] \"classInt\"      \"cli\"           \"clipr\"         \"cmm\"          \n [37] \"codebook\"      \"codetools\"     \"coin\"          \"collections\"  \n [41] \"commonmark\"    \"cpp11\"         \"crayon\"        \"crew\"         \n [45] \"curl\"          \"data.table\"    \"dataspice\"     \"digest\"       \n [49] \"dplyr\"         \"e1071\"         \"emld\"          \"evaluate\"     \n [53] \"farver\"        \"fastmap\"       \"fontawesome\"   \"forcats\"      \n [57] \"foreign\"       \"fs\"            \"future\"        \"future.apply\" \n [61] \"generics\"      \"ggplot2\"       \"globals\"       \"glue\"         \n [65] \"gridExtra\"     \"gtable\"        \"hardhat\"       \"haven\"        \n [69] \"here\"          \"highr\"         \"hms\"           \"htmltools\"    \n [73] \"htmlwidgets\"   \"httpuv\"        \"httr\"          \"igraph\"       \n [77] \"isoband\"       \"jqr\"           \"jquerylib\"     \"jsonld\"       \n [81] \"jsonlite\"      \"knitr\"         \"labeling\"      \"labelled\"     \n [85] \"later\"         \"lattice\"       \"lazyeval\"      \"libcoin\"      \n [89] \"lifecycle\"     \"likert\"        \"listenv\"       \"lme4\"         \n [93] \"lobstr\"        \"magrittr\"      \"mathjaxr\"      \"matrixStats\"  \n [97] \"memoise\"       \"meta\"          \"metabook\"      \"metadat\"      \n[101] \"metafor\"       \"mime\"          \"minqa\"         \"mipfp\"        \n[105] \"mirai\"         \"mnormt\"        \"modeltools\"    \"multcomp\"     \n[109] \"mvtnorm\"       \"nanonext\"      \"nlme\"          \"nloptr\"       \n[113] \"nnet\"          \"numDeriv\"      \"openssl\"       \"otel\"         \n[117] \"parallelly\"    \"party\"         \"pbapply\"       \"pillar\"       \n[121] \"pins\"          \"pkgconfig\"     \"plyr\"          \"polspline\"    \n[125] \"prettyunits\"   \"processx\"      \"progress\"      \"promises\"     \n[129] \"proto\"         \"proxy\"         \"ps\"            \"psych\"        \n[133] \"purrr\"         \"randomForest\"  \"ranger\"        \"rapidoc\"      \n[137] \"rappdirs\"      \"rbibutils\"     \"readr\"         \"reformulas\"   \n[141] \"renv\"          \"repr\"          \"reshape2\"      \"rhandsontable\"\n[145] \"rlang\"         \"rmarkdown\"     \"rmdpartials\"   \"rmutil\"       \n[149] \"rpart\"         \"rprojroot\"     \"sandwich\"      \"sass\"         \n[153] \"scales\"        \"secretbase\"    \"shiny\"         \"skimr\"        \n[157] \"sourcetools\"   \"sparsevctrs\"   \"stringi\"       \"stringr\"      \n[161] \"strucchange\"   \"survival\"      \"synthpop\"      \"sys\"          \n[165] \"targets\"       \"tibble\"        \"tidyr\"         \"tidyselect\"   \n[169] \"tinytex\"       \"truncnorm\"     \"tzdb\"          \"utf8\"         \n[173] \"uuid\"          \"vctrs\"         \"vetiver\"       \"viridisLite\"  \n[177] \"visNetwork\"    \"vroom\"         \"whisker\"       \"withr\"        \n[181] \"xfun\"          \"xml2\"          \"xtable\"        \"yaml\"         \n[185] \"zoo\"          \n\nrenv::status()\n\nNo issues found -- the project is in a consistent state.\n\n\nThe lockfile names R 4.4.1 and records package versions for the workshop, including meta, codebook, dataspice, pins, and targets. Use renv::status() to check whether your active library matches the lockfile.\nThe usual collaboration cycle is:\n\nA maintainer prepares and tests the required packages.\nThe maintainer uses renv::snapshot() and reviews the resulting lockfile.\nCollaborators use renv::restore() to obtain the recorded packages.\nThe analysis is tested in the restored environment.\n\nFor this activity, inspect the existing lockfile. If restoration is needed, follow the preparation instructions and run this in the R Console before the workshop.\nrenv::restore()",
-    "crumbs": [
-      "Workshop",
-      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Reproducible computational environments</span>"
-    ]
-  },
-  {
-    "objectID": "pages/workshop/03_environments.html#environments-docker",
-    "href": "pages/workshop/03_environments.html#environments-docker",
-    "title": "7  Reproducible computational environments",
-    "section": "7.5 Inspect the Docker route",
-    "text": "7.5 Inspect the Docker route\nAllow about four minutes. Run these commands in a Terminal at the project root. They read the repository’s configured image version:\nexport APP_VERSION=\"$(cat VERSION)\"\ndocker compose config --quiet\nSuccessful configuration resolution checks the Compose inputs. It does not verify that the image has been published or that a server can start.\nFor pre-workshop setup, once the instructor confirms that the image is available, use:\ndocker compose pull rstudio\ndocker compose up --no-build rstudio\nOpen RStudio at localhost:8787. Leave the terminal open while working; press Ctrl+C there to stop the service. If your environment is already running, use the existing session during the workshop.\nThe repository is mounted at /home/rstudio/open-reproducible-science-r. Open the project and save your work in that checkout. The RStudio service binds its port to localhost and disables login authentication for this local workshop configuration.\nThe image version selected by VERSION is separate from GitHub release tags such as v0.2.0. Do not assume that a release tag identifies a matching image. For stronger provenance, also record the resolved image digest when the prepared image is distributed. A mounted checkout can differ from the code originally copied into an image, so retain the checkout’s Git revision too.",
-    "crumbs": [
-      "Workshop",
-      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Reproducible computational environments</span>"
-    ]
-  },
-  {
-    "objectID": "pages/workshop/03_environments.html#try-it-yourself-restart-reload-record",
-    "href": "pages/workshop/03_environments.html#try-it-yourself-restart-reload-record",
-    "title": "7  Reproducible computational environments",
-    "section": "7.6 Try it yourself: restart, reload, record",
-    "text": "7.6 Try it yourself: restart, reload, record\nAllow about three minutes. Restart R, reopen the project if necessary, and load the data from its explicit path. This checks that the input does not depend on an object left over from an earlier Console session.\n\nraw_file &lt;- file.path(\"data\", \"raw\", \"healthwellbeing.rda\")\nstopifnot(\n  file.exists(raw_file),\n  identical(\n    unname(tools::md5sum(raw_file)),\n    \"0d74964b0b7168379a2b015cb648b326\"\n  )\n)\ndata_env &lt;- new.env(parent = baseenv())\nloaded_names &lt;- load(raw_file, envir = data_env)\nstopifnot(identical(loaded_names, \"HealthWellbeing\"))\nhealth &lt;- data_env[[\"HealthWellbeing\"]]\nstopifnot(nrow(health) == 29L, ncol(health) == 5L)\n\noutput_dir &lt;- \"outputs\"\ndir.create(output_dir, showWarnings = FALSE)\nwriteLines(\n  capture.output(sessionInfo()),\n  file.path(output_dir, \"session-info.txt\")\n)\n\nInspect outputs/session-info.txt. Add a short sentence to your existing WORKSHOP_NOTES.md recording the R version and whether you used local R or Docker. Keep the raw data and generated session record separate from code changes; only stage files deliberately when making a later commit.",
-    "crumbs": [
-      "Workshop",
-      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Reproducible computational environments</span>"
-    ]
-  },
-  {
-    "objectID": "pages/workshop/03_environments.html#environments-checkpoint",
-    "href": "pages/workshop/03_environments.html#environments-checkpoint",
-    "title": "7  Reproducible computational environments",
-    "section": "7.7 Checkpoint",
-    "text": "7.7 Checkpoint\n\nYou can explain which parts of the environment renv and Docker capture.\nYou can distinguish the lockfile’s requested R version from the running version.\nThe dataset reloads after a restart, and you have a session record on disk.\nYou can identify the workshop package versions recorded in the lockfile.\n\nTakeaway: a documented environment supports reproducibility, and a successful rerun supplies evidence. Next, the programme turns to dataset documentation and FAIR metadata with codebook and dataspice. Dataset documentation",
-    "crumbs": [
-      "Workshop",
-      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Reproducible computational environments</span>"
-    ]
-  },
-  {
-    "objectID": "pages/workshop/03_environments.html#further-reading",
-    "href": "pages/workshop/03_environments.html#further-reading",
-    "title": "7  Reproducible computational environments",
-    "section": "7.8 Further reading",
-    "text": "7.8 Further reading\n\nSharing a project environment with renv (Posit, n.d.).\nConfiguring services with Docker Compose (Docker, n.d.).\nWorkshop Docker setup.\n\n\n\n\n\nDocker. n.d. “Docker Compose.” https://docs.docker.com/compose/.\n\n\nPosit. n.d. “Collaborating with renv.” https://rstudio.github.io/renv/articles/collaborating.html.",
-    "crumbs": [
-      "Workshop",
-      "<span class='chapter-number'>7</span>  <span class='chapter-title'>Reproducible computational environments</span>"
     ]
   },
   {
