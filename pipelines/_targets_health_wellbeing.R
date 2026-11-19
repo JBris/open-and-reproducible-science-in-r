@@ -7,7 +7,7 @@ box::use(
 options(box.path = here())
 
 workshop_dir <- file.path("outputs", "health-wellbeing")
-
+pipeline_script <- targets::tar_path_script()
 
 tar_option_set(
   controller = crew_controller_local(workers = 1)
@@ -60,7 +60,6 @@ list(
     data
   }),
   targets::tar_target(fit, {
-    script <- targets::tar_path_script()
     code_revision <- system2(
       "git", c("rev-parse", "--verify", "HEAD"), stdout = TRUE
     )
@@ -71,13 +70,13 @@ list(
     script_status <- system2(
       "git",
       c("--no-optional-locks", "status", "--porcelain=v1",
-        "--untracked-files=all", "--ignored=matching", "--", shQuote(script)),
+        "--untracked-files=all", "--ignored=matching", "--", shQuote(pipeline_script)),
       stdout = TRUE
     )
     if (!is.null(attr(script_status, "status"))) {
       stop("Could not check the pipeline script's Git status.")
     }
-    pipeline_md5 <- unname(tools::md5sum(script))
+    pipeline_md5 <- unname(tools::md5sum(pipeline_script))
     stopifnot(!is.na(pipeline_md5))
 
     model <- meta::metacor(

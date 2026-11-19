@@ -2467,6 +2467,24 @@
       ],
       "Hash": "9380d36888b72faf5ae6c22b44703867"
     },
+    "visNetwork": {
+      "Package": "visNetwork",
+      "Version": "2.1.4",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Requirements": [
+        "R",
+        "grDevices",
+        "htmltools",
+        "htmlwidgets",
+        "jsonlite",
+        "magrittr",
+        "methods",
+        "stats",
+        "utils"
+      ],
+      "Hash": "5925096277c19e4ea9209e175a61d3d3"
+    },
     "vroom": {
       "Package": "vroom",
       "Version": "1.7.1",

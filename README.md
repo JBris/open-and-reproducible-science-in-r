@@ -131,11 +131,13 @@ once the workshop image is published.
 ## Render the book
 
 The Quarto project produces an HTML book website and one PDF containing all
-configured chapters. Install [Quarto](https://quarto.org/docs/get-started/),
-R with `knitr` and `rmarkdown` for named R chunks, and a LaTeX distribution
-such as TinyTeX. From the repository root, run:
+configured chapters. Use R 4.4.1, [Quarto](https://quarto.org/docs/get-started/),
+and a LaTeX distribution such as TinyTeX. From the repository root, run:
 
 ```bash
+# Restore the workshop library before the first render and after lockfile changes.
+Rscript -e 'renv::restore()'
+
 # Install TinyTeX if a LaTeX distribution is not already available.
 quarto install tinytex
 
@@ -149,11 +151,11 @@ PDF download. To build a single format, use `quarto render --to html` or
 `quarto render --to pdf`. Preview the HTML book with `quarto preview --to html`.
 
 Code evaluation is disabled by default in `_quarto.yml`, but workshop R
-chunks explicitly enable it. Rendering those chapters runs their examples,
-including restoration, downloads, and analysis, or reuses cached results.
-Use the prepared workshop environment. Workshop chapters execute from the
-project root; the standalone report command specifies its own input directory.
-The draft teaching plan is excluded from the book.
+example chunks explicitly enable it. Rendering uses the restored library
+and runs the examples, including downloads and analysis, or reuses cached
+results. Workshop chapters execute from the project root; the standalone
+report command specifies its own input directory. The draft teaching plan
+is excluded from the book.
 
 ## Coordinators
 

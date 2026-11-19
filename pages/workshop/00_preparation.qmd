@@ -45,14 +45,13 @@ if you will render reports locally later; HTML reporting does not require LaTeX.
 Browser-based Binder access is still being prepared. Use a verified local or
 Docker environment for this workshop.
 
-## Current development status
+## Workshop packages
 
-The committed lockfile records renv 1.0.7. For lessons 04–07, use
-the instructor's prepared environment with `box`, `codebook`,
-`dataspice`, `pins`, `targets`, `meta`, `visNetwork`, `knitr`, and
-`rmarkdown`. Ask about `synthpop` and `vetiver` if you plan to run
-the optional exercises. On Linux, building the `dataspice`
-dependency `jqr` from source needs the jq development library.
+The committed `renv.lock` records the packages for the workshop,
+including `knitr` and `rmarkdown` for rendering and `synthpop` and
+`vetiver` for the optional exercises. On Linux, building the
+`dataspice` dependency `jqr` from source needs the jq development
+library.
 
 Run the lesson chunks in the R Console. Use Quarto with `knitr` and
 `rmarkdown` when you are ready to render the standalone report.
@@ -74,16 +73,19 @@ project in the mounted checkout described in the environment chapter. Keep
 terminal commands and R Console commands rooted in this project directory.
 
 The project's `.Rprofile` activates renv; first startup may download renv.
-Complete that startup and any restoration before the session. In the R Console:
+Restore the project library in the R Console before the session or before
+rendering locally. Repeat this step after updating `renv.lock`.
 
-```{r health-preparation-environment, include = TRUE, echo = TRUE, message = FALSE, warning = FALSE, cache = TRUE, output = TRUE, eval = TRUE}
-R.version.string
+```r
 renv::restore()
-renv::status()
 ```
 
-Restoration installs packages recorded in the lockfile. It does not supply
-unrecorded workshop packages or install the R version named by the lockfile.
+Check your R version and the state of the restored library.
+
+```{r health-preparation-environment, include = TRUE, echo = TRUE, message = FALSE, warning = FALSE, cache = FALSE, output = TRUE, eval = TRUE}
+R.version.string
+renv::status()
+```
 
 ## Download and verify the raw data {#preparation-data}
 

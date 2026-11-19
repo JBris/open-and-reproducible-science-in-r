@@ -37,7 +37,7 @@ builds, starts, or reproduces every result.
 
 Allow about two minutes. In the **R Console**, with the project open:
 
-```{r health-environments-session, include = TRUE, echo = TRUE, message = FALSE, warning = FALSE, cache = TRUE, output = TRUE, eval = TRUE}
+```{r health-environments-session, include = TRUE, echo = TRUE, message = FALSE, warning = FALSE, cache = FALSE, output = TRUE, eval = TRUE}
 R.version.string
 .libPaths()
 packageVersion("renv")
@@ -50,17 +50,16 @@ record the difference; a lockfile does not switch your running R session.
 
 Allow about four minutes. Use the project's active renv environment:
 
-```{r health-environments-lockfile, include = TRUE, echo = TRUE, message = FALSE, warning = FALSE, cache = TRUE, output = TRUE, eval = TRUE}
+```{r health-environments-lockfile, include = TRUE, echo = TRUE, message = FALSE, warning = FALSE, cache = FALSE, output = TRUE, eval = TRUE}
 lock <- renv::lockfile_read("renv.lock")
 lock$R$Version
 names(lock$Packages)
 renv::status()
 ```
 
-In the current repository, the lockfile names R 4.4.1 and records renv 1.0.7
-only. It does not yet describe a complete metadata or meta-analysis environment.
-In particular, do not infer that `meta`, `codebook`, `dataspice`, `pins`, or
-`targets` is available merely because the lockfile exists.
+The lockfile names R 4.4.1 and records package versions for the workshop,
+including `meta`, `codebook`, `dataspice`, `pins`, and `targets`.
+Use `renv::status()` to check whether your active library matches the lockfile.
 
 The usual collaboration cycle is:
 
@@ -69,11 +68,11 @@ The usual collaboration cycle is:
 3. Collaborators use `renv::restore()` to obtain the recorded packages.
 4. The analysis is tested in the restored environment.
 
-For this activity, inspect the existing lockfile. You do not need to initialise
-renv again or change the snapshot. If restoration is needed, complete this
-before the workshop, or watch the instructor demonstrate it:
+For this activity, inspect the existing lockfile. If restoration is needed,
+follow the [preparation instructions](00_preparation.qmd) and run this in the
+R Console before the workshop.
 
-```{r health-environments-restore, include = TRUE, echo = TRUE, message = FALSE, warning = FALSE, cache = TRUE, output = TRUE, eval = TRUE}
+```r
 renv::restore()
 ```
 
@@ -152,7 +151,7 @@ changes; only stage files deliberately when making a later commit.
 - You can explain which parts of the environment renv and Docker capture.
 - You can distinguish the lockfile's requested R version from the running version.
 - The dataset reloads after a restart, and you have a session record on disk.
-- You know which workshop dependencies are still absent from the lockfile.
+- You can identify the workshop package versions recorded in the lockfile.
 
 **Takeaway:** a documented environment supports reproducibility, and a successful
 rerun supplies evidence. Next, the programme turns to dataset documentation and
