@@ -80,6 +80,35 @@ class ProjectHooksTest(unittest.TestCase):
         self.assertIn("R syntax check", self.hook("stop")["systemMessage"])
 
     @unittest.skipUnless(shutil.which("Rscript"), "Rscript is unavailable")
+    def test_clean_working_copy_does_not_hide_invalid_staged_r(self):
+        name = "edited example.R"
+        path = self.root / name
+        valid = "value <- 1\n"
+        invalid = "value <- (\n"
+        path.write_text(valid, encoding="utf-8")
+        self.git("add", name)
+        self.git("-c", "user.name=Hook Test", "-c", "user.email=hooks@example.invalid",
+                 "commit", "--quiet", "-m", "valid R", "--no-verify")
+        path.write_text(invalid, encoding="utf-8")
+        self.git("add", name)
+        path.write_text(valid, encoding="utf-8")
+
+        feedback = self.hook("stop")["systemMessage"]
+        self.assertIn(f"[staged] {name}", feedback)
+        self.assertEqual(invalid, self.git("show", f":{name}").stdout)
+        self.assertEqual(valid, path.read_text(encoding="utf-8"))
+
+    def test_clean_working_copy_does_not_hide_staged_whitespace(self):
+        path = self.root / "VERSION"
+        path.write_text("1.0.0 \n", encoding="utf-8")
+        self.git("add", "VERSION")
+        path.write_text("1.0.0\n", encoding="utf-8")
+
+        feedback = self.hook("stop")["systemMessage"]
+        self.assertIn("Staged whitespace check", feedback)
+        self.assertEqual("1.0.0 \n", self.git("show", ":VERSION").stdout)
+
+    @unittest.skipUnless(shutil.which("Rscript"), "Rscript is unavailable")
     def test_valid_r_code_is_parsed_without_execution(self):
         (self.root / ".Rprofile").write_text('stop("startup must not run")\n', encoding="utf-8")
         (self.root / "example.R").write_text(

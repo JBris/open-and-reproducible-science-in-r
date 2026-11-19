@@ -64,11 +64,11 @@ these files.
 availability, and missing renv bootstrap or package records. It runs on startup,
 resume, clear, and compaction. It does not restore dependencies.
 
-`Stop` checks tracked whitespace and parses changed standalone R files, including
-staged and untracked files. It excludes renv and generated site directories.
-Checks cover the current working tree, including edits made before the session;
-they cannot attribute a failure to an agent. Feedback is advisory, does not block
-completion, and does not create continuation loops. Clean checks are silent.
+`Stop` checks whitespace for staged and unstaged changes. It parses staged R
+blobs from the Git index and checks unstaged and untracked R files on disk.
+The R checks exclude renv and generated site directories. Feedback includes
+pre-existing changes, remains advisory, and does not create continuation
+loops. Clean checks are silent.
 Untracked non-R files and inline R chunks are outside these hook checks.
 
 The hooks do not execute R examples, render Quarto, build images, reformat files,

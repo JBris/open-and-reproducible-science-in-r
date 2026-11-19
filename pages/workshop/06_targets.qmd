@@ -18,9 +18,9 @@ summary for the report. By the end of these 18 minutes, you should be
 able to trace the summary back to its input and predict what rebuilds
 when you select another version.
 
-You need *box*, *pins*, *targets*, and *meta* in your workshop R
+You need Git and *box*, *pins*, *targets*, and *meta* in your workshop
 environment. The dependency graph also uses *visNetwork*. Start with
-the local board and version selection file from the previous lesson.
+your Git checkout, local board, and version selection file.
 Your instructor can share a prepared board and summary for comparison.
 [Dataset storage and versioning](05_pins.qmd#pins-checkpoint)
 
@@ -31,14 +31,13 @@ editor and follow the data dependencies in this order.
 
 ```text
 version_file -> data_version -> dataset_file -> studies -> fit
-fit, data_version, and code_revision_file -> result -> summary_file
+fit, data_version -> result -> summary_file
 ```
 
-We mark the selector, pinned RDS, revision text, and summary CSV as
-file targets. This lets *targets* track those files as the pipeline
-runs. The code revision records the checkout used for analysis.
-Commit any edits you want represented by the revision before recording
-it.
+We mark the selector, pinned RDS, and summary CSV as file targets.
+At fitting time, the pipeline records the Git revision, the script
+checksum, and whether the script has local changes. If you work with
+local edits, keep a copy of that script to reproduce the fit.
 
 The model uses the raw Pearson correlations and study sample sizes.
 *Meta* transforms each correlation to Fisher's z scale and pools
@@ -55,15 +54,9 @@ worked example of pooling reported effects from the supplied studies.
 
 ## Run the full dataset
 
-From the project root, record the Git revision in the Terminal.
-
-```bash
-git rev-parse HEAD > outputs/health-wellbeing/code-revision.txt
-```
-
-In the R Console, load the commands used to inspect and run the
-pipeline. The store path keeps this exercise's cache separate from
-other pipelines.
+In the R Console at the project root, load the commands used to
+inspect and run the pipeline. The store path keeps this exercise's
+cache separate from other pipelines.
 
 ```{r health-targets-setup, cache = FALSE}
 box::use(
@@ -137,14 +130,14 @@ tar_outdated(script = pipeline_script, store = pipeline_store)
 The full example combines **29 studies** with a pooled correlation of
 about **0.36** and a 95% interval of about **0.31 to 0.41**. The
 alternative input combines **18 studies**. The selector and downstream
-analysis rebuild when it changes. The code revision file has the same
-content across both runs. After restoring the full selection and
-rebuilding, `tar_outdated()` should be empty.
+analysis rebuild when it changes. If both fits use the same checkout,
+they record the same Git revision. After restoring the full selection
+and rebuilding, `tar_outdated()` should be empty.
 
 The file `outputs/health-wellbeing/meta-summary.csv` now contains the
-full result. The fit stores the R and *meta* versions used to create
-it. The report keeps those versions when the pipeline reuses a fit.
-Use a clean pipeline store to check results in a changed environment.
+full result. The fit stores its Git and software provenance. The
+report keeps those details when the pipeline reuses a fit. Use a
+clean pipeline store to check results in a changed environment.
 [Reproducible reporting and publishing](07_quarto.qmd)
 
 ## Further reading

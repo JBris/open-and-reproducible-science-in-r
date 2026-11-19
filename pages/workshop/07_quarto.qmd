@@ -27,8 +27,8 @@ instructor can provide the prepared CSV to render locally.
 Open `pipelines/health_wellbeing_report.qmd` in your editor. Its YAML
 header selects HTML, names the summary file, and controls how code
 and output are displayed. The report's R chunk reads one row from
-`meta-summary.csv`. Inline R expressions display the values where
-they are discussed.
+`meta-summary.csv`. Inline R expressions display the results and
+method names recorded in that row.
 
 The pipeline owns the analysis. The report explains its methods and
 interprets the saved results. Keeping the report downstream of the
@@ -50,8 +50,11 @@ quarto render "$report_dir/health_wellbeing_report.qmd" --to html
 ```
 
 Open `outputs/health-wellbeing/health_wellbeing_report.html` in your
-browser. The report's chunk reads the existing CSV. Run the pipeline
-again before rendering whenever the selected data or analysis changes.
+browser. If you have an older local copy of the report source, bring
+over the updated input chunk and the Methods and Provenance sections
+from the template. Keep any changes you made to the surrounding text.
+Run the pipeline again before rendering whenever the selected data
+or analysis changes.
 
 ## Try it yourself
 
