@@ -16,7 +16,7 @@ ENV DEBIAN_FRONTEND=noninteractive \
     RENV_CONFIG_PAK_ENABLED=TRUE
 
 RUN apt-get update \
-    && apt-get install -y --no-install-recommends pandoc libsodium-dev graphviz libuv1-dev \
+    && apt-get install -y --no-install-recommends pandoc libsodium-dev graphviz libuv1-dev libjq-dev \
     libglpk-dev cmake libnng-dev libmbedtls-dev openssh-client liblzma-dev libpq-dev libcurl4-openssl-dev \
     libbz2-dev software-properties-common build-essential libmagic-dev libmagick++-dev curl g++ make \
     libharfbuzz-dev libfribidi-dev graphviz-dev \

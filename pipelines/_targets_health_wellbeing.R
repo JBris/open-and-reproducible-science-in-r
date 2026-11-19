@@ -1,4 +1,17 @@
+box::use(
+  crew[crew_controller_local],
+  here[here],
+  targets[tar_target, tar_source, tar_option_set]
+)
+
+options(box.path = here())
+
 workshop_dir <- file.path("outputs", "health-wellbeing")
+
+
+tar_option_set(
+  controller = crew_controller_local(workers = 1)
+)
 
 list(
   targets::tar_target(
