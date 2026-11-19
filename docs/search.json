@@ -1,35 +1,5 @@
 [
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Open and Reproducible Science in R",
-    "section": "",
-    "text": "Welcome\nThis book contains the Open and Reproducible Science in R workshop materials. It introduces a connected research workflow using GitHub, renv, Docker, targets, Quarto, pins, vetiver, and Zenodo, with a focused extension on responsible sharing and differentially private synthetic data.\nThe practical examples and expanded teaching activities are under development. The current R and pipeline helpers are placeholders.",
-    "crumbs": [
-      "Welcome"
-    ]
-  },
-  {
-    "objectID": "index.html#getting-started",
-    "href": "index.html#getting-started",
-    "title": "Open and Reproducible Science in R",
-    "section": "Getting started",
-    "text": "Getting started\nStart with the introduction for the learning objectives, workflow, and prerequisites. Some familiarity with R will help you follow the material. The repository README describes Docker setup and the available computing environments.\nUse the book navigation to move between chapters. A PDF download is available from the HTML book’s download menu once both output formats have been rendered. The PDF contains the same configured chapters in a single document.",
-    "crumbs": [
-      "Welcome"
-    ]
-  },
-  {
-    "objectID": "index.html#people-and-community",
-    "href": "index.html#people-and-community",
-    "title": "Open and Reproducible Science in R",
-    "section": "People and community",
-    "text": "People and community\nSee the coordinators for presenter and co-author information. Event dates and venues are listed in the workshop announcements.\nThe community chapters contain contribution, accessibility, conduct, security, and AI-assisted development policies, followed by the changelog.",
-    "crumbs": [
-      "Welcome"
-    ]
-  },
-  {
     "objectID": "pages/1_introduction.html",
     "href": "pages/1_introduction.html",
     "title": "1  Introduction",
@@ -104,61 +74,6 @@
     "crumbs": [
       "Workshop Introduction",
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>Introduction</span>"
-    ]
-  },
-  {
-    "objectID": "pages/2_coordinators.html",
-    "href": "pages/2_coordinators.html",
-    "title": "2  Coordinators",
-    "section": "",
-    "text": "2.1 James Bristow\nPresenter and coordinator — Massey University\nJames is a data scientist who specialises in Bayesian inference, machine learning, and semi-mechanistic modelling. He currently works part-time at PFR, primarily working with the crop modelling team using simulation platforms such as Agricultural Production Systems sIMulator (APSIM) and Growth Grammar-related Interactive Modelling Platform (GroIMP). James is also completing a PhD in statistical epidemiology at Massey University, focusing on the application of spatiotemporal modelling to Salmonella case counts within New Zealand, alongside animal influenza sequence data as part of an international collaboration with Cornell University. He completed his Master’s degree on Bayesian age and growth modelling of chondrichthyans with National Institute of Water and Atmospheric research (NIWA) as supported by a Fisheries New Zealand scholarship.\nContact: J.Bristow2@massey.ac.nz.",
-    "crumbs": [
-      "Workshop Introduction",
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Coordinators</span>"
-    ]
-  },
-  {
-    "objectID": "pages/2_coordinators.html#hana-liang",
-    "href": "pages/2_coordinators.html#hana-liang",
-    "title": "2  Coordinators",
-    "section": "2.2 Hana Liang",
-    "text": "2.2 Hana Liang\nCo-author — Bioeconomy Science Institute\nHana is a data scientist based in Auckland. Since joining BSI, she has been working on various projects, focusing on sensor data ingestion and visualisation, model calibration, workflow orchestration, and pipeline implementation and deployment. She is also involved in computer vision projects, including deep learning–based image analysis. Hana has a bachelor’s degree from the University of Auckland majoring in Data Science and is currently studying a Master’s in Data Science part-time.",
-    "crumbs": [
-      "Workshop Introduction",
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Coordinators</span>"
-    ]
-  },
-  {
-    "objectID": "pages/2_coordinators.html#questions-and-updates",
-    "href": "pages/2_coordinators.html#questions-and-updates",
-    "title": "2  Coordinators",
-    "section": "2.3 Questions and updates",
-    "text": "2.3 Questions and updates\nFor workshop questions, use GitHub Discussions. Report problems with the materials through GitHub Issues.\nSee the introduction for the workshop overview and announcements for session updates.",
-    "crumbs": [
-      "Workshop Introduction",
-      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Coordinators</span>"
-    ]
-  },
-  {
-    "objectID": "pages/3_attribution.html",
-    "href": "pages/3_attribution.html",
-    "title": "3  Attribution",
-    "section": "",
-    "text": "3.1 Workshop inspiration\nWe acknowledge Olivia Angelin-Bonnet, Lindy Guo, and Jingjing Zhang, all from Bioeconomy Science Institute, for inspiration on reproducible workflows in R. Their workshop content is private.",
-    "crumbs": [
-      "Workshop Introduction",
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Attribution</span>"
-    ]
-  },
-  {
-    "objectID": "pages/3_attribution.html#reference-e-book",
-    "href": "pages/3_attribution.html#reference-e-book",
-    "title": "3  Attribution",
-    "section": "3.2 Reference e-book",
-    "text": "3.2 Reference e-book\nThe following R e-book is also acknowledged as a reference for these materials:\nHarrer, M., Cuijpers, P., Furukawa, T. A., & Ebert, D. D. (2021). Doing Meta-Analysis with R: A Hands-On Guide. Boca Raton, FL and London: Chapman & Hall/CRC Press. ISBN 978-0-367-61007-4.",
-    "crumbs": [
-      "Workshop Introduction",
-      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Attribution</span>"
     ]
   },
   {
@@ -265,7 +180,7 @@
     "href": "CONTRIBUTING.html",
     "title": "6  Contributing",
     "section": "",
-    "text": "6.1 Pull Request Process\nWhen contributing to this repository, please first discuss the change you wish to make via issue, email, or any other method with the owners of this repository before making a change.\nPlease note we have a code of conduct, please follow it in all your interactions with the project.",
+    "text": "6.1 Pull Request Process",
     "crumbs": [
       "Communications and Community",
       "<span class='chapter-number'>6</span>  <span class='chapter-title'>Contributing</span>"
@@ -298,7 +213,7 @@
     "href": "ACCESSIBILITY.html",
     "title": "7  Accessibility",
     "section": "",
-    "text": "7.1 Accessibility goals\nWe aim to make this project’s software, documentation, examples, and other materials accessible to people with different abilities, devices, and ways of working. Accessibility is part of how we design, maintain, and review the project.\nThis policy describes our goals, contributor expectations, and approach to reporting and addressing barriers. Apply the guidance relevant to the project’s features and outputs.\nFor web content and interfaces, we work toward WCAG 2.2 Level AA. This is a development goal; any claim of conformance must be supported by an evaluation that identifies its scope, date, methods, findings, and remaining limitations.\nAcross the project, we prioritise:",
+    "text": "7.1 Accessibility goals\nFor web content and interfaces, we work toward WCAG 2.2 Level AA. This is a development goal; any claim of conformance must be supported by an evaluation that identifies its scope, date, methods, findings, and remaining limitations.\nAcross the project, we prioritise:",
     "crumbs": [
       "Communications and Community",
       "<span class='chapter-number'>7</span>  <span class='chapter-title'>Accessibility</span>"
@@ -386,7 +301,7 @@
     "href": "AI_POLICY.html",
     "title": "9  AI-assisted development policy",
     "section": "",
-    "text": "9.1 Responsibility and review\nThis project permits AI-assisted and agentic work on code, documentation, tests, reviews, and development tooling. Contributions must meet the project’s quality, security, licensing, and contribution requirements regardless of how they were produced.\nContributors remain responsible for the accuracy and suitability of the work they submit. AI-generated contributions follow the same review and acceptance process as other contributions. A human contributor must take responsibility for the submission and complete any human review required by the project.\nState whether human review is complete or pending. Agent-run checks and automated reviews provide evidence for reviewers; they do not constitute human review.",
+    "text": "9.1 Responsibility and review\nContributors remain responsible for the accuracy and suitability of the work they submit. AI-generated contributions follow the same review and acceptance process as other contributions. A human contributor must take responsibility for the submission and complete any human review required by the project.\nState whether human review is complete or pending. Agent-run checks and automated reviews provide evidence for reviewers; they do not constitute human review.",
     "crumbs": [
       "Communications and Community",
       "<span class='chapter-number'>9</span>  <span class='chapter-title'>AI-assisted development policy</span>"
@@ -474,7 +389,7 @@
     "href": "CHANGELOG.html#unreleased",
     "title": "10  Changelog",
     "section": "",
-    "text": "10.1.1 Added\n\nVS Code workspace settings, extension recommendations, and tasks for R syntax checks, Quarto, and Codex hook tests.\nAn expanded teaching plan with two-hour and 90-minute formats built around one research project.\nNo-op R and pipeline helper placeholders for the developing workshop project.\n\n\n\n10.1.2 Changed\n\nConvert the workshop to a Quarto book with HTML website and single-PDF output, a landing page, and PDF downloads.\nInstall TinyTeX through Quarto in a separate runtime layer; keep project content and volatile build metadata after installation layers.\nPreinstall common LuaLaTeX packages and generate the rendering user’s font database during Docker builds.\nExport a UTC BUILD_DATE from both image workflows for Docker build labels.\nPoint documentation links and website metadata to the GitHub Pages workshop site.\nExpanded the planned workshop scope to include dataset and model metadata, provenance, and versioning with pins and vetiver.\nAdded a focused extension on differentially private synthetic data, privacy–utility trade-offs, and the limits of reproducing restricted-data findings.\nRead and validate VERSION in both image build workflows; image versions follow this file independently of GitHub release tags.\nRestore Rocker’s RStudio initialisation and use the Binder-specific image for Binder launches.\nInclude website configuration, styling, project metadata, and community documents in both runtime images.\nMove community documents to the repository root and rewrite the AI policy for this workshop.\nRefresh Codex guidance, agent roles, and skills for the current project structure and development policy.",
+    "text": "10.1.1 Added\n\nVS Code workspace settings, extension recommendations, and tasks for R syntax checks, Quarto, and Codex hook tests.\nAn expanded teaching plan with two-hour and 90-minute formats built around one research project.\nNo-op R and pipeline helper placeholders for the developing workshop project.\nAn attribution page acknowledging contributors and reference materials.\n\n\n\n10.1.2 Changed\n\nConvert the workshop to a Quarto book with HTML website and single-PDF output, a landing page, and PDF downloads.\nInstall TinyTeX through Quarto in a separate runtime layer; keep project content and volatile build metadata after installation layers.\nPreinstall common LuaLaTeX packages and generate the rendering user’s font database during Docker builds.\nExport a UTC BUILD_DATE from both image workflows for Docker build labels.\nPoint documentation links and website metadata to the GitHub Pages workshop site.\nExpanded the planned workshop scope to include dataset and model metadata, provenance, and versioning with pins and vetiver.\nAdded a focused extension on differentially private synthetic data, privacy–utility trade-offs, and the limits of reproducing restricted-data findings.\nRead and validate VERSION in both image build workflows; image versions follow this file independently of GitHub release tags.\nRestore Rocker’s RStudio initialisation and use the Binder-specific image for Binder launches.\nInclude website configuration, styling, project metadata, and community documents in both runtime images.\nMove community documents to the repository root and rewrite the AI policy for this workshop.\nRefresh Codex guidance, agent roles, and skills for the current project structure and development policy.",
     "crumbs": [
       "Communications and Community",
       "<span class='chapter-number'>10</span>  <span class='chapter-title'>Changelog</span>"
@@ -489,6 +404,91 @@
     "crumbs": [
       "Communications and Community",
       "<span class='chapter-number'>10</span>  <span class='chapter-title'>Changelog</span>"
+    ]
+  },
+  {
+    "objectID": "pages/2_coordinators.html",
+    "href": "pages/2_coordinators.html",
+    "title": "2  Coordinators",
+    "section": "",
+    "text": "2.1 James Bristow\nPresenter and coordinator — Massey University\nJames is a data scientist who specialises in Bayesian inference, machine learning, and semi-mechanistic modelling. He currently works part-time at PFR, primarily working with the crop modelling team using simulation platforms such as Agricultural Production Systems sIMulator (APSIM) and Growth Grammar-related Interactive Modelling Platform (GroIMP). James is also completing a PhD in statistical epidemiology at Massey University, focusing on the application of spatiotemporal modelling to Salmonella case counts within New Zealand, alongside animal influenza sequence data as part of an international collaboration with Cornell University. He completed his Master’s degree on Bayesian age and growth modelling of chondrichthyans with National Institute of Water and Atmospheric research (NIWA) as supported by a Fisheries New Zealand scholarship.\nORCID: 0009-0002-3381-7466.\nContact: J.Bristow2@massey.ac.nz.",
+    "crumbs": [
+      "Workshop Introduction",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Coordinators</span>"
+    ]
+  },
+  {
+    "objectID": "pages/2_coordinators.html#hana-liang",
+    "href": "pages/2_coordinators.html#hana-liang",
+    "title": "2  Coordinators",
+    "section": "2.2 Hana Liang",
+    "text": "2.2 Hana Liang\nCo-author — Bioeconomy Science Institute\nHana is a data scientist based in Auckland. Since joining BSI, she has been working on various projects, focusing on sensor data ingestion and visualisation, model calibration, workflow orchestration, and pipeline implementation and deployment. She is also involved in computer vision projects, including deep learning–based image analysis. Hana has a bachelor’s degree from the University of Auckland majoring in Data Science and is currently studying a Master’s in Data Science part-time.\nORCID: 0009-0008-3342-5028.",
+    "crumbs": [
+      "Workshop Introduction",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Coordinators</span>"
+    ]
+  },
+  {
+    "objectID": "pages/2_coordinators.html#questions-and-updates",
+    "href": "pages/2_coordinators.html#questions-and-updates",
+    "title": "2  Coordinators",
+    "section": "2.3 Questions and updates",
+    "text": "2.3 Questions and updates\nFor workshop questions, use GitHub Discussions. Report problems with the materials through GitHub Issues.\nSee the introduction for the workshop overview and announcements for session updates.",
+    "crumbs": [
+      "Workshop Introduction",
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Coordinators</span>"
+    ]
+  },
+  {
+    "objectID": "pages/3_attribution.html",
+    "href": "pages/3_attribution.html",
+    "title": "3  Attribution",
+    "section": "",
+    "text": "3.1 Workshop inspiration\nWe acknowledge Olivia Angelin-Bonnet, Lindy Guo, and Jingjing Zhang, all from Bioeconomy Science Institute, for inspiration on reproducible workflows in R, and for providing valuable feedback regarding these materials.",
+    "crumbs": [
+      "Workshop Introduction",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Attribution</span>"
+    ]
+  },
+  {
+    "objectID": "pages/3_attribution.html#reference-e-book",
+    "href": "pages/3_attribution.html#reference-e-book",
+    "title": "3  Attribution",
+    "section": "3.2 Reference e-book",
+    "text": "3.2 Reference e-book\nThe following R e-book is also acknowledged as a reference for these materials:\nHarrer, M., Cuijpers, P., Furukawa, T. A., & Ebert, D. D. (2021). Doing Meta-Analysis with R: A Hands-On Guide. Boca Raton, FL and London: Chapman & Hall/CRC Press. ISBN 978-0-367-61007-4.",
+    "crumbs": [
+      "Workshop Introduction",
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Attribution</span>"
+    ]
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Open and Reproducible Science in R",
+    "section": "",
+    "text": "Welcome\nThis book contains the Open and Reproducible Science in R workshop materials. It introduces a connected research workflow using GitHub, renv, Docker, targets, Quarto, pins, vetiver, and Zenodo, with a focused extension on responsible sharing and differentially private synthetic data.\nThe practical examples and expanded teaching activities are under development. The current R and pipeline helpers are placeholders.",
+    "crumbs": [
+      "Welcome"
+    ]
+  },
+  {
+    "objectID": "index.html#getting-started",
+    "href": "index.html#getting-started",
+    "title": "Open and Reproducible Science in R",
+    "section": "Getting started",
+    "text": "Getting started\nStart with the introduction for the learning objectives, workflow, and prerequisites. Some familiarity with R will help you follow the material. The repository README describes Docker setup and the available computing environments.\nUse the book navigation to move between chapters. A PDF download is available from the HTML book’s download menu once both output formats have been rendered. The PDF contains the same configured chapters in a single document.",
+    "crumbs": [
+      "Welcome"
+    ]
+  },
+  {
+    "objectID": "index.html#people-and-community",
+    "href": "index.html#people-and-community",
+    "title": "Open and Reproducible Science in R",
+    "section": "People and community",
+    "text": "People and community\nSee the coordinators for presenter and co-author information. Event dates and venues are listed in the workshop announcements.\nThe community chapters contain contribution, accessibility, conduct, security, and AI-assisted development policies, followed by the changelog.",
+    "crumbs": [
+      "Welcome"
     ]
   }
 ]
