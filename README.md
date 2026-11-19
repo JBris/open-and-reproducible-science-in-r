@@ -3,7 +3,7 @@
 [![R](https://img.shields.io/badge/R-4.4.1-blue)](https://www.r-project.org/)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.24342489.svg)](https://doi.org/10.5281/zenodo.24342489)
-[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/JBris/open-and-reproducible-science-in-r.git/HEAD)
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/JBris/open-and-reproducible-science-in-r/HEAD?urlpath=rstudio)
 [![Build RStudio](https://github.com/JBris/open-and-reproducible-science-in-r/actions/workflows/build-rstudio.yaml/badge.svg)](https://github.com/JBris/open-and-reproducible-science-in-r/actions/workflows/build-rstudio.yaml)
 [![Build Binder](https://github.com/JBris/open-and-reproducible-science-in-r/actions/workflows/build-binder.yaml/badge.svg)](https://github.com/JBris/open-and-reproducible-science-in-r/actions/workflows/build-binder.yaml)
 
@@ -11,7 +11,7 @@
 | [**Changelog**](https://jbris.github.io/open-and-reproducible-science-in-r/CHANGELOG.html)
 | [**Releases**](https://github.com/JBris/open-and-reproducible-science-in-r/releases)
 | [**Docker configuration**](docker-compose.yaml)
-| [**Binder**](https://mybinder.org/v2/gh/JBris/open-and-reproducible-science-in-r.git/HEAD)
+| [**Open RStudio on MyBinder**](https://mybinder.org/v2/gh/JBris/open-and-reproducible-science-in-r/HEAD?urlpath=rstudio)
 | [**Citation**](CITATION.cff)
 
 *A practical workshop on building open and reproducible research workflows with R and open-source tools.*
@@ -93,6 +93,9 @@ privacy claims need evidence about the mechanism and privacy accounting.
 
 ## Usage with Docker
 
+Workshop participants can use [MyBinder](#usage-with-binder) from a browser.
+Use this section if you want to run the workshop image locally with Docker.
+
 The [Compose configuration](docker-compose.yaml) provides an RStudio service for
 working with the workshop environment. Install Docker with the Docker Compose
 plugin, then run the following commands in a terminal to use a published image:
@@ -120,13 +123,14 @@ Save workshop changes in that directory to keep them in your local checkout.
 
 ## Usage with Binder
 
-[Launch the workshop on Binder](https://mybinder.org/v2/gh/JBris/open-and-reproducible-science-in-r.git/HEAD).
+[Open RStudio on MyBinder](https://mybinder.org/v2/gh/JBris/open-and-reproducible-science-in-r/HEAD?urlpath=rstudio)
+and follow the [workshop preparation steps](pages/workshop/00_preparation.qmd#choose-your-computing-environment).
+Allow time to start the session and download your work before it ends.
 
-Browser-based access through Binder is being prepared. The repository includes
-a [Binder entry point](binder/Dockerfile) and a
-[Binder image build workflow](.github/workflows/build-binder.yaml); the launch
-configuration still needs to be completed and verified. Use the Docker option
-once the workshop image is published.
+The [Build Binder workflow](.github/workflows/build-binder.yaml) builds and
+publishes the image selected by the [Binder entry point](binder/Dockerfile).
+The [Build RStudio workflow](.github/workflows/build-rstudio.yaml) publishes the
+image for local Docker use.
 
 ## Render the book
 
