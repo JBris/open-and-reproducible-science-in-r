@@ -389,18 +389,7 @@
     "href": "CHANGELOG.html",
     "title": "20  Changelog",
     "section": "",
-    "text": "20.1 [Unreleased]",
-    "crumbs": [
-      "Communications and Community",
-      "<span class='chapter-number'>20</span>  <span class='chapter-title'>Changelog</span>"
-    ]
-  },
-  {
-    "objectID": "CHANGELOG.html#unreleased",
-    "href": "CHANGELOG.html#unreleased",
-    "title": "20  Changelog",
-    "section": "",
-    "text": "20.1.1 Added\n\nVS Code workspace settings, extension recommendations, and tasks for R syntax checks, Quarto, and Codex hook tests.\nA 90-minute workshop sequence built around the HealthWellbeing teaching dataset.\nA targets pipeline for correlation meta-analysis and a standalone Quarto report.\nNo-op R and pipeline helper placeholders for the developing workshop project.\nAn attribution page acknowledging contributors and reference materials.\n\n\n\n20.1.2 Changed\n\nConvert the workshop to a Quarto book with HTML website and single-PDF output, a landing page, and PDF downloads.\nInstall TinyTeX through Quarto in a separate runtime layer; keep project content and volatile build metadata after installation layers.\nPreinstall common LuaLaTeX packages and generate the rendering user’s font database during Docker builds.\nExport a UTC BUILD_DATE from both image workflows for Docker build labels.\nPoint documentation links and website metadata to the GitHub Pages workshop site.\nCover dataset documentation with codebook and dataspice and versioning with pins in the core programme.\nInclude optional synthpop and vetiver examples in the closing discussion on responsible sharing.\nRead and validate VERSION in both image build workflows; image versions follow this file independently of GitHub release tags.\nRestore Rocker’s RStudio initialisation and use the Binder-specific image for Binder launches.\nInclude website configuration, styling, project metadata, and community documents in both runtime images.\nMove community documents to the repository root and rewrite the AI policy for this workshop.\nRefresh Codex guidance, agent roles, and skills for the current project structure and development policy.",
+    "text": "20.1 Unreleased",
     "crumbs": [
       "Communications and Community",
       "<span class='chapter-number'>20</span>  <span class='chapter-title'>Changelog</span>"
@@ -410,8 +399,52 @@
     "objectID": "CHANGELOG.html#section",
     "href": "CHANGELOG.html#section",
     "title": "20  Changelog",
-    "section": "20.2 [0.1.0] - 2026-11-19",
-    "text": "20.2 [0.1.0] - 2026-11-19\n\n20.2.1 Added\n\nInitial Quarto workshop website with introduction and coordinator pages.\nWorkshop README covering learning objectives, setup, communication, and citation.\nR project configuration and an initial renv lockfile specifying R 4.4.2.\nRStudio and Binder Dockerfiles, Docker Compose configuration, and GitHub Actions image build workflows.\nCodex project instructions, skills, subagents, command rules, lifecycle hooks, and validation tools.\nAIMOS2026 workshop announcement with the session details, venue, presenters, and abstract.\nContribution guidelines, community and security policies, citation metadata, and an MIT license.\n\n\n\n20.2.2 Changed\n\nReplaced earlier modelling workshop content with an integrated reproducibility workflow using GitHub, renv, Docker, targets, Quarto, and Zenodo.\nGeneralised the workshop pages for reuse across events, with event-specific details in announcements.",
+    "section": "20.2 0.5.0 - 2026-11-20",
+    "text": "20.2 0.5.0 - 2026-11-20\n\n20.2.1 Added\n\nAdd a shared bibliography and a References chapter to the workshop book.\nPublish the full workshop PDF alongside the HTML book on GitHub Pages.\n\n\n\n20.2.2 Changed\n\nMake MyBinder the browser-based route for workshop participants, with a direct RStudio launch link and instructions for saving work.\nExplain Dockerfiles, Docker image builds, and the Binder and RStudio GitHub Actions workflows. Refresh the published HTML, PDF, search index, and sitemap with the revised lesson.\n\n\n\n20.2.3 Fixed\n\nInclude the observed-versus-synthetic comparison plot in the published extras chapter. Allow generated figure assets under docs/ to be tracked.",
+    "crumbs": [
+      "Communications and Community",
+      "<span class='chapter-number'>20</span>  <span class='chapter-title'>Changelog</span>"
+    ]
+  },
+  {
+    "objectID": "CHANGELOG.html#section-1",
+    "href": "CHANGELOG.html#section-1",
+    "title": "20  Changelog",
+    "section": "20.3 0.4.0 - 2026-11-20",
+    "text": "20.3 0.4.0 - 2026-11-20\n\n20.3.1 Added\n\nInclude a checksum-verified copy of the HealthWellbeing teaching data.\n\n\n\n20.3.2 Changed\n\nMove renv::restore() into workshop setup so lesson renders use the prepared library.\nReuse matching dataset pins across renders and record the configured pipeline script path when running targets with local crew workers.\n\n\n\n20.3.3 Fixed\n\nRestore executable rendering of the targets chapter with an interactive visNetwork graph in HTML and a text diagram in PDF. Pin visNetwork 2.1.4.\nDirect the published workshop homepage to the Introduction chapter.",
+    "crumbs": [
+      "Communications and Community",
+      "<span class='chapter-number'>20</span>  <span class='chapter-title'>Changelog</span>"
+    ]
+  },
+  {
+    "objectID": "CHANGELOG.html#section-2",
+    "href": "CHANGELOG.html#section-2",
+    "title": "20  Changelog",
+    "section": "20.4 0.3.0 - 2026-11-19",
+    "text": "20.4 0.3.0 - 2026-11-19\n\n20.4.1 Added\n\nAdd the full 90-minute workshop sequence built around the HealthWellbeing teaching dataset. Cover Git and GitHub, renv and Docker, codebook and dataspice, pins, targets, Quarto, and Zenodo.\nAdd a targets pipeline for correlation meta-analysis and a standalone Quarto report that records data versions, analysis settings, the Git revision, and software provenance.\nInclude optional synthpop and vetiver examples in the closing discussion on responsible sharing.\nDocument Quarto journal-format extensions with a PLOS example and describe automatic GitHub release archiving with Zenodo.\n\n\n\n20.4.2 Changed\n\nExpand the R 4.4.1 lockfile to 184 package records, configure local crew workers, and add system libraries for the workshop dependencies.\nEnable the workshop’s R examples during rendering with explicit display and cache settings. Run them from the project root and preserve model versions across renders.",
+    "crumbs": [
+      "Communications and Community",
+      "<span class='chapter-number'>20</span>  <span class='chapter-title'>Changelog</span>"
+    ]
+  },
+  {
+    "objectID": "CHANGELOG.html#section-3",
+    "href": "CHANGELOG.html#section-3",
+    "title": "20  Changelog",
+    "section": "20.5 0.2.0 - 2026-11-19",
+    "text": "20.5 0.2.0 - 2026-11-19\n\n20.5.1 Added\n\nAdd an attribution chapter and ORCID links for coordinators and acknowledged contributors.\nPublish the rendered HTML site, search index, sitemap, and bundled assets under docs/.\nAdd reusable accessibility guidance and commit the renv 1.0.7 bootstrap.\n\n\n\n20.5.2 Changed\n\nConvert the workshop to a Quarto book with chapter navigation, a landing page, and configured HTML and PDF output.\nInstall TinyTeX and common LuaLaTeX packages in reusable build layers. Prepare the renderer’s font cache before copying project files and applying build labels.\nPoint documentation links and site metadata to the GitHub Pages workshop site and link the Zenodo record.\nAllow GitHub release tags to differ from the image version in VERSION. Export a UTC BUILD_DATE for image labels.\nMount the workshop checkout into the local RStudio service. Include the book’s landing page and accessibility guidance in both runtime images.\nExpand the AI assistance policy.\nRefresh Codex guidance, agent roles, and skills for the current project structure and development policy.",
+    "crumbs": [
+      "Communications and Community",
+      "<span class='chapter-number'>20</span>  <span class='chapter-title'>Changelog</span>"
+    ]
+  },
+  {
+    "objectID": "CHANGELOG.html#section-4",
+    "href": "CHANGELOG.html#section-4",
+    "title": "20  Changelog",
+    "section": "20.6 0.1.0 - 2026-11-19",
+    "text": "20.6 0.1.0 - 2026-11-19\n\n20.6.1 Added\n\nInitial Quarto workshop website with introduction and coordinator pages.\nWorkshop README covering learning objectives, setup, communication, and citation.\nR project configuration, an initial renv lockfile specifying R 4.4.1, and placeholder R and pipeline helpers.\nRStudio and Binder Dockerfiles, Docker Compose configuration, and GitHub Actions image build workflows.\nLocal RStudio startup through Rocker’s /init and a dedicated image for Binder launches.\nVS Code workspace settings, extension recommendations, and tasks for R syntax checks, Quarto, and Codex hook tests.\nCodex project instructions, skills, subagents, command rules, lifecycle hooks, and validation tools.\nAIMOS2026 workshop announcement with the session details, venue, presenters, and abstract.\nContribution guidelines, community and security policies, citation metadata, and an MIT license.\n\n\n\n20.6.2 Changed\n\nReplaced earlier modelling workshop content with an integrated reproducibility workflow using GitHub, renv, Docker, targets, Quarto, and Zenodo.\nGeneralised the workshop pages for reuse across events, with event-specific details in announcements.",
     "crumbs": [
       "Communications and Community",
       "<span class='chapter-number'>20</span>  <span class='chapter-title'>Changelog</span>"
