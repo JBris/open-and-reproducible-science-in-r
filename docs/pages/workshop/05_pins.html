@@ -55,7 +55,27 @@ div.sourceCode
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -321,6 +341,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
       </ul>
   </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/4_references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
     </ul>
     </div>
 </nav>
@@ -513,10 +539,15 @@ $scope
 <section id="further-reading" class="level2" data-number="9.6">
 <h2 data-number="9.6" class="anchored" data-anchor-id="further-reading"><span class="header-section-number">9.6</span> Further reading</h2>
 <ul>
-<li><a href="https://pins.rstudio.com/">Pins documentation</a>.</li>
+<li>Storing and retrieving versions with pins <span class="citation" data-cites="pins-docs">(<a href="../4_references.html#ref-pins-docs" role="doc-biblioref">Silge, Wickham, and Luraschi 2026</a>)</span>.</li>
 </ul>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="ref-pins-docs" class="csl-entry" role="listitem">
+Silge, Julia, Hadley Wickham, and Javier Luraschi. 2026. <em><span class="nocase">pins</span>: Pin, Discover, and Share Resources</em>. <a href="https://pins.rstudio.com/">https://pins.rstudio.com/</a>.
+</div>
+</div>
 </section>
 
 </main> <!-- /main -->

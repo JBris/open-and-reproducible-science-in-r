@@ -21,7 +21,27 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -287,6 +307,12 @@ ul.task-list li input[type="checkbox"] {
 </li>
       </ul>
   </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/4_references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
     </ul>
     </div>
 </nav>
@@ -334,11 +360,11 @@ ul.task-list li input[type="checkbox"] {
 <section id="introduction" class="level2" data-number="12.1">
 <h2 data-number="12.1" class="anchored" data-anchor-id="introduction"><span class="header-section-number">12.1</span> Introduction</h2>
 <p>In this five-minute demonstration, we will work out what a reader should cite to find the materials for a particular analysis. We will inspect the workshop archive and how published GitHub releases can be archived automatically through the Zenodo integration.</p>
-<p>A Git commit identifies a repository revision. A GitHub release gives a tagged revision a name and a place for release notes and assets. Zenodo can archive a copy of selected files and issue a DOI. An archive makes the cited files available under the access conditions of that record. <a href="https://help.zenodo.org/docs/deposit/describe-records/reserve-doi/">Zenodo records and DOIs</a></p>
+<p>A Git commit identifies a repository revision. A GitHub release gives a tagged revision a name and a place for release notes and assets. Zenodo can archive a copy of selected files and issue a DOI. An archive makes the cited files available under the access conditions of that record <span class="citation" data-cites="zenodo-reserve-doi">(<a href="../4_references.html#ref-zenodo-reserve-doi" role="doc-biblioref">Zenodo, n.d.c</a>)</span>.</p>
 </section>
 <section id="inspect-a-record" class="level2" data-number="12.2">
 <h2 data-number="12.2" class="anchored" data-anchor-id="inspect-a-record"><span class="header-section-number">12.2</span> Inspect a record</h2>
-<p>Open the workshop’s archived <code>v0.2.0</code> release. Find the creators, access conditions, and the ZIP of that revision. Compare the Zenodo version DOI with the GitHub release tag and the concept DOI in <code>CITATION.cff</code>. Cite the version DOI for the files supporting a result. Cite the concept DOI when referring to the evolving project. <a href="https://doi.org/10.5281/zenodo.24357028">Version archive</a> · <a href="https://doi.org/10.5281/zenodo.24342489">Concept DOI</a> · <a href="https://github.com/JBris/open-and-reproducible-science-in-r/releases/tag/v0.2.0">GitHub release</a></p>
+<p>Open the workshop’s archived <code>v0.2.0</code> release <span class="citation" data-cites="workshop-v020">(<a href="../4_references.html#ref-workshop-v020" role="doc-biblioref">Bristow and Liang 2026</a>)</span>. Find the creators, access conditions, and the ZIP of that revision. Compare the Zenodo version DOI with the GitHub release tag and the concept DOI in <code>CITATION.cff</code>. Cite the version DOI for the files supporting a result. Cite the concept DOI when referring to the evolving project. <a href="https://doi.org/10.5281/zenodo.24357028">Version archive</a> · <a href="https://doi.org/10.5281/zenodo.24342489">Concept DOI</a> · <a href="https://github.com/JBris/open-and-reproducible-science-in-r/releases/tag/v0.2.0">GitHub release</a></p>
 </section>
 <section id="connect-the-website-repository-and-archive" class="level2" data-number="12.3">
 <h2 data-number="12.3" class="anchored" data-anchor-id="connect-the-website-repository-and-archive"><span class="header-section-number">12.3</span> Connect the website, repository, and archive</h2>
@@ -403,12 +429,29 @@ ul.task-list li input[type="checkbox"] {
 <section id="further-reading" class="level2" data-number="12.8">
 <h2 data-number="12.8" class="anchored" data-anchor-id="further-reading"><span class="header-section-number">12.8</span> Further reading</h2>
 <ul>
-<li><a href="https://help.zenodo.org/docs/github/enable-repository/">Enable GitHub–Zenodo integration</a>.</li>
-<li><a href="https://help.zenodo.org/docs/deposit/manage-versions/">Managing versions on Zenodo</a>.</li>
-<li><a href="https://docs.github.com/en/repositories/archiving-a-github-repository/referencing-and-citing-content">Archiving a GitHub repository</a>.</li>
+<li>Enabling GitHub–Zenodo integration <span class="citation" data-cites="zenodo-enable-repository">(<a href="../4_references.html#ref-zenodo-enable-repository" role="doc-biblioref">Zenodo, n.d.a</a>)</span>.</li>
+<li>Managing versions on Zenodo <span class="citation" data-cites="zenodo-manage-versions">(<a href="../4_references.html#ref-zenodo-manage-versions" role="doc-biblioref">Zenodo, n.d.b</a>)</span>.</li>
+<li>Archiving and citing a GitHub repository <span class="citation" data-cites="github-archiving">(<a href="../4_references.html#ref-github-archiving" role="doc-biblioref">GitHub, n.d.</a>)</span>.</li>
 </ul>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="ref-workshop-v020" class="csl-entry" role="listitem">
+Bristow, James, and Hana Liang. 2026. <span>“Open and Reproducible Science in <span>R</span>.”</span> Zenodo. <a href="https://doi.org/10.5281/zenodo.24357028">https://doi.org/10.5281/zenodo.24357028</a>.
+</div>
+<div id="ref-github-archiving" class="csl-entry" role="listitem">
+GitHub. n.d. <span>“Referencing and Citing Content.”</span> <a href="https://docs.github.com/en/repositories/archiving-a-github-repository/referencing-and-citing-content">https://docs.github.com/en/repositories/archiving-a-github-repository/referencing-and-citing-content</a>.
+</div>
+<div id="ref-zenodo-enable-repository" class="csl-entry" role="listitem">
+Zenodo. n.d.a. <span>“Enable a Repository.”</span> <a href="https://help.zenodo.org/docs/github/enable-repository/">https://help.zenodo.org/docs/github/enable-repository/</a>.
+</div>
+<div id="ref-zenodo-manage-versions" class="csl-entry" role="listitem">
+———. n.d.b. <span>“Manage Versions.”</span> <a href="https://help.zenodo.org/docs/deposit/manage-versions/">https://help.zenodo.org/docs/deposit/manage-versions/</a>.
+</div>
+<div id="ref-zenodo-reserve-doi" class="csl-entry" role="listitem">
+———. n.d.c. <span>“Reserve a <span>DOI</span>.”</span> <a href="https://help.zenodo.org/docs/deposit/describe-records/reserve-doi/">https://help.zenodo.org/docs/deposit/describe-records/reserve-doi/</a>.
+</div>
+</div>
 </section>
 
 </main> <!-- /main -->

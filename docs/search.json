@@ -1,82 +1,5 @@
 [
   {
-    "objectID": "pages/1_introduction.html",
-    "href": "pages/1_introduction.html",
-    "title": "1  Introduction",
-    "section": "",
-    "text": "1.1 About the workshop\nOpen and reproducible science helps others understand, evaluate, reuse, and extend research. In this 90-minute workshop, we follow one prepared R project from its source data to an archived result. We use HealthWellbeing to pool published correlations between health and well-being. Teaching dataset\nThe workshop is presented by James Bristow, Massey University, with co-author Hana Liang, Bioeconomy Science Institute.",
-    "crumbs": [
-      "Workshop Introduction",
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Introduction</span>"
-    ]
-  },
-  {
-    "objectID": "pages/1_introduction.html#learning-objectives",
-    "href": "pages/1_introduction.html#learning-objectives",
-    "title": "1  Introduction",
-    "section": "1.2 Learning objectives",
-    "text": "1.2 Learning objectives\nBy the end of the workshop, participants should be able to:\n\nExplain how the tools support different parts of a reproducible research workflow.\nDescribe dataset variables, provenance, licensing, and access conditions using a codebook and structured FAIR metadata.\nStore a dataset with pins and retrieve a specific version.\nTrace a result through a targets pipeline and a Quarto report.\nIdentify the files and metadata needed for a citable archive.",
-    "crumbs": [
-      "Workshop Introduction",
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Introduction</span>"
-    ]
-  },
-  {
-    "objectID": "pages/1_introduction.html#building-a-connected-workflow",
-    "href": "pages/1_introduction.html#building-a-connected-workflow",
-    "title": "1  Introduction",
-    "section": "1.3 Building a connected workflow",
-    "text": "1.3 Building a connected workflow\n\nTrack changes with Git and review a change on GitHub. Version control and collaboration\nRecord R dependencies with renv and inspect the wider environment captured by Docker. Computational environments\nDescribe variables with codebook and record dataset metadata with dataspice. Dataset documentation and FAIR metadata\nStore the full dataset and a teaching subset with pins, then retrieve a specific version. Dataset storage and versioning\nRun the correlation meta-analysis with targets and inspect what rebuilds when the dataset version changes. Analytical pipelines\nRender and inspect the analysis report in Quarto. Reporting and publishing\nFind and cite a specific archive version on Zenodo. Research archiving\n\nTogether, these tools support a workflow whose history, dependencies, analytical steps, and outputs can be inspected and reused by other researchers.",
-    "crumbs": [
-      "Workshop Introduction",
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Introduction</span>"
-    ]
-  },
-  {
-    "objectID": "pages/1_introduction.html#optional-closing-examples",
-    "href": "pages/1_introduction.html#optional-closing-examples",
-    "title": "1  Introduction",
-    "section": "1.4 Optional closing examples",
-    "text": "1.4 Optional closing examples\nThe final five minutes include discussion and brief demonstrations if time allows. synthpop illustrates synthetic study summaries and vetiver shows how to link model versions to their training data. Optional extras and concluding discussion",
-    "crumbs": [
-      "Workshop Introduction",
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Introduction</span>"
-    ]
-  },
-  {
-    "objectID": "pages/1_introduction.html#reproducibility-when-data-cannot-be-shared",
-    "href": "pages/1_introduction.html#reproducibility-when-data-cannot-be-shared",
-    "title": "1  Introduction",
-    "section": "1.5 Reproducibility when data cannot be shared",
-    "text": "1.5 Reproducibility when data cannot be shared\nOpen science can include restricted-access data. Researchers can document their methods, code, and access conditions while restricting the original observations.\nSynthetic data can help readers test whether a workflow runs. Verifying findings based on original observations requires access to those observations. A differential privacy claim requires a validated mechanism and privacy accounting. NIST’s introduction to differentially private synthetic data",
-    "crumbs": [
-      "Workshop Introduction",
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Introduction</span>"
-    ]
-  },
-  {
-    "objectID": "pages/1_introduction.html#principles-to-put-into-practice",
-    "href": "pages/1_introduction.html#principles-to-put-into-practice",
-    "title": "1  Introduction",
-    "section": "1.6 Principles to put into practice",
-    "text": "1.6 Principles to put into practice\nThroughout the session, consider whether another researcher could:\n\nUnderstand the purpose of the project and follow the analysis decisions.\nReproduce the environment and rerun the workflow on another machine.\nAudit the history of changes and the relationship between inputs and outputs.\nTrace a reported result to the versions of its data, fitted model, and software environment.\nReuse and extend the code and materials with clear documentation and licensing.\nAssess sharing limits and distinguish a runnable workflow from verification of restricted-data findings.\nFind and cite a preserved version of the research outputs.\n\nWe will consider common barriers to these goals, including undocumented dependencies, manual analysis steps, and assumptions tied to a single computing environment.",
-    "crumbs": [
-      "Workshop Introduction",
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Introduction</span>"
-    ]
-  },
-  {
-    "objectID": "pages/1_introduction.html#getting-started",
-    "href": "pages/1_introduction.html#getting-started",
-    "title": "1  Introduction",
-    "section": "1.7 Getting started",
-    "text": "1.7 Getting started\nSome familiarity with R will help you follow the examples. Set up the environment and verify the teaching dataset before the timed session. Preparation\nFor upcoming workshops, dates, and venues, see the workshop announcements.",
-    "crumbs": [
-      "Workshop Introduction",
-      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Introduction</span>"
-    ]
-  },
-  {
     "objectID": "ANNOUNCEMENTS.html",
     "href": "ANNOUNCEMENTS.html",
     "title": "14  Announcements",
@@ -407,6 +330,83 @@
     ]
   },
   {
+    "objectID": "pages/1_introduction.html",
+    "href": "pages/1_introduction.html",
+    "title": "1  Introduction",
+    "section": "",
+    "text": "1.1 About the workshop\nOpen and reproducible science helps others understand, evaluate, reuse, and extend research. In this 90-minute workshop, we follow one prepared R project from its source data to an archived result. We use HealthWellbeing to pool published correlations between health and well-being. Teaching dataset\nThe workshop is presented by James Bristow, Massey University, with co-author Hana Liang, Bioeconomy Science Institute.",
+    "crumbs": [
+      "Workshop Introduction",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Introduction</span>"
+    ]
+  },
+  {
+    "objectID": "pages/1_introduction.html#learning-objectives",
+    "href": "pages/1_introduction.html#learning-objectives",
+    "title": "1  Introduction",
+    "section": "1.2 Learning objectives",
+    "text": "1.2 Learning objectives\nBy the end of the workshop, participants should be able to:\n\nExplain how the tools support different parts of a reproducible research workflow.\nDescribe dataset variables, provenance, licensing, and access conditions using a codebook and structured FAIR metadata.\nStore a dataset with pins and retrieve a specific version.\nTrace a result through a targets pipeline and a Quarto report.\nIdentify the files and metadata needed for a citable archive.",
+    "crumbs": [
+      "Workshop Introduction",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Introduction</span>"
+    ]
+  },
+  {
+    "objectID": "pages/1_introduction.html#building-a-connected-workflow",
+    "href": "pages/1_introduction.html#building-a-connected-workflow",
+    "title": "1  Introduction",
+    "section": "1.3 Building a connected workflow",
+    "text": "1.3 Building a connected workflow\n\nTrack changes with Git and review a change on GitHub. Version control and collaboration\nRecord R dependencies with renv and inspect the wider environment captured by Docker. Computational environments\nDescribe variables with codebook and record dataset metadata with dataspice. Dataset documentation and FAIR metadata\nStore the full dataset and a teaching subset with pins, then retrieve a specific version. Dataset storage and versioning\nRun the correlation meta-analysis with targets and inspect what rebuilds when the dataset version changes. Analytical pipelines\nRender and inspect the analysis report in Quarto. Reporting and publishing\nFind and cite a specific archive version on Zenodo. Research archiving\n\nTogether, these tools support a workflow whose history, dependencies, analytical steps, and outputs can be inspected and reused by other researchers.",
+    "crumbs": [
+      "Workshop Introduction",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Introduction</span>"
+    ]
+  },
+  {
+    "objectID": "pages/1_introduction.html#optional-closing-examples",
+    "href": "pages/1_introduction.html#optional-closing-examples",
+    "title": "1  Introduction",
+    "section": "1.4 Optional closing examples",
+    "text": "1.4 Optional closing examples\nThe final five minutes include discussion and brief demonstrations if time allows. synthpop illustrates synthetic study summaries and vetiver shows how to link model versions to their training data. Optional extras and concluding discussion",
+    "crumbs": [
+      "Workshop Introduction",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Introduction</span>"
+    ]
+  },
+  {
+    "objectID": "pages/1_introduction.html#reproducibility-when-data-cannot-be-shared",
+    "href": "pages/1_introduction.html#reproducibility-when-data-cannot-be-shared",
+    "title": "1  Introduction",
+    "section": "1.5 Reproducibility when data cannot be shared",
+    "text": "1.5 Reproducibility when data cannot be shared\nOpen science can include restricted-access data. Researchers can document their methods, code, and access conditions while restricting the original observations.\nSynthetic data can help readers test whether a workflow runs. Verifying findings based on original observations requires access to those observations. A differential privacy claim requires a validated mechanism and privacy accounting (Near and Darais 2021).",
+    "crumbs": [
+      "Workshop Introduction",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Introduction</span>"
+    ]
+  },
+  {
+    "objectID": "pages/1_introduction.html#principles-to-put-into-practice",
+    "href": "pages/1_introduction.html#principles-to-put-into-practice",
+    "title": "1  Introduction",
+    "section": "1.6 Principles to put into practice",
+    "text": "1.6 Principles to put into practice\nThroughout the session, consider whether another researcher could:\n\nUnderstand the purpose of the project and follow the analysis decisions.\nReproduce the environment and rerun the workflow on another machine.\nAudit the history of changes and the relationship between inputs and outputs.\nTrace a reported result to the versions of its data, fitted model, and software environment.\nReuse and extend the code and materials with clear documentation and licensing.\nAssess sharing limits and distinguish a runnable workflow from verification of restricted-data findings.\nFind and cite a preserved version of the research outputs.\n\nWe will consider common barriers to these goals, including undocumented dependencies, manual analysis steps, and assumptions tied to a single computing environment.",
+    "crumbs": [
+      "Workshop Introduction",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Introduction</span>"
+    ]
+  },
+  {
+    "objectID": "pages/1_introduction.html#getting-started",
+    "href": "pages/1_introduction.html#getting-started",
+    "title": "1  Introduction",
+    "section": "1.7 Getting started",
+    "text": "1.7 Getting started\nSome familiarity with R will help you follow the examples. Set up the environment and verify the teaching dataset before the timed session. Preparation\nFor upcoming workshops, dates, and venues, see the workshop announcements.\n\n\n\n\nNear, Joseph, and David Darais. 2021. “Differentially Private Synthetic Data.” National Institute of Standards; Technology. May 3, 2021. https://www.nist.gov/blogs/cybersecurity-insights/differentially-private-synthetic-data.",
+    "crumbs": [
+      "Workshop Introduction",
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Introduction</span>"
+    ]
+  },
+  {
     "objectID": "pages/2_coordinators.html",
     "href": "pages/2_coordinators.html",
     "title": "2  Coordinators",
@@ -455,7 +455,7 @@
     "href": "pages/3_attribution.html#reference-e-book",
     "title": "3  Attribution",
     "section": "3.2 Reference e-book",
-    "text": "3.2 Reference e-book\nThe following R e-book is also acknowledged as a reference for these materials:\nHarrer, M., Cuijpers, P., Furukawa, T. A., & Ebert, D. D. (2021). Doing Meta-Analysis with R: A Hands-On Guide. Boca Raton, FL and London: Chapman & Hall/CRC Press. ISBN 978-0-367-61007-4.",
+    "text": "3.2 Reference e-book\nDoing Meta-Analysis with R: A Hands-On Guide is a reference for these materials (Harrer et al. 2021).\n\n\n\n\nHarrer, Mathias, Pim Cuijpers, Toshi A. Furukawa, and David D. Ebert. 2021. Doing Meta-Analysis with R: A Hands-on Guide. Chapman; Hall/CRC. https://doi.org/10.1201/9781003107347.",
     "crumbs": [
       "Workshop Introduction",
       "<span class='chapter-number'>3</span>  <span class='chapter-title'>Attribution</span>"
@@ -477,7 +477,7 @@
     "href": "pages/workshop/00_preparation.html#our-teaching-dataset",
     "title": "4  Preparation",
     "section": "4.2 Our teaching dataset",
-    "text": "4.2 Our teaching dataset\nWe use HealthWellbeing from section 4.2.4, Correlations, of Doing Meta-Analysis with R: A Hands-On Guide. It contains study-level summaries of the association between health and well-being. It is also distributed with the dmetar package.\nThe original review is Ngamaba, Panagioti, and Armitage (2017). Consult the dataset documentation for the variable definitions and original reference.\nWe will download the authors’ data file directly, so these opening activities do not require installation of dmetar. Keep the raw file unchanged and record its source separately from any transformations you make later.",
+    "text": "4.2 Our teaching dataset\nWe use HealthWellbeing from the correlations chapter (Harrer et al. 2021, sec. 4.2.4). It contains study-level summaries of the association between health and well-being. It is also distributed with the dmetar package.\nThe original review is Ngamaba, Panagioti, and Armitage (2017). The dataset documentation describes the variables (Harrer et al., n.d.).\nWe will download the authors’ data file directly, so these opening activities do not require installation of dmetar. Keep the raw file unchanged and record its source separately from any transformations you make later.",
     "crumbs": [
       "Workshop",
       "<span class='chapter-number'>4</span>  <span class='chapter-title'>Preparation</span>"
@@ -543,18 +543,7 @@
     "href": "pages/workshop/00_preparation.html#preparation-checkpoint",
     "title": "4  Preparation",
     "section": "4.8 Preparation checkpoint",
-    "text": "4.8 Preparation checkpoint\nYou are ready when:\n\nThe project opens in your chosen environment and Git is available.\nYou know your R version and have completed the initial renv startup.\nThe raw file is saved and its checksum matches the teaching snapshot.\nhealth contains the verified data, and you can identify its upstream source.\n\nContinue to open and reproducible science.",
-    "crumbs": [
-      "Workshop",
-      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Preparation</span>"
-    ]
-  },
-  {
-    "objectID": "pages/workshop/00_preparation.html#further-reading",
-    "href": "pages/workshop/00_preparation.html#further-reading",
-    "title": "4  Preparation",
-    "section": "4.9 Further reading",
-    "text": "4.9 Further reading\nHarrer, M., Cuijpers, P., Furukawa, T. A., & Ebert, D. D. (2021). Doing Meta-Analysis with R: A Hands-On Guide. Chapman & Hall/CRC. Section 4.2.4.\nNgamaba, K. H., Panagioti, M., & Armitage, C. J. (2017). How strongly related are health status and subjective well-being? Systematic review and meta-analysis. The European Journal of Public Health, 27(5), 879–885.",
+    "text": "4.8 Preparation checkpoint\nYou are ready when:\n\nThe project opens in your chosen environment and Git is available.\nYou know your R version and have completed the initial renv startup.\nThe raw file is saved and its checksum matches the teaching snapshot.\nhealth contains the verified data, and you can identify its upstream source.\n\nContinue to open and reproducible science.\n\n\n\n\nHarrer, Mathias, Pim Cuijpers, Toshi A. Furukawa, and David D. Ebert. 2021. Doing Meta-Analysis with R: A Hands-on Guide. Chapman; Hall/CRC. https://doi.org/10.1201/9781003107347.\n\n\n———. n.d. “Association of Health and Well-Being Dataset.” dmetar. https://dmetar.protectlab.org/reference/healthwellbeing.\n\n\nNgamaba, Kayonda Hubert, Maria Panagioti, and Christopher J. Armitage. 2017. “How Strongly Related Are Health Status and Subjective Well-Being? Systematic Review and Meta-Analysis.” European Journal of Public Health 27 (5): 879–85. https://doi.org/10.1093/eurpub/ckx081.",
     "crumbs": [
       "Workshop",
       "<span class='chapter-number'>4</span>  <span class='chapter-title'>Preparation</span>"
@@ -587,7 +576,7 @@
     "href": "pages/workshop/01_open_science.html#our-example-health-and-well-being",
     "title": "5  Open and reproducible science",
     "section": "5.3 Our example: health and well-being",
-    "text": "5.3 Our example: health and well-being\nThe teaching question is: What association between health and well-being is reported across the included studies? We use the HealthWellbeing example from section 4.2.4 of the guide.\nEach row is a study summary, not a participant record. The columns are:\n\n\n\nColumn\nMeaning\n\n\n\n\nauthor\nStudy label\n\n\ncor\nReported Pearson correlation\n\n\nn\nStudy sample size\n\n\npopulation\nSample population description\n\n\ncountry\nStudy country\n\n\n\nThe preparation activity verifies the snapshot. For this opening, inspect the instructor’s copy or your own loaded data. There is no need to fit a model during these five minutes.\nLater analysis will pool correlations using Fisher’s z transformation and an explicit random-effects specification. Study independence, comparable effect definitions, and differences between study populations need consideration. A pooled association alone does not establish a causal effect.",
+    "text": "5.3 Our example: health and well-being\nThe teaching question is: What association between health and well-being is reported across the included studies? We use the HealthWellbeing correlation example (Harrer et al. 2021, sec. 4.2.4).\nEach row is a study summary, not a participant record. The columns are:\n\n\n\nColumn\nMeaning\n\n\n\n\nauthor\nStudy label\n\n\ncor\nReported Pearson correlation\n\n\nn\nStudy sample size\n\n\npopulation\nSample population description\n\n\ncountry\nStudy country\n\n\n\nThe preparation activity verifies the snapshot. For this opening, inspect the instructor’s copy or your own loaded data. There is no need to fit a model during these five minutes.\nLater analysis will pool correlations using Fisher’s z transformation and an explicit random-effects specification. Study independence, comparable effect definitions, and differences between study populations need consideration. A pooled association alone does not establish a causal effect.",
     "crumbs": [
       "Workshop",
       "<span class='chapter-number'>5</span>  <span class='chapter-title'>Open and reproducible science</span>"
@@ -631,7 +620,7 @@
     "href": "pages/workshop/01_open_science.html#further-reading",
     "title": "5  Open and reproducible science",
     "section": "5.7 Further reading",
-    "text": "5.7 Further reading\n\nThe guide’s correlation example.\nHealthWellbeing dataset documentation.\nFAIR principles.",
+    "text": "5.7 Further reading\n\nVariable definitions for the teaching dataset (Harrer et al., n.d.).\nFAIR principles for scientific data and metadata (GO FAIR, n.d.).\n\n\n\n\n\nGO FAIR. n.d. “FAIR Principles.” https://www.go-fair.org/fair-principles/.\n\n\nHarrer, Mathias, Pim Cuijpers, Toshi A. Furukawa, and David D. Ebert. 2021. Doing Meta-Analysis with R: A Hands-on Guide. Chapman; Hall/CRC. https://doi.org/10.1201/9781003107347.\n\n\n———. n.d. “Association of Health and Well-Being Dataset.” dmetar. https://dmetar.protectlab.org/reference/healthwellbeing.",
     "crumbs": [
       "Workshop",
       "<span class='chapter-number'>5</span>  <span class='chapter-title'>Open and reproducible science</span>"
@@ -675,7 +664,7 @@
     "href": "pages/workshop/02_git_github.html#create-a-provenance-note",
     "title": "6  Version control, collaboration and sharing",
     "section": "6.4 Create a provenance note",
-    "text": "6.4 Create a provenance note\nAllow about four minutes. Create WORKSHOP_NOTES.md in the project root using your editor. Use the following as a starting point, replacing the author and retrieval-date placeholders with your own information.\n# Health and well-being: workshop notes\n\nAuthor: YOUR NAME\n\n## Research question\n\nWhat association between health and well-being is reported across the studies?\n\n## Data source\n\n- Dataset: HealthWellbeing.\n- Book: Harrer, Cuijpers, Furukawa, and Ebert (2021), section 4.2.4.\n- Book URL: https://doing-meta.guide/pooling-es#correlations\n- Dataset documentation: https://dmetar.protectlab.org/reference/healthwellbeing\n- Download: https://www.protectlab.org/meta-analysis-in-r/data/healthwellbeing.rda\n- Retrieved: YYYY-MM-DD\n- Raw file: data/raw/healthwellbeing.rda\n- MD5: 0d74964b0b7168379a2b015cb648b326\n\n## Decisions\n\nPreserve the raw file unchanged. Keep derived data and analysis outputs separate.\nCheck upstream reuse terms before redistributing data.\nCheck the note against the source you actually used. If you received the file from the instructor, record that transfer and the verified checksum as well. The original review is Ngamaba, Panagioti, and Armitage (2017), cited in the preparation chapter.",
+    "text": "6.4 Create a provenance note\nAllow about four minutes. Create WORKSHOP_NOTES.md in the project root using your editor. Use the following as a starting point, replacing the author and retrieval-date placeholders with your own information.\n# Health and well-being: workshop notes\n\nAuthor: YOUR NAME\n\n## Research question\n\nWhat association between health and well-being is reported across the studies?\n\n## Data source\n\n- Dataset: HealthWellbeing.\n- Book: Harrer, Cuijpers, Furukawa, and Ebert (2021), section 4.2.4.\n- Book URL: https://doing-meta.guide/pooling-es#correlations\n- Dataset documentation: https://dmetar.protectlab.org/reference/healthwellbeing\n- Download: https://www.protectlab.org/meta-analysis-in-r/data/healthwellbeing.rda\n- Retrieved: YYYY-MM-DD\n- Raw file: data/raw/healthwellbeing.rda\n- MD5: 0d74964b0b7168379a2b015cb648b326\n\n## Decisions\n\nPreserve the raw file unchanged. Keep derived data and analysis outputs separate.\nCheck upstream reuse terms before redistributing data.\nCheck the note against the source you actually used. If you received the file from the instructor, record that transfer and the verified checksum as well. The original review is Ngamaba, Panagioti, and Armitage (2017).",
     "crumbs": [
       "Workshop",
       "<span class='chapter-number'>6</span>  <span class='chapter-title'>Version control, collaboration and sharing</span>"
@@ -719,7 +708,7 @@
     "href": "pages/workshop/02_git_github.html#further-reading",
     "title": "6  Version control, collaboration and sharing",
     "section": "6.8 Further reading",
-    "text": "6.8 Further reading\n\nGit’s introductory documentation.\nGitHub: creating a pull request from a fork.",
+    "text": "6.8 Further reading\n\nVersion control basics (Chacon and Straub 2014, sec. 1.1).\nCreating a pull request from a fork (GitHub, n.d.).\n\n\n\n\n\nChacon, Scott, and Ben Straub. 2014. Pro Git. 2nd ed. Apress. https://git-scm.com/book/en/v2/Getting-Started-About-Version-Control.\n\n\nGitHub. n.d. “Creating a Pull Request from a Fork.” https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request-from-a-fork.\n\n\nNgamaba, Kayonda Hubert, Maria Panagioti, and Christopher J. Armitage. 2017. “How Strongly Related Are Health Status and Subjective Well-Being? Systematic Review and Meta-Analysis.” European Journal of Public Health 27 (5): 879–85. https://doi.org/10.1093/eurpub/ckx081.",
     "crumbs": [
       "Workshop",
       "<span class='chapter-number'>6</span>  <span class='chapter-title'>Version control, collaboration and sharing</span>"
@@ -807,7 +796,7 @@
     "href": "pages/workshop/03_environments.html#further-reading",
     "title": "7  Reproducible computational environments",
     "section": "7.8 Further reading",
-    "text": "7.8 Further reading\n\nrenv: collaborating.\nDocker Compose documentation.\nWorkshop Docker setup.",
+    "text": "7.8 Further reading\n\nSharing a project environment with renv (Posit, n.d.).\nConfiguring services with Docker Compose (Docker, n.d.).\nWorkshop Docker setup.\n\n\n\n\n\nDocker. n.d. “Docker Compose.” https://docs.docker.com/compose/.\n\n\nPosit. n.d. “Collaborating with renv.” https://rstudio.github.io/renv/articles/collaborating.html.",
     "crumbs": [
       "Workshop",
       "<span class='chapter-number'>7</span>  <span class='chapter-title'>Reproducible computational environments</span>"
@@ -818,7 +807,7 @@
     "href": "pages/workshop/04_data_documentation.html",
     "title": "8  Dataset documentation and FAIR metadata",
     "section": "",
-    "text": "8.1 Introduction\nWe will describe the HealthWellbeing dataset so a collaborator can interpret the five columns and find the original teaching file. By the end of these 12 minutes, you should be able to read a data dictionary and explain what the dataset metadata adds.\nFAIR stands for Findable, Accessible, Interoperable, and Reusable. An identifiable source helps people find the data. Access instructions explain how to obtain it. Structured metadata helps software interpret it. Definitions, provenance, and reuse terms help people work out whether the data suit their question. Access can have conditions. FAIR Guiding Principles\nStart with the verified raw file from the preparation lesson. This page loads its own health object so it can render in a fresh R session. Run the chunks in the Console from the project root with box, codebook, and dataspice available. Your instructor can provide the completed CSV and JSON-LD files for discussion. Preparation",
+    "text": "8.1 Introduction\nWe will describe the HealthWellbeing dataset so a collaborator can interpret the five columns and find the original teaching file. By the end of these 12 minutes, you should be able to read a data dictionary and explain what the dataset metadata adds.\nFAIR stands for Findable, Accessible, Interoperable, and Reusable (GO FAIR, n.d.). An identifiable source helps people find the data. Access instructions explain how to obtain it. Structured metadata helps software interpret it. Definitions, provenance, and reuse terms help people work out whether the data suit their question. Access can have conditions.\nStart with the verified raw file from the preparation lesson. This page loads its own health object so it can render in a fresh R session. Run the chunks in the Console from the project root with box, codebook, and dataspice available. Your instructor can provide the completed CSV and JSON-LD files for discussion. Preparation",
     "crumbs": [
       "Workshop",
       "<span class='chapter-number'>8</span>  <span class='chapter-title'>Dataset documentation and FAIR metadata</span>"
@@ -829,7 +818,7 @@
     "href": "pages/workshop/04_data_documentation.html#data-dictionary",
     "title": "8  Dataset documentation and FAIR metadata",
     "section": "8.2 Data dictionary",
-    "text": "8.2 Data dictionary\nWe first load the functions used in this lesson. We label a copy of the table and keep the downloaded file unchanged.\n\nbox::use(\n  codebook[codebook_table],\n  dataspice[create_spice, write_spice],\n  utils[read.csv, write.csv]\n)\n\nraw_file &lt;- file.path(\"data\", \"raw\", \"healthwellbeing.rda\")\nstopifnot(\n  file.exists(raw_file),\n  identical(\n    unname(tools::md5sum(raw_file)),\n    \"0d74964b0b7168379a2b015cb648b326\"\n  )\n)\ndata_env &lt;- new.env(parent = baseenv())\nloaded_names &lt;- load(raw_file, envir = data_env)\nstopifnot(identical(loaded_names, \"HealthWellbeing\"))\nhealth &lt;- data_env[[\"HealthWellbeing\"]]\nstopifnot(\n  is.data.frame(health),\n  nrow(health) == 29L,\n  identical(names(health), c(\"author\", \"cor\", \"n\", \"population\", \"country\")),\n  !anyNA(health)\n)\n\n\n\n\n\n\n\n\n\nColumn\nWhat it records\nUnit or values\n\n\n\n\nauthor\nStudy label with first author and year\nText\n\n\ncor\nPearson correlation of health and well-being\nUnitless\n\n\nn\nStudy sample size\nCount of observations\n\n\npopulation\nType of study sample\nChronic condition or general population\n\n\ncountry\nCountry where the study was conducted\nCountry name\n\n\n\nA row represents one study summary. The supplied snapshot has 29 rows and no missing values. A zero correlation would describe a study result. Use a missing value marker such as NA for unavailable values in a future release. The column definitions and original citation come from the published teaching documentation. HealthWellbeing documentation\nIn R, codebook_table() combines variable labels with summaries. We will keep the three columns we need for the exercise and save them as a CSV.\n\nworkshop_dir &lt;- file.path(\"outputs\", \"health-wellbeing\")\ndir.create(workshop_dir, recursive = TRUE, showWarnings = FALSE)\n\nlabels &lt;- c(\n  author = \"Study label (first author and year)\",\n  cor = \"Pearson correlation of health and well-being\",\n  n = \"Number of observations in the study\",\n  population = \"Type of study sample\",\n  country = \"Country where the study was conducted\"\n)\n\nlabelled_health &lt;- health\nfor (column in names(labels)) {\n  attr(labelled_health[[column]], \"label\") &lt;- labels[[column]]\n}\n\ndictionary &lt;- codebook_table(labelled_health) |&gt;\n  subset(select = c(name, label, n_missing))\nwrite.csv(\n  dictionary,\n  file.path(workshop_dir, \"codebook.csv\"),\n  row.names = FALSE\n)\ndictionary\n\n# A tibble: 5 × 3\n  name       label                                        n_missing\n  &lt;chr&gt;      &lt;chr&gt;                                            &lt;int&gt;\n1 author     Study label (first author and year)                  0\n2 cor        Pearson correlation of health and well-being         0\n3 n          Number of observations in the study                  0\n4 population Type of study sample                                 0\n5 country    Country where the study was conducted                0",
+    "text": "8.2 Data dictionary\nWe first load the functions used in this lesson. We label a copy of the table and keep the downloaded file unchanged.\n\nbox::use(\n  codebook[codebook_table],\n  dataspice[create_spice, write_spice],\n  utils[read.csv, write.csv]\n)\n\nraw_file &lt;- file.path(\"data\", \"raw\", \"healthwellbeing.rda\")\nstopifnot(\n  file.exists(raw_file),\n  identical(\n    unname(tools::md5sum(raw_file)),\n    \"0d74964b0b7168379a2b015cb648b326\"\n  )\n)\ndata_env &lt;- new.env(parent = baseenv())\nloaded_names &lt;- load(raw_file, envir = data_env)\nstopifnot(identical(loaded_names, \"HealthWellbeing\"))\nhealth &lt;- data_env[[\"HealthWellbeing\"]]\nstopifnot(\n  is.data.frame(health),\n  nrow(health) == 29L,\n  identical(names(health), c(\"author\", \"cor\", \"n\", \"population\", \"country\")),\n  !anyNA(health)\n)\n\n\n\n\n\n\n\n\n\nColumn\nWhat it records\nUnit or values\n\n\n\n\nauthor\nStudy label with first author and year\nText\n\n\ncor\nPearson correlation of health and well-being\nUnitless\n\n\nn\nStudy sample size\nCount of observations\n\n\npopulation\nType of study sample\nChronic condition or general population\n\n\ncountry\nCountry where the study was conducted\nCountry name\n\n\n\nA row represents one study summary. The supplied snapshot has 29 rows and no missing values. A zero correlation would describe a study result. Use a missing value marker such as NA for unavailable values in a future release. The column definitions and original citation come from the published teaching documentation (Harrer et al., n.d.).\nIn R, codebook_table() combines variable labels with summaries. We will keep the three columns we need for the exercise and save them as a CSV.\n\nworkshop_dir &lt;- file.path(\"outputs\", \"health-wellbeing\")\ndir.create(workshop_dir, recursive = TRUE, showWarnings = FALSE)\n\nlabels &lt;- c(\n  author = \"Study label (first author and year)\",\n  cor = \"Pearson correlation of health and well-being\",\n  n = \"Number of observations in the study\",\n  population = \"Type of study sample\",\n  country = \"Country where the study was conducted\"\n)\n\nlabelled_health &lt;- health\nfor (column in names(labels)) {\n  attr(labelled_health[[column]], \"label\") &lt;- labels[[column]]\n}\n\ndictionary &lt;- codebook_table(labelled_health) |&gt;\n  subset(select = c(name, label, n_missing))\nwrite.csv(\n  dictionary,\n  file.path(workshop_dir, \"codebook.csv\"),\n  row.names = FALSE\n)\ndictionary\n\n# A tibble: 5 × 3\n  name       label                                        n_missing\n  &lt;chr&gt;      &lt;chr&gt;                                            &lt;int&gt;\n1 author     Study label (first author and year)                  0\n2 cor        Pearson correlation of health and well-being         0\n3 n          Number of observations in the study                  0\n4 population Type of study sample                                 0\n5 country    Country where the study was conducted                0",
     "crumbs": [
       "Workshop",
       "<span class='chapter-number'>8</span>  <span class='chapter-title'>Dataset documentation and FAIR metadata</span>"
@@ -873,7 +862,7 @@
     "href": "pages/workshop/04_data_documentation.html#further-reading",
     "title": "8  Dataset documentation and FAIR metadata",
     "section": "8.6 Further reading",
-    "text": "8.6 Further reading\n\ncodebook table reference.\nDataspice workflow.",
+    "text": "8.6 Further reading\n\nVariable summaries with codebook_table() (Arslan, n.d.).\nStructuring dataset metadata with dataspice (Boettiger et al. 2026).\n\n\n\n\n\nArslan, Ruben C. n.d. “codebook_table() Reference.” https://rubenarslan.github.io/codebook/reference/codebook_table.html.\n\n\nBoettiger, Carl, Scott Chamberlain, Auriel Fournier, Kelly Hondula, Anna Krystalli, Bryce Mecum, Maëlle Salmon, Kate Webbink, and Kara Woo. 2026. dataspice: Create Lightweight Schema.org Descriptions of Data. https://docs.ropensci.org/dataspice/.\n\n\nGO FAIR. n.d. “FAIR Principles.” https://www.go-fair.org/fair-principles/.\n\n\nHarrer, Mathias, Pim Cuijpers, Toshi A. Furukawa, and David D. Ebert. n.d. “Association of Health and Well-Being Dataset.” dmetar. https://dmetar.protectlab.org/reference/healthwellbeing.",
     "crumbs": [
       "Workshop",
       "<span class='chapter-number'>8</span>  <span class='chapter-title'>Dataset documentation and FAIR metadata</span>"
@@ -939,7 +928,7 @@
     "href": "pages/workshop/05_pins.html#further-reading",
     "title": "9  Dataset storage and versioning",
     "section": "9.6 Further reading",
-    "text": "9.6 Further reading\n\nPins documentation.",
+    "text": "9.6 Further reading\n\nStoring and retrieving versions with pins (Silge, Wickham, and Luraschi 2026).\n\n\n\n\n\nSilge, Julia, Hadley Wickham, and Javier Luraschi. 2026. pins: Pin, Discover, and Share Resources. https://pins.rstudio.com/.",
     "crumbs": [
       "Workshop",
       "<span class='chapter-number'>9</span>  <span class='chapter-title'>Dataset storage and versioning</span>"
@@ -961,7 +950,7 @@
     "href": "pages/workshop/06_targets.html#inspect-the-pipeline",
     "title": "10  Reproducible analytical pipelines",
     "section": "10.2 Inspect the pipeline",
-    "text": "10.2 Inspect the pipeline\nThe script is pipelines/_targets_health_wellbeing.R. Open it in your editor and follow the data dependencies in this order.\nversion_file -&gt; data_version -&gt; dataset_file -&gt; studies -&gt; fit\nfit, data_version -&gt; result -&gt; summary_file\nWe mark the selector, pinned RDS, and summary CSV as file targets. At fitting time, the pipeline records the Git revision, the script checksum, and whether the script has local changes. If you work with local edits, keep a copy of that script to reproduce the fit.\nThe model uses the raw Pearson correlations and study sample sizes. Meta transforms each correlation to Fisher’s z scale and pools the effects with a random-effects model. We use restricted maximum likelihood (REML) to estimate between-study variance and the Hartung–Knapp method for the 95% interval. The summary converts the estimate and limits back to the correlation scale.\nThis model treats study summaries as independent and assumes their correlations address a comparable association. Differences in populations, measures, and sampling limit interpretation. This is a worked example of pooling reported effects from the supplied studies. Section 4.2.4 of the guide",
+    "text": "10.2 Inspect the pipeline\nThe script is pipelines/_targets_health_wellbeing.R. Open it in your editor and follow the data dependencies in this order.\nversion_file -&gt; data_version -&gt; dataset_file -&gt; studies -&gt; fit\nfit, data_version -&gt; result -&gt; summary_file\nWe mark the selector, pinned RDS, and summary CSV as file targets. At fitting time, the pipeline records the Git revision, the script checksum, and whether the script has local changes. If you work with local edits, keep a copy of that script to reproduce the fit.\nThe model uses the raw Pearson correlations and study sample sizes. Meta transforms each correlation to Fisher’s z scale and pools the effects with a random-effects model. We use restricted maximum likelihood (REML) to estimate between-study variance and the Hartung–Knapp method for the 95% interval. The summary converts the estimate and limits back to the correlation scale.\nThis model treats study summaries as independent and assumes their correlations address a comparable association. Differences in populations, measures, and sampling limit interpretation. This is a worked example of pooling reported effects from the supplied studies (Harrer et al. 2021, sec. 4.2.4).",
     "crumbs": [
       "Workshop",
       "<span class='chapter-number'>10</span>  <span class='chapter-title'>Reproducible analytical pipelines</span>"
@@ -1005,7 +994,7 @@
     "href": "pages/workshop/06_targets.html#further-reading",
     "title": "10  Reproducible analytical pipelines",
     "section": "10.6 Further reading",
-    "text": "10.6 Further reading\n\nThe targets manual.\nReference for metacor.",
+    "text": "10.6 Further reading\n\nDefining targets and tracking dependencies (Landau, n.d.).\nPooling correlations with metacor() (Schwarzer, n.d.).\n\n\n\n\n\nHarrer, Mathias, Pim Cuijpers, Toshi A. Furukawa, and David D. Ebert. 2021. Doing Meta-Analysis with R: A Hands-on Guide. Chapman; Hall/CRC. https://doi.org/10.1201/9781003107347.\n\n\nLandau, Will. n.d. “The targets R Package User Manual.” https://books.ropensci.org/targets/.\n\n\nSchwarzer, Guido. n.d. “Meta-Analysis of Correlations with metacor().” https://rdrr.io/cran/meta/man/metacor.html.",
     "crumbs": [
       "Workshop",
       "<span class='chapter-number'>10</span>  <span class='chapter-title'>Reproducible analytical pipelines</span>"
@@ -1071,7 +1060,7 @@
     "href": "pages/workshop/07_quarto.html#quarto-extensions-for-journal-articles",
     "title": "11  Reproducible reporting and publishing",
     "section": "11.6 Quarto extensions for journal articles",
-    "text": "11.6 Quarto extensions for journal articles\nQuarto extensions add formats and templates for particular publishing workflows. During the publishing demonstration, browse the Journal Articles extension listing and find a format relevant to your field. Examples include:\n\n\n\nExtension\nArticle style or publisher\n\n\n\n\napaquarto\nAmerican Psychological Association, seventh edition\n\n\nelsevier\nElsevier journals\n\n\nplos\nPublic Library of Science\n\n\njss\nJournal of Statistical Software\n\n\n\nOpen an extension’s repository to check its supported formats, required software, author metadata, and usage instructions. Compare the template with the target journal’s current submission guidance.\nFor follow-up, create a separate article directory and start from the PLOS template. Run these commands in the Terminal from the project root and follow the prompts:\nmkdir health-wellbeing-article\ncd health-wellbeing-article\nquarto use template quarto-journals/plos\nThe template supplies an example QMD, bibliography, and extension files. PLOS supports plos-html and plos-pdf; the PDF format also requires a LaTeX installation. Adapt the article to read the same pipeline summary and retain its methods and provenance fields.\nExtensions are stored locally in _extensions/. Include that folder with the article source in Git, and record the Quarto and extension versions used for a release. renv.lock records R packages; it does not capture these extension files. See Managing Extensions for installation and version-control guidance.",
+    "text": "11.6 Quarto extensions for journal articles\nQuarto extensions add formats and templates for particular publishing workflows. During the publishing demonstration, browse the Journal Articles extension listing and find a format relevant to your field. Examples include:\n\n\n\nExtension\nArticle style or publisher\n\n\n\n\napaquarto\nAmerican Psychological Association, seventh edition\n\n\nelsevier\nElsevier journals\n\n\nplos\nPublic Library of Science\n\n\njss\nJournal of Statistical Software\n\n\n\nOpen an extension’s repository to check its supported formats, required software, author metadata, and usage instructions. Compare the template with the target journal’s current submission guidance.\nFor follow-up, create a separate article directory and start from the PLOS template. Run these commands in the Terminal from the project root and follow the prompts:\nmkdir health-wellbeing-article\ncd health-wellbeing-article\nquarto use template quarto-journals/plos\nThe template supplies an example QMD, bibliography, and extension files. PLOS supports plos-html and plos-pdf; the PDF format also requires a LaTeX installation. Adapt the article to read the same pipeline summary and retain its methods and provenance fields.\nExtensions are stored locally in _extensions/. Include that folder with the article source in Git. For a release, record the Quarto and extension versions alongside the R package versions in renv.lock. See the Quarto guidance on installing and versioning extensions (Quarto, n.d.b).",
     "crumbs": [
       "Workshop",
       "<span class='chapter-number'>11</span>  <span class='chapter-title'>Reproducible reporting and publishing</span>"
@@ -1093,7 +1082,7 @@
     "href": "pages/workshop/07_quarto.html#further-reading",
     "title": "11  Reproducible reporting and publishing",
     "section": "11.8 Further reading",
-    "text": "11.8 Further reading\n\nQuarto with R.\nQuarto publishing.\nQuarto journal article extensions.",
+    "text": "11.8 Further reading\n\nWorking with R in Quarto (Quarto, n.d.d).\nPublishing Quarto documents (Quarto, n.d.c).\nJournal article formats and templates (Quarto, n.d.a).\n\n\n\n\n\nQuarto. n.d.a. “Journal Articles.” https://quarto.org/docs/extensions/listing-journals.html.\n\n\n———. n.d.b. “Managing Extensions.” https://quarto.org/docs/extensions/managing.html.\n\n\n———. n.d.c. “Publishing.” https://quarto.org/docs/publishing/.\n\n\n———. n.d.d. “Using R.” https://quarto.org/docs/computations/r.html.",
     "crumbs": [
       "Workshop",
       "<span class='chapter-number'>11</span>  <span class='chapter-title'>Reproducible reporting and publishing</span>"
@@ -1104,7 +1093,7 @@
     "href": "pages/workshop/08_zenodo.html",
     "title": "12  Research archiving and persistent identifiers",
     "section": "",
-    "text": "12.1 Introduction\nIn this five-minute demonstration, we will work out what a reader should cite to find the materials for a particular analysis. We will inspect the workshop archive and how published GitHub releases can be archived automatically through the Zenodo integration.\nA Git commit identifies a repository revision. A GitHub release gives a tagged revision a name and a place for release notes and assets. Zenodo can archive a copy of selected files and issue a DOI. An archive makes the cited files available under the access conditions of that record. Zenodo records and DOIs",
+    "text": "12.1 Introduction\nIn this five-minute demonstration, we will work out what a reader should cite to find the materials for a particular analysis. We will inspect the workshop archive and how published GitHub releases can be archived automatically through the Zenodo integration.\nA Git commit identifies a repository revision. A GitHub release gives a tagged revision a name and a place for release notes and assets. Zenodo can archive a copy of selected files and issue a DOI. An archive makes the cited files available under the access conditions of that record (Zenodo, n.d.c).",
     "crumbs": [
       "Workshop",
       "<span class='chapter-number'>12</span>  <span class='chapter-title'>Research archiving and persistent identifiers</span>"
@@ -1115,7 +1104,7 @@
     "href": "pages/workshop/08_zenodo.html#inspect-a-record",
     "title": "12  Research archiving and persistent identifiers",
     "section": "12.2 Inspect a record",
-    "text": "12.2 Inspect a record\nOpen the workshop’s archived v0.2.0 release. Find the creators, access conditions, and the ZIP of that revision. Compare the Zenodo version DOI with the GitHub release tag and the concept DOI in CITATION.cff. Cite the version DOI for the files supporting a result. Cite the concept DOI when referring to the evolving project. Version archive · Concept DOI · GitHub release",
+    "text": "12.2 Inspect a record\nOpen the workshop’s archived v0.2.0 release (Bristow and Liang 2026). Find the creators, access conditions, and the ZIP of that revision. Compare the Zenodo version DOI with the GitHub release tag and the concept DOI in CITATION.cff. Cite the version DOI for the files supporting a result. Cite the concept DOI when referring to the evolving project. Version archive · Concept DOI · GitHub release",
     "crumbs": [
       "Workshop",
       "<span class='chapter-number'>12</span>  <span class='chapter-title'>Research archiving and persistent identifiers</span>"
@@ -1181,7 +1170,7 @@
     "href": "pages/workshop/08_zenodo.html#further-reading",
     "title": "12  Research archiving and persistent identifiers",
     "section": "12.8 Further reading",
-    "text": "12.8 Further reading\n\nEnable GitHub–Zenodo integration.\nManaging versions on Zenodo.\nArchiving a GitHub repository.",
+    "text": "12.8 Further reading\n\nEnabling GitHub–Zenodo integration (Zenodo, n.d.a).\nManaging versions on Zenodo (Zenodo, n.d.b).\nArchiving and citing a GitHub repository (GitHub, n.d.).\n\n\n\n\n\nBristow, James, and Hana Liang. 2026. “Open and Reproducible Science in R.” Zenodo. https://doi.org/10.5281/zenodo.24357028.\n\n\nGitHub. n.d. “Referencing and Citing Content.” https://docs.github.com/en/repositories/archiving-a-github-repository/referencing-and-citing-content.\n\n\nZenodo. n.d.a. “Enable a Repository.” https://help.zenodo.org/docs/github/enable-repository/.\n\n\n———. n.d.b. “Manage Versions.” https://help.zenodo.org/docs/deposit/manage-versions/.\n\n\n———. n.d.c. “Reserve a DOI.” https://help.zenodo.org/docs/deposit/describe-records/reserve-doi/.",
     "crumbs": [
       "Workshop",
       "<span class='chapter-number'>12</span>  <span class='chapter-title'>Research archiving and persistent identifiers</span>"
@@ -1214,7 +1203,7 @@
     "href": "pages/workshop/09_extras_and_discussion.html#synthetic-study-summaries",
     "title": "13  Optional extras and concluding discussion",
     "section": "13.3 Synthetic study summaries",
-    "text": "13.3 Synthetic study summaries\nWith synthpop available, we will use the CART synthesis method and seed 123 so we can repeat the classroom run in the same environment. We convert the generated values to the original scales and give the new rows synthetic labels. The generated sample sizes describe synthetic rows.\n\nbox::use(synthpop[compare, syn])\n\nsynthetic &lt;- syn(\n  original,\n  method = \"cart\",\n  seed = 123,\n  print.flag = FALSE\n)\n\nsynthetic_data &lt;- data.frame(\n  author = sprintf(\"Synthetic %02d\", seq_len(nrow(synthetic$syn))),\n  cor = tanh(synthetic$syn$z),\n  n = round(exp(synthetic$syn$log_n)),\n  population = synthetic$syn$population\n)\nhead(synthetic_data)\n\n        author   cor     n         population\n1 Synthetic 01 0.290 85070 general population\n2 Synthetic 02 0.360  3722 general population\n3 Synthetic 03 0.620 19000 general population\n4 Synthetic 04 0.388  3030 general population\n5 Synthetic 05 0.202  1134  chronic condition\n6 Synthetic 06 0.320 15184 general population\n\ncompare(synthetic, original)\n\nCalculations done for population \nCalculations done for z \nCalculations done for log_n \n\n\n\nComparing percentages observed with synthetic\n\n\n\n\n\n\n\n\n\n\nSelected utility measures:\n               pMSE   S_pMSE df\npopulation 0.003036 1.408907  1\nz          0.011063 1.283333  4\nlog_n      0.003539 0.410534  4\n\n\nInspect the distributions of population, z, and log_n. The comparison describes the resemblance of the two tables on these variables. Similar marginals can coexist with differences in their relationships and in downstream estimates. Treat this as a public teaching example. A privacy guarantee would require a validated mechanism and accounting beyond this distribution comparison. synthpop documentation",
+    "text": "13.3 Synthetic study summaries\nWith synthpop available, we will use the CART synthesis method and seed 123 so we can repeat the classroom run in the same environment. We convert the generated values to the original scales and give the new rows synthetic labels. The generated sample sizes describe synthetic rows.\n\nbox::use(synthpop[compare, syn])\n\nsynthetic &lt;- syn(\n  original,\n  method = \"cart\",\n  seed = 123,\n  print.flag = FALSE\n)\n\nsynthetic_data &lt;- data.frame(\n  author = sprintf(\"Synthetic %02d\", seq_len(nrow(synthetic$syn))),\n  cor = tanh(synthetic$syn$z),\n  n = round(exp(synthetic$syn$log_n)),\n  population = synthetic$syn$population\n)\nhead(synthetic_data)\n\n        author   cor     n         population\n1 Synthetic 01 0.290 85070 general population\n2 Synthetic 02 0.360  3722 general population\n3 Synthetic 03 0.620 19000 general population\n4 Synthetic 04 0.388  3030 general population\n5 Synthetic 05 0.202  1134  chronic condition\n6 Synthetic 06 0.320 15184 general population\n\ncompare(synthetic, original)\n\nCalculations done for population \nCalculations done for z \nCalculations done for log_n \n\n\n\nComparing percentages observed with synthetic\n\n\n\n\n\n\n\n\n\n\nSelected utility measures:\n               pMSE   S_pMSE df\npopulation 0.003036 1.408907  1\nz          0.011063 1.283333  4\nlog_n      0.003539 0.410534  4\n\n\nInspect the distributions of population, z, and log_n. The comparison describes the resemblance of the two tables on these variables. Similar marginals can coexist with differences in their relationships and in downstream estimates. Treat this as a public teaching example. A privacy guarantee would require a validated mechanism and accounting beyond this distribution comparison (Near and Darais 2021). For the synthesis methods, see Nowok, Raab, and Dibben (2016) and the synthpop documentation.",
     "crumbs": [
       "Workshop",
       "<span class='chapter-number'>13</span>  <span class='chapter-title'>Optional extras and concluding discussion</span>"
@@ -1225,7 +1214,7 @@
     "href": "pages/workshop/09_extras_and_discussion.html#model-versioning",
     "title": "13  Optional extras and concluding discussion",
     "section": "13.4 Model versioning",
-    "text": "13.4 Model versioning\nWe will use vetiver and pins to store two illustrative linear regressions under the same model name. The second adds log sample size as a predictor. Both regressions give each study equal weight and serve to illustrate model versioning. The core meta-analysis uses study precision and between-study variance when pooling effects.\nReuse the local model board across renders and keep the version identifiers for each pair of fits. Cached model chunks reuse their recorded identifiers. Refreshing the cache fits a new pair and retains earlier versions in the board. Keep the board with its document cache; if you remove the board, refresh the cache when rendering again.\n\nbox::use(\n  pins[pin_exists, pin_versions],\n  stats[lm],\n  vetiver[vetiver_model, vetiver_pin_write, vetiver_pin_read]\n)\n\nmodel_board &lt;- board_folder(\n  file.path(workshop_dir, \"model_store\"),\n  versioned = TRUE\n)\nmodel_name &lt;- \"health_wellbeing\"\n\ncode_revision &lt;- system2(\"git\", c(\"rev-parse\", \"HEAD\"), stdout = TRUE)\nstopifnot(length(code_revision) == 1L, grepl(\"^[0-9a-f]{40}$\", code_revision))\nmodel_source &lt;- list(\n  data_version = full_version,\n  code_revision = code_revision,\n  r_version = as.character(getRversion()),\n  vetiver_version = as.character(utils::packageVersion(\"vetiver\"))\n)\n\n\nprevious_versions &lt;- if (pin_exists(model_board, model_name)) {\n  pin_versions(model_board, model_name)$version\n} else {\n  character()\n}\n\nmodel_v1 &lt;- lm(z ~ population, data = original)\nv1 &lt;- vetiver_model(\n  model_v1,\n  model_name = model_name,\n  description = \"Illustrative regression on population.\",\n  metadata = model_source\n)\nvetiver_pin_write(model_board, v1)\nfirst_version &lt;- setdiff(\n  pin_versions(model_board, model_name)$version, previous_versions\n)\nstopifnot(length(first_version) == 1L)\n\nmodel_v2 &lt;- lm(z ~ population + log_n, data = original)\nv2 &lt;- vetiver_model(\n  model_v2,\n  model_name = model_name,\n  description = \"Illustrative regression on population and log sample size.\",\n  metadata = model_source\n)\nvetiver_pin_write(model_board, v2)\n\nmodel_history &lt;- pin_versions(model_board, model_name)\nsecond_version &lt;- setdiff(\n  model_history$version, c(previous_versions, first_version)\n)\nstopifnot(length(first_version) == 1L, length(second_version) == 1L)\nmodel_history\n\n# A tibble: 2 × 3\n  version                created             hash \n  &lt;chr&gt;                  &lt;dttm&gt;              &lt;chr&gt;\n1 20261119T103756Z-e3f44 2026-11-19 10:37:56 e3f44\n2 20261119T103756Z-e5ae0 2026-11-19 10:37:56 e5ae0\n\n\nWhen you use vetiver_pin_read() without a version, it selects the board’s current version. Pass an explicit identifier when you want to reproduce a previous prediction or inspect its input requirements. Compare the input columns of the two retrieved models.\n\nstored_v1 &lt;- vetiver_pin_read(\n  model_board, model_name, version = first_version\n)\nstored_v2 &lt;- vetiver_pin_read(\n  model_board, model_name, version = second_version\n)\nnames(stored_v1$prototype)\n\n[1] \"population\"\n\nnames(stored_v2$prototype)\n\n[1] \"population\" \"log_n\"     \n\nstored_v2$metadata\n\n$user\n$user$data_version\n[1] \"20261119T103524Z-11d00\"\n\n$user$code_revision\n[1] \"73d13ddebe53a761cc75802fc57e133b2dfe4d21\"\n\n$user$r_version\n[1] \"4.4.1\"\n\n$user$vetiver_version\n[1] \"0.2.8\"\n\n\n$version\n[1] \"20261119T103756Z-e3f44\"\n\n$url\nNULL\n\n$required_pkgs\nNULL\n\n\nThe model’s metadata retains its training pin version and software context. Keep the fitted objects and generated tables local until you have checked applicable release terms. Vetiver and versioned models",
+    "text": "13.4 Model versioning\nWe will use vetiver and pins to store two illustrative linear regressions under the same model name. The second adds log sample size as a predictor. Both regressions give each study equal weight and serve to illustrate model versioning. The core meta-analysis uses study precision and between-study variance when pooling effects.\nReuse the local model board across renders and keep the version identifiers for each pair of fits. Cached model chunks reuse their recorded identifiers. Refreshing the cache fits a new pair and retains earlier versions in the board. Keep the board with its document cache; if you remove the board, refresh the cache when rendering again.\n\nbox::use(\n  pins[pin_exists, pin_versions],\n  stats[lm],\n  vetiver[vetiver_model, vetiver_pin_write, vetiver_pin_read]\n)\n\nmodel_board &lt;- board_folder(\n  file.path(workshop_dir, \"model_store\"),\n  versioned = TRUE\n)\nmodel_name &lt;- \"health_wellbeing\"\n\ncode_revision &lt;- system2(\"git\", c(\"rev-parse\", \"HEAD\"), stdout = TRUE)\nstopifnot(length(code_revision) == 1L, grepl(\"^[0-9a-f]{40}$\", code_revision))\nmodel_source &lt;- list(\n  data_version = full_version,\n  code_revision = code_revision,\n  r_version = as.character(getRversion()),\n  vetiver_version = as.character(utils::packageVersion(\"vetiver\"))\n)\n\n\nprevious_versions &lt;- if (pin_exists(model_board, model_name)) {\n  pin_versions(model_board, model_name)$version\n} else {\n  character()\n}\n\nmodel_v1 &lt;- lm(z ~ population, data = original)\nv1 &lt;- vetiver_model(\n  model_v1,\n  model_name = model_name,\n  description = \"Illustrative regression on population.\",\n  metadata = model_source\n)\nvetiver_pin_write(model_board, v1)\nfirst_version &lt;- setdiff(\n  pin_versions(model_board, model_name)$version, previous_versions\n)\nstopifnot(length(first_version) == 1L)\n\nmodel_v2 &lt;- lm(z ~ population + log_n, data = original)\nv2 &lt;- vetiver_model(\n  model_v2,\n  model_name = model_name,\n  description = \"Illustrative regression on population and log sample size.\",\n  metadata = model_source\n)\nvetiver_pin_write(model_board, v2)\n\nmodel_history &lt;- pin_versions(model_board, model_name)\nsecond_version &lt;- setdiff(\n  model_history$version, c(previous_versions, first_version)\n)\nstopifnot(length(first_version) == 1L, length(second_version) == 1L)\nmodel_history\n\n# A tibble: 6 × 3\n  version                created             hash \n  &lt;chr&gt;                  &lt;dttm&gt;              &lt;chr&gt;\n1 20261119T103756Z-e3f44 2026-11-19 10:37:56 e3f44\n2 20261119T103756Z-e5ae0 2026-11-19 10:37:56 e5ae0\n3 20261119T115900Z-e5ae0 2026-11-19 11:59:00 e5ae0\n4 20261119T115901Z-e3f44 2026-11-19 11:59:01 e3f44\n5 20261119T122112Z-e3f44 2026-11-19 12:21:12 e3f44\n6 20261119T122112Z-e5ae0 2026-11-19 12:21:12 e5ae0\n\n\nWhen you use vetiver_pin_read() without a version, it selects the board’s current version. Pass an explicit identifier when you want to reproduce a previous prediction or inspect its input requirements. Compare the input columns of the two retrieved models.\n\nstored_v1 &lt;- vetiver_pin_read(\n  model_board, model_name, version = first_version\n)\nstored_v2 &lt;- vetiver_pin_read(\n  model_board, model_name, version = second_version\n)\nnames(stored_v1$prototype)\n\n[1] \"population\"\n\nnames(stored_v2$prototype)\n\n[1] \"population\" \"log_n\"     \n\nstored_v2$metadata\n\n$user\n$user$data_version\n[1] \"20261119T103524Z-11d00\"\n\n$user$code_revision\n[1] \"9af145b784df531e2e5733ba9713aea0b9860d62\"\n\n$user$r_version\n[1] \"4.4.1\"\n\n$user$vetiver_version\n[1] \"0.2.8\"\n\n\n$version\n[1] \"20261119T122112Z-e3f44\"\n\n$url\nNULL\n\n$required_pkgs\nNULL\n\n\nThe model’s metadata retains its training pin version and software context (Silge, n.d.). Keep the fitted objects and generated tables local until you have checked applicable release terms.",
     "crumbs": [
       "Workshop",
       "<span class='chapter-number'>13</span>  <span class='chapter-title'>Optional extras and concluding discussion</span>"
@@ -1236,10 +1225,20 @@
     "href": "pages/workshop/09_extras_and_discussion.html#extras-discussion",
     "title": "13  Optional extras and concluding discussion",
     "section": "13.5 Concluding discussion",
-    "text": "13.5 Concluding discussion\n\nIf you received only the report, which versions and files would you ask for to rerun it?\nIf the original data could not be shared, what could a reader test with a synthetic dataset, and what would require access to the originals?\nWhich single change would make your own research workflow easier for a collaborator to inspect and rerun?\n\nA useful checkpoint is to point to the exact data version, analysis revision, environment, and archive citation for one reported result. If you try the optional model exercise, check that the first model expects population and the second also expects log_n.",
+    "text": "13.5 Concluding discussion\n\nIf you received only the report, which versions and files would you ask for to rerun it?\nIf the original data could not be shared, what could a reader test with a synthetic dataset, and what would require access to the originals?\nWhich single change would make your own research workflow easier for a collaborator to inspect and rerun?\n\nA useful checkpoint is to point to the exact data version, analysis revision, environment, and archive citation for one reported result. If you try the optional model exercise, check that the first model expects population and the second also expects log_n.\n\n\n\n\nNear, Joseph, and David Darais. 2021. “Differentially Private Synthetic Data.” National Institute of Standards; Technology. May 3, 2021. https://www.nist.gov/blogs/cybersecurity-insights/differentially-private-synthetic-data.\n\n\nNowok, Beata, Gillian M. Raab, and Chris Dibben. 2016. “synthpop: Bespoke Creation of Synthetic Data in R.” Journal of Statistical Software 74 (11): 1–26. https://doi.org/10.18637/jss.v074.i11.\n\n\nSilge, Julia. n.d. “Pin a Versioned Model with vetiver_pin_write().” https://rstudio.github.io/vetiver-r/reference/vetiver_pin_write.html.",
     "crumbs": [
       "Workshop",
       "<span class='chapter-number'>13</span>  <span class='chapter-title'>Optional extras and concluding discussion</span>"
+    ]
+  },
+  {
+    "objectID": "pages/4_references.html",
+    "href": "pages/4_references.html",
+    "title": "References",
+    "section": "",
+    "text": "Arslan, Ruben C. n.d. “codebook_table() Reference.” https://rubenarslan.github.io/codebook/reference/codebook_table.html.\n\n\nBoettiger, Carl, Scott Chamberlain, Auriel Fournier, Kelly Hondula, Anna\nKrystalli, Bryce Mecum, Maëlle Salmon, Kate Webbink, and Kara Woo. 2026.\ndataspice: Create Lightweight Schema.org Descriptions of Data. https://docs.ropensci.org/dataspice/.\n\n\nBristow, James, and Hana Liang. 2026. “Open and Reproducible\nScience in R.” Zenodo. https://doi.org/10.5281/zenodo.24357028.\n\n\nChacon, Scott, and Ben Straub. 2014. Pro Git. 2nd\ned. Apress. https://git-scm.com/book/en/v2/Getting-Started-About-Version-Control.\n\n\nDocker. n.d. “Docker Compose.” https://docs.docker.com/compose/.\n\n\nGitHub. n.d.a. “Creating a Pull Request from a Fork.” https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request-from-a-fork.\n\n\n———. n.d.b. “Referencing and Citing Content.” https://docs.github.com/en/repositories/archiving-a-github-repository/referencing-and-citing-content.\n\n\nGO FAIR. n.d. “FAIR Principles.” https://www.go-fair.org/fair-principles/.\n\n\nHarrer, Mathias, Pim Cuijpers, Toshi A. Furukawa, and David D. Ebert.\n2021. Doing Meta-Analysis with R: A Hands-on\nGuide. Chapman; Hall/CRC. https://doi.org/10.1201/9781003107347.\n\n\n———. n.d. “Association of Health and Well-Being Dataset.”\ndmetar. https://dmetar.protectlab.org/reference/healthwellbeing.\n\n\nLandau, Will. n.d. “The targets\nR Package User Manual.” https://books.ropensci.org/targets/.\n\n\nNear, Joseph, and David Darais. 2021. “Differentially Private\nSynthetic Data.” National Institute of Standards; Technology. May\n3, 2021. https://www.nist.gov/blogs/cybersecurity-insights/differentially-private-synthetic-data.\n\n\nNgamaba, Kayonda Hubert, Maria Panagioti, and Christopher J. Armitage.\n2017. “How Strongly Related Are Health Status and Subjective\nWell-Being? Systematic Review and Meta-Analysis.” European\nJournal of Public Health 27 (5): 879–85. https://doi.org/10.1093/eurpub/ckx081.\n\n\nNowok, Beata, Gillian M. Raab, and Chris Dibben. 2016. “synthpop: Bespoke Creation of Synthetic Data in\nR.” Journal of Statistical Software 74\n(11): 1–26. https://doi.org/10.18637/jss.v074.i11.\n\n\nPosit. n.d. “Collaborating with renv.” https://rstudio.github.io/renv/articles/collaborating.html.\n\n\nQuarto. n.d.a. “Journal Articles.” https://quarto.org/docs/extensions/listing-journals.html.\n\n\n———. n.d.b. “Managing Extensions.” https://quarto.org/docs/extensions/managing.html.\n\n\n———. n.d.c. “Publishing.” https://quarto.org/docs/publishing/.\n\n\n———. n.d.d. “Using R.” https://quarto.org/docs/computations/r.html.\n\n\nSchwarzer, Guido. n.d. “Meta-Analysis of Correlations with metacor().” https://rdrr.io/cran/meta/man/metacor.html.\n\n\nSilge, Julia. n.d. “Pin a Versioned Model with vetiver_pin_write().” https://rstudio.github.io/vetiver-r/reference/vetiver_pin_write.html.\n\n\nSilge, Julia, Hadley Wickham, and Javier Luraschi. 2026. pins: Pin, Discover, and Share Resources. https://pins.rstudio.com/.\n\n\nZenodo. n.d.a. “Enable a Repository.” https://help.zenodo.org/docs/github/enable-repository/.\n\n\n———. n.d.b. “Manage Versions.” https://help.zenodo.org/docs/deposit/manage-versions/.\n\n\n———. n.d.c. “Reserve a DOI.” https://help.zenodo.org/docs/deposit/describe-records/reserve-doi/.",
+    "crumbs": [
+      "References"
     ]
   }
 ]

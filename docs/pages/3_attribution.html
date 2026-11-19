@@ -21,7 +21,27 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -287,6 +307,12 @@ ul.task-list li input[type="checkbox"] {
 </li>
       </ul>
   </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../pages/4_references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
     </ul>
     </div>
 </nav>
@@ -331,10 +357,14 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="reference-e-book" class="level2" data-number="3.2">
 <h2 data-number="3.2" class="anchored" data-anchor-id="reference-e-book"><span class="header-section-number">3.2</span> Reference e-book</h2>
-<p>The following R e-book is also acknowledged as a reference for these materials:</p>
-<p>Harrer, M., Cuijpers, P., Furukawa, T. A., &amp; Ebert, D. D. (2021). <a href="https://doing-meta.guide/"><em>Doing Meta-Analysis with R: A Hands-On Guide</em></a>. Boca Raton, FL and London: Chapman &amp; Hall/CRC Press. ISBN 978-0-367-61007-4.</p>
+<p><em>Doing Meta-Analysis with R: A Hands-On Guide</em> is a reference for these materials <span class="citation" data-cites="harrer2021">(<a href="4_references.html#ref-harrer2021" role="doc-biblioref">Harrer et al. 2021</a>)</span>.</p>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="ref-harrer2021" class="csl-entry" role="listitem">
+Harrer, Mathias, Pim Cuijpers, Toshi A. Furukawa, and David D. Ebert. 2021. <em>Doing Meta-Analysis with <span>R</span>: A Hands-on Guide</em>. Chapman; Hall/CRC. <a href="https://doi.org/10.1201/9781003107347">https://doi.org/10.1201/9781003107347</a>.
+</div>
+</div>
 </section>
 
 </main> <!-- /main -->

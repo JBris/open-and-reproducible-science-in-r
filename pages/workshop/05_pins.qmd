@@ -172,4 +172,4 @@ selection file a tracked pipeline input.
 
 ## Further reading
 
-- [Pins documentation](https://pins.rstudio.com/).
+- Storing and retrieving versions with pins [@pins-docs].

@@ -21,7 +21,27 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -287,6 +307,12 @@ ul.task-list li input[type="checkbox"] {
 </li>
       </ul>
   </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/4_references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
     </ul>
     </div>
 </nav>
@@ -341,7 +367,7 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="our-example-health-and-well-being" class="level2" data-number="5.3">
 <h2 data-number="5.3" class="anchored" data-anchor-id="our-example-health-and-well-being"><span class="header-section-number">5.3</span> Our example: health and well-being</h2>
-<p>The teaching question is: <strong>What association between health and well-being is reported across the included studies?</strong> We use the <code>HealthWellbeing</code> example from <a href="https://doing-meta.guide/pooling-es#correlations">section 4.2.4 of the guide</a>.</p>
+<p>The teaching question is: <strong>What association between health and well-being is reported across the included studies?</strong> We use the <code>HealthWellbeing</code> correlation example <span class="citation" data-cites="harrer2021">(<a href="../4_references.html#ref-harrer2021" role="doc-biblioref">Harrer et al. 2021, sec. 4.2.4</a>)</span>.</p>
 <p>Each row is a <strong>study summary</strong>, not a participant record. The columns are:</p>
 <table class="caption-top table">
 <thead>
@@ -446,12 +472,22 @@ ul.task-list li input[type="checkbox"] {
 <section id="further-reading" class="level2" data-number="5.7">
 <h2 data-number="5.7" class="anchored" data-anchor-id="further-reading"><span class="header-section-number">5.7</span> Further reading</h2>
 <ul>
-<li><a href="https://doing-meta.guide/pooling-es#correlations">The guide’s correlation example</a>.</li>
-<li><a href="https://dmetar.protectlab.org/reference/healthwellbeing">HealthWellbeing dataset documentation</a>.</li>
-<li><a href="https://www.go-fair.org/fair-principles/">FAIR principles</a>.</li>
+<li>Variable definitions for the teaching dataset <span class="citation" data-cites="healthwellbeing">(<a href="../4_references.html#ref-healthwellbeing" role="doc-biblioref">Harrer et al., n.d.</a>)</span>.</li>
+<li>FAIR principles for scientific data and metadata <span class="citation" data-cites="gofair-principles">(<a href="../4_references.html#ref-gofair-principles" role="doc-biblioref">GO FAIR, n.d.</a>)</span>.</li>
 </ul>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="ref-gofair-principles" class="csl-entry" role="listitem">
+GO FAIR. n.d. <span>“<span>FAIR</span> Principles.”</span> <a href="https://www.go-fair.org/fair-principles/">https://www.go-fair.org/fair-principles/</a>.
+</div>
+<div id="ref-harrer2021" class="csl-entry" role="listitem">
+Harrer, Mathias, Pim Cuijpers, Toshi A. Furukawa, and David D. Ebert. 2021. <em>Doing Meta-Analysis with <span>R</span>: A Hands-on Guide</em>. Chapman; Hall/CRC. <a href="https://doi.org/10.1201/9781003107347">https://doi.org/10.1201/9781003107347</a>.
+</div>
+<div id="ref-healthwellbeing" class="csl-entry" role="listitem">
+———. n.d. <span>“Association of Health and Well-Being Dataset.”</span> dmetar. <a href="https://dmetar.protectlab.org/reference/healthwellbeing">https://dmetar.protectlab.org/reference/healthwellbeing</a>.
+</div>
+</div>
 </section>
 
 </main> <!-- /main -->

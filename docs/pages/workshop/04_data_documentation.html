@@ -55,7 +55,27 @@ div.sourceCode
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -321,6 +341,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
       </ul>
   </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/4_references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
     </ul>
     </div>
 </nav>
@@ -366,7 +392,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="introduction" class="level2" data-number="8.1">
 <h2 data-number="8.1" class="anchored" data-anchor-id="introduction"><span class="header-section-number">8.1</span> Introduction</h2>
 <p>We will describe the <code>HealthWellbeing</code> dataset so a collaborator can interpret the five columns and find the original teaching file. By the end of these 12 minutes, you should be able to read a data dictionary and explain what the dataset metadata adds.</p>
-<p>FAIR stands for <strong>Findable, Accessible, Interoperable, and Reusable</strong>. An identifiable source helps people find the data. Access instructions explain how to obtain it. Structured metadata helps software interpret it. Definitions, provenance, and reuse terms help people work out whether the data suit their question. Access can have conditions. <a href="https://www.go-fair.org/fair-principles/">FAIR Guiding Principles</a></p>
+<p>FAIR stands for <strong>Findable, Accessible, Interoperable, and Reusable</strong> <span class="citation" data-cites="gofair-principles">(<a href="../4_references.html#ref-gofair-principles" role="doc-biblioref">GO FAIR, n.d.</a>)</span>. An identifiable source helps people find the data. Access instructions explain how to obtain it. Structured metadata helps software interpret it. Definitions, provenance, and reuse terms help people work out whether the data suit their question. Access can have conditions.</p>
 <p>Start with the verified raw file from the preparation lesson. This page loads its own <code>health</code> object so it can render in a fresh R session. Run the chunks in the Console from the project root with <em>box</em>, <em>codebook</em>, and <em>dataspice</em> available. Your instructor can provide the completed CSV and JSON-LD files for discussion. <a href="../../pages/workshop/00_preparation.html#preparation-data">Preparation</a></p>
 </section>
 <section id="data-dictionary" class="level2" data-number="8.2">
@@ -439,7 +465,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tr>
 </tbody>
 </table>
-<p>A row represents one study summary. The supplied snapshot has 29 rows and no missing values. A zero correlation would describe a study result. Use a missing value marker such as <code>NA</code> for unavailable values in a future release. The column definitions and original citation come from the published teaching documentation. <a href="https://dmetar.protectlab.org/reference/healthwellbeing">HealthWellbeing documentation</a></p>
+<p>A row represents one study summary. The supplied snapshot has 29 rows and no missing values. A zero correlation would describe a study result. Use a missing value marker such as <code>NA</code> for unavailable values in a future release. The column definitions and original citation come from the published teaching documentation <span class="citation" data-cites="healthwellbeing">(<a href="../4_references.html#ref-healthwellbeing" role="doc-biblioref">Harrer et al., n.d.</a>)</span>.</p>
 <p>In R, <code>codebook_table()</code> combines variable labels with summaries. We will keep the three columns we need for the exercise and save them as a CSV.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>workshop_dir <span class="ot">&lt;-</span> <span class="fu">file.path</span>(<span class="st">"outputs"</span>, <span class="st">"health-wellbeing"</span>)</span>
@@ -550,11 +576,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="further-reading" class="level2" data-number="8.6">
 <h2 data-number="8.6" class="anchored" data-anchor-id="further-reading"><span class="header-section-number">8.6</span> Further reading</h2>
 <ul>
-<li><a href="https://rubenarslan.github.io/codebook/reference/codebook_table.html">codebook table reference</a>.</li>
-<li><a href="https://docs.ropensci.org/dataspice/">Dataspice workflow</a>.</li>
+<li>Variable summaries with <code>codebook_table()</code> <span class="citation" data-cites="codebook-table">(<a href="../4_references.html#ref-codebook-table" role="doc-biblioref">Arslan, n.d.</a>)</span>.</li>
+<li>Structuring dataset metadata with dataspice <span class="citation" data-cites="dataspice">(<a href="../4_references.html#ref-dataspice" role="doc-biblioref">Boettiger et al. 2026</a>)</span>.</li>
 </ul>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="ref-codebook-table" class="csl-entry" role="listitem">
+Arslan, Ruben C. n.d. <span>“<span class="nocase">codebook_table()</span> Reference.”</span> <a href="https://rubenarslan.github.io/codebook/reference/codebook_table.html">https://rubenarslan.github.io/codebook/reference/codebook_table.html</a>.
+</div>
+<div id="ref-dataspice" class="csl-entry" role="listitem">
+Boettiger, Carl, Scott Chamberlain, Auriel Fournier, Kelly Hondula, Anna Krystalli, Bryce Mecum, Maëlle Salmon, Kate Webbink, and Kara Woo. 2026. <em><span class="nocase">dataspice</span>: Create Lightweight <span class="nocase">Schema.org</span> Descriptions of Data</em>. <a href="https://docs.ropensci.org/dataspice/">https://docs.ropensci.org/dataspice/</a>.
+</div>
+<div id="ref-gofair-principles" class="csl-entry" role="listitem">
+GO FAIR. n.d. <span>“<span>FAIR</span> Principles.”</span> <a href="https://www.go-fair.org/fair-principles/">https://www.go-fair.org/fair-principles/</a>.
+</div>
+<div id="ref-healthwellbeing" class="csl-entry" role="listitem">
+Harrer, Mathias, Pim Cuijpers, Toshi A. Furukawa, and David D. Ebert. n.d. <span>“Association of Health and Well-Being Dataset.”</span> dmetar. <a href="https://dmetar.protectlab.org/reference/healthwellbeing">https://dmetar.protectlab.org/reference/healthwellbeing</a>.
+</div>
+</div>
 </section>
 
 </main> <!-- /main -->

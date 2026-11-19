@@ -55,7 +55,27 @@ div.sourceCode
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -321,6 +341,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
       </ul>
   </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/4_references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
     </ul>
     </div>
 </nav>
@@ -339,7 +365,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#preparation-data" id="toc-preparation-data" class="nav-link" data-scroll-target="#preparation-data"><span class="header-section-number">4.6</span> Download and verify the raw data</a></li>
   <li><a href="#record-the-source" id="toc-record-the-source" class="nav-link" data-scroll-target="#record-the-source"><span class="header-section-number">4.7</span> Record the source</a></li>
   <li><a href="#preparation-checkpoint" id="toc-preparation-checkpoint" class="nav-link" data-scroll-target="#preparation-checkpoint"><span class="header-section-number">4.8</span> Preparation checkpoint</a></li>
-  <li><a href="#further-reading" id="toc-further-reading" class="nav-link" data-scroll-target="#further-reading"><span class="header-section-number">4.9</span> Further reading</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/JBris/open-and-reproducible-science-in-r/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div></nav>
     </div>
@@ -373,8 +398,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="our-teaching-dataset" class="level2" data-number="4.2">
 <h2 data-number="4.2" class="anchored" data-anchor-id="our-teaching-dataset"><span class="header-section-number">4.2</span> Our teaching dataset</h2>
-<p>We use <code>HealthWellbeing</code> from section <strong>4.2.4, Correlations</strong>, of <a href="https://doing-meta.guide/pooling-es#correlations"><em>Doing Meta-Analysis with R: A Hands-On Guide</em></a>. It contains study-level summaries of the association between health and well-being. It is also distributed with the <code>dmetar</code> package.</p>
-<p>The original review is Ngamaba, Panagioti, and Armitage (2017). Consult the <a href="https://dmetar.protectlab.org/reference/healthwellbeing">dataset documentation</a> for the variable definitions and original reference.</p>
+<p>We use <code>HealthWellbeing</code> from the <a href="https://doing-meta.guide/pooling-es#correlations">correlations chapter</a> <span class="citation" data-cites="harrer2021">(<a href="../4_references.html#ref-harrer2021" role="doc-biblioref">Harrer et al. 2021, sec. 4.2.4</a>)</span>. It contains study-level summaries of the association between health and well-being. It is also distributed with the <code>dmetar</code> package.</p>
+<p>The original review is <span class="citation" data-cites="ngamaba2017">Ngamaba, Panagioti, and Armitage (<a href="../4_references.html#ref-ngamaba2017" role="doc-biblioref">2017</a>)</span>. The dataset documentation describes the variables <span class="citation" data-cites="healthwellbeing">(<a href="../4_references.html#ref-healthwellbeing" role="doc-biblioref">Harrer et al., n.d.</a>)</span>.</p>
 <p>We will download the authors’ data file directly, so these opening activities do not require installation of <code>dmetar</code>. Keep the raw file unchanged and record its source separately from any transformations you make later.</p>
 </section>
 <section id="choose-your-computing-environment" class="level2" data-number="4.3">
@@ -489,13 +514,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><code>health</code> contains the verified data, and you can identify its upstream source.</li>
 </ul>
 <p>Continue to <a href="../../pages/workshop/01_open_science.html">open and reproducible science</a>.</p>
-</section>
-<section id="further-reading" class="level2" data-number="4.9">
-<h2 data-number="4.9" class="anchored" data-anchor-id="further-reading"><span class="header-section-number">4.9</span> Further reading</h2>
-<p>Harrer, M., Cuijpers, P., Furukawa, T. A., &amp; Ebert, D. D. (2021). <em>Doing Meta-Analysis with R: A Hands-On Guide</em>. Chapman &amp; Hall/CRC. <a href="https://doing-meta.guide/pooling-es#correlations">Section 4.2.4</a>.</p>
-<p>Ngamaba, K. H., Panagioti, M., &amp; Armitage, C. J. (2017). How strongly related are health status and subjective well-being? Systematic review and meta-analysis. <em>The European Journal of Public Health</em>, 27(5), 879–885.</p>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="ref-harrer2021" class="csl-entry" role="listitem">
+Harrer, Mathias, Pim Cuijpers, Toshi A. Furukawa, and David D. Ebert. 2021. <em>Doing Meta-Analysis with <span>R</span>: A Hands-on Guide</em>. Chapman; Hall/CRC. <a href="https://doi.org/10.1201/9781003107347">https://doi.org/10.1201/9781003107347</a>.
+</div>
+<div id="ref-healthwellbeing" class="csl-entry" role="listitem">
+———. n.d. <span>“Association of Health and Well-Being Dataset.”</span> dmetar. <a href="https://dmetar.protectlab.org/reference/healthwellbeing">https://dmetar.protectlab.org/reference/healthwellbeing</a>.
+</div>
+<div id="ref-ngamaba2017" class="csl-entry" role="listitem">
+Ngamaba, Kayonda Hubert, Maria Panagioti, and Christopher J. Armitage. 2017. <span>“How Strongly Related Are Health Status and Subjective Well-Being? Systematic Review and Meta-Analysis.”</span> <em>European Journal of Public Health</em> 27 (5): 879–85. <a href="https://doi.org/10.1093/eurpub/ckx081">https://doi.org/10.1093/eurpub/ckx081</a>.
+</div>
+</div>
 </section>
 
 </main> <!-- /main -->

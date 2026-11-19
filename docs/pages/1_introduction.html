@@ -23,7 +23,27 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -289,6 +309,12 @@ ul.task-list li input[type="checkbox"] {
 </li>
       </ul>
   </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../pages/4_references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
     </ul>
     </div>
 </nav>
@@ -389,7 +415,7 @@ ul.task-list li input[type="checkbox"] {
 <section id="reproducibility-when-data-cannot-be-shared" class="level2" data-number="1.5">
 <h2 data-number="1.5" class="anchored" data-anchor-id="reproducibility-when-data-cannot-be-shared"><span class="header-section-number">1.5</span> Reproducibility when data cannot be shared</h2>
 <p>Open science can include restricted-access data. Researchers can document their methods, code, and access conditions while restricting the original observations.</p>
-<p>Synthetic data can help readers test whether a workflow runs. Verifying findings based on original observations requires access to those observations. A differential privacy claim requires a validated mechanism and privacy accounting. <a href="https://www.nist.gov/blogs/cybersecurity-insights/differentially-private-synthetic-data">NIST’s introduction to differentially private synthetic data</a></p>
+<p>Synthetic data can help readers test whether a workflow runs. Verifying findings based on original observations requires access to those observations. A differential privacy claim requires a validated mechanism and privacy accounting <span class="citation" data-cites="near2021-synthetic-data">(<a href="4_references.html#ref-near2021-synthetic-data" role="doc-biblioref">Near and Darais 2021</a>)</span>.</p>
 </section>
 <section id="principles-to-put-into-practice" class="level2" data-number="1.6">
 <h2 data-number="1.6" class="anchored" data-anchor-id="principles-to-put-into-practice"><span class="header-section-number">1.6</span> Principles to put into practice</h2>
@@ -411,6 +437,11 @@ ul.task-list li input[type="checkbox"] {
 <p>For upcoming workshops, dates, and venues, see the <a href="../ANNOUNCEMENTS.html">workshop announcements</a>.</p>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="ref-near2021-synthetic-data" class="csl-entry" role="listitem">
+Near, Joseph, and David Darais. 2021. <span>“Differentially Private Synthetic Data.”</span> National Institute of Standards; Technology. May 3, 2021. <a href="https://www.nist.gov/blogs/cybersecurity-insights/differentially-private-synthetic-data">https://www.nist.gov/blogs/cybersecurity-insights/differentially-private-synthetic-data</a>.
+</div>
+</div>
 </section>
 
 </main> <!-- /main -->

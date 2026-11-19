@@ -13,9 +13,5 @@ Bioeconomy Science Institute, for inspiration on reproducible workflows in R, an
 
 ## Reference e-book
 
-The following R e-book is also acknowledged as a reference for these materials:
-
-Harrer, M., Cuijpers, P., Furukawa, T. A., & Ebert, D. D. (2021).
-[*Doing Meta-Analysis with R: A Hands-On Guide*](https://doing-meta.guide/).
-Boca Raton, FL and London: Chapman & Hall/CRC Press.
-ISBN 978-0-367-61007-4.
+*Doing Meta-Analysis with R: A Hands-On Guide* is a reference for these
+materials [@harrer2021].

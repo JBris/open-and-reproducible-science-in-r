@@ -68,8 +68,7 @@ Open science can include restricted-access data. Researchers can document their 
 Synthetic data can help readers test whether a workflow runs. Verifying
 findings based on original observations requires access to those
 observations. A differential privacy claim requires a validated
-mechanism and privacy accounting.
-[NIST's introduction to differentially private synthetic data](https://www.nist.gov/blogs/cybersecurity-insights/differentially-private-synthetic-data)
+mechanism and privacy accounting [@near2021-synthetic-data].
 
 ## Principles to put into practice
 

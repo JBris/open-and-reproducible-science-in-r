@@ -70,6 +70,10 @@ book:
         - SECURITY.md
         - AI_POLICY.md
         - CHANGELOG.md
+    - pages/4_references.qmd
+
+bibliography: bibliography.bib
+link-citations: true
 
 comments:
   hypothesis:

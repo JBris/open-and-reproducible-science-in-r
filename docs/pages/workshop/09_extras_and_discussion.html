@@ -55,7 +55,27 @@ div.sourceCode
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -321,6 +341,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
       </ul>
   </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/4_references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
     </ul>
     </div>
 </nav>
@@ -452,7 +478,7 @@ z          0.011063 1.283333  4
 log_n      0.003539 0.410534  4</code></pre>
 </div>
 </div>
-<p>Inspect the distributions of <code>population</code>, <code>z</code>, and <code>log_n</code>. The comparison describes the resemblance of the two tables on these variables. Similar marginals can coexist with differences in their relationships and in downstream estimates. Treat this as a public teaching example. A privacy guarantee would require a validated mechanism and accounting beyond this distribution comparison. <a href="https://www.synthpop.org.uk/">synthpop documentation</a></p>
+<p>Inspect the distributions of <code>population</code>, <code>z</code>, and <code>log_n</code>. The comparison describes the resemblance of the two tables on these variables. Similar marginals can coexist with differences in their relationships and in downstream estimates. Treat this as a public teaching example. A privacy guarantee would require a validated mechanism and accounting beyond this distribution comparison <span class="citation" data-cites="near2021-synthetic-data">(<a href="../4_references.html#ref-near2021-synthetic-data" role="doc-biblioref">Near and Darais 2021</a>)</span>. For the synthesis methods, see <span class="citation" data-cites="nowok2016-synthpop">Nowok, Raab, and Dibben (<a href="../4_references.html#ref-nowok2016-synthpop" role="doc-biblioref">2016</a>)</span> and the <a href="https://www.synthpop.org.uk/">synthpop documentation</a>.</p>
 </section>
 <section id="model-versioning" class="level2" data-number="13.4">
 <h2 data-number="13.4" class="anchored" data-anchor-id="model-versioning"><span class="header-section-number">13.4</span> Model versioning</h2>
@@ -480,7 +506,7 @@ log_n      0.003539 0.410534  4</code></pre>
 <span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">vetiver_version =</span> <span class="fu">as.character</span>(utils<span class="sc">::</span><span class="fu">packageVersion</span>(<span class="st">"vetiver"</span>))</span>
 <span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell" data-cache.extra="{&quot;data_version&quot;:&quot;20261119T103524Z-11d00&quot;,&quot;code_revision&quot;:&quot;73d13ddebe53a761cc75802fc57e133b2dfe4d21&quot;,&quot;r_version&quot;:&quot;4.4.1&quot;,&quot;vetiver_version&quot;:&quot;0.2.8&quot;}">
+<div class="cell" data-cache.extra="{&quot;data_version&quot;:&quot;20261119T103524Z-11d00&quot;,&quot;code_revision&quot;:&quot;9af145b784df531e2e5733ba9713aea0b9860d62&quot;,&quot;r_version&quot;:&quot;4.4.1&quot;,&quot;vetiver_version&quot;:&quot;0.2.8&quot;}">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>previous_versions <span class="ot">&lt;-</span> <span class="cf">if</span> (<span class="fu">pin_exists</span>(model_board, model_name)) {</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pin_versions</span>(model_board, model_name)<span class="sc">$</span>version</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
@@ -516,15 +542,19 @@ log_n      0.003539 0.410534  4</code></pre>
 <span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(<span class="fu">length</span>(first_version) <span class="sc">==</span> <span class="dv">1</span>L, <span class="fu">length</span>(second_version) <span class="sc">==</span> <span class="dv">1</span>L)</span>
 <span id="cb9-34"><a href="#cb9-34" aria-hidden="true" tabindex="-1"></a>model_history</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 2 × 3
+<pre><code># A tibble: 6 × 3
   version                created             hash 
   &lt;chr&gt;                  &lt;dttm&gt;              &lt;chr&gt;
 1 20261119T103756Z-e3f44 2026-11-19 10:37:56 e3f44
-2 20261119T103756Z-e5ae0 2026-11-19 10:37:56 e5ae0</code></pre>
+2 20261119T103756Z-e5ae0 2026-11-19 10:37:56 e5ae0
+3 20261119T115900Z-e5ae0 2026-11-19 11:59:00 e5ae0
+4 20261119T115901Z-e3f44 2026-11-19 11:59:01 e3f44
+5 20261119T122112Z-e3f44 2026-11-19 12:21:12 e3f44
+6 20261119T122112Z-e5ae0 2026-11-19 12:21:12 e5ae0</code></pre>
 </div>
 </div>
 <p>When you use <code>vetiver_pin_read()</code> without a version, it selects the board’s current version. Pass an explicit identifier when you want to reproduce a previous prediction or inspect its input requirements. Compare the input columns of the two retrieved models.</p>
-<div class="cell" data-cache.extra="[&quot;20261119T103756Z-e5ae0&quot;,&quot;20261119T103756Z-e3f44&quot;]">
+<div class="cell" data-cache.extra="[&quot;20261119T122112Z-e5ae0&quot;,&quot;20261119T122112Z-e3f44&quot;]">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>stored_v1 <span class="ot">&lt;-</span> <span class="fu">vetiver_pin_read</span>(</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  model_board, model_name, <span class="at">version =</span> first_version</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>)</span>
@@ -546,7 +576,7 @@ $user$data_version
 [1] "20261119T103524Z-11d00"
 
 $user$code_revision
-[1] "73d13ddebe53a761cc75802fc57e133b2dfe4d21"
+[1] "9af145b784df531e2e5733ba9713aea0b9860d62"
 
 $user$r_version
 [1] "4.4.1"
@@ -556,7 +586,7 @@ $user$vetiver_version
 
 
 $version
-[1] "20261119T103756Z-e3f44"
+[1] "20261119T122112Z-e3f44"
 
 $url
 NULL
@@ -565,7 +595,7 @@ $required_pkgs
 NULL</code></pre>
 </div>
 </div>
-<p>The model’s metadata retains its training pin version and software context. Keep the fitted objects and generated tables local until you have checked applicable release terms. <a href="https://rstudio.github.io/vetiver-r/reference/vetiver_pin_write.html">Vetiver and versioned models</a></p>
+<p>The model’s metadata retains its training pin version and software context <span class="citation" data-cites="vetiver-pin-write">(<a href="../4_references.html#ref-vetiver-pin-write" role="doc-biblioref">Silge, n.d.</a>)</span>. Keep the fitted objects and generated tables local until you have checked applicable release terms.</p>
 </section>
 <section id="extras-discussion" class="level2" data-number="13.5">
 <h2 data-number="13.5" class="anchored" data-anchor-id="extras-discussion"><span class="header-section-number">13.5</span> Concluding discussion</h2>
@@ -577,6 +607,17 @@ NULL</code></pre>
 <p>A useful checkpoint is to point to the exact data version, analysis revision, environment, and archive citation for one reported result. If you try the optional model exercise, check that the first model expects <code>population</code> and the second also expects <code>log_n</code>.</p>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="ref-near2021-synthetic-data" class="csl-entry" role="listitem">
+Near, Joseph, and David Darais. 2021. <span>“Differentially Private Synthetic Data.”</span> National Institute of Standards; Technology. May 3, 2021. <a href="https://www.nist.gov/blogs/cybersecurity-insights/differentially-private-synthetic-data">https://www.nist.gov/blogs/cybersecurity-insights/differentially-private-synthetic-data</a>.
+</div>
+<div id="ref-nowok2016-synthpop" class="csl-entry" role="listitem">
+Nowok, Beata, Gillian M. Raab, and Chris Dibben. 2016. <span>“<span class="nocase">synthpop</span>: Bespoke Creation of Synthetic Data in <span>R</span>.”</span> <em>Journal of Statistical Software</em> 74 (11): 1–26. <a href="https://doi.org/10.18637/jss.v074.i11">https://doi.org/10.18637/jss.v074.i11</a>.
+</div>
+<div id="ref-vetiver-pin-write" class="csl-entry" role="listitem">
+Silge, Julia. n.d. <span>“Pin a Versioned Model with <span class="nocase">vetiver_pin_write()</span>.”</span> <a href="https://rstudio.github.io/vetiver-r/reference/vetiver_pin_write.html">https://rstudio.github.io/vetiver-r/reference/vetiver_pin_write.html</a>.
+</div>
+</div>
 </section>
 
 </main> <!-- /main -->

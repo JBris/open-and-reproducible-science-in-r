@@ -49,8 +49,8 @@ estimate and limits back to the correlation scale.
 This model treats study summaries as independent and assumes their
 correlations address a comparable association. Differences in
 populations, measures, and sampling limit interpretation. This is a
-worked example of pooling reported effects from the supplied studies.
-[Section 4.2.4 of the guide](https://doing-meta.guide/pooling-es#correlations)
+worked example of pooling reported effects from the supplied studies
+[@harrer2021, sec. 4.2.4].
 
 ## Run the full dataset
 
@@ -143,5 +143,5 @@ clean pipeline store to check results in a changed environment.
 
 ## Further reading
 
-- [The targets manual](https://books.ropensci.org/targets/).
-- [Reference for metacor](https://rdrr.io/cran/meta/man/metacor.html).
+- Defining targets and tracking dependencies [@targets-manual].
+- Pooling correlations with `metacor()` [@meta-metacor].
