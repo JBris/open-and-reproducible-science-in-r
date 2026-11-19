@@ -63,6 +63,7 @@ box::use(
   targets[tar_make, tar_outdated, tar_read, tar_visnetwork],
   utils[read.csv]
 )
+invisible(loadNamespace("visNetwork"))
 
 workshop_dir <- file.path("outputs", "health-wellbeing")
 pipeline_script <- file.path("pipelines", "_targets_health_wellbeing.R")
@@ -73,7 +74,7 @@ selection_file <- file.path(workshop_dir, "analysis-data-version.txt")
 Use the graph to predict which targets depend on the selector. If
 you're using the PDF, follow the text diagram above.
 
-```{r health-targets-graph, include = TRUE, echo = TRUE, message = FALSE, warning = FALSE, cache = TRUE, output = TRUE, eval = TRUE}
+```{r health-targets-graph, include = TRUE, echo = TRUE, message = FALSE, warning = FALSE, cache = TRUE, output = TRUE, eval = knitr::is_html_output()}
 tar_visnetwork(
   script = pipeline_script,
   store = pipeline_store,
