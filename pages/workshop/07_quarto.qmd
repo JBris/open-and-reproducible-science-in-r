@@ -109,12 +109,11 @@ files. PLOS supports `plos-html` and `plos-pdf`; the PDF format also
 requires a LaTeX installation. Adapt the article to read the same
 pipeline summary and retain its methods and provenance fields.
 
-Extensions are stored locally in `_extensions/`. Include that
-folder with the article source in Git, and record the Quarto and
-extension versions used for a release. `renv.lock` records R packages;
-it does not capture these extension files. See
-[Managing Extensions](https://quarto.org/docs/extensions/managing.html)
-for installation and version-control guidance.
+Extensions are stored locally in `_extensions/`. Include that folder
+with the article source in Git. For a release, record the Quarto and
+extension versions alongside the R package versions in `renv.lock`.
+See the Quarto guidance on installing and versioning extensions
+[@quarto-managing-extensions].
 
 ## Checkpoint {#quarto-checkpoint}
 
@@ -129,6 +128,6 @@ Next we will inspect how to cite a preserved release.
 
 ## Further reading
 
-- [Quarto with R](https://quarto.org/docs/computations/r.html).
-- [Quarto publishing](https://quarto.org/docs/publishing/).
-- [Quarto journal article extensions](https://quarto.org/docs/extensions/listing-journals.html).
+- Working with R in Quarto [@quarto-r].
+- Publishing Quarto documents [@quarto-publishing].
+- Journal article formats and templates [@quarto-journal-extensions].

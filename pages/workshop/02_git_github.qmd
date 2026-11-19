@@ -83,8 +83,7 @@ Check upstream reuse terms before redistributing data.
 
 Check the note against the source you actually used. If you received the file
 from the instructor, record that transfer and the verified checksum as well.
-The original review is Ngamaba, Panagioti, and Armitage (2017), cited in the
-[preparation chapter](00_preparation.qmd#further-reading).
+The original review is @ngamaba2017.
 
 ## Stage and commit one change
 
@@ -145,5 +144,5 @@ Next, record the [computational environment](03_environments.qmd).
 
 ## Further reading
 
-- [Git's introductory documentation](https://git-scm.com/book/en/v2/Getting-Started-About-Version-Control).
-- [GitHub: creating a pull request from a fork](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request-from-a-fork).
+- Version control basics [@chacon2014-git, sec. 1.1].
+- Creating a pull request from a fork [@github-pull-request-fork].

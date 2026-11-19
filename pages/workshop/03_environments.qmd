@@ -160,6 +160,6 @@ FAIR metadata with codebook and dataspice.
 
 ## Further reading
 
-- [renv: collaborating](https://rstudio.github.io/renv/articles/collaborating.html).
-- [Docker Compose documentation](https://docs.docker.com/compose/).
+- Sharing a project environment with renv [@renv-collaborating].
+- Configuring services with Docker Compose [@docker-compose].
 - [Workshop Docker setup](https://github.com/JBris/open-and-reproducible-science-in-r#usage-with-docker).

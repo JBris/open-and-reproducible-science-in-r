@@ -55,7 +55,27 @@ div.sourceCode
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -326,6 +346,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
       </ul>
   </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/4_references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
     </ul>
     </div>
 </nav>
@@ -380,7 +406,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 fit, data_version -&gt; result -&gt; summary_file</code></pre>
 <p>We mark the selector, pinned RDS, and summary CSV as file targets. At fitting time, the pipeline records the Git revision, the script checksum, and whether the script has local changes. If you work with local edits, keep a copy of that script to reproduce the fit.</p>
 <p>The model uses the raw Pearson correlations and study sample sizes. <em>Meta</em> transforms each correlation to Fisher’s z scale and pools the effects with a random-effects model. We use restricted maximum likelihood (REML) to estimate between-study variance and the Hartung–Knapp method for the 95% interval. The summary converts the estimate and limits back to the correlation scale.</p>
-<p>This model treats study summaries as independent and assumes their correlations address a comparable association. Differences in populations, measures, and sampling limit interpretation. This is a worked example of pooling reported effects from the supplied studies. <a href="https://doing-meta.guide/pooling-es#correlations">Section 4.2.4 of the guide</a></p>
+<p>This model treats study summaries as independent and assumes their correlations address a comparable association. Differences in populations, measures, and sampling limit interpretation. This is a worked example of pooling reported effects from the supplied studies <span class="citation" data-cites="harrer2021">(<a href="../4_references.html#ref-harrer2021" role="doc-biblioref">Harrer et al. 2021, sec. 4.2.4</a>)</span>.</p>
 </section>
 <section id="run-the-full-dataset" class="level2" data-number="10.3">
 <h2 data-number="10.3" class="anchored" data-anchor-id="run-the-full-dataset"><span class="header-section-number">10.3</span> Run the full dataset</h2>
@@ -528,11 +554,22 @@ fit, data_version -&gt; result -&gt; summary_file</code></pre>
 <section id="further-reading" class="level2" data-number="10.6">
 <h2 data-number="10.6" class="anchored" data-anchor-id="further-reading"><span class="header-section-number">10.6</span> Further reading</h2>
 <ul>
-<li><a href="https://books.ropensci.org/targets/">The targets manual</a>.</li>
-<li><a href="https://rdrr.io/cran/meta/man/metacor.html">Reference for metacor</a>.</li>
+<li>Defining targets and tracking dependencies <span class="citation" data-cites="targets-manual">(<a href="../4_references.html#ref-targets-manual" role="doc-biblioref">Landau, n.d.</a>)</span>.</li>
+<li>Pooling correlations with <code>metacor()</code> <span class="citation" data-cites="meta-metacor">(<a href="../4_references.html#ref-meta-metacor" role="doc-biblioref">Schwarzer, n.d.</a>)</span>.</li>
 </ul>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="ref-harrer2021" class="csl-entry" role="listitem">
+Harrer, Mathias, Pim Cuijpers, Toshi A. Furukawa, and David D. Ebert. 2021. <em>Doing Meta-Analysis with <span>R</span>: A Hands-on Guide</em>. Chapman; Hall/CRC. <a href="https://doi.org/10.1201/9781003107347">https://doi.org/10.1201/9781003107347</a>.
+</div>
+<div id="ref-targets-manual" class="csl-entry" role="listitem">
+Landau, Will. n.d. <span>“The <span class="nocase">targets</span> <span>R</span> Package User Manual.”</span> <a href="https://books.ropensci.org/targets/">https://books.ropensci.org/targets/</a>.
+</div>
+<div id="ref-meta-metacor" class="csl-entry" role="listitem">
+Schwarzer, Guido. n.d. <span>“Meta-Analysis of Correlations with <span class="nocase">metacor()</span>.”</span> <a href="https://rdrr.io/cran/meta/man/metacor.html">https://rdrr.io/cran/meta/man/metacor.html</a>.
+</div>
+</div>
 </section>
 
 </main> <!-- /main -->

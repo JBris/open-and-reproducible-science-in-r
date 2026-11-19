@@ -90,8 +90,10 @@ The comparison describes the resemblance of the two tables on these
 variables. Similar marginals can coexist with differences in their
 relationships and in downstream estimates. Treat this as a public
 teaching example. A privacy guarantee would require a validated
-mechanism and accounting beyond this distribution comparison.
-[synthpop documentation](https://www.synthpop.org.uk/)
+mechanism and accounting beyond this distribution comparison
+[@near2021-synthetic-data]. For the synthesis methods, see
+@nowok2016-synthpop and the
+[synthpop documentation](https://www.synthpop.org.uk/).
 
 ## Model versioning
 
@@ -185,9 +187,8 @@ stored_v2$metadata
 ```
 
 The model's metadata retains its training pin version and software
-context. Keep the fitted objects and generated tables local until
-you have checked applicable release terms.
-[Vetiver and versioned models](https://rstudio.github.io/vetiver-r/reference/vetiver_pin_write.html)
+context [@vetiver-pin-write]. Keep the fitted objects and generated tables
+local until you have checked applicable release terms.
 
 ## Concluding discussion {#extras-discussion}
 

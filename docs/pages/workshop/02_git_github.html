@@ -55,7 +55,27 @@ div.sourceCode
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -321,6 +341,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
       </ul>
   </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../pages/4_references.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">References</span></a>
+  </div>
+</li>
     </ul>
     </div>
 </nav>
@@ -413,7 +439,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>Preserve the raw file unchanged. Keep derived data and analysis outputs separate.</span>
 <span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>Check upstream reuse terms before redistributing data.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Check the note against the source you actually used. If you received the file from the instructor, record that transfer and the verified checksum as well. The original review is Ngamaba, Panagioti, and Armitage (2017), cited in the <a href="../../pages/workshop/00_preparation.html#further-reading">preparation chapter</a>.</p>
+<p>Check the note against the source you actually used. If you received the file from the instructor, record that transfer and the verified checksum as well. The original review is <span class="citation" data-cites="ngamaba2017">Ngamaba, Panagioti, and Armitage (<a href="../4_references.html#ref-ngamaba2017" role="doc-biblioref">2017</a>)</span>.</p>
 </section>
 <section id="stage-and-commit-one-change" class="level2" data-number="6.5">
 <h2 data-number="6.5" class="anchored" data-anchor-id="stage-and-commit-one-change"><span class="header-section-number">6.5</span> Stage and commit one change</h2>
@@ -447,11 +473,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="further-reading" class="level2" data-number="6.8">
 <h2 data-number="6.8" class="anchored" data-anchor-id="further-reading"><span class="header-section-number">6.8</span> Further reading</h2>
 <ul>
-<li><a href="https://git-scm.com/book/en/v2/Getting-Started-About-Version-Control">Git’s introductory documentation</a>.</li>
-<li><a href="https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request-from-a-fork">GitHub: creating a pull request from a fork</a>.</li>
+<li>Version control basics <span class="citation" data-cites="chacon2014-git">(<a href="../4_references.html#ref-chacon2014-git" role="doc-biblioref">Chacon and Straub 2014, sec. 1.1</a>)</span>.</li>
+<li>Creating a pull request from a fork <span class="citation" data-cites="github-pull-request-fork">(<a href="../4_references.html#ref-github-pull-request-fork" role="doc-biblioref">GitHub, n.d.</a>)</span>.</li>
 </ul>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
+<div id="ref-chacon2014-git" class="csl-entry" role="listitem">
+Chacon, Scott, and Ben Straub. 2014. <em>Pro <span>Git</span></em>. 2nd ed. Apress. <a href="https://git-scm.com/book/en/v2/Getting-Started-About-Version-Control">https://git-scm.com/book/en/v2/Getting-Started-About-Version-Control</a>.
+</div>
+<div id="ref-github-pull-request-fork" class="csl-entry" role="listitem">
+GitHub. n.d. <span>“Creating a Pull Request from a Fork.”</span> <a href="https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request-from-a-fork">https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request-from-a-fork</a>.
+</div>
+<div id="ref-ngamaba2017" class="csl-entry" role="listitem">
+Ngamaba, Kayonda Hubert, Maria Panagioti, and Christopher J. Armitage. 2017. <span>“How Strongly Related Are Health Status and Subjective Well-Being? Systematic Review and Meta-Analysis.”</span> <em>European Journal of Public Health</em> 27 (5): 879–85. <a href="https://doi.org/10.1093/eurpub/ckx081">https://doi.org/10.1093/eurpub/ckx081</a>.
+</div>
+</div>
 </section>
 
 </main> <!-- /main -->

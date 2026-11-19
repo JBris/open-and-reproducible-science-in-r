@@ -215,3 +215,4 @@ cython_debug/
 **/_targets
 /outputs/health-wellbeing/
 figure-html
+figure-pdf

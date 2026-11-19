@@ -18,13 +18,12 @@ A Git commit identifies a repository revision. A GitHub release gives
 a tagged revision a name and a place for release notes and assets.
 Zenodo can archive a copy of selected files and issue a DOI. An
 archive makes the cited files available under the access conditions
-of that record.
-[Zenodo records and DOIs](https://help.zenodo.org/docs/deposit/describe-records/reserve-doi/)
+of that record [@zenodo-reserve-doi].
 
 ## Inspect a record
 
-Open the workshop's archived `v0.2.0` release. Find the creators,
-access conditions, and the ZIP of that revision. Compare the Zenodo
+Open the workshop's archived `v0.2.0` release [@workshop-v020]. Find the
+creators, access conditions, and the ZIP of that revision. Compare the Zenodo
 version DOI with the GitHub release tag and the concept DOI in
 `CITATION.cff`. Cite the version DOI for the files supporting a
 result. Cite the concept DOI when referring to the evolving project.
@@ -113,6 +112,6 @@ We will finish with optional extensions and discussion.
 
 ## Further reading
 
-- [Enable GitHub–Zenodo integration](https://help.zenodo.org/docs/github/enable-repository/).
-- [Managing versions on Zenodo](https://help.zenodo.org/docs/deposit/manage-versions/).
-- [Archiving a GitHub repository](https://docs.github.com/en/repositories/archiving-a-github-repository/referencing-and-citing-content).
+- Enabling GitHub–Zenodo integration [@zenodo-enable-repository].
+- Managing versions on Zenodo [@zenodo-manage-versions].
+- Archiving and citing a GitHub repository [@github-archiving].

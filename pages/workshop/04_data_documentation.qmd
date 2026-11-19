@@ -17,12 +17,12 @@ interpret the five columns and find the original teaching file. By the
 end of these 12 minutes, you should be able to read a data dictionary
 and explain what the dataset metadata adds.
 
-FAIR stands for **Findable, Accessible, Interoperable, and Reusable**.
+FAIR stands for **Findable, Accessible, Interoperable, and Reusable**
+[@gofair-principles].
 An identifiable source helps people find the data. Access instructions
 explain how to obtain it. Structured metadata helps software interpret
 it. Definitions, provenance, and reuse terms help people work out
 whether the data suit their question. Access can have conditions.
-[FAIR Guiding Principles](https://www.go-fair.org/fair-principles/)
 
 Start with the verified raw file from the preparation lesson. This
 page loads its own `health` object so it can render in a fresh R
@@ -75,8 +75,7 @@ A row represents one study summary. The supplied snapshot has 29 rows
 and no missing values. A zero correlation would describe a study result.
 Use a missing value marker such as `NA` for unavailable values in a
 future release. The column definitions and original citation come
-from the published teaching documentation.
-[HealthWellbeing documentation](https://dmetar.protectlab.org/reference/healthwellbeing)
+from the published teaching documentation [@healthwellbeing].
 
 In R, `codebook_table()` combines variable labels with summaries. We
 will keep the three columns we need for the exercise and save them as
@@ -196,5 +195,5 @@ Next we will store and retrieve versions of the documented dataset.
 
 ## Further reading
 
-- [codebook table reference](https://rubenarslan.github.io/codebook/reference/codebook_table.html).
-- [Dataspice workflow](https://docs.ropensci.org/dataspice/).
+- Variable summaries with `codebook_table()` [@codebook-table].
+- Structuring dataset metadata with dataspice [@dataspice].
