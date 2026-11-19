@@ -16,10 +16,11 @@ ENV DEBIAN_FRONTEND=noninteractive \
     RENV_PATHS_ROOT=${HOME}/renv \
     RENV_PATHS_LIBRARY=${HOME}/renv/library \
     RENV_PATHS_CACHE=${HOME}/renv/.cache \
-    RENV_CONFIG_REPOS_OVERRIDE=https://cloud.r-project.org
+    RENV_CONFIG_REPOS_OVERRIDE=https://cloud.r-project.org  \
+    RENV_CONFIG_PAK_ENABLED=TRUE
 
 RUN apt-get update \
-    && apt-get install -y --no-install-recommends pandoc libsodium-dev graphviz \
+    && apt-get install -y --no-install-recommends pandoc libsodium-dev graphviz libuv1-dev \
     libglpk-dev cmake libnng-dev libmbedtls-dev openssh-client liblzma-dev libpq-dev libcurl4-openssl-dev \
     libbz2-dev software-properties-common build-essential libmagic-dev libmagick++-dev curl g++ make \
     libharfbuzz-dev libfribidi-dev graphviz-dev \

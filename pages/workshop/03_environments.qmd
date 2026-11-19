@@ -1,0 +1,166 @@
+---
+title: "Reproducible computational environments"
+subtitle: "17–30 minutes · renv and Docker"
+editor: source
+---
+
+## Learning objectives
+
+By the end of this activity, you should be able to distinguish R package
+restoration from containerised computing, inspect the project's lockfile, and
+record the environment used to load the teaching data.
+
+Prerequisite: [preparation](00_preparation.qmd), including completed downloads
+and initial renv setup. Use a prepared environment during these 13 minutes;
+image builds and full installations belong before the session.
+
+## Why this matters
+
+The same script can behave differently when package versions or system
+libraries change. We need to describe the environment alongside the code and
+the data version.
+
+| Layer | What we record | Tool or file |
+| --- | --- | --- |
+| R runtime | R version | `renv.lock`, runtime information, container base image |
+| R packages | Package versions and sources | renv and `renv.lock` |
+| Wider environment | Operating-system libraries and rendering tools | Dockerfile and image |
+| Code and configuration | The revision used for the run | Git commit |
+| Actual session | Versions loaded when the activity ran | `sessionInfo()` |
+
+renv restores the R packages described by a lockfile. It does not install the
+specified R interpreter or capture every system dependency. Docker packages a
+wider environment, but a Dockerfile alone does not establish that an image
+builds, starts, or reproduces every result.
+
+## Inspect the current environment
+
+Allow about two minutes. In the **R Console**, with the project open:
+
+```r
+R.version.string
+.libPaths()
+packageVersion("renv")
+```
+
+Compare your R version with the reference version, **4.4.1**. If it differs,
+record the difference; a lockfile does not switch your running R session.
+
+## Inspect and restore a lockfile
+
+Allow about four minutes. Use the project's active renv environment:
+
+```r
+lock <- renv::lockfile_read("renv.lock")
+lock$R$Version
+names(lock$Packages)
+renv::status()
+```
+
+In the current repository, the lockfile names R 4.4.1 and records renv 1.0.7
+only. It does not yet describe a complete metadata or meta-analysis environment.
+In particular, do not infer that `meta`, `codebook`, `dataspice`, `pins`, or
+`targets` is available merely because the lockfile exists.
+
+The usual collaboration cycle is:
+
+1. A maintainer prepares and tests the required packages.
+2. The maintainer uses `renv::snapshot()` and reviews the resulting lockfile.
+3. Collaborators use `renv::restore()` to obtain the recorded packages.
+4. The analysis is tested in the restored environment.
+
+For this activity, inspect the existing lockfile. You do not need to initialise
+renv again or change the snapshot. If restoration is needed, complete this
+before the workshop, or watch the instructor demonstrate it:
+
+```r
+renv::restore()
+```
+
+## Inspect the Docker route {#environments-docker}
+
+Allow about four minutes. Run these commands in a **Terminal** at the project
+root. They read the repository's configured image version:
+
+```bash
+export APP_VERSION="$(cat VERSION)"
+docker compose config --quiet
+```
+
+Successful configuration resolution checks the Compose inputs. It does not
+verify that the image has been published or that a server can start.
+
+For pre-workshop setup, once the instructor confirms that the image is
+available, use:
+
+```bash
+docker compose pull rstudio
+docker compose up --no-build rstudio
+```
+
+Open [RStudio at localhost:8787](http://localhost:8787). Leave the terminal open
+while working; press **Ctrl+C** there to stop the service. If your environment
+is already running, use the existing session during the workshop.
+
+The repository is mounted at
+`/home/rstudio/open-reproducible-science-r`. Open the project and save your work
+in that checkout. The RStudio service binds its port to localhost and disables
+login authentication for this local workshop configuration.
+
+The image version selected by `VERSION` is separate from GitHub release tags
+such as `v0.2.0`. Do not assume that a release tag identifies a matching image.
+For stronger provenance, also record the resolved image digest when the prepared
+image is distributed. A mounted checkout can differ from the code originally
+copied into an image, so retain the checkout's Git revision too.
+
+## Try it yourself: restart, reload, record
+
+Allow about three minutes. Restart R, reopen the project if necessary, and load
+the data from its explicit path. This checks that the input does not depend on
+an object left over from an earlier Console session.
+
+```r
+raw_file <- file.path("data", "raw", "healthwellbeing.rda")
+stopifnot(
+  file.exists(raw_file),
+  identical(
+    unname(tools::md5sum(raw_file)),
+    "0d74964b0b7168379a2b015cb648b326"
+  )
+)
+data_env <- new.env(parent = baseenv())
+loaded_names <- load(raw_file, envir = data_env)
+stopifnot(identical(loaded_names, "HealthWellbeing"))
+health <- data_env[["HealthWellbeing"]]
+stopifnot(nrow(health) == 29L, ncol(health) == 5L)
+
+output_dir <- "outputs"
+dir.create(output_dir, showWarnings = FALSE)
+writeLines(
+  capture.output(sessionInfo()),
+  file.path(output_dir, "session-info.txt")
+)
+```
+
+Inspect `outputs/session-info.txt`. Add a short sentence to your existing
+`WORKSHOP_NOTES.md` recording the R version and whether you used local R or
+Docker. Keep the raw data and generated session record separate from code
+changes; only stage files deliberately when making a later commit.
+
+## Checkpoint {#environments-checkpoint}
+
+- You can explain which parts of the environment renv and Docker capture.
+- You can distinguish the lockfile's requested R version from the running version.
+- The dataset reloads after a restart, and you have a session record on disk.
+- You know which workshop dependencies are still absent from the lockfile.
+
+**Takeaway:** a documented environment supports reproducibility, and a successful
+rerun supplies evidence. Next, the programme turns to dataset documentation and
+FAIR metadata with codebook and dataspice.
+[Dataset documentation](04_data_documentation.qmd)
+
+## Further reading
+
+- [renv: collaborating](https://rstudio.github.io/renv/articles/collaborating.html).
+- [Docker Compose documentation](https://docs.docker.com/compose/).
+- [Workshop Docker setup](https://github.com/JBris/open-and-reproducible-science-in-r#usage-with-docker).

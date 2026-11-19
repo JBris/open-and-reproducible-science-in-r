@@ -36,17 +36,11 @@
 ## Introduction
 
 Open and reproducible science helps research be understood, evaluated, reused,
-and extended by others. This workshop introduces a practical workflow that
-connects R with GitHub, renv, Docker, targets, Quarto, pins, vetiver, and Zenodo to
-support reproducibility throughout the research lifecycle.
-
-Participants will explore how these tools work together, from versioning code
-and recording dependencies to organising analyses, versioning datasets and fitted
-models, communicating results, and preserving research outputs. A focused
-extension will explore differentially private synthetic data when original data
-cannot be shared. The emphasis is on making research transparent, portable,
-auditable, reusable, and accessible beyond the original researcher or computing
-environment.
+and extended by others. This 90-minute workshop follows one prepared R
+project using `HealthWellbeing`, a teaching dataset of published
+correlations between health and well-being. We document and version the
+dataset, run a correlation meta-analysis, and trace the result through
+a report and an archive.
 
 ## Workshop
 
@@ -62,31 +56,27 @@ on the [workshop website](https://jbris.github.io/open-and-reproducible-science-
 Quarto is used to organise the website and reports, with sources in the
 [pages directory](pages/).
 
-The [draft teaching plan](https://github.com/JBris/open-and-reproducible-science-in-r/blob/main/draft/workshop_plan.qmd) develops the expanded scope around
-one prepared research project, with a two-hour format and a shorter 90-minute
-adaptation. The practical examples and privacy demonstration remain under
-development; the announced conference session details above are unchanged.
+Set up your environment and verify the data before the session.
+The draft teaching plan gives the timing and activities for each lesson.
+[Preparation](pages/workshop/00_preparation.qmd) ·
+[Draft teaching plan](draft/workshop_plan.qmd)
 
-The core workflow will combine the following tools:
-
-| Tool                                                         | Role in the workflow                                                         |
-| ------------------------------------------------------------ | ---------------------------------------------------------------------------- |
-| [GitHub](https://github.com/)                                | Version control, collaboration, and open sharing of code and materials       |
-| [renv](https://rstudio.github.io/renv/)                      | Recording and restoring R package dependencies                               |
-| [Docker](https://www.docker.com/)                            | Capturing the computational environment in a portable container              |
-| [targets](https://docs.ropensci.org/targets/)                | Organising analysis steps and tracking which outputs need to be rebuilt      |
-| [pins](https://pins.rstudio.com/articles/pins.html)          | Versioning datasets and recording metadata, hashes, and provenance links     |
-| [vetiver](https://vetiver.posit.co/get-started/version.html) | Versioning fitted models with input requirements and prediction dependencies |
-| [Quarto](https://quarto.org/)                                | Connecting code, analysis, results, and narrative in reproducible reports    |
-| [Zenodo](https://zenodo.org/)                                | Archiving research outputs and assigning persistent identifiers              |
+| Tools | Role in the core workflow |
+| --- | --- |
+| [Git](https://git-scm.com/) and [GitHub](https://github.com/) | Track changes, collaborate, and share code. |
+| [renv](https://rstudio.github.io/renv/) and [Docker](https://www.docker.com/) | Record R dependencies and capture the computing environment. |
+| [codebook](https://cran.r-project.org/package=codebook) and [dataspice](https://docs.ropensci.org/dataspice/) | Describe the variables and record FAIR dataset metadata. |
+| [pins](https://pins.rstudio.com/articles/pins.html) | Store datasets with provenance and retrieve a specific version. |
+| [targets](https://docs.ropensci.org/targets/) | Organise the analysis and track what needs to be rebuilt. |
+| [Quarto](https://quarto.org/) | Connect the methods, results, and provenance in a report. |
+| [Zenodo](https://zenodo.org/) | Archive permitted outputs and cite a specific release. |
 
 By the end of the workshop, participants should be able to:
 
 - Explain how the tools support different parts of a reproducible research workflow.
-- Record dataset metadata and provenance, retrieve a specific dataset version, and link it to a fitted model.
-- Develop a workflow that can be shared, reproduced, and archived.
-- Explain the trade-offs between privacy and analytical utility when using synthetic data.
-- Identify common barriers to reproducibility and practical strategies for addressing them.
+- Record dataset metadata and provenance and retrieve a specific version.
+- Trace a result through the analytical pipeline and report.
+- Identify the files and metadata needed for a citable archive.
 
 Some familiarity with R will help participants follow the examples. The session
 focuses on connecting the tools into a coherent workflow and understanding the
@@ -94,26 +84,12 @@ principles behind their use.
 
 ### Research objects and responsible sharing
 
-The main practical activity will use `pins` for dataset versions and metadata,
-with a short `vetiver` demonstration for fitted models. These records will link
-data and model versions to the code, parameters, and environment used to produce
-them. Local boards will have versioning enabled explicitly. A data dictionary
-using [`codebook`](https://cran.r-project.org/package=codebook) is an optional extension.
-
-The privacy extension will use public teaching data treated as restricted for
-the exercise. `DPSynth` is a candidate for a synthetic-data demonstration, pending
-review and testing of the chosen method and its privacy accounting; `diffpriv`
-can support an explanation of underlying mechanisms. These are planned teaching
-choices, not yet configured project dependencies. See the
-[draft package and development plan](https://github.com/JBris/open-and-reproducible-science-in-r/blob/main/draft/workshop_plan.qmd).
-
-Open science can include restricted-access data. Synthetic data can help others
-run an analysis workflow, but does not establish that they can verify results
-computed from inaccessible originals. Synthetic observations or arbitrary noise
-also do not, by themselves, establish differential privacy. The extension will
-consider the mechanism, privacy budget, repeated releases, and effects on
-analytical utility. [NIST's overview](https://www.nist.gov/blogs/cybersecurity-insights/differentially-private-synthetic-data)
-provides background on this distinction.
+The final five minutes include discussion and optional examples of
+synthetic study summaries with `synthpop` and model versioning with
+`vetiver`. Synthetic data can help others test a workflow. Verifying
+findings based on original observations requires access to them, and
+privacy claims need evidence about the mechanism and privacy accounting.
+[Closing lesson](pages/workshop/09_extras_and_discussion.qmd)
 
 ## Usage with Docker
 
@@ -155,8 +131,9 @@ once the workshop image is published.
 ## Render the book
 
 The Quarto project produces an HTML book website and one PDF containing all
-configured chapters. Install [Quarto](https://quarto.org/docs/get-started/) and a
-LaTeX distribution such as TinyTeX, then run:
+configured chapters. Install [Quarto](https://quarto.org/docs/get-started/),
+R with `knitr` and `rmarkdown` for named R chunks, and a LaTeX distribution
+such as TinyTeX. From the repository root, run:
 
 ```bash
 # Install TinyTeX if a LaTeX distribution is not already available.

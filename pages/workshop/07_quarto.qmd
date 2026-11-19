@@ -1,0 +1,90 @@
+---
+title: "Reproducible reporting and publishing"
+subtitle: "68–80 minutes · Quarto"
+editor:
+  markdown:
+    wrap: 72
+link-citations: true
+execute:
+  warning: false
+  message: false
+---
+
+## Introduction
+
+We will render a short report that reads the summary from the
+`HealthWellbeing` pipeline. By the end of these 12 minutes, you should
+be able to explain where a result in the report came from and identify
+what a reader needs to recreate it.
+
+You need Quarto with *knitr* and *rmarkdown*, and the completed
+`meta-summary.csv` from the pipeline. If you joined here, the
+instructor can provide the prepared CSV to render locally.
+[Pipeline checkpoint](06_targets.qmd#targets-checkpoint)
+
+## Inspect the report source
+
+Open `pipelines/health_wellbeing_report.qmd` in your editor. Its YAML
+header selects HTML, names the summary file, and controls how code
+and output are displayed. The report's R chunk reads one row from
+`meta-summary.csv`. Inline R expressions display the results and
+method names recorded in that row.
+
+The pipeline owns the analysis. The report explains its methods and
+interprets the saved results. Keeping the report downstream of the
+summary makes it possible to review the same result in R and HTML.
+
+## Render the HTML report
+
+In the Terminal at the project root, copy the source beside its
+input and render the copy. Quarto runs the report as a standalone
+document. The HTML output embeds its resources and can be opened
+directly in a browser.
+
+```bash
+report_dir="outputs/health-wellbeing"
+if [ ! -f "$report_dir/health_wellbeing_report.qmd" ]; then
+  cp pipelines/health_wellbeing_report.qmd "$report_dir/"
+fi
+quarto render "$report_dir/health_wellbeing_report.qmd" --to html
+```
+
+Open `outputs/health-wellbeing/health_wellbeing_report.html` in your
+browser. If you have an older local copy of the report source, bring
+over the updated input chunk and the Methods and Provenance sections
+from the template. Keep any changes you made to the surrounding text.
+Run the pipeline again before rendering whenever the selected data
+or analysis changes.
+
+## Try it yourself
+
+Find the pooled estimate, study count, and dataset version in the
+report. Compare them with the matching columns in
+`meta-summary.csv`. Add a plain-language sentence to the report copy
+about how differences between study populations affect interpretation,
+then render the copy again. Leave the estimate linked to the CSV.
+
+## Publishing demonstration
+
+The instructor will open an example rendered report and show how an
+approved HTML file can be served from a project site or attached to a
+release. Before sharing, review the report for any content that came
+from data with reuse conditions. The report source, versioned analysis
+code, metadata, and environment record help others understand how the
+published HTML was made.
+
+## Checkpoint {#quarto-checkpoint}
+
+The HTML shows 29 studies and their pooled estimate when the CSV is
+from the full input. It names the exact pin version, Git revision,
+R version, and *meta* version. You can trace the number to a field
+in the pipeline output and explain how to update it after rerunning
+the analysis.
+
+Next we will inspect how to cite a preserved release.
+[Research archiving and persistent identifiers](08_zenodo.qmd)
+
+## Further reading
+
+- [Quarto with R](https://quarto.org/docs/computations/r.html).
+- [Quarto publishing](https://quarto.org/docs/publishing/).

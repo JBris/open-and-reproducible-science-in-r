@@ -1,19 +1,18 @@
 # Welcome {.unnumbered}
 
 This book contains the **Open and Reproducible Science in R** workshop materials.
-It introduces a connected research workflow using GitHub, renv, Docker, targets,
-Quarto, pins, vetiver, and Zenodo, with a focused extension on responsible sharing
-and differentially private synthetic data.
-
-The practical examples and expanded teaching activities are under development.
-The current R and pipeline helpers are placeholders.
+In 90 minutes, we document and version the `HealthWellbeing` dataset,
+run a correlation meta-analysis, and trace the result through a
+Quarto report and an archive. The workshop includes a runnable
+`targets` pipeline and a report template. The closing discussion can
+include brief examples of synthetic data and model versioning.
 
 ## Getting started
 
-Start with the [introduction](pages/1_introduction.qmd) for the learning objectives,
-workflow, and prerequisites. Some familiarity with R will help you follow the
-material. The [repository README](https://github.com/JBris/open-and-reproducible-science-in-r#usage-with-docker)
-describes Docker setup and the available computing environments.
+Read the learning objectives and set up your environment before the
+session. Some familiarity with R will help you follow the material.
+[Introduction](pages/1_introduction.qmd) ·
+[Preparation](pages/workshop/00_preparation.qmd)
 
 Use the book navigation to move between chapters. A PDF download is available
 from the HTML book's download menu once both output formats have been rendered.

@@ -1,0 +1,88 @@
+---
+title: "Open and reproducible science"
+subtitle: "0–5 minutes · R"
+editor: source
+---
+
+## Learning objectives
+
+By the end of this opening, you should be able to state the research question,
+identify the unit represented by a row of data, and describe what another
+researcher would need to retrace the analysis.
+
+## Why this matters
+
+A reported result is easier to evaluate when its data, analytical decisions,
+code, and software environment can be traced. Sharing code helps, but the code
+also needs identifiable inputs and instructions that work beyond its author's
+current R session.
+
+In this workshop, **reproducibility** means being able to rerun a documented
+workflow with its specified inputs and environment. **Open science** also
+concerns how methods and outputs can be inspected, accessed, and reused.
+Reproducibility does not establish that the scientific assumptions are correct,
+and openness still needs to respect licences and access conditions.
+
+## Our example: health and well-being
+
+The teaching question is: **What association between health and well-being is
+reported across the included studies?** We use the `HealthWellbeing` example
+from [section 4.2.4 of the guide](https://doing-meta.guide/pooling-es#correlations).
+
+Each row is a **study summary**, not a participant record. The columns are:
+
+| Column | Meaning |
+| --- | --- |
+| `author` | Study label |
+| `cor` | Reported Pearson correlation |
+| `n` | Study sample size |
+| `population` | Sample population description |
+| `country` | Study country |
+
+The [preparation activity](00_preparation.qmd#preparation-data) verifies the
+snapshot. For this opening, inspect the instructor's copy or your own loaded
+data. There is no need to fit a model during these five minutes.
+
+Later analysis will pool correlations using Fisher's z transformation and an
+explicit random-effects specification. Study independence, comparable effect
+definitions, and differences between study populations need consideration.
+A pooled association alone does not establish a causal effect.
+
+## One project throughout the session
+
+| Stage | Question we will answer | Tools |
+| --- | --- | --- |
+| Version the work | What changed, why, and who can review it? | Git, GitHub |
+| Record the environment | Which software is needed? | renv, Docker |
+| Document the input | What do the data describe, and how may they be reused? | codebook, dataspice |
+| Store dataset versions | Which input produced this result? | pins |
+| Track the analysis | Which steps depend on this input? | targets |
+| Report and publish | How are methods and results connected? | Quarto |
+| Preserve a release | How can this version be found and cited? | Zenodo |
+
+The final five minutes include discussion and optional signposts to `synthpop`
+and `vetiver`. They are follow-up options, not requirements for this core workflow.
+
+## Try it yourself
+
+With a neighbour, name one thing you would ask for if a collaborator sent only
+a pooled correlation. Choose from the data version, variable definitions,
+analysis settings, code revision, or software environment, and explain why it
+would matter.
+
+## Checkpoint {#open-science-checkpoint}
+
+You should be able to complete this sentence:
+
+> To retrace this result, I need the source and version of the study summaries,
+> the analysis decisions and code, and the environment used to run them.
+
+**Takeaway:** keep a traceable connection between the input, the decisions, and
+the output. We start by recording the source in
+[Git and GitHub](02_git_github.qmd).
+
+## Further reading
+
+- [The guide's correlation example](https://doing-meta.guide/pooling-es#correlations).
+- [HealthWellbeing dataset documentation](https://dmetar.protectlab.org/reference/healthwellbeing).
+- [FAIR principles](https://www.go-fair.org/fair-principles/).

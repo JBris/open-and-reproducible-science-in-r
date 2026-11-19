@@ -1,0 +1,159 @@
+---
+title: "Dataset storage and versioning"
+subtitle: "42–50 minutes · pins"
+editor:
+  markdown:
+    wrap: 72
+link-citations: true
+execute:
+  warning: false
+  message: false
+---
+
+## Introduction
+
+We will store two versions of `HealthWellbeing` in a local *pins*
+board. The first contains all 29 studies. The second contains the 18
+general-population studies, so we can explore how that restriction
+changes the analysis. Both use the variable definitions from the data
+dictionary, and both trace back to the same raw file.
+[Dataset documentation](04_data_documentation.qmd)
+
+Work from the project root with *box*, *pins*, and the raw file from
+the preparation lesson. Use a fresh board for the writing exercise.
+If you have already completed it, use your saved versions CSV to repeat
+the retrieval. The instructor can provide a prepared board and its
+selection files if you need to catch up.
+[Prepare the raw file](00_preparation.qmd#preparation-data)
+
+## Create a versioned board
+
+We enable versioning so the board retains both writes. We use RDS, an
+R format that preserves the column types. The board lives inside our
+local workshop outputs.
+
+```{r health-pins-setup, cache = FALSE}
+box::use(
+  pins[board_folder, pin_exists, pin_meta, pin_read, pin_versions,
+       pin_write],
+  utils[read.csv, write.csv]
+)
+
+workshop_dir <- file.path("outputs", "health-wellbeing")
+data_board <- board_folder(
+  file.path(workshop_dir, "data_store"),
+  versioned = TRUE
+)
+pin_name <- "health_wellbeing"
+versions_file <- file.path(workshop_dir, "dataset-versions.csv")
+selection_file <- file.path(workshop_dir, "analysis-data-version.txt")
+```
+
+## Write and describe two versions
+
+We verify the checksum, load the table from that file, and write it
+with its source and checksum in the pin metadata.
+
+```{r health-pins-write-full, cache = FALSE}
+stopifnot(!pin_exists(data_board, pin_name))
+
+source_url <- paste0(
+  "https://www.protectlab.org/meta-analysis-in-r/data/",
+  "healthwellbeing.rda"
+)
+raw_file <- file.path("data", "raw", "healthwellbeing.rda")
+raw_md5 <- unname(tools::md5sum(raw_file))
+stopifnot(identical(raw_md5, "0d74964b0b7168379a2b015cb648b326"))
+
+raw_data <- new.env(parent = baseenv())
+loaded_names <- load(raw_file, envir = raw_data)
+stopifnot(identical(loaded_names, "HealthWellbeing"))
+verified_health <- raw_data[["HealthWellbeing"]]
+stopifnot(is.data.frame(verified_health), nrow(verified_health) == 29L)
+
+pin_write(
+  data_board,
+  verified_health,
+  name = pin_name,
+  type = "rds",
+  title = "HealthWellbeing",
+  description = "All 29 studies in the teaching snapshot.",
+  metadata = list(source_url = source_url, raw_md5 = raw_md5, scope = "all")
+)
+full_version <- pin_versions(data_board, pin_name)$version
+stopifnot(length(full_version) == 1L)
+```
+
+For the teaching comparison, we read the exact full pin, then filter
+by population. The subset inherits its source and checksum from that
+pin. The filter and parent version account for the 11 excluded
+studies. The published example uses the full set.
+
+```{r health-pins-write-general, cache = FALSE}
+full_metadata <- pin_meta(data_board, pin_name, version = full_version)
+health_general <- pin_read(data_board, pin_name, version = full_version) |>
+  subset(population == "general population")
+stopifnot(nrow(health_general) == 18L)
+
+pin_write(
+  data_board,
+  health_general,
+  name = pin_name,
+  type = "rds",
+  title = "HealthWellbeing",
+  description = "Only studies labelled general population.",
+  metadata = list(
+    source_url = full_metadata$user$source_url,
+    raw_md5 = full_metadata$user$raw_md5,
+    scope = "general",
+    filter = "population == 'general population'",
+    parent_version = full_version
+  )
+)
+
+history <- pin_versions(data_board, pin_name)
+general_version <- setdiff(history$version, full_version)
+stopifnot(length(general_version) == 1L)
+history
+
+versions <- data.frame(
+  scope = c("all", "general"),
+  version = c(full_version, general_version)
+)
+write.csv(versions, versions_file, row.names = FALSE)
+writeLines(full_version, selection_file)
+```
+
+## Try it yourself
+
+Retrieve the full dataset by its recorded identifier and inspect
+its source metadata. The selection file tells the pipeline which
+version to use when we start the next activity.
+
+```{r health-pins-read-version, cache = FALSE}
+versions <- read.csv(versions_file, colClasses = "character")
+full_version <- versions$version[versions$scope == "all"]
+stopifnot(length(full_version) == 1L)
+
+health_full <- pin_read(data_board, pin_name, version = full_version)
+pin_meta(data_board, pin_name, version = full_version)$user
+nrow(health_full)
+```
+
+## Checkpoint {#pins-checkpoint}
+
+The history contains two versions with distinct identifiers. The saved
+selection points to the full dataset and the retrieval returns 29
+rows. Locate the identifier of the 18-study subset in
+`dataset-versions.csv`. The version identifies a stored object within
+this board. If you recreate the board elsewhere, use its new
+identifiers and retain the upstream checksum and filter.
+
+Keep the board local and share the source and transformation
+instructions when reuse terms are unclear. Next we will make the
+selection file a tracked pipeline input.
+[Reproducible analytical pipelines](06_targets.qmd)
+
+## Further reading
+
+- [Pins documentation](https://pins.rstudio.com/).

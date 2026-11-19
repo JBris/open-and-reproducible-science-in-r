@@ -1,0 +1,178 @@
+---
+title: "Preparation"
+subtitle: "Complete before the workshop"
+editor: source
+---
+
+## Learning objectives
+
+Before the timed session, you should be able to open the workshop project,
+identify its source data, and load a verified copy in R. You will use the same
+project and dataset throughout the workshop.
+
+Allow time for downloads and setup before the session. Some familiarity with R
+is helpful; you do not need previous experience with meta-analysis.
+
+## Our teaching dataset
+
+We use `HealthWellbeing` from section **4.2.4, Correlations**, of
+[*Doing Meta-Analysis with R: A Hands-On Guide*](https://doing-meta.guide/pooling-es#correlations).
+It contains study-level summaries of the association between health and
+well-being. It is also distributed with the `dmetar` package.
+
+The original review is Ngamaba, Panagioti, and Armitage (2017). Consult the
+[dataset documentation](https://dmetar.protectlab.org/reference/healthwellbeing)
+for the variable definitions and original reference.
+
+We will download the authors' data file directly, so these opening activities
+do not require installation of `dmetar`. Keep the raw file unchanged and record
+its source separately from any transformations you make later.
+
+## Choose your computing environment
+
+Use one of these routes:
+
+- **Local R:** install R and an editor such as RStudio. The reference environment
+  uses **R 4.4.1**. Record any difference if you use another version.
+- **Docker:** use the workshop RStudio image confirmed by the instructor.
+  Follow the [Docker instructions](03_environments.qmd#environments-docker)
+  before the session; downloading an image can take time.
+
+Both routes need Git for the local version-control activity. A GitHub account
+lets you practise sharing from your own fork. Install Quarto before the session
+if you will render reports locally later; HTML reporting does not require LaTeX.
+
+Browser-based Binder access is still being prepared. Use a verified local or
+Docker environment for this workshop.
+
+## Current development status
+
+The committed lockfile records renv 1.0.7. For lessons 04–07, use
+the instructor's prepared environment with `box`, `codebook`,
+`dataspice`, `pins`, `targets`, `meta`, `visNetwork`, `knitr`, and
+`rmarkdown`. Ask about `synthpop` and `vetiver` if you plan to run
+the optional exercises. On Linux, building the `dataspice`
+dependency `jqr` from source needs the jq development library.
+
+Run the lesson chunks in the R Console. Use Quarto with `knitr` and
+`rmarkdown` when you are ready to render the standalone report.
+
+## Get your own project copy
+
+1. Open the [workshop repository](https://github.com/JBris/open-and-reproducible-science-in-r)
+   and use **Fork** to create a copy in your GitHub account.
+2. In your fork, select **Code**, copy its HTTPS clone URL, and clone it with Git.
+   Replace `YOUR-USERNAME` below with your GitHub username.
+
+```bash
+git clone https://github.com/YOUR-USERNAME/open-and-reproducible-science-in-r.git
+cd open-and-reproducible-science-in-r
+```
+
+Open `open-and-reproducible-science-in-r.Rproj` in RStudio. For Docker, open the
+project in the mounted checkout described in the environment chapter. Keep
+terminal commands and R Console commands rooted in this project directory.
+
+The project's `.Rprofile` activates renv; first startup may download renv.
+Complete that startup and any restoration before the session. In the R Console:
+
+```r
+R.version.string
+renv::restore()
+renv::status()
+```
+
+Restoration installs packages recorded in the lockfile. It does not supply
+unrecorded workshop packages or install the R version named by the lockfile.
+
+## Download and verify the raw data {#preparation-data}
+
+Run the following in the **R Console** from the project root. R blocks in these
+chapters are examples to run yourself; rendering the teaching pages does not
+run them.
+
+The download comes from the resource linked in the book. The checksum identifies
+the exact file used to prepare these lessons. If you already have a different
+copy, keep it and ask the instructor to resolve the difference.
+
+```r
+raw_file <- file.path("data", "raw", "healthwellbeing.rda")
+source_url <- paste0(
+  "https://www.protectlab.org/meta-analysis-in-r/data/",
+  "healthwellbeing.rda"
+)
+
+dir.create(dirname(raw_file), recursive = TRUE, showWarnings = FALSE)
+if (!file.exists(raw_file)) {
+  download.file(source_url, destfile = raw_file, mode = "wb")
+}
+
+expected_md5 <- "0d74964b0b7168379a2b015cb648b326"
+actual_md5 <- unname(tools::md5sum(raw_file))
+stopifnot(identical(actual_md5, expected_md5))
+actual_md5
+```
+
+Load into a separate environment so the file does not silently replace objects
+in your working session. Use an explicit name for the dataset you will inspect.
+
+```r
+data_env <- new.env(parent = baseenv())
+loaded_names <- load(raw_file, envir = data_env)
+stopifnot(identical(loaded_names, "HealthWellbeing"))
+health <- data_env[["HealthWellbeing"]]
+
+expected_columns <- c("author", "cor", "n", "population", "country")
+stopifnot(
+  is.data.frame(health),
+  nrow(health) == 29L,
+  identical(names(health), expected_columns),
+  !anyNA(health),
+  all(is.finite(health$cor)),
+  all(abs(health$cor) < 1),
+  all(is.finite(health$n)),
+  all(health$n > 3),
+  all(health$n == floor(health$n))
+)
+
+head(health, 3)
+dim(health)
+```
+
+Expected checkpoint: **29 rows and 5 columns**, with no assertion failures.
+These checks describe this teaching snapshot, not a general rule that all
+meta-analysis datasets must be complete or have this size.
+
+If downloading is unavailable, ask for the instructor's prepared copy, put it
+at the same project-relative path, and run the checksum and loading checks.
+
+## Record the source
+
+For your project notes, retain the book section, dataset documentation, download
+URL, retrieval date, checksum, and original study citation. A package licence or
+the workshop repository's MIT licence should not be assumed to relicense every
+upstream dataset; check the relevant reuse terms before redistributing data.
+
+We will create and commit a short provenance note in the
+[Git and GitHub activity](02_git_github.qmd).
+
+## Preparation checkpoint {#preparation-checkpoint}
+
+You are ready when:
+
+- The project opens in your chosen environment and Git is available.
+- You know your R version and have completed the initial renv startup.
+- The raw file is saved and its checksum matches the teaching snapshot.
+- `health` contains the verified data, and you can identify its upstream source.
+
+Continue to [open and reproducible science](01_open_science.qmd).
+
+## Further reading
+
+Harrer, M., Cuijpers, P., Furukawa, T. A., & Ebert, D. D. (2021).
+*Doing Meta-Analysis with R: A Hands-On Guide*. Chapman & Hall/CRC.
+[Section 4.2.4](https://doing-meta.guide/pooling-es#correlations).
+
+Ngamaba, K. H., Panagioti, M., & Armitage, C. J. (2017).
+How strongly related are health status and subjective well-being? Systematic
+review and meta-analysis. *The European Journal of Public Health*, 27(5), 879–885.
