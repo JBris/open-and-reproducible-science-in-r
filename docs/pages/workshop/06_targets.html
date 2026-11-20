@@ -397,14 +397,14 @@ div.csl-indent {
 <section id="introduction" class="level2" data-number="10.1">
 <h2 data-number="10.1" class="anchored" data-anchor-id="introduction"><span class="header-section-number">10.1</span> Introduction</h2>
 <p>We will run a <em>targets</em> pipeline that reads a specified <code>HealthWellbeing</code> version, pools the study correlations, and writes a summary for the report. By the end of these 18 minutes, you should be able to trace the summary back to its input and predict what rebuilds when you select another version.</p>
-<p>You need Git and <em>box</em>, <em>pins</em>, <em>targets</em>, and <em>meta</em> in your workshop environment. The dependency graph also uses <em>visNetwork</em>. Start with your Git checkout, local board, and version selection file. Your instructor can share a prepared board and summary for comparison. <a href="../../pages/workshop/05_pins.html#pins-checkpoint">Dataset storage and versioning</a></p>
+<p>You need <em>box</em>, <em>pins</em>, <em>targets</em>, and <em>meta</em> in your workshop environment. The dependency graph also uses <em>visNetwork</em>. Start with the workshop project, local board, and version selection file. Your instructor can share a prepared board and summary for comparison. <a href="../../pages/workshop/05_pins.html#pins-checkpoint">Dataset storage and versioning</a></p>
 </section>
 <section id="inspect-the-pipeline" class="level2" data-number="10.2">
 <h2 data-number="10.2" class="anchored" data-anchor-id="inspect-the-pipeline"><span class="header-section-number">10.2</span> Inspect the pipeline</h2>
 <p>The script is <code>pipelines/_targets_health_wellbeing.R</code>. Open it in your editor and follow the data dependencies in this order.</p>
 <pre class="text"><code>version_file -&gt; data_version -&gt; dataset_file -&gt; studies -&gt; fit
 fit, data_version -&gt; result -&gt; summary_file</code></pre>
-<p>We mark the selector, pinned RDS, and summary CSV as file targets. At fitting time, the pipeline records the Git revision, the script checksum, and whether the script has local changes. If you work with local edits, keep a copy of that script to reproduce the fit.</p>
+<p>We mark the selector, pinned RDS, and summary CSV as file targets. At fitting time, the pipeline records the script checksum. Keep a copy of the script you used so you can verify it and reproduce the fit.</p>
 <p>The model uses the raw Pearson correlations and study sample sizes. <em>Meta</em> transforms each correlation to Fisher’s z scale and pools the effects with a random-effects model. We use restricted maximum likelihood (REML) to estimate between-study variance and the Hartung–Knapp method for the 95% interval. The summary converts the estimate and limits back to the correlation scale.</p>
 <p>This model treats study summaries as independent and assumes their correlations address a comparable association. Differences in populations, measures, and sampling limit interpretation. This is a worked example of pooling reported effects from the supplied studies <span class="citation" data-cites="harrer2021">(<a href="../4_references.html#ref-harrer2021" role="doc-biblioref">Harrer et al. 2021, sec. 4.2.4</a>)</span>.</p>
 </section>
@@ -432,40 +432,30 @@ fit, data_version -&gt; result -&gt; summary_file</code></pre>
 <span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">outdated =</span> <span class="cn">FALSE</span></span>
 <span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div class="visNetwork html-widget html-fill-item" id="htmlwidget-a9ed3e84977c400a2cf7" style="width:100%;height:464px;"></div>
-<script type="application/json" data-for="htmlwidget-a9ed3e84977c400a2cf7">{"x":{"nodes":{"name":["data_version","dataset_file","fit","result","studies","summary_file","version_file"],"type":["stem","stem","stem","stem","stem","stem","stem"],"description":[null,null,null,null,null,null,null],"status":["queued","queued","queued","queued","queued","queued","queued"],"seconds":[null,null,null,null,null,null,null],"bytes":[null,null,null,null,null,null,null],"branches":[null,null,null,null,null,null,null],"label":["data_version","dataset_file","fit","result","studies","summary_file","version_file"],"color":["#D2D2D0","#D2D2D0","#D2D2D0","#D2D2D0","#D2D2D0","#D2D2D0","#D2D2D0"],"id":["data_version","dataset_file","fit","result","studies","summary_file","version_file"],"level":[2,3,5,6,4,7,1],"shape":["dot","dot","dot","dot","dot","dot","dot"]},"edges":{"from":["version_file","data_version","studies","data_version","fit","dataset_file","result"],"to":["data_version","dataset_file","fit","result","result","studies","summary_file"],"color":["#D2D2D0","#D2D2D0","#D2D2D0","#D2D2D0","#D2D2D0","#D2D2D0","#D2D2D0"],"arrows":["to","to","to","to","to","to","to"]},"nodesToDataframe":true,"edgesToDataframe":true,"options":{"width":"100%","height":"100%","nodes":{"shape":"dot","physics":false},"manipulation":{"enabled":false},"edges":{"smooth":{"type":"cubicBezier","forceDirection":"horizontal"}},"physics":{"stabilization":false},"interaction":{"zoomSpeed":1},"layout":{"hierarchical":{"enabled":true,"levelSeparation":150,"direction":"LR"}}},"groups":null,"width":null,"height":null,"idselection":{"enabled":false,"style":"width: 150px; height: 26px","useLabels":true,"main":"Select by id"},"byselection":{"enabled":false,"style":"width: 150px; height: 26px","multiple":false,"hideColor":"rgba(200,200,200,0.5)","highlight":false},"main":{"text":"","style":"font-family:Georgia, Times New Roman, Times, serif;font-weight:bold;font-size:20px;text-align:center;"},"submain":null,"footer":null,"background":"rgba(0, 0, 0, 0)","highlight":{"enabled":true,"hoverNearest":false,"degree":{"from":1,"to":1},"algorithm":"hierarchical","hideColor":"rgba(200,200,200,0.5)","labelOnly":true},"collapse":{"enabled":true,"fit":false,"resetHighlight":true,"clusterOptions":null,"keepCoord":true,"labelSuffix":"(cluster)"},"legend":{"width":0.2,"useGroups":false,"position":"right","ncol":1,"stepX":100,"stepY":100,"zoom":true,"nodes":{"label":["Queued","Regular\ntarget"],"color":["#D2D2D0","#899DA4"],"shape":["dot","dot"]},"nodesToDataframe":true},"tooltipStay":300,"tooltipStyle":"position: fixed;visibility:hidden;padding: 5px;white-space: nowrap;font-family: verdana;font-size:14px;font-color:#000000;background-color: #f5f4ed;-moz-border-radius: 3px;-webkit-border-radius: 3px;border-radius: 3px;border: 1px solid #808074;box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);"},"evals":[],"jsHooks":[]}</script>
+<div class="visNetwork html-widget html-fill-item" id="htmlwidget-27bcc726f4a04ebbe311" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-27bcc726f4a04ebbe311">{"x":{"nodes":{"name":["data_version","dataset_file","fit","result","studies","summary_file","version_file"],"type":["stem","stem","stem","stem","stem","stem","stem"],"description":[null,null,null,null,null,null,null],"status":["completed","completed","completed","completed","completed","completed","completed"],"seconds":[0.006,0.11,3.496,0.001,0.008,0.004,0.001],"bytes":[75,931,4359,426,938,407,23],"branches":[null,null,null,null,null,null,null],"label":["data_version","dataset_file","fit","result","studies","summary_file","version_file"],"color":["#E1BD6D","#E1BD6D","#E1BD6D","#E1BD6D","#E1BD6D","#E1BD6D","#E1BD6D"],"id":["data_version","dataset_file","fit","result","studies","summary_file","version_file"],"level":[2,3,5,6,4,7,1],"shape":["dot","dot","dot","dot","dot","dot","dot"]},"edges":{"from":["version_file","data_version","studies","data_version","fit","dataset_file","result"],"to":["data_version","dataset_file","fit","result","result","studies","summary_file"],"color":["#E1BD6D","#E1BD6D","#E1BD6D","#E1BD6D","#E1BD6D","#E1BD6D","#E1BD6D"],"arrows":["to","to","to","to","to","to","to"]},"nodesToDataframe":true,"edgesToDataframe":true,"options":{"width":"100%","height":"100%","nodes":{"shape":"dot","physics":false},"manipulation":{"enabled":false},"edges":{"smooth":{"type":"cubicBezier","forceDirection":"horizontal"}},"physics":{"stabilization":false},"interaction":{"zoomSpeed":1},"layout":{"hierarchical":{"enabled":true,"levelSeparation":150,"direction":"LR"}}},"groups":null,"width":null,"height":null,"idselection":{"enabled":false,"style":"width: 150px; height: 26px","useLabels":true,"main":"Select by id"},"byselection":{"enabled":false,"style":"width: 150px; height: 26px","multiple":false,"hideColor":"rgba(200,200,200,0.5)","highlight":false},"main":{"text":"","style":"font-family:Georgia, Times New Roman, Times, serif;font-weight:bold;font-size:20px;text-align:center;"},"submain":null,"footer":null,"background":"rgba(0, 0, 0, 0)","highlight":{"enabled":true,"hoverNearest":false,"degree":{"from":1,"to":1},"algorithm":"hierarchical","hideColor":"rgba(200,200,200,0.5)","labelOnly":true},"collapse":{"enabled":true,"fit":false,"resetHighlight":true,"clusterOptions":null,"keepCoord":true,"labelSuffix":"(cluster)"},"legend":{"width":0.2,"useGroups":false,"position":"right","ncol":1,"stepX":100,"stepY":100,"zoom":true,"nodes":{"label":["Completed","Regular\ntarget"],"color":["#E1BD6D","#899DA4"],"shape":["dot","dot"]},"nodesToDataframe":true},"tooltipStay":300,"tooltipStyle":"position: fixed;visibility:hidden;padding: 5px;white-space: nowrap;font-family: verdana;font-size:14px;font-color:#000000;background-color: #f5f4ed;-moz-border-radius: 3px;-webkit-border-radius: 3px;border-radius: 3px;border: 1px solid #808074;box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);"},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 <p>We will build the targets and inspect the cached result.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tar_make</span>(<span class="at">script =</span> pipeline_script, <span class="at">store =</span> pipeline_store)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>+ version_file dispatched
-✔ version_file completed [1ms, 23 B]
-+ data_version dispatched
-✔ data_version completed [5ms, 75 B]
-+ dataset_file dispatched
-✔ dataset_file completed [111ms, 931 B]
-+ studies dispatched
-✔ studies completed [7ms, 938 B]
-+ fit dispatched
-✔ fit completed [5.8s, 4.36 kB]
+<pre><code>+ fit dispatched
+✔ fit completed [1.5s, 4.29 kB]
 + result dispatched
-✔ result completed [1ms, 430 B]
+✔ result completed [0ms, 369 B]
 + summary_file dispatched
-✔ summary_file completed [3ms, 406 B]
-✔ ended pipeline [14.9s, 7 completed, 0 skipped]</code></pre>
+✔ summary_file completed [3ms, 322 B]
+✔ ended pipeline [7.3s, 3 completed, 4 skipped]</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tar_read</span>(result, <span class="at">store =</span> pipeline_store)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>            data_version                            code_revision studies
-1 20261119T103524Z-11d00 73d13ddebe53a761cc75802fc57e133b2dfe4d21      29
-   pooled_r  ci_lower  ci_upper confidence_level effect_scale tau_method
-1 0.3631912 0.3092394 0.4148126             0.95         ZCOR       REML
-  interval_method r_version meta_version pipeline_modified
-1              HK     4.4.1        9.0-0              TRUE
+<pre><code>            data_version studies  pooled_r  ci_lower  ci_upper confidence_level
+1 20261119T103524Z-11d00      29 0.3631912 0.3092394 0.4148126             0.95
+  effect_scale tau_method interval_method r_version meta_version
+1         ZCOR       REML              HK     4.4.1        9.0-0
                       pipeline_md5
-1 3d6df21a3ad9774943dab63ff27aedc2</code></pre>
+1 abbbbdbd50f4ad5803e208d3f1374055</code></pre>
 </div>
 </div>
 </section>
@@ -491,29 +481,27 @@ fit, data_version -&gt; result -&gt; summary_file</code></pre>
 <pre><code>+ version_file dispatched
 ✔ version_file completed [0ms, 23 B]
 + data_version dispatched
-✔ data_version completed [5ms, 75 B]
+✔ data_version completed [4ms, 75 B]
 + dataset_file dispatched
-✔ dataset_file completed [98ms, 688 B]
+✔ dataset_file completed [87ms, 688 B]
 + studies dispatched
-✔ studies completed [7ms, 693 B]
+✔ studies completed [6ms, 693 B]
 + fit dispatched
-✔ fit completed [2.2s, 3.44 kB]
+✔ fit completed [1.5s, 3.38 kB]
 + result dispatched
-✔ result completed [1ms, 429 B]
+✔ result completed [1ms, 368 B]
 + summary_file dispatched
-✔ summary_file completed [4ms, 403 B]
-✔ ended pipeline [16.8s, 7 completed, 0 skipped]</code></pre>
+✔ summary_file completed [2ms, 319 B]
+✔ ended pipeline [7.5s, 7 completed, 0 skipped]</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tar_read</span>(result, <span class="at">store =</span> pipeline_store)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>            data_version                            code_revision studies
-1 20261119T103525Z-06ae2 73d13ddebe53a761cc75802fc57e133b2dfe4d21      18
-   pooled_r  ci_lower ci_upper confidence_level effect_scale tau_method
-1 0.3793444 0.2994259 0.453977             0.95         ZCOR       REML
-  interval_method r_version meta_version pipeline_modified
-1              HK     4.4.1        9.0-0              TRUE
+<pre><code>            data_version studies  pooled_r  ci_lower ci_upper confidence_level
+1 20261119T103525Z-06ae2      18 0.3793444 0.2994259 0.453977             0.95
+  effect_scale tau_method interval_method r_version meta_version
+1         ZCOR       REML              HK     4.4.1        9.0-0
                       pipeline_md5
-1 3d6df21a3ad9774943dab63ff27aedc2</code></pre>
+1 abbbbdbd50f4ad5803e208d3f1374055</code></pre>
 </div>
 </div>
 <p>Compare the study count and pooled correlation with the first run. The changed input is a planned teaching subset. The difference reflects which studies entered the model, including any differences in study precision and heterogeneity.</p>
@@ -529,16 +517,16 @@ fit, data_version -&gt; result -&gt; summary_file</code></pre>
 + data_version dispatched
 ✔ data_version completed [4ms, 75 B]
 + dataset_file dispatched
-✔ dataset_file completed [101ms, 931 B]
+✔ dataset_file completed [80ms, 931 B]
 + studies dispatched
-✔ studies completed [9ms, 938 B]
+✔ studies completed [6ms, 938 B]
 + fit dispatched
-✔ fit completed [3.4s, 4.36 kB]
+✔ fit completed [1.5s, 4.29 kB]
 + result dispatched
-✔ result completed [1ms, 430 B]
+✔ result completed [1ms, 369 B]
 + summary_file dispatched
-✔ summary_file completed [4ms, 406 B]
-✔ ended pipeline [15s, 7 completed, 0 skipped]</code></pre>
+✔ summary_file completed [2ms, 322 B]
+✔ ended pipeline [7.5s, 7 completed, 0 skipped]</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tar_outdated</span>(<span class="at">script =</span> pipeline_script, <span class="at">store =</span> pipeline_store)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -548,8 +536,8 @@ fit, data_version -&gt; result -&gt; summary_file</code></pre>
 </section>
 <section id="targets-checkpoint" class="level2" data-number="10.5">
 <h2 data-number="10.5" class="anchored" data-anchor-id="targets-checkpoint"><span class="header-section-number">10.5</span> Checkpoint</h2>
-<p>The full example combines <strong>29 studies</strong> with a pooled correlation of about <strong>0.36</strong> and a 95% interval of about <strong>0.31 to 0.41</strong>. The alternative input combines <strong>18 studies</strong>. The selector and downstream analysis rebuild when it changes. If both fits use the same checkout, they record the same Git revision. After restoring the full selection and rebuilding, <code>tar_outdated()</code> should be empty.</p>
-<p>The file <code>outputs/health-wellbeing/meta-summary.csv</code> now contains the full result. The fit stores its Git and software provenance. The report keeps those details when the pipeline reuses a fit. Use a clean pipeline store to check results in a changed environment. <a href="../../pages/workshop/07_quarto.html">Reproducible reporting and publishing</a></p>
+<p>The full example combines <strong>29 studies</strong> with a pooled correlation of about <strong>0.36</strong> and a 95% interval of about <strong>0.31 to 0.41</strong>. The alternative input combines <strong>18 studies</strong>. The selector and downstream analysis rebuild when it changes. After restoring the full selection and rebuilding, <code>tar_outdated()</code> should be empty.</p>
+<p>The file <code>outputs/health-wellbeing/meta-summary.csv</code> now contains the full result. The fit stores its script checksum and software versions. The report keeps those details when the pipeline reuses a fit. Use a clean pipeline store to check results in a changed environment. <a href="../../pages/workshop/07_quarto.html">Reproducible reporting and publishing</a></p>
 </section>
 <section id="further-reading" class="level2" data-number="10.6">
 <h2 data-number="10.6" class="anchored" data-anchor-id="further-reading"><span class="header-section-number">10.6</span> Further reading</h2>

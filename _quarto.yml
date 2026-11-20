@@ -16,6 +16,7 @@ project:
     - AI_POLICY.md
     - CHANGELOG.md
     - "!AGENTS.md"
+    - "!CLAUDE.md"
     - "!draft/"
     - "!*.rmd"
 

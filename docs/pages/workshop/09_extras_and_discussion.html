@@ -497,16 +497,13 @@ log_n      0.003539 0.410534  4</code></pre>
 <span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>)</span>
 <span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>model_name <span class="ot">&lt;-</span> <span class="st">"health_wellbeing"</span></span>
 <span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>code_revision <span class="ot">&lt;-</span> <span class="fu">system2</span>(<span class="st">"git"</span>, <span class="fu">c</span>(<span class="st">"rev-parse"</span>, <span class="st">"HEAD"</span>), <span class="at">stdout =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(<span class="fu">length</span>(code_revision) <span class="sc">==</span> <span class="dv">1</span>L, <span class="fu">grepl</span>(<span class="st">"^[0-9a-f]{40}$"</span>, code_revision))</span>
-<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>model_source <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
-<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">data_version =</span> full_version,</span>
-<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">code_revision =</span> code_revision,</span>
-<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">r_version =</span> <span class="fu">as.character</span>(<span class="fu">getRversion</span>()),</span>
-<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">vetiver_version =</span> <span class="fu">as.character</span>(utils<span class="sc">::</span><span class="fu">packageVersion</span>(<span class="st">"vetiver"</span>))</span>
-<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>model_source <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">data_version =</span> full_version,</span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">r_version =</span> <span class="fu">as.character</span>(<span class="fu">getRversion</span>()),</span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">vetiver_version =</span> <span class="fu">as.character</span>(utils<span class="sc">::</span><span class="fu">packageVersion</span>(<span class="st">"vetiver"</span>))</span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="cell" data-cache.extra="{&quot;data_version&quot;:&quot;20261119T103524Z-11d00&quot;,&quot;code_revision&quot;:&quot;9af145b784df531e2e5733ba9713aea0b9860d62&quot;,&quot;r_version&quot;:&quot;4.4.1&quot;,&quot;vetiver_version&quot;:&quot;0.2.8&quot;}">
+<div class="cell" data-cache.extra="{&quot;data_version&quot;:&quot;20261119T103524Z-11d00&quot;,&quot;r_version&quot;:&quot;4.4.1&quot;,&quot;vetiver_version&quot;:&quot;0.2.8&quot;}">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>previous_versions <span class="ot">&lt;-</span> <span class="cf">if</span> (<span class="fu">pin_exists</span>(model_board, model_name)) {</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pin_versions</span>(model_board, model_name)<span class="sc">$</span>version</span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
@@ -542,7 +539,7 @@ log_n      0.003539 0.410534  4</code></pre>
 <span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(<span class="fu">length</span>(first_version) <span class="sc">==</span> <span class="dv">1</span>L, <span class="fu">length</span>(second_version) <span class="sc">==</span> <span class="dv">1</span>L)</span>
 <span id="cb9-34"><a href="#cb9-34" aria-hidden="true" tabindex="-1"></a>model_history</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 6 × 3
+<pre><code># A tibble: 8 × 3
   version                created             hash 
   &lt;chr&gt;                  &lt;dttm&gt;              &lt;chr&gt;
 1 20261119T103756Z-e3f44 2026-11-19 10:37:56 e3f44
@@ -550,11 +547,13 @@ log_n      0.003539 0.410534  4</code></pre>
 3 20261119T115900Z-e5ae0 2026-11-19 11:59:00 e5ae0
 4 20261119T115901Z-e3f44 2026-11-19 11:59:01 e3f44
 5 20261119T122112Z-e3f44 2026-11-19 12:21:12 e3f44
-6 20261119T122112Z-e5ae0 2026-11-19 12:21:12 e5ae0</code></pre>
+6 20261119T122112Z-e5ae0 2026-11-19 12:21:12 e5ae0
+7 20261120T005940Z-e3f44 2026-11-20 00:59:40 e3f44
+8 20261120T005940Z-e5ae0 2026-11-20 00:59:40 e5ae0</code></pre>
 </div>
 </div>
 <p>When you use <code>vetiver_pin_read()</code> without a version, it selects the board’s current version. Pass an explicit identifier when you want to reproduce a previous prediction or inspect its input requirements. Compare the input columns of the two retrieved models.</p>
-<div class="cell" data-cache.extra="[&quot;20261119T122112Z-e5ae0&quot;,&quot;20261119T122112Z-e3f44&quot;]">
+<div class="cell" data-cache.extra="[&quot;20261120T005940Z-e5ae0&quot;,&quot;20261120T005940Z-e3f44&quot;]">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>stored_v1 <span class="ot">&lt;-</span> <span class="fu">vetiver_pin_read</span>(</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  model_board, model_name, <span class="at">version =</span> first_version</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>)</span>
@@ -575,9 +574,6 @@ log_n      0.003539 0.410534  4</code></pre>
 $user$data_version
 [1] "20261119T103524Z-11d00"
 
-$user$code_revision
-[1] "9af145b784df531e2e5733ba9713aea0b9860d62"
-
 $user$r_version
 [1] "4.4.1"
 
@@ -586,7 +582,7 @@ $user$vetiver_version
 
 
 $version
-[1] "20261119T122112Z-e3f44"
+[1] "20261120T005940Z-e3f44"
 
 $url
 NULL
