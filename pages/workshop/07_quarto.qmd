@@ -118,7 +118,7 @@ See the Quarto guidance on installing and versioning extensions
 ## Checkpoint {#quarto-checkpoint}
 
 The HTML shows 29 studies and their pooled estimate when the CSV is
-from the full input. It names the exact pin version, Git revision,
+from the full input. It names the exact pin version, pipeline checksum,
 R version, and *meta* version. You can trace the number to a field
 in the pipeline output and explain how to update it after rerunning
 the analysis.

@@ -122,11 +122,8 @@ model_board <- board_folder(
 )
 model_name <- "health_wellbeing"
 
-code_revision <- system2("git", c("rev-parse", "HEAD"), stdout = TRUE)
-stopifnot(length(code_revision) == 1L, grepl("^[0-9a-f]{40}$", code_revision))
 model_source <- list(
   data_version = full_version,
-  code_revision = code_revision,
   r_version = as.character(getRversion()),
   vetiver_version = as.character(utils::packageVersion("vetiver"))
 )

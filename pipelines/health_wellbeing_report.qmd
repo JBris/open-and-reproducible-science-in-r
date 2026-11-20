@@ -49,13 +49,6 @@ interval_method <- switch(
   result$interval_method
 )
 
-pipeline_state <- "unrecorded"
-if (identical(result[["pipeline_modified"]], "TRUE")) {
-  pipeline_state <- "local changes at fitting"
-}
-if (identical(result[["pipeline_modified"]], "FALSE")) {
-  pipeline_state <- "committed at fitting"
-}
 pipeline_md5 <- result[["pipeline_md5"]]
 if (is.null(pipeline_md5)) {
   pipeline_md5 <- "unrecorded"
@@ -84,8 +77,6 @@ populations and measurements, and the estimates are observational.
 ## Provenance
 
 -   Dataset pin version: `r result$data_version`
--   Analysis Git revision: `r result$code_revision`
--   Pipeline source: `r pipeline_state`
 -   Pipeline script MD5: `r pipeline_md5`
 -   R version: `r result$r_version`
 -   *meta* version: `r result$meta_version`
