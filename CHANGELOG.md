@@ -9,6 +9,7 @@
 - Add `pipelines/prepare_health_wellbeing.R`, which prepares the versioned dataset inputs before the session and reuses matching versions when rerun.
 - Add a hands-on lesson on modifying the analysis and reproducing the results.
 - Add a supplementary `synthpop` exercise that pools the original and synthetic study summaries.
+- Add an AIMOS2026 attendee subagent for Claude Code and Codex. It critiques workshop material from a participant's perspective without editing files.
 
 ### Changed
 
