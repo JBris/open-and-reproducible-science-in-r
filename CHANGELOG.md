@@ -10,6 +10,7 @@
 - Add a hands-on lesson on modifying the analysis and reproducing the results.
 - Add a supplementary `synthpop` exercise that pools the original and synthetic study summaries.
 - Add an AIMOS2026 attendee subagent for Claude Code and Codex. It critiques workshop material from a participant's perspective without editing files.
+- Record a simulated attendee review of the workshop revision in `draft/`. The findings are not yet addressed.
 
 ### Changed
 
