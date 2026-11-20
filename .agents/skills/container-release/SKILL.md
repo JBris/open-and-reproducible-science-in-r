@@ -49,6 +49,8 @@ Dockerfiles, and the build workflows under `.github/workflows/`.
   are available. Check server startup when runtime behaviour changes. A resolved
   Compose file does not prove that an image builds or starts.
 
-Prepare reviewable changes within the task's scope. Publish images or create
-releases when the user's instructions cover that action. Report the tag, checks,
-remaining prerequisites, and any pending human review under `AI_POLICY.md`.
+Prepare reviewable changes within the task's scope. Before creating a GitHub
+release, verify that `CHANGELOG.md` in the commit being tagged includes an entry
+for the release. Publish images or create releases when the user's instructions
+cover that action. Report the tag, checks, remaining prerequisites, and any
+pending human review under `AI_POLICY.md`.
