@@ -126,5 +126,9 @@ does not expose custom agents.
 
 See `.codex/README.md` for configuration, hook trust, and invocation examples.
 Hooks provide lightweight feedback; complete task-specific verification before
-reporting success. Publishing images or releases should follow the user's task
-authorization. Do not bump `VERSION` as a side effect of ordinary edits.
+reporting success.
+
+Before creating a GitHub release, update `CHANGELOG.md` and include the release
+entry in the commit being tagged. Publishing images or releases should follow
+the user's task authorization. Do not bump `VERSION` as a side effect of
+ordinary edits.
