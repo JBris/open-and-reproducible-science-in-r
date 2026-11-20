@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://jbris.github.io/open-and-reproducible-science-in-r/pages/workshop/03_environments.html</loc>
-    <lastmod>2026-11-19T20:51:03.677Z</lastmod>
+    <loc>https://jbris.github.io/open-and-reproducible-science-in-r/pages/1_introduction.html</loc>
+    <lastmod>2026-11-20T02:15:50.505Z</lastmod>
   </url>
   <url>
     <loc>https://jbris.github.io/open-and-reproducible-science-in-r/ANNOUNCEMENTS.html</loc>
@@ -30,11 +30,7 @@
   </url>
   <url>
     <loc>https://jbris.github.io/open-and-reproducible-science-in-r/CHANGELOG.html</loc>
-    <lastmod>2026-11-19T21:18:58.156Z</lastmod>
-  </url>
-  <url>
-    <loc>https://jbris.github.io/open-and-reproducible-science-in-r/pages/1_introduction.html</loc>
-    <lastmod>2026-11-19T12:12:44.019Z</lastmod>
+    <lastmod>2026-11-20T02:19:42.343Z</lastmod>
   </url>
   <url>
     <loc>https://jbris.github.io/open-and-reproducible-science-in-r/pages/2_coordinators.html</loc>
@@ -46,7 +42,7 @@
   </url>
   <url>
     <loc>https://jbris.github.io/open-and-reproducible-science-in-r/pages/workshop/00_preparation.html</loc>
-    <lastmod>2026-11-19T20:51:03.271Z</lastmod>
+    <lastmod>2026-11-20T00:31:21.008Z</lastmod>
   </url>
   <url>
     <loc>https://jbris.github.io/open-and-reproducible-science-in-r/pages/workshop/01_open_science.html</loc>
@@ -55,6 +51,10 @@
   <url>
     <loc>https://jbris.github.io/open-and-reproducible-science-in-r/pages/workshop/02_git_github.html</loc>
     <lastmod>2026-11-19T12:12:45.041Z</lastmod>
+  </url>
+  <url>
+    <loc>https://jbris.github.io/open-and-reproducible-science-in-r/pages/workshop/03_environments.html</loc>
+    <lastmod>2026-11-19T20:51:03.677Z</lastmod>
   </url>
   <url>
     <loc>https://jbris.github.io/open-and-reproducible-science-in-r/pages/workshop/04_data_documentation.html</loc>
@@ -66,11 +66,11 @@
   </url>
   <url>
     <loc>https://jbris.github.io/open-and-reproducible-science-in-r/pages/workshop/06_targets.html</loc>
-    <lastmod>2026-11-19T12:12:46.063Z</lastmod>
+    <lastmod>2026-11-20T01:17:52.595Z</lastmod>
   </url>
   <url>
     <loc>https://jbris.github.io/open-and-reproducible-science-in-r/pages/workshop/07_quarto.html</loc>
-    <lastmod>2026-11-19T12:13:37.344Z</lastmod>
+    <lastmod>2026-11-20T00:34:13.509Z</lastmod>
   </url>
   <url>
     <loc>https://jbris.github.io/open-and-reproducible-science-in-r/pages/workshop/08_zenodo.html</loc>
@@ -78,7 +78,7 @@
   </url>
   <url>
     <loc>https://jbris.github.io/open-and-reproducible-science-in-r/pages/workshop/09_extras_and_discussion.html</loc>
-    <lastmod>2026-11-19T12:13:37.866Z</lastmod>
+    <lastmod>2026-11-20T00:34:14.080Z</lastmod>
   </url>
   <url>
     <loc>https://jbris.github.io/open-and-reproducible-science-in-r/pages/4_references.html</loc>
