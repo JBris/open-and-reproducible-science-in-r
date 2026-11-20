@@ -60,22 +60,6 @@ list(
     data
   }),
   targets::tar_target(fit, {
-    code_revision <- system2(
-      "git", c("rev-parse", "--verify", "HEAD"), stdout = TRUE
-    )
-    if (length(code_revision) != 1L ||
-        !grepl("^([0-9a-f]{40}|[0-9a-f]{64})$", code_revision)) {
-      stop("Run the analysis from a Git checkout with a commit.")
-    }
-    script_status <- system2(
-      "git",
-      c("--no-optional-locks", "status", "--porcelain=v1",
-        "--untracked-files=all", "--ignored=matching", "--", shQuote(pipeline_script)),
-      stdout = TRUE
-    )
-    if (!is.null(attr(script_status, "status"))) {
-      stop("Could not check the pipeline script's Git status.")
-    }
     pipeline_md5 <- unname(tools::md5sum(pipeline_script))
     stopifnot(!is.na(pipeline_md5))
 
@@ -93,8 +77,6 @@ list(
     )
     list(
       model = model,
-      code_revision = code_revision,
-      pipeline_modified = length(script_status) > 0L,
       pipeline_md5 = pipeline_md5,
       r_version = as.character(getRversion()),
       meta_version = as.character(getNamespaceVersion("meta"))
@@ -104,7 +86,6 @@ list(
     model <- fit$model
     data.frame(
       data_version = data_version,
-      code_revision = fit$code_revision,
       studies = model$k,
       pooled_r = tanh(model$TE.random),
       ci_lower = tanh(model$lower.random),
@@ -115,7 +96,6 @@ list(
       interval_method = model$method.random.ci,
       r_version = fit$r_version,
       meta_version = fit$meta_version,
-      pipeline_modified = fit$pipeline_modified,
       pipeline_md5 = fit$pipeline_md5
     )
   }),

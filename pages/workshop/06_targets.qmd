@@ -18,10 +18,10 @@ summary for the report. By the end of these 18 minutes, you should be
 able to trace the summary back to its input and predict what rebuilds
 when you select another version.
 
-You need Git and *box*, *pins*, *targets*, and *meta* in your workshop
-environment. The dependency graph also uses *visNetwork*. Start with
-your Git checkout, local board, and version selection file.
-Your instructor can share a prepared board and summary for comparison.
+You need *box*, *pins*, *targets*, and *meta* in your workshop
+environment. The dependency graph also uses *visNetwork*. Start with the
+workshop project, local board, and version selection file. Your
+instructor can share a prepared board and summary for comparison.
 [Dataset storage and versioning](05_pins.qmd#pins-checkpoint)
 
 ## Inspect the pipeline
@@ -29,19 +29,18 @@ Your instructor can share a prepared board and summary for comparison.
 The script is `pipelines/_targets_health_wellbeing.R`. Open it in your
 editor and follow the data dependencies in this order.
 
-```text
+``` text
 version_file -> data_version -> dataset_file -> studies -> fit
 fit, data_version -> result -> summary_file
 ```
 
-We mark the selector, pinned RDS, and summary CSV as file targets.
-At fitting time, the pipeline records the Git revision, the script
-checksum, and whether the script has local changes. If you work with
-local edits, keep a copy of that script to reproduce the fit.
+We mark the selector, pinned RDS, and summary CSV as file targets. At
+fitting time, the pipeline records the script checksum. Keep a copy of
+the script you used so you can verify it and reproduce the fit.
 
 The model uses the raw Pearson correlations and study sample sizes.
-*Meta* transforms each correlation to Fisher's z scale and pools
-the effects with a random-effects model. We use restricted maximum
+*Meta* transforms each correlation to Fisher's z scale and pools the
+effects with a random-effects model. We use restricted maximum
 likelihood (REML) to estimate between-study variance and the
 Hartung–Knapp method for the 95% interval. The summary converts the
 estimate and limits back to the correlation scale.
@@ -54,9 +53,9 @@ worked example of pooling reported effects from the supplied studies
 
 ## Run the full dataset
 
-In the R Console at the project root, load the commands used to
-inspect and run the pipeline. The store path keeps this exercise's
-cache separate from other pipelines.
+In the R Console at the project root, load the commands used to inspect
+and run the pipeline. The store path keeps this exercise's cache
+separate from other pipelines.
 
 ```{r health-targets-setup, include = TRUE, echo = TRUE, message = FALSE, warning = FALSE, cache = FALSE, output = TRUE, eval = TRUE}
 box::use(
@@ -71,8 +70,8 @@ pipeline_store <- file.path(workshop_dir, "_targets")
 selection_file <- file.path(workshop_dir, "analysis-data-version.txt")
 ```
 
-Use the graph to predict which targets depend on the selector. If
-you're using the PDF, follow the text diagram above.
+Use the graph to predict which targets depend on the selector. If you're
+using the PDF, follow the text diagram above.
 
 ```{r health-targets-graph, include = TRUE, echo = TRUE, message = FALSE, warning = FALSE, cache = TRUE, output = TRUE, eval = knitr::is_html_output()}
 tar_visnetwork(
@@ -110,10 +109,10 @@ tar_make(script = pipeline_script, store = pipeline_store)
 tar_read(result, store = pipeline_store)
 ```
 
-Compare the study count and pooled correlation with the first run.
-The changed input is a planned teaching subset. The difference
-reflects which studies entered the model, including any differences
-in study precision and heterogeneity.
+Compare the study count and pooled correlation with the first run. The
+changed input is a planned teaching subset. The difference reflects
+which studies entered the model, including any differences in study
+precision and heterogeneity.
 
 Switch back to the full version for the reporting activity so everyone
 can compare with the same example.
@@ -131,17 +130,16 @@ tar_outdated(script = pipeline_script, store = pipeline_store)
 The full example combines **29 studies** with a pooled correlation of
 about **0.36** and a 95% interval of about **0.31 to 0.41**. The
 alternative input combines **18 studies**. The selector and downstream
-analysis rebuild when it changes. If both fits use the same checkout,
-they record the same Git revision. After restoring the full selection
-and rebuilding, `tar_outdated()` should be empty.
+analysis rebuild when it changes. After restoring the full selection and
+rebuilding, `tar_outdated()` should be empty.
 
 The file `outputs/health-wellbeing/meta-summary.csv` now contains the
-full result. The fit stores its Git and software provenance. The
-report keeps those details when the pipeline reuses a fit. Use a
+full result. The fit stores its script checksum and software versions.
+The report keeps those details when the pipeline reuses a fit. Use a
 clean pipeline store to check results in a changed environment.
 [Reproducible reporting and publishing](07_quarto.qmd)
 
 ## Further reading
 
-- Defining targets and tracking dependencies [@targets-manual].
-- Pooling correlations with `metacor()` [@meta-metacor].
+-   Defining targets and tracking dependencies [@targets-manual].
+-   Pooling correlations with `metacor()` [@meta-metacor].
