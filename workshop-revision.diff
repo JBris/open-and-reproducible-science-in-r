@@ -1,0 +1,4162 @@
+Workshop revision: final 90-minute programme
+============================================
+
+Base commit:  8b88f32 docs(site): refresh the rendered workshop
+Branch:       chore/claude-code-setup (uncommitted working tree)
+Created:      2026-11-21
+Size:         27 files changed, 1970 insertions(+), 1138 deletions(-)
+
+To apply it from a clean checkout of the base commit, run:
+
+    git apply --index workshop-revision.diff
+
+git apply ignores everything above the first "diff --git" line. Renames are
+written as the git mv pairs used in the revision, not as git's similarity
+guesses. The published site in docs/ is not refreshed or included.
+
+
+Summary
+=======
+
+The workshop now follows the final 90-minute programme: 42 minutes of concepts
+and demonstrations, 40 minutes of hands-on exercises and 8 minutes of
+discussion. Each segment has its own lesson. The revision is built on three
+foundations:
+
+  - One dataset throughout: HealthWellbeing (Harrer et al., section 4.2.4).
+    vetiver uses a small supplementary lm() model, because the meta-analysis
+    model is not supported by its standard interface.
+  - One continuous hands-on exercise: participants complete a partially
+    finished targets pipeline and Quarto report, copied to an ignored
+    workspace/ folder, then modify the analysis and reproduce the results.
+  - One prepared environment: MyBinder, with no installation during the
+    session. The dataset versions are prepared before the session.
+
+The main learning outcome is to understand and experience an end-to-end
+reproducible research workflow, not to master each package.
+
+
+Lessons (pages/workshop/)
+=========================
+
+  Time    Lesson                     Format         Change
+  ------  -------------------------  -------------  ----------------------------
+  Before  00_preparation             Self-paced     MyBinder only; prepares the
+                                                    dataset versions
+  0-10    01_open_science            Conceptual     Adds the Git and GitHub demo;
+                                                    Git practice is follow-up
+  10-20   02_environments            Demonstration  Was 03_environments
+  20-28   03_data_documentation      Demonstration  Was 04_data_documentation
+  28-35   04_versioning              Demonstration  Was 05_pins; adds vetiver
+  35-50   05_targets                 Hands-on       Was 06_targets; two TODOs in
+                                                    a template pipeline
+  50-65   06_quarto                  Hands-on       Was 07_quarto; three TODOs
+                                                    in a template report
+  65-75   07_modify_and_reproduce    Hands-on       New
+  75-82   08_archiving               Conceptual     Was 08_zenodo; adds GitHub
+                                                    releases and a brief synthpop
+                                                    mention
+  82-90   09_discussion              Interactive    Was 09_extras_and_discussion
+  After   10_synthetic_data          Supplementary  New synthpop exercise
+  Removed 02_git_github              -              Merged into 01_open_science
+
+
+Exercise files (pipelines/)
+===========================
+
+  prepare_health_wellbeing.R            New. Verifies the raw data, writes the
+                                        full and general-population dataset
+                                        pins, and selects the full version.
+                                        Rerunning it reuses matching versions.
+  exercise/_targets_health_wellbeing.R  New template pipeline. TODO 1 connects
+                                        fit to studies; TODO 2 writes the
+                                        summary file.
+  exercise/health_wellbeing_report.qmd  New template report. The TODOs add the
+                                        confidence interval, an interpretation
+                                        and the provenance fields.
+  _targets_health_wellbeing.R           Reference pipeline: numbered steps and
+                                        simpler imports; same targets and
+                                        results.
+  health_wellbeing_report.qmd           Reference report: reads the summary via
+                                        here::here() and names the methods in
+                                        full. Adds an interpretation paragraph.
+
+
+Project and documentation
+=========================
+
+  _quarto.yml               New chapter list and a "Supplementary exercises"
+                            part
+  pages/1_introduction.qmd  Programme table, revised objectives, and the
+                            three foundations
+  index.qmd, README.md      End-to-end description, tools table, 42/40/8 split
+  draft/*.qmd               Teaching plan and page plan for the final programme
+  CHANGELOG.md              Unreleased Added and Changed entries
+  AGENTS.md                 Describes the reference files, templates and
+                            workspace/
+  .gitignore, .renvignore   Ignore workspace/
+
+
+Verification
+============
+
+Run in the workshop image ghcr.io/jbris/open-reproducible-science-r:1.0.0
+under R 4.4.1:
+
+  - Full dataset: 29 studies, pooled r = 0.363 (95% CI 0.309 to 0.415).
+  - General population: 18 studies, pooled r = 0.379 (95% CI 0.299 to 0.454).
+  - The template pipeline lacks exactly two edges: studies -> fit and
+    result -> summary_file.
+  - A rerun skips all 7 targets, and a full rebuild produces an identical
+    summary.
+  - Changing the tau estimator rebuilds only fit, result and summary_file.
+  - quarto render --to all builds the HTML and PDF and exits with 0.
+  - The R parse check passed for 7 of 7 scripts, and git diff --check is
+    clean.
+
+Pending: human review (see AI_POLICY.md), a timed rehearsal, and a test in a
+fresh MyBinder launch. Codex and Claude Code assisted with the revision; agent
+verification is not human review.
+
+
+Files changed
+=============
+
+   .gitignore                                     |    3 
+   .renvignore                                    |    1 
+   AGENTS.md                                      |    5 
+   CHANGELOG.md                                   |   12 +
+   README.md                                      |   62 +++-
+   _quarto.yml                                    |   19 +
+   draft/workshop_pages.qmd                       |  139 +++++-----
+   draft/workshop_plan.qmd                        |  338 +++++++++++++-----------
+   index.qmd                                      |   18 +
+   pages/1_introduction.qmd                       |   89 ++++--
+   pages/workshop/00_preparation.qmd              |  125 +++++----
+   pages/workshop/01_open_science.qmd             |  177 ++++++++++---
+   pages/workshop/02_environments.qmd             |  118 ++++----
+   pages/workshop/02_git_github.qmd               |  148 -----------
+   pages/workshop/03_data_documentation.qmd       |   39 +--
+   pages/workshop/04_versioning.qmd               |  294 ++++++++++++---------
+   pages/workshop/05_targets.qmd                  |  198 +++++++++-----
+   pages/workshop/06_quarto.qmd                   |  195 +++++++++-----
+   pages/workshop/07_modify_and_reproduce.qmd     |  160 +++++++++++
+   pages/workshop/08_archiving.qmd                |  151 ++++++-----
+   pages/workshop/09_discussion.qmd               |  226 +++-------------
+   pages/workshop/10_synthetic_data.qmd           |  164 ++++++++++++
+   pipelines/_targets_health_wellbeing.R          |   48 +++
+   pipelines/exercise/_targets_health_wellbeing.R |  139 ++++++++++
+   pipelines/exercise/health_wellbeing_report.qmd |  100 +++++++
+   pipelines/health_wellbeing_report.qmd          |   31 +-
+   pipelines/prepare_health_wellbeing.R           |  109 ++++++++
+   27 files changed, 1970 insertions(+), 1138 deletions(-)
+   rename pages/workshop/{03_environments.qmd => 02_environments.qmd} (58%)
+   delete mode 100644 pages/workshop/02_git_github.qmd
+   rename pages/workshop/{04_data_documentation.qmd => 03_data_documentation.qmd} (83%)
+   rename pages/workshop/{05_pins.qmd => 04_versioning.qmd} (9%)
+   rename pages/workshop/{06_targets.qmd => 05_targets.qmd} (26%)
+   rename pages/workshop/{07_quarto.qmd => 06_quarto.qmd} (25%)
+   create mode 100644 pages/workshop/07_modify_and_reproduce.qmd
+   rename pages/workshop/{08_zenodo.qmd => 08_archiving.qmd} (32%)
+   rename pages/workshop/{09_extras_and_discussion.qmd => 09_discussion.qmd} (6%)
+   create mode 100644 pages/workshop/10_synthetic_data.qmd
+   create mode 100644 pipelines/exercise/_targets_health_wellbeing.R
+   create mode 100644 pipelines/exercise/health_wellbeing_report.qmd
+   create mode 100644 pipelines/prepare_health_wellbeing.R
+
+
+diff --git a/.gitignore b/.gitignore
+index 0c43157..52db707 100644
+--- a/.gitignore
++++ b/.gitignore
+@@ -214,6 +214,9 @@ cython_debug/
+ 
+ **/_targets
+ /outputs/health-wellbeing/
++
++# Participant copies of the workshop exercise templates.
++/workspace/
+ figure-html/
+ figure-pdf/
+ 
+diff --git a/.renvignore b/.renvignore
+index 350d6f5..6b257af 100644
+--- a/.renvignore
++++ b/.renvignore
+@@ -3,6 +3,7 @@ draft
+ 
+ # Generated analysis outputs and targets stores
+ /outputs/
++/workspace/
+ **/_targets/
+ 
+ # Rendered book and document caches
+diff --git a/AGENTS.md b/AGENTS.md
+index 0b7b036..2a30370 100644
+--- a/AGENTS.md
++++ b/AGENTS.md
+@@ -25,6 +25,11 @@ task introduces a package.
+   `binder/Dockerfile` is the Binder repository entry point.
+ - `R/dummy.R` and `pipelines/_targets_dummy.R` contain no-op placeholders.
+   They are not completed examples or a runnable targets pipeline.
++- `pipelines/_targets_health_wellbeing.R` and `pipelines/health_wellbeing_report.qmd`
++  are the completed reference pipeline and report. `pipelines/exercise/` holds
++  their partially completed participant templates, which lessons copy to the
++  ignored `workspace/` folder. Keep the templates' numbered steps and TODOs
++  aligned with the references.
+ - `pages/` contains reusable teaching material. Keep event names, dates, and
+   venues in `ANNOUNCEMENTS.md`. `draft/workshop_plan.qmd` is an unpublished
+   plan and is excluded from website rendering and navigation.
+diff --git a/CHANGELOG.md b/CHANGELOG.md
+index a21d4c2..f7d5582 100644
+--- a/CHANGELOG.md
++++ b/CHANGELOG.md
+@@ -5,6 +5,18 @@
+ ### Added
+ 
+ - Claude Code project instructions (`CLAUDE.md`), settings, subagents, lifecycle hooks, and image-publishing approval prompts alongside the existing Codex setup.
++- Add partially completed `targets` pipeline and Quarto report templates in `pipelines/exercise/`. Participants copy them to an ignored `workspace/` folder, and lessons provide collapsed solutions and a pipeline catch-up step.
++- Add `pipelines/prepare_health_wellbeing.R`, which prepares the versioned dataset inputs before the session and reuses matching versions when rerun.
++- Add a hands-on lesson on modifying the analysis and reproducing the results.
++- Add a supplementary `synthpop` exercise that pools the original and synthetic study summaries.
++
++### Changed
++
++- Restructure the workshop into the final 90-minute programme, with one lesson per segment: 42 minutes of concepts and demonstrations, 40 minutes of hands-on exercises, and 8 minutes of discussion. Merge Git and GitHub into the conceptual opening and move hands-on Git practice to follow-up material.
++- Demonstrate `vetiver` with a supplementary predictive model in the data and model versioning segment. Add GitHub releases to the archiving segment.
++- Make MyBinder the single prepared participant environment, with no installation during the session.
++- Read the report's pipeline summary relative to the project root, so reports render from the project root without an execution-directory option.
++- Revise the introduction, landing page, README, draft teaching plan, and page plan for the final programme.
+ 
+ ## [0.5.0] - 2026-11-20
+ 
+diff --git a/README.md b/README.md
+index 8800ffd..72b7faf 100644
+--- a/README.md
++++ b/README.md
+@@ -38,9 +38,12 @@
+ Open and reproducible science helps research be understood, evaluated, reused,
+ and extended by others. This 90-minute workshop follows one prepared R
+ project using `HealthWellbeing`, a teaching dataset of published
+-correlations between health and well-being. We document and version the
+-dataset, run a correlation meta-analysis, and trace the result through
+-a report and an archive.
++correlations between health and well-being. Participants see how the
++dataset is documented and versioned, then complete and run a
++correlation meta-analysis pipeline, render a report from its outputs,
++and change the analysis to reproduce the results. The aim is to
++understand and experience an end-to-end reproducible research workflow,
++not to master every package.
+ 
+ ## Workshop
+ 
+@@ -56,40 +59,49 @@ on the [workshop website](https://jbris.github.io/open-and-reproducible-science-
+ Quarto is used to organise the website and reports, with sources in the
+ [pages directory](pages/).
+ 
+-Set up your environment and verify the data before the session.
+-The draft teaching plan gives the timing and activities for each lesson.
++Open the prepared MyBinder environment, verify the data, and prepare the
++dataset versions before the session. The
++[programme](https://jbris.github.io/open-and-reproducible-science-in-r/pages/1_introduction.html#intro-programme)
++lists the timing and format of each segment, and the draft teaching plan
++describes how they are delivered.
+ [Preparation](pages/workshop/00_preparation.qmd) ·
+ [Draft teaching plan](draft/workshop_plan.qmd)
+ 
+ | Tools | Role in the core workflow |
+ | --- | --- |
+ | [Git](https://git-scm.com/) and [GitHub](https://github.com/) | Track changes, collaborate, and share code. |
+-| [renv](https://rstudio.github.io/renv/) and [Docker](https://www.docker.com/) | Record R dependencies and capture the computing environment. |
++| [renv](https://rstudio.github.io/renv/), [Docker](https://www.docker.com/), and [Binder](https://mybinder.org/) | Record R dependencies, capture the computing environment, and provide it in a browser. |
+ | [codebook](https://cran.r-project.org/package=codebook) and [dataspice](https://docs.ropensci.org/dataspice/) | Describe the variables and record FAIR dataset metadata. |
+-| [pins](https://pins.rstudio.com/articles/pins.html) | Store datasets with provenance and retrieve a specific version. |
++| [pins](https://pins.rstudio.com/articles/pins.html) and [vetiver](https://vetiver.posit.co/) | Store data and model versions with provenance and retrieve a specific version. |
+ | [targets](https://docs.ropensci.org/targets/) | Organise the analysis and track what needs to be rebuilt. |
+ | [Quarto](https://quarto.org/) | Connect the methods, results, and provenance in a report. |
+-| [Zenodo](https://zenodo.org/) | Archive permitted outputs and cite a specific release. |
++| GitHub releases and [Zenodo](https://zenodo.org/) | Release, archive, and cite a specific version. |
+ 
+ By the end of the workshop, participants should be able to:
+ 
+ - Explain how the tools support different parts of a reproducible research workflow.
+-- Record dataset metadata and provenance and retrieve a specific version.
+-- Trace a result through the analytical pipeline and report.
+-- Identify the files and metadata needed for a citable archive.
++- Explain how metadata and data and model versions support provenance.
++- Complete and run a `targets` pipeline and render a Quarto report from its outputs.
++- Modify an analysis input, rebuild only what is affected, and reproduce the result.
++- Identify the files and metadata needed for a citable release and archive.
+ 
+-Some familiarity with R will help participants follow the examples. The session
+-focuses on connecting the tools into a coherent workflow and understanding the
+-principles behind their use.
++The session combines 42 minutes of concepts and demonstrations, 40 minutes of
++hands-on exercises, and 8 minutes of discussion. Participants complete a
++partially prepared pipeline and report in one prepared MyBinder environment,
++so nothing is installed during the session. Some familiarity with R will help
++participants follow the examples.
+ 
+ ### Research objects and responsible sharing
+ 
+-The final five minutes include discussion and optional examples of
+-synthetic study summaries with `synthpop` and model versioning with
+-`vetiver`. Synthetic data can help others test a workflow. Verifying
+-findings based on original observations requires access to them, and
+-privacy claims need evidence about the mechanism and privacy accounting.
+-[Closing lesson](pages/workshop/09_extras_and_discussion.qmd)
++Model versioning with `vetiver` uses a small supplementary predictive model,
++because its standard interface does not support the meta-analysis model.
++Synthetic study summaries with `synthpop` are a supplementary exercise, mentioned
++briefly in the archiving segment. Synthetic data can help others test a
++workflow. Verifying findings based on original observations requires access to
++them, and privacy claims need evidence about the mechanism and privacy
++accounting.
++[Data and model versioning](pages/workshop/04_versioning.qmd) ·
++[Supplementary synthetic data exercise](pages/workshop/10_synthetic_data.qmd)
+ 
+ ## Usage with Docker
+ 
+@@ -157,9 +169,13 @@ PDF download. To build a single format, use `quarto render --to html` or
+ Code evaluation is disabled by default in `_quarto.yml`, but workshop R
+ example chunks explicitly enable it. Rendering uses the restored library
+ and runs the examples, including downloads and analysis, or reuses cached
+-results. Workshop chapters execute from the project root; the standalone
+-report command specifies its own input directory. The draft teaching plan
+-is excluded from the book.
++results. Workshop chapters execute from the project root. The targets
++chapter copies the partially completed pipeline in `pipelines/exercise/` to the
++ignored `workspace/` folder. While its TODOs remain, a catch-up step replaces
++the copy with the completed reference in `pipelines/`, so the rendered book
++shows the expected results. Render the standalone report from the project root;
++it locates the pipeline summary relative to the project root. The draft
++teaching plan is excluded from the book.
+ 
+ ## Coordinators
+ 
+diff --git a/_quarto.yml b/_quarto.yml
+index b69278b..7b5150d 100644
+--- a/_quarto.yml
++++ b/_quarto.yml
+@@ -54,14 +54,17 @@ book:
+       chapters:
+         - pages/workshop/00_preparation.qmd
+         - pages/workshop/01_open_science.qmd
+-        - pages/workshop/02_git_github.qmd
+-        - pages/workshop/03_environments.qmd
+-        - pages/workshop/04_data_documentation.qmd
+-        - pages/workshop/05_pins.qmd
+-        - pages/workshop/06_targets.qmd
+-        - pages/workshop/07_quarto.qmd
+-        - pages/workshop/08_zenodo.qmd
+-        - pages/workshop/09_extras_and_discussion.qmd
++        - pages/workshop/02_environments.qmd
++        - pages/workshop/03_data_documentation.qmd
++        - pages/workshop/04_versioning.qmd
++        - pages/workshop/05_targets.qmd
++        - pages/workshop/06_quarto.qmd
++        - pages/workshop/07_modify_and_reproduce.qmd
++        - pages/workshop/08_archiving.qmd
++        - pages/workshop/09_discussion.qmd
++    - part: "Supplementary exercises"
++      chapters:
++        - pages/workshop/10_synthetic_data.qmd
+     - part: "Communications and Community"
+       chapters:
+         - ANNOUNCEMENTS.md
+diff --git a/draft/workshop_pages.qmd b/draft/workshop_pages.qmd
+index e76a181..16ae5b2 100644
+--- a/draft/workshop_pages.qmd
++++ b/draft/workshop_pages.qmd
+@@ -1,6 +1,6 @@
+ ---
+ title: "Workshop page plan"
+-subtitle: "Planned Quarto chapters for the 90-minute programme"
++subtitle: "Quarto chapters for the final 90-minute programme"
+ editor: visual
+ ---
+ 
+@@ -13,74 +13,87 @@ and Ebert (2021). The dataset contains 29 study-level summaries, with the fields
+ `author`, `cor`, `n`, `population`, and `country`.
+ 
+ Follow this dataset from source attribution and environment preparation through
+-metadata, storage, analysis, reporting, and archiving. The
+-[workshop teaching plan](workshop_plan.qmd) gives the full learning objectives
+-and delivery guidance. This page is an unpublished planning document.
+-
+-## Planned QMD pages
+-
+-Paths are relative to the repository root. All ten pages have teaching
+-text and examples. Human review and a timed rehearsal are pending.
+-
+-| QMD file | Time | Duration | Topic and tools | Planned content | Status |
+-| --- | --- | --- | --- | --- | --- |
+-| `pages/workshop/00_preparation.qmd` | Before the session | Outside the 90 minutes | Project and environment setup; R, Git, GitHub, renv, Docker | Get a project copy; choose local R or Docker; download and verify the raw dataset; record its source; complete setup checks. | Drafted |
+-| `pages/workshop/01_open_science.qmd` | 0–5 min | 5 min | Introduction to open and reproducible science; R | Introduce the research question, study-level unit of observation, shared dataset, and traceable workflow. | Drafted |
+-| `pages/workshop/02_git_github.qmd` | 5–17 min | 12 min | Version control, collaboration and sharing; Git, GitHub | Create a working branch; write a dataset provenance note; inspect and commit the change; demonstrate a pull request within a participant's fork. | Drafted |
+-| `pages/workshop/03_environments.qmd` | 17–30 min | 13 min | Reproducible computational environments; renv, Docker | Inspect the lockfile and running R version; explain restoration and containers; reload data after a restart; save a session record. | Drafted |
+-| `pages/workshop/04_data_documentation.qmd` | 30–42 min | 12 min | Dataset documentation and FAIR metadata; codebook, dataspice | Describe variables, units, missing values, creators, provenance, licensing, and access conditions using prepared codebook output and metadata templates. | Drafted |
+-| `pages/workshop/05_pins.qmd` | 42–50 min | 8 min | Dataset storage and versioning; pins | Store all 29 studies and the 18 general-population studies on a local board; save and retrieve explicit version identifiers. | Drafted |
+-| `pages/workshop/06_targets.qmd` | 50–68 min | 18 min | Reproducible analytical pipelines; targets | Connect the selected data version to preparation, correlation meta-analysis, and output files; inspect the dependency graph and selective rebuilding. | Drafted |
+-| `pages/workshop/07_quarto.qmd` | 68–80 min | 12 min | Reproducible reporting and publishing; Quarto | Combine methods, tracked results, and provenance in a prepared report; render HTML and demonstrate publishing. | Drafted |
+-| `pages/workshop/08_zenodo.qmd` | 80–85 min | 5 min | Research archiving and persistent identifiers; Zenodo | Inspect a prepared deposit, versioned release, citation metadata, licence, and DOI; identify the permitted archive contents. | Drafted |
+-| `pages/workshop/09_extras_and_discussion.qmd` | 85–90 min | 5 min | Optional extras and concluding discussion; synthpop, vetiver | Use prepared synthetic-data and model-version examples; explain their limits; invite questions and identify follow-up resources. | Drafted |
+-| **Timed programme total** | **0–90 min** | **90 min** | | | |
+-
+-## Structure within a practical page
+-
+-Use learning objectives, a short explanation of why the step matters, a worked
+-example, one participant action, an expected-result checkpoint, key takeaways,
+-and further reading. Opening, archiving, and closing pages can use a short
+-demonstration or discussion instead of a full practical exercise.
+-
+-Use prepared inputs and fallback outputs to keep activities within their time
+-allocation. Complete installations, downloads, and image builds before the
+-session. Keep the closing discussion even if optional demonstrations are skipped.
+-
+-## Supplied examples for the optional closing page
+-
+-Page 09 adapts the supplied snippets for the full dataset pin, with
+-preparation in this order:
+-
+-1. Retrieve the full `HealthWellbeing` version recorded in the
+-   dataset storage activity.
++metadata, versioning, analysis, reporting, and archiving. The
++[workshop teaching plan](workshop_plan.qmd) gives the main learning outcome,
++the programme, and delivery guidance. This page is an unpublished planning
++document.
++
++## Pages
++
++Paths are relative to the repository root. There is one page per programme
++segment, plus the preparation page and a supplementary exercise. All pages have
++teaching text and examples. Human review and a timed rehearsal are pending.
++
++| QMD file | Time | Duration | Activity and tools | Format | Planned content | Status |
++| --- | --- | --- | --- | --- | --- | --- |
++| `pages/workshop/00_preparation.qmd` | Before the session | Outside the 90 minutes | Preparation; MyBinder, R, Git, renv | Self-paced | Open the prepared MyBinder session; clone the project; check R and the library; verify the raw data; prepare the dataset versions; record the source. | Drafted |
++| `pages/workshop/01_open_science.qmd` | 0–10 min | 10 min | Introduction, reproducibility principles, Git and GitHub | Conceptual | Research question, study-level unit of observation, the workflow as one table, and a demonstration of commits, branches, pull requests, and releases. Hands-on Git practice with a fork is follow-up material. | Drafted |
++| `pages/workshop/02_environments.qmd` | 10–20 min | 10 min | Computational reproducibility; renv, Docker, Binder | Demonstration | Running R version, lockfile versions, `renv::status()`, Dockerfile to GitHub Actions to MyBinder, and a session record. | Drafted |
++| `pages/workshop/03_data_documentation.qmd` | 20–28 min | 8 min | FAIR principles and metadata; codebook, dataspice | Demonstration | Data dictionary from `codebook_table()`, `dataspice` templates for creators, access, and variables, and the JSON-LD export. | Drafted |
++| `pages/workshop/04_versioning.qmd` | 28–35 min | 7 min | Data and model versioning; pins, vetiver | Demonstration | Two dataset versions from the prepared script, retrieval by identifier, and two versions of a supplementary `vetiver` model with input prototypes and training data version. | Drafted |
++| `pages/workshop/05_targets.qmd` | 35–50 min | 15 min | Build and execute a targets meta-analysis pipeline | Hands-on | Copy the partially completed pipeline, run it to see where it stops, complete two dependency TODOs, inspect the graph, build, and rerun. | Drafted |
++| `pages/workshop/06_quarto.qmd` | 50–65 min | 15 min | Create and render a reproducible Quarto report | Hands-on | Copy and render the partially completed report, complete the interval, interpretation, and provenance TODOs, rerender, and check the values against the summary. | Drafted |
++| `pages/workshop/07_modify_and_reproduce.qmd` | 65–75 min | 10 min | Modify the analysis and reproduce the results; targets, Quarto | Hands-on | Rebuild from the pinned input with an identical summary, switch to the general-population version, rerender, and restore. Optional estimator change as a sensitivity check. | Drafted |
++| `pages/workshop/08_archiving.qmd` | 75–82 min | 7 min | GitHub releases, Zenodo, archiving and optional synthpop | Conceptual | Releases and their triggered builds, Zenodo version and concept DOIs, archive contents, and a brief mention of synthetic data. | Drafted |
++| `pages/workshop/09_discussion.qmd` | 82–90 min | 8 min | Questions and discussion | Interactive | Recap of what each stage recorded, discussion prompts, questions, exporting work, and follow-up resources. | Drafted |
++| `pages/workshop/10_synthetic_data.qmd` | After the session | Supplementary | Synthetic data; synthpop | Self-paced | Generate synthetic study summaries, compare distributions, pool both tables, and explain the limits on verification and privacy. | Drafted |
++| **Timed programme total** | **0–90 min** | **90 min** | | | | |
++
++## Structure within a page
++
++Hands-on pages state learning objectives, give each step a time allocation,
++show a worked example with expected output, and end with a checkpoint and
++further reading. Solutions are in collapsed callouts. Demonstration and
++conceptual pages use the same structure, with the instructor running the code
++and participants following along in their own session.
++
++Complete installations, downloads, and image builds before the session.
++Keep the closing discussion even if earlier segments overrun.
++
++## Exercise files
++
++| File | Role |
++| --- | --- |
++| `pipelines/prepare_health_wellbeing.R` | Verifies the raw file, writes the two dataset versions, records their identifiers, and selects the full version. Rerunning it reuses matching versions. |
++| `pipelines/exercise/_targets_health_wellbeing.R` | Partially completed pipeline. TODO 1 connects `fit` to `studies`; TODO 2 writes the summary file. |
++| `pipelines/exercise/health_wellbeing_report.qmd` | Partially completed report. TODOs add the confidence interval, an interpretation, and the provenance fields. |
++| `pipelines/_targets_health_wellbeing.R` | Completed reference pipeline, used as the solution and catch-up copy. |
++| `pipelines/health_wellbeing_report.qmd` | Completed reference report. |
++| `workspace/` | Participants' working copies, ignored by Git. |
++
++The targets page copies the template to `workspace/_targets.R` only if no copy
++exists. Its catch-up step replaces the copy with the reference only while a
++`stop()` placeholder remains, so the rendered book shows the completed results.
++The report reads the summary through `here::here()`, so it renders from the
++project root without an execution-directory option. Both reports render as
++standalone HTML beside their source.
++
++## Supplementary synthpop exercise
++
++Page 10 uses the full dataset pin, in this order:
++
++1. Retrieve the full `HealthWellbeing` version recorded by the preparation
++   script.
+ 2. Define `original` with a factor `population`, `z = atanh(cor)`, and
+-   `log_n = log(n)`. Both optional examples depend on this object.
++   `log_n = log(n)`.
+ 3. Use `synthpop::syn()` with CART and seed 123; convert synthetic `z` and
+    `log_n` back with `tanh()` and rounded `exp()`; generate synthetic study
+    labels; inspect distributions with `compare()`. Label all generated records
+    as synthetic, including their generated sample sizes.
+-4. Fit the illustrative regressions `z ~ population` and
+-   `z ~ population + log_n`. Store them using `vetiver_model()` and
+-   `vetiver_pin_write()` on a versioned local `pins` board named `model_store`,
+-   with the model name `health_wellbeing`.
+-5. Inspect `pin_versions()` and read both models by their identifiers
+-   with `vetiver_pin_read()`. The model metadata links to the training
+-   pin, code revision, and environment.
+-
+-These unweighted regressions illustrate model storage and alternative
+-specifications; they are not the correlation meta-analysis taught in the core
+-pipeline. The synthesis example is not a differential privacy guarantee, and a
+-distribution comparison does not establish one. Both examples share the final
+-five-minute slot with discussion; fuller execution belongs in follow-up material.
++4. Pool the original and synthetic tables with the workshop's random-effects
++   model and compare the estimates.
++
++The synthesis example is not a differential privacy guarantee, and neither a
++distribution comparison nor a matching pooled estimate establishes one. The
++archiving segment mentions synthetic data briefly; the exercise itself is
++follow-up material.
+ 
+ ## Development and validation status
+ 
+-The teaching pipeline is `pipelines/_targets_health_wellbeing.R`.
+-Its output feeds the standalone `pipelines/health_wellbeing_report.qmd`
+-template. The lockfile records renv 1.0.7 under R 4.4.1. Capturing
+-the workshop packages and rehearsing the full session remain
+-preparation tasks.
++The pages, templates, and reference files were rendered and run in the
++published workshop image under R 4.4.1, including the catch-up path from a
++clean store. Rehearsing the full session in a fresh MyBinder launch and human
++review remain preparation tasks.
+ 
+-Codex assisted with this page plan, the chapters, and the teaching
+-examples. Human review is pending.
++Codex and Claude Code assisted with this page plan, the chapters, and the
++teaching examples. Human review is pending.
+diff --git a/draft/workshop_plan.qmd b/draft/workshop_plan.qmd
+index 24c9d6a..1df3625 100644
+--- a/draft/workshop_plan.qmd
++++ b/draft/workshop_plan.qmd
+@@ -1,6 +1,6 @@
+ ---
+ title: "Workshop plan"
+-subtitle: "Recommended 90-minute programme and development plan"
++subtitle: "Final 90-minute programme and development plan"
+ author:
+   - name: "James Bristow"
+     affiliation: "Massey University"
+@@ -10,179 +10,215 @@ author:
+ 
+ ## Scope and development status
+ 
+-This draft follows the recommended 90-minute programme below, replacing the
+-earlier two-hour format. Dataset documentation and FAIR metadata are core
+-activities; `synthpop` and `vetiver` are optional extras in the final five-minute
+-discussion. Installation, production model deployment, and a full treatment of
+-differential privacy are outside the timed programme.
++This plan adopts the final 90-minute programme below. The first half
++introduces the reproducible research lifecycle through short conceptual
++segments and demonstrations. The second half is one continuous hands-on
++exercise with `targets` and Quarto. `synthpop` is a supplementary exercise
++in the workbook, mentioned briefly in the archiving segment. Installation,
++production model deployment, and a full treatment of differential privacy
++are outside the timed programme.
+ 
+-The [page plan](workshop_pages.qmd) tracks the drafted lessons, the
+-`HealthWellbeing` pipeline, the report template, and the optional
+-examples. A timed rehearsal and the prepared participant environment
+-are pending. The lockfile currently records renv 1.0.7 under R 4.4.1.
++The [page plan](workshop_pages.qmd) tracks one lesson per programme segment,
++the preparation page, and the supplementary exercise. The exercise templates
++and reference solutions have been run in the published workshop image under
++R 4.4.1. Human review and a timed rehearsal are pending. The lockfile records
++the workshop packages under R 4.4.1, with renv 1.0.7.
+ 
+-Participants should have basic familiarity with R and receive a prepared
+-project and verified computing environment before the session. The intended
+-result is one documented workflow with a versioned input, tracked analysis,
+-reproducible report, and prepared archive record.
++Participants should have basic familiarity with R and open the prepared
++MyBinder environment before the session. The intended result is one
++documented workflow with a versioned input, a tracked analysis, a reproducible
++report, and a prepared archive record.
+ 
+-## Learning objectives
++## Main learning outcome
+ 
+-By the end of the core programme, participants should be able to:
++Participants should understand and experience an end-to-end reproducible
++research workflow. Mastering every individual package is not the aim.
+ 
+-- Explain how Git/GitHub, renv, and Docker support collaboration and reproducibility.
+-- Document dataset variables, provenance, licensing, and access conditions using
+-  a codebook and structured metadata that support FAIR principles.
+-- Store dataset versions with `pins` and retrieve a specified version.
+-- Trace inputs and outputs through a `targets` pipeline and a Quarto report.
+-- Identify the materials and metadata needed for an archived, citable release.
++By the end of the programme, participants should be able to:
+ 
+-Independent model versioning and synthetic-data generation are follow-up options
+-rather than required participant outcomes.
++- Explain how the tools support different parts of a reproducible research workflow.
++- Describe how a codebook and structured metadata record variables,
++  provenance, licensing, and access conditions in support of FAIR principles.
++- Explain how `pins` and `vetiver` link results to specific data and model versions.
++- Complete and run a `targets` pipeline and render a Quarto report from its outputs.
++- Modify an analysis input, rebuild only what is affected, and reproduce the result.
++- Identify the files and metadata needed for a citable release and archive.
+ 
+-## Recommended 90-minute workshop programme
++## Final 90-minute programme
+ 
+-| Time | Duration | Topic | Tools |
++| Time | Duration | Activity | Format |
+ | --- | --- | --- | --- |
+-| 0–5 min | 5 min | Introduction to open and reproducible science | R |
+-| 5–17 min | 12 min | Version control, collaboration and sharing | Git, GitHub |
+-| 17–30 min | 13 min | Reproducible computational environments | renv, Docker |
+-| 30–42 min | 12 min | Dataset documentation and FAIR metadata | codebook, dataspice |
+-| 42–50 min | 8 min | Dataset storage and versioning | pins |
+-| 50–68 min | 18 min | Reproducible analytical pipelines | targets |
+-| 68–80 min | 12 min | Reproducible reporting and publishing | Quarto |
+-| 80–85 min | 5 min | Research archiving and persistent identifiers | Zenodo |
+-| 85–90 min | 5 min | Optional extras and concluding discussion | synthpop, vetiver |
++| 0–10 min | 10 min | Introduction, reproducibility principles, Git and GitHub | Conceptual |
++| 10–20 min | 10 min | Computational reproducibility: renv, Docker and Binder | Demonstration |
++| 20–28 min | 8 min | FAIR principles and metadata: codebook and dataspice | Demonstration |
++| 28–35 min | 7 min | Data and model versioning: pins and vetiver | Demonstration |
++| 35–50 min | 15 min | Build and execute a targets meta-analysis pipeline | Hands-on |
++| 50–65 min | 15 min | Create and render a reproducible Quarto report | Hands-on |
++| 65–75 min | 10 min | Modify the analysis and reproduce the results | Hands-on |
++| 75–82 min | 7 min | GitHub releases, Zenodo, archiving and optional synthpop | Conceptual |
++| 82–90 min | 8 min | Questions and discussion | Interactive |
+ | **Total** | **90 min** | | |
+ 
+-### Delivery and pacing
+-
+-- **0–5 minutes:** introduce the research question and show the prepared project.
+-  Connect each later step to a reproducibility problem.
+-- **5–17 minutes:** inspect the repository, make one small change and commit, and
+-  demonstrate GitHub collaboration and sharing using a prepared example.
+-- **17–30 minutes:** inspect the lockfile and Docker configuration. Explain R
+-  package dependencies versus the wider computing environment. Complete full
+-  dependency restoration and image builds before the session.
+-- **30–42 minutes:** inspect a prepared `codebook` output, complete a few variable
+-  descriptions and units, and connect them to `dataspice` metadata for creators,
+-  access, and dataset description. Discuss findability, accessibility,
+-  interoperability, and reusability (FAIR), including licence and access conditions.
+-- **42–50 minutes:** write two small dataset versions to a prepared local `pins`
+-  board and retrieve an earlier version by its identifier.
+-- **50–68 minutes:** run a small, scaffolded `targets` pipeline, inspect its
+-  dependency graph, change one input, and observe which outputs need rebuilding.
+-- **68–80 minutes:** render a prepared Quarto report from the pipeline outputs,
+-  inspect provenance, and show a prepared publishing example rather than requiring
+-  every participant to deploy a site.
+-- **80–85 minutes:** inspect a prepared Zenodo deposit and its citation metadata.
+-  Explain persistent identifiers and versioned releases without requiring live
+-  publication by participants.
+-- **85–90 minutes:** briefly signpost `synthpop` and `vetiver`, using prepared
+-  outputs if time permits, then invite questions and identify follow-up resources.
+-
+-Use one small participant action per segment and supply completed checkpoints
+-and example outputs for anyone who falls behind. Each allocation includes its
+-explanation, activity, and transition; there is no separate setup buffer. Keep
+-concluding discussion even if optional demonstrations are skipped. Dates, venues,
+-and announced session details belong in [announcements](../ANNOUNCEMENTS.md).
++| Workshop format | Time |
++| --- | --- |
++| Concepts and demonstrations | 42 min |
++| Hands-on exercises | 40 min |
++| Discussion | 8 min |
++
++The balance suits an interdisciplinary audience. Participants encounter the
++complete reproducible research lifecycle while gaining practical experience
++with `targets` and Quarto.
++
++## Foundations for the exercises
++
++1. **One dataset throughout.** Use `HealthWellbeing` from section 4.2.4 of
++   *Doing Meta-Analysis with R*. For `vetiver`, include a small supplementary
++   predictive model, because its standard interface does not support the
++   meta-analysis model. The lesson uses two linear regressions that predict
++   a study's Fisher-transformed correlation from its population type and log
++   sample size.
++2. **One continuous hands-on exercise.** Provide a partially completed
++   `targets` pipeline and Quarto report, so participants modify and execute
++   the workflow rather than build everything from scratch. The templates in
++   `pipelines/exercise/` each have short TODOs. Participants copy them to the
++   ignored `workspace/` folder. The completed references in `pipelines/` serve
++   as solutions and catch-up copies.
++3. **One prepared computational environment.** Use MyBinder to provide the
++   required packages, configuration, and data. Avoid live installations
++   during the workshop. The repository includes the verified raw file, and
++   `pipelines/prepare_health_wellbeing.R` prepares the versioned dataset
++   inputs before the session.
++
++## Delivery and pacing
++
++- **0–10 minutes, conceptual:** introduce the research question, the unit of
++  observation, and the principles of understanding, rerunning, auditing,
++  tracing, reusing, and citing work. Show the programme as one workflow.
++  Demonstrate commits, branches, pull requests, and the releases page in the
++  workshop repository. Hands-on Git practice is follow-up material.
++- **10–20 minutes, demonstration:** inspect the running R version and the
++  lockfile. Explain R package dependencies and the wider computing
++  environment. Trace the Dockerfile through GitHub Actions to the MyBinder
++  session participants are already using, and save a session record.
++- **20–28 minutes, demonstration:** show a prepared `codebook` table and
++  `dataspice` templates for creators, access, provenance, and variables.
++  Generate the JSON-LD and discuss licence and access conditions for FAIR data.
++- **28–35 minutes, demonstration:** show the two prepared dataset versions on
++  a versioned local `pins` board and retrieve each by its identifier. Store two
++  versions of the supplementary `vetiver` model and compare their input
++  prototypes and training data version.
++- **35–50 minutes, hands-on:** participants copy the partially completed
++  pipeline, run it to see where it stops, and complete two TODOs that create
++  missing dependencies. They inspect the graph, build the targets, and rerun
++  to see that every target is skipped.
++- **50–65 minutes, hands-on:** participants copy and render the partially
++  completed report. They then add the confidence interval with inline R, an
++  interpretation, and the provenance fields, and check the rendered values
++  against the pipeline summary.
++- **65–75 minutes, hands-on:** participants rebuild everything from the
++  pinned input and confirm an identical summary. They switch the selected
++  version to the general-population subset, predict and observe the
++  outdated targets, rerender the report, and restore the full version. A
++  method change is an optional sensitivity check.
++- **75–82 minutes, conceptual:** explain GitHub releases, the release-triggered
++  image builds, and Zenodo version and concept DOIs. Decide what belongs in a
++  permitted archive. Briefly mention `synthpop` for data that cannot be shared,
++  and point to the supplementary exercise.
++- **82–90 minutes, interactive:** recap what each stage recorded, discuss
++  barriers to reproducibility in participants' own work, take questions, and
++  remind participants to export their workspace.
++
++Each hands-on step lists a time allocation, an expected-result checkpoint, and
++a collapsed solution. If someone falls behind, the targets catch-up step
++replaces an unfinished pipeline with the completed reference, and the
++reference report is available for comparison. Keep the discussion even if
++earlier segments overrun. Dates, venues, and announced session details belong
++in [announcements](../ANNOUNCEMENTS.md).
+ 
+ ## Proposed revised abstract
+ 
+ Open and reproducible science helps research be understood, evaluated, reused,
+-and extended by others. This 90-minute workshop introduces a practical research
+-workflow using R and open-source tools.
+-
+-Participants will follow one prepared project through version control and
+-collaboration with Git and GitHub, reproducible environments with renv and
+-Docker, and dataset documentation using codebook and dataspice. They will explore
+-how variable descriptions, provenance, licensing, and access metadata support
+-FAIR research data.
+-
+-The workflow connects dataset storage and versioning with pins to analytical
+-pipelines with targets and reproducible reporting and publishing with Quarto.
+-A short Zenodo demonstration introduces archiving and persistent identifiers.
+-Optional closing examples signpost synthetic data with synthpop and model
+-versioning with vetiver.
++and extended by others. This 90-minute workshop introduces a practical,
++end-to-end research workflow using R and open-source tools.
++
++Short demonstrations follow one prepared project through version control with
++Git and GitHub, reproducible environments with renv, Docker, and Binder, FAIR
++dataset metadata with codebook and dataspice, and data and model versioning
++with pins and vetiver. In a continuous hands-on exercise, participants complete
++and run a targets meta-analysis pipeline, render a reproducible Quarto report
++from its outputs, then modify the analysis and reproduce the results. The
++session closes with GitHub releases, archiving and persistent identifiers with
++Zenodo, and discussion.
+ 
+ The emphasis is on transparent, portable, auditable, reusable, and accessible
+-research, with clear documentation of limits on data access and reuse. Activities
+-use public teaching data and prepared scaffolding so participants can focus on
+-the connections between the tools.
++research, with clear documentation of limits on data access and reuse.
++Participants use public teaching data in a prepared browser-based environment,
++so they can focus on how the tools connect rather than on installation.
+ 
+ ## One practical research project
+ 
+-Use the publicly accessible `HealthWellbeing` teaching dataset and
+-pool the study correlations. Preserve the raw file and explain
+-cleaning, missing-value checks, and modelling assumptions. Check
+-upstream reuse terms before adding data to an archive.
++Use the publicly accessible `HealthWellbeing` teaching dataset and pool the
++study correlations. Preserve the raw file and explain cleaning, missing-value
++checks, and modelling assumptions. Check upstream reuse terms before adding
++data to an archive.
+ [Section 4.2.4, Correlations](https://doing-meta.guide/pooling-es#correlations)
+ 
+ 1. **Track the project and environment.** Provide a Git repository containing
+-   analysis helpers, metadata templates, a lockfile, and Docker configuration.
+-   Participants inspect the prepared files and record a small change.
++   the pipeline, report, metadata templates, a lockfile, and Docker
++   configuration, launched as a prepared MyBinder session.
+ 2. **Document the dataset.** Use `codebook` to inspect variable descriptions and
+    summaries, and `dataspice` to prepare structured dataset metadata. Record the
+    source, creators, licence, access conditions, units, and processing decisions.
+    These tools support FAIR practices; using them does not by itself establish
+    that a dataset meets every FAIR principle.
+-3. **Store and retrieve versions.** Prepare a local `pins` board with versioning
+-   explicitly enabled. Write two dataset versions and retrieve a specified
+-   earlier version. Keep metadata linked to the matching data version.
+-4. **Run the analytical pipeline.** Use `targets` to connect the selected dataset
+-   version, preparation, a simple analysis or model, and output files. Make the
+-   version identifier an explicit input rather than silently reading whichever
+-   version is newest. Supply short-running targets and completed checkpoints.
+-5. **Report and publish.** Use Quarto to read the tracked output files and explain
+-   methods and results. Record the dataset version, code revision, analytical
+-   settings, and environment information needed to trace each result.
+-6. **Prepare an archive.** Assemble code, documentation, permitted data, and the
+-   report for a GitHub release and a prepared Zenodo deposit. Inspect authorship,
+-   licensing, version information, and the persistent identifier.
+-
+-Optional closing examples can reuse the dataset and any simple fitted model.
+-Neither synthetic-data generation nor separate model storage is required to
+-complete the core workflow.
++3. **Store and retrieve versions.** Store two dataset versions on a local `pins`
++   board with versioning enabled explicitly, and retrieve a specified version.
++   Store two versions of a supplementary `vetiver` model with its training data
++   version in the metadata.
++4. **Run the analytical pipeline.** Complete a partially prepared `targets`
++   pipeline that connects the selected dataset version, checks, a
++   random-effects correlation meta-analysis, and a summary file. The version
++   identifier is an explicit input rather than whichever version is newest.
++5. **Report the results.** Complete a partially prepared Quarto report that
++   reads the summary and records the dataset version, script checksum,
++   analytical settings, and software versions needed to trace each result.
++6. **Modify and reproduce.** Rebuild from the pinned input, change the selected
++   version, and observe which targets and report values change.
++7. **Prepare an archive.** Connect a GitHub release to a Zenodo deposit, and
++   identify the code, documentation, permitted data, and report it should
++   contain. Inspect authorship, licensing, version information, and the
++   persistent identifier.
+ 
+ ## Tools and scope
+ 
+ | Tool | Planned teaching role | Scope |
+ | --- | --- | --- |
+-| [R](https://www.r-project.org/) | Shared language and prepared project | Core introduction |
+-| [Git](https://git-scm.com/), [GitHub](https://github.com/) | Change history, collaboration, and sharing | Core, 12 minutes |
+-| [renv](https://rstudio.github.io/renv/), [Docker](https://www.docker.com/) | R dependencies and the wider computing environment | Core, 13 minutes; setup completed beforehand |
+-| [codebook](https://cran.r-project.org/package=codebook) | Variable descriptions, labelled missing values, and summaries | Core metadata segment, shared 12 minutes |
+-| [dataspice](https://docs.ropensci.org/dataspice/) | Structured metadata using CSV templates and Schema.org descriptions | Core metadata segment, shared 12 minutes |
+-| [pins](https://pins.rstudio.com/articles/pins.html) | Dataset storage, version identifiers, and historical retrieval | Core, 8 minutes |
+-| [targets](https://docs.ropensci.org/targets/) | Analysis dependencies, tracked outputs, and selective rebuilding | Core, 18 minutes |
+-| [Quarto](https://quarto.org/) | Reproducible reporting and publishing | Core, 12 minutes |
+-| [Zenodo](https://zenodo.org/) | Archiving and persistent identifiers | Core demonstration, 5 minutes |
+-| [synthpop](https://www.synthpop.org.uk/) | Synthetic-data illustration and limits on interpretation and sharing | Optional closing example within the final 5 minutes |
+-| [vetiver](https://vetiver.posit.co/get-started/version.html) | Model storage, input requirements, and prediction dependencies | Optional closing example within the final 5 minutes |
++| [R](https://www.r-project.org/) | Shared language and prepared project | Throughout |
++| [Git](https://git-scm.com/), [GitHub](https://github.com/) | Change history, collaboration, and sharing | Conceptual, within the first 10 minutes |
++| [renv](https://rstudio.github.io/renv/), [Docker](https://www.docker.com/), [Binder](https://mybinder.org/) | R dependencies, the wider computing environment, and the prepared participant session | Demonstration, 10 minutes; setup completed beforehand |
++| [codebook](https://cran.r-project.org/package=codebook) | Variable descriptions, labelled missing values, and summaries | Demonstration, shared 8 minutes |
++| [dataspice](https://docs.ropensci.org/dataspice/) | Structured metadata using CSV templates and Schema.org descriptions | Demonstration, shared 8 minutes |
++| [pins](https://pins.rstudio.com/articles/pins.html) | Dataset storage, version identifiers, and historical retrieval | Demonstration, shared 7 minutes; pipeline input in the hands-on exercise |
++| [vetiver](https://vetiver.posit.co/get-started/version.html) | Model storage, input prototypes, and training data version | Demonstration, shared 7 minutes; supplementary predictive model |
++| [targets](https://docs.ropensci.org/targets/) | Analysis dependencies, tracked outputs, and selective rebuilding | Hands-on, 15 minutes, and 10 minutes modifying and reproducing |
++| [Quarto](https://quarto.org/) | Reproducible reporting and publishing | Hands-on, 15 minutes, and rerendering after the modification |
++| GitHub releases, [Zenodo](https://zenodo.org/) | Releases, archiving, and persistent identifiers | Conceptual, 7 minutes |
++| [synthpop](https://www.synthpop.org.uk/) | Synthetic-data illustration and limits on interpretation and sharing | Brief mention; supplementary exercise in the workbook |
+ 
+ `pins` and `vetiver` support versioned storage, but project-specific provenance
+ links still need to be supplied as metadata. Enable versioning explicitly for a
+ local folder board. Capture the computational package environment with `renv`
+ alongside the model's prediction dependencies.
+ 
+-Test the chosen package versions together before adding them to the workshop
+-lockfile. Prepare `codebook` output and partially completed `dataspice` templates
+-in advance so the metadata activity fits its time allocation.
+-
+-## Optional extras and responsible sharing
+-
+-The final five minutes combine optional examples with concluding discussion;
+-they are not two additional practical exercises. Use prepared outputs and
+-provide fuller material for follow-up.
++## Supplementary synthpop exercise and responsible sharing
+ 
+-- **synthpop:** show a synthetic version of the public teaching data and one
+-  comparison with the original. A runnable synthetic-data workflow does not let
+-  others verify findings computed from inaccessible originals. Ordinary synthesis
+-  with `synthpop` must not be presented as a differential privacy guarantee;
+-  utility or disclosure-risk scores do not establish one.
+-- **vetiver:** show a prepared model record with its dataset version, code
+-  revision, settings, input requirements, and prediction dependencies. Creating
+-  a model API or deploying a service is follow-up work.
++The supplementary exercise uses the full pinned dataset. It generates synthetic
++study summaries with CART and seed 123, compares their distributions with the
++original, and runs the same pooled analysis on both tables. A runnable
++synthetic-data workflow does not let others verify findings computed from
++inaccessible originals. Ordinary synthesis with `synthpop` must not be
++presented as a differential privacy guarantee; utility or disclosure-risk
++scores do not establish one.
+ 
+ Versioning and metadata do not automatically make a dataset or fitted model
+ appropriate for public release. A model trained on restricted data can reveal
+@@ -198,22 +234,18 @@ and [guidelines for evaluating differential privacy guarantees](https://csrc.nis
+ 
+ ## Development work
+ 
+-- Review the dataset documentation, analysis assumptions, and reuse terms.
+-- Prepare the Git/GitHub activity and verify the participant environment before
+-  the session, including the required dependencies under R 4.4.1.
+-- Prepare a `codebook` output and partially completed `dataspice` templates with
+-  source, licence, access, and variable metadata for the 12-minute activity.
+-- Build the eight-minute `pins` exercise with two versions and explicit
+-  historical retrieval, preserving raw data.
+-- Implement the short-running `targets` pipeline, dependency graph, and
+-  selective-rebuild activity for the 18-minute segment.
+-- Prepare the Quarto report, publishing example, and provenance fields.
+-- Prepare a permitted archive example and citation metadata for the five-minute
+-  Zenodo demonstration.
+-- Test package versions before recording them in `renv.lock` and rebuilding the
+-  workshop environment; do not treat current placeholders as working examples.
+-- Prepare optional `synthpop` and `vetiver` outputs and follow-up resources, with
+-  reproducible seeds for ordinary stochastic teaching examples and clear limits
+-  on privacy claims.
+-- Rehearse the exact 90-minute sequence, including transitions, checkpoints,
+-  fallback outputs, and concluding discussion.
++- [x] Restructure the lessons to one page per programme segment, with the
++  preparation page and a supplementary `synthpop` page.
++- [x] Provide partially completed `targets` and Quarto templates, completed
++  references, and a catch-up step for the pipeline.
++- [x] Prepare the versioned dataset inputs with a single, rerunnable script.
++- [x] Move the `vetiver` model into the data and model versioning
++  demonstration as a supplementary predictive model.
++- [ ] Review the dataset documentation, analysis assumptions, and upstream
++  reuse terms.
++- [ ] Rebuild and publish the workshop images if the lockfile or system
++  dependencies change, then confirm that a fresh MyBinder session runs every
++  hands-on step.
++- [ ] Rehearse the exact 90-minute sequence, including transitions,
++  checkpoints, catch-up steps, and the closing discussion.
++- [ ] Complete human review of the lessons, templates, and reference solutions.
+diff --git a/index.qmd b/index.qmd
+index 101d8f3..7856332 100644
+--- a/index.qmd
++++ b/index.qmd
+@@ -1,16 +1,20 @@
+ # Welcome {.unnumbered}
+ 
+ This book contains the **Open and Reproducible Science in R** workshop materials.
+-In 90 minutes, we document and version the `HealthWellbeing` dataset,
+-run a correlation meta-analysis, and trace the result through a
+-Quarto report and an archive. The workshop includes a runnable
+-`targets` pipeline and a report template. The closing discussion can
+-include brief examples of synthetic data and model versioning.
++In 90 minutes, we follow the `HealthWellbeing` dataset through an
++end-to-end reproducible research workflow. Short demonstrations cover
++Git and GitHub, computational environments, FAIR metadata, and data and
++model versioning. In the hands-on exercises, you complete and run a
++`targets` meta-analysis pipeline, render a Quarto report from its
++outputs, then change the analysis and reproduce the results. We finish
++with releases, archiving, and discussion. A supplementary exercise
++covers synthetic data with `synthpop`.
+ 
+ ## Getting started
+ 
+-Read the learning objectives and set up your environment before the
+-session. Some familiarity with R will help you follow the material.
++Read the learning objectives and programme, then open the prepared
++MyBinder environment before the session. Some familiarity with R will
++help you follow the material.
+ [Introduction](pages/1_introduction.qmd) ·
+ [Preparation](pages/workshop/00_preparation.qmd)
+ 
+diff --git a/pages/1_introduction.qmd b/pages/1_introduction.qmd
+index 1e9d8df..b0a7971 100644
+--- a/pages/1_introduction.qmd
++++ b/pages/1_introduction.qmd
+@@ -20,46 +20,58 @@ well-being.
+ 
+ The workshop is presented by [James Bristow](2_coordinators.qmd#james-bristow), Massey University, with co-author [Hana Liang](2_coordinators.qmd#hana-liang), Bioeconomy Science Institute.
+ 
++The main aim is for you to understand and experience an end-to-end
++reproducible research workflow, not to master every individual package.
++
+ ## Learning objectives
+ 
+ By the end of the workshop, participants should be able to:
+ 
+ -   Explain how the tools support different parts of a reproducible research workflow.
+--   Describe dataset variables, provenance, licensing, and access
+-    conditions using a codebook and structured FAIR metadata.
+--   Store a dataset with `pins` and retrieve a specific version.
+--   Trace a result through a `targets` pipeline and a Quarto report.
+--   Identify the files and metadata needed for a citable archive.
+-
+-## Building a connected workflow
+-
+-1.  Track changes with Git and review a change on GitHub.
+-    [Version control and collaboration](workshop/02_git_github.qmd)
+-2.  Record R dependencies with renv and inspect the wider environment
+-    captured by Docker.
+-    [Computational environments](workshop/03_environments.qmd)
+-3.  Describe variables with `codebook` and record dataset metadata with
+-    `dataspice`.
+-    [Dataset documentation and FAIR metadata](workshop/04_data_documentation.qmd)
+-4.  Store the full dataset and a teaching subset with `pins`, then
+-    retrieve a specific version.
+-    [Dataset storage and versioning](workshop/05_pins.qmd)
+-5.  Run the correlation meta-analysis with `targets` and inspect what
+-    rebuilds when the dataset version changes.
+-    [Analytical pipelines](workshop/06_targets.qmd)
+-6.  Render and inspect the analysis report in Quarto.
+-    [Reporting and publishing](workshop/07_quarto.qmd)
+-7.  Find and cite a specific archive version on Zenodo.
+-    [Research archiving](workshop/08_zenodo.qmd)
+-
+-Together, these tools support a workflow whose history, dependencies, analytical steps, and outputs can be inspected and reused by other researchers.
+-
+-## Optional closing examples
+-
+-The final five minutes include discussion and brief demonstrations if
+-time allows. `synthpop` illustrates synthetic study summaries and
+-`vetiver` shows how to link model versions to their training data.
+-[Optional extras and concluding discussion](workshop/09_extras_and_discussion.qmd)
++-   Describe how a codebook and structured metadata record variables,
++    provenance, licensing, and access conditions in support of FAIR principles.
++-   Explain how `pins` and `vetiver` link results to specific data and model versions.
++-   Complete and run a `targets` pipeline and render a Quarto report from its outputs.
++-   Modify an analysis input, rebuild only what is affected, and reproduce the result.
++-   Identify the files and metadata needed for a citable release and archive.
++
++## Programme {#intro-programme}
++
++| Time | Duration | Activity | Format |
++| --- | --- | --- | --- |
++| 0–10 min | 10 min | [Introduction, reproducibility principles, Git and GitHub](workshop/01_open_science.qmd) | Conceptual |
++| 10–20 min | 10 min | [Computational reproducibility: renv, Docker and Binder](workshop/02_environments.qmd) | Demonstration |
++| 20–28 min | 8 min | [FAIR principles and metadata: codebook and dataspice](workshop/03_data_documentation.qmd) | Demonstration |
++| 28–35 min | 7 min | [Data and model versioning: pins and vetiver](workshop/04_versioning.qmd) | Demonstration |
++| 35–50 min | 15 min | [Build and execute a targets meta-analysis pipeline](workshop/05_targets.qmd) | Hands-on |
++| 50–65 min | 15 min | [Create and render a reproducible Quarto report](workshop/06_quarto.qmd) | Hands-on |
++| 65–75 min | 10 min | [Modify the analysis and reproduce the results](workshop/07_modify_and_reproduce.qmd) | Hands-on |
++| 75–82 min | 7 min | [GitHub releases, Zenodo, archiving and optional synthpop](workshop/08_archiving.qmd) | Conceptual |
++| 82–90 min | 8 min | [Questions and discussion](workshop/09_discussion.qmd) | Interactive |
++| **Total** | **90 min** | | |
++
++The session combines 42 minutes of concepts and demonstrations, 40
++minutes of hands-on exercises, and 8 minutes of discussion.
++
++## One dataset, one exercise, one environment
++
++-   **One dataset throughout.** Every stage uses `HealthWellbeing`. For
++    `vetiver`, a small supplementary predictive model stands in for the
++    meta-analysis model, which its standard interface does not support.
++-   **One continuous hands-on exercise.** You complete and run a
++    partially completed `targets` pipeline and Quarto report, then
++    change the analysis and reproduce the results, rather than building
++    everything from scratch.
++-   **One prepared computational environment.** MyBinder provides the
++    packages, configuration, and data, so nothing is installed during
++    the workshop. [Preparation](workshop/00_preparation.qmd)
++
++## Supplementary exercise
++
++Synthetic data with `synthpop` is a supplementary exercise for after
++the workshop. The archiving segment mentions it briefly when
++discussing data that cannot be shared.
++[Synthetic data with synthpop](workshop/10_synthetic_data.qmd)
+ 
+ ## Reproducibility when data cannot be shared
+ 
+@@ -70,7 +82,7 @@ findings based on original observations requires access to those
+ observations. A differential privacy claim requires a validated
+ mechanism and privacy accounting [@near2021-synthetic-data].
+ 
+-## Principles to put into practice
++## Principles to put into practice {#intro-principles}
+ 
+ Throughout the session, consider whether another researcher could:
+ 
+@@ -86,8 +98,9 @@ We will consider common barriers to these goals, including undocumented dependen
+ 
+ ## Getting started
+ 
+-Some familiarity with R will help you follow the examples. Set up the
+-environment and verify the teaching dataset before the timed session.
++Some familiarity with R will help you follow the examples. Open the
++prepared environment, verify the teaching dataset, and prepare the
++dataset versions before the timed session.
+ [Preparation](workshop/00_preparation.qmd)
+ 
+ For upcoming workshops, dates, and venues, see the [workshop announcements](../ANNOUNCEMENTS.md).
+diff --git a/pages/workshop/00_preparation.qmd b/pages/workshop/00_preparation.qmd
+index 5e5dade..9300eaf 100644
+--- a/pages/workshop/00_preparation.qmd
++++ b/pages/workshop/00_preparation.qmd
+@@ -1,17 +1,18 @@
+ ---
+ title: "Preparation"
+-subtitle: "Complete before the workshop"
++subtitle: "Before the session · MyBinder"
+ editor: visual
+ ---
+ 
+ ## Learning objectives
+ 
+-Before the timed session, you should be able to open the workshop project,
+-identify its source data, and load a verified copy in R. You will use the same
+-project and dataset throughout the workshop.
++Before the timed session, you should be able to open the prepared workshop
++environment, load a verified copy of the teaching data, and prepare the dataset
++versions used in the hands-on activities. You will use the same project,
++dataset, and environment throughout the workshop.
+ 
+-Allow time for downloads and setup before the session. Some familiarity with R
+-is helpful; you do not need previous experience with meta-analysis.
++Allow about 15 minutes, including startup time. Some familiarity with R is
++helpful; you do not need previous experience with meta-analysis.
+ 
+ ## Our teaching dataset
+ 
+@@ -24,47 +25,42 @@ well-being. It is also distributed with the `dmetar` package.
+ The original review is @ngamaba2017. The dataset documentation describes
+ the variables [@healthwellbeing].
+ 
+-We will download the authors' data file directly, so these opening activities
+-do not require installation of `dmetar`. Keep the raw file unchanged and record
++The workshop repository includes the authors' data file at
++`data/raw/healthwellbeing.rda`, so you do not need to install `dmetar` or
++download anything during the session. Keep the raw file unchanged and record
+ its source separately from any transformations you make later.
+ 
+-## Choose your computing environment
++## Open the prepared environment {#choose-your-computing-environment}
+ 
+-Use MyBinder to run the workshop in your browser. The remote workshop image
+-provides RStudio, R, Git, and the R packages. A local Docker installation is
+-optional and is covered in the [repository setup guide](https://github.com/JBris/open-and-reproducible-science-in-r#usage-with-docker).
++Everyone uses the same prepared environment. MyBinder runs the workshop's
++published image in your browser, with RStudio, R 4.4.1, Git, Quarto, and the
++R packages recorded in the project lockfile already installed. There is nothing
++to install during the workshop.
+ 
+ 1. [Open RStudio on MyBinder](https://mybinder.org/v2/gh/JBris/open-and-reproducible-science-in-r/HEAD?urlpath=rstudio)
+-   or use the link supplied by your instructor. Allow time for startup before
+-   the workshop.
+-2. Once RStudio opens, use its **Terminal** to follow the project setup below.
++   or use the link supplied by your instructor. Start it shortly before the
++   workshop and keep the browser tab open; MyBinder stops idle sessions.
++2. Once RStudio opens, use its **Terminal** for the project setup below.
+    Run R commands and lesson exercises in the **Console** in the same browser
+    session.
+ 3. Download work you want to keep using **More → Export** in the RStudio
+    **Files** pane. MyBinder sessions are temporary, and files in a session
+    are lost when it ends.
+ 
+-You can also use an existing local RStudio setup. Have Git available for the
+-version-control activity and Quarto for rendering reports. The reference
+-environment uses **R 4.4.1**. Record any difference if you use another version.
+ If MyBinder fails to start, let the instructor know so you can use a prepared
+-environment.
++alternative.
+ 
+-## Workshop packages
++You can use your own computer instead, but complete the setup before the
++workshop. Restore the project library with `renv::restore()` or use the
++[Docker setup](https://github.com/JBris/open-and-reproducible-science-in-r#usage-with-docker).
++On Linux, building the `dataspice` dependency `jqr` from source needs the jq
++development library. Record your R version if it differs from 4.4.1.
+ 
+-The committed `renv.lock` records the packages for the workshop,
+-including `knitr` and `rmarkdown` for rendering and `synthpop` and
+-`vetiver` for the optional exercises. On Linux, building the
+-`dataspice` dependency `jqr` from source needs the jq development
+-library.
++## Get the project
+ 
+-Run the lesson chunks in the R Console. Use Quarto with `knitr` and
+-`rmarkdown` when you are ready to render the standalone report.
+-
+-## Get your own project copy
+-
+-Clone the project in the **Terminal** in RStudio. If you have a GitHub account
+-and want to practise pushing changes, use **Fork** on the [workshop repository](https://github.com/JBris/open-and-reproducible-science-in-r)
++Clone the project in the RStudio **Terminal**. If you have a GitHub account
++and want to practise pushing changes after the workshop, use **Fork** on the
++[workshop repository](https://github.com/JBris/open-and-reproducible-science-in-r)
+ and replace `JBris` in the command with your GitHub username.
+ 
+ ```bash
+@@ -77,32 +73,25 @@ In RStudio’s **Files** pane, open the new `open-and-reproducible-science-in-r`
+ folder in your home directory and open `open-and-reproducible-science-in-r.Rproj`.
+ Keep Terminal and Console commands rooted in this project directory.
+ 
+-The project's `.Rprofile` activates renv. If you are using local R, restore the
+-project library in the Console before the session and after updating
+-`renv.lock`.
+-
+-```r
+-renv::restore()
+-```
+-
+-In either environment, check your R version and the state of the library.
+-If the library in your MyBinder session differs from the lockfile, check with
+-the instructor before proceeding.
++The project's `.Rprofile` activates renv. Check your R version and whether the
++library matches the lockfile. If the library in your MyBinder session differs
++from the lockfile, check with the instructor before proceeding.
+ 
+ ```{r health-preparation-environment, include = TRUE, echo = TRUE, message = FALSE, warning = FALSE, cache = FALSE, output = TRUE, eval = TRUE}
+ R.version.string
+ renv::status()
+ ```
+ 
+-## Download and verify the raw data {#preparation-data}
++## Verify the raw data {#preparation-data}
+ 
+ Run the following in the **R Console** from the project root. The R chunks
+ are also configured to run during rendering; setup chunks are uncached and
+ other R chunks use the cache.
+ 
+-The download comes from the resource linked in the book. The checksum identifies
+-the exact file used to prepare these lessons. If you already have a different
+-copy, keep it and ask the instructor to resolve the difference.
++The file is already in your project copy, so the download only runs if it is
++missing. The checksum identifies the exact file used to prepare these lessons.
++If you have a different copy, keep it and ask the instructor to resolve the
++difference.
+ 
+ ```{r health-preparation-download, include = TRUE, echo = TRUE, message = FALSE, warning = FALSE, cache = TRUE, output = TRUE, eval = TRUE}
+ raw_file <- file.path("data", "raw", "healthwellbeing.rda")
+@@ -152,26 +141,40 @@ Expected checkpoint: **29 rows and 5 columns**, with no assertion failures.
+ These checks describe this teaching snapshot, not a general rule that all
+ meta-analysis datasets must be complete or have this size.
+ 
+-If downloading is unavailable, ask for the instructor's prepared copy, put it
+-at the same project-relative path, and run the checksum and loading checks.
++## Prepare the dataset versions {#preparation-versions}
+ 
+-## Record the source
++The hands-on activities read a specific, versioned copy of the dataset. Run the
++prepared script once in the **Console**. It checks the raw file, stores two
++versions on a local *pins* board, records their identifiers, and selects the
++full dataset as the starting input for the pipeline.
++
++```{r health-preparation-versions, include = TRUE, echo = TRUE, message = FALSE, warning = FALSE, cache = FALSE, output = TRUE, eval = TRUE}
++source(file.path("pipelines", "prepare_health_wellbeing.R"))
++```
+ 
+-For your project notes, retain the book section, dataset documentation, download
+-URL, retrieval date, checksum, and original study citation. A package licence or
+-the workshop repository's MIT licence should not be assumed to relicense every
+-upstream dataset; check the relevant reuse terms before redistributing data.
++Expected checkpoint: a table with two rows, `all` and `general`, each with a
++version identifier. Identifiers record when a version was written, so yours
++will differ from the instructor's. Running the script again reuses the same
++versions. The instructor explains the board in the
++[data and model versioning demonstration](04_versioning.qmd).
++
++## Record the source
+ 
+-We will create and commit a short provenance note in the
+-[Git and GitHub activity](02_git_github.qmd).
++For your project notes, retain the book section, dataset documentation,
++download URL, retrieval date, checksum, and original study citation. A package
++licence or the workshop repository's MIT licence should not be assumed to
++relicense every upstream dataset; check the relevant reuse terms before
++redistributing data.
+ 
+ ## Preparation checkpoint {#preparation-checkpoint}
+ 
+ You are ready when:
+ 
+-- The project opens in your chosen environment and Git is available.
+-- You know your R version and have completed the initial renv startup.
+-- The raw file is saved and its checksum matches the teaching snapshot.
+-- `health` contains the verified data, and you can identify its upstream source.
++- RStudio is open in MyBinder, or in your own prepared setup, with the project
++  open.
++- You know your R version and `renv::status()` reports no problems.
++- The raw file's checksum matches the teaching snapshot.
++- The prepared script printed the `all` and `general` dataset versions.
+ 
+-Continue to [open and reproducible science](01_open_science.qmd).
++Continue to the
++[introduction, reproducibility principles, Git and GitHub](01_open_science.qmd).
+diff --git a/pages/workshop/01_open_science.qmd b/pages/workshop/01_open_science.qmd
+index 2e352fa..aa16d23 100644
+--- a/pages/workshop/01_open_science.qmd
++++ b/pages/workshop/01_open_science.qmd
+@@ -1,21 +1,22 @@
+ ---
+-title: "Open and reproducible science"
+-subtitle: "0–5 minutes · R"
++title: "Introduction, reproducibility principles, Git and GitHub"
++subtitle: "0–10 minutes · Conceptual"
+ editor: visual
+ ---
+ 
+ ## Learning objectives
+ 
+ By the end of this opening, you should be able to state the research question,
+-identify the unit represented by a row of data, and describe what another
+-researcher would need to retrace the analysis.
++identify the unit represented by a row of data, describe what another
++researcher would need to retrace a result, and explain how Git and GitHub
++record, review, and share changes.
+ 
+ ## Why this matters
+ 
+-A reported result is easier to evaluate when its data, analytical decisions,
+-code, and software environment can be traced. Sharing code helps, but the code
+-also needs identifiable inputs and instructions that work beyond its author's
+-current R session.
++Allow about three minutes. A reported result is easier to evaluate when its
++data, analytical decisions, code, and software environment can be traced.
++Sharing code helps, but the code also needs identifiable inputs and
++instructions that work beyond its author's current R session.
+ 
+ In this workshop, **reproducibility** means being able to rerun a documented
+ workflow with its specified inputs and environment. **Open science** also
+@@ -23,11 +24,16 @@ concerns how methods and outputs can be inspected, accessed, and reused.
+ Reproducibility does not establish that the scientific assumptions are correct,
+ and openness still needs to respect licences and access conditions.
+ 
++Throughout the session, ask whether another researcher could understand,
++rerun, audit, trace, reuse, and cite the work. The
++[introduction](../1_introduction.qmd#intro-principles) lists
++these principles.
++
+ ## Our example: health and well-being
+ 
+-The teaching question is: **What association between health and well-being is
+-reported across the included studies?** We use the `HealthWellbeing`
+-correlation example [@harrer2021, sec. 4.2.4].
++Allow about two minutes. The teaching question is: **What association between
++health and well-being is reported across the included studies?** We use the
++`HealthWellbeing` correlation example [@harrer2021, sec. 4.2.4].
+ 
+ Each row is a **study summary**, not a participant record. The columns are:
+ 
+@@ -40,33 +46,70 @@ Each row is a **study summary**, not a participant record. The columns are:
+ | `country` | Study country |
+ 
+ The [preparation activity](00_preparation.qmd#preparation-data) verifies the
+-snapshot. For this opening, inspect the instructor's copy or your own loaded
+-data. There is no need to fit a model during these five minutes.
++snapshot. There is no need to fit a model during this opening.
+ 
+-Later analysis will pool correlations using Fisher's z transformation and an
++Later, the pipeline pools correlations using Fisher's z transformation and an
+ explicit random-effects specification. Study independence, comparable effect
+ definitions, and differences between study populations need consideration.
+ A pooled association alone does not establish a causal effect.
+ 
+-## One project throughout the session
++## One workflow throughout the session
++
++We follow this dataset through one connected workflow. The first half uses
++short demonstrations; in the second half, you complete, run, and change the
++analysis yourself.
++
++| Time | Stage | Question we will answer | Tools | Format |
++| --- | --- | --- | --- | --- |
++| 0–10 min | Version the work | What changed, why, and who reviewed it? | Git, GitHub | Conceptual |
++| 10–20 min | Record the environment | Which software is needed? | renv, Docker, Binder | Demonstration |
++| 20–28 min | Document the input | What do the data describe, and how may they be reused? | codebook, dataspice | Demonstration |
++| 28–35 min | Version data and models | Which input and model produced this result? | pins, vetiver | Demonstration |
++| 35–50 min | Run the analysis | Which steps depend on this input? | targets | Hands-on |
++| 50–65 min | Report the result | How are methods, results, and provenance connected? | Quarto | Hands-on |
++| 65–75 min | Modify and reproduce | What changes when an input changes, and does the result reproduce? | targets, Quarto | Hands-on |
++| 75–82 min | Release and archive | How can this version be found and cited? | GitHub releases, Zenodo | Conceptual |
++| 82–90 min | Questions and discussion | What would you change in your own work? | | Interactive |
+ 
+-| Stage | Question we will answer | Tools |
+-| --- | --- | --- |
+-| Version the work | What changed, why, and who can review it? | Git, GitHub |
+-| Record the environment | Which software is needed? | renv, Docker |
+-| Document the input | What do the data describe, and how may they be reused? | codebook, dataspice |
+-| Store dataset versions | Which input produced this result? | pins |
+-| Track the analysis | Which steps depend on this input? | targets |
+-| Report and publish | How are methods and results connected? | Quarto |
+-| Preserve a release | How can this version be found and cited? | Zenodo |
++The aim is to understand and experience the whole workflow, not to master each
++package.
+ 
+-The final five minutes include discussion and optional signposts to `synthpop`
+-and `vetiver`. They are follow-up options, not requirements for this core workflow.
++## Version control with Git and GitHub {#git-github}
+ 
+-## Try it yourself
++Allow about four minutes for this demonstration. **Git** records the history of
++a project's files. **GitHub** hosts Git repositories and adds collaboration
++tools such as issues, pull requests, and releases.
+ 
+-With a neighbour, name one thing you would ask for if a collaborator sent only
+-a pooled correlation. Choose from the data version, variable definitions,
++| Term | Meaning |
++| --- | --- |
++| Commit | A recorded change to one or more files, with a message explaining why |
++| Branch | A line of work that can change without affecting the main version |
++| Remote | A copy of the repository elsewhere, such as on GitHub |
++| Pull request | A proposal to merge a branch, with a place for review and discussion |
++| Release | A named, tagged version of the repository, covered later in the session |
++
++The instructor inspects the history of the workshop repository in the
++**Terminal**. You can run the same read-only commands in your project copy.
++
++```bash
++git log --oneline -5
++git show --stat HEAD
++git status --short
++```
++
++On GitHub, the instructor then shows the commit history, a merged pull request
++with its **Files changed** view, and the releases page.
++
++Every later stage of the workshop is a tracked text file: the lockfile,
++metadata templates, the pipeline, and the report. Their changes can be reviewed
++like any other code. Generated outputs, caches, and your personal workspace
++copies are ignored by Git, because they can be recreated from the tracked
++files. The raw data file is tracked, together with its checksum.
++
++## Discuss with a neighbour
++
++Allow about one minute. Name one thing you would ask for if a collaborator sent
++only a pooled correlation. Choose from the data version, variable definitions,
+ analysis settings, code revision, or software environment, and explain why it
+ would matter.
+ 
+@@ -77,11 +120,83 @@ You should be able to complete this sentence:
+ > To retrace this result, I need the source and version of the study summaries,
+ > the analysis decisions and code, and the environment used to run them.
+ 
++You can also explain the difference between a local commit, a push to a
++remote, and a pull request.
++
+ **Takeaway:** keep a traceable connection between the input, the decisions, and
+-the output. We start by recording the source in
+-[Git and GitHub](02_git_github.qmd).
++the output. Next, we record the
++[computational environment](02_environments.qmd).
++
++## After the workshop: practise Git with your fork {#git-practice}
++
++This optional exercise takes about ten minutes. It needs a GitHub account, a
++fork of the
++[workshop repository](https://github.com/JBris/open-and-reproducible-science-in-r)
++cloned as your `origin`, and GitHub authentication in your environment. Run the
++commands in the **Terminal** at the project root.
++
++1. Create a working branch:
++
++   ```bash
++   git switch -c workshop/health-wellbeing
++   ```
++
++2. Create `WORKSHOP_NOTES.md` in the project root as a provenance note.
++   Replace the placeholders with your own information.
++
++   ```markdown
++   # Health and well-being: workshop notes
++
++   Author: YOUR NAME
++
++   ## Data source
++
++   - Dataset: HealthWellbeing.
++   - Book: Harrer, Cuijpers, Furukawa, and Ebert (2021), section 4.2.4.
++   - Book URL: https://doing-meta.guide/pooling-es#correlations
++   - Dataset documentation: https://dmetar.protectlab.org/reference/healthwellbeing
++   - Download: https://www.protectlab.org/meta-analysis-in-r/data/healthwellbeing.rda
++   - Retrieved: YYYY-MM-DD
++   - Raw file: data/raw/healthwellbeing.rda
++   - MD5: 0d74964b0b7168379a2b015cb648b326
++
++   ## Decisions
++
++   Preserve the raw file unchanged. Keep derived data and analysis outputs separate.
++   Check upstream reuse terms before redistributing data.
++   ```
++
++3. Stage the note explicitly, inspect what will be committed, and commit it.
++   Newly created files appear in `git diff --cached` after staging.
++
++   ```bash
++   git add WORKSHOP_NOTES.md
++   git diff --cached -- WORKSHOP_NOTES.md
++   git commit -m "docs(workshop): record HealthWellbeing data source"
++   git log -1 --oneline
++   ```
++
++   If Git asks for an identity, configure your name and preferred commit email
++   for this repository, then retry.
++
++4. Push the branch to your fork and open a pull request **within your fork**,
++   comparing the branch with its `main` branch:
++
++   ```bash
++   git push --set-upstream origin workshop/health-wellbeing
++   ```
++
++Ask a colleague to check that the data source is identifiable and the note
++describes what you actually did. For a substantive contribution to the teaching
++repository, follow its
++[contribution guidance](https://github.com/JBris/open-and-reproducible-science-in-r/blob/main/CONTRIBUTING.md)
++and [AI assistance policy](https://github.com/JBris/open-and-reproducible-science-in-r/blob/main/AI_POLICY.md).
++A pull request provides a place for review; opening one does not mean that
++human review is complete.
+ 
+ ## Further reading
+ 
+ - Variable definitions for the teaching dataset [@healthwellbeing].
+ - FAIR principles for scientific data and metadata [@gofair-principles].
++- Version control basics [@chacon2014-git, sec. 1.1].
++- Creating a pull request from a fork [@github-pull-request-fork].
+diff --git a/pages/workshop/03_environments.qmd b/pages/workshop/02_environments.qmd
+similarity index 58%
+rename from pages/workshop/03_environments.qmd
+rename to pages/workshop/02_environments.qmd
+index e263902..e593ad8 100644
+--- a/pages/workshop/03_environments.qmd
++++ b/pages/workshop/02_environments.qmd
+@@ -1,24 +1,24 @@
+ ---
+-title: "Reproducible computational environments"
+-subtitle: "17–30 minutes · renv, Docker and Binder"
++title: "Computational reproducibility"
++subtitle: "10–20 minutes · Demonstration · renv, Docker and Binder"
+ editor: visual
+ ---
+ 
+ ## Learning objectives
+ 
+-By the end of this activity, you should be able to inspect the project's R
+-lockfile, explain how a Docker image becomes a Binder session, and record the
+-environment used to load the teaching data.
++By the end of this demonstration, you should be able to explain what the
++project's R lockfile records, how a Docker image becomes your MyBinder
++session, and why we keep a record of the environment used to run an analysis.
+ 
+-Complete [preparation](00_preparation.qmd) before the session, including the
+-data download and environment checks. Run the R activities in a prepared
+-MyBinder session or an existing local R environment.
++The instructor runs the commands. You can follow along in the MyBinder session
++you opened during [preparation](00_preparation.qmd); nothing needs to be
++installed.
+ 
+ ## Why this matters
+ 
+-The same script can behave differently when package versions or system
+-libraries change. We need to describe the environment alongside the code and
+-the data version.
++Allow about two minutes. The same script can behave differently when package
++versions or system libraries change. We need to describe the environment
++alongside the code and the data version.
+ 
+ | Layer | What we record | Tool or file |
+ | --- | --- | --- |
+@@ -26,16 +26,17 @@ the data version.
+ | R packages | Package versions and sources | renv and `renv.lock` |
+ | Wider environment | Operating-system libraries and rendering tools | Dockerfile and image |
+ | Code and configuration | The revision used for the run | Git commit |
+-| Actual session | Versions loaded when the activity ran | `sessionInfo()` |
++| Actual session | Versions loaded when the analysis ran | `sessionInfo()` |
+ 
+ renv restores the R packages described by a lockfile. A Docker image can also
+ include the R interpreter, operating-system libraries, and rendering tools.
+-Reproducing a result still requires the analysis code, the input data, and a
+-successful rerun.
++Binder starts a container from such an image in a browser. Reproducing a
++result still requires the analysis code, the input data, and a successful
++rerun.
+ 
+-## Inspect the current environment
++## Inspect the R environment
+ 
+-Allow about two minutes. In the **R Console**, with the project open:
++Allow about three minutes. In the **R Console**, with the project open:
+ 
+ ```{r health-environments-session, include = TRUE, echo = TRUE, message = FALSE, warning = FALSE, cache = FALSE, output = TRUE, eval = TRUE}
+ R.version.string
+@@ -43,23 +44,31 @@ R.version.string
+ packageVersion("renv")
+ ```
+ 
+-Compare your R version with the reference version, **4.4.1**. If it differs,
+-record the difference; a lockfile does not switch your running R session.
+-
+-## Inspect and restore a lockfile
+-
+-Allow about four minutes. Use the project's active renv environment:
++Compare the running version with the reference version, **4.4.1**. A lockfile
++records a version; it does not switch your running R session.
+ 
+ ```{r health-environments-lockfile, include = TRUE, echo = TRUE, message = FALSE, warning = FALSE, cache = FALSE, output = TRUE, eval = TRUE}
+ lock <- renv::lockfile_read("renv.lock")
+ lock$R$Version
+-names(lock$Packages)
++workshop_packages <- c(
++  "codebook", "dataspice", "meta", "pins", "quarto", "rmarkdown",
++  "synthpop", "targets", "vetiver"
++)
++vapply(
++  workshop_packages,
++  function(package) {
++    record <- lock$Packages[[package]]
++    if (is.null(record)) NA_character_ else record$Version
++  },
++  character(1)
++)
+ renv::status()
+ ```
+ 
+-The lockfile names R 4.4.1 and records package versions for the workshop,
+-including `meta`, `codebook`, `dataspice`, `pins`, and `targets`.
+-Use `renv::status()` to check whether your active library matches the lockfile.
++The lockfile records exact package versions for the workshop. A package that
++is not recorded appears as `NA`; Quarto, for example, is a command-line tool
++in the image rather than an R package in the lockfile. `renv::status()` checks
++whether the active library matches the lockfile.
+ 
+ The usual collaboration cycle is:
+ 
+@@ -68,15 +77,12 @@ The usual collaboration cycle is:
+ 3. Collaborators use `renv::restore()` to obtain the recorded packages.
+ 4. The analysis is tested in the restored environment.
+ 
+-For this activity, inspect the existing lockfile. The Binder image is built
+-with the restored library. If you are setting up local R, follow the
+-[preparation instructions](00_preparation.qmd) to restore it before the workshop.
++The workshop's Binder image was built by restoring this lockfile, so you do not
++need to run `renv::restore()` during the session.
+ 
+ ## From a Dockerfile to RStudio on MyBinder {#environments-docker}
+ 
+-Allow about four minutes. Participants need a browser to use MyBinder. The
+-build commands below show what runs on GitHub Actions, so you can follow along
+-without installing Docker or running a build.
++Allow about four minutes.
+ 
+ ### Read the Dockerfile
+ 
+@@ -90,9 +96,9 @@ these instructions in the workshop's [Binder image Dockerfile](https://github.co
+ | `COPY` | Adds files such as the lockfile and workshop lessons to the image. |
+ 
+ A **Docker build** uses these instructions and the repository files to produce
+-an **image**. A **container** is a running instance of an image. The image
+-provides the environment, and each participant runs the workshop in their own
+-container.
++an **image**. A **container** is a running instance of an image. Each
++participant runs the workshop in their own container started from the same
++image.
+ 
+ ### Follow the GitHub Actions build pipelines
+ 
+@@ -103,7 +109,7 @@ builds a separate image for people running RStudio with Docker locally.
+ 
+ Each workflow checks out the source, reads `VERSION` into `APP_VERSION`, and
+ records a UTC build date. Docker Compose uses `APP_VERSION` to select the
+-Dockerfile and tag the image. The binder job includes these two steps.
++Dockerfile and tag the image. The Binder job includes these two steps.
+ 
+ ```bash
+ docker compose build binder
+@@ -112,9 +118,7 @@ docker compose push binder
+ 
+ The first command builds the image. The second publishes the image with its
+ version tag to GitHub Container Registry (`ghcr.io`). The image version comes
+-from `VERSION` and can differ from the GitHub release tag. Open a completed
+-workflow run and find its build and push output if you want to see the process
+-in the Actions log.
++from `VERSION` and can differ from the GitHub release tag.
+ 
+ ### Launch the published environment
+ 
+@@ -123,15 +127,14 @@ which selects the published Binder image with `FROM`. MyBinder prepares the
+ launch image and starts a container on its servers. The launch link’s
+ `urlpath=rstudio` setting opens the RStudio interface in your browser.
+ 
+-Use the session you opened during [preparation](00_preparation.qmd#choose-your-computing-environment)
+-to run the R exercises. Keep your project files and outputs together in that
+-session, and download your work before it ends.
++Because everyone starts from the same image, everyone has the same R version,
++packages, and tools for the hands-on activities.
+ 
+-## Try it yourself: restart, reload, record
++## Record the session
+ 
+-Allow about three minutes. Restart R, reopen the project if necessary, and load
+-the data from its explicit path. This checks that the input does not depend on
+-an object left over from an earlier Console session.
++Allow about one minute. Restarting R and loading the data from its explicit
++path checks that the analysis does not depend on objects left over from an
++earlier Console session. We then save a record of the session.
+ 
+ ```{r health-environments-reload, include = TRUE, echo = TRUE, message = FALSE, warning = FALSE, cache = TRUE, output = TRUE, eval = TRUE}
+ raw_file <- file.path("data", "raw", "healthwellbeing.rda")
+@@ -156,25 +159,22 @@ writeLines(
+ )
+ ```
+ 
+-Inspect `outputs/session-info.txt`. Add a short sentence to your existing
+-`WORKSHOP_NOTES.md` recording the R version and whether you used MyBinder or
+-local R. If you used MyBinder, record the image tag from `binder/Dockerfile`
+-and the project revision from `git rev-parse HEAD` in the **Terminal**. Keep
+-the raw data and generated session record separate from code changes.
++`outputs/session-info.txt` lists the loaded package versions and platform.
++Later, the pipeline records the R and *meta* versions with its result. For a
++MyBinder run, the image tag in `binder/Dockerfile` and the project revision
++from `git rev-parse HEAD` complete the record.
+ 
+ ## Checkpoint {#environments-checkpoint}
+ 
+ - You can explain which parts of the environment renv and Docker capture.
+ - You can trace how GitHub Actions builds and publishes the Binder image and
+   how MyBinder uses it to start RStudio.
+-- You can distinguish the lockfile's requested R version from the running version.
+-- The dataset reloads after a restart, and you have a session record on disk.
+-- You can identify the workshop package versions recorded in the lockfile.
+-
+-**Takeaway:** a documented environment supports reproducibility, and a successful
+-rerun supplies evidence. Next, the programme turns to dataset documentation and
+-FAIR metadata with codebook and dataspice.
+-[Dataset documentation](04_data_documentation.qmd)
++- You can distinguish the lockfile's recorded R version from the running version.
++- You know where to find the session record and the package versions.
++
++**Takeaway:** a documented environment supports reproducibility, and a
++successful rerun supplies evidence. Next, we document the dataset itself.
++[FAIR principles and metadata](03_data_documentation.qmd)
+ 
+ ## Further reading
+ 
+diff --git a/pages/workshop/02_git_github.qmd b/pages/workshop/02_git_github.qmd
+deleted file mode 100644
+index 42461bb..0000000
+--- a/pages/workshop/02_git_github.qmd
++++ /dev/null
+@@ -1,148 +0,0 @@
+----
+-title: "Version control, collaboration and sharing"
+-subtitle: "5–17 minutes · Git and GitHub"
+-editor: visual
+----
+-
+-## Learning objectives
+-
+-By the end of this activity, you should be able to inspect repository changes,
+-make a focused commit on a branch, and describe how a pull request supports
+-review. Your output is a committed provenance note for the teaching dataset.
+-
+-Prerequisite: the project copy from [preparation](00_preparation.qmd). Run the
+-shell blocks in the **Terminal** at the project root.
+-
+-## Why this matters
+-
+-**Git** tracks changes to files through commits and branches. **GitHub** hosts
+-Git repositories and adds collaboration tools such as issues and pull requests.
+-A commit records a change; a useful message explains its purpose.
+-
+-For our correlation example, a small provenance note makes the dataset source
+-and the decision to preserve the raw file visible to collaborators.
+-
+-## Inspect the project and create a branch
+-
+-Allow about two minutes. Check your current directory, branch, and remote.
+-
+-```bash
+-git status --short
+-git branch --show-current
+-git remote -v
+-```
+-
+-If you downloaded the data during preparation, `data/` may be untracked. That
+-is expected at this stage. Inspect existing work before proceeding, and leave
+-changes you do not intend to commit in place.
+-
+-For the sharing exercise, `origin` should point to **your fork**. If you cloned
+-the teaching repository directly, you can complete the local commit exercise
+-and watch the instructor demonstrate sharing from a fork.
+-
+-Create a working branch:
+-
+-```bash
+-git switch -c workshop/health-wellbeing
+-```
+-
+-If this branch already exists from an earlier attempt, inspect it and switch
+-to it rather than creating it again.
+-
+-## Create a provenance note
+-
+-Allow about four minutes. Create `WORKSHOP_NOTES.md` in the project root using
+-your editor. Use the following as a starting point, replacing the author and
+-retrieval-date placeholders with your own information.
+-
+-```markdown
+-# Health and well-being: workshop notes
+-
+-Author: YOUR NAME
+-
+-## Research question
+-
+-What association between health and well-being is reported across the studies?
+-
+-## Data source
+-
+-- Dataset: HealthWellbeing.
+-- Book: Harrer, Cuijpers, Furukawa, and Ebert (2021), section 4.2.4.
+-- Book URL: https://doing-meta.guide/pooling-es#correlations
+-- Dataset documentation: https://dmetar.protectlab.org/reference/healthwellbeing
+-- Download: https://www.protectlab.org/meta-analysis-in-r/data/healthwellbeing.rda
+-- Retrieved: YYYY-MM-DD
+-- Raw file: data/raw/healthwellbeing.rda
+-- MD5: 0d74964b0b7168379a2b015cb648b326
+-
+-## Decisions
+-
+-Preserve the raw file unchanged. Keep derived data and analysis outputs separate.
+-Check upstream reuse terms before redistributing data.
+-```
+-
+-Check the note against the source you actually used. If you received the file
+-from the instructor, record that transfer and the verified checksum as well.
+-The original review is @ngamaba2017.
+-
+-## Stage and commit one change
+-
+-Allow about three minutes. Stage the note explicitly and inspect what will be
+-committed. Newly created, untracked files do not appear in ordinary `git diff`;
+-after staging, inspect them with `git diff --cached`.
+-
+-```bash
+-git add WORKSHOP_NOTES.md
+-git diff --cached --name-only
+-git diff --cached -- WORKSHOP_NOTES.md
+-```
+-
+-Confirm that the staged list contains only changes you intend to include.
+-Then make the commit:
+-
+-```bash
+-git commit -m "docs(workshop): record HealthWellbeing data source"
+-git log -1 --oneline
+-git status --short
+-```
+-
+-If Git asks for an identity, configure your name and preferred commit email for
+-this repository, then retry. The note should now be committed. The downloaded
+-raw file may still be untracked; it was not included by staging the note.
+-
+-## Share and request review
+-
+-Allow about three minutes, including the instructor demonstration. If `origin`
+-is your fork and GitHub authentication is ready:
+-
+-```bash
+-git push --set-upstream origin workshop/health-wellbeing
+-```
+-
+-On GitHub, open a pull request **within your fork**, comparing this branch with
+-its `main` branch. Inspect the **Files changed** view and ask a partner to check
+-that the data source is identifiable and the note describes what you actually
+-did. Keep the exercise pull request in your fork.
+-
+-For a substantive contribution to the teaching repository, follow its
+-[contribution guidance](https://github.com/JBris/open-and-reproducible-science-in-r/blob/main/CONTRIBUTING.md)
+-and [AI assistance policy](https://github.com/JBris/open-and-reproducible-science-in-r/blob/main/AI_POLICY.md).
+-A pull request provides a place for review; creating one does not mean that
+-human review is complete.
+-
+-## Checkpoint {#git-checkpoint}
+-
+-- You can identify your current branch and its remote repository.
+-- Your latest commit contains `WORKSHOP_NOTES.md` with the dataset source.
+-- You can explain the difference between a local commit, a push, and a pull request.
+-
+-If sharing is unavailable, keep the local commit and inspect the instructor's
+-pull request. The learning checkpoint does not require a live merge.
+-
+-**Takeaway:** make focused changes whose purpose and provenance are clear.
+-Next, record the [computational environment](03_environments.qmd).
+-
+-## Further reading
+-
+-- Version control basics [@chacon2014-git, sec. 1.1].
+-- Creating a pull request from a fork [@github-pull-request-fork].
+diff --git a/pages/workshop/04_data_documentation.qmd b/pages/workshop/03_data_documentation.qmd
+similarity index 83%
+rename from pages/workshop/04_data_documentation.qmd
+rename to pages/workshop/03_data_documentation.qmd
+index 5edacff..a3ac367 100644
+--- a/pages/workshop/04_data_documentation.qmd
++++ b/pages/workshop/03_data_documentation.qmd
+@@ -1,6 +1,6 @@
+ ---
+-title: "Dataset documentation and FAIR metadata"
+-subtitle: "30–42 minutes · codebook and dataspice"
++title: "FAIR principles and metadata"
++subtitle: "20–28 minutes · Demonstration · codebook and dataspice"
+ editor:
+   markdown:
+     wrap: 72
+@@ -14,8 +14,8 @@ execute:
+ 
+ We will describe the `HealthWellbeing` dataset so a collaborator can
+ interpret the five columns and find the original teaching file. By the
+-end of these 12 minutes, you should be able to read a data dictionary
+-and explain what the dataset metadata adds.
++end of this eight-minute demonstration, you should be able to read a
++data dictionary and explain what the dataset metadata adds.
+ 
+ FAIR stands for **Findable, Accessible, Interoperable, and Reusable**
+ [@gofair-principles].
+@@ -24,11 +24,10 @@ explain how to obtain it. Structured metadata helps software interpret
+ it. Definitions, provenance, and reuse terms help people work out
+ whether the data suit their question. Access can have conditions.
+ 
+-Start with the verified raw file from the preparation lesson. This
+-page loads its own `health` object so it can render in a fresh R
+-session. Run the chunks in the Console from the project root with
+-*box*, *codebook*, and *dataspice* available. Your instructor can
+-provide the completed CSV and JSON-LD files for discussion.
++The instructor runs the code from the project root, starting with
++the verified raw file from the preparation lesson. This page loads
++its own `health` object so it can render in a fresh R session. You
++can run the same chunks in your MyBinder session afterwards.
+ [Preparation](00_preparation.qmd#preparation-data)
+ 
+ ## Data dictionary
+@@ -167,13 +166,13 @@ write.csv(
+ )
+ ```
+ 
+-## Try it yourself
++## Generate the JSON-LD
+ 
+-Open `attributes.csv` and add the two population categories to the
+-description for `population`. Save the edited worksheet, then regenerate
+-the JSON-LD. Keep `biblio.csv` and `WORKSHOP_NOTES.md` with the JSON-LD so
+-readers have the original citation, source URL, date of retrieval, and
+-checksum.
++The instructor opens `attributes.csv`, adds the two population
++categories to the description for `population`, and regenerates the
++JSON-LD. Keep `biblio.csv` and your provenance notes with the JSON-LD
++so readers have the original citation, source URL, date of retrieval,
++and checksum.
+ 
+ ```{r health-dataspice-export, include = TRUE, echo = TRUE, message = FALSE, warning = FALSE, cache = TRUE, output = TRUE, eval = TRUE}
+ write_spice(path = metadata_dir)
+@@ -187,11 +186,13 @@ Look for the dataset title, variable descriptions, and source
+ download in `metadata/dataspice.json`. Review the draft export for
+ template placeholders in the coverage fields. Check the provider's
+ reuse terms before completing the licence field or sharing the data.
+-With a completed worksheet, explain why someone needs both the
+-meaning of `n` and the original download link.
++You should be able to explain why someone needs both the meaning of
++`n` and the original download link.
+ 
+-Next we will store and retrieve versions of the documented dataset.
+-[Dataset storage and versioning](05_pins.qmd)
++These tools support FAIR practices; using them does not by itself
++establish that a dataset meets every FAIR principle. Next we store
++and retrieve versions of the documented dataset and a model.
++[Data and model versioning](04_versioning.qmd)
+ 
+ ## Further reading
+ 
+diff --git a/pages/workshop/05_pins.qmd b/pages/workshop/04_versioning.qmd
+similarity index 9%
+rename from pages/workshop/05_pins.qmd
+rename to pages/workshop/04_versioning.qmd
+index 7b794f9..b7f2ea2 100644
+--- a/pages/workshop/05_pins.qmd
++++ b/pages/workshop/04_versioning.qmd
+@@ -1,6 +1,6 @@
+ ---
+-title: "Dataset storage and versioning"
+-subtitle: "42–50 minutes · pins"
++title: "Data and model versioning"
++subtitle: "28–35 minutes · Demonstration · pins and vetiver"
+ editor:
+   markdown:
+     wrap: 72
+@@ -12,30 +12,42 @@ execute:
+ 
+ ## Introduction
+ 
+-We will store two versions of `HealthWellbeing` in a local *pins*
+-board. The first contains all 29 studies. The second contains the 18
+-general-population studies, so we can explore how that restriction
+-changes the analysis. Both use the variable definitions from the data
+-dictionary, and both trace back to the same raw file.
+-[Dataset documentation](04_data_documentation.qmd)
+-
+-Work from the project root with *box*, *pins*, and the raw file from
+-the preparation lesson. Runs reuse versions with the same data and
+-provenance. The instructor can provide a prepared board and its
+-selection files if you need to catch up.
+-[Prepare the raw file](00_preparation.qmd#preparation-data)
+-
+-## Create a versioned board
++In this seven-minute demonstration, we store versions of the
++documented dataset and of a small model, then retrieve each by its
++identifier. By the end, you should be able to explain how a version
++identifier links a result to the exact input that produced it.
++
++The pipeline in the hands-on activities reads a pinned dataset
++version, so you prepared the board before the session. The instructor
++runs the code below from the project root; the board and identifiers
++in your MyBinder session are your own.
++[Prepare the dataset versions](00_preparation.qmd#preparation-versions)
++
++## Store dataset versions with pins
++
++Allow about four minutes. A *pins* board stores named objects, called
++pins. We use a local folder board with versioning enabled explicitly,
++so each write adds a version instead of replacing the previous one.
++We store the data as RDS, an R format that preserves the column types.
++
++The prepared script writes two versions of the `health_wellbeing` pin.
++The first contains all 29 studies, with the source URL and raw-file
++checksum as metadata. The second contains the 18 general-population
++studies. It is read from the exact full version, and its metadata
++records the filter and that parent version. Rerunning the script
++reuses identical versions instead of writing duplicates.
++
++```{r health-versioning-prepare, include = TRUE, echo = TRUE, message = FALSE, warning = FALSE, cache = FALSE, output = TRUE, eval = TRUE, code = readLines(file.path("pipelines", "prepare_health_wellbeing.R"))}
++#| code-fold: true
++#| code-summary: "Show pipelines/prepare_health_wellbeing.R"
++```
+ 
+-We enable versioning so the board retains both writes. We use RDS, an
+-R format that preserves the column types. The board lives inside our
+-local workshop outputs.
++We open the same board and list its versions.
+ 
+-```{r health-pins-setup, include = TRUE, echo = TRUE, message = FALSE, warning = FALSE, cache = FALSE, output = TRUE, eval = TRUE}
++```{r health-versioning-board, include = TRUE, echo = TRUE, message = FALSE, warning = FALSE, cache = FALSE, output = TRUE, eval = TRUE}
+ box::use(
+-  pins[board_folder, pin_exists, pin_meta, pin_read, pin_versions,
+-       pin_write],
+-  utils[read.csv, write.csv]
++  pins[board_folder, pin_exists, pin_meta, pin_read, pin_versions],
++  utils[read.csv]
+ )
+ 
+ workshop_dir <- file.path("outputs", "health-wellbeing")
+@@ -43,133 +55,157 @@ data_board <- board_folder(
+   file.path(workshop_dir, "data_store"),
+   versioned = TRUE
+ )
+-pin_name <- "health_wellbeing"
+-versions_file <- file.path(workshop_dir, "dataset-versions.csv")
+-selection_file <- file.path(workshop_dir, "analysis-data-version.txt")
+-
+-write_dataset_version <- function(board, name, data, description, metadata) {
+-  previous_versions <- character()
+-  if (pin_exists(board, name)) {
+-    previous_versions <- pin_versions(board, name)$version
+-    for (version in previous_versions) {
+-      if (identical(pin_meta(board, name, version = version)$user, metadata) &&
+-          identical(pin_read(board, name, version = version), data)) {
+-        return(version)
+-      }
+-    }
+-  }
+-
+-  pin_write(
+-    board,
+-    data,
+-    name = name,
+-    type = "rds",
+-    title = "HealthWellbeing",
+-    description = description,
+-    metadata = metadata
+-  )
+-  new_version <- setdiff(pin_versions(board, name)$version, previous_versions)
+-  stopifnot(length(new_version) == 1L)
+-  new_version
+-}
++pin_versions(data_board, "health_wellbeing")
+ ```
+ 
+-## Write and describe two versions
++The script also recorded which identifier belongs to which dataset.
++We retrieve the subset's metadata and the full dataset by those
++identifiers.
+ 
+-We verify the checksum, load the table from that file, and record its
+-source and checksum in the pin metadata.
+-
+-```{r health-pins-write-full, include = TRUE, echo = TRUE, message = FALSE, warning = FALSE, cache = FALSE, output = TRUE, eval = TRUE}
+-source_url <- paste0(
+-  "https://www.protectlab.org/meta-analysis-in-r/data/",
+-  "healthwellbeing.rda"
++```{r health-versioning-read, include = TRUE, echo = TRUE, message = FALSE, warning = FALSE, cache = FALSE, output = TRUE, eval = TRUE}
++versions <- read.csv(
++  file.path(workshop_dir, "dataset-versions.csv"),
++  colClasses = "character"
+ )
+-raw_file <- file.path("data", "raw", "healthwellbeing.rda")
+-raw_md5 <- unname(tools::md5sum(raw_file))
+-stopifnot(identical(raw_md5, "0d74964b0b7168379a2b015cb648b326"))
+-
+-raw_data <- new.env(parent = baseenv())
+-loaded_names <- load(raw_file, envir = raw_data)
+-stopifnot(identical(loaded_names, "HealthWellbeing"))
+-verified_health <- raw_data[["HealthWellbeing"]]
+-stopifnot(is.data.frame(verified_health), nrow(verified_health) == 29L)
+-
+-full_version <- write_dataset_version(
+-  data_board,
+-  pin_name,
+-  verified_health,
+-  description = "All 29 studies in the teaching snapshot.",
+-  metadata = list(source_url = source_url, raw_md5 = raw_md5, scope = "all")
++full_version <- versions$version[versions$scope == "all"]
++general_version <- versions$version[versions$scope == "general"]
++stopifnot(length(full_version) == 1L, length(general_version) == 1L)
++
++pin_meta(data_board, "health_wellbeing", version = general_version)$user
++
++health_full <- pin_read(
++  data_board, "health_wellbeing", version = full_version
+ )
++nrow(health_full)
+ ```
+ 
+-For the teaching comparison, we read the exact full pin, then filter
+-by population. The subset inherits its source and checksum from that
+-pin. The filter and parent version account for the 11 excluded
+-studies. The published example uses the full set.
+-
+-```{r health-pins-write-general, include = TRUE, echo = TRUE, message = FALSE, warning = FALSE, cache = FALSE, output = TRUE, eval = TRUE}
+-full_metadata <- pin_meta(data_board, pin_name, version = full_version)
+-health_general <- pin_read(data_board, pin_name, version = full_version) |>
+-  subset(population == "general population")
+-stopifnot(nrow(health_general) == 18L)
+-
+-general_version <- write_dataset_version(
+-  data_board,
+-  pin_name,
+-  health_general,
+-  description = "Only studies labelled general population.",
+-  metadata = list(
+-    source_url = full_metadata$user$source_url,
+-    raw_md5 = full_metadata$user$raw_md5,
+-    scope = "general",
+-    filter = "population == 'general population'",
+-    parent_version = full_version
+-  )
++A version identifier names a stored object within this board. If you
++recreate the board elsewhere, it receives new identifiers, so retain
++the upstream checksum and the filter as well. In the hands-on
++activities, the pipeline reads the version named in
++`analysis-data-version.txt` rather than whichever version is newest.
++
++## Store model versions with vetiver
++
++Allow about three minutes. *vetiver* stores a fitted model on a pins
++board together with what is needed to use it again: a *prototype* of
++the expected inputs, the packages needed for prediction, and our own
++metadata. Its standard interface supports common model types such as
++`lm()`, but not the *meta* objects from our meta-analysis. We therefore
++use a small supplementary predictive model.
++
++The model predicts a study's Fisher-transformed correlation, `z`, from
++its population type and the natural log of its sample size, `log_n`.
++We store two versions under the same name: the second adds `log_n`.
++Both regressions give each study equal weight and illustrate model
++versioning only. The meta-analysis in the pipeline weights studies by
++their precision and between-study variance.
++
++```{r health-vetiver-setup, include = TRUE, echo = TRUE, message = FALSE, warning = FALSE, cache = FALSE, output = TRUE, eval = TRUE}
++box::use(
++  stats[lm],
++  vetiver[vetiver_model, vetiver_pin_read, vetiver_pin_write]
+ )
+ 
+-pin_versions(data_board, pin_name)
++original <- data.frame(
++  population = factor(health_full$population),
++  z = atanh(health_full$cor),
++  log_n = log(health_full$n)
++)
+ 
+-versions <- data.frame(
+-  scope = c("all", "general"),
+-  version = c(full_version, general_version)
++model_board <- board_folder(
++  file.path(workshop_dir, "model_store"),
++  versioned = TRUE
++)
++model_name <- "health_wellbeing"
++
++model_source <- list(
++  data_version = full_version,
++  r_version = as.character(getRversion()),
++  vetiver_version = as.character(utils::packageVersion("vetiver"))
+ )
+-write.csv(versions, versions_file, row.names = FALSE)
+-if (!file.exists(selection_file)) {
+-  writeLines(full_version, selection_file)
+-}
+ ```
+ 
+-## Try it yourself
++Each render writes a new pair of model versions unless the cached
++chunk below is reused. Cached chunks keep their recorded identifiers,
++and the board keeps earlier versions. Keep the board with the
++document cache; if you remove the board, refresh the cache when
++rendering again.
++
++```{r health-vetiver-versions, include = TRUE, echo = TRUE, message = FALSE, warning = FALSE, cache = TRUE, output = TRUE, eval = TRUE, cache.extra = get0("model_source")}
++previous_versions <- if (pin_exists(model_board, model_name)) {
++  pin_versions(model_board, model_name)$version
++} else {
++  character()
++}
+ 
+-Retrieve the full dataset by its recorded identifier and inspect
+-its source metadata. The selection file starts with the full
+-version and retains your choice on later runs.
++model_v1 <- lm(z ~ population, data = original)
++v1 <- vetiver_model(
++  model_v1,
++  model_name = model_name,
++  description = "Illustrative regression on population.",
++  metadata = model_source
++)
++vetiver_pin_write(model_board, v1)
++first_version <- setdiff(
++  pin_versions(model_board, model_name)$version, previous_versions
++)
++stopifnot(length(first_version) == 1L)
++
++model_v2 <- lm(z ~ population + log_n, data = original)
++v2 <- vetiver_model(
++  model_v2,
++  model_name = model_name,
++  description = "Illustrative regression on population and log sample size.",
++  metadata = model_source
++)
++vetiver_pin_write(model_board, v2)
+ 
+-```{r health-pins-read-version, include = TRUE, echo = TRUE, message = FALSE, warning = FALSE, cache = TRUE, output = TRUE, eval = TRUE, cache.extra = get0("full_version")}
+-versions <- read.csv(versions_file, colClasses = "character")
+-full_version <- versions$version[versions$scope == "all"]
+-stopifnot(length(full_version) == 1L)
++model_history <- pin_versions(model_board, model_name)
++second_version <- setdiff(
++  model_history$version, c(previous_versions, first_version)
++)
++stopifnot(length(second_version) == 1L)
++c(first = first_version, second = second_version)
++```
+ 
+-health_full <- pin_read(data_board, pin_name, version = full_version)
+-pin_meta(data_board, pin_name, version = full_version)$user
+-nrow(health_full)
++Without a version, `vetiver_pin_read()` selects the board's newest
++version. Pass an explicit identifier to reproduce an earlier
++prediction or inspect its input requirements.
++
++```{r health-vetiver-read, include = TRUE, echo = TRUE, message = FALSE, warning = FALSE, cache = TRUE, output = TRUE, eval = TRUE, cache.extra = list(get0("first_version"), get0("second_version"))}
++stored_v1 <- vetiver_pin_read(
++  model_board, model_name, version = first_version
++)
++stored_v2 <- vetiver_pin_read(
++  model_board, model_name, version = second_version
++)
++names(stored_v1$prototype)
++names(stored_v2$prototype)
++stored_v2$metadata$user
+ ```
+ 
+-## Checkpoint {#pins-checkpoint}
++The model's metadata records its training data version and software
++context [@vetiver-pin-write]. A model trained on restricted data can
++reveal sensitive information, so keep fitted models local until you
++have checked the applicable release terms. Creating a model API or
++deploying a service is follow-up work.
++
++## Checkpoint {#versioning-checkpoint}
+ 
+-The history includes the full dataset and the subset under distinct
+-identifiers. Retrieving the full version returns 29 rows. Locate the
+-identifier of the 18-study subset in
+-`dataset-versions.csv`. The version identifies a stored object within
+-this board. If you recreate the board elsewhere, use its new
+-identifiers and retain the upstream checksum and filter.
++- The data board lists two versions of `health_wellbeing`. The full
++  version returns 29 rows, and the subset's metadata records its
++  filter and parent version.
++- The model board holds several versions under one name. The first
++  model expects `population`; the second also expects `log_n`. Both
++  record the dataset version they were trained on.
++- You can explain why the pipeline reads a named version rather than
++  the newest one.
+ 
+-Keep the board local and share the source and transformation
+-instructions when reuse terms are unclear. Next we will make the
+-selection file a tracked pipeline input.
+-[Reproducible analytical pipelines](06_targets.qmd)
++Next, you will build and run the analysis yourself.
++[Build and execute a targets pipeline](05_targets.qmd)
+ 
+ ## Further reading
+ 
+ - Storing and retrieving versions with pins [@pins-docs].
++- Versioning models with vetiver [@vetiver-pin-write].
+diff --git a/pages/workshop/06_targets.qmd b/pages/workshop/05_targets.qmd
+similarity index 26%
+rename from pages/workshop/06_targets.qmd
+rename to pages/workshop/05_targets.qmd
+index d87e2fd..a2d1bd8 100644
+--- a/pages/workshop/06_targets.qmd
++++ b/pages/workshop/05_targets.qmd
+@@ -1,6 +1,6 @@
+ ---
+-title: "Reproducible analytical pipelines"
+-subtitle: "50–68 minutes · targets"
++title: "Build and execute a targets pipeline"
++subtitle: "35–50 minutes · Hands-on · targets"
+ editor:
+   markdown:
+     wrap: 72
+@@ -12,34 +12,36 @@ execute:
+ 
+ ## Introduction
+ 
+-We will run a *targets* pipeline that reads a specified
+-`HealthWellbeing` version, pools the study correlations, and writes a
+-summary for the report. By the end of these 18 minutes, you should be
+-able to trace the summary back to its input and predict what rebuilds
+-when you select another version.
++In this 15-minute activity, you complete and run a *targets* pipeline
++that reads the selected `HealthWellbeing` version, pools the study
++correlations, and writes a summary for the report. The pipeline is
++partially completed: you fill in two short gaps rather than writing it
++from scratch. By the end, you should be able to trace the summary back
++to its input and explain which steps *targets* reruns, and why.
+ 
+-You need *box*, *pins*, *targets*, and *meta* in your workshop
+-environment. The dependency graph also uses *visNetwork*. Start with the
+-workshop project, local board, and version selection file. Your
+-instructor can share a prepared board and summary for comparison.
+-[Dataset storage and versioning](05_pins.qmd#pins-checkpoint)
++Work in your MyBinder session, at the project root, after preparing
++the dataset versions. If you fall behind, the catch-up step gives you
++the completed pipeline so you can continue with the report.
++[Prepare the dataset versions](00_preparation.qmd#preparation-versions)
+ 
+-## Inspect the pipeline
++## The pipeline at a glance
+ 
+-The script is `pipelines/_targets_health_wellbeing.R`. Open it in your
+-editor and follow the data dependencies in this order.
++A *target* is one named step whose result *targets* stores and
++tracks. When a target's code mentions another target by name, it
++depends on that target. The pipeline's targets connect in this order:
+ 
+ ``` text
+ version_file -> data_version -> dataset_file -> studies -> fit
+ fit, data_version -> result -> summary_file
+ ```
+ 
+-We mark the selector, pinned RDS, and summary CSV as file targets. At
+-fitting time, the pipeline records the script checksum. Keep a copy of
+-the script you used so you can verify it and reproduce the fit.
++`version_file`, `dataset_file`, and `summary_file` are file targets:
++*targets* tracks the contents of the selection file, the pinned RDS
++file, and the summary CSV. When fitting, the pipeline records the
++checksum of the script that ran.
+ 
+ The model uses the raw Pearson correlations and study sample sizes.
+-*Meta* transforms each correlation to Fisher's z scale and pools the
++*meta* transforms each correlation to Fisher's z scale and pools the
+ effects with a random-effects model. We use restricted maximum
+ likelihood (REML) to estimate between-study variance and the
+ Hartung–Knapp method for the 95% interval. The summary converts the
+@@ -51,93 +53,157 @@ populations, measures, and sampling limit interpretation. This is a
+ worked example of pooling reported effects from the supplied studies
+ [@harrer2021, sec. 4.2.4].
+ 
+-## Run the full dataset
++## Step 1: copy the workbook pipeline
+ 
+-In the R Console at the project root, load the commands used to inspect
+-and run the pipeline. The store path keeps this exercise's cache
+-separate from other pipelines.
++Allow about two minutes. Run this in the **R Console**. It loads the
++*targets* functions and copies the partially completed template to
++`workspace/_targets.R`, your own working copy. The copy is only made
++if it does not exist yet, so rerunning the chunk keeps your edits.
++Git ignores the `workspace/` folder, so the supplied template stays
++unchanged.
+ 
+ ```{r health-targets-setup, include = TRUE, echo = TRUE, message = FALSE, warning = FALSE, cache = FALSE, output = TRUE, eval = TRUE}
+ box::use(
+-  targets[tar_make, tar_outdated, tar_read, tar_visnetwork],
+-  utils[read.csv]
++  targets[tar_make, tar_outdated, tar_read, tar_visnetwork]
+ )
+ invisible(loadNamespace("visNetwork"))
+ 
+ workshop_dir <- file.path("outputs", "health-wellbeing")
+-pipeline_script <- file.path("pipelines", "_targets_health_wellbeing.R")
++pipeline_template <- file.path(
++  "pipelines", "exercise", "_targets_health_wellbeing.R"
++)
++pipeline_script <- file.path("workspace", "_targets.R")
+ pipeline_store <- file.path(workshop_dir, "_targets")
+-selection_file <- file.path(workshop_dir, "analysis-data-version.txt")
++
++dir.create("workspace", showWarnings = FALSE)
++if (!file.exists(pipeline_script)) {
++  file.copy(pipeline_template, pipeline_script)
++}
++readLines(file.path(workshop_dir, "analysis-data-version.txt"))
+ ```
+ 
+-Use the graph to predict which targets depend on the selector. If you're
+-using the PDF, follow the text diagram above.
++The last line shows the selected dataset version. It should match the
++`all` version from your preparation step.
++
++## Step 2: run the pipeline before completing it
++
++Allow about three minutes. Open `workspace/_targets.R` in RStudio and
++read its seven numbered targets. Then draw the dependency graph and
++try to run the pipeline.
+ 
+-```{r health-targets-graph, include = TRUE, echo = TRUE, message = FALSE, warning = FALSE, cache = TRUE, output = TRUE, eval = knitr::is_html_output()}
++```{r health-targets-first-run, include = TRUE, echo = TRUE, eval = FALSE}
+ tar_visnetwork(
+   script = pipeline_script,
+   store = pipeline_store,
+   targets_only = TRUE,
+   outdated = FALSE
+ )
++tar_make(script = pipeline_script, store = pipeline_store)
+ ```
+ 
+-We will build the targets and inspect the cached result.
++Two arrows are missing from the graph: nothing connects `studies` to
++`fit`, or `result` to `summary_file`. The run stops with the message
++`Complete TODO 1 in the fit target.` *targets* found nothing to link
++those steps because their code does not yet mention the targets they
++need.
+ 
+-```{r health-targets-run, include = TRUE, echo = TRUE, message = FALSE, warning = FALSE, cache = TRUE, output = TRUE, eval = TRUE}
+-tar_make(script = pipeline_script, store = pipeline_store)
+-tar_read(result, store = pipeline_store)
++## Step 3: complete the two gaps
++
++Allow about four minutes. Edit `workspace/_targets.R` and save it.
++
++-   **TODO 1**, in step 5: replace `stop(...)` in `data = stop(...)`
++    with the name of the target that holds the checked study
++    summaries.
++-   **TODO 2**, in step 7: replace the `stop(...)` line with two lines
++    that write `result` to `path` and then return `path`.
++
++::: {.callout-tip collapse="true"}
++## Solution to TODO 1
++
++``` r
++      data = studies,
++```
++
++Mentioning `studies` makes `fit` depend on it, so the graph gains an
++arrow from `studies` to `fit`.
++:::
++
++::: {.callout-tip collapse="true"}
++## Solution to TODO 2
++
++``` r
++      utils::write.csv(result, path, row.names = FALSE)
++      path
++```
++
++A file target returns the path of the file it wrote. *targets* then
++tracks the file's contents and rebuilds it if the file changes.
++:::
++
++If you are stuck, run this catch-up step. It replaces your copy with
++the completed reference pipeline only while a `stop()` placeholder
++remains, so it leaves a completed copy unchanged.
++
++```{r health-targets-catch-up, include = TRUE, echo = TRUE, message = FALSE, warning = FALSE, cache = FALSE, output = TRUE, eval = TRUE}
++if (any(grepl("Complete TODO", readLines(pipeline_script)))) {
++  file.copy(
++    file.path("pipelines", "_targets_health_wellbeing.R"),
++    pipeline_script,
++    overwrite = TRUE
++  )
++}
+ ```
+ 
+-## Try it yourself
++## Step 4: inspect the graph and run the pipeline
+ 
+-Change the selector from all studies to the 18 general-population
+-studies. Predict which branches of the graph are affected, then ask
+-*targets* which targets are outdated and rebuild.
++Allow about four minutes. Draw the graph again. Both missing arrows
++should now appear. If you're using the PDF, follow the text diagram
++above.
+ 
+-```{r health-targets-change-input, include = TRUE, echo = TRUE, message = FALSE, warning = FALSE, cache = TRUE, output = TRUE, eval = TRUE}
+-versions <- read.csv(
+-  file.path(workshop_dir, "dataset-versions.csv"),
+-  colClasses = "character"
++```{r health-targets-graph, include = TRUE, echo = TRUE, message = FALSE, warning = FALSE, cache = FALSE, output = TRUE, eval = knitr::is_html_output()}
++tar_visnetwork(
++  script = pipeline_script,
++  store = pipeline_store,
++  targets_only = TRUE,
++  outdated = FALSE
+ )
+-general_version <- versions$version[versions$scope == "general"]
+-stopifnot(length(general_version) == 1L)
+-writeLines(general_version, selection_file)
++```
+ 
+-tar_outdated(script = pipeline_script, store = pipeline_store)
++Run the pipeline and read the result.
++
++```{r health-targets-run, include = TRUE, echo = TRUE, message = FALSE, warning = FALSE, cache = FALSE, output = TRUE, eval = TRUE}
+ tar_make(script = pipeline_script, store = pipeline_store)
+ tar_read(result, store = pipeline_store)
+ ```
+ 
+-Compare the study count and pooled correlation with the first run. The
+-changed input is a planned teaching subset. The difference reflects
+-which studies entered the model, including any differences in study
+-precision and heterogeneity.
++On your first complete run, each target reports that it completed.
++*targets* saves every result in the pipeline store, here
++`outputs/health-wellbeing/_targets`, and `tar_read()` loads a saved
++result without rerunning anything.
+ 
+-Switch back to the full version for the reporting activity so everyone
+-can compare with the same example.
++## Step 5: run it again
+ 
+-```{r health-targets-restore-full, include = TRUE, echo = TRUE, message = FALSE, warning = FALSE, cache = TRUE, output = TRUE, eval = TRUE}
+-full_version <- versions$version[versions$scope == "all"]
+-stopifnot(length(full_version) == 1L)
+-writeLines(full_version, selection_file)
++Allow about one minute. Run the pipeline a second time and ask which
++targets are outdated.
++
++```{r health-targets-rerun, include = TRUE, echo = TRUE, message = FALSE, warning = FALSE, cache = FALSE, output = TRUE, eval = TRUE}
+ tar_make(script = pipeline_script, store = pipeline_store)
+ tar_outdated(script = pipeline_script, store = pipeline_store)
+ ```
+ 
++Nothing runs, and no target is outdated. *targets* reruns a step only
++when its code, its upstream targets, or its tracked files change.
++
+ ## Checkpoint {#targets-checkpoint}
+ 
+ The full example combines **29 studies** with a pooled correlation of
+-about **0.36** and a 95% interval of about **0.31 to 0.41**. The
+-alternative input combines **18 studies**. The selector and downstream
+-analysis rebuild when it changes. After restoring the full selection and
+-rebuilding, `tar_outdated()` should be empty.
+-
+-The file `outputs/health-wellbeing/meta-summary.csv` now contains the
+-full result. The fit stores its script checksum and software versions.
+-The report keeps those details when the pipeline reuses a fit. Use a
+-clean pipeline store to check results in a changed environment.
+-[Reproducible reporting and publishing](07_quarto.qmd)
++about **0.36** and a 95% interval of about **0.31 to 0.41**. The file
++`outputs/health-wellbeing/meta-summary.csv` contains the same values,
++the dataset version, the method names, the R and *meta* versions, and
++the checksum of your pipeline script. A second run skips every target.
++
++Next, you will write a report that reads this summary.
++[Create and render a reproducible Quarto report](06_quarto.qmd)
+ 
+ ## Further reading
+ 
+diff --git a/pages/workshop/07_quarto.qmd b/pages/workshop/06_quarto.qmd
+similarity index 25%
+rename from pages/workshop/07_quarto.qmd
+rename to pages/workshop/06_quarto.qmd
+index aa41f71..632add8 100644
+--- a/pages/workshop/07_quarto.qmd
++++ b/pages/workshop/06_quarto.qmd
+@@ -1,6 +1,6 @@
+ ---
+-title: "Reproducible reporting and publishing"
+-subtitle: "68–80 minutes · Quarto"
++title: "Create and render a reproducible Quarto report"
++subtitle: "50–65 minutes · Hands-on · Quarto"
+ editor:
+   markdown:
+     wrap: 72
+@@ -12,74 +12,150 @@ execute:
+ 
+ ## Introduction
+ 
+-We will render a short report that reads the summary from the
+-`HealthWellbeing` pipeline. By the end of these 12 minutes, you should
+-be able to explain where a result in the report came from and identify
+-what a reader needs to recreate it.
++In this 15-minute activity, you complete and render a short report
++that reads the summary written by your pipeline. The report is
++partially completed: its methods are written, and you add the
++confidence interval, an interpretation, and the provenance fields. By
++the end, you should be able to explain where each number in the
++report came from and what a reader needs to recreate it.
+ 
+-You need Quarto with *knitr* and *rmarkdown*, and the completed
+-`meta-summary.csv` from the pipeline. If you joined here, the
+-instructor can provide the prepared CSV to render locally.
+-[Pipeline checkpoint](06_targets.qmd#targets-checkpoint)
++You need the `meta-summary.csv` file from the targets activity. If
++you joined here, run the targets activity's catch-up step and
++`tar_make()` first.
++[Pipeline checkpoint](05_targets.qmd#targets-checkpoint)
+ 
+-## Inspect the report source
++## Step 1: copy and render the template
+ 
+-Open `pipelines/health_wellbeing_report.qmd` in your editor. Its YAML
+-header selects HTML, names the summary file, and controls how code
+-and output are displayed. The report's R chunk reads one row from
+-`meta-summary.csv`. Inline R expressions display the results and
+-method names recorded in that row.
++Allow about three minutes. In the RStudio **Terminal**, at the project
++root, copy the partially completed report to `workspace/report.qmd`
++and render it. The copy is only made if it does not exist yet, so
++running the commands again keeps your edits.
+ 
+-The pipeline owns the analysis. The report explains its methods and
+-interprets the saved results. Keeping the report downstream of the
+-summary makes it possible to review the same result in R and HTML.
++```bash
++mkdir -p workspace
++if [ ! -f workspace/report.qmd ]; then
++  cp pipelines/exercise/health_wellbeing_report.qmd workspace/report.qmd
++fi
++quarto render workspace/report.qmd --to html
++```
++
++Run `quarto render` from the project root. The project's R setup is
++found there, and the report locates the summary relative to the
++project root.
++
++In the **Files** pane, open the `workspace` folder, click
++`report.html`, and choose **View in Web Browser**. The HTML embeds its
++resources, so it works as a single file. The pooled estimate appears,
++along with three **TODO** markers.
++
++## Step 2: read the report source
++
++Allow about three minutes. Open `workspace/report.qmd` in RStudio.
++
++-   The **YAML header** at the top sets the title and HTML format, and
++    names the summary file in `params`.
++-   The hidden **R chunk** reads one row from the summary CSV and
++    checks it. It does not fit any model.
++-   **Inline R code**, written as a backtick, the letter `r`, an
++    expression, and a closing backtick, puts values from that row into
++    the text when the report renders.
++
++The pipeline owns the analysis; the report explains its methods and
++interprets the saved result. Because the report never retypes a
++number, rerunning the pipeline and rendering again updates every
++value.
++
++## Step 3: complete the three gaps
++
++Allow about six minutes. Edit `workspace/report.qmd` and save it.
++
++-   **TODO 1**, in Results: report the confidence interval using inline
++    R code, following the pattern for the pooled correlation.
++-   **TODO 2**, in Results: write one or two plain-language sentences
++    on how differences between study populations and measurements
++    limit what the pooled estimate tells us about any one setting.
++-   **TODO 3**, in Provenance: add list items for the dataset pin
++    version and the pipeline script MD5.
++
++::: {.callout-tip collapse="true"}
++## Solution to TODO 1
++
++Replace the sentence about the pooled correlation and the TODO 1
++paragraph with:
++
++```` markdown
++The pooled correlation was `r knitr::inline_expr('sprintf("%.3f", result$pooled_r)')` with a
++`r knitr::inline_expr('sprintf("%.0f%%", 100 * result$confidence_level)')` confidence interval
++from `r knitr::inline_expr('sprintf("%.3f", result$ci_lower)')` to
++`r knitr::inline_expr('sprintf("%.3f", result$ci_upper)')`.
++````
++:::
+ 
+-## Render the HTML report
++::: {.callout-tip collapse="true"}
++## Example for TODO 2
+ 
+-In the Terminal at the project root, copy the source beside its
+-input and render the copy. Quarto runs the report as a standalone
+-document. The HTML output embeds its resources and can be opened
+-directly in a browser. The explicit execution directory lets the
+-standalone report read its adjacent CSV, while workshop chapters run
+-from the project root.
++Your wording can differ. For example:
++
++```` markdown
++The studies differ in their populations and measurements, so the
++association may vary between settings. These observational estimates
++do not show that better health causes greater well-being.
++````
++:::
++
++::: {.callout-tip collapse="true"}
++## Solution to TODO 3
++
++```` markdown
++-   Dataset pin version: `r knitr::inline_expr('result$data_version')`
++-   Pipeline script MD5: `r knitr::inline_expr('pipeline_md5')`
++````
++:::
++
++The completed reference report is
++`pipelines/health_wellbeing_report.qmd`. If you are stuck, compare
++your copy with it.
++
++## Step 4: render again and check the numbers
++
++Allow about three minutes. Render the report again in the
++**Terminal**:
+ 
+ ```bash
+-report_dir="outputs/health-wellbeing"
+-if [ ! -f "$report_dir/health_wellbeing_report.qmd" ]; then
+-  cp pipelines/health_wellbeing_report.qmd "$report_dir/"
+-fi
+-quarto render "$report_dir/health_wellbeing_report.qmd" --to html \
+-  --execute-dir "$report_dir"
++quarto render workspace/report.qmd --to html
+ ```
+ 
+-Open `outputs/health-wellbeing/health_wellbeing_report.html` in your
+-browser. If you have an older local copy of the report source, bring
+-over the updated input chunk and the Methods and Provenance sections
+-from the template. Keep any changes you made to the surrounding text.
+-Run the pipeline again before rendering whenever the selected data
+-or analysis changes.
++Reload `report.html` in your browser. Then compare its values with the
++summary file in the **R Console**:
+ 
+-## Try it yourself
++```{r health-quarto-summary, include = TRUE, echo = TRUE, message = FALSE, warning = FALSE, cache = FALSE, output = TRUE, eval = TRUE}
++summary_csv <- read.csv(
++  file.path("outputs", "health-wellbeing", "meta-summary.csv")
++)
++summary_csv[, c("data_version", "studies", "pooled_r", "ci_lower", "ci_upper")]
++```
++
++## Checkpoint {#quarto-checkpoint}
+ 
+-Find the pooled estimate, study count, and dataset version in the
+-report. Compare them with the matching columns in
+-`meta-summary.csv`. Add a plain-language sentence to the report copy
+-about how differences between study populations affect interpretation,
+-then render the copy again. Leave the estimate linked to the CSV.
++Your rendered report shows **29 studies**, a pooled correlation of
++**0.363**, and a 95% interval from **0.309 to 0.415**. Its provenance
++names the same pin version as the summary file, the pipeline script
++checksum, the R version, and the *meta* version. No TODO markers
++remain. You can point to the CSV column behind each number.
+ 
+-## Publishing demonstration
++Next, you will change the analysis input and reproduce the results.
++[Modify the analysis and reproduce the results](07_modify_and_reproduce.qmd)
+ 
+-The instructor will open an example rendered report and show how an
+-approved HTML file can be served from a project site or attached to a
+-release. Before sharing, review the report for any content that came
+-from data with reuse conditions. The report source, versioned analysis
+-code, metadata, and environment record help others understand how the
+-published HTML was made.
++## After the workshop: publishing and journal formats {#quarto-publishing}
+ 
+-## Quarto extensions for journal articles
++An approved HTML report can be served from a project site or attached
++to a release. Before sharing, review the report for any content that
++came from data with reuse conditions. The report source, versioned
++analysis code, metadata, and environment record help others
++understand how the published HTML was made.
+ 
+ Quarto extensions add formats and templates for particular publishing
+-workflows. During the publishing demonstration, browse the
++workflows. Browse the
+ [Journal Articles extension listing](https://quarto.org/docs/extensions/listing-journals.html)
+ and find a format relevant to your field. Examples include:
+ 
+@@ -94,7 +170,7 @@ Open an extension's repository to check its supported formats,
+ required software, author metadata, and usage instructions. Compare
+ the template with the target journal's current submission guidance.
+ 
+-For follow-up, create a separate article directory and start from the
++To try one, create a separate article directory and start from the
+ [PLOS template](https://github.com/quarto-journals/plos). Run these
+ commands in the Terminal from the project root and follow the prompts:
+ 
+@@ -115,17 +191,6 @@ extension versions alongside the R package versions in `renv.lock`.
+ See the Quarto guidance on installing and versioning extensions
+ [@quarto-managing-extensions].
+ 
+-## Checkpoint {#quarto-checkpoint}
+-
+-The HTML shows 29 studies and their pooled estimate when the CSV is
+-from the full input. It names the exact pin version, pipeline checksum,
+-R version, and *meta* version. You can trace the number to a field
+-in the pipeline output and explain how to update it after rerunning
+-the analysis.
+-
+-Next we will inspect how to cite a preserved release.
+-[Research archiving and persistent identifiers](08_zenodo.qmd)
+-
+ ## Further reading
+ 
+ - Working with R in Quarto [@quarto-r].
+diff --git a/pages/workshop/07_modify_and_reproduce.qmd b/pages/workshop/07_modify_and_reproduce.qmd
+new file mode 100644
+index 0000000..8245c69
+--- /dev/null
++++ b/pages/workshop/07_modify_and_reproduce.qmd
+@@ -0,0 +1,160 @@
++---
++title: "Modify the analysis and reproduce the results"
++subtitle: "65–75 minutes · Hands-on · targets and Quarto"
++editor:
++  markdown:
++    wrap: 72
++link-citations: true
++execute:
++  warning: false
++  message: false
++---
++
++## Introduction
++
++In this 10-minute activity, you first check that your result
++reproduces, then change one input, predict what needs rebuilding,
++and update the report. By the end, you should be able to explain how
++the pipeline and report keep a reported result consistent with its
++inputs.
++
++Continue in the same session with your completed
++`workspace/_targets.R` and `workspace/report.qmd`.
++[Report checkpoint](06_quarto.qmd#quarto-checkpoint)
++
++## Step 1: reproduce the result
++
++Allow about three minutes. In the **R Console**, keep a copy of the
++current summary, ask *targets* to forget that every target is up to
++date, and rebuild everything from the pinned input. This is what
++happens when a collaborator runs the pipeline for the first time.
++
++```{r health-modify-setup, include = TRUE, echo = TRUE, message = FALSE, warning = FALSE, cache = FALSE, output = TRUE, eval = TRUE}
++box::use(
++  targets[everything, tar_invalidate, tar_make, tar_outdated, tar_read],
++  utils[read.csv]
++)
++
++workshop_dir <- file.path("outputs", "health-wellbeing")
++pipeline_script <- file.path("workspace", "_targets.R")
++pipeline_store <- file.path(workshop_dir, "_targets")
++selection_file <- file.path(workshop_dir, "analysis-data-version.txt")
++summary_path <- file.path(workshop_dir, "meta-summary.csv")
++stopifnot(file.exists(pipeline_script), file.exists(summary_path))
++```
++
++```{r health-modify-reproduce, include = TRUE, echo = TRUE, message = FALSE, warning = FALSE, cache = FALSE, output = TRUE, eval = TRUE}
++before <- read.csv(summary_path)
++tar_invalidate(everything(), store = pipeline_store)
++tar_make(script = pipeline_script, store = pipeline_store)
++after <- read.csv(summary_path)
++identical(before, after)
++```
++
++`tar_invalidate()` removes the records that mark targets as up to
++date; it does not delete the pinned data. Every target reruns, and
++`TRUE` means the rebuilt summary matches the previous one exactly in
++this environment. Another R or *meta* version could change the final
++digits, which is why the summary records both.
++
++## Step 2: change the input
++
++Allow about three minutes. Before running anything, predict which
++targets will be outdated if the selection file names the
++general-population version instead of the full dataset. Then switch
++the selection and check your prediction.
++
++```{r health-modify-select-general, include = TRUE, echo = TRUE, message = FALSE, warning = FALSE, cache = FALSE, output = TRUE, eval = TRUE}
++versions <- read.csv(
++  file.path(workshop_dir, "dataset-versions.csv"),
++  colClasses = "character"
++)
++general_version <- versions$version[versions$scope == "general"]
++stopifnot(length(general_version) == 1L)
++writeLines(general_version, selection_file)
++
++tar_outdated(script = pipeline_script, store = pipeline_store)
++```
++
++Every target is outdated: the selection file is the first step, and
++all later steps depend on it. Rebuild and read the new result.
++
++```{r health-modify-rebuild-general, include = TRUE, echo = TRUE, message = FALSE, warning = FALSE, cache = FALSE, output = TRUE, eval = TRUE}
++tar_make(script = pipeline_script, store = pipeline_store)
++tar_read(result, store = pipeline_store)[
++  , c("data_version", "studies", "pooled_r", "ci_lower", "ci_upper")
++]
++```
++
++## Step 3: update the report
++
++Allow about two minutes. In the **Terminal**, at the project root,
++render the report again and reload it in your browser.
++
++```bash
++quarto render workspace/report.qmd --to html
++```
++
++The report now describes 18 studies and names the general-population
++pin version in its provenance. You did not edit a single number by
++hand. The subset's pooled correlation is similar, with a wider
++interval from fewer studies. It is a planned teaching comparison, not
++a replacement for the full analysis.
++
++## Step 4: restore the full dataset
++
++Allow about two minutes. Select the full version again, rebuild, and
++check that nothing is outdated.
++
++```{r health-modify-restore, include = TRUE, echo = TRUE, message = FALSE, warning = FALSE, cache = FALSE, output = TRUE, eval = TRUE}
++full_version <- versions$version[versions$scope == "all"]
++stopifnot(length(full_version) == 1L)
++writeLines(full_version, selection_file)
++
++tar_make(script = pipeline_script, store = pipeline_store)
++tar_outdated(script = pipeline_script, store = pipeline_store)
++tar_read(result, store = pipeline_store)$studies
++```
++
++*targets* keeps only the latest result for each target, so switching
++back reruns the steps. Render the report once more so it matches the
++full analysis.
++
++## Optional: change a method instead
++
++If you have time, make a code change rather than a data change. In
++`workspace/_targets.R`, step 5, change `method.tau = "REML"` to
++`method.tau = "DL"`, the DerSimonian–Laird estimator, and save the
++file.
++
++Predict the outdated targets, then run `tar_outdated()`. Only `fit`,
++`result`, and `summary_file` are listed, because the input steps have
++not changed. Run `tar_make()` and render the report. Its Methods
++section now names the DerSimonian–Laird method, and the pooled
++correlation stays at about 0.363. This is a quick sensitivity check:
++the result does not depend on this choice of estimator. Change the
++setting back to `"REML"` and rebuild before you finish.
++
++In your own project, the pipeline would be a tracked file. `git diff`
++would show the one-line change, and a commit would record why you made
++it.
++
++## Checkpoint {#modify-checkpoint}
++
++-   Rebuilding from the pinned input gave an identical summary.
++-   With the general-population version, the pipeline combined **18
++    studies** with a pooled correlation of about **0.38** and a 95%
++    interval of about **0.30 to 0.45**, and the report updated without
++    manual edits.
++-   After restoring the full version, `tar_outdated()` is empty and the
++    summary shows 29 studies again.
++-   You can explain why a data change reruns every target, while a
++    method change reruns only the model and its outputs.
++
++Next, we look at how to release and archive a version of this work.
++[GitHub releases, Zenodo and archiving](08_archiving.qmd)
++
++## Further reading
++
++-   How *targets* decides what to rerun [@targets-manual].
++-   Pooling correlations with `metacor()` [@meta-metacor].
+diff --git a/pages/workshop/08_zenodo.qmd b/pages/workshop/08_archiving.qmd
+similarity index 32%
+rename from pages/workshop/08_zenodo.qmd
+rename to pages/workshop/08_archiving.qmd
+index 04fc5c6..8060e5c 100644
+--- a/pages/workshop/08_zenodo.qmd
++++ b/pages/workshop/08_archiving.qmd
+@@ -1,6 +1,6 @@
+ ---
+-title: "Research archiving and persistent identifiers"
+-subtitle: "80–85 minutes · Zenodo"
++title: "GitHub releases, Zenodo and archiving"
++subtitle: "75–82 minutes · Conceptual · GitHub releases, Zenodo and synthpop"
+ editor:
+   markdown:
+     wrap: 72
+@@ -9,10 +9,11 @@ link-citations: true
+ 
+ ## Introduction
+ 
+-In this five-minute demonstration, we will work out what a reader
+-should cite to find the materials for a particular analysis. We will
+-inspect the workshop archive and how published GitHub releases can
+-be archived automatically through the Zenodo integration.
++In this seven-minute overview, we work out what a reader should cite
++to find the materials behind a particular result. We connect a
++GitHub release to an archived Zenodo record with a DOI, decide what
++belongs in the archive, and briefly consider what to do when the data
++cannot be shared.
+ 
+ A Git commit identifies a repository revision. A GitHub release gives
+ a tagged revision a name and a place for release notes and assets.
+@@ -20,19 +21,36 @@ Zenodo can archive a copy of selected files and issue a DOI. An
+ archive makes the cited files available under the access conditions
+ of that record [@zenodo-reserve-doi].
+ 
+-## Inspect a record
++## Releases on GitHub {#archiving-releases}
+ 
+-Open the workshop's archived `v0.2.0` release [@workshop-v020]. Find the
+-creators, access conditions, and the ZIP of that revision. Compare the Zenodo
+-version DOI with the GitHub release tag and the concept DOI in
+-`CITATION.cff`. Cite the version DOI for the files supporting a
+-result. Cite the concept DOI when referring to the evolving project.
++Allow about two minutes. A release marks the version of a project
++that others should use or cite. In the workshop repository, preparing
++a release follows the steps we have used throughout the session:
++
++1.  Record the changes in `CHANGELOG.md` and commit that entry.
++2.  Tag the commit and publish a release with notes on the
++    [releases page](https://github.com/JBris/open-and-reproducible-science-in-r/releases).
++3.  Publishing the release triggers the workflows that build and push
++    the RStudio and Binder images. With the Zenodo integration enabled
++    for the repository, Zenodo also archives the tagged files.
++
++For an analysis, one release ties together the pipeline script, the
++report source, the lockfile, and the metadata at one tagged revision.
++A reader can then retrieve that exact combination rather than the
++repository's latest state.
++
++## Inspect a Zenodo record
++
++Allow about two minutes. Open the workshop's archived `v0.2.0`
++release [@workshop-v020]. Find the creators, access conditions, and
++the ZIP of that revision. Compare the Zenodo version DOI with the
++GitHub release tag and the concept DOI in `CITATION.cff`. Cite the
++version DOI for the files supporting a result. Cite the concept DOI
++when referring to the evolving project.
+ [Version archive](https://doi.org/10.5281/zenodo.24357028) ·
+ [Concept DOI](https://doi.org/10.5281/zenodo.24342489) ·
+ [GitHub release](https://github.com/JBris/open-and-reproducible-science-in-r/releases/tag/v0.2.0)
+ 
+-## Connect the website, repository, and archive
+-
+ The workshop has three connected locations:
+ 
+ | Resource | Role |
+@@ -42,76 +60,81 @@ The workshop has three connected locations:
+ | [Zenodo record 24357028](https://zenodo.org/records/24357028) | Find the archived `v0.2.0` release and its version DOI. |
+ 
+ The record's related identifier points to the repository's `v0.2.0`
+-tag. Follow that link when comparing the archived files with GitHub.
+-The live website can evolve as the project changes; cite the archived
+-version that supplied the files for a particular result.
+-
+-## Automatically archive GitHub releases {#zenodo-github-integration}
+-
+-For an instructor demonstration or follow-up setup, use Zenodo's
+-[Enable a repository guide](https://help.zenodo.org/docs/github/enable-repository/):
+-
+-1. Connect your GitHub account to Zenodo if it is not already linked.
+-2. In Zenodo's profile menu, select **GitHub**.
+-3. Select **Sync now** to refresh the list of repositories.
+-4. Find the repository you maintain and enable its slider. For this
+-   workshop, inspect the connection for
+-   `JBris/open-and-reproducible-science-in-r`; use your own repository
+-   for follow-up practice.
+-5. Refresh the page and check that the repository is enabled.
+-
+-Once connected, publishing a new GitHub release triggers automatic
+-ingestion and archiving in Zenodo. Inspect the resulting version record,
+-its DOI, metadata, and downloadable files after each release. The
+-**Sync now** control refreshes the repository list; published releases
+-are the events that create new archives.
+-
+-Record `24357028` identifies `v0.2.0`. Later archived releases have
+-separate version records and DOIs, connected through the project's
+-version history and concept DOI. Retain the version DOI in the
+-citation for a specific analysis.
++tag. The live website can change as the project changes; cite the
++archived version that supplied the files for a particular result.
++Later archived releases have their own version records and DOIs,
++connected through the concept DOI.
+ 
+ ## Decide what to archive
+ 
+-For the `HealthWellbeing` analysis, assemble a candidate list:
++Allow about two minutes. For the `HealthWellbeing` analysis, a
++candidate list is:
+ 
+ -   The exact code revision, pipeline script, and Quarto report source.
+ -   The report and summary CSV, where upstream terms permit sharing.
+--   The lockfile, actual environment record, and container digest if
+-    the run used a container.
++-   The lockfile, actual environment record, and container image tag
++    or digest if the run used a container.
+ -   The source citation, download URL, checksum, pin version and
+-    study inclusion rule, plus the relevant metadata and reuse terms.
++    study inclusion rule, plus the codebook, dataset metadata, and
++    reuse terms.
+ 
+ The upstream download is publicly accessible. Confirm its reuse terms
+ before including the raw file, pinned copies, or derivatives in a
+ deposit. If you cannot include a copy, document how an authorised
+ reader can obtain the source and recreate the selected input. A pin
+-version identifies an object in a particular board. Preserving a
++version identifies an object in a particular board. Preserving the
+ version identifier with the checksum and filter lets another reader
+ understand what that object contained.
+ 
+-## Try it yourself
++## When the data cannot be shared
++
++Allow about one minute. Open science can include restricted-access
++data: you can share the methods, code, metadata, and access
++conditions while restricting the original observations.
++
++Synthetic data generated with *synthpop* can help others test whether
++a workflow runs. It does not let them verify findings computed from
++inaccessible originals, and ordinary synthesis is not a privacy
++guarantee. A differential privacy claim requires a validated mechanism
++and privacy accounting [@near2021-synthetic-data]. The
++[supplementary synthetic data exercise](10_synthetic_data.qmd) works
++through an example after the workshop.
+ 
+-Point to the DOI you would cite for the files you inspected.
+-Identify one item that would help a reader recreate the precise
+-version of the input. Explain how you would document its access
+-conditions. Follow the record's related link to the GitHub tag and
+-identify the release event that would create the next archive.
++## Question for the room
++
++Which DOI would you cite for the files behind a specific result, and
++which single item would help a reader recreate the precise input?
+ 
+ ## Checkpoint {#zenodo-checkpoint}
+ 
+-You can connect a cited archive to a specific version, distinguish
+-its DOI from a GitHub release tag, and list the files and metadata
+-a reader needs. You can explain how an enabled GitHub repository
+-produces a new Zenodo archive when a release is published. Use the
+-archive's own citation for the record you inspected and cite the
+-original review separately for the study data.
++You can connect a cited archive to a specific release, distinguish
++its DOI from a GitHub release tag, and list the files and metadata a
++reader needs. You can explain how publishing a release produces a new
++Zenodo archive. Use the archive's own citation for the record you
++inspected and cite the original review separately for the study data.
++
++We finish with questions and discussion.
++[Questions and discussion](09_discussion.qmd)
+ 
+-We will finish with optional extensions and discussion.
+-[Optional extras and concluding discussion](09_extras_and_discussion.qmd)
++## After the workshop: archive your own releases {#zenodo-github-integration}
++
++To archive releases of your own repository, follow Zenodo's
++[Enable a repository guide](https://help.zenodo.org/docs/github/enable-repository/):
++
++1.  Connect your GitHub account to Zenodo if it is not already linked.
++2.  In Zenodo's profile menu, select **GitHub**.
++3.  Select **Sync now** to refresh the list of repositories.
++4.  Find the repository you maintain and enable its slider.
++5.  Refresh the page and check that the repository is enabled.
++
++Once connected, publishing a new GitHub release triggers automatic
++archiving in Zenodo. Inspect the resulting version record, its DOI,
++metadata, and downloadable files after each release. The **Sync now**
++control refreshes the repository list; published releases are the
++events that create new archives.
+ 
+ ## Further reading
+ 
+-- Enabling GitHub–Zenodo integration [@zenodo-enable-repository].
+-- Managing versions on Zenodo [@zenodo-manage-versions].
+-- Archiving and citing a GitHub repository [@github-archiving].
++-   Enabling GitHub–Zenodo integration [@zenodo-enable-repository].
++-   Managing versions on Zenodo [@zenodo-manage-versions].
++-   Archiving and citing a GitHub repository [@github-archiving].
+diff --git a/pages/workshop/09_extras_and_discussion.qmd b/pages/workshop/09_discussion.qmd
+similarity index 6%
+rename from pages/workshop/09_extras_and_discussion.qmd
+rename to pages/workshop/09_discussion.qmd
+index 11987de..a6989ec 100644
+--- a/pages/workshop/09_extras_and_discussion.qmd
++++ b/pages/workshop/09_discussion.qmd
+@@ -1,203 +1,71 @@
+ ---
+-title: "Optional extras and concluding discussion"
+-subtitle: "85–90 minutes · synthpop and vetiver"
++title: "Questions and discussion"
++subtitle: "82–90 minutes · Interactive"
+ editor:
+   markdown:
+     wrap: 72
+ link-citations: true
+-execute:
+-  warning: false
+-  message: false
+ ---
+ 
+ ## Introduction
+ 
+-In the final five minutes, we will discuss what another researcher
+-needs to rerun or verify our analysis. If time allows, the instructor
+-will show a distribution comparison from *synthpop* and a model
+-version history from *vetiver*. The code below is for follow-up with
+-the prepared workshop environment.
++In the final eight minutes, we look back at the workflow you used,
++take questions, and discuss how to apply it in your own work. The aim
++of the session was to experience an end-to-end reproducible research
++workflow, not to master every package.
+ 
+-## Prepare the study summaries
++## The workflow you used
+ 
+-We will use the saved pin identifier for the full 29-study dataset.
+-Run the setup from the project root with *box* and *pins*. Use the
+-versions CSV and board from the dataset versioning exercise.
+-[Dataset storage and versioning](05_pins.qmd#pins-checkpoint)
++Allow about one minute. Each stage recorded something another
++researcher needs to understand, rerun, or cite the result.
+ 
+-```{r health-extras-data, include = TRUE, echo = TRUE, message = FALSE, warning = FALSE, cache = FALSE, output = TRUE, eval = TRUE}
+-box::use(pins[board_folder, pin_read], utils[read.csv])
++| Stage | What it recorded | Where to find it |
++| --- | --- | --- |
++| Git and GitHub | Change history and review | Commits and pull requests |
++| renv, Docker, Binder | Package versions and computing environment | `renv.lock`, Dockerfiles, `outputs/session-info.txt` |
++| codebook, dataspice | Variable meanings, provenance, and reuse terms | `codebook.csv`, `dataspice.json` |
++| pins, vetiver | Exact data and model versions | `dataset-versions.csv`, pin metadata |
++| targets | The steps from input to summary, and their dependencies | `workspace/_targets.R`, `meta-summary.csv` |
++| Quarto | Methods, results, and provenance in one document | `workspace/report.html` |
++| GitHub releases, Zenodo | A citable, archived version | Release tag and version DOI |
+ 
+-workshop_dir <- file.path("outputs", "health-wellbeing")
+-versions <- read.csv(
+-  file.path(workshop_dir, "dataset-versions.csv"),
+-  colClasses = "character"
+-)
+-full_version <- versions$version[versions$scope == "all"]
+-stopifnot(length(full_version) == 1L)
++A useful test of the whole workflow is to point to the exact data
++version, analysis revision, environment, and archive citation for one
++reported result.
+ 
+-data_board <- board_folder(
+-  file.path(workshop_dir, "data_store"),
+-  versioned = TRUE
+-)
+-health_full <- pin_read(
+-  data_board, "health_wellbeing", version = full_version
+-)
+-stopifnot(nrow(health_full) == 29L)
++## Discussion {#extras-discussion}
+ 
+-original <- data.frame(
+-  population = factor(health_full$population),
+-  z = atanh(health_full$cor),
+-  log_n = log(health_full$n)
+-)
+-```
+-
+-`z` is the Fisher transformation of the correlation, and `log_n`
+-is the natural log of the study sample size. The example uses
+-study summaries and leaves out the original study labels and country
+-column.
+-
+-## Synthetic study summaries
+-
+-With *synthpop* available, we will use the CART synthesis method and
+-seed 123 so we can repeat the classroom run in the same environment.
+-We convert the generated values to the original scales and give
+-the new rows synthetic labels. The generated sample sizes describe
+-synthetic rows.
+-
+-```{r health-synthetic-data, include = TRUE, echo = TRUE, message = FALSE, warning = FALSE, cache = FALSE, output = TRUE, eval = TRUE}
+-box::use(synthpop[compare, syn])
+-
+-synthetic <- syn(
+-  original,
+-  method = "cart",
+-  seed = 123,
+-  print.flag = FALSE
+-)
+-
+-synthetic_data <- data.frame(
+-  author = sprintf("Synthetic %02d", seq_len(nrow(synthetic$syn))),
+-  cor = tanh(synthetic$syn$z),
+-  n = round(exp(synthetic$syn$log_n)),
+-  population = synthetic$syn$population
+-)
+-head(synthetic_data)
+-compare(synthetic, original)
+-```
+-
+-Inspect the distributions of `population`, `z`, and `log_n`.
+-The comparison describes the resemblance of the two tables on these
+-variables. Similar marginals can coexist with differences in their
+-relationships and in downstream estimates. Treat this as a public
+-teaching example. A privacy guarantee would require a validated
+-mechanism and accounting beyond this distribution comparison
+-[@near2021-synthetic-data]. For the synthesis methods, see
+-@nowok2016-synthpop and the
+-[synthpop documentation](https://www.synthpop.org.uk/).
+-
+-## Model versioning
+-
+-We will use *vetiver* and *pins* to store two illustrative linear
+-regressions under the same model name. The second adds log sample
+-size as a predictor. Both regressions give each study equal weight
+-and serve to illustrate model versioning. The core meta-analysis
+-uses study precision and between-study variance when pooling effects.
+-
+-Reuse the local model board across renders and keep the version
+-identifiers for each pair of fits. Cached model chunks reuse their
+-recorded identifiers. Refreshing the cache fits a new pair and retains
+-earlier versions in the board. Keep the board with its document cache;
+-if you remove the board, refresh the cache when rendering again.
+-
+-```{r health-vetiver-setup, include = TRUE, echo = TRUE, message = FALSE, warning = FALSE, cache = FALSE, output = TRUE, eval = TRUE}
+-box::use(
+-  pins[pin_exists, pin_versions],
+-  stats[lm],
+-  vetiver[vetiver_model, vetiver_pin_write, vetiver_pin_read]
+-)
+-
+-model_board <- board_folder(
+-  file.path(workshop_dir, "model_store"),
+-  versioned = TRUE
+-)
+-model_name <- "health_wellbeing"
+-
+-model_source <- list(
+-  data_version = full_version,
+-  r_version = as.character(getRversion()),
+-  vetiver_version = as.character(utils::packageVersion("vetiver"))
+-)
+-```
+-
+-```{r health-vetiver-versions, include = TRUE, echo = TRUE, message = FALSE, warning = FALSE, cache = TRUE, output = TRUE, eval = TRUE, cache.extra = get0("model_source")}
+-previous_versions <- if (pin_exists(model_board, model_name)) {
+-  pin_versions(model_board, model_name)$version
+-} else {
+-  character()
+-}
+-
+-model_v1 <- lm(z ~ population, data = original)
+-v1 <- vetiver_model(
+-  model_v1,
+-  model_name = model_name,
+-  description = "Illustrative regression on population.",
+-  metadata = model_source
+-)
+-vetiver_pin_write(model_board, v1)
+-first_version <- setdiff(
+-  pin_versions(model_board, model_name)$version, previous_versions
+-)
+-stopifnot(length(first_version) == 1L)
+-
+-model_v2 <- lm(z ~ population + log_n, data = original)
+-v2 <- vetiver_model(
+-  model_v2,
+-  model_name = model_name,
+-  description = "Illustrative regression on population and log sample size.",
+-  metadata = model_source
+-)
+-vetiver_pin_write(model_board, v2)
+-
+-model_history <- pin_versions(model_board, model_name)
+-second_version <- setdiff(
+-  model_history$version, c(previous_versions, first_version)
+-)
+-stopifnot(length(first_version) == 1L, length(second_version) == 1L)
+-model_history
+-```
+-
+-When you use `vetiver_pin_read()` without a version, it selects the
+-board's current version. Pass an explicit identifier when you want
+-to reproduce a previous prediction or inspect its input requirements.
+-Compare the input columns of the two retrieved models.
+-
+-```{r health-vetiver-read, include = TRUE, echo = TRUE, message = FALSE, warning = FALSE, cache = TRUE, output = TRUE, eval = TRUE, cache.extra = list(get0("first_version"), get0("second_version"))}
+-stored_v1 <- vetiver_pin_read(
+-  model_board, model_name, version = first_version
+-)
+-stored_v2 <- vetiver_pin_read(
+-  model_board, model_name, version = second_version
+-)
+-names(stored_v1$prototype)
+-names(stored_v2$prototype)
+-stored_v2$metadata
+-```
+-
+-The model's metadata retains its training pin version and software
+-context [@vetiver-pin-write]. Keep the fitted objects and generated tables
+-local until you have checked applicable release terms.
+-
+-## Concluding discussion {#extras-discussion}
++Allow about five minutes. Discuss one or more of these questions with
++your neighbours or the room.
+ 
+ -   If you received only the report, which versions and files would
+     you ask for to rerun it?
+ -   If the original data could not be shared, what could a reader
+     test with a synthetic dataset, and what would require access to
+     the originals?
++-   Which barrier to reproducibility do you meet most often:
++    undocumented dependencies, manual analysis steps, or assumptions
++    tied to one computer?
+ -   Which single change would make your own research workflow easier
+     for a collaborator to inspect and rerun?
+ 
+-A useful checkpoint is to point to the exact data version, analysis
+-revision, environment, and archive citation for one reported result.
+-If you try the optional model exercise, check that the first model
+-expects `population` and the second also expects `log_n`.
++Use the remaining time for questions.
++
++## Before you leave
++
++Your MyBinder session is temporary. To keep your work, select the
++`workspace` folder in the RStudio **Files** pane and use
++**More → Export**. Your pipeline and report copies are there.
++
++## Follow-up resources
++
++-   [Supplementary exercise: synthetic data with synthpop](10_synthetic_data.qmd).
++-   [Practise Git and GitHub with your own fork](01_open_science.qmd#git-practice).
++-   [Publishing and journal formats with Quarto](06_quarto.qmd#quarto-publishing).
++-   [Archiving your own releases with Zenodo](08_archiving.qmd#zenodo-github-integration).
++-   [Deploying models with vetiver](https://vetiver.posit.co/get-started/deploy.html).
++-   The lessons' further reading sections and the
++    [references](../4_references.qmd).
++
++Questions after the workshop are welcome in the repository's
++[GitHub Discussions](https://github.com/JBris/open-and-reproducible-science-in-r/discussions).
+diff --git a/pages/workshop/10_synthetic_data.qmd b/pages/workshop/10_synthetic_data.qmd
+new file mode 100644
+index 0000000..71639a8
+--- /dev/null
++++ b/pages/workshop/10_synthetic_data.qmd
+@@ -0,0 +1,164 @@
++---
++title: "Supplementary exercise: synthetic data with synthpop"
++subtitle: "After the workshop · synthpop"
++editor:
++  markdown:
++    wrap: 72
++link-citations: true
++execute:
++  warning: false
++  message: false
++---
++
++## Introduction
++
++This supplementary exercise is outside the timed programme and takes
++about 15 minutes. You will generate a synthetic version of the
++`HealthWellbeing` study summaries with *synthpop*, compare it with the
++original, and run the same pooled analysis on both. By the end, you
++should be able to explain what a synthetic dataset lets others test
++and what it cannot establish.
++
++Run the chunks in the **R Console** from the project root, in the
++prepared environment, after preparing the dataset versions.
++[Prepare the dataset versions](00_preparation.qmd#preparation-versions)
++
++## Prepare the study summaries
++
++We read the full 29-study dataset by its recorded pin version, so the
++exercise starts from the same input as the workshop pipeline.
++
++```{r health-extras-data, include = TRUE, echo = TRUE, message = FALSE, warning = FALSE, cache = FALSE, output = TRUE, eval = TRUE}
++box::use(pins[board_folder, pin_read], utils[read.csv])
++
++workshop_dir <- file.path("outputs", "health-wellbeing")
++versions <- read.csv(
++  file.path(workshop_dir, "dataset-versions.csv"),
++  colClasses = "character"
++)
++full_version <- versions$version[versions$scope == "all"]
++stopifnot(length(full_version) == 1L)
++
++data_board <- board_folder(
++  file.path(workshop_dir, "data_store"),
++  versioned = TRUE
++)
++health_full <- pin_read(
++  data_board, "health_wellbeing", version = full_version
++)
++stopifnot(nrow(health_full) == 29L)
++
++original <- data.frame(
++  population = factor(health_full$population),
++  z = atanh(health_full$cor),
++  log_n = log(health_full$n)
++)
++```
++
++`z` is the Fisher transformation of the correlation, and `log_n`
++is the natural log of the study sample size. The example uses
++study summaries and leaves out the original study labels and country
++column.
++
++## Generate synthetic study summaries
++
++We use the CART synthesis method with seed 123, so the run can be
++repeated in the same environment. We convert the generated values to
++the original scales and give the new rows synthetic labels. The
++generated sample sizes describe synthetic rows, not real studies.
++
++```{r health-synthetic-data, include = TRUE, echo = TRUE, message = FALSE, warning = FALSE, cache = FALSE, output = TRUE, eval = TRUE}
++box::use(synthpop[compare, syn])
++
++synthetic <- syn(
++  original,
++  method = "cart",
++  seed = 123,
++  print.flag = FALSE
++)
++
++synthetic_data <- data.frame(
++  author = sprintf("Synthetic %02d", seq_len(nrow(synthetic$syn))),
++  cor = tanh(synthetic$syn$z),
++  n = round(exp(synthetic$syn$log_n)),
++  population = synthetic$syn$population
++)
++head(synthetic_data)
++compare(synthetic, original)
++```
++
++Inspect the distributions of `population`, `z`, and `log_n`. The
++comparison describes how closely the two tables resemble each other
++on these variables. Similar distributions can coexist with
++differences in the relationships between variables and in downstream
++estimates. For the synthesis methods, see @nowok2016-synthpop and the
++[synthpop documentation](https://www.synthpop.org.uk/).
++
++## Try it yourself: pool both datasets
++
++Run the workshop's random-effects model on the original and the
++synthetic study summaries, and compare the pooled correlations.
++
++```{r health-synthetic-pool, include = TRUE, echo = TRUE, message = FALSE, warning = FALSE, cache = FALSE, output = TRUE, eval = TRUE}
++box::use(meta[metacor])
++
++pool_correlations <- function(data) {
++  model <- metacor(
++    cor = cor,
++    n = n,
++    studlab = author,
++    data = data,
++    sm = "ZCOR",
++    common = FALSE,
++    random = TRUE,
++    method.tau = "REML",
++    method.random.ci = "HK"
++  )
++  c(
++    studies = model$k,
++    pooled_r = tanh(model$TE.random),
++    ci_lower = tanh(model$lower.random),
++    ci_upper = tanh(model$upper.random)
++  )
++}
++
++round(
++  rbind(
++    original = pool_correlations(health_full),
++    synthetic = pool_correlations(synthetic_data)
++  ),
++  3
++)
++```
++
++The analysis code runs unchanged on the synthetic table, so a reader
++without access to restricted originals could test that the workflow
++works. The synthetic estimate is computed from generated rows. A close
++match would not verify the original finding, and a difference would
++not refute it.
++
++## Limits on interpretation and sharing
++
++Treat this as a public teaching example. Ordinary synthesis with
++*synthpop* is not a differential privacy guarantee, and a distribution
++comparison or utility score does not establish one. A privacy claim
++requires a validated mechanism and privacy accounting
++[@near2021-synthetic-data]. Synthetic data also does not confer
++privacy protection on related models, evaluation results, or
++metadata. Keep generated tables local until you have checked the
++applicable release terms.
++
++## Checkpoint {#synthetic-checkpoint}
++
++-   You generated 29 synthetic study summaries with labelled synthetic
++    rows and compared their distributions with the original.
++-   You ran the same pooled analysis on both tables and can explain
++    why a matching estimate would not verify the original finding.
++-   You can explain why synthetic data is not, by itself, a privacy
++    guarantee.
++
++## Further reading
++
++-   The synthesis methods in *synthpop* [@nowok2016-synthpop].
++-   Synthetic data and differential privacy
++    [@near2021-synthetic-data].
+diff --git a/pipelines/_targets_health_wellbeing.R b/pipelines/_targets_health_wellbeing.R
+index d1eedd5..b6e2c9c 100644
+--- a/pipelines/_targets_health_wellbeing.R
++++ b/pipelines/_targets_health_wellbeing.R
+@@ -1,30 +1,46 @@
++# HealthWellbeing correlation meta-analysis: completed reference pipeline.
++#
++# Prepare the inputs first with pipelines/prepare_health_wellbeing.R, then run
++# from the project root:
++#   targets::tar_make(
++#     script = "pipelines/_targets_health_wellbeing.R",
++#     store = "outputs/health-wellbeing/_targets"
++#   )
++#
++# The partially completed template for the hands-on activity is
++# pipelines/exercise/_targets_health_wellbeing.R. Its numbered steps match this
++# file, which serves as the solution and the catch-up copy.
++
+ box::use(
+   crew[crew_controller_local],
+-  here[here],
+-  targets[tar_target, tar_source, tar_option_set]
++  targets[tar_option_set, tar_path_script, tar_target]
+ )
+ 
+-options(box.path = here())
+-
+ workshop_dir <- file.path("outputs", "health-wellbeing")
+-pipeline_script <- targets::tar_path_script()
++pipeline_script <- tar_path_script()
+ 
++# Run the targets in one local background worker.
+ tar_option_set(
+   controller = crew_controller_local(workers = 1)
+ )
+ 
+ list(
+-  targets::tar_target(
++  # 1. The selection file names the pinned dataset version to analyse.
++  tar_target(
+     version_file,
+     file.path(workshop_dir, "analysis-data-version.txt"),
+     format = "file"
+   ),
+-  targets::tar_target(data_version, {
++
++  # 2. Read the selected version identifier.
++  tar_target(data_version, {
+     version <- trimws(readLines(version_file, warn = FALSE))
+     stopifnot(length(version) == 1L, nzchar(version))
+     version
+   }),
+-  targets::tar_target(
++
++  # 3. Retrieve that exact version from the versioned pins board.
++  tar_target(
+     dataset_file,
+     {
+       board_path <- file.path(workshop_dir, "data_store")
+@@ -41,7 +57,9 @@ list(
+     },
+     format = "file"
+   ),
+-  targets::tar_target(studies, {
++
++  # 4. Read the study summaries and check the assumptions the model needs.
++  tar_target(studies, {
+     data <- readRDS(dataset_file)
+     stopifnot(
+       is.data.frame(data),
+@@ -59,7 +77,9 @@ list(
+     )
+     data
+   }),
+-  targets::tar_target(fit, {
++
++  # 5. Pool the correlations with a random-effects model on Fisher's z scale.
++  tar_target(fit, {
+     pipeline_md5 <- unname(tools::md5sum(pipeline_script))
+     stopifnot(!is.na(pipeline_md5))
+ 
+@@ -82,7 +102,9 @@ list(
+       meta_version = as.character(getNamespaceVersion("meta"))
+     )
+   }),
+-  targets::tar_target(result, {
++
++  # 6. Summarise the pooled estimate on the correlation scale, with provenance.
++  tar_target(result, {
+     model <- fit$model
+     data.frame(
+       data_version = data_version,
+@@ -99,7 +121,9 @@ list(
+       pipeline_md5 = fit$pipeline_md5
+     )
+   }),
+-  targets::tar_target(
++
++  # 7. Write the summary that the Quarto report reads.
++  tar_target(
+     summary_file,
+     {
+       path <- file.path(workshop_dir, "meta-summary.csv")
+diff --git a/pipelines/exercise/_targets_health_wellbeing.R b/pipelines/exercise/_targets_health_wellbeing.R
+new file mode 100644
+index 0000000..7bc18c4
+--- /dev/null
++++ b/pipelines/exercise/_targets_health_wellbeing.R
+@@ -0,0 +1,139 @@
++# HealthWellbeing correlation meta-analysis: partially completed workbook.
++#
++# Copy this template to workspace/_targets.R, complete TODO 1 and TODO 2 in the
++# copy, and run it from the project root:
++#   targets::tar_make(
++#     script = "workspace/_targets.R",
++#     store = "outputs/health-wellbeing/_targets"
++#   )
++#
++# Prepare the inputs first with pipelines/prepare_health_wellbeing.R. The
++# completed reference with the same numbered steps is
++# pipelines/_targets_health_wellbeing.R.
++
++box::use(
++  crew[crew_controller_local],
++  targets[tar_option_set, tar_path_script, tar_target]
++)
++
++workshop_dir <- file.path("outputs", "health-wellbeing")
++pipeline_script <- tar_path_script()
++
++# Run the targets in one local background worker.
++tar_option_set(
++  controller = crew_controller_local(workers = 1)
++)
++
++list(
++  # 1. The selection file names the pinned dataset version to analyse.
++  tar_target(
++    version_file,
++    file.path(workshop_dir, "analysis-data-version.txt"),
++    format = "file"
++  ),
++
++  # 2. Read the selected version identifier.
++  tar_target(data_version, {
++    version <- trimws(readLines(version_file, warn = FALSE))
++    stopifnot(length(version) == 1L, nzchar(version))
++    version
++  }),
++
++  # 3. Retrieve that exact version from the versioned pins board.
++  tar_target(
++    dataset_file,
++    {
++      board_path <- file.path(workshop_dir, "data_store")
++      stopifnot(dir.exists(board_path))
++
++      board <- pins::board_folder(board_path, versioned = TRUE)
++      files <- pins::pin_download(
++        board,
++        "health_wellbeing",
++        version = data_version
++      )
++      stopifnot(length(files) == 1L, file.exists(files))
++      files
++    },
++    format = "file"
++  ),
++
++  # 4. Read the study summaries and check the assumptions the model needs.
++  tar_target(studies, {
++    data <- readRDS(dataset_file)
++    stopifnot(
++      is.data.frame(data),
++      all(c("author", "cor", "n") %in% names(data)),
++      nrow(data) > 1L,
++      !anyNA(data$author),
++      !anyDuplicated(data$author),
++      is.numeric(data$cor),
++      all(is.finite(data$cor)),
++      all(abs(data$cor) < 1),
++      is.numeric(data$n),
++      all(is.finite(data$n)),
++      all(data$n > 3),
++      all(data$n == floor(data$n))
++    )
++    data
++  }),
++
++  # 5. Pool the correlations with a random-effects model on Fisher's z scale.
++  tar_target(fit, {
++    pipeline_md5 <- unname(tools::md5sum(pipeline_script))
++    stopifnot(!is.na(pipeline_md5))
++
++    model <- meta::metacor(
++      cor = cor,
++      n = n,
++      studlab = author,
++      # TODO 1: replace stop(...) with the name of the target from step 4 that
++      # holds the checked study summaries. Naming a target creates a dependency.
++      data = stop("Complete TODO 1 in the fit target."),
++      sm = "ZCOR",
++      common = FALSE,
++      random = TRUE,
++      method.tau = "REML",
++      method.random.ci = "HK",
++      level.ma = 0.95
++    )
++    list(
++      model = model,
++      pipeline_md5 = pipeline_md5,
++      r_version = as.character(getRversion()),
++      meta_version = as.character(getNamespaceVersion("meta"))
++    )
++  }),
++
++  # 6. Summarise the pooled estimate on the correlation scale, with provenance.
++  tar_target(result, {
++    model <- fit$model
++    data.frame(
++      data_version = data_version,
++      studies = model$k,
++      pooled_r = tanh(model$TE.random),
++      ci_lower = tanh(model$lower.random),
++      ci_upper = tanh(model$upper.random),
++      confidence_level = model$level.ma,
++      effect_scale = model$sm,
++      tau_method = model$method.tau,
++      interval_method = model$method.random.ci,
++      r_version = fit$r_version,
++      meta_version = fit$meta_version,
++      pipeline_md5 = fit$pipeline_md5
++    )
++  }),
++
++  # 7. Write the summary that the Quarto report reads.
++  tar_target(
++    summary_file,
++    {
++      path <- file.path(workshop_dir, "meta-summary.csv")
++      # TODO 2: replace stop(...) with two lines that write the `result` target
++      # to `path` with utils::write.csv(), using row.names = FALSE, and then
++      # return `path` so targets can track the file.
++      stop("Complete TODO 2 in the summary_file target.")
++    },
++    format = "file"
++  )
++)
+diff --git a/pipelines/exercise/health_wellbeing_report.qmd b/pipelines/exercise/health_wellbeing_report.qmd
+new file mode 100644
+index 0000000..2e0ba07
+--- /dev/null
++++ b/pipelines/exercise/health_wellbeing_report.qmd
+@@ -0,0 +1,100 @@
++---
++title: "Health and well-being across studies"
++subtitle: "Workshop report: complete TODO 1 to TODO 3"
++format:
++  html:
++    embed-resources: true
++toc: true
++link-citations: true
++editor:
++  markdown:
++    wrap: 72
++execute:
++  warning: false
++  message: false
++  echo: false
++params:
++  summary_file: "outputs/health-wellbeing/meta-summary.csv"
++---
++
++## Introduction
++
++We ask how strongly health and well-being are associated across the
++studies included in the selected `HealthWellbeing` dataset version.
++The input consists of study summaries from the teaching example in
++*Doing Meta-Analysis with R: A Hands-On Guide*.
++[Section 4.2.4, Correlations](https://doing-meta.guide/pooling-es#correlations)
++
++```{r health-report-input, include = FALSE, cache = FALSE}
++# The summary path is relative to the project root, wherever Quarto runs.
++summary_file <- here::here(params$summary_file)
++result <- utils::read.csv(summary_file, colClasses = "character")
++stopifnot(nrow(result) == 1L, result$effect_scale == "ZCOR")
++stopifnot(
++  all(c("tau_method", "interval_method") %in% names(result)),
++  !anyNA(c(result$tau_method, result$interval_method)),
++  all(nzchar(c(result$tau_method, result$interval_method)))
++)
++numeric_fields <- c("pooled_r", "ci_lower", "ci_upper", "confidence_level")
++result[numeric_fields] <- lapply(result[numeric_fields], as.numeric)
++
++tau_method <- switch(
++  result$tau_method,
++  REML = "restricted maximum likelihood (REML)",
++  PM = "the Paule–Mandel method (PM)",
++  DL = "the DerSimonian–Laird method (DL)",
++  result$tau_method
++)
++interval_method <- switch(
++  result$interval_method,
++  HK = "the Hartung–Knapp method (HK)",
++  KR = "the Kenward–Roger method (KR)",
++  classic = "a normal approximation (classic)",
++  result$interval_method
++)
++
++pipeline_md5 <- result[["pipeline_md5"]]
++if (is.null(pipeline_md5)) {
++  pipeline_md5 <- "unrecorded"
++}
++```
++
++## Methods
++
++The analysis pools Pearson correlations on Fisher's z scale with a
++random-effects model. The pipeline estimates between-study variance
++using `r tau_method` and calculates a confidence interval using
++`r interval_method`. It transforms the estimate and interval limits
++back to the correlation scale. Similarity of effect definitions and
++independence of study estimates are assumptions of this analysis.
++
++## Results
++
++The analysis combined `r result$studies` studies. The pooled
++correlation was `r sprintf("%.3f", result$pooled_r)`.
++
++**TODO 1:** Replace this paragraph with a sentence that reports the
++`r sprintf("%.0f%%", 100 * result$confidence_level)` confidence
++interval. Follow the inline R pattern used for the pooled correlation
++above, and format `result$ci_lower` and `result$ci_upper` with
++`sprintf("%.3f", ...)`.
++
++**TODO 2:** Replace this paragraph with one or two plain-language
++sentences on how differences between study populations and
++measurements limit what the pooled estimate tells us about any one
++setting.
++
++## Provenance
++
++-   **TODO 3:** Replace this item with two list items that report the
++    dataset pin version (`result$data_version`) and the pipeline
++    script MD5 (`pipeline_md5`), following the pattern below.
++-   R version: `r result$r_version`
++-   *meta* version: `r result$meta_version`
++-   Effect scale: `r result$effect_scale`
++-   Variance estimator: `r result$tau_method`
++-   Interval method: `r result$interval_method`
++
++The report reads the CSV produced by the workshop's *targets*
++pipeline. Retain the source data citation, checksum, selection file,
++and environment record with a permitted archive of the analysis.
+diff --git a/pipelines/health_wellbeing_report.qmd b/pipelines/health_wellbeing_report.qmd
+index d675907..8394dd3 100644
+--- a/pipelines/health_wellbeing_report.qmd
++++ b/pipelines/health_wellbeing_report.qmd
+@@ -13,7 +13,7 @@ execute:
+   message: false
+   echo: false
+ params:
+-  summary_file: "meta-summary.csv"
++  summary_file: "outputs/health-wellbeing/meta-summary.csv"
+ ---
+ 
+ ## Introduction
+@@ -25,7 +25,9 @@ The input consists of study summaries from the teaching example in
+ [Section 4.2.4, Correlations](https://doing-meta.guide/pooling-es#correlations)
+ 
+ ```{r health-report-input, include = FALSE, cache = FALSE}
+-result <- utils::read.csv(params$summary_file, colClasses = "character")
++# The summary path is relative to the project root, wherever Quarto runs.
++summary_file <- here::here(params$summary_file)
++result <- utils::read.csv(summary_file, colClasses = "character")
+ stopifnot(nrow(result) == 1L, result$effect_scale == "ZCOR")
+ stopifnot(
+   all(c("tau_method", "interval_method") %in% names(result)),
+@@ -38,14 +40,15 @@ result[numeric_fields] <- lapply(result[numeric_fields], as.numeric)
+ tau_method <- switch(
+   result$tau_method,
+   REML = "restricted maximum likelihood (REML)",
+-  DL = "DerSimonian–Laird (DL)",
++  PM = "the Paule–Mandel method (PM)",
++  DL = "the DerSimonian–Laird method (DL)",
+   result$tau_method
+ )
+ interval_method <- switch(
+   result$interval_method,
+-  HK = "Hartung–Knapp (HK)",
+-  KR = "Kenward–Roger (KR)",
+-  classic = "normal approximation (classic)",
++  HK = "the Hartung–Knapp method (HK)",
++  KR = "the Kenward–Roger method (KR)",
++  classic = "a normal approximation (classic)",
+   result$interval_method
+ )
+ 
+@@ -70,9 +73,12 @@ The analysis combined `r result$studies` studies. The pooled
+ correlation was `r sprintf("%.3f", result$pooled_r)` with a
+ `r sprintf("%.0f%%", 100 * result$confidence_level)` confidence interval
+ from `r sprintf("%.3f", result$ci_lower)` to
+-`r sprintf("%.3f", result$ci_upper)`. The pooled estimate summarises the
+-association across included studies. The relationship may vary across
+-populations and measurements, and the estimates are observational.
++`r sprintf("%.3f", result$ci_upper)`.
++
++The pooled estimate summarises the association across the included
++studies. The studies differ in their populations and measurements,
++so the association may vary between settings, and these observational
++estimates do not show that better health causes greater well-being.
+ 
+ ## Provenance
+ 
+@@ -84,7 +90,6 @@ populations and measurements, and the estimates are observational.
+ -   Variance estimator: `r result$tau_method`
+ -   Interval method: `r result$interval_method`
+ 
+-The report reads the CSV produced by
+-`pipelines/_targets_health_wellbeing.R`. Retain the source data
+-citation, checksum, selection file, and environment record with a
+-permitted archive of the analysis.
++The report reads the CSV produced by the workshop's *targets*
++pipeline. Retain the source data citation, checksum, selection file,
++and environment record with a permitted archive of the analysis.
+diff --git a/pipelines/prepare_health_wellbeing.R b/pipelines/prepare_health_wellbeing.R
+new file mode 100644
+index 0000000..64027bb
+--- /dev/null
++++ b/pipelines/prepare_health_wellbeing.R
+@@ -0,0 +1,109 @@
++# Prepare the versioned HealthWellbeing inputs for the workshop pipeline.
++#
++# Run from the project root before the hands-on activities:
++#   source(file.path("pipelines", "prepare_health_wellbeing.R"))
++#
++# The script verifies the unchanged raw teaching file, stores two dataset
++# versions on a versioned local pins board, records their identifiers, and
++# selects the full dataset as the pipeline's starting input. Rerunning it reuses
++# matching versions instead of writing duplicates. Objects stay local to the
++# script; its outputs are the files under outputs/health-wellbeing/.
++
++local({
++  workshop_dir <- file.path("outputs", "health-wellbeing")
++  raw_file <- file.path("data", "raw", "healthwellbeing.rda")
++  source_url <- paste0(
++    "https://www.protectlab.org/meta-analysis-in-r/data/",
++    "healthwellbeing.rda"
++  )
++
++  # Check that the raw file is the verified teaching snapshot.
++  stopifnot(file.exists(raw_file))
++  raw_md5 <- unname(tools::md5sum(raw_file))
++  stopifnot(identical(raw_md5, "0d74964b0b7168379a2b015cb648b326"))
++
++  raw_data <- new.env(parent = baseenv())
++  loaded_names <- load(raw_file, envir = raw_data)
++  stopifnot(identical(loaded_names, "HealthWellbeing"))
++  health <- raw_data[["HealthWellbeing"]]
++  stopifnot(is.data.frame(health), nrow(health) == 29L)
++
++  # Enable versioning explicitly so the board keeps every write.
++  dir.create(workshop_dir, recursive = TRUE, showWarnings = FALSE)
++  board <- pins::board_folder(
++    file.path(workshop_dir, "data_store"),
++    versioned = TRUE
++  )
++  pin_name <- "health_wellbeing"
++
++  # Return an identical stored version if one exists; otherwise write a new one.
++  write_version <- function(data, description, metadata) {
++    previous_versions <- character()
++    if (pins::pin_exists(board, pin_name)) {
++      previous_versions <- pins::pin_versions(board, pin_name)$version
++      for (version in previous_versions) {
++        stored_metadata <- pins::pin_meta(board, pin_name, version = version)$user
++        if (identical(stored_metadata, metadata) &&
++              identical(pins::pin_read(board, pin_name, version = version), data)) {
++          return(version)
++        }
++      }
++    }
++
++    pins::pin_write(
++      board,
++      data,
++      name = pin_name,
++      type = "rds",
++      title = "HealthWellbeing",
++      description = description,
++      metadata = metadata
++    )
++    new_version <- setdiff(
++      pins::pin_versions(board, pin_name)$version,
++      previous_versions
++    )
++    stopifnot(length(new_version) == 1L)
++    new_version
++  }
++
++  # Version 1: all 29 studies, with the source and checksum as metadata.
++  full_version <- write_version(
++    health,
++    description = "All 29 studies in the teaching snapshot.",
++    metadata = list(source_url = source_url, raw_md5 = raw_md5, scope = "all")
++  )
++
++  # Version 2: the 18 general-population studies, derived from version 1.
++  health_general <- pins::pin_read(board, pin_name, version = full_version) |>
++    subset(population == "general population")
++  stopifnot(nrow(health_general) == 18L)
++
++  general_version <- write_version(
++    health_general,
++    description = "Only studies labelled general population.",
++    metadata = list(
++      source_url = source_url,
++      raw_md5 = raw_md5,
++      scope = "general",
++      filter = "population == 'general population'",
++      parent_version = full_version
++    )
++  )
++
++  # Record both identifiers and start the pipeline from the full dataset.
++  versions <- data.frame(
++    scope = c("all", "general"),
++    version = c(full_version, general_version)
++  )
++  utils::write.csv(
++    versions,
++    file.path(workshop_dir, "dataset-versions.csv"),
++    row.names = FALSE
++  )
++  writeLines(
++    full_version,
++    file.path(workshop_dir, "analysis-data-version.txt")
++  )
++  print(versions)
++})

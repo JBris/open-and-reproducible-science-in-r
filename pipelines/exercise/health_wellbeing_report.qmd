@@ -1,0 +1,100 @@
+---
+title: "Health and well-being across studies"
+subtitle: "Workshop report: complete TODO 1 to TODO 3"
+format:
+  html:
+    embed-resources: true
+toc: true
+link-citations: true
+editor:
+  markdown:
+    wrap: 72
+execute:
+  warning: false
+  message: false
+  echo: false
+params:
+  summary_file: "outputs/health-wellbeing/meta-summary.csv"
+---
+
+## Introduction
+
+We ask how strongly health and well-being are associated across the
+studies included in the selected `HealthWellbeing` dataset version.
+The input consists of study summaries from the teaching example in
+*Doing Meta-Analysis with R: A Hands-On Guide*.
+[Section 4.2.4, Correlations](https://doing-meta.guide/pooling-es#correlations)
+
+```{r health-report-input, include = FALSE, cache = FALSE}
+# The summary path is relative to the project root, wherever Quarto runs.
+summary_file <- here::here(params$summary_file)
+result <- utils::read.csv(summary_file, colClasses = "character")
+stopifnot(nrow(result) == 1L, result$effect_scale == "ZCOR")
+stopifnot(
+  all(c("tau_method", "interval_method") %in% names(result)),
+  !anyNA(c(result$tau_method, result$interval_method)),
+  all(nzchar(c(result$tau_method, result$interval_method)))
+)
+numeric_fields <- c("pooled_r", "ci_lower", "ci_upper", "confidence_level")
+result[numeric_fields] <- lapply(result[numeric_fields], as.numeric)
+
+tau_method <- switch(
+  result$tau_method,
+  REML = "restricted maximum likelihood (REML)",
+  PM = "the Paule–Mandel method (PM)",
+  DL = "the DerSimonian–Laird method (DL)",
+  result$tau_method
+)
+interval_method <- switch(
+  result$interval_method,
+  HK = "the Hartung–Knapp method (HK)",
+  KR = "the Kenward–Roger method (KR)",
+  classic = "a normal approximation (classic)",
+  result$interval_method
+)
+
+pipeline_md5 <- result[["pipeline_md5"]]
+if (is.null(pipeline_md5)) {
+  pipeline_md5 <- "unrecorded"
+}
+```
+
+## Methods
+
+The analysis pools Pearson correlations on Fisher's z scale with a
+random-effects model. The pipeline estimates between-study variance
+using `r tau_method` and calculates a confidence interval using
+`r interval_method`. It transforms the estimate and interval limits
+back to the correlation scale. Similarity of effect definitions and
+independence of study estimates are assumptions of this analysis.
+
+## Results
+
+The analysis combined `r result$studies` studies. The pooled
+correlation was `r sprintf("%.3f", result$pooled_r)`.
+
+**TODO 1:** Replace this paragraph with a sentence that reports the
+`r sprintf("%.0f%%", 100 * result$confidence_level)` confidence
+interval. Follow the inline R pattern used for the pooled correlation
+above, and format `result$ci_lower` and `result$ci_upper` with
+`sprintf("%.3f", ...)`.
+
+**TODO 2:** Replace this paragraph with one or two plain-language
+sentences on how differences between study populations and
+measurements limit what the pooled estimate tells us about any one
+setting.
+
+## Provenance
+
+-   **TODO 3:** Replace this item with two list items that report the
+    dataset pin version (`result$data_version`) and the pipeline
+    script MD5 (`pipeline_md5`), following the pattern below.
+-   R version: `r result$r_version`
+-   *meta* version: `r result$meta_version`
+-   Effect scale: `r result$effect_scale`
+-   Variance estimator: `r result$tau_method`
+-   Interval method: `r result$interval_method`
+
+The report reads the CSV produced by the workshop's *targets*
+pipeline. Retain the source data citation, checksum, selection file,
+and environment record with a permitted archive of the analysis.

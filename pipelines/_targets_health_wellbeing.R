@@ -1,30 +1,46 @@
+# HealthWellbeing correlation meta-analysis: completed reference pipeline.
+#
+# Prepare the inputs first with pipelines/prepare_health_wellbeing.R, then run
+# from the project root:
+#   targets::tar_make(
+#     script = "pipelines/_targets_health_wellbeing.R",
+#     store = "outputs/health-wellbeing/_targets"
+#   )
+#
+# The partially completed template for the hands-on activity is
+# pipelines/exercise/_targets_health_wellbeing.R. Its numbered steps match this
+# file, which serves as the solution and the catch-up copy.
+
 box::use(
   crew[crew_controller_local],
-  here[here],
-  targets[tar_target, tar_source, tar_option_set]
+  targets[tar_option_set, tar_path_script, tar_target]
 )
 
-options(box.path = here())
-
 workshop_dir <- file.path("outputs", "health-wellbeing")
-pipeline_script <- targets::tar_path_script()
+pipeline_script <- tar_path_script()
 
+# Run the targets in one local background worker.
 tar_option_set(
   controller = crew_controller_local(workers = 1)
 )
 
 list(
-  targets::tar_target(
+  # 1. The selection file names the pinned dataset version to analyse.
+  tar_target(
     version_file,
     file.path(workshop_dir, "analysis-data-version.txt"),
     format = "file"
   ),
-  targets::tar_target(data_version, {
+
+  # 2. Read the selected version identifier.
+  tar_target(data_version, {
     version <- trimws(readLines(version_file, warn = FALSE))
     stopifnot(length(version) == 1L, nzchar(version))
     version
   }),
-  targets::tar_target(
+
+  # 3. Retrieve that exact version from the versioned pins board.
+  tar_target(
     dataset_file,
     {
       board_path <- file.path(workshop_dir, "data_store")
@@ -41,7 +57,9 @@ list(
     },
     format = "file"
   ),
-  targets::tar_target(studies, {
+
+  # 4. Read the study summaries and check the assumptions the model needs.
+  tar_target(studies, {
     data <- readRDS(dataset_file)
     stopifnot(
       is.data.frame(data),
@@ -59,7 +77,9 @@ list(
     )
     data
   }),
-  targets::tar_target(fit, {
+
+  # 5. Pool the correlations with a random-effects model on Fisher's z scale.
+  tar_target(fit, {
     pipeline_md5 <- unname(tools::md5sum(pipeline_script))
     stopifnot(!is.na(pipeline_md5))
 
@@ -82,7 +102,9 @@ list(
       meta_version = as.character(getNamespaceVersion("meta"))
     )
   }),
-  targets::tar_target(result, {
+
+  # 6. Summarise the pooled estimate on the correlation scale, with provenance.
+  tar_target(result, {
     model <- fit$model
     data.frame(
       data_version = data_version,
@@ -99,7 +121,9 @@ list(
       pipeline_md5 = fit$pipeline_md5
     )
   }),
-  targets::tar_target(
+
+  # 7. Write the summary that the Quarto report reads.
+  tar_target(
     summary_file,
     {
       path <- file.path(workshop_dir, "meta-summary.csv")

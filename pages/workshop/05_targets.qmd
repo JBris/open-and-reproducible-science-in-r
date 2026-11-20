@@ -1,0 +1,211 @@
+---
+title: "Build and execute a targets pipeline"
+subtitle: "35–50 minutes · Hands-on · targets"
+editor:
+  markdown:
+    wrap: 72
+link-citations: true
+execute:
+  warning: false
+  message: false
+---
+
+## Introduction
+
+In this 15-minute activity, you complete and run a *targets* pipeline
+that reads the selected `HealthWellbeing` version, pools the study
+correlations, and writes a summary for the report. The pipeline is
+partially completed: you fill in two short gaps rather than writing it
+from scratch. By the end, you should be able to trace the summary back
+to its input and explain which steps *targets* reruns, and why.
+
+Work in your MyBinder session, at the project root, after preparing
+the dataset versions. If you fall behind, the catch-up step gives you
+the completed pipeline so you can continue with the report.
+[Prepare the dataset versions](00_preparation.qmd#preparation-versions)
+
+## The pipeline at a glance
+
+A *target* is one named step whose result *targets* stores and
+tracks. When a target's code mentions another target by name, it
+depends on that target. The pipeline's targets connect in this order:
+
+``` text
+version_file -> data_version -> dataset_file -> studies -> fit
+fit, data_version -> result -> summary_file
+```
+
+`version_file`, `dataset_file`, and `summary_file` are file targets:
+*targets* tracks the contents of the selection file, the pinned RDS
+file, and the summary CSV. When fitting, the pipeline records the
+checksum of the script that ran.
+
+The model uses the raw Pearson correlations and study sample sizes.
+*meta* transforms each correlation to Fisher's z scale and pools the
+effects with a random-effects model. We use restricted maximum
+likelihood (REML) to estimate between-study variance and the
+Hartung–Knapp method for the 95% interval. The summary converts the
+estimate and limits back to the correlation scale.
+
+This model treats study summaries as independent and assumes their
+correlations address a comparable association. Differences in
+populations, measures, and sampling limit interpretation. This is a
+worked example of pooling reported effects from the supplied studies
+[@harrer2021, sec. 4.2.4].
+
+## Step 1: copy the workbook pipeline
+
+Allow about two minutes. Run this in the **R Console**. It loads the
+*targets* functions and copies the partially completed template to
+`workspace/_targets.R`, your own working copy. The copy is only made
+if it does not exist yet, so rerunning the chunk keeps your edits.
+Git ignores the `workspace/` folder, so the supplied template stays
+unchanged.
+
+```{r health-targets-setup, include = TRUE, echo = TRUE, message = FALSE, warning = FALSE, cache = FALSE, output = TRUE, eval = TRUE}
+box::use(
+  targets[tar_make, tar_outdated, tar_read, tar_visnetwork]
+)
+invisible(loadNamespace("visNetwork"))
+
+workshop_dir <- file.path("outputs", "health-wellbeing")
+pipeline_template <- file.path(
+  "pipelines", "exercise", "_targets_health_wellbeing.R"
+)
+pipeline_script <- file.path("workspace", "_targets.R")
+pipeline_store <- file.path(workshop_dir, "_targets")
+
+dir.create("workspace", showWarnings = FALSE)
+if (!file.exists(pipeline_script)) {
+  file.copy(pipeline_template, pipeline_script)
+}
+readLines(file.path(workshop_dir, "analysis-data-version.txt"))
+```
+
+The last line shows the selected dataset version. It should match the
+`all` version from your preparation step.
+
+## Step 2: run the pipeline before completing it
+
+Allow about three minutes. Open `workspace/_targets.R` in RStudio and
+read its seven numbered targets. Then draw the dependency graph and
+try to run the pipeline.
+
+```{r health-targets-first-run, include = TRUE, echo = TRUE, eval = FALSE}
+tar_visnetwork(
+  script = pipeline_script,
+  store = pipeline_store,
+  targets_only = TRUE,
+  outdated = FALSE
+)
+tar_make(script = pipeline_script, store = pipeline_store)
+```
+
+Two arrows are missing from the graph: nothing connects `studies` to
+`fit`, or `result` to `summary_file`. The run stops with the message
+`Complete TODO 1 in the fit target.` *targets* found nothing to link
+those steps because their code does not yet mention the targets they
+need.
+
+## Step 3: complete the two gaps
+
+Allow about four minutes. Edit `workspace/_targets.R` and save it.
+
+-   **TODO 1**, in step 5: replace `stop(...)` in `data = stop(...)`
+    with the name of the target that holds the checked study
+    summaries.
+-   **TODO 2**, in step 7: replace the `stop(...)` line with two lines
+    that write `result` to `path` and then return `path`.
+
+::: {.callout-tip collapse="true"}
+## Solution to TODO 1
+
+``` r
+      data = studies,
+```
+
+Mentioning `studies` makes `fit` depend on it, so the graph gains an
+arrow from `studies` to `fit`.
+:::
+
+::: {.callout-tip collapse="true"}
+## Solution to TODO 2
+
+``` r
+      utils::write.csv(result, path, row.names = FALSE)
+      path
+```
+
+A file target returns the path of the file it wrote. *targets* then
+tracks the file's contents and rebuilds it if the file changes.
+:::
+
+If you are stuck, run this catch-up step. It replaces your copy with
+the completed reference pipeline only while a `stop()` placeholder
+remains, so it leaves a completed copy unchanged.
+
+```{r health-targets-catch-up, include = TRUE, echo = TRUE, message = FALSE, warning = FALSE, cache = FALSE, output = TRUE, eval = TRUE}
+if (any(grepl("Complete TODO", readLines(pipeline_script)))) {
+  file.copy(
+    file.path("pipelines", "_targets_health_wellbeing.R"),
+    pipeline_script,
+    overwrite = TRUE
+  )
+}
+```
+
+## Step 4: inspect the graph and run the pipeline
+
+Allow about four minutes. Draw the graph again. Both missing arrows
+should now appear. If you're using the PDF, follow the text diagram
+above.
+
+```{r health-targets-graph, include = TRUE, echo = TRUE, message = FALSE, warning = FALSE, cache = FALSE, output = TRUE, eval = knitr::is_html_output()}
+tar_visnetwork(
+  script = pipeline_script,
+  store = pipeline_store,
+  targets_only = TRUE,
+  outdated = FALSE
+)
+```
+
+Run the pipeline and read the result.
+
+```{r health-targets-run, include = TRUE, echo = TRUE, message = FALSE, warning = FALSE, cache = FALSE, output = TRUE, eval = TRUE}
+tar_make(script = pipeline_script, store = pipeline_store)
+tar_read(result, store = pipeline_store)
+```
+
+On your first complete run, each target reports that it completed.
+*targets* saves every result in the pipeline store, here
+`outputs/health-wellbeing/_targets`, and `tar_read()` loads a saved
+result without rerunning anything.
+
+## Step 5: run it again
+
+Allow about one minute. Run the pipeline a second time and ask which
+targets are outdated.
+
+```{r health-targets-rerun, include = TRUE, echo = TRUE, message = FALSE, warning = FALSE, cache = FALSE, output = TRUE, eval = TRUE}
+tar_make(script = pipeline_script, store = pipeline_store)
+tar_outdated(script = pipeline_script, store = pipeline_store)
+```
+
+Nothing runs, and no target is outdated. *targets* reruns a step only
+when its code, its upstream targets, or its tracked files change.
+
+## Checkpoint {#targets-checkpoint}
+
+The full example combines **29 studies** with a pooled correlation of
+about **0.36** and a 95% interval of about **0.31 to 0.41**. The file
+`outputs/health-wellbeing/meta-summary.csv` contains the same values,
+the dataset version, the method names, the R and *meta* versions, and
+the checksum of your pipeline script. A second run skips every target.
+
+Next, you will write a report that reads this summary.
+[Create and render a reproducible Quarto report](06_quarto.qmd)
+
+## Further reading
+
+-   Defining targets and tracking dependencies [@targets-manual].
+-   Pooling correlations with `metacor()` [@meta-metacor].

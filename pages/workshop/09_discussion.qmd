@@ -1,0 +1,71 @@
+---
+title: "Questions and discussion"
+subtitle: "82–90 minutes · Interactive"
+editor:
+  markdown:
+    wrap: 72
+link-citations: true
+---
+
+## Introduction
+
+In the final eight minutes, we look back at the workflow you used,
+take questions, and discuss how to apply it in your own work. The aim
+of the session was to experience an end-to-end reproducible research
+workflow, not to master every package.
+
+## The workflow you used
+
+Allow about one minute. Each stage recorded something another
+researcher needs to understand, rerun, or cite the result.
+
+| Stage | What it recorded | Where to find it |
+| --- | --- | --- |
+| Git and GitHub | Change history and review | Commits and pull requests |
+| renv, Docker, Binder | Package versions and computing environment | `renv.lock`, Dockerfiles, `outputs/session-info.txt` |
+| codebook, dataspice | Variable meanings, provenance, and reuse terms | `codebook.csv`, `dataspice.json` |
+| pins, vetiver | Exact data and model versions | `dataset-versions.csv`, pin metadata |
+| targets | The steps from input to summary, and their dependencies | `workspace/_targets.R`, `meta-summary.csv` |
+| Quarto | Methods, results, and provenance in one document | `workspace/report.html` |
+| GitHub releases, Zenodo | A citable, archived version | Release tag and version DOI |
+
+A useful test of the whole workflow is to point to the exact data
+version, analysis revision, environment, and archive citation for one
+reported result.
+
+## Discussion {#extras-discussion}
+
+Allow about five minutes. Discuss one or more of these questions with
+your neighbours or the room.
+
+-   If you received only the report, which versions and files would
+    you ask for to rerun it?
+-   If the original data could not be shared, what could a reader
+    test with a synthetic dataset, and what would require access to
+    the originals?
+-   Which barrier to reproducibility do you meet most often:
+    undocumented dependencies, manual analysis steps, or assumptions
+    tied to one computer?
+-   Which single change would make your own research workflow easier
+    for a collaborator to inspect and rerun?
+
+Use the remaining time for questions.
+
+## Before you leave
+
+Your MyBinder session is temporary. To keep your work, select the
+`workspace` folder in the RStudio **Files** pane and use
+**More → Export**. Your pipeline and report copies are there.
+
+## Follow-up resources
+
+-   [Supplementary exercise: synthetic data with synthpop](10_synthetic_data.qmd).
+-   [Practise Git and GitHub with your own fork](01_open_science.qmd#git-practice).
+-   [Publishing and journal formats with Quarto](06_quarto.qmd#quarto-publishing).
+-   [Archiving your own releases with Zenodo](08_archiving.qmd#zenodo-github-integration).
+-   [Deploying models with vetiver](https://vetiver.posit.co/get-started/deploy.html).
+-   The lessons' further reading sections and the
+    [references](../4_references.qmd).
+
+Questions after the workshop are welcome in the repository's
+[GitHub Discussions](https://github.com/JBris/open-and-reproducible-science-in-r/discussions).

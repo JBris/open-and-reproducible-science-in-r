@@ -1,17 +1,18 @@
 ---
 title: "Preparation"
-subtitle: "Complete before the workshop"
+subtitle: "Before the session · MyBinder"
 editor: visual
 ---
 
 ## Learning objectives
 
-Before the timed session, you should be able to open the workshop project,
-identify its source data, and load a verified copy in R. You will use the same
-project and dataset throughout the workshop.
+Before the timed session, you should be able to open the prepared workshop
+environment, load a verified copy of the teaching data, and prepare the dataset
+versions used in the hands-on activities. You will use the same project,
+dataset, and environment throughout the workshop.
 
-Allow time for downloads and setup before the session. Some familiarity with R
-is helpful; you do not need previous experience with meta-analysis.
+Allow about 15 minutes, including startup time. Some familiarity with R is
+helpful; you do not need previous experience with meta-analysis.
 
 ## Our teaching dataset
 
@@ -24,47 +25,42 @@ well-being. It is also distributed with the `dmetar` package.
 The original review is @ngamaba2017. The dataset documentation describes
 the variables [@healthwellbeing].
 
-We will download the authors' data file directly, so these opening activities
-do not require installation of `dmetar`. Keep the raw file unchanged and record
+The workshop repository includes the authors' data file at
+`data/raw/healthwellbeing.rda`, so you do not need to install `dmetar` or
+download anything during the session. Keep the raw file unchanged and record
 its source separately from any transformations you make later.
 
-## Choose your computing environment
+## Open the prepared environment {#choose-your-computing-environment}
 
-Use MyBinder to run the workshop in your browser. The remote workshop image
-provides RStudio, R, Git, and the R packages. A local Docker installation is
-optional and is covered in the [repository setup guide](https://github.com/JBris/open-and-reproducible-science-in-r#usage-with-docker).
+Everyone uses the same prepared environment. MyBinder runs the workshop's
+published image in your browser, with RStudio, R 4.4.1, Git, Quarto, and the
+R packages recorded in the project lockfile already installed. There is nothing
+to install during the workshop.
 
 1. [Open RStudio on MyBinder](https://mybinder.org/v2/gh/JBris/open-and-reproducible-science-in-r/HEAD?urlpath=rstudio)
-   or use the link supplied by your instructor. Allow time for startup before
-   the workshop.
-2. Once RStudio opens, use its **Terminal** to follow the project setup below.
+   or use the link supplied by your instructor. Start it shortly before the
+   workshop and keep the browser tab open; MyBinder stops idle sessions.
+2. Once RStudio opens, use its **Terminal** for the project setup below.
    Run R commands and lesson exercises in the **Console** in the same browser
    session.
 3. Download work you want to keep using **More → Export** in the RStudio
    **Files** pane. MyBinder sessions are temporary, and files in a session
    are lost when it ends.
 
-You can also use an existing local RStudio setup. Have Git available for the
-version-control activity and Quarto for rendering reports. The reference
-environment uses **R 4.4.1**. Record any difference if you use another version.
 If MyBinder fails to start, let the instructor know so you can use a prepared
-environment.
+alternative.
 
-## Workshop packages
+You can use your own computer instead, but complete the setup before the
+workshop. Restore the project library with `renv::restore()` or use the
+[Docker setup](https://github.com/JBris/open-and-reproducible-science-in-r#usage-with-docker).
+On Linux, building the `dataspice` dependency `jqr` from source needs the jq
+development library. Record your R version if it differs from 4.4.1.
 
-The committed `renv.lock` records the packages for the workshop,
-including `knitr` and `rmarkdown` for rendering and `synthpop` and
-`vetiver` for the optional exercises. On Linux, building the
-`dataspice` dependency `jqr` from source needs the jq development
-library.
+## Get the project
 
-Run the lesson chunks in the R Console. Use Quarto with `knitr` and
-`rmarkdown` when you are ready to render the standalone report.
-
-## Get your own project copy
-
-Clone the project in the **Terminal** in RStudio. If you have a GitHub account
-and want to practise pushing changes, use **Fork** on the [workshop repository](https://github.com/JBris/open-and-reproducible-science-in-r)
+Clone the project in the RStudio **Terminal**. If you have a GitHub account
+and want to practise pushing changes after the workshop, use **Fork** on the
+[workshop repository](https://github.com/JBris/open-and-reproducible-science-in-r)
 and replace `JBris` in the command with your GitHub username.
 
 ```bash
@@ -77,32 +73,25 @@ In RStudio’s **Files** pane, open the new `open-and-reproducible-science-in-r`
 folder in your home directory and open `open-and-reproducible-science-in-r.Rproj`.
 Keep Terminal and Console commands rooted in this project directory.
 
-The project's `.Rprofile` activates renv. If you are using local R, restore the
-project library in the Console before the session and after updating
-`renv.lock`.
-
-```r
-renv::restore()
-```
-
-In either environment, check your R version and the state of the library.
-If the library in your MyBinder session differs from the lockfile, check with
-the instructor before proceeding.
+The project's `.Rprofile` activates renv. Check your R version and whether the
+library matches the lockfile. If the library in your MyBinder session differs
+from the lockfile, check with the instructor before proceeding.
 
 ```{r health-preparation-environment, include = TRUE, echo = TRUE, message = FALSE, warning = FALSE, cache = FALSE, output = TRUE, eval = TRUE}
 R.version.string
 renv::status()
 ```
 
-## Download and verify the raw data {#preparation-data}
+## Verify the raw data {#preparation-data}
 
 Run the following in the **R Console** from the project root. The R chunks
 are also configured to run during rendering; setup chunks are uncached and
 other R chunks use the cache.
 
-The download comes from the resource linked in the book. The checksum identifies
-the exact file used to prepare these lessons. If you already have a different
-copy, keep it and ask the instructor to resolve the difference.
+The file is already in your project copy, so the download only runs if it is
+missing. The checksum identifies the exact file used to prepare these lessons.
+If you have a different copy, keep it and ask the instructor to resolve the
+difference.
 
 ```{r health-preparation-download, include = TRUE, echo = TRUE, message = FALSE, warning = FALSE, cache = TRUE, output = TRUE, eval = TRUE}
 raw_file <- file.path("data", "raw", "healthwellbeing.rda")
@@ -152,26 +141,40 @@ Expected checkpoint: **29 rows and 5 columns**, with no assertion failures.
 These checks describe this teaching snapshot, not a general rule that all
 meta-analysis datasets must be complete or have this size.
 
-If downloading is unavailable, ask for the instructor's prepared copy, put it
-at the same project-relative path, and run the checksum and loading checks.
+## Prepare the dataset versions {#preparation-versions}
+
+The hands-on activities read a specific, versioned copy of the dataset. Run the
+prepared script once in the **Console**. It checks the raw file, stores two
+versions on a local *pins* board, records their identifiers, and selects the
+full dataset as the starting input for the pipeline.
+
+```{r health-preparation-versions, include = TRUE, echo = TRUE, message = FALSE, warning = FALSE, cache = FALSE, output = TRUE, eval = TRUE}
+source(file.path("pipelines", "prepare_health_wellbeing.R"))
+```
+
+Expected checkpoint: a table with two rows, `all` and `general`, each with a
+version identifier. Identifiers record when a version was written, so yours
+will differ from the instructor's. Running the script again reuses the same
+versions. The instructor explains the board in the
+[data and model versioning demonstration](04_versioning.qmd).
 
 ## Record the source
 
-For your project notes, retain the book section, dataset documentation, download
-URL, retrieval date, checksum, and original study citation. A package licence or
-the workshop repository's MIT licence should not be assumed to relicense every
-upstream dataset; check the relevant reuse terms before redistributing data.
-
-We will create and commit a short provenance note in the
-[Git and GitHub activity](02_git_github.qmd).
+For your project notes, retain the book section, dataset documentation,
+download URL, retrieval date, checksum, and original study citation. A package
+licence or the workshop repository's MIT licence should not be assumed to
+relicense every upstream dataset; check the relevant reuse terms before
+redistributing data.
 
 ## Preparation checkpoint {#preparation-checkpoint}
 
 You are ready when:
 
-- The project opens in your chosen environment and Git is available.
-- You know your R version and have completed the initial renv startup.
-- The raw file is saved and its checksum matches the teaching snapshot.
-- `health` contains the verified data, and you can identify its upstream source.
+- RStudio is open in MyBinder, or in your own prepared setup, with the project
+  open.
+- You know your R version and `renv::status()` reports no problems.
+- The raw file's checksum matches the teaching snapshot.
+- The prepared script printed the `all` and `general` dataset versions.
 
-Continue to [open and reproducible science](01_open_science.qmd).
+Continue to the
+[introduction, reproducibility principles, Git and GitHub](01_open_science.qmd).

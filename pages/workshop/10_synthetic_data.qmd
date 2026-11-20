@@ -1,0 +1,164 @@
+---
+title: "Supplementary exercise: synthetic data with synthpop"
+subtitle: "After the workshop · synthpop"
+editor:
+  markdown:
+    wrap: 72
+link-citations: true
+execute:
+  warning: false
+  message: false
+---
+
+## Introduction
+
+This supplementary exercise is outside the timed programme and takes
+about 15 minutes. You will generate a synthetic version of the
+`HealthWellbeing` study summaries with *synthpop*, compare it with the
+original, and run the same pooled analysis on both. By the end, you
+should be able to explain what a synthetic dataset lets others test
+and what it cannot establish.
+
+Run the chunks in the **R Console** from the project root, in the
+prepared environment, after preparing the dataset versions.
+[Prepare the dataset versions](00_preparation.qmd#preparation-versions)
+
+## Prepare the study summaries
+
+We read the full 29-study dataset by its recorded pin version, so the
+exercise starts from the same input as the workshop pipeline.
+
+```{r health-extras-data, include = TRUE, echo = TRUE, message = FALSE, warning = FALSE, cache = FALSE, output = TRUE, eval = TRUE}
+box::use(pins[board_folder, pin_read], utils[read.csv])
+
+workshop_dir <- file.path("outputs", "health-wellbeing")
+versions <- read.csv(
+  file.path(workshop_dir, "dataset-versions.csv"),
+  colClasses = "character"
+)
+full_version <- versions$version[versions$scope == "all"]
+stopifnot(length(full_version) == 1L)
+
+data_board <- board_folder(
+  file.path(workshop_dir, "data_store"),
+  versioned = TRUE
+)
+health_full <- pin_read(
+  data_board, "health_wellbeing", version = full_version
+)
+stopifnot(nrow(health_full) == 29L)
+
+original <- data.frame(
+  population = factor(health_full$population),
+  z = atanh(health_full$cor),
+  log_n = log(health_full$n)
+)
+```
+
+`z` is the Fisher transformation of the correlation, and `log_n`
+is the natural log of the study sample size. The example uses
+study summaries and leaves out the original study labels and country
+column.
+
+## Generate synthetic study summaries
+
+We use the CART synthesis method with seed 123, so the run can be
+repeated in the same environment. We convert the generated values to
+the original scales and give the new rows synthetic labels. The
+generated sample sizes describe synthetic rows, not real studies.
+
+```{r health-synthetic-data, include = TRUE, echo = TRUE, message = FALSE, warning = FALSE, cache = FALSE, output = TRUE, eval = TRUE}
+box::use(synthpop[compare, syn])
+
+synthetic <- syn(
+  original,
+  method = "cart",
+  seed = 123,
+  print.flag = FALSE
+)
+
+synthetic_data <- data.frame(
+  author = sprintf("Synthetic %02d", seq_len(nrow(synthetic$syn))),
+  cor = tanh(synthetic$syn$z),
+  n = round(exp(synthetic$syn$log_n)),
+  population = synthetic$syn$population
+)
+head(synthetic_data)
+compare(synthetic, original)
+```
+
+Inspect the distributions of `population`, `z`, and `log_n`. The
+comparison describes how closely the two tables resemble each other
+on these variables. Similar distributions can coexist with
+differences in the relationships between variables and in downstream
+estimates. For the synthesis methods, see @nowok2016-synthpop and the
+[synthpop documentation](https://www.synthpop.org.uk/).
+
+## Try it yourself: pool both datasets
+
+Run the workshop's random-effects model on the original and the
+synthetic study summaries, and compare the pooled correlations.
+
+```{r health-synthetic-pool, include = TRUE, echo = TRUE, message = FALSE, warning = FALSE, cache = FALSE, output = TRUE, eval = TRUE}
+box::use(meta[metacor])
+
+pool_correlations <- function(data) {
+  model <- metacor(
+    cor = cor,
+    n = n,
+    studlab = author,
+    data = data,
+    sm = "ZCOR",
+    common = FALSE,
+    random = TRUE,
+    method.tau = "REML",
+    method.random.ci = "HK"
+  )
+  c(
+    studies = model$k,
+    pooled_r = tanh(model$TE.random),
+    ci_lower = tanh(model$lower.random),
+    ci_upper = tanh(model$upper.random)
+  )
+}
+
+round(
+  rbind(
+    original = pool_correlations(health_full),
+    synthetic = pool_correlations(synthetic_data)
+  ),
+  3
+)
+```
+
+The analysis code runs unchanged on the synthetic table, so a reader
+without access to restricted originals could test that the workflow
+works. The synthetic estimate is computed from generated rows. A close
+match would not verify the original finding, and a difference would
+not refute it.
+
+## Limits on interpretation and sharing
+
+Treat this as a public teaching example. Ordinary synthesis with
+*synthpop* is not a differential privacy guarantee, and a distribution
+comparison or utility score does not establish one. A privacy claim
+requires a validated mechanism and privacy accounting
+[@near2021-synthetic-data]. Synthetic data also does not confer
+privacy protection on related models, evaluation results, or
+metadata. Keep generated tables local until you have checked the
+applicable release terms.
+
+## Checkpoint {#synthetic-checkpoint}
+
+-   You generated 29 synthetic study summaries with labelled synthetic
+    rows and compared their distributions with the original.
+-   You ran the same pooled analysis on both tables and can explain
+    why a matching estimate would not verify the original finding.
+-   You can explain why synthetic data is not, by itself, a privacy
+    guarantee.
+
+## Further reading
+
+-   The synthesis methods in *synthpop* [@nowok2016-synthpop].
+-   Synthetic data and differential privacy
+    [@near2021-synthetic-data].

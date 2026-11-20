@@ -1,6 +1,6 @@
 ---
 title: "Workshop page plan"
-subtitle: "Planned Quarto chapters for the 90-minute programme"
+subtitle: "Quarto chapters for the final 90-minute programme"
 editor: visual
 ---
 
@@ -13,74 +13,87 @@ and Ebert (2021). The dataset contains 29 study-level summaries, with the fields
 `author`, `cor`, `n`, `population`, and `country`.
 
 Follow this dataset from source attribution and environment preparation through
-metadata, storage, analysis, reporting, and archiving. The
-[workshop teaching plan](workshop_plan.qmd) gives the full learning objectives
-and delivery guidance. This page is an unpublished planning document.
+metadata, versioning, analysis, reporting, and archiving. The
+[workshop teaching plan](workshop_plan.qmd) gives the main learning outcome,
+the programme, and delivery guidance. This page is an unpublished planning
+document.
 
-## Planned QMD pages
+## Pages
 
-Paths are relative to the repository root. All ten pages have teaching
-text and examples. Human review and a timed rehearsal are pending.
+Paths are relative to the repository root. There is one page per programme
+segment, plus the preparation page and a supplementary exercise. All pages have
+teaching text and examples. Human review and a timed rehearsal are pending.
 
-| QMD file | Time | Duration | Topic and tools | Planned content | Status |
-| --- | --- | --- | --- | --- | --- |
-| `pages/workshop/00_preparation.qmd` | Before the session | Outside the 90 minutes | Project and environment setup; R, Git, GitHub, renv, Docker | Get a project copy; choose local R or Docker; download and verify the raw dataset; record its source; complete setup checks. | Drafted |
-| `pages/workshop/01_open_science.qmd` | 0–5 min | 5 min | Introduction to open and reproducible science; R | Introduce the research question, study-level unit of observation, shared dataset, and traceable workflow. | Drafted |
-| `pages/workshop/02_git_github.qmd` | 5–17 min | 12 min | Version control, collaboration and sharing; Git, GitHub | Create a working branch; write a dataset provenance note; inspect and commit the change; demonstrate a pull request within a participant's fork. | Drafted |
-| `pages/workshop/03_environments.qmd` | 17–30 min | 13 min | Reproducible computational environments; renv, Docker | Inspect the lockfile and running R version; explain restoration and containers; reload data after a restart; save a session record. | Drafted |
-| `pages/workshop/04_data_documentation.qmd` | 30–42 min | 12 min | Dataset documentation and FAIR metadata; codebook, dataspice | Describe variables, units, missing values, creators, provenance, licensing, and access conditions using prepared codebook output and metadata templates. | Drafted |
-| `pages/workshop/05_pins.qmd` | 42–50 min | 8 min | Dataset storage and versioning; pins | Store all 29 studies and the 18 general-population studies on a local board; save and retrieve explicit version identifiers. | Drafted |
-| `pages/workshop/06_targets.qmd` | 50–68 min | 18 min | Reproducible analytical pipelines; targets | Connect the selected data version to preparation, correlation meta-analysis, and output files; inspect the dependency graph and selective rebuilding. | Drafted |
-| `pages/workshop/07_quarto.qmd` | 68–80 min | 12 min | Reproducible reporting and publishing; Quarto | Combine methods, tracked results, and provenance in a prepared report; render HTML and demonstrate publishing. | Drafted |
-| `pages/workshop/08_zenodo.qmd` | 80–85 min | 5 min | Research archiving and persistent identifiers; Zenodo | Inspect a prepared deposit, versioned release, citation metadata, licence, and DOI; identify the permitted archive contents. | Drafted |
-| `pages/workshop/09_extras_and_discussion.qmd` | 85–90 min | 5 min | Optional extras and concluding discussion; synthpop, vetiver | Use prepared synthetic-data and model-version examples; explain their limits; invite questions and identify follow-up resources. | Drafted |
-| **Timed programme total** | **0–90 min** | **90 min** | | | |
+| QMD file | Time | Duration | Activity and tools | Format | Planned content | Status |
+| --- | --- | --- | --- | --- | --- | --- |
+| `pages/workshop/00_preparation.qmd` | Before the session | Outside the 90 minutes | Preparation; MyBinder, R, Git, renv | Self-paced | Open the prepared MyBinder session; clone the project; check R and the library; verify the raw data; prepare the dataset versions; record the source. | Drafted |
+| `pages/workshop/01_open_science.qmd` | 0–10 min | 10 min | Introduction, reproducibility principles, Git and GitHub | Conceptual | Research question, study-level unit of observation, the workflow as one table, and a demonstration of commits, branches, pull requests, and releases. Hands-on Git practice with a fork is follow-up material. | Drafted |
+| `pages/workshop/02_environments.qmd` | 10–20 min | 10 min | Computational reproducibility; renv, Docker, Binder | Demonstration | Running R version, lockfile versions, `renv::status()`, Dockerfile to GitHub Actions to MyBinder, and a session record. | Drafted |
+| `pages/workshop/03_data_documentation.qmd` | 20–28 min | 8 min | FAIR principles and metadata; codebook, dataspice | Demonstration | Data dictionary from `codebook_table()`, `dataspice` templates for creators, access, and variables, and the JSON-LD export. | Drafted |
+| `pages/workshop/04_versioning.qmd` | 28–35 min | 7 min | Data and model versioning; pins, vetiver | Demonstration | Two dataset versions from the prepared script, retrieval by identifier, and two versions of a supplementary `vetiver` model with input prototypes and training data version. | Drafted |
+| `pages/workshop/05_targets.qmd` | 35–50 min | 15 min | Build and execute a targets meta-analysis pipeline | Hands-on | Copy the partially completed pipeline, run it to see where it stops, complete two dependency TODOs, inspect the graph, build, and rerun. | Drafted |
+| `pages/workshop/06_quarto.qmd` | 50–65 min | 15 min | Create and render a reproducible Quarto report | Hands-on | Copy and render the partially completed report, complete the interval, interpretation, and provenance TODOs, rerender, and check the values against the summary. | Drafted |
+| `pages/workshop/07_modify_and_reproduce.qmd` | 65–75 min | 10 min | Modify the analysis and reproduce the results; targets, Quarto | Hands-on | Rebuild from the pinned input with an identical summary, switch to the general-population version, rerender, and restore. Optional estimator change as a sensitivity check. | Drafted |
+| `pages/workshop/08_archiving.qmd` | 75–82 min | 7 min | GitHub releases, Zenodo, archiving and optional synthpop | Conceptual | Releases and their triggered builds, Zenodo version and concept DOIs, archive contents, and a brief mention of synthetic data. | Drafted |
+| `pages/workshop/09_discussion.qmd` | 82–90 min | 8 min | Questions and discussion | Interactive | Recap of what each stage recorded, discussion prompts, questions, exporting work, and follow-up resources. | Drafted |
+| `pages/workshop/10_synthetic_data.qmd` | After the session | Supplementary | Synthetic data; synthpop | Self-paced | Generate synthetic study summaries, compare distributions, pool both tables, and explain the limits on verification and privacy. | Drafted |
+| **Timed programme total** | **0–90 min** | **90 min** | | | | |
 
-## Structure within a practical page
+## Structure within a page
 
-Use learning objectives, a short explanation of why the step matters, a worked
-example, one participant action, an expected-result checkpoint, key takeaways,
-and further reading. Opening, archiving, and closing pages can use a short
-demonstration or discussion instead of a full practical exercise.
+Hands-on pages state learning objectives, give each step a time allocation,
+show a worked example with expected output, and end with a checkpoint and
+further reading. Solutions are in collapsed callouts. Demonstration and
+conceptual pages use the same structure, with the instructor running the code
+and participants following along in their own session.
 
-Use prepared inputs and fallback outputs to keep activities within their time
-allocation. Complete installations, downloads, and image builds before the
-session. Keep the closing discussion even if optional demonstrations are skipped.
+Complete installations, downloads, and image builds before the session.
+Keep the closing discussion even if earlier segments overrun.
 
-## Supplied examples for the optional closing page
+## Exercise files
 
-Page 09 adapts the supplied snippets for the full dataset pin, with
-preparation in this order:
+| File | Role |
+| --- | --- |
+| `pipelines/prepare_health_wellbeing.R` | Verifies the raw file, writes the two dataset versions, records their identifiers, and selects the full version. Rerunning it reuses matching versions. |
+| `pipelines/exercise/_targets_health_wellbeing.R` | Partially completed pipeline. TODO 1 connects `fit` to `studies`; TODO 2 writes the summary file. |
+| `pipelines/exercise/health_wellbeing_report.qmd` | Partially completed report. TODOs add the confidence interval, an interpretation, and the provenance fields. |
+| `pipelines/_targets_health_wellbeing.R` | Completed reference pipeline, used as the solution and catch-up copy. |
+| `pipelines/health_wellbeing_report.qmd` | Completed reference report. |
+| `workspace/` | Participants' working copies, ignored by Git. |
 
-1. Retrieve the full `HealthWellbeing` version recorded in the
-   dataset storage activity.
+The targets page copies the template to `workspace/_targets.R` only if no copy
+exists. Its catch-up step replaces the copy with the reference only while a
+`stop()` placeholder remains, so the rendered book shows the completed results.
+The report reads the summary through `here::here()`, so it renders from the
+project root without an execution-directory option. Both reports render as
+standalone HTML beside their source.
+
+## Supplementary synthpop exercise
+
+Page 10 uses the full dataset pin, in this order:
+
+1. Retrieve the full `HealthWellbeing` version recorded by the preparation
+   script.
 2. Define `original` with a factor `population`, `z = atanh(cor)`, and
-   `log_n = log(n)`. Both optional examples depend on this object.
+   `log_n = log(n)`.
 3. Use `synthpop::syn()` with CART and seed 123; convert synthetic `z` and
    `log_n` back with `tanh()` and rounded `exp()`; generate synthetic study
    labels; inspect distributions with `compare()`. Label all generated records
    as synthetic, including their generated sample sizes.
-4. Fit the illustrative regressions `z ~ population` and
-   `z ~ population + log_n`. Store them using `vetiver_model()` and
-   `vetiver_pin_write()` on a versioned local `pins` board named `model_store`,
-   with the model name `health_wellbeing`.
-5. Inspect `pin_versions()` and read both models by their identifiers
-   with `vetiver_pin_read()`. The model metadata links to the training
-   pin, code revision, and environment.
+4. Pool the original and synthetic tables with the workshop's random-effects
+   model and compare the estimates.
 
-These unweighted regressions illustrate model storage and alternative
-specifications; they are not the correlation meta-analysis taught in the core
-pipeline. The synthesis example is not a differential privacy guarantee, and a
-distribution comparison does not establish one. Both examples share the final
-five-minute slot with discussion; fuller execution belongs in follow-up material.
+The synthesis example is not a differential privacy guarantee, and neither a
+distribution comparison nor a matching pooled estimate establishes one. The
+archiving segment mentions synthetic data briefly; the exercise itself is
+follow-up material.
 
 ## Development and validation status
 
-The teaching pipeline is `pipelines/_targets_health_wellbeing.R`.
-Its output feeds the standalone `pipelines/health_wellbeing_report.qmd`
-template. The lockfile records renv 1.0.7 under R 4.4.1. Capturing
-the workshop packages and rehearsing the full session remain
-preparation tasks.
+The pages, templates, and reference files were rendered and run in the
+published workshop image under R 4.4.1, including the catch-up path from a
+clean store. Rehearsing the full session in a fresh MyBinder launch and human
+review remain preparation tasks.
 
-Codex assisted with this page plan, the chapters, and the teaching
-examples. Human review is pending.
+Codex and Claude Code assisted with this page plan, the chapters, and the
+teaching examples. Human review is pending.

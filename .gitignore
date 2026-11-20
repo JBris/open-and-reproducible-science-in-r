@@ -214,6 +214,9 @@ cython_debug/
 
 **/_targets
 /outputs/health-wellbeing/
+
+# Participant copies of the workshop exercise templates.
+/workspace/
 figure-html/
 figure-pdf/
 

@@ -1,0 +1,160 @@
+---
+title: "Modify the analysis and reproduce the results"
+subtitle: "65–75 minutes · Hands-on · targets and Quarto"
+editor:
+  markdown:
+    wrap: 72
+link-citations: true
+execute:
+  warning: false
+  message: false
+---
+
+## Introduction
+
+In this 10-minute activity, you first check that your result
+reproduces, then change one input, predict what needs rebuilding,
+and update the report. By the end, you should be able to explain how
+the pipeline and report keep a reported result consistent with its
+inputs.
+
+Continue in the same session with your completed
+`workspace/_targets.R` and `workspace/report.qmd`.
+[Report checkpoint](06_quarto.qmd#quarto-checkpoint)
+
+## Step 1: reproduce the result
+
+Allow about three minutes. In the **R Console**, keep a copy of the
+current summary, ask *targets* to forget that every target is up to
+date, and rebuild everything from the pinned input. This is what
+happens when a collaborator runs the pipeline for the first time.
+
+```{r health-modify-setup, include = TRUE, echo = TRUE, message = FALSE, warning = FALSE, cache = FALSE, output = TRUE, eval = TRUE}
+box::use(
+  targets[everything, tar_invalidate, tar_make, tar_outdated, tar_read],
+  utils[read.csv]
+)
+
+workshop_dir <- file.path("outputs", "health-wellbeing")
+pipeline_script <- file.path("workspace", "_targets.R")
+pipeline_store <- file.path(workshop_dir, "_targets")
+selection_file <- file.path(workshop_dir, "analysis-data-version.txt")
+summary_path <- file.path(workshop_dir, "meta-summary.csv")
+stopifnot(file.exists(pipeline_script), file.exists(summary_path))
+```
+
+```{r health-modify-reproduce, include = TRUE, echo = TRUE, message = FALSE, warning = FALSE, cache = FALSE, output = TRUE, eval = TRUE}
+before <- read.csv(summary_path)
+tar_invalidate(everything(), store = pipeline_store)
+tar_make(script = pipeline_script, store = pipeline_store)
+after <- read.csv(summary_path)
+identical(before, after)
+```
+
+`tar_invalidate()` removes the records that mark targets as up to
+date; it does not delete the pinned data. Every target reruns, and
+`TRUE` means the rebuilt summary matches the previous one exactly in
+this environment. Another R or *meta* version could change the final
+digits, which is why the summary records both.
+
+## Step 2: change the input
+
+Allow about three minutes. Before running anything, predict which
+targets will be outdated if the selection file names the
+general-population version instead of the full dataset. Then switch
+the selection and check your prediction.
+
+```{r health-modify-select-general, include = TRUE, echo = TRUE, message = FALSE, warning = FALSE, cache = FALSE, output = TRUE, eval = TRUE}
+versions <- read.csv(
+  file.path(workshop_dir, "dataset-versions.csv"),
+  colClasses = "character"
+)
+general_version <- versions$version[versions$scope == "general"]
+stopifnot(length(general_version) == 1L)
+writeLines(general_version, selection_file)
+
+tar_outdated(script = pipeline_script, store = pipeline_store)
+```
+
+Every target is outdated: the selection file is the first step, and
+all later steps depend on it. Rebuild and read the new result.
+
+```{r health-modify-rebuild-general, include = TRUE, echo = TRUE, message = FALSE, warning = FALSE, cache = FALSE, output = TRUE, eval = TRUE}
+tar_make(script = pipeline_script, store = pipeline_store)
+tar_read(result, store = pipeline_store)[
+  , c("data_version", "studies", "pooled_r", "ci_lower", "ci_upper")
+]
+```
+
+## Step 3: update the report
+
+Allow about two minutes. In the **Terminal**, at the project root,
+render the report again and reload it in your browser.
+
+```bash
+quarto render workspace/report.qmd --to html
+```
+
+The report now describes 18 studies and names the general-population
+pin version in its provenance. You did not edit a single number by
+hand. The subset's pooled correlation is similar, with a wider
+interval from fewer studies. It is a planned teaching comparison, not
+a replacement for the full analysis.
+
+## Step 4: restore the full dataset
+
+Allow about two minutes. Select the full version again, rebuild, and
+check that nothing is outdated.
+
+```{r health-modify-restore, include = TRUE, echo = TRUE, message = FALSE, warning = FALSE, cache = FALSE, output = TRUE, eval = TRUE}
+full_version <- versions$version[versions$scope == "all"]
+stopifnot(length(full_version) == 1L)
+writeLines(full_version, selection_file)
+
+tar_make(script = pipeline_script, store = pipeline_store)
+tar_outdated(script = pipeline_script, store = pipeline_store)
+tar_read(result, store = pipeline_store)$studies
+```
+
+*targets* keeps only the latest result for each target, so switching
+back reruns the steps. Render the report once more so it matches the
+full analysis.
+
+## Optional: change a method instead
+
+If you have time, make a code change rather than a data change. In
+`workspace/_targets.R`, step 5, change `method.tau = "REML"` to
+`method.tau = "DL"`, the DerSimonian–Laird estimator, and save the
+file.
+
+Predict the outdated targets, then run `tar_outdated()`. Only `fit`,
+`result`, and `summary_file` are listed, because the input steps have
+not changed. Run `tar_make()` and render the report. Its Methods
+section now names the DerSimonian–Laird method, and the pooled
+correlation stays at about 0.363. This is a quick sensitivity check:
+the result does not depend on this choice of estimator. Change the
+setting back to `"REML"` and rebuild before you finish.
+
+In your own project, the pipeline would be a tracked file. `git diff`
+would show the one-line change, and a commit would record why you made
+it.
+
+## Checkpoint {#modify-checkpoint}
+
+-   Rebuilding from the pinned input gave an identical summary.
+-   With the general-population version, the pipeline combined **18
+    studies** with a pooled correlation of about **0.38** and a 95%
+    interval of about **0.30 to 0.45**, and the report updated without
+    manual edits.
+-   After restoring the full version, `tar_outdated()` is empty and the
+    summary shows 29 studies again.
+-   You can explain why a data change reruns every target, while a
+    method change reruns only the model and its outputs.
+
+Next, we look at how to release and archive a version of this work.
+[GitHub releases, Zenodo and archiving](08_archiving.qmd)
+
+## Further reading
+
+-   How *targets* decides what to rerun [@targets-manual].
+-   Pooling correlations with `metacor()` [@meta-metacor].

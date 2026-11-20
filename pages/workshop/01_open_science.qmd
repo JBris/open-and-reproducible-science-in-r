@@ -1,21 +1,22 @@
 ---
-title: "Open and reproducible science"
-subtitle: "0–5 minutes · R"
+title: "Introduction, reproducibility principles, Git and GitHub"
+subtitle: "0–10 minutes · Conceptual"
 editor: visual
 ---
 
 ## Learning objectives
 
 By the end of this opening, you should be able to state the research question,
-identify the unit represented by a row of data, and describe what another
-researcher would need to retrace the analysis.
+identify the unit represented by a row of data, describe what another
+researcher would need to retrace a result, and explain how Git and GitHub
+record, review, and share changes.
 
 ## Why this matters
 
-A reported result is easier to evaluate when its data, analytical decisions,
-code, and software environment can be traced. Sharing code helps, but the code
-also needs identifiable inputs and instructions that work beyond its author's
-current R session.
+Allow about three minutes. A reported result is easier to evaluate when its
+data, analytical decisions, code, and software environment can be traced.
+Sharing code helps, but the code also needs identifiable inputs and
+instructions that work beyond its author's current R session.
 
 In this workshop, **reproducibility** means being able to rerun a documented
 workflow with its specified inputs and environment. **Open science** also
@@ -23,11 +24,16 @@ concerns how methods and outputs can be inspected, accessed, and reused.
 Reproducibility does not establish that the scientific assumptions are correct,
 and openness still needs to respect licences and access conditions.
 
+Throughout the session, ask whether another researcher could understand,
+rerun, audit, trace, reuse, and cite the work. The
+[introduction](../1_introduction.qmd#intro-principles) lists
+these principles.
+
 ## Our example: health and well-being
 
-The teaching question is: **What association between health and well-being is
-reported across the included studies?** We use the `HealthWellbeing`
-correlation example [@harrer2021, sec. 4.2.4].
+Allow about two minutes. The teaching question is: **What association between
+health and well-being is reported across the included studies?** We use the
+`HealthWellbeing` correlation example [@harrer2021, sec. 4.2.4].
 
 Each row is a **study summary**, not a participant record. The columns are:
 
@@ -40,33 +46,70 @@ Each row is a **study summary**, not a participant record. The columns are:
 | `country` | Study country |
 
 The [preparation activity](00_preparation.qmd#preparation-data) verifies the
-snapshot. For this opening, inspect the instructor's copy or your own loaded
-data. There is no need to fit a model during these five minutes.
+snapshot. There is no need to fit a model during this opening.
 
-Later analysis will pool correlations using Fisher's z transformation and an
+Later, the pipeline pools correlations using Fisher's z transformation and an
 explicit random-effects specification. Study independence, comparable effect
 definitions, and differences between study populations need consideration.
 A pooled association alone does not establish a causal effect.
 
-## One project throughout the session
+## One workflow throughout the session
 
-| Stage | Question we will answer | Tools |
-| --- | --- | --- |
-| Version the work | What changed, why, and who can review it? | Git, GitHub |
-| Record the environment | Which software is needed? | renv, Docker |
-| Document the input | What do the data describe, and how may they be reused? | codebook, dataspice |
-| Store dataset versions | Which input produced this result? | pins |
-| Track the analysis | Which steps depend on this input? | targets |
-| Report and publish | How are methods and results connected? | Quarto |
-| Preserve a release | How can this version be found and cited? | Zenodo |
+We follow this dataset through one connected workflow. The first half uses
+short demonstrations; in the second half, you complete, run, and change the
+analysis yourself.
 
-The final five minutes include discussion and optional signposts to `synthpop`
-and `vetiver`. They are follow-up options, not requirements for this core workflow.
+| Time | Stage | Question we will answer | Tools | Format |
+| --- | --- | --- | --- | --- |
+| 0–10 min | Version the work | What changed, why, and who reviewed it? | Git, GitHub | Conceptual |
+| 10–20 min | Record the environment | Which software is needed? | renv, Docker, Binder | Demonstration |
+| 20–28 min | Document the input | What do the data describe, and how may they be reused? | codebook, dataspice | Demonstration |
+| 28–35 min | Version data and models | Which input and model produced this result? | pins, vetiver | Demonstration |
+| 35–50 min | Run the analysis | Which steps depend on this input? | targets | Hands-on |
+| 50–65 min | Report the result | How are methods, results, and provenance connected? | Quarto | Hands-on |
+| 65–75 min | Modify and reproduce | What changes when an input changes, and does the result reproduce? | targets, Quarto | Hands-on |
+| 75–82 min | Release and archive | How can this version be found and cited? | GitHub releases, Zenodo | Conceptual |
+| 82–90 min | Questions and discussion | What would you change in your own work? | | Interactive |
 
-## Try it yourself
+The aim is to understand and experience the whole workflow, not to master each
+package.
 
-With a neighbour, name one thing you would ask for if a collaborator sent only
-a pooled correlation. Choose from the data version, variable definitions,
+## Version control with Git and GitHub {#git-github}
+
+Allow about four minutes for this demonstration. **Git** records the history of
+a project's files. **GitHub** hosts Git repositories and adds collaboration
+tools such as issues, pull requests, and releases.
+
+| Term | Meaning |
+| --- | --- |
+| Commit | A recorded change to one or more files, with a message explaining why |
+| Branch | A line of work that can change without affecting the main version |
+| Remote | A copy of the repository elsewhere, such as on GitHub |
+| Pull request | A proposal to merge a branch, with a place for review and discussion |
+| Release | A named, tagged version of the repository, covered later in the session |
+
+The instructor inspects the history of the workshop repository in the
+**Terminal**. You can run the same read-only commands in your project copy.
+
+```bash
+git log --oneline -5
+git show --stat HEAD
+git status --short
+```
+
+On GitHub, the instructor then shows the commit history, a merged pull request
+with its **Files changed** view, and the releases page.
+
+Every later stage of the workshop is a tracked text file: the lockfile,
+metadata templates, the pipeline, and the report. Their changes can be reviewed
+like any other code. Generated outputs, caches, and your personal workspace
+copies are ignored by Git, because they can be recreated from the tracked
+files. The raw data file is tracked, together with its checksum.
+
+## Discuss with a neighbour
+
+Allow about one minute. Name one thing you would ask for if a collaborator sent
+only a pooled correlation. Choose from the data version, variable definitions,
 analysis settings, code revision, or software environment, and explain why it
 would matter.
 
@@ -77,11 +120,83 @@ You should be able to complete this sentence:
 > To retrace this result, I need the source and version of the study summaries,
 > the analysis decisions and code, and the environment used to run them.
 
+You can also explain the difference between a local commit, a push to a
+remote, and a pull request.
+
 **Takeaway:** keep a traceable connection between the input, the decisions, and
-the output. We start by recording the source in
-[Git and GitHub](02_git_github.qmd).
+the output. Next, we record the
+[computational environment](02_environments.qmd).
+
+## After the workshop: practise Git with your fork {#git-practice}
+
+This optional exercise takes about ten minutes. It needs a GitHub account, a
+fork of the
+[workshop repository](https://github.com/JBris/open-and-reproducible-science-in-r)
+cloned as your `origin`, and GitHub authentication in your environment. Run the
+commands in the **Terminal** at the project root.
+
+1. Create a working branch:
+
+   ```bash
+   git switch -c workshop/health-wellbeing
+   ```
+
+2. Create `WORKSHOP_NOTES.md` in the project root as a provenance note.
+   Replace the placeholders with your own information.
+
+   ```markdown
+   # Health and well-being: workshop notes
+
+   Author: YOUR NAME
+
+   ## Data source
+
+   - Dataset: HealthWellbeing.
+   - Book: Harrer, Cuijpers, Furukawa, and Ebert (2021), section 4.2.4.
+   - Book URL: https://doing-meta.guide/pooling-es#correlations
+   - Dataset documentation: https://dmetar.protectlab.org/reference/healthwellbeing
+   - Download: https://www.protectlab.org/meta-analysis-in-r/data/healthwellbeing.rda
+   - Retrieved: YYYY-MM-DD
+   - Raw file: data/raw/healthwellbeing.rda
+   - MD5: 0d74964b0b7168379a2b015cb648b326
+
+   ## Decisions
+
+   Preserve the raw file unchanged. Keep derived data and analysis outputs separate.
+   Check upstream reuse terms before redistributing data.
+   ```
+
+3. Stage the note explicitly, inspect what will be committed, and commit it.
+   Newly created files appear in `git diff --cached` after staging.
+
+   ```bash
+   git add WORKSHOP_NOTES.md
+   git diff --cached -- WORKSHOP_NOTES.md
+   git commit -m "docs(workshop): record HealthWellbeing data source"
+   git log -1 --oneline
+   ```
+
+   If Git asks for an identity, configure your name and preferred commit email
+   for this repository, then retry.
+
+4. Push the branch to your fork and open a pull request **within your fork**,
+   comparing the branch with its `main` branch:
+
+   ```bash
+   git push --set-upstream origin workshop/health-wellbeing
+   ```
+
+Ask a colleague to check that the data source is identifiable and the note
+describes what you actually did. For a substantive contribution to the teaching
+repository, follow its
+[contribution guidance](https://github.com/JBris/open-and-reproducible-science-in-r/blob/main/CONTRIBUTING.md)
+and [AI assistance policy](https://github.com/JBris/open-and-reproducible-science-in-r/blob/main/AI_POLICY.md).
+A pull request provides a place for review; opening one does not mean that
+human review is complete.
 
 ## Further reading
 
 - Variable definitions for the teaching dataset [@healthwellbeing].
 - FAIR principles for scientific data and metadata [@gofair-principles].
+- Version control basics [@chacon2014-git, sec. 1.1].
+- Creating a pull request from a fork [@github-pull-request-fork].

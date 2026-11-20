@@ -38,9 +38,12 @@
 Open and reproducible science helps research be understood, evaluated, reused,
 and extended by others. This 90-minute workshop follows one prepared R
 project using `HealthWellbeing`, a teaching dataset of published
-correlations between health and well-being. We document and version the
-dataset, run a correlation meta-analysis, and trace the result through
-a report and an archive.
+correlations between health and well-being. Participants see how the
+dataset is documented and versioned, then complete and run a
+correlation meta-analysis pipeline, render a report from its outputs,
+and change the analysis to reproduce the results. The aim is to
+understand and experience an end-to-end reproducible research workflow,
+not to master every package.
 
 ## Workshop
 
@@ -56,40 +59,49 @@ on the [workshop website](https://jbris.github.io/open-and-reproducible-science-
 Quarto is used to organise the website and reports, with sources in the
 [pages directory](pages/).
 
-Set up your environment and verify the data before the session.
-The draft teaching plan gives the timing and activities for each lesson.
+Open the prepared MyBinder environment, verify the data, and prepare the
+dataset versions before the session. The
+[programme](https://jbris.github.io/open-and-reproducible-science-in-r/pages/1_introduction.html#intro-programme)
+lists the timing and format of each segment, and the draft teaching plan
+describes how they are delivered.
 [Preparation](pages/workshop/00_preparation.qmd) ·
 [Draft teaching plan](draft/workshop_plan.qmd)
 
 | Tools | Role in the core workflow |
 | --- | --- |
 | [Git](https://git-scm.com/) and [GitHub](https://github.com/) | Track changes, collaborate, and share code. |
-| [renv](https://rstudio.github.io/renv/) and [Docker](https://www.docker.com/) | Record R dependencies and capture the computing environment. |
+| [renv](https://rstudio.github.io/renv/), [Docker](https://www.docker.com/), and [Binder](https://mybinder.org/) | Record R dependencies, capture the computing environment, and provide it in a browser. |
 | [codebook](https://cran.r-project.org/package=codebook) and [dataspice](https://docs.ropensci.org/dataspice/) | Describe the variables and record FAIR dataset metadata. |
-| [pins](https://pins.rstudio.com/articles/pins.html) | Store datasets with provenance and retrieve a specific version. |
+| [pins](https://pins.rstudio.com/articles/pins.html) and [vetiver](https://vetiver.posit.co/) | Store data and model versions with provenance and retrieve a specific version. |
 | [targets](https://docs.ropensci.org/targets/) | Organise the analysis and track what needs to be rebuilt. |
 | [Quarto](https://quarto.org/) | Connect the methods, results, and provenance in a report. |
-| [Zenodo](https://zenodo.org/) | Archive permitted outputs and cite a specific release. |
+| GitHub releases and [Zenodo](https://zenodo.org/) | Release, archive, and cite a specific version. |
 
 By the end of the workshop, participants should be able to:
 
 - Explain how the tools support different parts of a reproducible research workflow.
-- Record dataset metadata and provenance and retrieve a specific version.
-- Trace a result through the analytical pipeline and report.
-- Identify the files and metadata needed for a citable archive.
+- Explain how metadata and data and model versions support provenance.
+- Complete and run a `targets` pipeline and render a Quarto report from its outputs.
+- Modify an analysis input, rebuild only what is affected, and reproduce the result.
+- Identify the files and metadata needed for a citable release and archive.
 
-Some familiarity with R will help participants follow the examples. The session
-focuses on connecting the tools into a coherent workflow and understanding the
-principles behind their use.
+The session combines 42 minutes of concepts and demonstrations, 40 minutes of
+hands-on exercises, and 8 minutes of discussion. Participants complete a
+partially prepared pipeline and report in one prepared MyBinder environment,
+so nothing is installed during the session. Some familiarity with R will help
+participants follow the examples.
 
 ### Research objects and responsible sharing
 
-The final five minutes include discussion and optional examples of
-synthetic study summaries with `synthpop` and model versioning with
-`vetiver`. Synthetic data can help others test a workflow. Verifying
-findings based on original observations requires access to them, and
-privacy claims need evidence about the mechanism and privacy accounting.
-[Closing lesson](pages/workshop/09_extras_and_discussion.qmd)
+Model versioning with `vetiver` uses a small supplementary predictive model,
+because its standard interface does not support the meta-analysis model.
+Synthetic study summaries with `synthpop` are a supplementary exercise, mentioned
+briefly in the archiving segment. Synthetic data can help others test a
+workflow. Verifying findings based on original observations requires access to
+them, and privacy claims need evidence about the mechanism and privacy
+accounting.
+[Data and model versioning](pages/workshop/04_versioning.qmd) ·
+[Supplementary synthetic data exercise](pages/workshop/10_synthetic_data.qmd)
 
 ## Usage with Docker
 
@@ -157,9 +169,13 @@ PDF download. To build a single format, use `quarto render --to html` or
 Code evaluation is disabled by default in `_quarto.yml`, but workshop R
 example chunks explicitly enable it. Rendering uses the restored library
 and runs the examples, including downloads and analysis, or reuses cached
-results. Workshop chapters execute from the project root; the standalone
-report command specifies its own input directory. The draft teaching plan
-is excluded from the book.
+results. Workshop chapters execute from the project root. The targets
+chapter copies the partially completed pipeline in `pipelines/exercise/` to the
+ignored `workspace/` folder. While its TODOs remain, a catch-up step replaces
+the copy with the completed reference in `pipelines/`, so the rendered book
+shows the expected results. Render the standalone report from the project root;
+it locates the pipeline summary relative to the project root. The draft
+teaching plan is excluded from the book.
 
 ## Coordinators
 

@@ -3,6 +3,7 @@ draft
 
 # Generated analysis outputs and targets stores
 /outputs/
+/workspace/
 **/_targets/
 
 # Rendered book and document caches

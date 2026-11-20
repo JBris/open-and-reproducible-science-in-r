@@ -13,7 +13,7 @@ execute:
   message: false
   echo: false
 params:
-  summary_file: "meta-summary.csv"
+  summary_file: "outputs/health-wellbeing/meta-summary.csv"
 ---
 
 ## Introduction
@@ -25,7 +25,9 @@ The input consists of study summaries from the teaching example in
 [Section 4.2.4, Correlations](https://doing-meta.guide/pooling-es#correlations)
 
 ```{r health-report-input, include = FALSE, cache = FALSE}
-result <- utils::read.csv(params$summary_file, colClasses = "character")
+# The summary path is relative to the project root, wherever Quarto runs.
+summary_file <- here::here(params$summary_file)
+result <- utils::read.csv(summary_file, colClasses = "character")
 stopifnot(nrow(result) == 1L, result$effect_scale == "ZCOR")
 stopifnot(
   all(c("tau_method", "interval_method") %in% names(result)),
@@ -38,14 +40,15 @@ result[numeric_fields] <- lapply(result[numeric_fields], as.numeric)
 tau_method <- switch(
   result$tau_method,
   REML = "restricted maximum likelihood (REML)",
-  DL = "DerSimonian–Laird (DL)",
+  PM = "the Paule–Mandel method (PM)",
+  DL = "the DerSimonian–Laird method (DL)",
   result$tau_method
 )
 interval_method <- switch(
   result$interval_method,
-  HK = "Hartung–Knapp (HK)",
-  KR = "Kenward–Roger (KR)",
-  classic = "normal approximation (classic)",
+  HK = "the Hartung–Knapp method (HK)",
+  KR = "the Kenward–Roger method (KR)",
+  classic = "a normal approximation (classic)",
   result$interval_method
 )
 
@@ -70,9 +73,12 @@ The analysis combined `r result$studies` studies. The pooled
 correlation was `r sprintf("%.3f", result$pooled_r)` with a
 `r sprintf("%.0f%%", 100 * result$confidence_level)` confidence interval
 from `r sprintf("%.3f", result$ci_lower)` to
-`r sprintf("%.3f", result$ci_upper)`. The pooled estimate summarises the
-association across included studies. The relationship may vary across
-populations and measurements, and the estimates are observational.
+`r sprintf("%.3f", result$ci_upper)`.
+
+The pooled estimate summarises the association across the included
+studies. The studies differ in their populations and measurements,
+so the association may vary between settings, and these observational
+estimates do not show that better health causes greater well-being.
 
 ## Provenance
 
@@ -84,7 +90,6 @@ populations and measurements, and the estimates are observational.
 -   Variance estimator: `r result$tau_method`
 -   Interval method: `r result$interval_method`
 
-The report reads the CSV produced by
-`pipelines/_targets_health_wellbeing.R`. Retain the source data
-citation, checksum, selection file, and environment record with a
-permitted archive of the analysis.
+The report reads the CSV produced by the workshop's *targets*
+pipeline. Retain the source data citation, checksum, selection file,
+and environment record with a permitted archive of the analysis.
