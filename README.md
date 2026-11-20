@@ -186,7 +186,8 @@ See the [contribution guidelines](https://jbris.github.io/open-and-reproducible-
 [community code of conduct](https://jbris.github.io/open-and-reproducible-science-in-r/CODE_OF_CONDUCT.html), and
 [AI-assisted development policy](https://jbris.github.io/open-and-reproducible-science-in-r/AI_POLICY.html).
 
-Contributors using Codex can refer to the [development setup](.codex/README.md)
+Contributors using Codex or Claude Code can refer to the development setup for
+[Codex](.codex/README.md) or [Claude Code](.claude/README.md)
 and [project instructions](AGENTS.md) for repository skills, subagents, hooks,
 and validation commands.
 

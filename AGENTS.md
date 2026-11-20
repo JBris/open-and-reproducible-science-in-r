@@ -109,7 +109,7 @@ For whole-book changes, use `quarto render --to all` to validate both formats.
 Render PDF only when the task affects PDF output. Missing tools or referenced
 source files are limitations to report, not passing checks.
 
-## Codex workflows
+## Codex and Claude Code workflows
 
 Repository skills live in `.agents/skills/`:
 
@@ -124,7 +124,12 @@ parallel; coordinate shared-file edits. The main agent integrates the results
 and verifies the final change. Use the same role guidance directly if the client
 does not expose custom agents.
 
-See `.codex/README.md` for configuration, hook trust, and invocation examples.
+Claude Code equivalents live in `.claude/agents/` (`r-developer`, `lesson-editor`,
+`reproducibility-reviewer`) and `.claude/settings.json`, which reuses the
+`.codex/` hook and R checker scripts.
+
+See `.codex/README.md` and `.claude/README.md` for configuration, hook trust,
+and invocation examples.
 Hooks provide lightweight feedback; complete task-specific verification before
 reporting success.
 

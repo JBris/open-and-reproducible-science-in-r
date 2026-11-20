@@ -219,3 +219,6 @@ figure-pdf/
 
 # GitHub Pages serves the rendered book, including its chapter images.
 !/docs/**/figure-html/
+
+# Personal Claude Code settings
+.claude/settings.local.json

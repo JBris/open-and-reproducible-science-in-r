@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+### Added
+
+- Claude Code project instructions (`CLAUDE.md`), settings, subagents, lifecycle hooks, and image-publishing approval prompts alongside the existing Codex setup.
+
 ## [0.5.0] - 2026-11-20
 
 ### Added
