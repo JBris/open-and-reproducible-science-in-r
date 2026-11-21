@@ -230,10 +230,12 @@ metadata_url <- "http://127.0.0.1:8765/dataspice.json"
 
 ### Save the results
 
-To keep an example for an offline demonstration, save both assessment
-objects after a successful run and load them into the console before
-class. Retain the identifiers, package and metric versions, and run date
-when sharing an assessment.
+An assessment describes what the assessor found on the day it ran.
+Servers, metadata, and metric versions can change, so a later run may
+give different results. After a successful run, save both assessment
+objects together with the identifiers, the *rfair* and metric versions,
+and the run date. You can then compare a later run with yours or share
+the evidence alongside your metadata.
 
 ```{r health-rfair-save-example, eval = FALSE}
 source("pipelines/workshop_support.R")
@@ -252,6 +254,11 @@ saveRDS(
   file.path(metadata_dir, "fair-assessment.rds")
 )
 ```
+
+The file is saved in `outputs/health-wellbeing/metadata/`. Reload it
+with `readRDS()`, and keep it by following the
+[export checklist](09_discussion.qmd#export-work) before your session
+ends.
 
 ## Further reading
 

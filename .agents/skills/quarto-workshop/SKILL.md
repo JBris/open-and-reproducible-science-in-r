@@ -14,8 +14,9 @@ and citations against appropriate sources.
   in `ANNOUNCEMENTS.md`. The unpublished plan is `draft/workshop_plan.qmd`;
   preserve the draft render exclusion and keep it out of the sidebar. Link to
   repository source when referring to an unpublished draft from the README.
-- Root `CONTRIBUTING.md`, `CODE_OF_CONDUCT.md`, `SECURITY.md`, and `AI_POLICY.md`
-  are website inputs. Update README/sidebar references when moving published
+- Root `ANNOUNCEMENTS.md`, `CODE_OF_CONDUCT.md`, `CONTRIBUTING.md`,
+  `ACCESSIBILITY.md`, `SECURITY.md`, `AI_POLICY.md`, and `CHANGELOG.md` are
+  website inputs. Update README/sidebar references when moving published
   documents. GitHub workflows and issue/PR templates keep their discovery paths
   under `.github/` and are not workshop pages.
 - `book.chapters` defines the reading order; `index.qmd` is required. Keep the

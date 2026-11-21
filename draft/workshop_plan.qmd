@@ -38,8 +38,8 @@ research workflow. Mastering every individual package is not the aim.
 By the end of the programme, participants should be able to:
 
 - Explain how the tools support different parts of a reproducible research workflow.
-- Use FAIR principles to explain variable definitions, provenance, licensing,
-  and access conditions, and interpret an automated assessment.
+- Use FAIR principles to document variables, provenance, licensing, and access
+  conditions, and interpret an automated assessment.
 - Explain how `pins` and `vetiver` link results to specific data and model versions.
 - Complete and run a `targets` pipeline and render a Quarto report from its outputs.
 - Change an analysis setting, rebuild only what is affected, and reproduce the result.

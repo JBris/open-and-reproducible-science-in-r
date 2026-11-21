@@ -10,6 +10,12 @@
 - Remove the unused `R/dummy.R` and `pipelines/_targets_dummy.R`
   placeholders, their mentions in the agent instructions, and the `R/` copy
   in both images.
+- Write the FAIR lesson's follow-up on saving assessment results for
+  participants. It explains why to keep the run date and versions, and where
+  to find and export the saved file.
+- List every root document rendered into the book in the agent instructions
+  and the Quarto workshop skill.
+- Refresh the published FAIR lesson and PDF.
 
 ### Fixed
 
@@ -19,6 +25,10 @@
   retrieval date from the notes for the commit-pinned teaching snapshot.
 - Update the simulated review record and the draft plan's checklist to
   match the changes made since.
+- Use the coordinator's Massey University address for conduct reports in the
+  contribution guidelines.
+- Align the draft plan's FAIR learning objective with the introduction and
+  README.
 
 ## [0.7.0] - 2026-11-22
 
