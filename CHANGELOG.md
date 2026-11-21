@@ -1,5 +1,7 @@
 # Changelog
 
+## [Unreleased]
+
 ## [0.8.0] - 2026-11-22
 
 ### Changed
@@ -195,7 +197,8 @@
 - Replaced earlier modelling workshop content with an integrated reproducibility workflow using GitHub, renv, Docker, targets, Quarto, and Zenodo.
 - Generalised the workshop pages for reuse across events, with event-specific details in announcements.
 
-[Unreleased]: https://github.com/JBris/open-and-reproducible-science-in-r/compare/v0.7.0...main
+[Unreleased]: https://github.com/JBris/open-and-reproducible-science-in-r/compare/v0.8.0...main
+[0.8.0]: https://github.com/JBris/open-and-reproducible-science-in-r/releases/tag/v0.8.0
 [0.7.0]: https://github.com/JBris/open-and-reproducible-science-in-r/releases/tag/v0.7.0
 [0.6.0]: https://github.com/JBris/open-and-reproducible-science-in-r/releases/tag/v0.6.0
 [0.5.1]: https://github.com/JBris/open-and-reproducible-science-in-r/releases/tag/v0.5.1
