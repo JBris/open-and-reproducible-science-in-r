@@ -408,3 +408,58 @@ versioning and archiving.
 
 This was a simulated attendee review of the source. Live pacing,
 MyBinder delivery, and human review remain to be checked.
+
+## Workshop sequencing review
+
+**Reviewed revision:** `c08e0dc`.
+
+Keep the chapter sequence. Attendees start with one research question,
+learn how to describe and identify the data, run the analysis, turn its
+output into a report, and decide what to preserve. The strongest stretch
+is `targets` → Quarto → modify and reproduce. Each lesson uses an
+artifact attendees just made.
+[Programme](../pages/1_introduction.qmd#intro-programme)
+
+1. **Make the FAIR segment more active.** Keep FAIR before versioning.
+   First establish what the data mean and how to access them, then
+   identify the exact version the pipeline uses. Bring the prepared
+   `rfair` results ahead of the assessment code and ask attendees why
+   the access statement check fails even though the download works.
+   Use that discussion to lead into versioning.
+   [FAIR lesson](../pages/workshop/03_data_documentation.qmd#assess-fair-metadata)
+2. **Keep the saved `vetiver` pin as a preview and simplify the first
+   pipeline diagram.** Moving the `targets` commands to instructor prep
+   resolves the earlier ordering issue. Attendees still meet a predictive
+   regression alongside the meta-analysis, then see the full dependency
+   graph as they learn what a target is. Start with four steps:
+   **select input → check studies → fit meta-analysis → write summary**.
+   Then show the model pin as a second output from the checked studies.
+   This gives attendees a simpler map for the two pipeline TODOs.
+   [Versioning demo](../pages/workshop/04_versioning.qmd#store-model-versions-with-vetiver) ·
+   [Pipeline introduction](../pages/workshop/05_targets.qmd#the-pipeline-at-a-glance)
+3. **Explain the two intervals before the interpretation exercise.**
+   The pipeline lesson introduces the confidence interval. The Quarto
+   exercise asks attendees to distinguish it from the prediction interval,
+   with the explanation inside the collapsed solution. Give both
+   definitions before the TODO so attendees can interpret the result
+   in their own words. Change the Quarto handoff to “change an analysis
+   setting” to match the timed REML-to-DL exercise.
+   [Pipeline methods](../pages/workshop/05_targets.qmd#the-pipeline-at-a-glance) ·
+   [Quarto exercise](../pages/workshop/06_quarto.qmd#step-3-complete-the-three-gaps)
+4. **Start archiving with the report attendees just updated.** The
+   lesson starts with release mechanics and an older Zenodo record before
+   returning to their files. Ask what a colleague would need to rerun
+   their exact report. Use their report and summary to build the checklist,
+   then show the existing Zenodo record as an example of how an archive
+   exposes those materials. This closes the FAIR question about what a
+   reader can find independently.
+   [Archiving lesson](../pages/workshop/08_archiving.qmd#archiving-releases)
+
+**Delivery issue.** At the time of review, GitHub Pages served
+`main:/docs`, where the rendered book still had separate Git and GitHub
+and pins chapters. Refresh the published book before giving attendees
+the site link so they can follow the reviewed sequence.
+[Published book source on GitHub](https://github.com/JBris/open-and-reproducible-science-in-r/tree/main/docs/pages/workshop)
+
+Codex reviewed the lesson sources and checked the GitHub Pages source.
+Live pacing and human review remain pending.
