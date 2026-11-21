@@ -726,7 +726,7 @@ One possible answer
 </div>
 <section id="save-the-results" class="level3" data-number="7.6.1">
 <h3 data-number="7.6.1" class="anchored" data-anchor-id="save-the-results"><span class="header-section-number">7.6.1</span> Save the results</h3>
-<p>To keep an example for an offline demonstration, save both assessment objects after a successful run and load them into the console before class. Retain the identifiers, package and metric versions, and run date when sharing an assessment.</p>
+<p>An assessment describes what the assessor found on the day it ran. Servers, metadata, and metric versions can change, so a later run may give different results. After a successful run, save both assessment objects together with the identifiers, the <em>rfair</em> and metric versions, and the run date. You can then compare a later run with yours or share the evidence alongside your metadata.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"pipelines/workshop_support.R"</span>)</span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>metadata_dir <span class="ot">&lt;-</span> <span class="fu">file.path</span>(<span class="fu">workshop_output_dir</span>(), <span class="st">"metadata"</span>)</span>
@@ -744,6 +744,7 @@ One possible answer
 <span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">file.path</span>(metadata_dir, <span class="st">"fair-assessment.rds"</span>)</span>
 <span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<p>The file is saved in <code>outputs/health-wellbeing/metadata/</code>. Reload it with <code>readRDS()</code>, and keep it by following the <a href="../../pages/workshop/09_discussion.html#export-work">export checklist</a> before your session ends.</p>
 </section>
 </section>
 <section id="further-reading" class="level2" data-number="7.7">
