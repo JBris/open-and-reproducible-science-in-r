@@ -26,8 +26,7 @@ and citations against appropriate sources.
   because PDF rendering combines chapters into one document.
 - The dataspice and rfair, pins and vetiver, targets, and Quarto examples are
   implemented. synthpop is a supplementary exercise, and differential privacy is
-  not implemented. `R/dummy.R` and `pipelines/_targets_dummy.R` remain no-op
-  placeholders.
+  not implemented.
 - Preserve fenced code languages and Quarto cell options. Use examples compatible
   with the project's pinned environment; avoid hidden session state and installing
   packages inside lessons.

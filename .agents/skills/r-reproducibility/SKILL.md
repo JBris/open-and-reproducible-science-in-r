@@ -7,8 +7,7 @@ description: Implement or review R code, renv dependencies, dataset/model proven
 
 Read `AGENTS.md`, `AI_POLICY.md`, the relevant R code, `.lintr`, and `renv.lock`.
 This is a workshop project with no package `DESCRIPTION` or established R test
-suite. `R/dummy.R` and `pipelines/_targets_dummy.R` are no-op placeholders;
-the latter is not a runnable targets pipeline.
+suite.
 
 - Identify inputs, outputs, scientific assumptions, and expected behaviour
   before changing an analysis. Preserve raw observations and document filtering,
