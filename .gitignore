@@ -225,3 +225,6 @@ figure-pdf/
 
 # Personal Claude Code settings
 .claude/settings.local.json
+
+# Local Codex session ID
+/.codex-session-id
