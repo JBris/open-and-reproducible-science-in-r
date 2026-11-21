@@ -65,6 +65,11 @@ archived version that supplied the files for a particular result.
 Later archived releases have their own version records and DOIs,
 connected through the concept DOI.
 
+The [FAIR demonstration](03_data_documentation.qmd#assess-fair-metadata)
+used the teaching file's download URL. As a follow-up, pass this release's
+DOI to `rfair::assess_fair()` and check what the repository exposes.
+That assessment describes the archived workshop release.
+
 ## Decide what to archive
 
 Allow about two minutes. Use your session's report to decide which
@@ -73,7 +78,7 @@ materials a collaborator needs to rerun the result.
 | Put in the tagged source revision | Attach to the release or deposit |
 | --- | --- |
 | Your completed pipeline and report source, plus their support and preparation scripts | Rendered report and `meta-summary.csv` |
-| Lockfile, Dockerfile or image reference, and instructions | Actual session record, dataset selection and version files, codebook, and JSON-LD |
+| Lockfile, Dockerfile or image reference, and instructions | Actual session record, dataset selection and version files, JSON-LD, and any FAIR assessment record |
 | Data source, checksum, inclusion rule, and upstream notice | Dataset and model pins if permitted and needed to preserve the exact stored versions |
 
 In this exercise your edits are in `workspace/`. Move the exact source

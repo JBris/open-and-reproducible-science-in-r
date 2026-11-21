@@ -56,7 +56,7 @@ records a version; it does not switch your running R session.
 lock <- renv::lockfile_read("renv.lock")
 lock$R$Version
 workshop_packages <- c(
-  "codebook", "dataspice", "meta", "pins", "quarto", "rmarkdown",
+  "dataspice", "meta", "pins", "quarto", "rfair", "rmarkdown",
   "synthpop", "targets", "vetiver"
 )
 vapply(
@@ -179,7 +179,7 @@ from `git rev-parse HEAD` complete the record.
 
 **Takeaway:** a documented environment supports reproducibility, and a
 successful rerun supplies evidence. Next, we document the dataset itself.
-[FAIR principles and metadata](03_data_documentation.qmd)
+[FAIR data documentation and assessment](03_data_documentation.qmd)
 
 ## After the workshop: record your own environment
 

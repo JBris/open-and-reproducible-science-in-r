@@ -20,7 +20,7 @@ research. This 90-minute workshop follows one prepared R project through
 that workflow.
 
 Short demonstrations cover Git and GitHub, reproducible environments with
-renv, Docker, and MyBinder, FAIR metadata with codebook and dataspice, and
+renv, Docker, and MyBinder, FAIR metadata and assessment with dataspice and rfair, and
 data and model versioning with pins and vetiver. In the hands-on exercise,
 you will complete and run a targets meta-analysis pipeline, render its
 Quarto report, and change an analysis setting to see which steps rebuild.

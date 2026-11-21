@@ -28,8 +28,8 @@ reproducible research workflow, not to master every individual package.
 By the end of the workshop, participants should be able to:
 
 -   Explain how the tools support different parts of a reproducible research workflow.
--   Describe how a codebook and structured metadata record variables,
-    provenance, licensing, and access conditions in support of FAIR principles.
+-   Use FAIR principles to document variables, provenance, licensing, and
+    access conditions, and interpret an automated assessment.
 -   Explain how `pins` and `vetiver` link results to specific data and model versions.
 -   Complete and run a `targets` pipeline and render a Quarto report from its outputs.
 -   Modify an analysis input, rebuild only what is affected, and reproduce the result.
@@ -41,7 +41,7 @@ By the end of the workshop, participants should be able to:
 | --- | --- | --- | --- |
 | 0–10 min | 10 min | [Introduction, reproducibility principles, Git and GitHub](workshop/01_open_science.qmd) | Conceptual |
 | 10–20 min | 10 min | [Computational reproducibility: renv, Docker and Binder](workshop/02_environments.qmd) | Demonstration |
-| 20–28 min | 8 min | [FAIR principles and metadata: codebook and dataspice](workshop/03_data_documentation.qmd) | Demonstration |
+| 20–28 min | 8 min | [FAIR data documentation and assessment: dataspice and rfair](workshop/03_data_documentation.qmd) | Demonstration |
 | 28–35 min | 7 min | [Data and model versioning: pins and vetiver](workshop/04_versioning.qmd) | Demonstration |
 | 35–50 min | 15 min | [Build and execute a targets meta-analysis pipeline](workshop/05_targets.qmd) | Hands-on |
 | 50–65 min | 15 min | [Create and render a reproducible Quarto report](workshop/06_quarto.qmd) | Hands-on |

@@ -23,7 +23,7 @@ researcher needs to understand, rerun, or cite the result.
 | --- | --- | --- |
 | Git and GitHub | Change history and review | Commits and pull requests |
 | renv, Docker, Binder | Package versions and computing environment | `renv.lock`, Dockerfiles, `outputs/health-wellbeing/session-info.txt` |
-| codebook, dataspice | Variable meanings, data source, and the snapshot licence | `codebook.csv`, `dataspice.json` |
+| dataspice, rfair | Variable meanings, source and licence, plus evidence from an automated FAIR assessment | `metadata/dataspice.json`, saved assessment if run |
 | pins, vetiver | Exact input and predictive model versions | `dataset-versions.csv`, `predictive-model-version.txt`, pin metadata |
 | targets | The steps from input to summary, and their dependencies | `workspace/_targets.R`, `meta-summary.csv` |
 | Quarto | Methods, results, and provenance in one document | `workspace/report.html` |
@@ -62,7 +62,7 @@ Download each group before closing the browser tab.
 2. **Results and provenance.** Open `outputs/health-wellbeing/` and
    export `meta-summary.csv`, `analysis-data-version.txt`,
    `dataset-versions.csv`, and `predictive-model-version.txt`. Include
-   `session-info.txt`, `codebook.csv`, and `metadata/` if you ran the
+   `session-info.txt` and `metadata/` if you ran the
    demonstrations. Run their short exercises to produce any missing
    records you want to keep.
 3. **Exact pins.** Export `data_store/` and `model_store/` if you want
