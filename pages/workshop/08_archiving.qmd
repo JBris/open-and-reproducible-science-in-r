@@ -9,23 +9,60 @@ link-citations: true
 
 ## Introduction
 
-In this seven-minute overview, we work out what a reader should cite
-to find the materials behind a particular result. We connect a
-GitHub release to an archived Zenodo record with a DOI, decide what
-belongs in the archive, and briefly consider what to do when the data
-cannot be shared.
+In this seven-minute overview, we start from the report you just
+updated. We work out what a colleague would need to rerun it, then see
+how a GitHub release and an archived Zenodo record keep those materials
+together and citable. We finish with what to do when the data cannot
+be shared.
 
-A Git commit identifies a repository revision. A GitHub release gives
-a tagged revision a name and a place for release notes and assets.
-Zenodo can archive a copy of selected files and issue a DOI. An
-archive makes the cited files available under the access conditions
-of that record [@zenodo-reserve-doi].
+**Question for the room.** Allow about 30 seconds. Think of the report
+you just rendered. What would a colleague need to rerun it exactly and
+get the same numbers?
+
+## Decide what to archive {#decide-what-to-archive}
+
+Allow about two minutes. Open `workspace/report.html`. Each part of it
+points to files a colleague would need.
+
+| In your report | Files that support it | Where they go |
+| --- | --- | --- |
+| Methods and results | `workspace/report.qmd` and the `meta-summary.csv` it reads | Track the report source. Attach the summary and the rendered HTML. |
+| Pipeline script MD5, variance estimator, and interval method | `workspace/_targets.R`, plus the support and preparation scripts it relies on | Track. |
+| Upstream snapshot, raw and selected input MD5s, and inclusion rule | The data source and upstream notice in `data/raw/`, and the dataset metadata | Track. Attach any FAIR assessment record. |
+| Dataset and predictive model pin versions | `analysis-data-version.txt`, `dataset-versions.csv`, `predictive-model-version.txt`, and the pins | Attach the version files. Attach the pins if permitted and needed to preserve the exact stored versions. |
+| R and *meta* versions | `renv.lock`, the Dockerfile or image reference, and the session record | Track the lockfile and Dockerfile. Attach the session record. |
+
+Track the source that recreates the outputs. Attach the generated
+outputs and records that show what this particular run produced. The
+source can rebuild them, but an archive keeps the exact copies behind
+a reported result.
+
+In this exercise your edits are in `workspace/`. Move the exact source
+files into a tracked location before tagging a release of your own project.
+Use the [export checklist](09_discussion.qmd#export-work) to collect the
+session's outputs. An existing workshop release cannot contain work
+you created after it was tagged.
+
+The report records the input checksum and filter so a reader can
+recreate the input even if rebuilding the board gives the pin a new
+identifier. The predictive model pin records the training version and
+checksum. Retain the upstream notice if you include the bundled MIT
+teaching snapshot. Check reuse terms separately for other data or
+models before depositing them.
 
 ## Releases on GitHub {#archiving-releases}
 
-Allow about two minutes. A release marks the version of a project
-that others should use or cite. In the workshop repository, preparing
-a release follows the steps we have used throughout the session:
+Allow about one minute. A Git commit identifies a repository revision.
+A GitHub release gives a tagged revision a name and a place for release
+notes and attached files. Zenodo can archive a copy of selected files
+and issue a DOI. An archive makes the cited files available under the
+access conditions of that record [@zenodo-reserve-doi].
+
+One release ties your pipeline, report source, lockfile, and metadata
+together at one tagged revision. A reader can then retrieve that exact
+combination rather than the repository's latest state. In the workshop
+repository, preparing a release follows the steps we have used
+throughout the session:
 
 1.  Record the changes in `CHANGELOG.md` and commit that entry.
 2.  Tag the commit and publish a release with notes on the
@@ -34,18 +71,17 @@ a release follows the steps we have used throughout the session:
     the RStudio and Binder images. With the Zenodo integration enabled
     for the repository, Zenodo also archives the tagged files.
 
-For an analysis, one release ties together the pipeline script, the
-report source, the lockfile, and the metadata at one tagged revision.
-A reader can then retrieve that exact combination rather than the
-repository's latest state.
+Check the files in each new archive. If an attached output should be
+preserved but is missing, add it to the deposit.
 
 ## Inspect a Zenodo record
 
-Allow about two minutes. Open the workshop's archived `v0.2.0`
-release [@workshop-v020]. Find the creators, access conditions, and
-the ZIP of that revision. Compare the Zenodo version DOI with the
-GitHub release tag and the concept DOI in `CITATION.cff`. Cite the
-version DOI for the files supporting a result. Cite the concept DOI
+Allow about two minutes. An archive exposes these materials so a reader
+can find them without asking you. As an example, open the workshop's
+archived `v0.2.0` release [@workshop-v020]. Find the creators, access
+conditions, and the ZIP of that revision. Compare the Zenodo version DOI
+with the GitHub release tag and the concept DOI in `CITATION.cff`. Cite
+the version DOI for the files supporting a result. Cite the concept DOI
 when referring to the evolving project.
 [Version archive](https://doi.org/10.5281/zenodo.24357028) ·
 [Concept DOI](https://doi.org/10.5281/zenodo.24342489) ·
@@ -65,34 +101,15 @@ archived version that supplied the files for a particular result.
 Later archived releases have their own version records and DOIs,
 connected through the concept DOI.
 
-The [FAIR demonstration](03_data_documentation.qmd#assess-fair-metadata)
-used the teaching file's download URL. As a follow-up, pass this release's
-DOI to `rfair::assess_fair()` and check what the repository exposes.
-That assessment describes the archived workshop release.
-
-## Decide what to archive
-
-Allow about two minutes. Use your session's report to decide which
-materials a collaborator needs to rerun the result.
-
-| Put in the tagged source revision | Attach to the release or deposit |
-| --- | --- |
-| Your completed pipeline and report source, plus their support and preparation scripts | Rendered report and `meta-summary.csv` |
-| Lockfile, Dockerfile or image reference, and instructions | Actual session record, dataset selection and version files, JSON-LD, and any FAIR assessment record |
-| Data source, checksum, inclusion rule, and upstream notice | Dataset and model pins if permitted and needed to preserve the exact stored versions |
-
-In this exercise your edits are in `workspace/`. Move the exact source
-files into a tracked location before tagging a release of your own project.
-Use the [export checklist](09_discussion.qmd#export-work) to collect the
-session's outputs. An existing workshop release cannot contain work
-you created after it was tagged.
-
-The report records the input checksum and filter so a reader can
-recreate the input even if rebuilding the board gives the pin a new
-identifier. The predictive model pin records the training version and
-checksum. Retain the upstream notice if you include the bundled MIT
-teaching snapshot. Check reuse terms separately for other data or
-models before depositing them.
+This answers the question left open in the
+[FAIR demonstration](03_data_documentation.qmd#metadata-checkpoint).
+There, the assessor found the title and licence only when the
+instructor supplied a separate metadata URL. Zenodo registers the
+record's metadata with its DOI, and the DOI resolves to a landing page
+that shows the metadata and files. A reader or a tool can start from
+the identifier alone. As a follow-up, pass this release's DOI to
+`rfair::assess_fair()` and check what the repository exposes. That
+assessment describes the archived workshop release.
 
 ## When the data cannot be shared
 
@@ -108,18 +125,15 @@ and privacy accounting [@near2021-synthetic-data]. The
 [supplementary synthetic data exercise](10_synthetic_data.qmd) works
 through an example after the workshop.
 
-## Question for the room
-
-Which DOI would you cite for the files behind a specific result, and
-which single item would help a reader recreate the precise input?
-
 ## Checkpoint {#zenodo-checkpoint}
 
-You can connect a cited archive to a specific release, distinguish
-its DOI from a GitHub release tag, and list the files and metadata a
-reader needs. You can explain how publishing a release produces a new
-Zenodo archive. Use the archive's own citation for the record you
-inspected and cite the original review separately for the study data.
+You can list the files a colleague needs to rerun your report and say
+which belong in the tagged source and which to attach. You can connect
+a cited archive to a specific release, distinguish its version DOI from
+the GitHub release tag and the concept DOI, and explain how publishing
+a release produces a new Zenodo archive. Use the archive's own citation
+for the record you inspected and cite the original review separately
+for the study data.
 
 We finish with questions and discussion.
 [Questions and discussion](09_discussion.qmd)

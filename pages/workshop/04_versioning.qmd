@@ -95,9 +95,10 @@ other trains a small illustrative regression of Fisher z on log sample
 size, then stores it with *vetiver*. The regression and the pooled estimate
 answer different questions.
 
-The instructor has prepared a model pin from the full dataset. The
-workshop pipeline built it, and the next lesson shows how that pipeline
-runs. If you are trying this demo on your own, first run
+This is a preview of one pipeline output. Before the session, the
+instructor ran the workshop pipeline's model branch on the full dataset
+and saved the model pin. The next lesson shows where that branch fits
+in the pipeline. If you are trying this demo on your own, first run
 `source("pipelines/prepare_versioning_demo.R")` from the project root.
 
 Read the saved version identifier and use it to retrieve the model.

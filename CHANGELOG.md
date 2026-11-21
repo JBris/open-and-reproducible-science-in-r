@@ -24,6 +24,10 @@
 - Add explicit recovery for participant work and isolate book rendering from that work.
 - Teach selective rebuilding with an estimator change. Report heterogeneity, prediction intervals, and dataset and model provenance.
 - Connect the vetiver demonstration to a predictive model branch and document the bundled snapshot's upstream MIT licence.
+- Present the FAIR segment as a demonstration with a room question on access
+  statements, introduce the pipeline as four stages, define confidence and
+  prediction intervals before the report exercise, and start the archiving
+  segment from the participant's report.
 - Read the report's pipeline summary relative to the project root, so reports render from the project root without an execution-directory option.
 - Revise the introduction, landing page, README, draft teaching plan, and page plan for the final programme.
 

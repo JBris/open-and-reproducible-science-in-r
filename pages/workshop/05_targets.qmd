@@ -50,7 +50,35 @@ After recovery, run Step 1 to set the paths and then skip to
 
 A *target* is one named step whose result *targets* stores and
 tracks. When a target's code mentions another target by name, it
-depends on that target. The pipeline's targets connect in this order:
+depends on that target. The analysis has four stages:
+
+``` text
+select input -> check studies -> fit meta-analysis -> write summary
+```
+
+| Stage | Numbered steps in the script | Targets | Your gap |
+| --- | --- | --- | --- |
+| Select input | 1–3 | `version_file`, `data_version`, `dataset_file` | None |
+| Check studies | 4 | `studies` | None |
+| Fit meta-analysis | 5 | `fit` | TODO 1 connects `studies` to `fit` |
+| Write summary | 6–7 | `result`, `summary_file` | TODO 2 writes the summary file |
+
+The checked studies also feed a second output: the predictive model
+from the versioning demonstration. The summary records that model's
+version.
+
+``` text
+check studies -> train and pin predictive model -> model version in the summary
+```
+
+The graph you draw in Step 2 shows every target, including two that
+record provenance for the summary. `data_provenance` holds the source
+URL, checksums, and inclusion rule, and `pipeline_file` tracks the
+script itself. The supplied script uses `crew_controller_local()` to run
+the pipeline in a background R process.
+
+::: {.callout-note collapse="true"}
+## Every target and its dependencies
 
 ``` text
 version_file -> data_version -> dataset_file -> studies -> fit
@@ -62,16 +90,17 @@ fit, data_provenance, data_version, model_version, pipeline_file -> result -> su
 `version_file`, `dataset_file`, and `summary_file` are file targets:
 *targets* tracks the contents of the selection file, the pinned RDS
 file, and the summary CSV. `pipeline_file` tracks the analysis script and
-its checksum. The extra model branch uses the same checked data and
-provides a model version for the summary. The supplied script uses
-`crew_controller_local()` to run the pipeline in a background R process.
+its checksum.
+:::
 
 The model uses the raw Pearson correlations and study sample sizes.
 *meta* transforms each correlation to Fisher's z scale and pools the
 effects with a random-effects model. We use restricted maximum
 likelihood (REML) to estimate between-study variance and the
-Hartung–Knapp method for the 95% interval. The summary converts the
-estimate and limits back to the correlation scale.
+Hartung–Knapp method for the 95% confidence interval of the pooled
+correlation. The summary converts the estimate and limits back to the
+correlation scale. It also records between-study heterogeneity and a
+95% prediction interval, which the report lesson explains.
 
 This model treats study summaries as independent and assumes their
 correlations address a comparable association. Differences in
