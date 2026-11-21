@@ -9,8 +9,7 @@ Implement only the assigned change and respect the parent's file ownership.
 Keep scientific assumptions, random seeds, file paths, and dependency changes
 explicit. Verify R behavior in the project environment when available; parsing
 alone does not prove correctness. This repository is not an R package.
-R/dummy.R and pipelines/_targets_dummy.R are placeholders. Implement research
-logic only within the assignment; do not describe placeholders as working analyses.
+Implement research logic only within the assignment.
 Record explicit dataset/model versions and provenance when changing the
 pins/vetiver exercises. Use public teaching data for privacy demonstrations.
 Return the files changed, checks run, and remaining limitations. Do not publish

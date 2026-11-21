@@ -137,9 +137,10 @@ with `targets` and Quarto.
   report participants just rendered, and build the archive checklist from its
   provenance. Then explain GitHub releases and the release-triggered image
   builds. Show the Zenodo record as an example of how an archive exposes those
-  materials through version and concept DOIs, which answers the FAIR question
-  about finding metadata from an identifier. Briefly mention `synthpop` for
-  data that cannot be shared, and point to the supplementary exercise.
+  materials through a concept DOI that cites all versions and resolves to the
+  latest one. This answers the FAIR question about finding metadata from an
+  identifier. Briefly mention `synthpop` for data that cannot be shared, and
+  point to the supplementary exercise.
 - **82–90 minutes, interactive:** recap what each stage recorded, discuss
   barriers to reproducibility in participants' own work, take questions, and
   remind participants to export their work, summary, and provenance records.
@@ -244,9 +245,9 @@ and [guidelines for evaluating differential privacy guarantees](https://csrc.nis
 - [x] Document the bundled data snapshot's upstream source and MIT notice.
 - [ ] Complete human review of the dataset documentation and analysis
   assumptions.
-- [ ] Rebuild and publish the workshop images if the lockfile or system
-  dependencies change, then confirm that a fresh MyBinder session runs every
-  hands-on step.
+- [x] Rebuild and publish the workshop images for the current lockfile and
+  system dependencies. Rebuild them again if either changes.
+- [ ] Confirm that a fresh MyBinder session runs every hands-on step.
 - [ ] Rehearse the exact 90-minute sequence, including transitions,
   checkpoints, recovery steps, and the closing discussion.
 - [ ] Complete human review of the lessons, templates, and reference solutions.

@@ -166,9 +166,11 @@ versions. The instructor explains the board in the
 ## Record the source
 
 For your project notes, retain the book section, dataset documentation,
-download URL, retrieval date, checksum, original study citation, and upstream
-licence notice. Apply this record to the bundled teaching snapshot. Verify
-the terms separately for other data or materials.
+download URL, checksum, original study citation, and upstream licence
+notice. Apply this record to the bundled teaching snapshot. Its download
+URL names a fixed upstream commit, so it needs no retrieval date. For a
+source that can change, also record the date you retrieved it. Verify the
+terms separately for other data or materials.
 
 ## Preparation checkpoint {#preparation-checkpoint}
 

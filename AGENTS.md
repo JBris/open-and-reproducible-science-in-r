@@ -23,8 +23,6 @@ task introduces a package.
   project-file format version.
 - `dockerfiles/rstudio/` and `dockerfiles/binder/` contain versioned Dockerfiles.
   `binder/Dockerfile` is the Binder repository entry point.
-- `R/dummy.R` and `pipelines/_targets_dummy.R` contain no-op placeholders.
-  They are not completed examples or a runnable targets pipeline.
 - `pipelines/_targets_health_wellbeing.R` and `pipelines/health_wellbeing_report.qmd`
   are the completed reference pipeline and report. `pipelines/exercise/` holds
   their partially completed participant templates, which lessons copy to the
@@ -72,9 +70,9 @@ Follow existing formatting and `.lintr`; avoid mass formatting during small edit
 
 The core covers dataset metadata and FAIR assessment with dataspice and rfair,
 and data and model versioning with pins and vetiver. synthpop is a supplementary
-exercise, and differential privacy is a possible future extension. Keep these
-examples distinct from the no-op placeholders. Use public teaching data and
-do not infer a privacy guarantee from synthetic observations or utility scores.
+exercise, and differential privacy is a possible future extension. Use public
+teaching data and do not infer a privacy guarantee from synthetic observations
+or utility scores.
 
 Keep generated site output, caches, installed R libraries, and credentials out of
 source changes. Install or snapshot dependencies when dependency work is part of

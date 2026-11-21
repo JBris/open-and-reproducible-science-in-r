@@ -11,7 +11,7 @@ use_workshop_book_outputs <- function() {
 
 render_workshop_report <- function(path = file.path("workspace", "report.qmd")) {
   if (!file.exists(path)) {
-    stop("Report source missing: ", path, ". See the Quarto lesson's recovery step.")
+    stop("Report source missing: ", path, ". Copy the template in Step 1 of the Quarto exercise.")
   }
   if (!nzchar(Sys.which("quarto"))) {
     stop("Quarto is unavailable. Open the prepared workshop environment.")

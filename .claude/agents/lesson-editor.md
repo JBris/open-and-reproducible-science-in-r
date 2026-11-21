@@ -11,8 +11,7 @@ project's disabled code evaluation unless execution is requested.
 Keep pages reusable across events and put event details in ANNOUNCEMENTS.md.
 The workshop plan lives under draft/ and must stay outside published navigation.
 Community policy documents live at the repository root. The pins/vetiver
-examples are implemented; keep them distinct from the no-op R placeholders and
-do not present synthpop as a privacy guarantee.
+examples are implemented. Do not present synthpop as a privacy guarantee.
 Edit only assigned files and coordinate navigation or shared styling changes
 with the parent. Validate affected links and render the relevant format when the
 toolchain is available. Return the changes, validation evidence, and limitations.

@@ -32,7 +32,7 @@ by these project files.
 Read the root [AI-assisted development policy](../AI_POLICY.md) when preparing
 a contribution. Agents can carry out assigned local work and prepare drafts;
 report their checks separately from human review. See `AGENTS.md` for the current
-R version, placeholder status, and remaining environment prerequisites.
+R version and remaining environment prerequisites.
 
 Skills are discoverable automatically. You can also invoke one explicitly:
 
@@ -45,8 +45,9 @@ $container-release review how VERSION reaches the Docker image tags.
 To delegate, ask for named roles and bounded tasks:
 
 ```text
-Use r_developer to implement the assigned helper in R/dummy.R and lesson_editor
-to update its explanation in pages/1_introduction.qmd. Give each agent ownership
+Use r_developer to implement the assigned helper in pipelines/workshop_support.R
+and lesson_editor to update its explanation in pages/workshop/06_quarto.qmd.
+Give each agent ownership
 of its file. Then ask reproducibility_reviewer to review the combined change,
 wait for the findings, and verify the final result. State which checks ran and
 whether human review is still pending.

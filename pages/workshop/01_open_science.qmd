@@ -60,9 +60,9 @@ A pooled association alone does not establish a causal effect.
 
 ## One workflow throughout the session
 
-We follow this dataset through one connected workflow. The first half uses
-short demonstrations; in the second half, you complete, run, and change the
-analysis yourself.
+We follow this dataset through one connected workflow. The first half
+opens with a short Git activity and continues with demonstrations; in the
+second half, you complete, run, and change the analysis yourself.
 
 | Time | Stage | Question we will answer | Tools | Format |
 | --- | --- | --- | --- | --- |
@@ -111,8 +111,9 @@ from GitHub and change nothing in your project.
     ```
 
     Each line pairs a commit hash with a version tag. A tag gives one
-    commit a permanent name. The archiving segment shows how each
-    tagged release is archived with its own DOI.
+    commit a permanent name. The archiving segment shows how Zenodo
+    archives each tagged release under one concept DOI, which cites all
+    versions and always resolves to the latest one.
 
 2.  **What changed recently, and why?** Copy the history into a
     temporary folder. `--filter=blob:none` fetches the commits and the
@@ -209,7 +210,6 @@ commands in the **Terminal** at the root of that clone.
    - Book URL: https://doing-meta.guide/pooling-es#correlations
    - Dataset documentation: https://dmetar.protectlab.org/reference/healthwellbeing
    - Download: https://raw.githubusercontent.com/MathiasHarrer/dmetar/38c9b9bb5f85ea49de33e5d2536f6544d5268517/data/HealthWellbeing.rda
-   - Retrieved: YYYY-MM-DD
    - Raw file: data/raw/healthwellbeing.rda
    - MD5: 0d74964b0b7168379a2b015cb648b326
 

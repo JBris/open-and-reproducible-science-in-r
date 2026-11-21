@@ -76,7 +76,7 @@ describes how they are delivered.
 | [pins](https://pins.rstudio.com/articles/pins.html) and [vetiver](https://vetiver.posit.co/) | Store data and model versions with provenance and retrieve a specific version. |
 | [targets](https://docs.ropensci.org/targets/) | Organise the analysis and track what needs to be rebuilt. |
 | [Quarto](https://quarto.org/) | Connect the methods, results, and provenance in a report. |
-| GitHub releases and [Zenodo](https://zenodo.org/) | Release, archive, and cite a specific version. |
+| GitHub releases and [Zenodo](https://zenodo.org/) | Release and archive each version, and cite all versions through one concept DOI. |
 
 By the end of the workshop, participants should be able to:
 

@@ -58,8 +58,6 @@ USER root
 ENV R_LIBS=${HOME}/renv/library/R-4.4/x86_64-pc-linux-gnu \
     R_LIBS_SITE=${HOME}/renv/library/linux-ubuntu-jammy/R-4.4/x86_64-pc-linux-gnu
 
-COPY --chown=${NB_USER}:${NB_USER} ./R ${HOME}/R
-
 COPY --chown=${NB_USER}:${NB_USER} ./pages ${HOME}/pages
 
 COPY --chown=${NB_USER}:${NB_USER} ./pipelines ${HOME}/pipelines
