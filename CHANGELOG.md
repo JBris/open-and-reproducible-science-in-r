@@ -2,6 +2,13 @@
 
 ## [Unreleased]
 
+### Fixed
+
+- Keep the Quarto report exercise available after pipeline recovery.
+- Redirect the former workshop chapter URLs to the revised chapters.
+- Pin the JSON-LD revision used by the FAIR assessment and link the
+  workshop archive through its concept DOI.
+
 ## [0.6.0] - 2026-11-21
 
 ### Added

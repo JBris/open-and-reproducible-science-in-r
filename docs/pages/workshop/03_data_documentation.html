@@ -501,7 +501,7 @@ div.csl-indent {
 </div>
 </div>
 <p>This record describes the <a href="../../pages/workshop/00_preparation.html#preparation-data">verified teaching file</a>. The link resolves to a particular upstream revision. Keep the source and licence notice in <code>data/raw/</code> with the metadata. The DOI in <code>biblio.csv</code> identifies the original review. Check for placeholder coverage fields before publishing the generated record.</p>
-<p>The repository’s reviewed copy omits empty publication and coverage fields, and writes <code>type</code> as <code>@type</code>; both mean the same under the Schema.org context. The full record below comes from the same file the assessment uses.</p>
+<p>The repository’s reviewed copy omits empty publication and coverage fields and writes <code>@type</code>, which has the same meaning as <code>type</code> under the Schema.org context. The full record below is the repository copy. The assessment fetches the pinned revision of that record.</p>
 <div class="callout callout-style-default callout-note callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -605,21 +605,22 @@ NULL
 NULL</code></pre>
 </div>
 </div>
-<p>Then supply the JSON-LD record as a separate metadata endpoint. The repository publishes it at <code>data/metadata/health-wellbeing/dataspice.json</code>, and we fetch it through <a href="https://www.jsdelivr.com/">jsDelivr</a>, which serves files from GitHub repositories labelled as JSON. <em>rfair</em> reads a metadata endpoint only when the server labels it as JSON, and GitHub’s raw file links label every file as plain text. Software can use metadata only when it recognises the format. Here <code>@main</code> follows the latest commit; a tag or commit hash in its place would pin one version.</p>
+<p>Then supply the JSON-LD record as a separate metadata endpoint. The repository publishes it at <code>data/metadata/health-wellbeing/dataspice.json</code>, and we fetch it through <a href="https://www.jsdelivr.com/">jsDelivr</a>, which serves files from GitHub repositories labelled as JSON. <em>rfair</em> reads a metadata endpoint only when the server labels it as JSON, and GitHub’s raw file links label every file as plain text. Software can use metadata only when it recognises the format. The commit in the URL pins the assessment to one revision of the metadata.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>metadata_url <span class="ot">&lt;-</span> <span class="fu">paste0</span>(</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">"https://cdn.jsdelivr.net/gh/JBris/open-and-reproducible-science-in-r@main/"</span>,</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"data/metadata/health-wellbeing/dataspice.json"</span></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>enriched <span class="ot">&lt;-</span> rfair<span class="sc">::</span><span class="fu">assess_fair</span>(</span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  snapshot_url,</span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">metric_version =</span> <span class="st">"0.8"</span>,</span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">metadata_service_endpoint =</span> metadata_url,</span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">metadata_service_type =</span> <span class="st">"schema_org"</span>,</span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">timeout =</span> <span class="dv">6</span>,</span>
-<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">max_time =</span> <span class="dv">30</span></span>
-<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>enriched<span class="sc">$</span>resolution[<span class="fu">c</span>(<span class="st">"ok"</span>, <span class="st">"status"</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">"https://cdn.jsdelivr.net/gh/JBris/open-and-reproducible-science-in-r@"</span>,</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"c08e0dc036e46e89376536a87ad279db61374f7e"</span>,</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">"/data/metadata/health-wellbeing/dataspice.json"</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>enriched <span class="ot">&lt;-</span> rfair<span class="sc">::</span><span class="fu">assess_fair</span>(</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>  snapshot_url,</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">metric_version =</span> <span class="st">"0.8"</span>,</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">metadata_service_endpoint =</span> metadata_url,</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">metadata_service_type =</span> <span class="st">"schema_org"</span>,</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">timeout =</span> <span class="dv">6</span>,</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">max_time =</span> <span class="dv">30</span></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>enriched<span class="sc">$</span>resolution[<span class="fu">c</span>(<span class="st">"ok"</span>, <span class="st">"status"</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>$ok
 [1] TRUE

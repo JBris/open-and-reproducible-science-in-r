@@ -1,6 +1,8 @@
 ---
 title: "GitHub releases, Zenodo and archiving"
 subtitle: "75–82 minutes · Conceptual · GitHub releases, Zenodo and synthpop"
+aliases:
+  - 08_zenodo.html
 editor:
   markdown:
     wrap: 72
@@ -83,11 +85,10 @@ Zenodo record [@workshop-zenodo].
 Find the creators, access conditions, the ZIP of the archived revision,
 and the list of versions. Each archived release has its own version DOI.
 The concept DOI, `10.5281/zenodo.24342489`, represents all versions and
-resolves to the latest one; it is also the DOI in `CITATION.cff`. Cite a
-version DOI for the files supporting a particular result. Cite the
-concept DOI when referring to the project as a whole.
-[Zenodo record](https://zenodo.org/records/24383988) ·
-[Concept DOI](https://doi.org/10.5281/zenodo.24342489) ·
+opens the latest version. Cite the workshop using this concept DOI from
+`CITATION.cff`. Include the GitHub release tag when you need to identify
+the exact workshop files you used.
+[Workshop archive](https://doi.org/10.5281/zenodo.24342489) ·
 [GitHub releases](https://github.com/JBris/open-and-reproducible-science-in-r/releases)
 
 The workshop has three connected locations:
@@ -96,12 +97,12 @@ The workshop has three connected locations:
 | --- | --- |
 | [Workshop website](https://jbris.github.io/open-and-reproducible-science-in-r/) | Read the published workshop materials. |
 | [GitHub repository](https://github.com/JBris/open-and-reproducible-science-in-r) | Find the source files, history, and releases used to publish the site. |
-| [Zenodo record](https://zenodo.org/records/24383988) | Find the archived releases, their version DOIs, and the concept DOI for all versions. |
+| [Zenodo archive](https://doi.org/10.5281/zenodo.24342489) | Find and download the archived releases. |
 
 Each version's related identifier points to the GitHub release tag it
-archives. The live website can change as the project changes; cite the
-archived version that supplied the files for a particular result. New
-releases add version records and DOIs under the same concept DOI.
+archives. The live website can change as the project changes. Record
+the tag that identifies the files behind a particular result. New
+releases add version records under the same concept DOI.
 
 This answers the question left open in the
 [FAIR demonstration](03_data_documentation.qmd#metadata-checkpoint).
@@ -134,9 +135,8 @@ You can list the files a colleague needs to rerun your report and say
 which belong in the tagged source and which to attach. You can connect
 a cited archive to a specific release, distinguish its version DOI from
 the GitHub release tag and the concept DOI, and explain how publishing
-a release produces a new Zenodo archive. Use the archive's own citation
-for the record you inspected and cite the original review separately
-for the study data.
+a release produces a new Zenodo archive. Use the concept DOI to cite
+the workshop and cite the original review separately for the study data.
 
 We finish with questions and discussion.
 [Questions and discussion](09_discussion.qmd)

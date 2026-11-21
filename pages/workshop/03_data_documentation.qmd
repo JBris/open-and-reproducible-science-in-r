@@ -1,6 +1,8 @@
 ---
 title: "FAIR data documentation and assessment"
 subtitle: "20–28 minutes · Demonstration · dataspice and rfair"
+aliases:
+  - 04_data_documentation.html
 editor:
   markdown:
     wrap: 72
@@ -81,9 +83,9 @@ The DOI in `biblio.csv` identifies the original review. Check for
 placeholder coverage fields before publishing the generated record.
 
 The repository's reviewed copy omits empty publication and coverage
-fields, and writes `type` as `@type`; both mean the same under the
-Schema.org context. The full record below comes from the same file the
-assessment uses.
+fields and writes `@type`, which has the same meaning as `type` under
+the Schema.org context. The full record below is the repository copy.
+The assessment fetches the pinned revision of that record.
 
 ::: {.callout-note collapse="true"}
 ## HealthWellbeing JSON-LD
@@ -124,13 +126,14 @@ and we fetch it through [jsDelivr](https://www.jsdelivr.com/), which
 serves files from GitHub repositories labelled as JSON. *rfair* reads a
 metadata endpoint only when the server labels it as JSON, and GitHub's
 raw file links label every file as plain text. Software can use metadata
-only when it recognises the format. Here `@main` follows the latest
-commit; a tag or commit hash in its place would pin one version.
+only when it recognises the format. The commit in the URL pins the
+assessment to one revision of the metadata.
 
 ```{r health-rfair-supplement, eval = TRUE}
 metadata_url <- paste0(
-  "https://cdn.jsdelivr.net/gh/JBris/open-and-reproducible-science-in-r@main/",
-  "data/metadata/health-wellbeing/dataspice.json"
+  "https://cdn.jsdelivr.net/gh/JBris/open-and-reproducible-science-in-r@",
+  "c08e0dc036e46e89376536a87ad279db61374f7e",
+  "/data/metadata/health-wellbeing/dataspice.json"
 )
 enriched <- rfair::assess_fair(
   snapshot_url,

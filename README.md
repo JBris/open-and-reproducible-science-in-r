@@ -128,7 +128,7 @@ docker compose up --no-build rstudio
 
 The image matching [VERSION](VERSION) must be published to the GitHub Container
 Registry before it can be pulled. Loading `APP_VERSION` explicitly selects the
-workshop release recorded in the repository.
+Docker image tag recorded in the repository.
 
 Open [RStudio at localhost:8787](http://localhost:8787) in your browser. Press
 **Ctrl+C** in the terminal to stop the service.
@@ -136,7 +136,9 @@ Open [RStudio at localhost:8787](http://localhost:8787) in your browser. Press
 The supplied configuration uses Rocker's `/init` startup, disables RStudio
 authentication, and binds port 8787 to localhost for local workshop use.
 The local repository is mounted at `/home/rstudio/open-reproducible-science-r`.
-Save workshop changes in that directory to keep them in your local checkout.
+In RStudio, use **File → Open Project** to open
+`open-and-reproducible-science-in-r.Rproj` from that directory before running the
+lesson commands. Work saved in the project stays in your local checkout.
 
 ## Usage with Binder
 
@@ -155,14 +157,14 @@ that image on its own.
 
 The [FAIR lesson](pages/workshop/03_data_documentation.qmd) runs `rfair`
 live. It assesses the upstream data URL, then supplies
-`data/metadata/health-wellbeing/dataspice.json` from `main` through jsDelivr.
+`data/metadata/health-wellbeing/dataspice.json` through jsDelivr, pinned to a
+Git commit that contains the displayed JSON-LD record.
 `rfair` 0.2.0 reads a metadata endpoint only when it is served as JSON, and
-GitHub's raw file links serve plain text. jsDelivr caches branch URLs, so
-after changing the file on `main`, purge
-<https://purge.jsdelivr.net/gh/JBris/open-and-reproducible-science-in-r@main/data/metadata/health-wellbeing/dataspice.json>
-or wait for the cache to expire. Before teaching, check that the Binder image
-has the `rfair` version in `renv.lock`, and save both assessment results in
-case a request times out during the session.
+GitHub's raw file links serve plain text. After publishing a change to the
+record, update the commit in `metadata_url` and verify that the endpoint
+serves the same record shown in the lesson. Before teaching, check that the
+Binder image has the `rfair` version in `renv.lock`, and save both assessment
+results in case a request times out during the session.
 
 ### Prepare the versioning demonstration
 
@@ -207,8 +209,10 @@ against the upstream data URL and jsDelivr. The book uses the reference pipeline
 generated analysis files under `outputs/health-wellbeing/book/`.
 Participant commands use `workspace/` and `outputs/health-wellbeing/`.
 From the project root, use `source("pipelines/recover_workshop.R")` to
-prepare missing inputs, back up working copies, and load the reference
-exercise files. The standalone report renders from the project root and
+prepare missing inputs, back up the working pipeline, and rebuild the
+summary with the reference pipeline. Start or resume your report in the
+[Quarto exercise](pages/workshop/06_quarto.qmd#step-1-copy-and-render-the-template).
+The standalone report renders from the project root and
 locates the summary relative to that root. Draft teaching plans are
 excluded from the book.
 

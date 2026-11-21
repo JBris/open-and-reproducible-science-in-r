@@ -474,8 +474,8 @@ div.csl-indent {
 </div>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">.libPaths</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "/home/rstudio/renv/library/linux-ubuntu-jammy/R-4.4/x86_64-pc-linux-gnu"                  
-[2] "/home/rstudio/.cache/R/renv/sandbox/linux-ubuntu-jammy/R-4.4/x86_64-pc-linux-gnu/25ebdc09"</code></pre>
+<pre><code>[1] "/home/rstudio/renv/library/linux-ubuntu-jammy/R-4.4/x86_64-pc-linux-gnu"
+[2] "/usr/local/lib/R/library"                                               </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">packageVersion</span>(<span class="st">"renv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -558,7 +558,7 @@ div.csl-indent {
 </section>
 <section id="follow-the-github-actions-build-pipelines" class="level3" data-number="6.4.2">
 <h3 data-number="6.4.2" class="anchored" data-anchor-id="follow-the-github-actions-build-pipelines"><span class="header-section-number">6.4.2</span> Follow the GitHub Actions build pipelines</h3>
-<p>The repository has two workflows that run when a GitHub release is published or when a maintainer starts them manually. <a href="https://github.com/JBris/open-and-reproducible-science-in-r/actions/workflows/build-binder.yaml">Build Binder</a> builds the image MyBinder uses. <a href="https://github.com/JBris/open-and-reproducible-science-in-r/actions/workflows/build-rstudio.yaml">Build RStudio</a> builds a separate image for people running RStudio with Docker locally.</p>
+<p>Publishing a GitHub release starts <a href="https://github.com/JBris/open-and-reproducible-science-in-r/actions/workflows/build-rstudio.yaml">Build RStudio</a>. Once it builds and pushes the image for local Docker use, it starts <a href="https://github.com/JBris/open-and-reproducible-science-in-r/actions/workflows/build-binder.yaml">Build Binder</a> from the same release revision. Build Binder publishes the image that MyBinder uses. Maintainers can also start either workflow manually to build that image on its own.</p>
 <p>Each workflow checks out the source, reads <code>VERSION</code> into <code>APP_VERSION</code>, and records a UTC build date. Docker Compose uses <code>APP_VERSION</code> to select the Dockerfile and tag the image. The Binder job includes these two steps.</p>
 <div class="sourceCode" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> compose build binder</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> compose push binder</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
