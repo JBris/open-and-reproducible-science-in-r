@@ -2,6 +2,25 @@
 
 ## [Unreleased]
 
+### Changed
+
+- Recommend the Claude Code extension alongside the Codex extension in the
+  VS Code workspace, and label the hook-test task for both.
+- Record the maintainer-accepted discrepancies in `AGENTS.md` so agent reviews
+  do not report them again.
+- Remove the redirect pages for chapter addresses used before the `0.6.0`
+  restructure, so `pages/` holds only lesson sources.
+- Remove the `CRANextra` repository from `renv.lock`. No locked package comes
+  from it, and renv's check of that server could stall R sessions, including
+  book renders.
+- Rebuild the published HTML book and PDF.
+
+### Fixed
+
+- Show the Massey University contact on the published contribution page.
+- Make clear that the opening Git activity compares the reference pipeline,
+  the completed solution to the pipeline exercise.
+
 ## [0.8.0] - 2026-11-22
 
 ### Changed
