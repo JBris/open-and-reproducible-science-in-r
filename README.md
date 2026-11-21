@@ -143,7 +143,7 @@ lesson commands. Work saved in the project stays in your local checkout.
 ## Usage with Binder
 
 [Open RStudio on MyBinder](https://mybinder.org/v2/gh/JBris/open-and-reproducible-science-in-r/HEAD?urlpath=rstudio)
-and follow the [workshop preparation steps](pages/workshop/00_preparation.qmd#choose-your-computing-environment).
+and follow the [workshop preparation steps](https://jbris.github.io/open-and-reproducible-science-in-r/pages/workshop/00_preparation.html#choose-your-computing-environment).
 Allow time to start the session and download your work before it ends.
 
 Publishing a GitHub release starts the
@@ -211,7 +211,7 @@ Participant commands use `workspace/` and `outputs/health-wellbeing/`.
 From the project root, use `source("pipelines/recover_workshop.R")` to
 select the full dataset, back up the working pipeline, and rebuild the
 summary with the reference REML pipeline. Start or resume your report in the
-[Quarto exercise](pages/workshop/06_quarto.qmd#step-1-copy-and-render-the-template).
+[Quarto exercise](https://jbris.github.io/open-and-reproducible-science-in-r/pages/workshop/06_quarto.html#step-1-copy-and-render-the-template).
 The standalone report renders from the project root and
 locates the summary relative to that root. Draft teaching plans are
 excluded from the book.
