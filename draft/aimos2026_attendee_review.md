@@ -488,3 +488,87 @@ human review remain pending.
 The rebuilt images include the locked `rfair`, and the FAIR lesson now runs
 the assessments live against the repository's JSON-LD (`9a98fee`). Whether a
 metric version recognises the suggested access statement is still unchecked.
+
+## AIMOS2026 attendee review of v0.9.0
+
+**Reviewed on 22 November 2026.** The Codex `aimos2026_attendee`
+agent reviewed the lessons for the v0.9.0 release (`41aa66f`) in programme
+order from the perspective of a researcher who uses R and is new to the
+workshop tools. The review also considered an attendee with less R
+experience and a data steward interested in metadata and archiving.
+
+### What works for attendees
+
+The [announcement](../ANNOUNCEMENTS.md) sets
+accurate expectations about what I will watch and what I will do. I can
+follow one study-level dataset from the opening question through the
+report I update and the files I would archive. The expected study count,
+intervals, and target names let me check my progress. The pinned model
+makes sense as a second output when I see its training-data version in
+the report. The worked interpretation of the confidence and prediction
+intervals helps me understand what the code produces.
+[Programme](../pages/1_introduction.qmd#intro-programme) ·
+[Quarto checkpoint](../pages/workshop/06_quarto.qmd#quarto-checkpoint)
+
+For a data steward, the FAIR access question and the Zenodo comparison
+give me two ways to discuss discovery with colleagues. The release
+lesson then connects the archive to my own report and its provenance.
+[FAIR checkpoint](../pages/workshop/03_data_documentation.qmd#metadata-checkpoint) ·
+[Archiving checklist](../pages/workshop/08_archiving.qmd#decide-what-to-archive)
+
+### Findings in priority order
+
+1. **Major. Give the room a cue for using the existing recovery steps.**
+   The targets steps allocate 14 of 15 minutes, and the Quarto and
+   modification steps allocate their full 15 and 10 minutes. With less
+   R experience, I could spend several minutes on a missed comma or an
+   unfinished render while the room moves on. At the handoffs around
+   minutes 50 and 65, state what I need to see, when to open a solution,
+   and which recovery step gets me back to the current exercise. The
+   preparation page says to ask about a “prepared alternative” if
+   MyBinder fails. Name the route the presenter can actually offer and
+   show how to rejoin at the next checkpoint.
+   [Preparation](../pages/workshop/00_preparation.qmd#choose-your-computing-environment) ·
+   [Targets lesson](../pages/workshop/05_targets.qmd#introduction) ·
+   [Report lesson](../pages/workshop/06_quarto.qmd#introduction) ·
+   [Modification lesson](../pages/workshop/07_modify_and_reproduce.qmd#introduction)
+2. **Major. Give the unfinished pipeline an executable text check.**
+   Step 2 asks me to draw the graph and look for missing arrows. The
+   lesson describes the arrows in text, but I can only check my own graph
+   in the Console once I get to Step 4. Offer the two existing edge
+   checks before the edits, when both should return `FALSE`, then repeat
+   them after the edits, when both should return `TRUE`. I can make the
+   same prediction and verify it from the Console or the PDF.
+   [First run](../pages/workshop/05_targets.qmd#step-2-run-the-pipeline-before-completing-it) ·
+   [Dependency checks](../pages/workshop/05_targets.qmd#check-dependencies) ·
+   [Accessibility goals](../ACCESSIBILITY.md#accessibility-goals)
+3. **Minor. Reserve time to export and open the downloads.** The closing
+   chapter gives one minute to recap, five to discussion, and the
+   remaining time to questions. I still need to download several groups
+   from a temporary MyBinder session. Reserve a short download window
+   and lead with `workspace/`, `.here`, and the summary with its
+   provenance files. Ask the room to confirm the downloads open before
+   closing the tab. The full checklist can guide people who also need
+   the exact pin stores or FAIR assessment.
+   [Closing discussion and export checklist](../pages/workshop/09_discussion.qmd#export-work)
+4. **Minor. Give the opening Git activity a text fallback.** If GitHub
+   cannot be reached the lesson says to “follow the instructor's screen”.
+   A short prepared log and hash pair would let me answer the same
+   question using a screen reader or the PDF.
+   [Git activity](../pages/workshop/01_open_science.qmd#git-history)
+
+### Readiness for the session
+
+I could achieve the main learning outcome in the 90-minute session with
+a working prepared environment and clear cues at the handoffs. My
+questions for the presenter are how to rejoin if I lose MyBinder, when
+to use a worked solution, and when we will check the downloads together.
+
+Codex ran the graph check in a disposable copy in the local RStudio
+container. The unfinished template returned `FALSE` for both edges and
+the completed reference returned `TRUE` for both. The earlier local
+review verified the 29-study result, the report render, and the four
+targets rebuilt by the estimator change. A fresh browser launch of
+MyBinder, a timed rehearsal, keyboard and screen-reader testing, and
+human review remain pending. This feedback comes from a simulated
+attendee.
