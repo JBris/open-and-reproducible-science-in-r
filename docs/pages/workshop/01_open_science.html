@@ -462,7 +462,7 @@ div.csl-indent {
 </section>
 <section id="one-workflow-throughout-the-session" class="level2" data-number="5.4">
 <h2 data-number="5.4" class="anchored" data-anchor-id="one-workflow-throughout-the-session"><span class="header-section-number">5.4</span> One workflow throughout the session</h2>
-<p>We follow this dataset through one connected workflow. The first half uses short demonstrations; in the second half, you complete, run, and change the analysis yourself.</p>
+<p>We follow this dataset through one connected workflow. The first half opens with a short Git activity and continues with demonstrations; in the second half, you complete, run, and change the analysis yourself.</p>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 20%">
@@ -596,7 +596,7 @@ div.csl-indent {
 <li><p><strong>Which versions have been released?</strong> List the repository’s tags without downloading anything else.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="va">url</span><span class="op">=</span>https://github.com/JBris/open-and-reproducible-science-in-r.git</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> ls-remote <span class="at">--tags</span> <span class="at">--refs</span> <span class="st">"</span><span class="va">$url</span><span class="st">"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Each line pairs a commit hash with a version tag. A tag gives one commit a permanent name. The archiving segment shows how each tagged release is archived with its own DOI.</p></li>
+<p>Each line pairs a commit hash with a version tag. A tag gives one commit a permanent name. The archiving segment shows how Zenodo archives each tagged release under one concept DOI, which cites all versions and always resolves to the latest one.</p></li>
 <li><p><strong>What changed recently, and why?</strong> Copy the history into a temporary folder. <code>--filter=blob:none</code> fetches the commits and the lists of files they changed, but not the file contents, so it takes a few seconds.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone <span class="at">--quiet</span> <span class="at">--bare</span> <span class="at">--filter</span><span class="op">=</span>blob:none <span class="st">"</span><span class="va">$url</span><span class="st">"</span> /tmp/workshop-history.git</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> <span class="at">-C</span> /tmp/workshop-history.git log <span class="at">--oneline</span> <span class="at">--no-merges</span> <span class="at">-5</span></span>
@@ -643,14 +643,13 @@ div.csl-indent {
 <span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Book URL: https://doing-meta.guide/pooling-es#correlations</span>
 <span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Dataset documentation: https://dmetar.protectlab.org/reference/healthwellbeing</span>
 <span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Download: https://raw.githubusercontent.com/MathiasHarrer/dmetar/38c9b9bb5f85ea49de33e5d2536f6544d5268517/data/HealthWellbeing.rda</span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Retrieved: YYYY-MM-DD</span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Raw file: data/raw/healthwellbeing.rda</span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>MD5: 0d74964b0b7168379a2b015cb648b326</span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a><span class="fu">## Decisions</span></span>
-<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>Preserve the raw file unchanged. Keep derived data and analysis outputs separate.</span>
-<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>Check upstream reuse terms before redistributing data.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Raw file: data/raw/healthwellbeing.rda</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>MD5: 0d74964b0b7168379a2b015cb648b326</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="fu">## Decisions</span></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>Preserve the raw file unchanged. Keep derived data and analysis outputs separate.</span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>Check upstream reuse terms before redistributing data.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
 <li><p>Stage the note explicitly, inspect what will be committed, and commit it. Newly created files appear in <code>git diff --cached</code> after staging.</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add WORKSHOP_NOTES.md</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> diff <span class="at">--cached</span> <span class="at">--</span> WORKSHOP_NOTES.md</span>
