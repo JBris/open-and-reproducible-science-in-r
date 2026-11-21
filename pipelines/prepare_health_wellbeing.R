@@ -10,15 +10,18 @@
 # script; its outputs are the files under outputs/health-wellbeing/.
 
 local({
-  workshop_dir <- file.path("outputs", "health-wellbeing")
+  source("pipelines/workshop_support.R", local = TRUE)
+  workshop_dir <- workshop_output_dir()
   raw_file <- file.path("data", "raw", "healthwellbeing.rda")
   source_url <- paste0(
-    "https://www.protectlab.org/meta-analysis-in-r/data/",
-    "healthwellbeing.rda"
+    "https://raw.githubusercontent.com/MathiasHarrer/dmetar/",
+    "38c9b9bb5f85ea49de33e5d2536f6544d5268517/data/HealthWellbeing.rda"
   )
 
-  # Check that the raw file is the verified teaching snapshot.
-  stopifnot(file.exists(raw_file))
+  # Use the bundled snapshot or retrieve its exact upstream copy.
+  if (!file.exists(raw_file)) {
+    stop("Teaching data missing. Follow the Verify the raw data step in the preparation lesson.")
+  }
   raw_md5 <- unname(tools::md5sum(raw_file))
   stopifnot(identical(raw_md5, "0d74964b0b7168379a2b015cb648b326"))
 
@@ -71,7 +74,10 @@ local({
   full_version <- write_version(
     health,
     description = "All 29 studies in the teaching snapshot.",
-    metadata = list(source_url = source_url, raw_md5 = raw_md5, scope = "all")
+    metadata = list(
+      source_url = source_url, raw_md5 = raw_md5, scope = "all",
+      filter = "all studies"
+    )
   )
 
   # Version 2: the 18 general-population studies, derived from version 1.

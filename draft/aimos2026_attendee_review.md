@@ -330,3 +330,31 @@ R scripts parsed. The HTML book and standalone participant report
 rendered, and the synthetic comparison PNG was generated. PDF rendering
 was outside this independent check. A fresh MyBinder launch, timed
 rehearsal, and human review are pending.
+
+## Follow-up on the selected findings
+
+| Finding | Change |
+| --- | --- |
+| M1 | The three hands-on lessons offer a recovery command that prepares missing inputs, backs up working files, and restores the reference pipeline and report. Book renders use separate outputs. |
+| M2 | The REML-to-DL change is timed. The dataset switch is an extension. |
+| M3 | The report gives τ², I², and a prediction interval. The exercise compares the two estimators on these data and describes the subset comparison as descriptive. |
+| M4 | The report links the exact script, dataset and model versions, checksums, and inclusion rule to the result. The archiving lesson distinguishes files to track from artifacts to attach. |
+| M5 | The announcement separates demonstrations from hands-on work. The opening sets the same expectations, and there is follow-up guidance for Git, renv, and Docker. |
+| M7 | The bundled file was already tracked. Its Git blob matches the file at a pinned upstream dmetar revision. The upstream MIT notice is included and the licence is visible in the JSON-LD. |
+| m1–m3 | The report template contains three TODOs. The lessons define push and explain package imports and the worker. Participants can check both dependency edges in text. |
+| m4–m6 | Render mechanics are in the README or hidden setup. Participants can render from the R Console. The metadata lesson shows an excerpt of the exported JSON-LD. |
+| m7–m9 | The export checklist includes analysis outputs and pins. Correlations and interval bounds use three decimals. The environment exercise describes the R session it actually records. |
+| Model versioning | A pipeline branch trains and pins an illustrative regression from the checked study summaries. The report names its exact model version. Changing the input retrains the regression and records a new version. |
+
+Codex implemented the follow-up. In the local RStudio image, recovery from a
+clean store worked, a second recovery preserved an edited pipeline as a backup,
+and full invalidation reproduced the original summary and reused the model pin.
+The estimator edit rebuilt four targets and left the model pin unchanged. The
+optional subset built an 18-study result and a distinct model pin whose metadata
+matched the selected dataset version and checksum. Both standalone reports
+rendered from the Console helper. The HTML book and PDF rendered, the
+synthetic comparison figure was included in the HTML, and the book render
+left an unfinished participant script and a participant selection file
+untouched.
+
+A fresh MyBinder launch, timed rehearsal, and human review remain pending.

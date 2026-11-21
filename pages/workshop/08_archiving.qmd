@@ -67,24 +67,27 @@ connected through the concept DOI.
 
 ## Decide what to archive
 
-Allow about two minutes. For the `HealthWellbeing` analysis, a
-candidate list is:
+Allow about two minutes. Use your session's report to decide which
+materials a collaborator needs to rerun the result.
 
--   The exact code revision, pipeline script, and Quarto report source.
--   The report and summary CSV, where upstream terms permit sharing.
--   The lockfile, actual environment record, and container image tag
-    or digest if the run used a container.
--   The source citation, download URL, checksum, pin version and
-    study inclusion rule, plus the codebook, dataset metadata, and
-    reuse terms.
+| Put in the tagged source revision | Attach to the release or deposit |
+| --- | --- |
+| Your completed pipeline and report source, plus their support and preparation scripts | Rendered report and `meta-summary.csv` |
+| Lockfile, Dockerfile or image reference, and instructions | Actual session record, dataset selection and version files, codebook, and JSON-LD |
+| Data source, checksum, inclusion rule, and upstream notice | Dataset and model pins if permitted and needed to preserve the exact stored versions |
 
-The upstream download is publicly accessible. Confirm its reuse terms
-before including the raw file, pinned copies, or derivatives in a
-deposit. If you cannot include a copy, document how an authorised
-reader can obtain the source and recreate the selected input. A pin
-version identifies an object in a particular board. Preserving the
-version identifier with the checksum and filter lets another reader
-understand what that object contained.
+In this exercise your edits are in `workspace/`. Move the exact source
+files into a tracked location before tagging a release of your own project.
+Use the [export checklist](09_discussion.qmd#export-work) to collect the
+session's outputs. An existing workshop release cannot contain work
+you created after it was tagged.
+
+The report records the input checksum and filter so a reader can
+recreate the input even if rebuilding the board gives the pin a new
+identifier. The predictive model pin records the training version and
+checksum. Retain the upstream notice if you include the bundled MIT
+teaching snapshot. Check reuse terms separately for other data or
+models before depositing them.
 
 ## When the data cannot be shared
 

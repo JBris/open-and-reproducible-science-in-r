@@ -11,6 +11,11 @@ identify the unit represented by a row of data, describe what another
 researcher would need to retrace a result, and explain how Git and GitHub
 record, review, and share changes.
 
+You will watch the Git, environment, metadata, versioning, and archiving
+demonstrations. In the hands-on segment you will complete and run the pipeline
+and revise its report. If you arrive late, finish
+[preparation](00_preparation.qmd) during the demonstrations.
+
 ## Why this matters
 
 Allow about three minutes. A reported result is easier to evaluate when its
@@ -85,6 +90,7 @@ tools such as issues, pull requests, and releases.
 | Commit | A recorded change to one or more files, with a message explaining why |
 | Branch | A line of work that can change without affecting the main version |
 | Remote | A copy of the repository elsewhere, such as on GitHub |
+| Push | Send local commits to a remote repository |
 | Pull request | A proposal to merge a branch, with a place for review and discussion |
 | Release | A named, tagged version of the repository, covered later in the session |
 
@@ -100,11 +106,11 @@ git status --short
 On GitHub, the instructor then shows the commit history, a merged pull request
 with its **Files changed** view, and the releases page.
 
-Every later stage of the workshop is a tracked text file: the lockfile,
-metadata templates, the pipeline, and the report. Their changes can be reviewed
-like any other code. Generated outputs, caches, and your personal workspace
-copies are ignored by Git, because they can be recreated from the tracked
-files. The raw data file is tracked, together with its checksum.
+The lockfile, exercise templates, and reference solutions are tracked.
+Your edits in `workspace/` are personal working copies. Save them with
+your report and provenance records using the
+[export checklist](09_discussion.qmd#export-work). The raw teaching
+snapshot and its licence notice are tracked too.
 
 ## Discuss with a neighbour
 
@@ -155,7 +161,7 @@ commands in the **Terminal** at the project root.
    - Book: Harrer, Cuijpers, Furukawa, and Ebert (2021), section 4.2.4.
    - Book URL: https://doing-meta.guide/pooling-es#correlations
    - Dataset documentation: https://dmetar.protectlab.org/reference/healthwellbeing
-   - Download: https://www.protectlab.org/meta-analysis-in-r/data/healthwellbeing.rda
+   - Download: https://raw.githubusercontent.com/MathiasHarrer/dmetar/38c9b9bb5f85ea49de33e5d2536f6544d5268517/data/HealthWellbeing.rda
    - Retrieved: YYYY-MM-DD
    - Raw file: data/raw/healthwellbeing.rda
    - MD5: 0d74964b0b7168379a2b015cb648b326

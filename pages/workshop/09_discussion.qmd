@@ -22,9 +22,9 @@ researcher needs to understand, rerun, or cite the result.
 | Stage | What it recorded | Where to find it |
 | --- | --- | --- |
 | Git and GitHub | Change history and review | Commits and pull requests |
-| renv, Docker, Binder | Package versions and computing environment | `renv.lock`, Dockerfiles, `outputs/session-info.txt` |
-| codebook, dataspice | Variable meanings, provenance, and reuse terms | `codebook.csv`, `dataspice.json` |
-| pins, vetiver | Exact data and model versions | `dataset-versions.csv`, pin metadata |
+| renv, Docker, Binder | Package versions and computing environment | `renv.lock`, Dockerfiles, `outputs/health-wellbeing/session-info.txt` |
+| codebook, dataspice | Variable meanings, data source, and the snapshot licence | `codebook.csv`, `dataspice.json` |
+| pins, vetiver | Exact input and predictive model versions | `dataset-versions.csv`, `predictive-model-version.txt`, pin metadata |
 | targets | The steps from input to summary, and their dependencies | `workspace/_targets.R`, `meta-summary.csv` |
 | Quarto | Methods, results, and provenance in one document | `workspace/report.html` |
 | GitHub releases, Zenodo | A citable, archived version | Release tag and version DOI |
@@ -51,11 +51,26 @@ your neighbours or the room.
 
 Use the remaining time for questions.
 
-## Before you leave
+## Before you leave {#export-work}
 
-Your MyBinder session is temporary. To keep your work, select the
-`workspace` folder in the RStudio **Files** pane and use
-**More → Export**. Your pipeline and report copies are there.
+MyBinder files disappear when the session ends. In RStudio's **Files**
+pane, select the files or folders below and use **More → Export**.
+Download each group before closing the browser tab.
+
+1. **Your work.** Export `workspace/` for the exact pipeline, report
+   source, and rendered HTML. If you used recovery, any backups are here too.
+2. **Results and provenance.** Open `outputs/health-wellbeing/` and
+   export `meta-summary.csv`, `analysis-data-version.txt`,
+   `dataset-versions.csv`, and `predictive-model-version.txt`. Include
+   `session-info.txt`, `codebook.csv`, and `metadata/` if you ran the
+   demonstrations. Run their short exercises to produce any missing
+   records you want to keep.
+3. **Exact pins.** Export `data_store/` and `model_store/` if you want
+   to reopen the same data and model versions later. Keep the
+   `data/raw/` source and licence record with the teaching snapshot.
+
+For a public release, review the exported contents first and follow
+the [archiving checklist](08_archiving.qmd#decide-what-to-archive).
 
 ## Follow-up resources
 

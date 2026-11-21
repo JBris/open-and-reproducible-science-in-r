@@ -93,8 +93,9 @@ participants follow the examples.
 
 ### Research objects and responsible sharing
 
-Model versioning with `vetiver` uses a small supplementary predictive model,
-because its standard interface does not support the meta-analysis model.
+A branch of the pipeline trains and pins a small regression with `vetiver`
+using the same checked data as the meta-analysis. The report records its
+model version.
 Synthetic study summaries with `synthpop` are a supplementary exercise, mentioned
 briefly in the archiving segment. Synthetic data can help others test a
 workflow. Verifying findings based on original observations requires access to
@@ -168,14 +169,14 @@ PDF download. To build a single format, use `quarto render --to html` or
 
 Code evaluation is disabled by default in `_quarto.yml`, but workshop R
 example chunks explicitly enable it. Rendering uses the restored library
-and runs the examples, including downloads and analysis, or reuses cached
-results. Workshop chapters execute from the project root. The targets
-chapter copies the partially completed pipeline in `pipelines/exercise/` to the
-ignored `workspace/` folder. While its TODOs remain, a catch-up step replaces
-the copy with the completed reference in `pipelines/`, so the rendered book
-shows the expected results. Render the standalone report from the project root;
-it locates the pipeline summary relative to the project root. The draft
-teaching plan is excluded from the book.
+and runs the examples. The book uses the reference pipeline and writes its
+generated analysis files under `outputs/health-wellbeing/book/`.
+Participant commands use `workspace/` and `outputs/health-wellbeing/`.
+From the project root, use `source("pipelines/recover_workshop.R")` to
+prepare missing inputs, back up working copies, and load the reference
+exercise files. The standalone report renders from the project root and
+locates the summary relative to that root. Draft teaching plans are
+excluded from the book.
 
 ## Coordinators
 

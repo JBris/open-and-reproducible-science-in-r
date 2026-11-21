@@ -10,6 +10,11 @@ execute:
   message: false
 ---
 
+```{r health-synthetic-book-output, include = FALSE, eval = TRUE}
+source("pipelines/workshop_support.R")
+use_workshop_book_outputs()
+```
+
 ## Introduction
 
 This supplementary exercise is outside the timed programme and takes
@@ -31,7 +36,8 @@ exercise starts from the same input as the workshop pipeline.
 ```{r health-extras-data, include = TRUE, echo = TRUE, message = FALSE, warning = FALSE, cache = FALSE, output = TRUE, eval = TRUE}
 box::use(pins[board_folder, pin_read], utils[read.csv])
 
-workshop_dir <- file.path("outputs", "health-wellbeing")
+source("pipelines/workshop_support.R")
+workshop_dir <- workshop_output_dir()
 versions <- read.csv(
   file.path(workshop_dir, "dataset-versions.csv"),
   colClasses = "character"

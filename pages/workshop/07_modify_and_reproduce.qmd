@@ -12,147 +12,130 @@ execute:
 
 ## Introduction
 
-In this 10-minute activity, you first check that your result
-reproduces, then change one input, predict what needs rebuilding,
-and update the report. By the end, you should be able to explain how
-the pipeline and report keep a reported result consistent with its
-inputs.
+In this 10-minute activity, reproduce the summary in your prepared
+environment, then change a model setting and predict which targets
+will run. Continue with your completed `workspace/_targets.R` and
+`workspace/report.qmd`, starting from the full dataset and REML.
 
-Continue in the same session with your completed
-`workspace/_targets.R` and `workspace/report.qmd`.
-[Report checkpoint](06_quarto.qmd#quarto-checkpoint)
+::: {.callout-tip}
+## Get back on track {#recover-reproduce}
 
-## Step 1: reproduce the result
+Run this from the project root in the **R Console** if you need a working
+pipeline and report. It prepares missing inputs and backs up your previous
+working files in `workspace/`.
 
-Allow about three minutes. In the **R Console**, keep a copy of the
-current summary, ask *targets* to forget that every target is up to
-date, and rebuild everything from the pinned input. This is what
-happens when a collaborator runs the pipeline for the first time.
+``` r
+source("pipelines/recover_workshop.R")
+```
+:::
 
-```{r health-modify-setup, include = TRUE, echo = TRUE, message = FALSE, warning = FALSE, cache = FALSE, output = TRUE, eval = TRUE}
-box::use(
-  targets[everything, tar_invalidate, tar_make, tar_outdated, tar_read],
-  utils[read.csv]
-)
+## Step 1: rebuild from your selected input
 
-workshop_dir <- file.path("outputs", "health-wellbeing")
+Allow about three minutes. In the **R Console**, compare your current
+summary with a rebuild in the same environment and with the same local
+board. A collaborator who recreates the board can get a new version ID.
+The raw and selected input checksums identify the data across boards.
+
+```{r health-modify-reproduce, eval = FALSE}
+source("pipelines/workshop_support.R")
+workshop_dir <- workshop_output_dir()
 pipeline_script <- file.path("workspace", "_targets.R")
 pipeline_store <- file.path(workshop_dir, "_targets")
-selection_file <- file.path(workshop_dir, "analysis-data-version.txt")
 summary_path <- file.path(workshop_dir, "meta-summary.csv")
-stopifnot(file.exists(pipeline_script), file.exists(summary_path))
-```
+if (!file.exists(pipeline_script) || !file.exists(summary_path)) {
+  stop("Run the Get back on track command at the top of this lesson.")
+}
 
-```{r health-modify-reproduce, include = TRUE, echo = TRUE, message = FALSE, warning = FALSE, cache = FALSE, output = TRUE, eval = TRUE}
 before <- read.csv(summary_path)
-tar_invalidate(everything(), store = pipeline_store)
-tar_make(script = pipeline_script, store = pipeline_store)
+targets::tar_invalidate(targets::everything(), store = pipeline_store)
+targets::tar_make(script = pipeline_script, store = pipeline_store)
+identical(before, read.csv(summary_path))
+```
+
+Expect `TRUE`. Invalidation reruns the analysis and reuses the matching
+input and model pins. A different R or *meta* version can change results.
+
+## Step 2: make a change and predict the rebuild
+
+Allow about four minutes. In `workspace/_targets.R`, find the `fit` target.
+Change `method.tau = "REML"` to `method.tau = "DL"` and save the file.
+The alternative estimator is called DerSimonian–Laird.
+
+Predict which targets will rerun. Then compare your prediction with
+the Console output.
+
+```{r health-modify-estimator, eval = FALSE}
+targets::tar_outdated(script = pipeline_script, store = pipeline_store)
+targets::tar_make(script = pipeline_script, store = pipeline_store)
 after <- read.csv(summary_path)
-identical(before, after)
-```
-
-`tar_invalidate()` removes the records that mark targets as up to
-date; it does not delete the pinned data. Every target reruns, and
-`TRUE` means the rebuilt summary matches the previous one exactly in
-this environment. Another R or *meta* version could change the final
-digits, which is why the summary records both.
-
-## Step 2: change the input
-
-Allow about three minutes. Before running anything, predict which
-targets will be outdated if the selection file names the
-general-population version instead of the full dataset. Then switch
-the selection and check your prediction.
-
-```{r health-modify-select-general, include = TRUE, echo = TRUE, message = FALSE, warning = FALSE, cache = FALSE, output = TRUE, eval = TRUE}
-versions <- read.csv(
-  file.path(workshop_dir, "dataset-versions.csv"),
-  colClasses = "character"
+rbind(
+  REML = before[, c("pooled_r", "ci_lower", "ci_upper", "tau2")],
+  DL = after[, c("pooled_r", "ci_lower", "ci_upper", "tau2")]
 )
-general_version <- versions$version[versions$scope == "general"]
-stopifnot(length(general_version) == 1L)
-writeLines(general_version, selection_file)
-
-tar_outdated(script = pipeline_script, store = pipeline_store)
+after$pooled_r - before$pooled_r
 ```
 
-Every target is outdated: the selection file is the first step, and
-all later steps depend on it. Rebuild and read the new result.
+Expect `pipeline_file`, `fit`, `result`, and `summary_file`. The input
+checks and predictive model branch remain up to date. Both pooled
+estimates round to **0.363**. Switching from REML to DL increases the
+pooled correlation by about **0.00010** in this dataset. Compare how
+the reported heterogeneity and intervals change in this example.
 
-```{r health-modify-rebuild-general, include = TRUE, echo = TRUE, message = FALSE, warning = FALSE, cache = FALSE, output = TRUE, eval = TRUE}
-tar_make(script = pipeline_script, store = pipeline_store)
-tar_read(result, store = pipeline_store)[
-  , c("data_version", "studies", "pooled_r", "ci_lower", "ci_upper")
-]
+For a quick look at the recorded edit, run the command below in the
+Console. Git prints a diff. An exit status of 1 means it found a
+difference.
+
+```{r health-modify-diff, eval = FALSE}
+system2("git", c("--no-pager", "diff", "--no-index",
+                 "pipelines/_targets_health_wellbeing.R", pipeline_script))
 ```
 
 ## Step 3: update the report
 
-Allow about two minutes. In the **Terminal**, at the project root,
-render the report again and reload it in your browser.
-
-```bash
-quarto render workspace/report.qmd --to html
-```
-
-The report now describes 18 studies and names the general-population
-pin version in its provenance. You did not edit a single number by
-hand. The subset's pooled correlation is similar, with a wider
-interval from fewer studies. It is a planned teaching comparison, not
-a replacement for the full analysis.
-
-## Step 4: restore the full dataset
-
-Allow about two minutes. Select the full version again, rebuild, and
-check that nothing is outdated.
-
-```{r health-modify-restore, include = TRUE, echo = TRUE, message = FALSE, warning = FALSE, cache = FALSE, output = TRUE, eval = TRUE}
-full_version <- versions$version[versions$scope == "all"]
-stopifnot(length(full_version) == 1L)
-writeLines(full_version, selection_file)
-
-tar_make(script = pipeline_script, store = pipeline_store)
-tar_outdated(script = pipeline_script, store = pipeline_store)
-tar_read(result, store = pipeline_store)$studies
-```
-
-*targets* keeps only the latest result for each target, so switching
-back reruns the steps. Render the report once more so it matches the
-full analysis.
-
-## Optional: change a method instead
-
-If you have time, make a code change rather than a data change. In
-`workspace/_targets.R`, step 5, change `method.tau = "REML"` to
-`method.tau = "DL"`, the DerSimonian–Laird estimator, and save the
-file.
-
-Predict the outdated targets, then run `tar_outdated()`. Only `fit`,
-`result`, and `summary_file` are listed, because the input steps have
-not changed. Run `tar_make()` and render the report. Its Methods
-section now names the DerSimonian–Laird method, and the pooled
-correlation stays at about 0.363. This is a quick sensitivity check:
-the result does not depend on this choice of estimator. Change the
-setting back to `"REML"` and rebuild before you finish.
-
-In your own project, the pipeline would be a tracked file. `git diff`
-would show the one-line change, and a commit would record why you made
-it.
+Allow about three minutes. Run `render_workshop_report()` in the
+**R Console** and reload `workspace/report.html`. Methods now names
+the DerSimonian–Laird estimator. Compare the pipeline checksum with the
+new summary. The dataset ID and predictive model ID stayed the same.
 
 ## Checkpoint {#modify-checkpoint}
 
--   Rebuilding from the pinned input gave an identical summary.
--   With the general-population version, the pipeline combined **18
-    studies** with a pooled correlation of about **0.38** and a 95%
-    interval of about **0.30 to 0.45**, and the report updated without
-    manual edits.
--   After restoring the full version, `tar_outdated()` is empty and the
-    summary shows 29 studies again.
--   You can explain why a data change reruns every target, while a
-    method change reruns only the model and its outputs.
-
-Next, we look at how to release and archive a version of this work.
+You reproduced the starting summary, saw a selective rebuild after an
+estimator change, and rendered a report for the updated analysis.
 [GitHub releases, Zenodo and archiving](08_archiving.qmd)
+
+## Optional: select a different dataset version {#change-input}
+
+Use the general-population version to see how a new analytical input
+affects both model branches. Keep your current selection so you can
+restore it afterwards.
+
+```{r health-modify-select-subset, eval = FALSE}
+selection_file <- file.path(workshop_dir, "analysis-data-version.txt")
+original_version <- readLines(selection_file)
+versions <- read.csv(file.path(workshop_dir, "dataset-versions.csv"))
+general_version <- versions$version[versions$scope == "general"]
+stopifnot(length(general_version) == 1L)
+writeLines(general_version, selection_file)
+
+targets::tar_make(script = pipeline_script, store = pipeline_store)
+read.csv(summary_path)[, c(
+  "studies", "pooled_r", "ci_lower", "ci_upper",
+  "data_version", "predictive_model_version"
+)]
+render_workshop_report()
+```
+
+The subset has **18 studies** and its own model pin version. The
+comparison is descriptive. The full set includes these same studies,
+so use a subgroup analysis to compare populations formally.
+
+When you finish, restore the selection and render the report again.
+
+```{r health-modify-restore-input, eval = FALSE}
+writeLines(original_version, selection_file)
+targets::tar_make(script = pipeline_script, store = pipeline_store)
+render_workshop_report()
+```
 
 ## Further reading
 

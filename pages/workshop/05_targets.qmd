@@ -10,6 +10,11 @@ execute:
   message: false
 ---
 
+```{r health-targets-book-output, include = FALSE, eval = TRUE}
+source("pipelines/workshop_support.R")
+use_workshop_book_outputs()
+```
+
 ## Introduction
 
 In this 15-minute activity, you complete and run a *targets* pipeline
@@ -24,6 +29,23 @@ the dataset versions. If you fall behind, the catch-up step gives you
 the completed pipeline so you can continue with the report.
 [Prepare the dataset versions](00_preparation.qmd#preparation-versions)
 
+::: {.callout-tip}
+## Get back on track {#get-back-on-track}
+
+If you arrived late, lost your session, or broke a working file, run this
+from the project root in the **R Console**. It prepares missing inputs, saves
+any previous working files as backups in `workspace/`, restores the
+reference pipeline and report, and runs the pipeline.
+
+``` r
+source("pipelines/recover_workshop.R")
+```
+
+After recovery, run Step 1 to set the paths and then skip to
+[Step 4](#check-dependencies). You can also go straight to the
+[Quarto report](06_quarto.qmd).
+:::
+
 ## The pipeline at a glance
 
 A *target* is one named step whose result *targets* stores and
@@ -32,13 +54,17 @@ depends on that target. The pipeline's targets connect in this order:
 
 ``` text
 version_file -> data_version -> dataset_file -> studies -> fit
-fit, data_version -> result -> summary_file
+dataset_file, data_version -> data_provenance
+studies, data_provenance, data_version -> predictive_model -> model_pin_files -> model_version
+fit, data_provenance, data_version, model_version, pipeline_file -> result -> summary_file
 ```
 
 `version_file`, `dataset_file`, and `summary_file` are file targets:
 *targets* tracks the contents of the selection file, the pinned RDS
-file, and the summary CSV. When fitting, the pipeline records the
-checksum of the script that ran.
+file, and the summary CSV. `pipeline_file` tracks the analysis script and
+its checksum. The extra model branch uses the same checked data and
+provides a model version for the summary. The supplied script uses
+`crew_controller_local()` to run the pipeline in a background R process.
 
 The model uses the raw Pearson correlations and study sample sizes.
 *meta* transforms each correlation to Fisher's z scale and pools the
@@ -64,22 +90,30 @@ unchanged.
 
 ```{r health-targets-setup, include = TRUE, echo = TRUE, message = FALSE, warning = FALSE, cache = FALSE, output = TRUE, eval = TRUE}
 box::use(
-  targets[tar_make, tar_outdated, tar_read, tar_visnetwork]
+  targets[tar_make, tar_network, tar_outdated, tar_read, tar_visnetwork]
 )
-invisible(loadNamespace("visNetwork"))
+invisible(loadNamespace("visNetwork")) # Load the graph display package quietly.
 
-workshop_dir <- file.path("outputs", "health-wellbeing")
+source("pipelines/workshop_support.R")
+workshop_dir <- workshop_output_dir()
 pipeline_template <- file.path(
   "pipelines", "exercise", "_targets_health_wellbeing.R"
 )
 pipeline_script <- file.path("workspace", "_targets.R")
 pipeline_store <- file.path(workshop_dir, "_targets")
 
+readLines(file.path(workshop_dir, "analysis-data-version.txt"))
+```
+
+```{r health-targets-participant-copy, eval = FALSE}
 dir.create("workspace", showWarnings = FALSE)
 if (!file.exists(pipeline_script)) {
   file.copy(pipeline_template, pipeline_script)
 }
-readLines(file.path(workshop_dir, "analysis-data-version.txt"))
+```
+
+```{r health-targets-reference-script, include = FALSE, eval = TRUE}
+pipeline_script <- file.path("pipelines", "_targets_health_wellbeing.R")
 ```
 
 The last line shows the selected dataset version. It should match the
@@ -88,7 +122,7 @@ The last line shows the selected dataset version. It should match the
 ## Step 2: run the pipeline before completing it
 
 Allow about three minutes. Open `workspace/_targets.R` in RStudio and
-read its seven numbered targets. Then draw the dependency graph and
+read the numbered steps. Then draw the dependency graph and
 try to run the pipeline.
 
 ```{r health-targets-first-run, include = TRUE, echo = TRUE, eval = FALSE}
@@ -102,8 +136,7 @@ tar_make(script = pipeline_script, store = pipeline_store)
 ```
 
 Two arrows are missing from the graph: nothing connects `studies` to
-`fit`, or `result` to `summary_file`. The run stops with the message
-`Complete TODO 1 in the fit target.` *targets* found nothing to link
+`fit`, or `result` to `summary_file`. The run stops at a TODO placeholder. *targets* found nothing to link
 those steps because their code does not yet mention the targets they
 need.
 
@@ -140,25 +173,19 @@ A file target returns the path of the file it wrote. *targets* then
 tracks the file's contents and rebuilds it if the file changes.
 :::
 
-If you are stuck, run this catch-up step. It replaces your copy with
-the completed reference pipeline only while a `stop()` placeholder
-remains, so it leaves a completed copy unchanged.
+## Step 4: inspect the graph and run the pipeline {#check-dependencies}
 
-```{r health-targets-catch-up, include = TRUE, echo = TRUE, message = FALSE, warning = FALSE, cache = FALSE, output = TRUE, eval = TRUE}
-if (any(grepl("Complete TODO", readLines(pipeline_script)))) {
-  file.copy(
-    file.path("pipelines", "_targets_health_wellbeing.R"),
-    pipeline_script,
-    overwrite = TRUE
-  )
-}
+Allow about four minutes. Check that your own script has both edges.
+The text check works in the Console with a screen reader or alongside
+the PDF. Each expression should return `TRUE`.
+
+```{r health-targets-text-graph, eval = TRUE}
+edges <- tar_network(script = pipeline_script, targets_only = TRUE)$edges
+any(edges$from == "studies" & edges$to == "fit")
+any(edges$from == "result" & edges$to == "summary_file")
 ```
 
-## Step 4: inspect the graph and run the pipeline
-
-Allow about four minutes. Draw the graph again. Both missing arrows
-should now appear. If you're using the PDF, follow the text diagram
-above.
+You can also draw the graph again.
 
 ```{r health-targets-graph, include = TRUE, echo = TRUE, message = FALSE, warning = FALSE, cache = FALSE, output = TRUE, eval = knitr::is_html_output()}
 tar_visnetwork(
@@ -176,7 +203,7 @@ tar_make(script = pipeline_script, store = pipeline_store)
 tar_read(result, store = pipeline_store)
 ```
 
-On your first complete run, each target reports that it completed.
+On the first complete run, targets with new or changed inputs report that they completed.
 *targets* saves every result in the pipeline store, here
 `outputs/health-wellbeing/_targets`, and `tar_read()` loads a saved
 result without rerunning anything.
@@ -197,10 +224,10 @@ when its code, its upstream targets, or its tracked files change.
 ## Checkpoint {#targets-checkpoint}
 
 The full example combines **29 studies** with a pooled correlation of
-about **0.36** and a 95% interval of about **0.31 to 0.41**. The file
+**0.363** and a 95% confidence interval of **0.309 to 0.415**. The file
 `outputs/health-wellbeing/meta-summary.csv` contains the same values,
-the dataset version, the method names, the R and *meta* versions, and
-the checksum of your pipeline script. A second run skips every target.
+the uncertainty measures, dataset and model versions, input checksums,
+and the checksum of your pipeline script. A second run skips every target.
 
 Next, you will write a report that reads this summary.
 [Create and render a reproducible Quarto report](06_quarto.qmd)

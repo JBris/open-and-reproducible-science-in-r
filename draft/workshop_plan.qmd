@@ -10,9 +10,9 @@ author:
 
 ## Scope and development status
 
-This plan adopts the final 90-minute programme below. The first half
-introduces the reproducible research lifecycle through short conceptual
-segments and demonstrations. The second half is one continuous hands-on
+This plan adopts the final 90-minute programme below. The first 35 minutes
+introduce the reproducible research lifecycle through short conceptual
+segments and demonstrations. The next 40 minutes are one continuous hands-on
 exercise with `targets` and Quarto. `synthpop` is a supplementary exercise
 in the workbook, mentioned briefly in the archiving segment. Installation,
 production model deployment, and a full treatment of differential privacy
@@ -72,11 +72,9 @@ with `targets` and Quarto.
 ## Foundations for the exercises
 
 1. **One dataset throughout.** Use `HealthWellbeing` from section 4.2.4 of
-   *Doing Meta-Analysis with R*. For `vetiver`, include a small supplementary
-   predictive model, because its standard interface does not support the
-   meta-analysis model. The lesson uses two linear regressions that predict
-   a study's Fisher-transformed correlation from its population type and log
-   sample size.
+   *Doing Meta-Analysis with R*. A separate pipeline branch trains a small
+   regression of Fisher z on log sample size and pins it with `vetiver`.
+   The regression and the meta-analysis use the same checked data.
 2. **One continuous hands-on exercise.** Provide a partially completed
    `targets` pipeline and Quarto report, so participants modify and execute
    the workflow rather than build everything from scratch. The templates in
@@ -104,34 +102,33 @@ with `targets` and Quarto.
   `dataspice` templates for creators, access, provenance, and variables.
   Generate the JSON-LD and discuss licence and access conditions for FAIR data.
 - **28–35 minutes, demonstration:** show the two prepared dataset versions on
-  a versioned local `pins` board and retrieve each by its identifier. Store two
-  versions of the supplementary `vetiver` model and compare their input
-  prototypes and training data version.
+  a versioned local `pins` board and retrieve each by its identifier. Retrieve
+  the predictive model produced by the pipeline and inspect its input
+  prototype, training version, and training checksum.
 - **35–50 minutes, hands-on:** participants copy the partially completed
   pipeline, run it to see where it stops, and complete two TODOs that create
   missing dependencies. They inspect the graph, build the targets, and rerun
   to see that every target is skipped.
 - **50–65 minutes, hands-on:** participants copy and render the partially
   completed report. They then add the confidence interval with inline R, an
-  interpretation, and the provenance fields, and check the rendered values
+  interpretation of the prediction interval, and the provenance fields, and check the rendered values
   against the pipeline summary.
 - **65–75 minutes, hands-on:** participants rebuild everything from the
-  pinned input and confirm an identical summary. They switch the selected
-  version to the general-population subset, predict and observe the
-  outdated targets, rerender the report, and restore the full version. A
-  method change is an optional sensitivity check.
+  pinned input and confirm an identical summary. They switch the estimator
+  from REML to DL, predict the selective rebuild, and rerender the report.
+  Changing the selected dataset version is an optional comparison that
+  updates both model branches.
 - **75–82 minutes, conceptual:** explain GitHub releases, the release-triggered
   image builds, and Zenodo version and concept DOIs. Decide what belongs in a
   permitted archive. Briefly mention `synthpop` for data that cannot be shared,
   and point to the supplementary exercise.
 - **82–90 minutes, interactive:** recap what each stage recorded, discuss
   barriers to reproducibility in participants' own work, take questions, and
-  remind participants to export their workspace.
+  remind participants to export their work, summary, and provenance records.
 
 Each hands-on step lists a time allocation, an expected-result checkpoint, and
-a collapsed solution. If someone falls behind, the targets catch-up step
-replaces an unfinished pipeline with the completed reference, and the
-reference report is available for comparison. Keep the discussion even if
+a collapsed solution. The recovery script prepares missing inputs,
+backs up working files, and runs the reference pipeline. Keep the discussion even if
 earlier segments overrun. Dates, venues, and announced session details belong
 in [announcements](../ANNOUNCEMENTS.md).
 
@@ -159,8 +156,8 @@ so they can focus on how the tools connect rather than on installation.
 
 Use the publicly accessible `HealthWellbeing` teaching dataset and pool the
 study correlations. Preserve the raw file and explain cleaning, missing-value
-checks, and modelling assumptions. Check upstream reuse terms before adding
-data to an archive.
+checks, and modelling assumptions. Retain the upstream MIT notice when archiving the bundled teaching
+snapshot.
 [Section 4.2.4, Correlations](https://doing-meta.guide/pooling-es#correlations)
 
 1. **Track the project and environment.** Provide a Git repository containing
@@ -173,8 +170,8 @@ data to an archive.
    that a dataset meets every FAIR principle.
 3. **Store and retrieve versions.** Store two dataset versions on a local `pins`
    board with versioning enabled explicitly, and retrieve a specified version.
-   Store two versions of a supplementary `vetiver` model with its training data
-   version in the metadata.
+   Retrieve the `vetiver` model pin and match its training version and
+   checksum to the inputs of the analysis.
 4. **Run the analytical pipeline.** Complete a partially prepared `targets`
    pipeline that connects the selected dataset version, checks, a
    random-effects correlation meta-analysis, and a summary file. The version
@@ -182,8 +179,8 @@ data to an archive.
 5. **Report the results.** Complete a partially prepared Quarto report that
    reads the summary and records the dataset version, script checksum,
    analytical settings, and software versions needed to trace each result.
-6. **Modify and reproduce.** Rebuild from the pinned input, change the selected
-   version, and observe which targets and report values change.
+6. **Modify and reproduce.** Rebuild from the pinned input, change the estimator,
+   and observe which targets and report values change.
 7. **Prepare an archive.** Connect a GitHub release to a Zenodo deposit, and
    identify the code, documentation, permitted data, and report it should
    contain. Inspect authorship, licensing, version information, and the
@@ -239,10 +236,10 @@ and [guidelines for evaluating differential privacy guarantees](https://csrc.nis
 - [x] Provide partially completed `targets` and Quarto templates, completed
   references, and a catch-up step for the pipeline.
 - [x] Prepare the versioned dataset inputs with a single, rerunnable script.
-- [x] Move the `vetiver` model into the data and model versioning
-  demonstration as a supplementary predictive model.
-- [ ] Review the dataset documentation, analysis assumptions, and upstream
-  reuse terms.
+- [x] Connect the versioning demonstration to the predictive model branch.
+- [x] Document the bundled data snapshot's upstream source and MIT notice.
+- [ ] Complete human review of the dataset documentation and analysis
+  assumptions.
 - [ ] Rebuild and publish the workshop images if the lockfile or system
   dependencies change, then confirm that a fresh MyBinder session runs every
   hands-on step.

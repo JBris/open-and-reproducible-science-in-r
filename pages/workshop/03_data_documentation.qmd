@@ -10,6 +10,11 @@ execute:
   message: false
 ---
 
+```{r health-metadata-book-output, include = FALSE, eval = TRUE}
+source("pipelines/workshop_support.R")
+use_workshop_book_outputs()
+```
+
 ## Introduction
 
 We will describe the `HealthWellbeing` dataset so a collaborator can
@@ -25,14 +30,13 @@ it. Definitions, provenance, and reuse terms help people work out
 whether the data suit their question. Access can have conditions.
 
 The instructor runs the code from the project root, starting with
-the verified raw file from the preparation lesson. This page loads
-its own `health` object so it can render in a fresh R session. You
+the verified raw file from the preparation lesson. You
 can run the same chunks in your MyBinder session afterwards.
 [Preparation](00_preparation.qmd#preparation-data)
 
 ## Data dictionary
 
-We first load the functions used in this lesson. We label a copy of
+We use `box::use()` to make selected functions available by name. We label a copy of
 the table and keep the downloaded file unchanged.
 
 ```{r health-metadata-setup, include = TRUE, echo = TRUE, message = FALSE, warning = FALSE, cache = FALSE, output = TRUE, eval = TRUE}
@@ -80,8 +84,9 @@ In R, `codebook_table()` combines variable labels with summaries. We
 will keep the three columns we need for the exercise and save them as
 a CSV.
 
-```{r health-codebook, include = TRUE, echo = TRUE, message = FALSE, warning = FALSE, cache = TRUE, output = TRUE, eval = TRUE}
-workshop_dir <- file.path("outputs", "health-wellbeing")
+```{r health-codebook, include = TRUE, echo = TRUE, message = FALSE, warning = FALSE, cache = FALSE, output = TRUE, eval = TRUE}
+source("pipelines/workshop_support.R")
+workshop_dir <- workshop_output_dir()
 dir.create(workshop_dir, recursive = TRUE, showWarnings = FALSE)
 
 labels <- c(
@@ -112,11 +117,11 @@ dictionary
 A dataset record also needs a title, creator, source, access route, and
 any verified licence. *Dataspice* produces a Schema.org Dataset
 description in JSON-LD from four CSV files. We will prepare the
-worksheets and leave unknown fields blank. The dataset documentation
+worksheets, record the bundled snapshot's licence, and leave unknown fields blank. The dataset documentation
 credits Mathias Harrer for the teaching object. Keep the original
 review citation and the book section with the provenance notes.
 
-```{r health-dataspice-templates, include = TRUE, echo = TRUE, message = FALSE, warning = FALSE, cache = TRUE, output = TRUE, eval = TRUE}
+```{r health-dataspice-templates, include = TRUE, echo = TRUE, message = FALSE, warning = FALSE, cache = FALSE, output = TRUE, eval = TRUE}
 metadata_dir <- file.path(workshop_dir, "metadata")
 create_spice(dir = workshop_dir)
 
@@ -130,11 +135,13 @@ biblio$description <- paste(
 )
 biblio$citation <- "Ngamaba, Panagioti, and Armitage (2017)"
 biblio$keywords <- "health, well-being, meta-analysis"
+biblio$license <- "https://opensource.org/license/mit"
 write.csv(biblio, biblio_path, row.names = FALSE, na = "")
 
 raw_name <- "healthwellbeing.rda"
 data_url <- paste0(
-  "https://www.protectlab.org/meta-analysis-in-r/data/", raw_name
+  "https://raw.githubusercontent.com/MathiasHarrer/dmetar/",
+  "38c9b9bb5f85ea49de33e5d2536f6544d5268517/data/HealthWellbeing.rda"
 )
 write.csv(
   data.frame(
@@ -158,6 +165,8 @@ attributes <- data.frame(
   description = unname(labels),
   unitText = c(NA, "unitless", "observations", NA, NA)
 )
+attributes$description[attributes$variableName == "population"] <-
+  "Type of study sample: chronic condition or general population."
 write.csv(
   attributes,
   file.path(metadata_dir, "attributes.csv"),
@@ -168,15 +177,16 @@ write.csv(
 
 ## Generate the JSON-LD
 
-The instructor opens `attributes.csv`, adds the two population
-categories to the description for `population`, and regenerates the
-JSON-LD. Keep `biblio.csv` and your provenance notes with the JSON-LD
+Open `attributes.csv` to see the population categories. The JSON-LD extract
+below shows the title, licence, and download link. Keep `biblio.csv` and
+your provenance notes with the JSON-LD
 so readers have the original citation, source URL, date of retrieval,
 and checksum.
 
-```{r health-dataspice-export, include = TRUE, echo = TRUE, message = FALSE, warning = FALSE, cache = TRUE, output = TRUE, eval = TRUE}
+```{r health-dataspice-export, include = TRUE, echo = TRUE, message = FALSE, warning = FALSE, cache = FALSE, output = TRUE, eval = TRUE}
 write_spice(path = metadata_dir)
-file.exists(file.path(metadata_dir, "dataspice.json"))
+record <- jsonlite::read_json(file.path(metadata_dir, "dataspice.json"))
+record[c("name", "license", "distribution")]
 ```
 
 ## Checkpoint {#metadata-checkpoint}
@@ -184,8 +194,8 @@ file.exists(file.path(metadata_dir, "dataspice.json"))
 Your codebook has five variables and zero missing values in each.
 Look for the dataset title, variable descriptions, and source
 download in `metadata/dataspice.json`. Review the draft export for
-template placeholders in the coverage fields. Check the provider's
-reuse terms before completing the licence field or sharing the data.
+template placeholders in the coverage fields. Keep the upstream copyright
+notice with any copy of this teaching snapshot.
 You should be able to explain why someone needs both the meaning of
 `n` and the original download link.
 

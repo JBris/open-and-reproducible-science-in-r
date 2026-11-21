@@ -10,6 +10,11 @@ execute:
   message: false
 ---
 
+```{r health-quarto-book-output, include = FALSE, eval = TRUE}
+source("pipelines/workshop_support.R")
+use_workshop_book_outputs()
+```
+
 ## Introduction
 
 In this 15-minute activity, you complete and render a short report
@@ -19,34 +24,45 @@ confidence interval, an interpretation, and the provenance fields. By
 the end, you should be able to explain where each number in the
 report came from and what a reader needs to recreate it.
 
-You need the `meta-summary.csv` file from the targets activity. If
-you joined here, run the targets activity's catch-up step and
-`tar_make()` first.
-[Pipeline checkpoint](05_targets.qmd#targets-checkpoint)
+You need the `meta-summary.csv` file from the
+[targets activity](05_targets.qmd#targets-checkpoint).
+
+::: {.callout-tip}
+## Get back on track {#recover-report}
+
+If you arrived late, lost your session, or broke a working file, run this
+from the project root in the **R Console**. It prepares missing inputs, saves
+any previous working files as backups in `workspace/`, restores the
+reference pipeline and report, and runs the pipeline.
+
+``` r
+source("pipelines/recover_workshop.R")
+```
+:::
+
+After recovery, run the render command in Step 1. In a Quarto error,
+look for the first error and the reported line or chunk in `report.qmd`.
 
 ## Step 1: copy and render the template
 
-Allow about three minutes. In the RStudio **Terminal**, at the project
-root, copy the partially completed report to `workspace/report.qmd`
-and render it. The copy is only made if it does not exist yet, so
-running the commands again keeps your edits.
+Allow about three minutes. In the **R Console** at the project root,
+copy and render your report. Run the same render command after each
+edit. It keeps you in the Console and lets you read any errors there.
 
-```bash
-mkdir -p workspace
-if [ ! -f workspace/report.qmd ]; then
-  cp pipelines/exercise/health_wellbeing_report.qmd workspace/report.qmd
-fi
-quarto render workspace/report.qmd --to html
+```{r health-quarto-render-template, eval = FALSE}
+source("pipelines/workshop_support.R")
+dir.create("workspace", showWarnings = FALSE)
+report <- file.path("workspace", "report.qmd")
+if (!file.exists(report)) {
+  file.copy("pipelines/exercise/health_wellbeing_report.qmd", report)
+}
+render_workshop_report()
 ```
-
-Run `quarto render` from the project root. The project's R setup is
-found there, and the report locates the summary relative to the
-project root.
 
 In the **Files** pane, open the `workspace` folder, click
 `report.html`, and choose **View in Web Browser**. The HTML embeds its
 resources, so it works as a single file. The pooled estimate appears,
-along with three **TODO** markers.
+along with three **TODO** markers in the template.
 
 ## Step 2: read the report source
 
@@ -71,9 +87,8 @@ Allow about six minutes. Edit `workspace/report.qmd` and save it.
 
 -   **TODO 1**, in Results: report the confidence interval using inline
     R code, following the pattern for the pooled correlation.
--   **TODO 2**, in Results: write one or two plain-language sentences
-    on how differences between study populations and measurements
-    limit what the pooled estimate tells us about any one setting.
+-   **TODO 2**, in Results: explain how the prediction interval and
+    confidence interval answer different questions.
 -   **TODO 3**, in Provenance: add list items for the dataset pin
     version and the pipeline script MD5.
 
@@ -97,9 +112,9 @@ from `r knitr::inline_expr('sprintf("%.3f", result$ci_lower)')` to
 Your wording can differ. For example:
 
 ```` markdown
-The studies differ in their populations and measurements, so the
-association may vary between settings. These observational estimates
-do not show that better health causes greater well-being.
+The confidence interval describes uncertainty in the average association.
+The prediction interval describes plausible true associations in a
+comparable setting under the model.
 ````
 :::
 
@@ -118,11 +133,10 @@ your copy with it.
 
 ## Step 4: render again and check the numbers
 
-Allow about three minutes. Render the report again in the
-**Terminal**:
+Allow about three minutes. Render the report again in the **R Console**:
 
-```bash
-quarto render workspace/report.qmd --to html
+```{r health-quarto-render-final, eval = FALSE}
+render_workshop_report()
 ```
 
 Reload `report.html` in your browser. Then compare its values with the
@@ -130,7 +144,7 @@ summary file in the **R Console**:
 
 ```{r health-quarto-summary, include = TRUE, echo = TRUE, message = FALSE, warning = FALSE, cache = FALSE, output = TRUE, eval = TRUE}
 summary_csv <- read.csv(
-  file.path("outputs", "health-wellbeing", "meta-summary.csv")
+  file.path(workshop_output_dir(), "meta-summary.csv")
 )
 summary_csv[, c("data_version", "studies", "pooled_r", "ci_lower", "ci_upper")]
 ```
@@ -140,8 +154,10 @@ summary_csv[, c("data_version", "studies", "pooled_r", "ci_lower", "ci_upper")]
 Your rendered report shows **29 studies**, a pooled correlation of
 **0.363**, and a 95% interval from **0.309 to 0.415**. Its provenance
 names the same pin version as the summary file, the pipeline script
-checksum, the R version, and the *meta* version. No TODO markers
-remain. You can point to the CSV column behind each number.
+checksum, the inclusion rule, and the model version. It reports
+I² of **99.8%** and a prediction interval of **0.056 to 0.607**.
+You can point to the CSV column behind each number. No TODO markers
+remain.
 
 Next, you will change the analysis input and reproduce the results.
 [Modify the analysis and reproduce the results](07_modify_and_reproduce.qmd)

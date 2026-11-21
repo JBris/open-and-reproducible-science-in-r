@@ -56,8 +56,8 @@ minutes of hands-on exercises, and 8 minutes of discussion.
 ## One dataset, one exercise, one environment
 
 -   **One dataset throughout.** Every stage uses `HealthWellbeing`. For
-    `vetiver`, a small supplementary predictive model stands in for the
-    meta-analysis model, which its standard interface does not support.
+    `vetiver`, a separate pipeline branch trains and pins a small
+    regression on the same checked input as the meta-analysis.
 -   **One continuous hands-on exercise.** You complete and run a
     partially completed `targets` pipeline and Quarto report, then
     change the analysis and reproduce the results, rather than building

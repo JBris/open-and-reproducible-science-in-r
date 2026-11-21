@@ -16,7 +16,8 @@ box::use(
   targets[tar_option_set, tar_path_script, tar_target]
 )
 
-workshop_dir <- file.path("outputs", "health-wellbeing")
+source("pipelines/workshop_support.R", local = TRUE)
+workshop_dir <- workshop_output_dir()
 pipeline_script <- tar_path_script()
 
 # Run the targets in one local background worker.
@@ -58,6 +59,18 @@ list(
     format = "file"
   ),
 
+  tar_target(data_provenance, {
+    board <- pins::board_folder(file.path(workshop_dir, "data_store"), versioned = TRUE)
+    pin <- pins::pin_meta(board, "health_wellbeing", version = data_version)
+    list(
+      source_url = pin$user$source_url,
+      raw_md5 = pin$user$raw_md5,
+      scope = pin$user$scope,
+      filter = if (is.null(pin$user$filter)) "all studies" else pin$user$filter,
+      data_file_md5 = unname(tools::md5sum(dataset_file))
+    )
+  }),
+
   # 4. Read the study summaries and check the assumptions the model needs.
   tar_target(studies, {
     data <- readRDS(dataset_file)
@@ -80,9 +93,6 @@ list(
 
   # 5. Pool the correlations with a random-effects model on Fisher's z scale.
   tar_target(fit, {
-    pipeline_md5 <- unname(tools::md5sum(pipeline_script))
-    stopifnot(!is.na(pipeline_md5))
-
     model <- meta::metacor(
       cor = cor,
       n = n,
@@ -93,32 +103,92 @@ list(
       random = TRUE,
       method.tau = "REML",
       method.random.ci = "HK",
-      level.ma = 0.95
+      level.ma = 0.95,
+      prediction = TRUE,
+      level.predict = 0.95
     )
     list(
       model = model,
-      pipeline_md5 = pipeline_md5,
       r_version = as.character(getRversion()),
       meta_version = as.character(getNamespaceVersion("meta"))
     )
   }),
+
+  # A separate model uses the same checked input and has its own pin.
+  tar_target(predictive_model, {
+    training <- data.frame(z = atanh(studies$cor), log_n = log(studies$n))
+    model <- stats::lm(z ~ log_n, data = training)
+    metadata <- list(
+      data_version = data_version,
+      data_file_md5 = data_provenance$data_file_md5,
+      recipe = "Fisher z ~ log(sample size), unweighted",
+      r_version = as.character(getRversion()),
+      vetiver_version = as.character(utils::packageVersion("vetiver"))
+    )
+    metadata$model_key <- digest::digest(
+      list(metadata, stats::coef(model), deparse1(stats::formula(model))),
+      algo = "sha256"
+    )
+    vetiver::vetiver_model(model, "health_wellbeing_lm", metadata = metadata)
+  }),
+
+  tar_target(model_pin_files, {
+    board <- pins::board_folder(file.path(workshop_dir, "model_store"), versioned = TRUE)
+    name <- predictive_model$model_name
+    previous <- if (pins::pin_exists(board, name)) {
+      pins::pin_versions(board, name)$version
+    } else {
+      character()
+    }
+    matches <- vapply(previous, function(version) {
+      stored <- pins::pin_meta(board, name, version = version)
+      identical(stored$user$model_key, predictive_model$metadata$user$model_key)
+    }, logical(1))
+    version <- if (any(matches)) {
+      previous[which(matches)[1L]]
+    } else {
+      vetiver::vetiver_pin_write(board, predictive_model)
+      created <- setdiff(pins::pin_versions(board, name)$version, previous)
+      stopifnot(length(created) == 1L)
+      created
+    }
+    model_version_file <- file.path(workshop_dir, "predictive-model-version.txt")
+    writeLines(version, model_version_file)
+    c(model_version_file, pins::pin_download(board, name, version = version))
+  }, format = "file"),
+
+  tar_target(model_version, readLines(model_pin_files[[1L]])),
+
+  tar_target(pipeline_file, pipeline_script, format = "file"),
 
   # 6. Summarise the pooled estimate on the correlation scale, with provenance.
   tar_target(result, {
     model <- fit$model
     data.frame(
       data_version = data_version,
+      data_source = data_provenance$source_url,
+      raw_md5 = data_provenance$raw_md5,
+      data_scope = data_provenance$scope,
+      data_filter = data_provenance$filter,
+      data_file_md5 = data_provenance$data_file_md5,
+      predictive_model_version = model_version,
       studies = model$k,
       pooled_r = tanh(model$TE.random),
       ci_lower = tanh(model$lower.random),
       ci_upper = tanh(model$upper.random),
       confidence_level = model$level.ma,
+      tau2 = model$tau2,
+      i2_percent = 100 * model$I2,
+      prediction_lower = tanh(model$lower.predict),
+      prediction_upper = tanh(model$upper.predict),
+      prediction_level = model$level.predict,
+      prediction_method = model$method.predict,
       effect_scale = model$sm,
       tau_method = model$method.tau,
       interval_method = model$method.random.ci,
       r_version = fit$r_version,
       meta_version = fit$meta_version,
-      pipeline_md5 = fit$pipeline_md5
+      pipeline_md5 = unname(tools::md5sum(pipeline_file))
     )
   }),
 

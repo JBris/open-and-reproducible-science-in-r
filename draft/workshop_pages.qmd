@@ -30,10 +30,10 @@ teaching text and examples. Human review and a timed rehearsal are pending.
 | `pages/workshop/01_open_science.qmd` | 0–10 min | 10 min | Introduction, reproducibility principles, Git and GitHub | Conceptual | Research question, study-level unit of observation, the workflow as one table, and a demonstration of commits, branches, pull requests, and releases. Hands-on Git practice with a fork is follow-up material. | Drafted |
 | `pages/workshop/02_environments.qmd` | 10–20 min | 10 min | Computational reproducibility; renv, Docker, Binder | Demonstration | Running R version, lockfile versions, `renv::status()`, Dockerfile to GitHub Actions to MyBinder, and a session record. | Drafted |
 | `pages/workshop/03_data_documentation.qmd` | 20–28 min | 8 min | FAIR principles and metadata; codebook, dataspice | Demonstration | Data dictionary from `codebook_table()`, `dataspice` templates for creators, access, and variables, and the JSON-LD export. | Drafted |
-| `pages/workshop/04_versioning.qmd` | 28–35 min | 7 min | Data and model versioning; pins, vetiver | Demonstration | Two dataset versions from the prepared script, retrieval by identifier, and two versions of a supplementary `vetiver` model with input prototypes and training data version. | Drafted |
+| `pages/workshop/04_versioning.qmd` | 28–35 min | 7 min | Data and model versioning; pins, vetiver | Demonstration | Two dataset versions from the prepared script, retrieval by identifier, and a pipeline-produced `vetiver` model with its input prototype and training provenance. | Drafted |
 | `pages/workshop/05_targets.qmd` | 35–50 min | 15 min | Build and execute a targets meta-analysis pipeline | Hands-on | Copy the partially completed pipeline, run it to see where it stops, complete two dependency TODOs, inspect the graph, build, and rerun. | Drafted |
-| `pages/workshop/06_quarto.qmd` | 50–65 min | 15 min | Create and render a reproducible Quarto report | Hands-on | Copy and render the partially completed report, complete the interval, interpretation, and provenance TODOs, rerender, and check the values against the summary. | Drafted |
-| `pages/workshop/07_modify_and_reproduce.qmd` | 65–75 min | 10 min | Modify the analysis and reproduce the results; targets, Quarto | Hands-on | Rebuild from the pinned input with an identical summary, switch to the general-population version, rerender, and restore. Optional estimator change as a sensitivity check. | Drafted |
+| `pages/workshop/06_quarto.qmd` | 50–65 min | 15 min | Create and render a reproducible Quarto report | Hands-on | Copy and render the partially completed report, complete the confidence interval, prediction interval interpretation, and provenance TODOs, rerender, and check the values against the summary. | Drafted |
+| `pages/workshop/07_modify_and_reproduce.qmd` | 65–75 min | 10 min | Modify the analysis and reproduce the results; targets, Quarto | Hands-on | Rebuild from the pinned input with an identical summary, change the variance estimator, verify the selective rebuild, and rerender. Optional input change retrains the model. | Drafted |
 | `pages/workshop/08_archiving.qmd` | 75–82 min | 7 min | GitHub releases, Zenodo, archiving and optional synthpop | Conceptual | Releases and their triggered builds, Zenodo version and concept DOIs, archive contents, and a brief mention of synthetic data. | Drafted |
 | `pages/workshop/09_discussion.qmd` | 82–90 min | 8 min | Questions and discussion | Interactive | Recap of what each stage recorded, discussion prompts, questions, exporting work, and follow-up resources. | Drafted |
 | `pages/workshop/10_synthetic_data.qmd` | After the session | Supplementary | Synthetic data; synthpop | Self-paced | Generate synthetic study summaries, compare distributions, pool both tables, and explain the limits on verification and privacy. | Drafted |
@@ -59,14 +59,14 @@ Keep the closing discussion even if earlier segments overrun.
 | `pipelines/exercise/health_wellbeing_report.qmd` | Partially completed report. TODOs add the confidence interval, an interpretation, and the provenance fields. |
 | `pipelines/_targets_health_wellbeing.R` | Completed reference pipeline, used as the solution and catch-up copy. |
 | `pipelines/health_wellbeing_report.qmd` | Completed reference report. |
+| `pipelines/recover_workshop.R` | Prepares missing inputs, backs up work, restores the reference files, and runs the pipeline. |
 | `workspace/` | Participants' working copies, ignored by Git. |
 
 The targets page copies the template to `workspace/_targets.R` only if no copy
-exists. Its catch-up step replaces the copy with the reference only while a
-`stop()` placeholder remains, so the rendered book shows the completed results.
-The report reads the summary through `here::here()`, so it renders from the
-project root without an execution-directory option. Both reports render as
-standalone HTML beside their source.
+exists. The book render uses the reference pipeline with a separate output
+directory. Participants run the recovery script explicitly when needed.
+The report reads the summary through `here::here()` and renders as standalone
+HTML beside its source.
 
 ## Supplementary synthpop exercise
 

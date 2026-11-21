@@ -4,6 +4,11 @@ subtitle: "10–20 minutes · Demonstration · renv, Docker and Binder"
 editor: visual
 ---
 
+```{r health-environments-book-output, include = FALSE, eval = TRUE}
+source("pipelines/workshop_support.R")
+use_workshop_book_outputs()
+```
+
 ## Learning objectives
 
 By the end of this demonstration, you should be able to explain what the
@@ -132,11 +137,10 @@ packages, and tools for the hands-on activities.
 
 ## Record the session
 
-Allow about one minute. Restarting R and loading the data from its explicit
-path checks that the analysis does not depend on objects left over from an
-earlier Console session. We then save a record of the session.
+Allow about one minute. Load the data by its explicit path into a
+separate environment, then save a record of the current R session.
 
-```{r health-environments-reload, include = TRUE, echo = TRUE, message = FALSE, warning = FALSE, cache = TRUE, output = TRUE, eval = TRUE}
+```{r health-environments-reload, include = TRUE, echo = TRUE, message = FALSE, warning = FALSE, cache = FALSE, output = TRUE, eval = TRUE}
 raw_file <- file.path("data", "raw", "healthwellbeing.rda")
 stopifnot(
   file.exists(raw_file),
@@ -151,15 +155,16 @@ stopifnot(identical(loaded_names, "HealthWellbeing"))
 health <- data_env[["HealthWellbeing"]]
 stopifnot(nrow(health) == 29L, ncol(health) == 5L)
 
-output_dir <- "outputs"
-dir.create(output_dir, showWarnings = FALSE)
+source("pipelines/workshop_support.R")
+output_dir <- workshop_output_dir()
+dir.create(output_dir, recursive = TRUE, showWarnings = FALSE)
 writeLines(
   capture.output(sessionInfo()),
   file.path(output_dir, "session-info.txt")
 )
 ```
 
-`outputs/session-info.txt` lists the loaded package versions and platform.
+`outputs/health-wellbeing/session-info.txt` lists the loaded package versions and platform.
 Later, the pipeline records the R and *meta* versions with its result. For a
 MyBinder run, the image tag in `binder/Dockerfile` and the project revision
 from `git rev-parse HEAD` complete the record.
@@ -175,6 +180,19 @@ from `git rev-parse HEAD` complete the record.
 **Takeaway:** a documented environment supports reproducibility, and a
 successful rerun supplies evidence. Next, we document the dataset itself.
 [FAIR principles and metadata](03_data_documentation.qmd)
+
+## After the workshop: record your own environment
+
+In a new R project, use `renv::init()` to create the project library.
+After installing and checking the packages your analysis uses, run
+`renv::snapshot()` and review the lockfile. A collaborator can then run
+`renv::restore()` with the corresponding R version.
+
+For a container, start with an R base image such as
+`FROM rocker/r-ver:4.4.1`. Add your system dependencies and restore the
+package library from `renv.lock` during the build. The
+[workshop's Docker setup](https://github.com/JBris/open-and-reproducible-science-in-r#usage-with-docker)
+shows how this fits into a complete project.
 
 ## Further reading
 

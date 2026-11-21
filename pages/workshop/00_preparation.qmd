@@ -4,9 +4,15 @@ subtitle: "Before the session · MyBinder"
 editor: visual
 ---
 
+```{r health-preparation-book-output, include = FALSE, eval = TRUE}
+source("pipelines/workshop_support.R")
+use_workshop_book_outputs()
+```
+
 ## Learning objectives
 
-Before the timed session, you should be able to open the prepared workshop
+On the day, prepare in the MyBinder session you will use for the workshop.
+You should be able to open the prepared workshop
 environment, load a verified copy of the teaching data, and prepare the dataset
 versions used in the hands-on activities. You will use the same project,
 dataset, and environment throughout the workshop.
@@ -28,7 +34,11 @@ the variables [@healthwellbeing].
 The workshop repository includes the authors' data file at
 `data/raw/healthwellbeing.rda`, so you do not need to install `dmetar` or
 download anything during the session. Keep the raw file unchanged and record
-its source separately from any transformations you make later.
+its source separately from any transformations you make later. The
+bundled file matches the upstream `dmetar` snapshot byte for byte.
+The [source and licence record](https://github.com/MathiasHarrer/dmetar/blob/38c9b9bb5f85ea49de33e5d2536f6544d5268517/DESCRIPTION)
+shows the package's MIT licence. The workshop keeps the upstream
+notice in `data/raw/LICENSE-HealthWellbeing`.
 
 ## Open the prepared environment {#choose-your-computing-environment}
 
@@ -43,9 +53,11 @@ to install during the workshop.
 2. Once RStudio opens, use its **Terminal** for the project setup below.
    Run R commands and lesson exercises in the **Console** in the same browser
    session.
-3. Download work you want to keep using **More → Export** in the RStudio
-   **Files** pane. MyBinder sessions are temporary, and files in a session
-   are lost when it ends.
+3. Keep the lessons and RStudio in separate browser tabs. Switch between
+   them, or place them side by side if that works at your zoom level.
+   Use the Console for the hands-on exercises.
+4. MyBinder sessions are temporary. Follow the
+   [export checklist](09_discussion.qmd#export-work) before closing yours.
 
 If MyBinder fails to start, let the instructor know so you can use a prepared
 alternative.
@@ -84,20 +96,18 @@ renv::status()
 
 ## Verify the raw data {#preparation-data}
 
-Run the following in the **R Console** from the project root. The R chunks
-are also configured to run during rendering; setup chunks are uncached and
-other R chunks use the cache.
+Run the following in the **R Console** from the project root.
 
 The file is already in your project copy, so the download only runs if it is
 missing. The checksum identifies the exact file used to prepare these lessons.
 If you have a different copy, keep it and ask the instructor to resolve the
 difference.
 
-```{r health-preparation-download, include = TRUE, echo = TRUE, message = FALSE, warning = FALSE, cache = TRUE, output = TRUE, eval = TRUE}
+```{r health-preparation-download, include = TRUE, echo = TRUE, message = FALSE, warning = FALSE, cache = FALSE, output = TRUE, eval = TRUE}
 raw_file <- file.path("data", "raw", "healthwellbeing.rda")
 source_url <- paste0(
-  "https://www.protectlab.org/meta-analysis-in-r/data/",
-  "healthwellbeing.rda"
+  "https://raw.githubusercontent.com/MathiasHarrer/dmetar/",
+  "38c9b9bb5f85ea49de33e5d2536f6544d5268517/data/HealthWellbeing.rda"
 )
 
 dir.create(dirname(raw_file), recursive = TRUE, showWarnings = FALSE)
@@ -161,10 +171,9 @@ versions. The instructor explains the board in the
 ## Record the source
 
 For your project notes, retain the book section, dataset documentation,
-download URL, retrieval date, checksum, and original study citation. A package
-licence or the workshop repository's MIT licence should not be assumed to
-relicense every upstream dataset; check the relevant reuse terms before
-redistributing data.
+download URL, retrieval date, checksum, original study citation, and upstream
+licence notice. Apply this record to the bundled teaching snapshot. Verify
+the terms separately for other data or materials.
 
 ## Preparation checkpoint {#preparation-checkpoint}
 
