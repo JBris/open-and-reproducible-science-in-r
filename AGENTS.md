@@ -11,8 +11,8 @@ task introduces a package.
   `index.qmd` is the landing chapter; generated output stays under `_site/`.
   Code execution is disabled globally with `execute.eval: false`.
 - `renv.lock` and the container base images currently specify R 4.4.1.
-  The lockfile currently records renv 1.0.7 only; the planned workshop packages
-  are not yet locked. Inspect it before claiming dependencies are available.
+  The lockfile records renv 1.0.7 and the workshop packages. Inspect it before
+  claiming a dependency is available.
 - `.Rprofile` sources the committed `renv/activate.R` bootstrap for renv 1.0.7.
   First startup can download/install renv. Use `Rscript --vanilla` for
   dependency-free checks; do not initialise or replace the environment during
@@ -36,6 +36,9 @@ task introduces a package.
 - `CONTRIBUTING.md`, `CODE_OF_CONDUCT.md`, `ACCESSIBILITY.md`, `SECURITY.md`, and
   `AI_POLICY.md` live at the repository root so Quarto can render them. GitHub workflow, issue,
   and PR templates retain their discovery locations under `.github/`.
+- Both images copy the project files participants need, including `data/raw/`,
+  into `/home/rstudio`, the project root in MyBinder. That copy has no Git
+  history; lessons must not assume a clone.
 - The RStudio Compose service uses Rocker's `/init`, with authentication disabled
   and port 8787 bound to localhost. Binder uses the separately built Binder image
   and its Jupyter/RStudio proxy startup, not the RStudio-only image.
@@ -67,9 +70,10 @@ examples understandable to workshop participants. Make random examples
 reproducible, preserve raw data, and explain substantive scientific assumptions.
 Follow existing formatting and `.lintr`; avoid mass formatting during small edits.
 
-The planned core includes dataset and model metadata/provenance with pins and
-vetiver; differential privacy is a focused extension. Keep these planned
-exercises distinct from the current placeholders. Use public teaching data and
+The core covers dataset metadata and FAIR assessment with dataspice and rfair,
+and data and model versioning with pins and vetiver. synthpop is a supplementary
+exercise, and differential privacy is a possible future extension. Keep these
+examples distinct from the no-op placeholders. Use public teaching data and
 do not infer a privacy guarantee from synthetic observations or utility scores.
 
 Keep generated site output, caches, installed R libraries, and credentials out of

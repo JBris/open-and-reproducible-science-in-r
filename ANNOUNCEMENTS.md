@@ -19,11 +19,13 @@ Open and reproducible science helps others understand, evaluate, and reuse
 research. This 90-minute workshop follows one prepared R project through
 that workflow.
 
-Short demonstrations cover Git and GitHub, reproducible environments with
-renv, Docker, and MyBinder, FAIR metadata and assessment with dataspice and rfair, and
-data and model versioning with pins and vetiver. In the hands-on exercise,
-you will complete and run a targets meta-analysis pipeline, render its
-Quarto report, and change an analysis setting to see which steps rebuild.
+We start with Git and GitHub, including a short activity in which you read
+the workshop's history. Short demonstrations then cover reproducible
+environments with renv, Docker, and MyBinder, FAIR metadata and assessment
+with dataspice and rfair, and data and model versioning with pins and
+vetiver. In the hands-on exercise, you will complete and run a targets
+meta-analysis pipeline, render its Quarto report, and change an analysis
+setting to see which steps rebuild.
 We close by working out what to include in a GitHub release and Zenodo
 archive.
 

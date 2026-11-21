@@ -8,7 +8,7 @@
 
 <meta name="description" content="Content for the Open and Reproducible Science in R workshop.">
 
-<title>11&nbsp; Reproducible reporting and publishing – Open and Reproducible Science in R</title>
+<title>11&nbsp; Modify the analysis and reproduce the results – Open and Reproducible Science in R</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -85,8 +85,8 @@ div.csl-indent {
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
-<link href="../../pages/workshop/08_zenodo.html" rel="next">
-<link href="../../pages/workshop/06_targets.html" rel="prev">
+<link href="../../pages/workshop/08_archiving.html" rel="next">
+<link href="../../pages/workshop/06_quarto.html" rel="prev">
 <script src="../../site_libs/quarto-html/quarto.js"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -139,10 +139,10 @@ div.csl-indent {
 
 
 <link rel="stylesheet" href="../../styles.css">
-<meta property="og:title" content="11&nbsp; Reproducible reporting and publishing – Open and Reproducible Science in R">
+<meta property="og:title" content="11&nbsp; Modify the analysis and reproduce the results – Open and Reproducible Science in R">
 <meta property="og:description" content="Content for the Open and Reproducible Science in R workshop.">
 <meta property="og:site_name" content="Open and Reproducible Science in R">
-<meta name="twitter:title" content="11&nbsp; Reproducible reporting and publishing – Open and Reproducible Science in R">
+<meta name="twitter:title" content="11&nbsp; Modify the analysis and reproduce the results – Open and Reproducible Science in R">
 <meta name="twitter:description" content="Content for the Open and Reproducible Science in R workshop.">
 <meta name="twitter:card" content="summary">
 </head>
@@ -156,7 +156,7 @@ div.csl-indent {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../pages/workshop/00_preparation.html">Workshop</a></li><li class="breadcrumb-item"><a href="../../pages/workshop/07_quarto.html"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Reproducible reporting and publishing</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../pages/workshop/00_preparation.html">Workshop</a></li><li class="breadcrumb-item"><a href="../../pages/workshop/07_modify_and_reproduce.html"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Modify the analysis and reproduce the results</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -235,55 +235,55 @@ div.csl-indent {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../pages/workshop/01_open_science.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Open and reproducible science</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Introduction, reproducibility principles, Git and GitHub</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../pages/workshop/02_git_github.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Version control, collaboration and sharing</span></span></a>
+  <a href="../../pages/workshop/02_environments.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Computational reproducibility</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../pages/workshop/03_environments.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Reproducible computational environments</span></span></a>
+  <a href="../../pages/workshop/03_data_documentation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">FAIR data documentation and assessment</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../pages/workshop/04_data_documentation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Dataset documentation and FAIR metadata</span></span></a>
+  <a href="../../pages/workshop/04_versioning.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Data and model versioning</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../pages/workshop/05_pins.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Dataset storage and versioning</span></span></a>
+  <a href="../../pages/workshop/05_targets.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Build and execute a targets meta-analysis pipeline</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../pages/workshop/06_targets.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Reproducible analytical pipelines</span></span></a>
+  <a href="../../pages/workshop/06_quarto.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Create and render a reproducible Quarto report</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../pages/workshop/07_quarto.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Reproducible reporting and publishing</span></span></a>
+  <a href="../../pages/workshop/07_modify_and_reproduce.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Modify the analysis and reproduce the results</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../pages/workshop/08_zenodo.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Research archiving and persistent identifiers</span></span></a>
+  <a href="../../pages/workshop/08_archiving.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">GitHub releases, Zenodo and archiving</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../pages/workshop/09_extras_and_discussion.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Optional extras and concluding discussion</span></span></a>
+  <a href="../../pages/workshop/09_discussion.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Questions and discussion</span></span></a>
   </div>
 </li>
       </ul>
@@ -291,7 +291,7 @@ div.csl-indent {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
- <span class="menu-text">Communications and Community</span></a>
+ <span class="menu-text">Supplementary exercises</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -299,44 +299,61 @@ div.csl-indent {
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../../pages/workshop/10_synthetic_data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Supplementary exercise: synthetic data with synthpop</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">Communications and Community</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../../ANNOUNCEMENTS.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Announcements</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Announcements</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../CODE_OF_CONDUCT.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Contributor Covenant Code of Conduct</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Contributor Covenant Code of Conduct</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../CONTRIBUTING.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Contributing</span></span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Contributing</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../ACCESSIBILITY.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Accessibility</span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Accessibility</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../SECURITY.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Security Policy</span></span></a>
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Security Policy</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../AI_POLICY.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">AI-assisted development policy</span></span></a>
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">AI-assisted development policy</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../CHANGELOG.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Changelog</span></span></a>
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Changelog</span></span></a>
   </div>
 </li>
       </ul>
@@ -358,23 +375,22 @@ div.csl-indent {
    
   <ul>
   <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">11.1</span> Introduction</a></li>
-  <li><a href="#inspect-the-report-source" id="toc-inspect-the-report-source" class="nav-link" data-scroll-target="#inspect-the-report-source"><span class="header-section-number">11.2</span> Inspect the report source</a></li>
-  <li><a href="#render-the-html-report" id="toc-render-the-html-report" class="nav-link" data-scroll-target="#render-the-html-report"><span class="header-section-number">11.3</span> Render the HTML report</a></li>
-  <li><a href="#try-it-yourself" id="toc-try-it-yourself" class="nav-link" data-scroll-target="#try-it-yourself"><span class="header-section-number">11.4</span> Try it yourself</a></li>
-  <li><a href="#publishing-demonstration" id="toc-publishing-demonstration" class="nav-link" data-scroll-target="#publishing-demonstration"><span class="header-section-number">11.5</span> Publishing demonstration</a></li>
-  <li><a href="#quarto-extensions-for-journal-articles" id="toc-quarto-extensions-for-journal-articles" class="nav-link" data-scroll-target="#quarto-extensions-for-journal-articles"><span class="header-section-number">11.6</span> Quarto extensions for journal articles</a></li>
-  <li><a href="#quarto-checkpoint" id="toc-quarto-checkpoint" class="nav-link" data-scroll-target="#quarto-checkpoint"><span class="header-section-number">11.7</span> Checkpoint</a></li>
-  <li><a href="#further-reading" id="toc-further-reading" class="nav-link" data-scroll-target="#further-reading"><span class="header-section-number">11.8</span> Further reading</a></li>
+  <li><a href="#step-1-rebuild-from-your-selected-input" id="toc-step-1-rebuild-from-your-selected-input" class="nav-link" data-scroll-target="#step-1-rebuild-from-your-selected-input"><span class="header-section-number">11.2</span> Step 1: rebuild from your selected input</a></li>
+  <li><a href="#step-2-make-a-change-and-predict-the-rebuild" id="toc-step-2-make-a-change-and-predict-the-rebuild" class="nav-link" data-scroll-target="#step-2-make-a-change-and-predict-the-rebuild"><span class="header-section-number">11.3</span> Step 2: make a change and predict the rebuild</a></li>
+  <li><a href="#step-3-update-the-report" id="toc-step-3-update-the-report" class="nav-link" data-scroll-target="#step-3-update-the-report"><span class="header-section-number">11.4</span> Step 3: update the report</a></li>
+  <li><a href="#modify-checkpoint" id="toc-modify-checkpoint" class="nav-link" data-scroll-target="#modify-checkpoint"><span class="header-section-number">11.5</span> Checkpoint</a></li>
+  <li><a href="#change-input" id="toc-change-input" class="nav-link" data-scroll-target="#change-input"><span class="header-section-number">11.6</span> Optional: select a different dataset version</a></li>
+  <li><a href="#further-reading" id="toc-further-reading" class="nav-link" data-scroll-target="#further-reading"><span class="header-section-number">11.7</span> Further reading</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/JBris/open-and-reproducible-science-in-r/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../pages/workshop/00_preparation.html">Workshop</a></li><li class="breadcrumb-item"><a href="../../pages/workshop/07_quarto.html"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Reproducible reporting and publishing</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../pages/workshop/00_preparation.html">Workshop</a></li><li class="breadcrumb-item"><a href="../../pages/workshop/07_modify_and_reproduce.html"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Modify the analysis and reproduce the results</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Reproducible reporting and publishing</span></h1>
-<p class="subtitle lead">68–80 minutes · Quarto</p>
+<h1 class="title"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Modify the analysis and reproduce the results</span></h1>
+<p class="subtitle lead">65–75 minutes · Hands-on · targets and Quarto</p>
 </div>
 
 
@@ -393,96 +409,111 @@ div.csl-indent {
 
 <section id="introduction" class="level2" data-number="11.1">
 <h2 data-number="11.1" class="anchored" data-anchor-id="introduction"><span class="header-section-number">11.1</span> Introduction</h2>
-<p>We will render a short report that reads the summary from the <code>HealthWellbeing</code> pipeline. By the end of these 12 minutes, you should be able to explain where a result in the report came from and identify what a reader needs to recreate it.</p>
-<p>You need Quarto with <em>knitr</em> and <em>rmarkdown</em>, and the completed <code>meta-summary.csv</code> from the pipeline. If you joined here, the instructor can provide the prepared CSV to render locally. <a href="../../pages/workshop/06_targets.html#targets-checkpoint">Pipeline checkpoint</a></p>
+<p>In this 10-minute activity, reproduce the summary in your prepared environment, then change a model setting and predict which targets will run. Continue with your completed <code>workspace/_targets.R</code> and <code>workspace/report.qmd</code>, starting from the full dataset and REML.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Get back on track
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Run this from the project root in the <strong>R Console</strong> if you need a working pipeline and report. It prepares missing inputs and backs up your previous working files in <code>workspace/</code>.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"pipelines/recover_workshop.R"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
 </section>
-<section id="inspect-the-report-source" class="level2" data-number="11.2">
-<h2 data-number="11.2" class="anchored" data-anchor-id="inspect-the-report-source"><span class="header-section-number">11.2</span> Inspect the report source</h2>
-<p>Open <code>pipelines/health_wellbeing_report.qmd</code> in your editor. Its YAML header selects HTML, names the summary file, and controls how code and output are displayed. The report’s R chunk reads one row from <code>meta-summary.csv</code>. Inline R expressions display the results and method names recorded in that row.</p>
-<p>The pipeline owns the analysis. The report explains its methods and interprets the saved results. Keeping the report downstream of the summary makes it possible to review the same result in R and HTML.</p>
+<section id="step-1-rebuild-from-your-selected-input" class="level2" data-number="11.2">
+<h2 data-number="11.2" class="anchored" data-anchor-id="step-1-rebuild-from-your-selected-input"><span class="header-section-number">11.2</span> Step 1: rebuild from your selected input</h2>
+<p>Allow about three minutes. In the <strong>R Console</strong>, compare your current summary with a rebuild in the same environment and with the same local board. A collaborator who recreates the board can get a new version ID. The raw and selected input checksums identify the data across boards.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"pipelines/workshop_support.R"</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>workshop_dir <span class="ot">&lt;-</span> <span class="fu">workshop_output_dir</span>()</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>pipeline_script <span class="ot">&lt;-</span> <span class="fu">file.path</span>(<span class="st">"workspace"</span>, <span class="st">"_targets.R"</span>)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>pipeline_store <span class="ot">&lt;-</span> <span class="fu">file.path</span>(workshop_dir, <span class="st">"_targets"</span>)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>summary_path <span class="ot">&lt;-</span> <span class="fu">file.path</span>(workshop_dir, <span class="st">"meta-summary.csv"</span>)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">file.exists</span>(pipeline_script) <span class="sc">||</span> <span class="sc">!</span><span class="fu">file.exists</span>(summary_path)) {</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stop</span>(<span class="st">"Run the Get back on track command at the top of this lesson."</span>)</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>before <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(summary_path)</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>targets<span class="sc">::</span><span class="fu">tar_invalidate</span>(targets<span class="sc">::</span><span class="fu">everything</span>(), <span class="at">store =</span> pipeline_store)</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>targets<span class="sc">::</span><span class="fu">tar_make</span>(<span class="at">script =</span> pipeline_script, <span class="at">store =</span> pipeline_store)</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="fu">identical</span>(before, <span class="fu">read.csv</span>(summary_path))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Expect <code>TRUE</code>. Invalidation reruns the analysis and reuses the matching input and model pins. A different R or <em>meta</em> version can change results.</p>
 </section>
-<section id="render-the-html-report" class="level2" data-number="11.3">
-<h2 data-number="11.3" class="anchored" data-anchor-id="render-the-html-report"><span class="header-section-number">11.3</span> Render the HTML report</h2>
-<p>In the Terminal at the project root, copy the source beside its input and render the copy. Quarto runs the report as a standalone document. The HTML output embeds its resources and can be opened directly in a browser. The explicit execution directory lets the standalone report read its adjacent CSV, while workshop chapters run from the project root.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="va">report_dir</span><span class="op">=</span><span class="st">"outputs/health-wellbeing"</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="bu">[</span> <span class="ot">!</span> <span class="ot">-f</span> <span class="st">"</span><span class="va">$report_dir</span><span class="st">/health_wellbeing_report.qmd"</span> <span class="bu">]</span><span class="kw">;</span> <span class="cf">then</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cp</span> pipelines/health_wellbeing_report.qmd <span class="st">"</span><span class="va">$report_dir</span><span class="st">/"</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="cf">fi</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> render <span class="st">"</span><span class="va">$report_dir</span><span class="st">/health_wellbeing_report.qmd"</span> <span class="at">--to</span> html <span class="dt">\</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">--execute-dir</span> <span class="st">"</span><span class="va">$report_dir</span><span class="st">"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Open <code>outputs/health-wellbeing/health_wellbeing_report.html</code> in your browser. If you have an older local copy of the report source, bring over the updated input chunk and the Methods and Provenance sections from the template. Keep any changes you made to the surrounding text. Run the pipeline again before rendering whenever the selected data or analysis changes.</p>
+<section id="step-2-make-a-change-and-predict-the-rebuild" class="level2" data-number="11.3">
+<h2 data-number="11.3" class="anchored" data-anchor-id="step-2-make-a-change-and-predict-the-rebuild"><span class="header-section-number">11.3</span> Step 2: make a change and predict the rebuild</h2>
+<p>Allow about four minutes. In <code>workspace/_targets.R</code>, find the <code>fit</code> target. Change <code>method.tau = "REML"</code> to <code>method.tau = "DL"</code> and save the file. The alternative estimator is called DerSimonian–Laird.</p>
+<p>Predict which targets will rerun. Then compare your prediction with the Console output.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>targets<span class="sc">::</span><span class="fu">tar_outdated</span>(<span class="at">script =</span> pipeline_script, <span class="at">store =</span> pipeline_store)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>targets<span class="sc">::</span><span class="fu">tar_make</span>(<span class="at">script =</span> pipeline_script, <span class="at">store =</span> pipeline_store)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>after <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(summary_path)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="fu">rbind</span>(</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">REML =</span> before[, <span class="fu">c</span>(<span class="st">"pooled_r"</span>, <span class="st">"ci_lower"</span>, <span class="st">"ci_upper"</span>, <span class="st">"tau2"</span>)],</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">DL =</span> after[, <span class="fu">c</span>(<span class="st">"pooled_r"</span>, <span class="st">"ci_lower"</span>, <span class="st">"ci_upper"</span>, <span class="st">"tau2"</span>)]</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>after<span class="sc">$</span>pooled_r <span class="sc">-</span> before<span class="sc">$</span>pooled_r</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Expect <code>pipeline_file</code>, <code>fit</code>, <code>result</code>, and <code>summary_file</code>. The input checks and predictive model branch remain up to date. Both pooled estimates round to <strong>0.363</strong>. Switching from REML to DL increases the pooled correlation by about <strong>0.00010</strong> in this dataset. Compare how the reported heterogeneity and intervals change in this example.</p>
+<p>For a quick look at the recorded edit, run the command below in the Console. Git prints a diff. An exit status of 1 means it found a difference.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">system2</span>(<span class="st">"git"</span>, <span class="fu">c</span>(<span class="st">"--no-pager"</span>, <span class="st">"diff"</span>, <span class="st">"--no-index"</span>,</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>                 <span class="st">"pipelines/_targets_health_wellbeing.R"</span>, pipeline_script))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </section>
-<section id="try-it-yourself" class="level2" data-number="11.4">
-<h2 data-number="11.4" class="anchored" data-anchor-id="try-it-yourself"><span class="header-section-number">11.4</span> Try it yourself</h2>
-<p>Find the pooled estimate, study count, and dataset version in the report. Compare them with the matching columns in <code>meta-summary.csv</code>. Add a plain-language sentence to the report copy about how differences between study populations affect interpretation, then render the copy again. Leave the estimate linked to the CSV.</p>
+<section id="step-3-update-the-report" class="level2" data-number="11.4">
+<h2 data-number="11.4" class="anchored" data-anchor-id="step-3-update-the-report"><span class="header-section-number">11.4</span> Step 3: update the report</h2>
+<p>Allow about three minutes. Run <code>render_workshop_report()</code> in the <strong>R Console</strong> and reload <code>workspace/report.html</code>. Methods now names the DerSimonian–Laird estimator. Compare the pipeline checksum with the new summary. The dataset ID and predictive model ID stayed the same.</p>
 </section>
-<section id="publishing-demonstration" class="level2" data-number="11.5">
-<h2 data-number="11.5" class="anchored" data-anchor-id="publishing-demonstration"><span class="header-section-number">11.5</span> Publishing demonstration</h2>
-<p>The instructor will open an example rendered report and show how an approved HTML file can be served from a project site or attached to a release. Before sharing, review the report for any content that came from data with reuse conditions. The report source, versioned analysis code, metadata, and environment record help others understand how the published HTML was made.</p>
+<section id="modify-checkpoint" class="level2" data-number="11.5">
+<h2 data-number="11.5" class="anchored" data-anchor-id="modify-checkpoint"><span class="header-section-number">11.5</span> Checkpoint</h2>
+<p>You reproduced the starting summary, saw a selective rebuild after an estimator change, and rendered a report for the updated analysis. <a href="../../pages/workshop/08_archiving.html">GitHub releases, Zenodo and archiving</a></p>
 </section>
-<section id="quarto-extensions-for-journal-articles" class="level2" data-number="11.6">
-<h2 data-number="11.6" class="anchored" data-anchor-id="quarto-extensions-for-journal-articles"><span class="header-section-number">11.6</span> Quarto extensions for journal articles</h2>
-<p>Quarto extensions add formats and templates for particular publishing workflows. During the publishing demonstration, browse the <a href="https://quarto.org/docs/extensions/listing-journals.html">Journal Articles extension listing</a> and find a format relevant to your field. Examples include:</p>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th>Extension</th>
-<th>Article style or publisher</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code>apaquarto</code></td>
-<td>American Psychological Association, seventh edition</td>
-</tr>
-<tr class="even">
-<td><code>elsevier</code></td>
-<td>Elsevier journals</td>
-</tr>
-<tr class="odd">
-<td><code>plos</code></td>
-<td>Public Library of Science</td>
-</tr>
-<tr class="even">
-<td><code>jss</code></td>
-<td>Journal of Statistical Software</td>
-</tr>
-</tbody>
-</table>
-<p>Open an extension’s repository to check its supported formats, required software, author metadata, and usage instructions. Compare the template with the target journal’s current submission guidance.</p>
-<p>For follow-up, create a separate article directory and start from the <a href="https://github.com/quarto-journals/plos">PLOS template</a>. Run these commands in the Terminal from the project root and follow the prompts:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> health-wellbeing-article</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> health-wellbeing-article</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> use template quarto-journals/plos</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>The template supplies an example QMD, bibliography, and extension files. PLOS supports <code>plos-html</code> and <code>plos-pdf</code>; the PDF format also requires a LaTeX installation. Adapt the article to read the same pipeline summary and retain its methods and provenance fields.</p>
-<p>Extensions are stored locally in <code>_extensions/</code>. Include that folder with the article source in Git. For a release, record the Quarto and extension versions alongside the R package versions in <code>renv.lock</code>. See the Quarto guidance on installing and versioning extensions <span class="citation" data-cites="quarto-managing-extensions">(<a href="../4_references.html#ref-quarto-managing-extensions" role="doc-biblioref">Quarto, n.d.b</a>)</span>.</p>
+<section id="change-input" class="level2" data-number="11.6">
+<h2 data-number="11.6" class="anchored" data-anchor-id="change-input"><span class="header-section-number">11.6</span> Optional: select a different dataset version</h2>
+<p>Use the general-population version to see how a new analytical input affects both model branches. Keep your current selection so you can restore it afterwards.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>selection_file <span class="ot">&lt;-</span> <span class="fu">file.path</span>(workshop_dir, <span class="st">"analysis-data-version.txt"</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>original_version <span class="ot">&lt;-</span> <span class="fu">readLines</span>(selection_file)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>versions <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="fu">file.path</span>(workshop_dir, <span class="st">"dataset-versions.csv"</span>))</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>general_version <span class="ot">&lt;-</span> versions<span class="sc">$</span>version[versions<span class="sc">$</span>scope <span class="sc">==</span> <span class="st">"general"</span>]</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(<span class="fu">length</span>(general_version) <span class="sc">==</span> <span class="dv">1</span>L)</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="fu">writeLines</span>(general_version, selection_file)</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>targets<span class="sc">::</span><span class="fu">tar_make</span>(<span class="at">script =</span> pipeline_script, <span class="at">store =</span> pipeline_store)</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="fu">read.csv</span>(summary_path)[, <span class="fu">c</span>(</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>  <span class="st">"studies"</span>, <span class="st">"pooled_r"</span>, <span class="st">"ci_lower"</span>, <span class="st">"ci_upper"</span>,</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>  <span class="st">"data_version"</span>, <span class="st">"predictive_model_version"</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>)]</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="fu">render_workshop_report</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The subset has <strong>18 studies</strong> and its own model pin version. The comparison is descriptive. The full set includes these same studies, so use a subgroup analysis to compare populations formally.</p>
+<p>When you finish, restore the selection and render the report again.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">writeLines</span>(original_version, selection_file)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>targets<span class="sc">::</span><span class="fu">tar_make</span>(<span class="at">script =</span> pipeline_script, <span class="at">store =</span> pipeline_store)</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">render_workshop_report</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </section>
-<section id="quarto-checkpoint" class="level2" data-number="11.7">
-<h2 data-number="11.7" class="anchored" data-anchor-id="quarto-checkpoint"><span class="header-section-number">11.7</span> Checkpoint</h2>
-<p>The HTML shows 29 studies and their pooled estimate when the CSV is from the full input. It names the exact pin version, pipeline checksum, R version, and <em>meta</em> version. You can trace the number to a field in the pipeline output and explain how to update it after rerunning the analysis.</p>
-<p>Next we will inspect how to cite a preserved release. <a href="../../pages/workshop/08_zenodo.html">Research archiving and persistent identifiers</a></p>
-</section>
-<section id="further-reading" class="level2" data-number="11.8">
-<h2 data-number="11.8" class="anchored" data-anchor-id="further-reading"><span class="header-section-number">11.8</span> Further reading</h2>
+<section id="further-reading" class="level2" data-number="11.7">
+<h2 data-number="11.7" class="anchored" data-anchor-id="further-reading"><span class="header-section-number">11.7</span> Further reading</h2>
 <ul>
-<li>Working with R in Quarto <span class="citation" data-cites="quarto-r">(<a href="../4_references.html#ref-quarto-r" role="doc-biblioref">Quarto, n.d.d</a>)</span>.</li>
-<li>Publishing Quarto documents <span class="citation" data-cites="quarto-publishing">(<a href="../4_references.html#ref-quarto-publishing" role="doc-biblioref">Quarto, n.d.c</a>)</span>.</li>
-<li>Journal article formats and templates <span class="citation" data-cites="quarto-journal-extensions">(<a href="../4_references.html#ref-quarto-journal-extensions" role="doc-biblioref">Quarto, n.d.a</a>)</span>.</li>
+<li>How <em>targets</em> decides what to rerun <span class="citation" data-cites="targets-manual">(<a href="../4_references.html#ref-targets-manual" role="doc-biblioref">Landau, n.d.</a>)</span>.</li>
+<li>Pooling correlations with <code>metacor()</code> <span class="citation" data-cites="meta-metacor">(<a href="../4_references.html#ref-meta-metacor" role="doc-biblioref">Schwarzer, n.d.</a>)</span>.</li>
 </ul>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
-<div id="ref-quarto-journal-extensions" class="csl-entry" role="listitem">
-Quarto. n.d.a. <span>“Journal Articles.”</span> <a href="https://quarto.org/docs/extensions/listing-journals.html">https://quarto.org/docs/extensions/listing-journals.html</a>.
+<div id="ref-targets-manual" class="csl-entry" role="listitem">
+Landau, Will. n.d. <span>“The <span class="nocase">targets</span> <span>R</span> Package User Manual.”</span> <a href="https://books.ropensci.org/targets/">https://books.ropensci.org/targets/</a>.
 </div>
-<div id="ref-quarto-managing-extensions" class="csl-entry" role="listitem">
-———. n.d.b. <span>“Managing Extensions.”</span> <a href="https://quarto.org/docs/extensions/managing.html">https://quarto.org/docs/extensions/managing.html</a>.
-</div>
-<div id="ref-quarto-publishing" class="csl-entry" role="listitem">
-———. n.d.c. <span>“Publishing.”</span> <a href="https://quarto.org/docs/publishing/">https://quarto.org/docs/publishing/</a>.
-</div>
-<div id="ref-quarto-r" class="csl-entry" role="listitem">
-———. n.d.d. <span>“Using <span>R</span>.”</span> <a href="https://quarto.org/docs/computations/r.html">https://quarto.org/docs/computations/r.html</a>.
+<div id="ref-meta-metacor" class="csl-entry" role="listitem">
+Schwarzer, Guido. n.d. <span>“Meta-Analysis of Correlations with <span class="nocase">metacor()</span>.”</span> <a href="https://rdrr.io/cran/meta/man/metacor.html">https://rdrr.io/cran/meta/man/metacor.html</a>.
 </div>
 </div>
 </section>
@@ -1054,13 +1085,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../../pages/workshop/06_targets.html" class="pagination-link" aria-label="Reproducible analytical pipelines">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Reproducible analytical pipelines</span></span>
+      <a href="../../pages/workshop/06_quarto.html" class="pagination-link" aria-label="Create and render a reproducible Quarto report">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Create and render a reproducible Quarto report</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../pages/workshop/08_zenodo.html" class="pagination-link" aria-label="Research archiving and persistent identifiers">
-        <span class="nav-page-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Research archiving and persistent identifiers</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../pages/workshop/08_archiving.html" class="pagination-link" aria-label="GitHub releases, Zenodo and archiving">
+        <span class="nav-page-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">GitHub releases, Zenodo and archiving</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

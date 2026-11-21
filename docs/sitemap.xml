@@ -1,87 +1,99 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://jbris.github.io/open-and-reproducible-science-in-r/pages/1_introduction.html</loc>
-    <lastmod>2026-11-20T02:15:50.505Z</lastmod>
-  </url>
-  <url>
     <loc>https://jbris.github.io/open-and-reproducible-science-in-r/ANNOUNCEMENTS.html</loc>
-    <lastmod>2026-11-18T11:57:24.710Z</lastmod>
+    <lastmod>2026-11-21T10:11:21.000Z</lastmod>
   </url>
   <url>
     <loc>https://jbris.github.io/open-and-reproducible-science-in-r/CODE_OF_CONDUCT.html</loc>
-    <lastmod>2026-11-17T11:06:24.001Z</lastmod>
+    <lastmod>2026-11-17T11:06:24.000Z</lastmod>
   </url>
   <url>
     <loc>https://jbris.github.io/open-and-reproducible-science-in-r/CONTRIBUTING.html</loc>
-    <lastmod>2026-11-18T22:01:55.576Z</lastmod>
+    <lastmod>2026-11-18T22:01:55.000Z</lastmod>
   </url>
   <url>
     <loc>https://jbris.github.io/open-and-reproducible-science-in-r/ACCESSIBILITY.html</loc>
-    <lastmod>2026-11-18T20:18:54.217Z</lastmod>
+    <lastmod>2026-11-18T20:18:54.000Z</lastmod>
   </url>
   <url>
     <loc>https://jbris.github.io/open-and-reproducible-science-in-r/SECURITY.html</loc>
-    <lastmod>2026-11-17T11:10:48.103Z</lastmod>
+    <lastmod>2026-11-17T11:10:48.000Z</lastmod>
   </url>
   <url>
     <loc>https://jbris.github.io/open-and-reproducible-science-in-r/AI_POLICY.html</loc>
-    <lastmod>2026-11-18T20:18:54.222Z</lastmod>
+    <lastmod>2026-11-18T20:18:54.000Z</lastmod>
   </url>
   <url>
     <loc>https://jbris.github.io/open-and-reproducible-science-in-r/CHANGELOG.html</loc>
-    <lastmod>2026-11-20T02:19:42.343Z</lastmod>
+    <lastmod>2026-11-21T10:12:18.000Z</lastmod>
+  </url>
+  <url>
+    <loc>https://jbris.github.io/open-and-reproducible-science-in-r/index.html</loc>
+    <lastmod>2026-11-21T10:11:21.000Z</lastmod>
+  </url>
+  <url>
+    <loc>https://jbris.github.io/open-and-reproducible-science-in-r/pages/1_introduction.html</loc>
+    <lastmod>2026-11-21T10:11:12.000Z</lastmod>
   </url>
   <url>
     <loc>https://jbris.github.io/open-and-reproducible-science-in-r/pages/2_coordinators.html</loc>
-    <lastmod>2026-11-19T11:48:11.507Z</lastmod>
+    <lastmod>2026-11-21T10:11:12.000Z</lastmod>
   </url>
   <url>
     <loc>https://jbris.github.io/open-and-reproducible-science-in-r/pages/3_attribution.html</loc>
-    <lastmod>2026-11-19T12:12:44.272Z</lastmod>
+    <lastmod>2026-11-19T12:12:44.000Z</lastmod>
   </url>
   <url>
     <loc>https://jbris.github.io/open-and-reproducible-science-in-r/pages/workshop/00_preparation.html</loc>
-    <lastmod>2026-11-20T00:31:21.008Z</lastmod>
+    <lastmod>2026-11-21T10:10:52.000Z</lastmod>
   </url>
   <url>
     <loc>https://jbris.github.io/open-and-reproducible-science-in-r/pages/workshop/01_open_science.html</loc>
-    <lastmod>2026-11-19T12:12:44.789Z</lastmod>
+    <lastmod>2026-11-21T10:10:52.000Z</lastmod>
   </url>
   <url>
-    <loc>https://jbris.github.io/open-and-reproducible-science-in-r/pages/workshop/02_git_github.html</loc>
-    <lastmod>2026-11-19T12:12:45.041Z</lastmod>
+    <loc>https://jbris.github.io/open-and-reproducible-science-in-r/pages/workshop/02_environments.html</loc>
+    <lastmod>2026-11-21T10:10:52.000Z</lastmod>
   </url>
   <url>
-    <loc>https://jbris.github.io/open-and-reproducible-science-in-r/pages/workshop/03_environments.html</loc>
-    <lastmod>2026-11-19T20:51:03.677Z</lastmod>
+    <loc>https://jbris.github.io/open-and-reproducible-science-in-r/pages/workshop/03_data_documentation.html</loc>
+    <lastmod>2026-11-21T09:33:00.000Z</lastmod>
   </url>
   <url>
-    <loc>https://jbris.github.io/open-and-reproducible-science-in-r/pages/workshop/04_data_documentation.html</loc>
-    <lastmod>2026-11-19T12:12:45.592Z</lastmod>
+    <loc>https://jbris.github.io/open-and-reproducible-science-in-r/pages/workshop/04_versioning.html</loc>
+    <lastmod>2026-11-21T10:11:12.000Z</lastmod>
   </url>
   <url>
-    <loc>https://jbris.github.io/open-and-reproducible-science-in-r/pages/workshop/05_pins.html</loc>
-    <lastmod>2026-11-19T12:12:45.820Z</lastmod>
+    <loc>https://jbris.github.io/open-and-reproducible-science-in-r/pages/workshop/05_targets.html</loc>
+    <lastmod>2026-11-21T10:11:12.000Z</lastmod>
   </url>
   <url>
-    <loc>https://jbris.github.io/open-and-reproducible-science-in-r/pages/workshop/06_targets.html</loc>
-    <lastmod>2026-11-20T01:17:52.595Z</lastmod>
+    <loc>https://jbris.github.io/open-and-reproducible-science-in-r/pages/workshop/06_quarto.html</loc>
+    <lastmod>2026-11-21T08:07:09.000Z</lastmod>
   </url>
   <url>
-    <loc>https://jbris.github.io/open-and-reproducible-science-in-r/pages/workshop/07_quarto.html</loc>
-    <lastmod>2026-11-20T00:34:13.509Z</lastmod>
+    <loc>https://jbris.github.io/open-and-reproducible-science-in-r/pages/workshop/07_modify_and_reproduce.html</loc>
+    <lastmod>2026-11-21T00:42:34.000Z</lastmod>
   </url>
   <url>
-    <loc>https://jbris.github.io/open-and-reproducible-science-in-r/pages/workshop/08_zenodo.html</loc>
-    <lastmod>2026-11-19T12:13:37.620Z</lastmod>
+    <loc>https://jbris.github.io/open-and-reproducible-science-in-r/pages/workshop/08_archiving.html</loc>
+    <lastmod>2026-11-21T09:58:47.000Z</lastmod>
   </url>
   <url>
-    <loc>https://jbris.github.io/open-and-reproducible-science-in-r/pages/workshop/09_extras_and_discussion.html</loc>
-    <lastmod>2026-11-20T00:34:14.080Z</lastmod>
+    <loc>https://jbris.github.io/open-and-reproducible-science-in-r/pages/workshop/09_discussion.html</loc>
+    <lastmod>2026-11-21T10:11:12.000Z</lastmod>
+  </url>
+  <url>
+    <loc>https://jbris.github.io/open-and-reproducible-science-in-r/pages/workshop/10_synthetic_data.html</loc>
+    <lastmod>2026-11-21T10:11:12.000Z</lastmod>
   </url>
   <url>
     <loc>https://jbris.github.io/open-and-reproducible-science-in-r/pages/4_references.html</loc>
-    <lastmod>2026-11-19T12:17:39.550Z</lastmod>
+    <lastmod>2026-11-19T12:17:39.000Z</lastmod>
+  </url>
+  <url>
+    <loc>https://jbris.github.io/open-and-reproducible-science-in-r/open-and-reproducible-science-in-r.pdf</loc>
+    <lastmod>2026-11-21T10:25:03.812Z</lastmod>
   </url>
 </urlset>

@@ -22,8 +22,8 @@ researcher needs to understand, rerun, or cite the result.
 | Stage | What it recorded | Where to find it |
 | --- | --- | --- |
 | Git and GitHub | Change history and review | Commits and pull requests |
-| renv, Docker, Binder | Package versions and computing environment | `renv.lock`, Dockerfiles, `outputs/health-wellbeing/session-info.txt` |
-| dataspice, rfair | Variable meanings, source and licence, plus evidence from an automated FAIR assessment | `metadata/dataspice.json`, saved assessment if run |
+| renv, Docker, Binder | Package versions and computing environment | `renv.lock`, `VERSION`, `outputs/health-wellbeing/session-info.txt`, and the Dockerfiles on GitHub |
+| dataspice, rfair | Variable meanings, source and licence, plus evidence from an automated FAIR assessment | `data/metadata/health-wellbeing/dataspice.json`, and `outputs/health-wellbeing/metadata/` if you ran the demonstration |
 | pins, vetiver | Exact input and predictive model versions | `dataset-versions.csv`, `predictive-model-version.txt`, pin metadata |
 | targets | The steps from input to summary, and their dependencies | `workspace/_targets.R`, `meta-summary.csv` |
 | Quarto | Methods, results, and provenance in one document | `workspace/report.html` |
@@ -38,8 +38,9 @@ reported result.
 Allow about five minutes. Discuss one or more of these questions with
 your neighbours or the room.
 
--   If you received only the report, which versions and files would
-    you ask for to rerun it?
+-   Which record from today, such as the lockfile, the metadata, the
+    data version, or the report's provenance, would have saved time in a
+    past project?
 -   If the original data could not be shared, what could a reader
     test with a synthetic dataset, and what would require access to
     the originals?

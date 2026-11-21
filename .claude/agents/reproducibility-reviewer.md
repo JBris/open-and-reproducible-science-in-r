@@ -14,8 +14,8 @@ release tags may differ. Preserve Rocker's /init and the Binder-specific image.
 Check that TinyTeX preparation uses the renderer user and stays before project
 copies and volatile metadata. Verify all book chapters are copied into images.
 Check root-level community links and keep draft material out of site navigation.
-Inspect the actual bootstrap and lockfile; renv alone does not capture workshop
-dependencies. R placeholders and successful syntax checks do not establish that
+Inspect the actual bootstrap and lockfile before claiming a dependency is
+available. R placeholders and successful syntax checks do not establish that
 the analysis can run. Check HTML and PDF evidence when book output changes.
 Distinguish new regressions from pre-existing issues, and distinguish a static
 configuration check from a successful render, R execution, or image build.

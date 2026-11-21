@@ -8,7 +8,7 @@
 
 <meta name="description" content="Content for the Open and Reproducible Science in R workshop.">
 
-<title>10&nbsp; Reproducible analytical pipelines – Open and Reproducible Science in R</title>
+<title>9&nbsp; Build and execute a targets meta-analysis pipeline – Open and Reproducible Science in R</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -85,8 +85,8 @@ div.csl-indent {
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
-<link href="../../pages/workshop/07_quarto.html" rel="next">
-<link href="../../pages/workshop/05_pins.html" rel="prev">
+<link href="../../pages/workshop/06_quarto.html" rel="next">
+<link href="../../pages/workshop/04_versioning.html" rel="prev">
 <script src="../../site_libs/quarto-html/quarto.js"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -144,10 +144,10 @@ div.csl-indent {
 
 
 <link rel="stylesheet" href="../../styles.css">
-<meta property="og:title" content="10&nbsp; Reproducible analytical pipelines – Open and Reproducible Science in R">
+<meta property="og:title" content="9&nbsp; Build and execute a targets meta-analysis pipeline – Open and Reproducible Science in R">
 <meta property="og:description" content="Content for the Open and Reproducible Science in R workshop.">
 <meta property="og:site_name" content="Open and Reproducible Science in R">
-<meta name="twitter:title" content="10&nbsp; Reproducible analytical pipelines – Open and Reproducible Science in R">
+<meta name="twitter:title" content="9&nbsp; Build and execute a targets meta-analysis pipeline – Open and Reproducible Science in R">
 <meta name="twitter:description" content="Content for the Open and Reproducible Science in R workshop.">
 <meta name="twitter:card" content="summary">
 </head>
@@ -161,7 +161,7 @@ div.csl-indent {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../pages/workshop/00_preparation.html">Workshop</a></li><li class="breadcrumb-item"><a href="../../pages/workshop/06_targets.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Reproducible analytical pipelines</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../pages/workshop/00_preparation.html">Workshop</a></li><li class="breadcrumb-item"><a href="../../pages/workshop/05_targets.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Build and execute a targets meta-analysis pipeline</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -240,55 +240,55 @@ div.csl-indent {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../pages/workshop/01_open_science.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Open and reproducible science</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Introduction, reproducibility principles, Git and GitHub</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../pages/workshop/02_git_github.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Version control, collaboration and sharing</span></span></a>
+  <a href="../../pages/workshop/02_environments.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Computational reproducibility</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../pages/workshop/03_environments.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Reproducible computational environments</span></span></a>
+  <a href="../../pages/workshop/03_data_documentation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">FAIR data documentation and assessment</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../pages/workshop/04_data_documentation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Dataset documentation and FAIR metadata</span></span></a>
+  <a href="../../pages/workshop/04_versioning.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Data and model versioning</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../pages/workshop/05_pins.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Dataset storage and versioning</span></span></a>
+  <a href="../../pages/workshop/05_targets.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Build and execute a targets meta-analysis pipeline</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../pages/workshop/06_targets.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Reproducible analytical pipelines</span></span></a>
+  <a href="../../pages/workshop/06_quarto.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Create and render a reproducible Quarto report</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../pages/workshop/07_quarto.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Reproducible reporting and publishing</span></span></a>
+  <a href="../../pages/workshop/07_modify_and_reproduce.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Modify the analysis and reproduce the results</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../pages/workshop/08_zenodo.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Research archiving and persistent identifiers</span></span></a>
+  <a href="../../pages/workshop/08_archiving.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">GitHub releases, Zenodo and archiving</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../pages/workshop/09_extras_and_discussion.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Optional extras and concluding discussion</span></span></a>
+  <a href="../../pages/workshop/09_discussion.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Questions and discussion</span></span></a>
   </div>
 </li>
       </ul>
@@ -296,7 +296,7 @@ div.csl-indent {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
- <span class="menu-text">Communications and Community</span></a>
+ <span class="menu-text">Supplementary exercises</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -304,44 +304,61 @@ div.csl-indent {
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../../pages/workshop/10_synthetic_data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Supplementary exercise: synthetic data with synthpop</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">Communications and Community</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../../ANNOUNCEMENTS.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Announcements</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Announcements</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../CODE_OF_CONDUCT.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Contributor Covenant Code of Conduct</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Contributor Covenant Code of Conduct</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../CONTRIBUTING.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Contributing</span></span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Contributing</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../ACCESSIBILITY.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Accessibility</span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Accessibility</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../SECURITY.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Security Policy</span></span></a>
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Security Policy</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../AI_POLICY.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">AI-assisted development policy</span></span></a>
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">AI-assisted development policy</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../CHANGELOG.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Changelog</span></span></a>
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Changelog</span></span></a>
   </div>
 </li>
       </ul>
@@ -362,22 +379,25 @@ div.csl-indent {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">10.1</span> Introduction</a></li>
-  <li><a href="#inspect-the-pipeline" id="toc-inspect-the-pipeline" class="nav-link" data-scroll-target="#inspect-the-pipeline"><span class="header-section-number">10.2</span> Inspect the pipeline</a></li>
-  <li><a href="#run-the-full-dataset" id="toc-run-the-full-dataset" class="nav-link" data-scroll-target="#run-the-full-dataset"><span class="header-section-number">10.3</span> Run the full dataset</a></li>
-  <li><a href="#try-it-yourself" id="toc-try-it-yourself" class="nav-link" data-scroll-target="#try-it-yourself"><span class="header-section-number">10.4</span> Try it yourself</a></li>
-  <li><a href="#targets-checkpoint" id="toc-targets-checkpoint" class="nav-link" data-scroll-target="#targets-checkpoint"><span class="header-section-number">10.5</span> Checkpoint</a></li>
-  <li><a href="#further-reading" id="toc-further-reading" class="nav-link" data-scroll-target="#further-reading"><span class="header-section-number">10.6</span> Further reading</a></li>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">9.1</span> Introduction</a></li>
+  <li><a href="#the-pipeline-at-a-glance" id="toc-the-pipeline-at-a-glance" class="nav-link" data-scroll-target="#the-pipeline-at-a-glance"><span class="header-section-number">9.2</span> The pipeline at a glance</a></li>
+  <li><a href="#step-1-copy-the-workbook-pipeline" id="toc-step-1-copy-the-workbook-pipeline" class="nav-link" data-scroll-target="#step-1-copy-the-workbook-pipeline"><span class="header-section-number">9.3</span> Step 1: copy the workbook pipeline</a></li>
+  <li><a href="#step-2-run-the-pipeline-before-completing-it" id="toc-step-2-run-the-pipeline-before-completing-it" class="nav-link" data-scroll-target="#step-2-run-the-pipeline-before-completing-it"><span class="header-section-number">9.4</span> Step 2: run the pipeline before completing it</a></li>
+  <li><a href="#step-3-complete-the-two-gaps" id="toc-step-3-complete-the-two-gaps" class="nav-link" data-scroll-target="#step-3-complete-the-two-gaps"><span class="header-section-number">9.5</span> Step 3: complete the two gaps</a></li>
+  <li><a href="#check-dependencies" id="toc-check-dependencies" class="nav-link" data-scroll-target="#check-dependencies"><span class="header-section-number">9.6</span> Step 4: inspect the graph and run the pipeline</a></li>
+  <li><a href="#step-5-run-it-again" id="toc-step-5-run-it-again" class="nav-link" data-scroll-target="#step-5-run-it-again"><span class="header-section-number">9.7</span> Step 5: run it again</a></li>
+  <li><a href="#targets-checkpoint" id="toc-targets-checkpoint" class="nav-link" data-scroll-target="#targets-checkpoint"><span class="header-section-number">9.8</span> Checkpoint</a></li>
+  <li><a href="#further-reading" id="toc-further-reading" class="nav-link" data-scroll-target="#further-reading"><span class="header-section-number">9.9</span> Further reading</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/JBris/open-and-reproducible-science-in-r/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../pages/workshop/00_preparation.html">Workshop</a></li><li class="breadcrumb-item"><a href="../../pages/workshop/06_targets.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Reproducible analytical pipelines</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../pages/workshop/00_preparation.html">Workshop</a></li><li class="breadcrumb-item"><a href="../../pages/workshop/05_targets.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Build and execute a targets meta-analysis pipeline</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Reproducible analytical pipelines</span></h1>
-<p class="subtitle lead">50–68 minutes · targets</p>
+<h1 class="title"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Build and execute a targets meta-analysis pipeline</span></h1>
+<p class="subtitle lead">35–50 minutes · Hands-on · targets</p>
 </div>
 
 
@@ -394,153 +414,268 @@ div.csl-indent {
 </header>
 
 
-<section id="introduction" class="level2" data-number="10.1">
-<h2 data-number="10.1" class="anchored" data-anchor-id="introduction"><span class="header-section-number">10.1</span> Introduction</h2>
-<p>We will run a <em>targets</em> pipeline that reads a specified <code>HealthWellbeing</code> version, pools the study correlations, and writes a summary for the report. By the end of these 18 minutes, you should be able to trace the summary back to its input and predict what rebuilds when you select another version.</p>
-<p>You need <em>box</em>, <em>pins</em>, <em>targets</em>, and <em>meta</em> in your workshop environment. The dependency graph also uses <em>visNetwork</em>. Start with the workshop project, local board, and version selection file. Your instructor can share a prepared board and summary for comparison. <a href="../../pages/workshop/05_pins.html#pins-checkpoint">Dataset storage and versioning</a></p>
+<section id="introduction" class="level2" data-number="9.1">
+<h2 data-number="9.1" class="anchored" data-anchor-id="introduction"><span class="header-section-number">9.1</span> Introduction</h2>
+<p>In this 15-minute activity, you complete and run a <em>targets</em> pipeline that reads the selected <code>HealthWellbeing</code> version, pools the study correlations, and writes a summary for the report. The pipeline is partially completed: you fill in two short gaps rather than writing it from scratch. By the end, you should be able to trace the summary back to its input and explain which steps <em>targets</em> reruns, and why.</p>
+<p>Work in your MyBinder session, at the project root, after preparing the dataset versions. If you fall behind, the <strong>Get back on track</strong> step below restores a working pipeline and report so you can continue. <a href="../../pages/workshop/00_preparation.html#preparation-versions">Prepare the dataset versions</a></p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Get back on track
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>If you arrived late, lost your session, or broke a working file, run this from the project root in the <strong>R Console</strong>. It prepares missing inputs, saves any previous working files as backups in <code>workspace/</code>, restores the reference pipeline and report, and runs the pipeline.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"pipelines/recover_workshop.R"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>After recovery, run Step 1 to set the paths and then skip to <a href="#check-dependencies">Step 4</a>. You can also go straight to the <a href="../../pages/workshop/06_quarto.html">Quarto report</a>.</p>
+</div>
+</div>
 </section>
-<section id="inspect-the-pipeline" class="level2" data-number="10.2">
-<h2 data-number="10.2" class="anchored" data-anchor-id="inspect-the-pipeline"><span class="header-section-number">10.2</span> Inspect the pipeline</h2>
-<p>The script is <code>pipelines/_targets_health_wellbeing.R</code>. Open it in your editor and follow the data dependencies in this order.</p>
+<section id="the-pipeline-at-a-glance" class="level2" data-number="9.2">
+<h2 data-number="9.2" class="anchored" data-anchor-id="the-pipeline-at-a-glance"><span class="header-section-number">9.2</span> The pipeline at a glance</h2>
+<p>A <em>target</em> is one named step whose result <em>targets</em> stores and tracks. When a target’s code mentions another target by name, it depends on that target. The analysis has four stages:</p>
+<pre class="text"><code>select input -&gt; check studies -&gt; fit meta-analysis -&gt; write summary</code></pre>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Stage</th>
+<th>Numbered steps in the script</th>
+<th>Targets</th>
+<th>Your gap</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Select input</td>
+<td>1–3</td>
+<td><code>version_file</code>, <code>data_version</code>, <code>dataset_file</code></td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td>Check studies</td>
+<td>4</td>
+<td><code>studies</code></td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td>Fit meta-analysis</td>
+<td>5</td>
+<td><code>fit</code></td>
+<td>TODO 1 connects <code>studies</code> to <code>fit</code></td>
+</tr>
+<tr class="even">
+<td>Write summary</td>
+<td>6–7</td>
+<td><code>result</code>, <code>summary_file</code></td>
+<td>TODO 2 writes the summary file</td>
+</tr>
+</tbody>
+</table>
+<p>The checked studies also feed a second output: the predictive model from the versioning demonstration. The summary records that model’s version.</p>
+<pre class="text"><code>check studies -&gt; train and pin predictive model -&gt; model version in the summary</code></pre>
+<p>The graph you draw in Step 2 shows every target, including two that record provenance for the summary. <code>data_provenance</code> holds the source URL, checksums, and inclusion rule, and <code>pipeline_file</code> tracks the script itself. The supplied script uses <code>crew_controller_local()</code> to run the pipeline in a background R process.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Every target and its dependencies
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
 <pre class="text"><code>version_file -&gt; data_version -&gt; dataset_file -&gt; studies -&gt; fit
-fit, data_version -&gt; result -&gt; summary_file</code></pre>
-<p>We mark the selector, pinned RDS, and summary CSV as file targets. At fitting time, the pipeline records the script checksum. Keep a copy of the script you used so you can verify it and reproduce the fit.</p>
-<p>The model uses the raw Pearson correlations and study sample sizes. <em>Meta</em> transforms each correlation to Fisher’s z scale and pools the effects with a random-effects model. We use restricted maximum likelihood (REML) to estimate between-study variance and the Hartung–Knapp method for the 95% interval. The summary converts the estimate and limits back to the correlation scale.</p>
+dataset_file, data_version -&gt; data_provenance
+studies, data_provenance, data_version -&gt; predictive_model -&gt; model_pin_files -&gt; model_version
+fit, data_provenance, data_version, model_version, pipeline_file -&gt; result -&gt; summary_file</code></pre>
+<p><code>version_file</code>, <code>dataset_file</code>, and <code>summary_file</code> are file targets: <em>targets</em> tracks the contents of the selection file, the pinned RDS file, and the summary CSV. <code>pipeline_file</code> tracks the analysis script and its checksum.</p>
+</div>
+</div>
+</div>
+<p>The model uses the raw Pearson correlations and study sample sizes. <em>meta</em> transforms each correlation to Fisher’s z scale and pools the effects with a random-effects model. We use restricted maximum likelihood (REML) to estimate between-study variance and the Hartung–Knapp method for the 95% confidence interval of the pooled correlation. The summary converts the estimate and limits back to the correlation scale. It also records between-study heterogeneity and a 95% prediction interval, which the report lesson explains.</p>
 <p>This model treats study summaries as independent and assumes their correlations address a comparable association. Differences in populations, measures, and sampling limit interpretation. This is a worked example of pooling reported effects from the supplied studies <span class="citation" data-cites="harrer2021">(<a href="../4_references.html#ref-harrer2021" role="doc-biblioref">Harrer et al. 2021, sec. 4.2.4</a>)</span>.</p>
 </section>
-<section id="run-the-full-dataset" class="level2" data-number="10.3">
-<h2 data-number="10.3" class="anchored" data-anchor-id="run-the-full-dataset"><span class="header-section-number">10.3</span> Run the full dataset</h2>
-<p>In the R Console at the project root, load the commands used to inspect and run the pipeline. The store path keeps this exercise’s cache separate from other pipelines.</p>
+<section id="step-1-copy-the-workbook-pipeline" class="level2" data-number="9.3">
+<h2 data-number="9.3" class="anchored" data-anchor-id="step-1-copy-the-workbook-pipeline"><span class="header-section-number">9.3</span> Step 1: copy the workbook pipeline</h2>
+<p>Allow about two minutes. Run this in the <strong>R Console</strong>. It loads the <em>targets</em> functions and copies the partially completed template to <code>workspace/_targets.R</code>, your own working copy. The copy is only made if it does not exist yet, so rerunning the chunk keeps your edits. Git ignores the <code>workspace/</code> folder, so the supplied template stays unchanged.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>box<span class="sc">::</span><span class="fu">use</span>(</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  targets[tar_make, tar_outdated, tar_read, tar_visnetwork],</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  utils[read.csv]</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="fu">invisible</span>(<span class="fu">loadNamespace</span>(<span class="st">"visNetwork"</span>))</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>workshop_dir <span class="ot">&lt;-</span> <span class="fu">file.path</span>(<span class="st">"outputs"</span>, <span class="st">"health-wellbeing"</span>)</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>pipeline_script <span class="ot">&lt;-</span> <span class="fu">file.path</span>(<span class="st">"pipelines"</span>, <span class="st">"_targets_health_wellbeing.R"</span>)</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>pipeline_store <span class="ot">&lt;-</span> <span class="fu">file.path</span>(workshop_dir, <span class="st">"_targets"</span>)</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>selection_file <span class="ot">&lt;-</span> <span class="fu">file.path</span>(workshop_dir, <span class="st">"analysis-data-version.txt"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>Use the graph to predict which targets depend on the selector. If you’re using the PDF, follow the text diagram above.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tar_visnetwork</span>(</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">script =</span> pipeline_script,</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">store =</span> pipeline_store,</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">targets_only =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">outdated =</span> <span class="cn">FALSE</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div class="visNetwork html-widget html-fill-item" id="htmlwidget-27bcc726f4a04ebbe311" style="width:100%;height:464px;"></div>
-<script type="application/json" data-for="htmlwidget-27bcc726f4a04ebbe311">{"x":{"nodes":{"name":["data_version","dataset_file","fit","result","studies","summary_file","version_file"],"type":["stem","stem","stem","stem","stem","stem","stem"],"description":[null,null,null,null,null,null,null],"status":["completed","completed","completed","completed","completed","completed","completed"],"seconds":[0.006,0.11,3.496,0.001,0.008,0.004,0.001],"bytes":[75,931,4359,426,938,407,23],"branches":[null,null,null,null,null,null,null],"label":["data_version","dataset_file","fit","result","studies","summary_file","version_file"],"color":["#E1BD6D","#E1BD6D","#E1BD6D","#E1BD6D","#E1BD6D","#E1BD6D","#E1BD6D"],"id":["data_version","dataset_file","fit","result","studies","summary_file","version_file"],"level":[2,3,5,6,4,7,1],"shape":["dot","dot","dot","dot","dot","dot","dot"]},"edges":{"from":["version_file","data_version","studies","data_version","fit","dataset_file","result"],"to":["data_version","dataset_file","fit","result","result","studies","summary_file"],"color":["#E1BD6D","#E1BD6D","#E1BD6D","#E1BD6D","#E1BD6D","#E1BD6D","#E1BD6D"],"arrows":["to","to","to","to","to","to","to"]},"nodesToDataframe":true,"edgesToDataframe":true,"options":{"width":"100%","height":"100%","nodes":{"shape":"dot","physics":false},"manipulation":{"enabled":false},"edges":{"smooth":{"type":"cubicBezier","forceDirection":"horizontal"}},"physics":{"stabilization":false},"interaction":{"zoomSpeed":1},"layout":{"hierarchical":{"enabled":true,"levelSeparation":150,"direction":"LR"}}},"groups":null,"width":null,"height":null,"idselection":{"enabled":false,"style":"width: 150px; height: 26px","useLabels":true,"main":"Select by id"},"byselection":{"enabled":false,"style":"width: 150px; height: 26px","multiple":false,"hideColor":"rgba(200,200,200,0.5)","highlight":false},"main":{"text":"","style":"font-family:Georgia, Times New Roman, Times, serif;font-weight:bold;font-size:20px;text-align:center;"},"submain":null,"footer":null,"background":"rgba(0, 0, 0, 0)","highlight":{"enabled":true,"hoverNearest":false,"degree":{"from":1,"to":1},"algorithm":"hierarchical","hideColor":"rgba(200,200,200,0.5)","labelOnly":true},"collapse":{"enabled":true,"fit":false,"resetHighlight":true,"clusterOptions":null,"keepCoord":true,"labelSuffix":"(cluster)"},"legend":{"width":0.2,"useGroups":false,"position":"right","ncol":1,"stepX":100,"stepY":100,"zoom":true,"nodes":{"label":["Completed","Regular\ntarget"],"color":["#E1BD6D","#899DA4"],"shape":["dot","dot"]},"nodesToDataframe":true},"tooltipStay":300,"tooltipStyle":"position: fixed;visibility:hidden;padding: 5px;white-space: nowrap;font-family: verdana;font-size:14px;font-color:#000000;background-color: #f5f4ed;-moz-border-radius: 3px;-webkit-border-radius: 3px;border-radius: 3px;border: 1px solid #808074;box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);"},"evals":[],"jsHooks":[]}</script>
-</div>
-</div>
-<p>We will build the targets and inspect the cached result.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tar_make</span>(<span class="at">script =</span> pipeline_script, <span class="at">store =</span> pipeline_store)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>box<span class="sc">::</span><span class="fu">use</span>(</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  targets[tar_make, tar_network, tar_outdated, tar_read, tar_visnetwork]</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="fu">invisible</span>(<span class="fu">loadNamespace</span>(<span class="st">"visNetwork"</span>)) <span class="co"># Load the graph display package quietly.</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"pipelines/workshop_support.R"</span>)</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>workshop_dir <span class="ot">&lt;-</span> <span class="fu">workshop_output_dir</span>()</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>pipeline_template <span class="ot">&lt;-</span> <span class="fu">file.path</span>(</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>  <span class="st">"pipelines"</span>, <span class="st">"exercise"</span>, <span class="st">"_targets_health_wellbeing.R"</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>pipeline_script <span class="ot">&lt;-</span> <span class="fu">file.path</span>(<span class="st">"workspace"</span>, <span class="st">"_targets.R"</span>)</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>pipeline_store <span class="ot">&lt;-</span> <span class="fu">file.path</span>(workshop_dir, <span class="st">"_targets"</span>)</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="fu">readLines</span>(<span class="fu">file.path</span>(workshop_dir, <span class="st">"analysis-data-version.txt"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>+ fit dispatched
-✔ fit completed [1.5s, 4.29 kB]
-+ result dispatched
-✔ result completed [0ms, 369 B]
-+ summary_file dispatched
-✔ summary_file completed [3ms, 322 B]
-✔ ended pipeline [7.3s, 3 completed, 4 skipped]</code></pre>
+<pre><code>[1] "20261121T102119Z-11d00"</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tar_read</span>(result, <span class="at">store =</span> pipeline_store)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>            data_version studies  pooled_r  ci_lower  ci_upper confidence_level
-1 20261119T103524Z-11d00      29 0.3631912 0.3092394 0.4148126             0.95
-  effect_scale tau_method interval_method r_version meta_version
-1         ZCOR       REML              HK     4.4.1        9.0-0
-                      pipeline_md5
-1 abbbbdbd50f4ad5803e208d3f1374055</code></pre>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dir.create</span>(<span class="st">"workspace"</span>, <span class="at">showWarnings =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">file.exists</span>(pipeline_script)) {</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">file.copy</span>(pipeline_template, pipeline_script)</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The last line shows the selected dataset version. It should match the <code>all</code> version from your preparation step.</p>
+</section>
+<section id="step-2-run-the-pipeline-before-completing-it" class="level2" data-number="9.4">
+<h2 data-number="9.4" class="anchored" data-anchor-id="step-2-run-the-pipeline-before-completing-it"><span class="header-section-number">9.4</span> Step 2: run the pipeline before completing it</h2>
+<p>Allow about three minutes. Open <code>workspace/_targets.R</code> in RStudio and read the numbered steps. Then draw the dependency graph and try to run the pipeline.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tar_visnetwork</span>(</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">script =</span> pipeline_script,</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">store =</span> pipeline_store,</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">targets_only =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">outdated =</span> <span class="cn">FALSE</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="fu">tar_make</span>(<span class="at">script =</span> pipeline_script, <span class="at">store =</span> pipeline_store)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Two arrows are missing from the graph: nothing connects <code>studies</code> to <code>fit</code>, or <code>result</code> to <code>summary_file</code>. The run stops at a TODO placeholder. <em>targets</em> found nothing to link those steps because their code does not yet mention the targets they need.</p>
+</section>
+<section id="step-3-complete-the-two-gaps" class="level2" data-number="9.5">
+<h2 data-number="9.5" class="anchored" data-anchor-id="step-3-complete-the-two-gaps"><span class="header-section-number">9.5</span> Step 3: complete the two gaps</h2>
+<p>Allow about four minutes. Edit <code>workspace/_targets.R</code> and save it.</p>
+<ul>
+<li><strong>TODO 1</strong>, in step 5: replace <code>stop(...)</code> in <code>data = stop(...)</code> with the name of the target that holds the checked study summaries.</li>
+<li><strong>TODO 2</strong>, in step 7: replace the <code>stop(...)</code> line with two lines that write <code>result</code> to <code>path</code> and then return <code>path</code>.</li>
+</ul>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution to TODO 1
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="sourceCode" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>      data <span class="ot">=</span> studies,</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Mentioning <code>studies</code> makes <code>fit</code> depend on it, so the graph gains an arrow from <code>studies</code> to <code>fit</code>.</p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution to TODO 2
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="sourceCode" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>      utils<span class="sc">::</span><span class="fu">write.csv</span>(result, path, <span class="at">row.names =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>      path</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>A file target returns the path of the file it wrote. <em>targets</em> then tracks the file’s contents and rebuilds it if the file changes.</p>
+</div>
 </div>
 </div>
 </section>
-<section id="try-it-yourself" class="level2" data-number="10.4">
-<h2 data-number="10.4" class="anchored" data-anchor-id="try-it-yourself"><span class="header-section-number">10.4</span> Try it yourself</h2>
-<p>Change the selector from all studies to the 18 general-population studies. Predict which branches of the graph are affected, then ask <em>targets</em> which targets are outdated and rebuild.</p>
+<section id="check-dependencies" class="level2" data-number="9.6">
+<h2 data-number="9.6" class="anchored" data-anchor-id="check-dependencies"><span class="header-section-number">9.6</span> Step 4: inspect the graph and run the pipeline</h2>
+<p>Allow about four minutes. Check that your own script has both edges. The text check works in the Console with a screen reader or alongside the PDF. Each expression should return <code>TRUE</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>versions <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">file.path</span>(workshop_dir, <span class="st">"dataset-versions.csv"</span>),</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">colClasses =</span> <span class="st">"character"</span></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>general_version <span class="ot">&lt;-</span> versions<span class="sc">$</span>version[versions<span class="sc">$</span>scope <span class="sc">==</span> <span class="st">"general"</span>]</span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(<span class="fu">length</span>(general_version) <span class="sc">==</span> <span class="dv">1</span>L)</span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="fu">writeLines</span>(general_version, selection_file)</span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="fu">tar_outdated</span>(<span class="at">script =</span> pipeline_script, <span class="at">store =</span> pipeline_store)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>edges <span class="ot">&lt;-</span> <span class="fu">tar_network</span>(<span class="at">script =</span> pipeline_script, <span class="at">targets_only =</span> <span class="cn">TRUE</span>)<span class="sc">$</span>edges</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">any</span>(edges<span class="sc">$</span>from <span class="sc">==</span> <span class="st">"studies"</span> <span class="sc">&amp;</span> edges<span class="sc">$</span>to <span class="sc">==</span> <span class="st">"fit"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "studies"      "fit"          "dataset_file" "result"       "summary_file"
-[6] "data_version" "version_file"</code></pre>
+<pre><code>[1] TRUE</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tar_make</span>(<span class="at">script =</span> pipeline_script, <span class="at">store =</span> pipeline_store)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">any</span>(edges<span class="sc">$</span>from <span class="sc">==</span> <span class="st">"result"</span> <span class="sc">&amp;</span> edges<span class="sc">$</span>to <span class="sc">==</span> <span class="st">"summary_file"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>+ version_file dispatched
-✔ version_file completed [0ms, 23 B]
-+ data_version dispatched
-✔ data_version completed [4ms, 75 B]
-+ dataset_file dispatched
-✔ dataset_file completed [87ms, 688 B]
-+ studies dispatched
-✔ studies completed [6ms, 693 B]
-+ fit dispatched
-✔ fit completed [1.5s, 3.38 kB]
-+ result dispatched
-✔ result completed [1ms, 368 B]
-+ summary_file dispatched
-✔ summary_file completed [2ms, 319 B]
-✔ ended pipeline [7.5s, 7 completed, 0 skipped]</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tar_read</span>(result, <span class="at">store =</span> pipeline_store)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>            data_version studies  pooled_r  ci_lower ci_upper confidence_level
-1 20261119T103525Z-06ae2      18 0.3793444 0.2994259 0.453977             0.95
-  effect_scale tau_method interval_method r_version meta_version
-1         ZCOR       REML              HK     4.4.1        9.0-0
-                      pipeline_md5
-1 abbbbdbd50f4ad5803e208d3f1374055</code></pre>
+<pre><code>[1] TRUE</code></pre>
 </div>
 </div>
-<p>Compare the study count and pooled correlation with the first run. The changed input is a planned teaching subset. The difference reflects which studies entered the model, including any differences in study precision and heterogeneity.</p>
-<p>Switch back to the full version for the reporting activity so everyone can compare with the same example.</p>
+<p>You can also draw the graph again.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>full_version <span class="ot">&lt;-</span> versions<span class="sc">$</span>version[versions<span class="sc">$</span>scope <span class="sc">==</span> <span class="st">"all"</span>]</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(<span class="fu">length</span>(full_version) <span class="sc">==</span> <span class="dv">1</span>L)</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="fu">writeLines</span>(full_version, selection_file)</span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="fu">tar_make</span>(<span class="at">script =</span> pipeline_script, <span class="at">store =</span> pipeline_store)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>+ version_file dispatched
-✔ version_file completed [0ms, 23 B]
-+ data_version dispatched
-✔ data_version completed [4ms, 75 B]
-+ dataset_file dispatched
-✔ dataset_file completed [80ms, 931 B]
-+ studies dispatched
-✔ studies completed [6ms, 938 B]
-+ fit dispatched
-✔ fit completed [1.5s, 4.29 kB]
-+ result dispatched
-✔ result completed [1ms, 369 B]
-+ summary_file dispatched
-✔ summary_file completed [2ms, 322 B]
-✔ ended pipeline [7.5s, 7 completed, 0 skipped]</code></pre>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tar_visnetwork</span>(</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">script =</span> pipeline_script,</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">store =</span> pipeline_store,</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">targets_only =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">outdated =</span> <span class="cn">FALSE</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="visNetwork html-widget html-fill-item" id="htmlwidget-9536b2a892ba8fb5f451" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-9536b2a892ba8fb5f451">{"x":{"nodes":{"name":["data_provenance","data_version","dataset_file","fit","model_pin_files","model_version","pipeline_file","predictive_model","result","studies","summary_file","version_file"],"type":["stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem"],"description":[null,null,null,null,null,null,null,null,null,null,null,null],"status":["skipped","skipped","skipped","queued","skipped","skipped","queued","skipped","queued","skipped","queued","skipped"],"seconds":[0.005,0,0.079,null,0.065,0,null,0.308,null,0,null,0.001],"bytes":[293,75,931,null,2122,75,null,2465,null,938,null,23],"branches":[null,null,null,null,null,null,null,null,null,null,null,null],"label":["data_provenance","data_version","dataset_file","fit","model_pin_files","model_version","pipeline_file","predictive_model","result","studies","summary_file","version_file"],"color":["#7500D1","#7500D1","#7500D1","#D2D2D0","#7500D1","#7500D1","#D2D2D0","#7500D1","#D2D2D0","#7500D1","#D2D2D0","#7500D1"],"id":["data_provenance","data_version","dataset_file","fit","model_pin_files","model_version","pipeline_file","predictive_model","result","studies","summary_file","version_file"],"level":[4,2,3,5,6,7,1,5,8,4,9,1],"shape":["dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot"]},"edges":{"from":["data_version","dataset_file","version_file","data_version","studies","predictive_model","model_pin_files","data_provenance","data_version","studies","data_provenance","model_version","data_version","fit","pipeline_file","dataset_file","result"],"to":["data_provenance","data_provenance","data_version","dataset_file","fit","model_pin_files","model_version","predictive_model","predictive_model","predictive_model","result","result","result","result","result","studies","summary_file"],"color":["#7500D1","#7500D1","#7500D1","#7500D1","#D2D2D0","#7500D1","#7500D1","#7500D1","#7500D1","#7500D1","#D2D2D0","#D2D2D0","#D2D2D0","#D2D2D0","#D2D2D0","#7500D1","#D2D2D0"],"arrows":["to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to"]},"nodesToDataframe":true,"edgesToDataframe":true,"options":{"width":"100%","height":"100%","nodes":{"shape":"dot","physics":false},"manipulation":{"enabled":false},"edges":{"smooth":{"type":"cubicBezier","forceDirection":"horizontal"}},"physics":{"stabilization":false},"interaction":{"zoomSpeed":1},"layout":{"hierarchical":{"enabled":true,"levelSeparation":150,"direction":"LR"}}},"groups":null,"width":null,"height":null,"idselection":{"enabled":false,"style":"width: 150px; height: 26px","useLabels":true,"main":"Select by id"},"byselection":{"enabled":false,"style":"width: 150px; height: 26px","multiple":false,"hideColor":"rgba(200,200,200,0.5)","highlight":false},"main":{"text":"","style":"font-family:Georgia, Times New Roman, Times, serif;font-weight:bold;font-size:20px;text-align:center;"},"submain":null,"footer":null,"background":"rgba(0, 0, 0, 0)","highlight":{"enabled":true,"hoverNearest":false,"degree":{"from":1,"to":1},"algorithm":"hierarchical","hideColor":"rgba(200,200,200,0.5)","labelOnly":true},"collapse":{"enabled":true,"fit":false,"resetHighlight":true,"clusterOptions":null,"keepCoord":true,"labelSuffix":"(cluster)"},"legend":{"width":0.2,"useGroups":false,"position":"right","ncol":1,"stepX":100,"stepY":100,"zoom":true,"nodes":{"label":["Skipped","Queued","Regular\ntarget"],"color":["#7500D1","#D2D2D0","#899DA4"],"shape":["dot","dot","dot"]},"nodesToDataframe":true},"tooltipStay":300,"tooltipStyle":"position: fixed;visibility:hidden;padding: 5px;white-space: nowrap;font-family: verdana;font-size:14px;font-color:#000000;background-color: #f5f4ed;-moz-border-radius: 3px;-webkit-border-radius: 3px;border-radius: 3px;border: 1px solid #808074;box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);"},"evals":[],"jsHooks":[]}</script>
 </div>
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tar_outdated</span>(<span class="at">script =</span> pipeline_script, <span class="at">store =</span> pipeline_store)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Run the pipeline and read the result.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tar_make</span>(<span class="at">script =</span> pipeline_script, <span class="at">store =</span> pipeline_store)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>+ pipeline_file dispatched
+✔ pipeline_file completed [1ms, 6.65 kB]
++ fit dispatched
+✔ fit completed [1.6s, 4.26 kB]
++ result dispatched
+✔ result completed [1ms, 673 B]
++ summary_file dispatched
+✔ summary_file completed [1ms, 833 B]
+✔ ended pipeline [8s, 4 completed, 8 skipped]</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tar_read</span>(result, <span class="at">store =</span> pipeline_store)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>            data_version
+1 20261121T102119Z-11d00
+                                                                                                               data_source
+1 https://raw.githubusercontent.com/MathiasHarrer/dmetar/38c9b9bb5f85ea49de33e5d2536f6544d5268517/data/HealthWellbeing.rda
+                           raw_md5 data_scope data_filter
+1 0d74964b0b7168379a2b015cb648b326        all all studies
+                     data_file_md5 predictive_model_version studies  pooled_r
+1 5be036389f4d3f5da5056beef8867d21   20261121T102216Z-5259a      29 0.3631912
+   ci_lower  ci_upper confidence_level       tau2 i2_percent prediction_lower
+1 0.3092394 0.4148126             0.95 0.02413495   99.82844         0.056267
+  prediction_upper prediction_level prediction_method effect_scale tau_method
+1         0.607398             0.95                 V         ZCOR       REML
+  interval_method r_version meta_version                     pipeline_md5
+1              HK     4.4.1        9.0-0 e0e8f89d363d924bcc945bb10e671664</code></pre>
+</div>
+</div>
+<p>On the first complete run, targets with new or changed inputs report that they completed. <em>targets</em> saves every result in the pipeline store, here <code>outputs/health-wellbeing/_targets</code>, and <code>tar_read()</code> loads a saved result without rerunning anything.</p>
+</section>
+<section id="step-5-run-it-again" class="level2" data-number="9.7">
+<h2 data-number="9.7" class="anchored" data-anchor-id="step-5-run-it-again"><span class="header-section-number">9.7</span> Step 5: run it again</h2>
+<p>Allow about one minute. Run the pipeline a second time and ask which targets are outdated.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tar_make</span>(<span class="at">script =</span> pipeline_script, <span class="at">store =</span> pipeline_store)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>✔ skipped pipeline [151ms, 12 skipped]</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tar_outdated</span>(<span class="at">script =</span> pipeline_script, <span class="at">store =</span> pipeline_store)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>character(0)</code></pre>
 </div>
 </div>
+<p>Nothing runs, and no target is outdated. <em>targets</em> reruns a step only when its code, its upstream targets, or its tracked files change.</p>
 </section>
-<section id="targets-checkpoint" class="level2" data-number="10.5">
-<h2 data-number="10.5" class="anchored" data-anchor-id="targets-checkpoint"><span class="header-section-number">10.5</span> Checkpoint</h2>
-<p>The full example combines <strong>29 studies</strong> with a pooled correlation of about <strong>0.36</strong> and a 95% interval of about <strong>0.31 to 0.41</strong>. The alternative input combines <strong>18 studies</strong>. The selector and downstream analysis rebuild when it changes. After restoring the full selection and rebuilding, <code>tar_outdated()</code> should be empty.</p>
-<p>The file <code>outputs/health-wellbeing/meta-summary.csv</code> now contains the full result. The fit stores its script checksum and software versions. The report keeps those details when the pipeline reuses a fit. Use a clean pipeline store to check results in a changed environment. <a href="../../pages/workshop/07_quarto.html">Reproducible reporting and publishing</a></p>
+<section id="targets-checkpoint" class="level2" data-number="9.8">
+<h2 data-number="9.8" class="anchored" data-anchor-id="targets-checkpoint"><span class="header-section-number">9.8</span> Checkpoint</h2>
+<p>The full example combines <strong>29 studies</strong> with a pooled correlation of <strong>0.363</strong> and a 95% confidence interval of <strong>0.309 to 0.415</strong>. The file <code>outputs/health-wellbeing/meta-summary.csv</code> contains the same values, the uncertainty measures, dataset and model versions, input checksums, and the checksum of your pipeline script. A second run skips every target.</p>
+<p>Next, you will write a report that reads this summary. <a href="../../pages/workshop/06_quarto.html">Create and render a reproducible Quarto report</a></p>
 </section>
-<section id="further-reading" class="level2" data-number="10.6">
-<h2 data-number="10.6" class="anchored" data-anchor-id="further-reading"><span class="header-section-number">10.6</span> Further reading</h2>
+<section id="further-reading" class="level2" data-number="9.9">
+<h2 data-number="9.9" class="anchored" data-anchor-id="further-reading"><span class="header-section-number">9.9</span> Further reading</h2>
 <ul>
 <li>Defining targets and tracking dependencies <span class="citation" data-cites="targets-manual">(<a href="../4_references.html#ref-targets-manual" role="doc-biblioref">Landau, n.d.</a>)</span>.</li>
 <li>Pooling correlations with <code>metacor()</code> <span class="citation" data-cites="meta-metacor">(<a href="../4_references.html#ref-meta-metacor" role="doc-biblioref">Schwarzer, n.d.</a>)</span>.</li>
@@ -1127,13 +1262,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../../pages/workshop/05_pins.html" class="pagination-link" aria-label="Dataset storage and versioning">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Dataset storage and versioning</span></span>
+      <a href="../../pages/workshop/04_versioning.html" class="pagination-link" aria-label="Data and model versioning">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Data and model versioning</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../pages/workshop/07_quarto.html" class="pagination-link" aria-label="Reproducible reporting and publishing">
-        <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Reproducible reporting and publishing</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../pages/workshop/06_quarto.html" class="pagination-link" aria-label="Create and render a reproducible Quarto report">
+        <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Create and render a reproducible Quarto report</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

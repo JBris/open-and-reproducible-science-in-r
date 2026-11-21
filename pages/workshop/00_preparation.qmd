@@ -50,12 +50,10 @@ to install during the workshop.
 1. [Open RStudio on MyBinder](https://mybinder.org/v2/gh/JBris/open-and-reproducible-science-in-r/HEAD?urlpath=rstudio)
    or use the link supplied by your instructor. Start it shortly before the
    workshop and keep the browser tab open; MyBinder stops idle sessions.
-2. Once RStudio opens, use its **Terminal** for the project setup below.
-   Run R commands and lesson exercises in the **Console** in the same browser
-   session.
+2. Once RStudio opens, run the setup below and the lesson exercises in the
+   **Console**. One short Git activity uses the **Terminal** tab beside it.
 3. Keep the lessons and RStudio in separate browser tabs. Switch between
    them, or place them side by side if that works at your zoom level.
-   Use the Console for the hands-on exercises.
 4. MyBinder sessions are temporary. Follow the
    [export checklist](09_discussion.qmd#export-work) before closing yours.
 
@@ -63,27 +61,22 @@ If MyBinder fails to start, let the instructor know so you can use a prepared
 alternative.
 
 You can use your own computer instead, but complete the setup before the
-workshop. Restore the project library with `renv::restore()` or use the
+workshop. Clone the
+[workshop repository](https://github.com/JBris/open-and-reproducible-science-in-r),
+open `open-and-reproducible-science-in-r.Rproj`, and restore the project
+library with `renv::restore()`, or use the
 [Docker setup](https://github.com/JBris/open-and-reproducible-science-in-r#usage-with-docker).
 On Linux, building the `dataspice` dependency `jqr` from source needs the jq
 development library. Record your R version if it differs from 4.4.1.
 
-## Get the project
+## Check the project {#preparation-project}
 
-Clone the project in the RStudio **Terminal**. If you have a GitHub account
-and want to practise pushing changes after the workshop, use **Fork** on the
-[workshop repository](https://github.com/JBris/open-and-reproducible-science-in-r)
-and replace `JBris` in the command with your GitHub username.
-
-```bash
-cd ~
-git clone https://github.com/JBris/open-and-reproducible-science-in-r.git
-cd open-and-reproducible-science-in-r
-```
-
-In RStudio’s **Files** pane, open the new `open-and-reproducible-science-in-r`
-folder in your home directory and open `open-and-reproducible-science-in-r.Rproj`.
-Keep Terminal and Console commands rooted in this project directory.
+You do not need to clone anything. MyBinder opens RStudio with the
+workshop project already in your home folder, `/home/rstudio`. This
+folder is the project root: the **Files** pane shows `pages`,
+`pipelines`, `data`, and `open-and-reproducible-science-in-r.Rproj`.
+The lessons' paths, such as `pipelines/prepare_health_wellbeing.R`, are
+relative to this folder, so run every command from here.
 
 The project's `.Rprofile` activates renv. Check your R version and whether the
 library matches the lockfile. If the library in your MyBinder session differs
@@ -98,8 +91,10 @@ renv::status()
 
 Run the following in the **R Console** from the project root.
 
-The file is already in your project copy, so the download only runs if it is
-missing. The checksum identifies the exact file used to prepare these lessons.
+The prepared environment and a clone of the repository both include the file,
+so the download only runs if it is missing. It then retrieves the same file
+from a fixed upstream revision. The checksum identifies the exact file used to
+prepare these lessons.
 If you have a different copy, keep it and ask the instructor to resolve the
 difference.
 
@@ -179,8 +174,8 @@ the terms separately for other data or materials.
 
 You are ready when:
 
-- RStudio is open in MyBinder, or in your own prepared setup, with the project
-  open.
+- RStudio is open in MyBinder, or in your own prepared setup, at the project
+  root.
 - You know your R version and `renv::status()` reports no problems.
 - The raw file's checksum matches the teaching snapshot.
 - The prepared script printed the `all` and `general` dataset versions.

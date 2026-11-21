@@ -78,14 +78,16 @@ preserved but is missing, add it to the deposit.
 
 Allow about two minutes. An archive exposes these materials so a reader
 can find them without asking you. As an example, open the workshop's
-archived `v0.2.0` release [@workshop-v020]. Find the creators, access
-conditions, and the ZIP of that revision. Compare the Zenodo version DOI
-with the GitHub release tag and the concept DOI in `CITATION.cff`. Cite
-the version DOI for the files supporting a result. Cite the concept DOI
-when referring to the evolving project.
-[Version archive](https://doi.org/10.5281/zenodo.24357028) ·
+Zenodo record [@workshop-zenodo].
+Find the creators, access conditions, the ZIP of the archived revision,
+and the list of versions. Each archived release has its own version DOI.
+The concept DOI, `10.5281/zenodo.24342489`, represents all versions and
+resolves to the latest one; it is also the DOI in `CITATION.cff`. Cite a
+version DOI for the files supporting a particular result. Cite the
+concept DOI when referring to the project as a whole.
+[Zenodo record](https://zenodo.org/records/24383988) ·
 [Concept DOI](https://doi.org/10.5281/zenodo.24342489) ·
-[GitHub release](https://github.com/JBris/open-and-reproducible-science-in-r/releases/tag/v0.2.0)
+[GitHub releases](https://github.com/JBris/open-and-reproducible-science-in-r/releases)
 
 The workshop has three connected locations:
 
@@ -93,13 +95,12 @@ The workshop has three connected locations:
 | --- | --- |
 | [Workshop website](https://jbris.github.io/open-and-reproducible-science-in-r/) | Read the published workshop materials. |
 | [GitHub repository](https://github.com/JBris/open-and-reproducible-science-in-r) | Find the source files, history, and releases used to publish the site. |
-| [Zenodo record 24357028](https://zenodo.org/records/24357028) | Find the archived `v0.2.0` release and its version DOI. |
+| [Zenodo record](https://zenodo.org/records/24383988) | Find the archived releases, their version DOIs, and the concept DOI for all versions. |
 
-The record's related identifier points to the repository's `v0.2.0`
-tag. The live website can change as the project changes; cite the
-archived version that supplied the files for a particular result.
-Later archived releases have their own version records and DOIs,
-connected through the concept DOI.
+Each version's related identifier points to the GitHub release tag it
+archives. The live website can change as the project changes; cite the
+archived version that supplied the files for a particular result. New
+releases add version records and DOIs under the same concept DOI.
 
 This answers the question left open in the
 [FAIR demonstration](03_data_documentation.qmd#metadata-checkpoint).
@@ -107,9 +108,10 @@ There, the assessor found the title and licence only when the
 instructor supplied a separate metadata URL. Zenodo registers the
 record's metadata with its DOI, and the DOI resolves to a landing page
 that shows the metadata and files. A reader or a tool can start from
-the identifier alone. As a follow-up, pass this release's DOI to
+the identifier alone. As a follow-up, pass the concept DOI to
 `rfair::assess_fair()` and check what the repository exposes. That
-assessment describes the archived workshop release.
+assessment describes the version the DOI resolves to on the day you
+run it.
 
 ## When the data cannot be shared
 

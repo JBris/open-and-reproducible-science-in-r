@@ -26,15 +26,15 @@ teaching text and examples. Human review and a timed rehearsal are pending.
 
 | QMD file | Time | Duration | Activity and tools | Format | Planned content | Status |
 | --- | --- | --- | --- | --- | --- | --- |
-| `pages/workshop/00_preparation.qmd` | Before the session | Outside the 90 minutes | Preparation; MyBinder, R, Git, renv | Self-paced | Open the prepared MyBinder session; clone the project; check R and the library; verify the raw data; prepare the dataset versions; record the source. | Drafted |
-| `pages/workshop/01_open_science.qmd` | 0–10 min | 10 min | Introduction, reproducibility principles, Git and GitHub | Conceptual | Research question, study-level unit of observation, the workflow as one table, and a demonstration of commits, branches, pull requests, and releases. Hands-on Git practice with a fork is follow-up material. | Drafted |
+| `pages/workshop/00_preparation.qmd` | Before the session | Outside the 90 minutes | Preparation; MyBinder, R, Git, renv | Self-paced | Open the prepared MyBinder session, which already contains the project; check R and the library; verify the raw data; prepare the dataset versions; record the source. | Drafted |
+| `pages/workshop/01_open_science.qmd` | 0–10 min | 10 min | Introduction, reproducibility principles, Git and GitHub | Conceptual and hands-on | Research question, study-level unit of observation, the workflow as one table, a short Terminal activity reading the public repository's tags and history and comparing the participant's pipeline copy by Git hash, and a GitHub tour of a pull request and releases. Committing and pushing with a fork is follow-up material. | Drafted |
 | `pages/workshop/02_environments.qmd` | 10–20 min | 10 min | Computational reproducibility; renv, Docker, Binder | Demonstration | Running R version, lockfile versions, `renv::status()`, Dockerfile to GitHub Actions to MyBinder, and a session record. | Drafted |
-| `pages/workshop/03_data_documentation.qmd` | 20–28 min | 8 min | FAIR data documentation and assessment; dataspice, rfair | Demonstration | Participants watch. Export Schema.org JSON-LD from prepared metadata, show an excerpt including `n`, compare pre-run assessments of the same dataset with and without that metadata supplied, and ask why the access check fails. Assessment code is follow-up material. | Drafted |
+| `pages/workshop/03_data_documentation.qmd` | 20–28 min | 8 min | FAIR data documentation and assessment; dataspice, rfair | Demonstration | Participants watch. Export Schema.org JSON-LD from prepared metadata, show an excerpt including `n`, run live assessments of the same dataset with and without the repository's JSON-LD supplied, and ask why the access check fails. Checking an unpublished record is follow-up material. | Drafted |
 | `pages/workshop/04_versioning.qmd` | 28–35 min | 7 min | Data and model versioning; pins, vetiver | Demonstration | Two dataset versions from the prepared script, retrieval by identifier, and a pipeline-produced `vetiver` model with its input prototype and training provenance. | Drafted |
 | `pages/workshop/05_targets.qmd` | 35–50 min | 15 min | Build and execute a targets meta-analysis pipeline | Hands-on | Introduce the pipeline as four stages with the model pin as a second output. Copy the partially completed pipeline, run it to see where it stops, complete two dependency TODOs, inspect the graph, build, and rerun. | Drafted |
 | `pages/workshop/06_quarto.qmd` | 50–65 min | 15 min | Create and render a reproducible Quarto report | Hands-on | Copy and render the partially completed report, define the confidence and prediction intervals, complete the confidence interval, prediction interval interpretation, and provenance TODOs, rerender, and check the values against the summary. | Drafted |
 | `pages/workshop/07_modify_and_reproduce.qmd` | 65–75 min | 10 min | Modify the analysis and reproduce the results; targets, Quarto | Hands-on | Rebuild from the pinned input with an identical summary, change the variance estimator, verify the selective rebuild, and rerender. Optional input change retrains the model. | Drafted |
-| `pages/workshop/08_archiving.qmd` | 75–82 min | 7 min | GitHub releases, Zenodo, archiving and optional synthpop | Conceptual | Start from the participant's report to decide archive contents, then releases and their triggered builds, Zenodo version and concept DOIs, and a brief mention of synthetic data. | Drafted |
+| `pages/workshop/08_archiving.qmd` | 75–82 min | 7 min | GitHub releases, Zenodo and archiving | Conceptual | Start from the participant's report to decide archive contents, then releases and their triggered builds, Zenodo version and concept DOIs, and a brief mention of synthetic data. | Drafted |
 | `pages/workshop/09_discussion.qmd` | 82–90 min | 8 min | Questions and discussion | Interactive | Recap of what each stage recorded, discussion prompts, questions, exporting work, and follow-up resources. | Drafted |
 | `pages/workshop/10_synthetic_data.qmd` | After the session | Supplementary | Synthetic data; synthpop | Self-paced | Generate synthetic study summaries, compare distributions, pool both tables, and explain the limits on verification and privacy. | Drafted |
 | **Timed programme total** | **0–90 min** | **90 min** | | | | |
@@ -58,7 +58,7 @@ Keep the closing discussion even if earlier segments overrun.
 | `pipelines/prepare_health_wellbeing.R` | Verifies the raw file, writes the two dataset versions, records their identifiers, and selects the full version. Rerunning it reuses matching versions. |
 | `pipelines/exercise/_targets_health_wellbeing.R` | Partially completed pipeline. TODO 1 connects `fit` to `studies`; TODO 2 writes the summary file. |
 | `pipelines/exercise/health_wellbeing_report.qmd` | Partially completed report. TODOs add the confidence interval, an interpretation, and the provenance fields. |
-| `pipelines/_targets_health_wellbeing.R` | Completed reference pipeline, used as the solution and catch-up copy. |
+| `pipelines/_targets_health_wellbeing.R` | Completed reference pipeline, used as the solution and restored by the recovery script. |
 | `pipelines/health_wellbeing_report.qmd` | Completed reference report. |
 | `pipelines/recover_workshop.R` | Prepares missing inputs, backs up work, restores the reference files, and runs the pipeline. |
 | `workspace/` | Participants' working copies, ignored by Git. |
@@ -92,7 +92,7 @@ follow-up material.
 ## Development and validation status
 
 The pages, templates, and reference files were rendered and run in the
-published workshop image under R 4.4.1, including the catch-up path from a
+published workshop image under R 4.4.1, including recovery from a
 clean store. Rehearsing the full session in a fresh MyBinder launch and human
 review remain preparation tasks.
 

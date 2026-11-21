@@ -8,7 +8,7 @@
 
 <meta name="description" content="Content for the Open and Reproducible Science in R workshop.">
 
-<title>9&nbsp; Dataset storage and versioning – Open and Reproducible Science in R</title>
+<title>6&nbsp; Computational reproducibility – Open and Reproducible Science in R</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -85,8 +85,8 @@ div.csl-indent {
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
-<link href="../../pages/workshop/06_targets.html" rel="next">
-<link href="../../pages/workshop/04_data_documentation.html" rel="prev">
+<link href="../../pages/workshop/03_data_documentation.html" rel="next">
+<link href="../../pages/workshop/01_open_science.html" rel="prev">
 <script src="../../site_libs/quarto-html/quarto.js"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -139,10 +139,10 @@ div.csl-indent {
 
 
 <link rel="stylesheet" href="../../styles.css">
-<meta property="og:title" content="9&nbsp; Dataset storage and versioning – Open and Reproducible Science in R">
+<meta property="og:title" content="6&nbsp; Computational reproducibility – Open and Reproducible Science in R">
 <meta property="og:description" content="Content for the Open and Reproducible Science in R workshop.">
 <meta property="og:site_name" content="Open and Reproducible Science in R">
-<meta name="twitter:title" content="9&nbsp; Dataset storage and versioning – Open and Reproducible Science in R">
+<meta name="twitter:title" content="6&nbsp; Computational reproducibility – Open and Reproducible Science in R">
 <meta name="twitter:description" content="Content for the Open and Reproducible Science in R workshop.">
 <meta name="twitter:card" content="summary">
 </head>
@@ -156,7 +156,7 @@ div.csl-indent {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../pages/workshop/00_preparation.html">Workshop</a></li><li class="breadcrumb-item"><a href="../../pages/workshop/05_pins.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Dataset storage and versioning</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../pages/workshop/00_preparation.html">Workshop</a></li><li class="breadcrumb-item"><a href="../../pages/workshop/02_environments.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Computational reproducibility</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -235,55 +235,55 @@ div.csl-indent {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../pages/workshop/01_open_science.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Open and reproducible science</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Introduction, reproducibility principles, Git and GitHub</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../pages/workshop/02_git_github.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Version control, collaboration and sharing</span></span></a>
+  <a href="../../pages/workshop/02_environments.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Computational reproducibility</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../pages/workshop/03_environments.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Reproducible computational environments</span></span></a>
+  <a href="../../pages/workshop/03_data_documentation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">FAIR data documentation and assessment</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../pages/workshop/04_data_documentation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Dataset documentation and FAIR metadata</span></span></a>
+  <a href="../../pages/workshop/04_versioning.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Data and model versioning</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../pages/workshop/05_pins.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Dataset storage and versioning</span></span></a>
+  <a href="../../pages/workshop/05_targets.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Build and execute a targets meta-analysis pipeline</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../pages/workshop/06_targets.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Reproducible analytical pipelines</span></span></a>
+  <a href="../../pages/workshop/06_quarto.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Create and render a reproducible Quarto report</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../pages/workshop/07_quarto.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Reproducible reporting and publishing</span></span></a>
+  <a href="../../pages/workshop/07_modify_and_reproduce.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Modify the analysis and reproduce the results</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../pages/workshop/08_zenodo.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Research archiving and persistent identifiers</span></span></a>
+  <a href="../../pages/workshop/08_archiving.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">GitHub releases, Zenodo and archiving</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../pages/workshop/09_extras_and_discussion.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Optional extras and concluding discussion</span></span></a>
+  <a href="../../pages/workshop/09_discussion.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Questions and discussion</span></span></a>
   </div>
 </li>
       </ul>
@@ -291,7 +291,7 @@ div.csl-indent {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
- <span class="menu-text">Communications and Community</span></a>
+ <span class="menu-text">Supplementary exercises</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -299,44 +299,61 @@ div.csl-indent {
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../../pages/workshop/10_synthetic_data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Supplementary exercise: synthetic data with synthpop</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">Communications and Community</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../../ANNOUNCEMENTS.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Announcements</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Announcements</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../CODE_OF_CONDUCT.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Contributor Covenant Code of Conduct</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Contributor Covenant Code of Conduct</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../CONTRIBUTING.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Contributing</span></span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Contributing</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../ACCESSIBILITY.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Accessibility</span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Accessibility</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../SECURITY.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Security Policy</span></span></a>
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Security Policy</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../AI_POLICY.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">AI-assisted development policy</span></span></a>
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">AI-assisted development policy</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../CHANGELOG.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Changelog</span></span></a>
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Changelog</span></span></a>
   </div>
 </li>
       </ul>
@@ -357,22 +374,29 @@ div.csl-indent {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">9.1</span> Introduction</a></li>
-  <li><a href="#create-a-versioned-board" id="toc-create-a-versioned-board" class="nav-link" data-scroll-target="#create-a-versioned-board"><span class="header-section-number">9.2</span> Create a versioned board</a></li>
-  <li><a href="#write-and-describe-two-versions" id="toc-write-and-describe-two-versions" class="nav-link" data-scroll-target="#write-and-describe-two-versions"><span class="header-section-number">9.3</span> Write and describe two versions</a></li>
-  <li><a href="#try-it-yourself" id="toc-try-it-yourself" class="nav-link" data-scroll-target="#try-it-yourself"><span class="header-section-number">9.4</span> Try it yourself</a></li>
-  <li><a href="#pins-checkpoint" id="toc-pins-checkpoint" class="nav-link" data-scroll-target="#pins-checkpoint"><span class="header-section-number">9.5</span> Checkpoint</a></li>
-  <li><a href="#further-reading" id="toc-further-reading" class="nav-link" data-scroll-target="#further-reading"><span class="header-section-number">9.6</span> Further reading</a></li>
+  <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives"><span class="header-section-number">6.1</span> Learning objectives</a></li>
+  <li><a href="#why-this-matters" id="toc-why-this-matters" class="nav-link" data-scroll-target="#why-this-matters"><span class="header-section-number">6.2</span> Why this matters</a></li>
+  <li><a href="#inspect-the-r-environment" id="toc-inspect-the-r-environment" class="nav-link" data-scroll-target="#inspect-the-r-environment"><span class="header-section-number">6.3</span> Inspect the R environment</a></li>
+  <li><a href="#environments-docker" id="toc-environments-docker" class="nav-link" data-scroll-target="#environments-docker"><span class="header-section-number">6.4</span> From a Dockerfile to RStudio on MyBinder</a>
+  <ul class="collapse">
+  <li><a href="#read-the-dockerfile" id="toc-read-the-dockerfile" class="nav-link" data-scroll-target="#read-the-dockerfile"><span class="header-section-number">6.4.1</span> Read the Dockerfile</a></li>
+  <li><a href="#follow-the-github-actions-build-pipelines" id="toc-follow-the-github-actions-build-pipelines" class="nav-link" data-scroll-target="#follow-the-github-actions-build-pipelines"><span class="header-section-number">6.4.2</span> Follow the GitHub Actions build pipelines</a></li>
+  <li><a href="#launch-the-published-environment" id="toc-launch-the-published-environment" class="nav-link" data-scroll-target="#launch-the-published-environment"><span class="header-section-number">6.4.3</span> Launch the published environment</a></li>
+  </ul></li>
+  <li><a href="#record-the-session" id="toc-record-the-session" class="nav-link" data-scroll-target="#record-the-session"><span class="header-section-number">6.5</span> Record the session</a></li>
+  <li><a href="#environments-checkpoint" id="toc-environments-checkpoint" class="nav-link" data-scroll-target="#environments-checkpoint"><span class="header-section-number">6.6</span> Checkpoint</a></li>
+  <li><a href="#after-the-workshop-record-your-own-environment" id="toc-after-the-workshop-record-your-own-environment" class="nav-link" data-scroll-target="#after-the-workshop-record-your-own-environment"><span class="header-section-number">6.7</span> After the workshop: record your own environment</a></li>
+  <li><a href="#further-reading" id="toc-further-reading" class="nav-link" data-scroll-target="#further-reading"><span class="header-section-number">6.8</span> Further reading</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/JBris/open-and-reproducible-science-in-r/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../pages/workshop/00_preparation.html">Workshop</a></li><li class="breadcrumb-item"><a href="../../pages/workshop/05_pins.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Dataset storage and versioning</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../pages/workshop/00_preparation.html">Workshop</a></li><li class="breadcrumb-item"><a href="../../pages/workshop/02_environments.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Computational reproducibility</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Dataset storage and versioning</span></h1>
-<p class="subtitle lead">42–50 minutes · pins</p>
+<h1 class="title"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Computational reproducibility</span></h1>
+<p class="subtitle lead">10–20 minutes · Demonstration · renv, Docker and Binder</p>
 </div>
 
 
@@ -389,163 +413,222 @@ div.csl-indent {
 </header>
 
 
-<section id="introduction" class="level2" data-number="9.1">
-<h2 data-number="9.1" class="anchored" data-anchor-id="introduction"><span class="header-section-number">9.1</span> Introduction</h2>
-<p>We will store two versions of <code>HealthWellbeing</code> in a local <em>pins</em> board. The first contains all 29 studies. The second contains the 18 general-population studies, so we can explore how that restriction changes the analysis. Both use the variable definitions from the data dictionary, and both trace back to the same raw file. <a href="../../pages/workshop/04_data_documentation.html">Dataset documentation</a></p>
-<p>Work from the project root with <em>box</em>, <em>pins</em>, and the raw file from the preparation lesson. Runs reuse versions with the same data and provenance. The instructor can provide a prepared board and its selection files if you need to catch up. <a href="../../pages/workshop/00_preparation.html#preparation-data">Prepare the raw file</a></p>
+<section id="learning-objectives" class="level2" data-number="6.1">
+<h2 data-number="6.1" class="anchored" data-anchor-id="learning-objectives"><span class="header-section-number">6.1</span> Learning objectives</h2>
+<p>By the end of this demonstration, you should be able to explain what the project’s R lockfile records, how a Docker image becomes your MyBinder session, and why we keep a record of the environment used to run an analysis.</p>
+<p>The instructor runs the commands. You can follow along in the MyBinder session you opened during <a href="../../pages/workshop/00_preparation.html">preparation</a>; nothing needs to be installed.</p>
 </section>
-<section id="create-a-versioned-board" class="level2" data-number="9.2">
-<h2 data-number="9.2" class="anchored" data-anchor-id="create-a-versioned-board"><span class="header-section-number">9.2</span> Create a versioned board</h2>
-<p>We enable versioning so the board retains both writes. We use RDS, an R format that preserves the column types. The board lives inside our local workshop outputs.</p>
+<section id="why-this-matters" class="level2" data-number="6.2">
+<h2 data-number="6.2" class="anchored" data-anchor-id="why-this-matters"><span class="header-section-number">6.2</span> Why this matters</h2>
+<p>Allow about two minutes. The same script can behave differently when package versions or system libraries change. We need to describe the environment alongside the code and the data version.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Layer</th>
+<th>What we record</th>
+<th>Tool or file</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>R runtime</td>
+<td>R version</td>
+<td><code>renv.lock</code>, runtime information, container base image</td>
+</tr>
+<tr class="even">
+<td>R packages</td>
+<td>Package versions and sources</td>
+<td>renv and <code>renv.lock</code></td>
+</tr>
+<tr class="odd">
+<td>Wider environment</td>
+<td>Operating-system libraries and rendering tools</td>
+<td>Dockerfile and image</td>
+</tr>
+<tr class="even">
+<td>Code and configuration</td>
+<td>The revision used for the run</td>
+<td>Git commit</td>
+</tr>
+<tr class="odd">
+<td>Actual session</td>
+<td>Versions loaded when the analysis ran</td>
+<td><code>sessionInfo()</code></td>
+</tr>
+</tbody>
+</table>
+<p>renv restores the R packages described by a lockfile. A Docker image can also include the R interpreter, operating-system libraries, and rendering tools. Binder starts a container from such an image in a browser. Reproducing a result still requires the analysis code, the input data, and a successful rerun.</p>
+</section>
+<section id="inspect-the-r-environment" class="level2" data-number="6.3">
+<h2 data-number="6.3" class="anchored" data-anchor-id="inspect-the-r-environment"><span class="header-section-number">6.3</span> Inspect the R environment</h2>
+<p>Allow about three minutes. In the <strong>R Console</strong>, from the project root:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>box<span class="sc">::</span><span class="fu">use</span>(</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  pins[board_folder, pin_exists, pin_meta, pin_read, pin_versions,</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>       pin_write],</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  utils[read.csv, write.csv]</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>workshop_dir <span class="ot">&lt;-</span> <span class="fu">file.path</span>(<span class="st">"outputs"</span>, <span class="st">"health-wellbeing"</span>)</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>data_board <span class="ot">&lt;-</span> <span class="fu">board_folder</span>(</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">file.path</span>(workshop_dir, <span class="st">"data_store"</span>),</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">versioned =</span> <span class="cn">TRUE</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>pin_name <span class="ot">&lt;-</span> <span class="st">"health_wellbeing"</span></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>versions_file <span class="ot">&lt;-</span> <span class="fu">file.path</span>(workshop_dir, <span class="st">"dataset-versions.csv"</span>)</span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>selection_file <span class="ot">&lt;-</span> <span class="fu">file.path</span>(workshop_dir, <span class="st">"analysis-data-version.txt"</span>)</span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>write_dataset_version <span class="ot">&lt;-</span> <span class="cf">function</span>(board, name, data, description, metadata) {</span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>  previous_versions <span class="ot">&lt;-</span> <span class="fu">character</span>()</span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">pin_exists</span>(board, name)) {</span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>    previous_versions <span class="ot">&lt;-</span> <span class="fu">pin_versions</span>(board, name)<span class="sc">$</span>version</span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> (version <span class="cf">in</span> previous_versions) {</span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>      <span class="cf">if</span> (<span class="fu">identical</span>(<span class="fu">pin_meta</span>(board, name, <span class="at">version =</span> version)<span class="sc">$</span>user, metadata) <span class="sc">&amp;&amp;</span></span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>          <span class="fu">identical</span>(<span class="fu">pin_read</span>(board, name, <span class="at">version =</span> version), data)) {</span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>        <span class="fu">return</span>(version)</span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>      }</span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pin_write</span>(</span>
-<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>    board,</span>
-<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>    data,</span>
-<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>    <span class="at">name =</span> name,</span>
-<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>    <span class="at">type =</span> <span class="st">"rds"</span>,</span>
-<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"HealthWellbeing"</span>,</span>
-<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>    <span class="at">description =</span> description,</span>
-<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>    <span class="at">metadata =</span> metadata</span>
-<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>  new_version <span class="ot">&lt;-</span> <span class="fu">setdiff</span>(<span class="fu">pin_versions</span>(board, name)<span class="sc">$</span>version, previous_versions)</span>
-<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stopifnot</span>(<span class="fu">length</span>(new_version) <span class="sc">==</span> <span class="dv">1</span>L)</span>
-<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>  new_version</span>
-<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>R.version.string</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "R version 4.4.1 (2024-06-14)"</code></pre>
 </div>
-</section>
-<section id="write-and-describe-two-versions" class="level2" data-number="9.3">
-<h2 data-number="9.3" class="anchored" data-anchor-id="write-and-describe-two-versions"><span class="header-section-number">9.3</span> Write and describe two versions</h2>
-<p>We verify the checksum, load the table from that file, and record its source and checksum in the pin metadata.</p>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">.libPaths</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "/home/rstudio/renv/library/linux-ubuntu-jammy/R-4.4/x86_64-pc-linux-gnu"                  
+[2] "/home/rstudio/.cache/R/renv/sandbox/linux-ubuntu-jammy/R-4.4/x86_64-pc-linux-gnu/25ebdc09"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">packageVersion</span>(<span class="st">"renv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] '1.0.7'</code></pre>
+</div>
+</div>
+<p>Compare the running version with the reference version, <strong>4.4.1</strong>. A lockfile records a version; it does not switch your running R session.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>source_url <span class="ot">&lt;-</span> <span class="fu">paste0</span>(</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">"https://www.protectlab.org/meta-analysis-in-r/data/"</span>,</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"healthwellbeing.rda"</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>raw_file <span class="ot">&lt;-</span> <span class="fu">file.path</span>(<span class="st">"data"</span>, <span class="st">"raw"</span>, <span class="st">"healthwellbeing.rda"</span>)</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>raw_md5 <span class="ot">&lt;-</span> <span class="fu">unname</span>(tools<span class="sc">::</span><span class="fu">md5sum</span>(raw_file))</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(<span class="fu">identical</span>(raw_md5, <span class="st">"0d74964b0b7168379a2b015cb648b326"</span>))</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>raw_data <span class="ot">&lt;-</span> <span class="fu">new.env</span>(<span class="at">parent =</span> <span class="fu">baseenv</span>())</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>loaded_names <span class="ot">&lt;-</span> <span class="fu">load</span>(raw_file, <span class="at">envir =</span> raw_data)</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(<span class="fu">identical</span>(loaded_names, <span class="st">"HealthWellbeing"</span>))</span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>verified_health <span class="ot">&lt;-</span> raw_data[[<span class="st">"HealthWellbeing"</span>]]</span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(<span class="fu">is.data.frame</span>(verified_health), <span class="fu">nrow</span>(verified_health) <span class="sc">==</span> <span class="dv">29</span>L)</span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>full_version <span class="ot">&lt;-</span> <span class="fu">write_dataset_version</span>(</span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>  data_board,</span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>  pin_name,</span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>  verified_health,</span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">description =</span> <span class="st">"All 29 studies in the teaching snapshot."</span>,</span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>  <span class="at">metadata =</span> <span class="fu">list</span>(<span class="at">source_url =</span> source_url, <span class="at">raw_md5 =</span> raw_md5, <span class="at">scope =</span> <span class="st">"all"</span>)</span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>lock <span class="ot">&lt;-</span> renv<span class="sc">::</span><span class="fu">lockfile_read</span>(<span class="st">"renv.lock"</span>)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>lock<span class="sc">$</span>R<span class="sc">$</span>Version</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "4.4.1"</code></pre>
 </div>
-<p>For the teaching comparison, we read the exact full pin, then filter by population. The subset inherits its source and checksum from that pin. The filter and parent version account for the 11 excluded studies. The published example uses the full set.</p>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>workshop_packages <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">"dataspice"</span>, <span class="st">"meta"</span>, <span class="st">"pins"</span>, <span class="st">"quarto"</span>, <span class="st">"rfair"</span>, <span class="st">"rmarkdown"</span>,</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"synthpop"</span>, <span class="st">"targets"</span>, <span class="st">"vetiver"</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="fu">vapply</span>(</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>  workshop_packages,</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>  <span class="cf">function</span>(package) {</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>    record <span class="ot">&lt;-</span> lock<span class="sc">$</span>Packages[[package]]</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (<span class="fu">is.null</span>(record)) <span class="cn">NA_character_</span> <span class="cf">else</span> record<span class="sc">$</span>Version</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>  },</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">character</span>(<span class="dv">1</span>)</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>dataspice      meta      pins    quarto     rfair rmarkdown  synthpop   targets 
+  "1.2.1"   "9.0-0"   "1.4.2"        NA   "0.2.0"    "2.32"   "1.9-3"  "1.12.0" 
+  vetiver 
+  "0.2.8" </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>renv<span class="sc">::</span><span class="fu">status</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>No issues found -- the project is in a consistent state.</code></pre>
+</div>
+</div>
+<p>The lockfile records exact package versions for the workshop. A package that is not recorded appears as <code>NA</code>; Quarto, for example, is a command-line tool in the image rather than an R package in the lockfile. <code>renv::status()</code> checks whether the active library matches the lockfile.</p>
+<p>The usual collaboration cycle is:</p>
+<ol type="1">
+<li>A maintainer prepares and tests the required packages.</li>
+<li>The maintainer uses <code>renv::snapshot()</code> and reviews the resulting lockfile.</li>
+<li>Collaborators use <code>renv::restore()</code> to obtain the recorded packages.</li>
+<li>The analysis is tested in the restored environment.</li>
+</ol>
+<p>The workshop’s Binder image was built by restoring this lockfile, so you do not need to run <code>renv::restore()</code> during the session.</p>
+</section>
+<section id="environments-docker" class="level2" data-number="6.4">
+<h2 data-number="6.4" class="anchored" data-anchor-id="environments-docker"><span class="header-section-number">6.4</span> From a Dockerfile to RStudio on MyBinder</h2>
+<p>Allow about four minutes.</p>
+<section id="read-the-dockerfile" class="level3" data-number="6.4.1">
+<h3 data-number="6.4.1" class="anchored" data-anchor-id="read-the-dockerfile"><span class="header-section-number">6.4.1</span> Read the Dockerfile</h3>
+<p>A <strong>Dockerfile</strong> is a set of instructions for building a Docker image. Find these instructions in the workshop’s <a href="https://github.com/JBris/open-and-reproducible-science-in-r/blob/main/dockerfiles/binder/Dockerfile.1.0.0">Binder image Dockerfile</a>.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 50%">
+<col style="width: 50%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Instruction</th>
+<th>What it does in this project</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>FROM rocker/binder:4.4.1 AS base</code></td>
+<td>Starts from Rocker’s Binder image for R 4.4.1.</td>
+</tr>
+<tr class="even">
+<td><code>RUN</code></td>
+<td>Executes build steps such as installing system libraries and restoring R packages from <code>renv.lock</code>.</td>
+</tr>
+<tr class="odd">
+<td><code>COPY</code></td>
+<td>Adds files such as the lockfile and workshop lessons to the image.</td>
+</tr>
+</tbody>
+</table>
+<p>A <strong>Docker build</strong> uses these instructions and the repository files to produce an <strong>image</strong>. A <strong>container</strong> is a running instance of an image. Each participant runs the workshop in their own container started from the same image.</p>
+</section>
+<section id="follow-the-github-actions-build-pipelines" class="level3" data-number="6.4.2">
+<h3 data-number="6.4.2" class="anchored" data-anchor-id="follow-the-github-actions-build-pipelines"><span class="header-section-number">6.4.2</span> Follow the GitHub Actions build pipelines</h3>
+<p>The repository has two workflows that run when a GitHub release is published or when a maintainer starts them manually. <a href="https://github.com/JBris/open-and-reproducible-science-in-r/actions/workflows/build-binder.yaml">Build Binder</a> builds the image MyBinder uses. <a href="https://github.com/JBris/open-and-reproducible-science-in-r/actions/workflows/build-rstudio.yaml">Build RStudio</a> builds a separate image for people running RStudio with Docker locally.</p>
+<p>Each workflow checks out the source, reads <code>VERSION</code> into <code>APP_VERSION</code>, and records a UTC build date. Docker Compose uses <code>APP_VERSION</code> to select the Dockerfile and tag the image. The Binder job includes these two steps.</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> compose build binder</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> compose push binder</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The first command builds the image. The second publishes the image with its version tag to GitHub Container Registry (<code>ghcr.io</code>). The image version comes from <code>VERSION</code> and can differ from the GitHub release tag.</p>
+</section>
+<section id="launch-the-published-environment" class="level3" data-number="6.4.3">
+<h3 data-number="6.4.3" class="anchored" data-anchor-id="launch-the-published-environment"><span class="header-section-number">6.4.3</span> Launch the published environment</h3>
+<p>MyBinder reads the small <a href="https://github.com/JBris/open-and-reproducible-science-in-r/blob/main/binder/Dockerfile">Binder entry point</a>, which selects the published Binder image with <code>FROM</code>. MyBinder prepares the launch image and starts a container on its servers. The launch link’s <code>urlpath=rstudio</code> setting opens the RStudio interface in your browser.</p>
+<p>Because everyone starts from the same image, everyone has the same R version, packages, and tools for the hands-on activities.</p>
+</section>
+</section>
+<section id="record-the-session" class="level2" data-number="6.5">
+<h2 data-number="6.5" class="anchored" data-anchor-id="record-the-session"><span class="header-section-number">6.5</span> Record the session</h2>
+<p>Allow about one minute. Load the data by its explicit path into a separate environment, then save a record of the current R session.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>full_metadata <span class="ot">&lt;-</span> <span class="fu">pin_meta</span>(data_board, pin_name, <span class="at">version =</span> full_version)</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>health_general <span class="ot">&lt;-</span> <span class="fu">pin_read</span>(data_board, pin_name, <span class="at">version =</span> full_version) <span class="sc">|&gt;</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">subset</span>(population <span class="sc">==</span> <span class="st">"general population"</span>)</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(<span class="fu">nrow</span>(health_general) <span class="sc">==</span> <span class="dv">18</span>L)</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>general_version <span class="ot">&lt;-</span> <span class="fu">write_dataset_version</span>(</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  data_board,</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  pin_name,</span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  health_general,</span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">description =</span> <span class="st">"Only studies labelled general population."</span>,</span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">metadata =</span> <span class="fu">list</span>(</span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">source_url =</span> full_metadata<span class="sc">$</span>user<span class="sc">$</span>source_url,</span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">raw_md5 =</span> full_metadata<span class="sc">$</span>user<span class="sc">$</span>raw_md5,</span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>    <span class="at">scope =</span> <span class="st">"general"</span>,</span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">filter =</span> <span class="st">"population == 'general population'"</span>,</span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">parent_version =</span> full_version</span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a><span class="fu">pin_versions</span>(data_board, pin_name)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 2 × 3
-  version                created             hash 
-  &lt;chr&gt;                  &lt;dttm&gt;              &lt;chr&gt;
-1 20261119T103524Z-11d00 2026-11-19 10:35:24 11d00
-2 20261119T103525Z-06ae2 2026-11-19 10:35:25 06ae2</code></pre>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>raw_file <span class="ot">&lt;-</span> <span class="fu">file.path</span>(<span class="st">"data"</span>, <span class="st">"raw"</span>, <span class="st">"healthwellbeing.rda"</span>)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">file.exists</span>(raw_file),</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">identical</span>(</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">unname</span>(tools<span class="sc">::</span><span class="fu">md5sum</span>(raw_file)),</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"0d74964b0b7168379a2b015cb648b326"</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>data_env <span class="ot">&lt;-</span> <span class="fu">new.env</span>(<span class="at">parent =</span> <span class="fu">baseenv</span>())</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>loaded_names <span class="ot">&lt;-</span> <span class="fu">load</span>(raw_file, <span class="at">envir =</span> data_env)</span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(<span class="fu">identical</span>(loaded_names, <span class="st">"HealthWellbeing"</span>))</span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>health <span class="ot">&lt;-</span> data_env[[<span class="st">"HealthWellbeing"</span>]]</span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(<span class="fu">nrow</span>(health) <span class="sc">==</span> <span class="dv">29</span>L, <span class="fu">ncol</span>(health) <span class="sc">==</span> <span class="dv">5</span>L)</span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"pipelines/workshop_support.R"</span>)</span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>output_dir <span class="ot">&lt;-</span> <span class="fu">workshop_output_dir</span>()</span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a><span class="fu">dir.create</span>(output_dir, <span class="at">recursive =</span> <span class="cn">TRUE</span>, <span class="at">showWarnings =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a><span class="fu">writeLines</span>(</span>
+<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">capture.output</span>(<span class="fu">sessionInfo</span>()),</span>
+<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">file.path</span>(output_dir, <span class="st">"session-info.txt"</span>)</span>
+<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>versions <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">scope =</span> <span class="fu">c</span>(<span class="st">"all"</span>, <span class="st">"general"</span>),</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">version =</span> <span class="fu">c</span>(full_version, general_version)</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(versions, versions_file, <span class="at">row.names =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">file.exists</span>(selection_file)) {</span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">writeLines</span>(full_version, selection_file)</span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
+<p><code>outputs/health-wellbeing/session-info.txt</code> lists the loaded package versions and platform. Later, the pipeline records the R and <em>meta</em> versions with its result. For a MyBinder run, record the image version in the project’s <code>VERSION</code> file; it matches the image tag that <code>binder/Dockerfile</code> selects on GitHub. Your MyBinder copy has no Git history. In a clone, <code>git rev-parse HEAD</code> adds the exact project revision.</p>
 </section>
-<section id="try-it-yourself" class="level2" data-number="9.4">
-<h2 data-number="9.4" class="anchored" data-anchor-id="try-it-yourself"><span class="header-section-number">9.4</span> Try it yourself</h2>
-<p>Retrieve the full dataset by its recorded identifier and inspect its source metadata. The selection file starts with the full version and retains your choice on later runs.</p>
-<div class="cell" data-cache.extra="20261119T103524Z-11d00">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>versions <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(versions_file, <span class="at">colClasses =</span> <span class="st">"character"</span>)</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>full_version <span class="ot">&lt;-</span> versions<span class="sc">$</span>version[versions<span class="sc">$</span>scope <span class="sc">==</span> <span class="st">"all"</span>]</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(<span class="fu">length</span>(full_version) <span class="sc">==</span> <span class="dv">1</span>L)</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>health_full <span class="ot">&lt;-</span> <span class="fu">pin_read</span>(data_board, pin_name, <span class="at">version =</span> full_version)</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="fu">pin_meta</span>(data_board, pin_name, <span class="at">version =</span> full_version)<span class="sc">$</span>user</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>$source_url
-[1] "https://www.protectlab.org/meta-analysis-in-r/data/healthwellbeing.rda"
-
-$raw_md5
-[1] "0d74964b0b7168379a2b015cb648b326"
-
-$scope
-[1] "all"</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(health_full)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 29</code></pre>
-</div>
-</div>
-</section>
-<section id="pins-checkpoint" class="level2" data-number="9.5">
-<h2 data-number="9.5" class="anchored" data-anchor-id="pins-checkpoint"><span class="header-section-number">9.5</span> Checkpoint</h2>
-<p>The history includes the full dataset and the subset under distinct identifiers. Retrieving the full version returns 29 rows. Locate the identifier of the 18-study subset in <code>dataset-versions.csv</code>. The version identifies a stored object within this board. If you recreate the board elsewhere, use its new identifiers and retain the upstream checksum and filter.</p>
-<p>Keep the board local and share the source and transformation instructions when reuse terms are unclear. Next we will make the selection file a tracked pipeline input. <a href="../../pages/workshop/06_targets.html">Reproducible analytical pipelines</a></p>
-</section>
-<section id="further-reading" class="level2" data-number="9.6">
-<h2 data-number="9.6" class="anchored" data-anchor-id="further-reading"><span class="header-section-number">9.6</span> Further reading</h2>
+<section id="environments-checkpoint" class="level2" data-number="6.6">
+<h2 data-number="6.6" class="anchored" data-anchor-id="environments-checkpoint"><span class="header-section-number">6.6</span> Checkpoint</h2>
 <ul>
-<li>Storing and retrieving versions with pins <span class="citation" data-cites="pins-docs">(<a href="../4_references.html#ref-pins-docs" role="doc-biblioref">Silge, Wickham, and Luraschi 2026</a>)</span>.</li>
+<li>You can explain which parts of the environment renv and Docker capture.</li>
+<li>You can trace how GitHub Actions builds and publishes the Binder image and how MyBinder uses it to start RStudio.</li>
+<li>You can distinguish the lockfile’s recorded R version from the running version.</li>
+<li>You know where to find the session record and the package versions.</li>
+</ul>
+<p><strong>Takeaway:</strong> a documented environment supports reproducibility, and a successful rerun supplies evidence. Next, we document the dataset itself. <a href="../../pages/workshop/03_data_documentation.html">FAIR data documentation and assessment</a></p>
+</section>
+<section id="after-the-workshop-record-your-own-environment" class="level2" data-number="6.7">
+<h2 data-number="6.7" class="anchored" data-anchor-id="after-the-workshop-record-your-own-environment"><span class="header-section-number">6.7</span> After the workshop: record your own environment</h2>
+<p>In a new R project, use <code>renv::init()</code> to create the project library. After installing and checking the packages your analysis uses, run <code>renv::snapshot()</code> and review the lockfile. A collaborator can then run <code>renv::restore()</code> with the corresponding R version.</p>
+<p>For a container, start with an R base image such as <code>FROM rocker/r-ver:4.4.1</code>. Add your system dependencies and restore the package library from <code>renv.lock</code> during the build. The <a href="https://github.com/JBris/open-and-reproducible-science-in-r#usage-with-docker">workshop’s Docker setup</a> shows how this fits into a complete project.</p>
+</section>
+<section id="further-reading" class="level2" data-number="6.8">
+<h2 data-number="6.8" class="anchored" data-anchor-id="further-reading"><span class="header-section-number">6.8</span> Further reading</h2>
+<ul>
+<li>Sharing a project environment with renv <span class="citation" data-cites="renv-collaborating">(<a href="../4_references.html#ref-renv-collaborating" role="doc-biblioref">Posit, n.d.</a>)</span>.</li>
+<li>Configuring services with Docker Compose <span class="citation" data-cites="docker-compose">(<a href="../4_references.html#ref-docker-compose" role="doc-biblioref">Docker, n.d.</a>)</span>.</li>
+<li><a href="https://docs.docker.com/reference/dockerfile/">Dockerfile reference</a>.</li>
+<li><a href="https://mybinder.readthedocs.io/en/latest/howto/user_interface.html">Configuring the Binder user interface</a>.</li>
 </ul>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
-<div id="ref-pins-docs" class="csl-entry" role="listitem">
-Silge, Julia, Hadley Wickham, and Javier Luraschi. 2026. <em><span class="nocase">pins</span>: Pin, Discover, and Share Resources</em>. <a href="https://pins.rstudio.com/">https://pins.rstudio.com/</a>.
+<div id="ref-docker-compose" class="csl-entry" role="listitem">
+Docker. n.d. <span>“Docker Compose.”</span> <a href="https://docs.docker.com/compose/">https://docs.docker.com/compose/</a>.
+</div>
+<div id="ref-renv-collaborating" class="csl-entry" role="listitem">
+Posit. n.d. <span>“Collaborating with <span class="nocase">renv</span>.”</span> <a href="https://rstudio.github.io/renv/articles/collaborating.html">https://rstudio.github.io/renv/articles/collaborating.html</a>.
 </div>
 </div>
 </section>
@@ -1117,13 +1200,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../../pages/workshop/04_data_documentation.html" class="pagination-link" aria-label="Dataset documentation and FAIR metadata">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Dataset documentation and FAIR metadata</span></span>
+      <a href="../../pages/workshop/01_open_science.html" class="pagination-link" aria-label="Introduction, reproducibility principles, Git and GitHub">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Introduction, reproducibility principles, Git and GitHub</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../pages/workshop/06_targets.html" class="pagination-link" aria-label="Reproducible analytical pipelines">
-        <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Reproducible analytical pipelines</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../pages/workshop/03_data_documentation.html" class="pagination-link" aria-label="FAIR data documentation and assessment">
+        <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">FAIR data documentation and assessment</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

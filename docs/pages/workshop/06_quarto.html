@@ -8,7 +8,7 @@
 
 <meta name="description" content="Content for the Open and Reproducible Science in R workshop.">
 
-<title>12&nbsp; Research archiving and persistent identifiers – Open and Reproducible Science in R</title>
+<title>10&nbsp; Create and render a reproducible Quarto report – Open and Reproducible Science in R</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 /* CSS for citations */
 div.csl-bib-body { }
@@ -51,8 +85,8 @@ div.csl-indent {
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
-<link href="../../pages/workshop/09_extras_and_discussion.html" rel="next">
-<link href="../../pages/workshop/07_quarto.html" rel="prev">
+<link href="../../pages/workshop/07_modify_and_reproduce.html" rel="next">
+<link href="../../pages/workshop/05_targets.html" rel="prev">
 <script src="../../site_libs/quarto-html/quarto.js"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -103,12 +137,41 @@ div.csl-indent {
   });
 </script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="../../styles.css">
-<meta property="og:title" content="12&nbsp; Research archiving and persistent identifiers – Open and Reproducible Science in R">
+<meta property="og:title" content="10&nbsp; Create and render a reproducible Quarto report – Open and Reproducible Science in R">
 <meta property="og:description" content="Content for the Open and Reproducible Science in R workshop.">
 <meta property="og:site_name" content="Open and Reproducible Science in R">
-<meta name="twitter:title" content="12&nbsp; Research archiving and persistent identifiers – Open and Reproducible Science in R">
+<meta name="twitter:title" content="10&nbsp; Create and render a reproducible Quarto report – Open and Reproducible Science in R">
 <meta name="twitter:description" content="Content for the Open and Reproducible Science in R workshop.">
 <meta name="twitter:card" content="summary">
 </head>
@@ -122,7 +185,7 @@ div.csl-indent {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../pages/workshop/00_preparation.html">Workshop</a></li><li class="breadcrumb-item"><a href="../../pages/workshop/08_zenodo.html"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Research archiving and persistent identifiers</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../pages/workshop/00_preparation.html">Workshop</a></li><li class="breadcrumb-item"><a href="../../pages/workshop/06_quarto.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Create and render a reproducible Quarto report</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -201,55 +264,55 @@ div.csl-indent {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../pages/workshop/01_open_science.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Open and reproducible science</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Introduction, reproducibility principles, Git and GitHub</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../pages/workshop/02_git_github.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Version control, collaboration and sharing</span></span></a>
+  <a href="../../pages/workshop/02_environments.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Computational reproducibility</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../pages/workshop/03_environments.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Reproducible computational environments</span></span></a>
+  <a href="../../pages/workshop/03_data_documentation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">FAIR data documentation and assessment</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../pages/workshop/04_data_documentation.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Dataset documentation and FAIR metadata</span></span></a>
+  <a href="../../pages/workshop/04_versioning.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Data and model versioning</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../pages/workshop/05_pins.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Dataset storage and versioning</span></span></a>
+  <a href="../../pages/workshop/05_targets.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Build and execute a targets meta-analysis pipeline</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../pages/workshop/06_targets.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Reproducible analytical pipelines</span></span></a>
+  <a href="../../pages/workshop/06_quarto.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Create and render a reproducible Quarto report</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../pages/workshop/07_quarto.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Reproducible reporting and publishing</span></span></a>
+  <a href="../../pages/workshop/07_modify_and_reproduce.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Modify the analysis and reproduce the results</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../pages/workshop/08_zenodo.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Research archiving and persistent identifiers</span></span></a>
+  <a href="../../pages/workshop/08_archiving.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">GitHub releases, Zenodo and archiving</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../pages/workshop/09_extras_and_discussion.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Optional extras and concluding discussion</span></span></a>
+  <a href="../../pages/workshop/09_discussion.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Questions and discussion</span></span></a>
   </div>
 </li>
       </ul>
@@ -257,7 +320,7 @@ div.csl-indent {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
- <span class="menu-text">Communications and Community</span></a>
+ <span class="menu-text">Supplementary exercises</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -265,44 +328,61 @@ div.csl-indent {
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../../pages/workshop/10_synthetic_data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Supplementary exercise: synthetic data with synthpop</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">Communications and Community</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../../ANNOUNCEMENTS.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Announcements</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Announcements</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../CODE_OF_CONDUCT.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Contributor Covenant Code of Conduct</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Contributor Covenant Code of Conduct</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../CONTRIBUTING.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Contributing</span></span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Contributing</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../ACCESSIBILITY.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Accessibility</span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Accessibility</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../SECURITY.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Security Policy</span></span></a>
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Security Policy</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../AI_POLICY.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">AI-assisted development policy</span></span></a>
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">AI-assisted development policy</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../CHANGELOG.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Changelog</span></span></a>
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Changelog</span></span></a>
   </div>
 </li>
       </ul>
@@ -323,24 +403,24 @@ div.csl-indent {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">12.1</span> Introduction</a></li>
-  <li><a href="#inspect-a-record" id="toc-inspect-a-record" class="nav-link" data-scroll-target="#inspect-a-record"><span class="header-section-number">12.2</span> Inspect a record</a></li>
-  <li><a href="#connect-the-website-repository-and-archive" id="toc-connect-the-website-repository-and-archive" class="nav-link" data-scroll-target="#connect-the-website-repository-and-archive"><span class="header-section-number">12.3</span> Connect the website, repository, and archive</a></li>
-  <li><a href="#zenodo-github-integration" id="toc-zenodo-github-integration" class="nav-link" data-scroll-target="#zenodo-github-integration"><span class="header-section-number">12.4</span> Automatically archive GitHub releases</a></li>
-  <li><a href="#decide-what-to-archive" id="toc-decide-what-to-archive" class="nav-link" data-scroll-target="#decide-what-to-archive"><span class="header-section-number">12.5</span> Decide what to archive</a></li>
-  <li><a href="#try-it-yourself" id="toc-try-it-yourself" class="nav-link" data-scroll-target="#try-it-yourself"><span class="header-section-number">12.6</span> Try it yourself</a></li>
-  <li><a href="#zenodo-checkpoint" id="toc-zenodo-checkpoint" class="nav-link" data-scroll-target="#zenodo-checkpoint"><span class="header-section-number">12.7</span> Checkpoint</a></li>
-  <li><a href="#further-reading" id="toc-further-reading" class="nav-link" data-scroll-target="#further-reading"><span class="header-section-number">12.8</span> Further reading</a></li>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">10.1</span> Introduction</a></li>
+  <li><a href="#step-1-copy-and-render-the-template" id="toc-step-1-copy-and-render-the-template" class="nav-link" data-scroll-target="#step-1-copy-and-render-the-template"><span class="header-section-number">10.2</span> Step 1: copy and render the template</a></li>
+  <li><a href="#step-2-read-the-report-source" id="toc-step-2-read-the-report-source" class="nav-link" data-scroll-target="#step-2-read-the-report-source"><span class="header-section-number">10.3</span> Step 2: read the report source</a></li>
+  <li><a href="#step-3-complete-the-three-gaps" id="toc-step-3-complete-the-three-gaps" class="nav-link" data-scroll-target="#step-3-complete-the-three-gaps"><span class="header-section-number">10.4</span> Step 3: complete the three gaps</a></li>
+  <li><a href="#step-4-render-again-and-check-the-numbers" id="toc-step-4-render-again-and-check-the-numbers" class="nav-link" data-scroll-target="#step-4-render-again-and-check-the-numbers"><span class="header-section-number">10.5</span> Step 4: render again and check the numbers</a></li>
+  <li><a href="#quarto-checkpoint" id="toc-quarto-checkpoint" class="nav-link" data-scroll-target="#quarto-checkpoint"><span class="header-section-number">10.6</span> Checkpoint</a></li>
+  <li><a href="#quarto-publishing" id="toc-quarto-publishing" class="nav-link" data-scroll-target="#quarto-publishing"><span class="header-section-number">10.7</span> After the workshop: publishing and journal formats</a></li>
+  <li><a href="#further-reading" id="toc-further-reading" class="nav-link" data-scroll-target="#further-reading"><span class="header-section-number">10.8</span> Further reading</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/JBris/open-and-reproducible-science-in-r/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../pages/workshop/00_preparation.html">Workshop</a></li><li class="breadcrumb-item"><a href="../../pages/workshop/08_zenodo.html"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Research archiving and persistent identifiers</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../pages/workshop/00_preparation.html">Workshop</a></li><li class="breadcrumb-item"><a href="../../pages/workshop/06_quarto.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Create and render a reproducible Quarto report</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Research archiving and persistent identifiers</span></h1>
-<p class="subtitle lead">80–85 minutes · Zenodo</p>
+<h1 class="title"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Create and render a reproducible Quarto report</span></h1>
+<p class="subtitle lead">50–65 minutes · Hands-on · Quarto</p>
 </div>
 
 
@@ -357,99 +437,204 @@ div.csl-indent {
 </header>
 
 
-<section id="introduction" class="level2" data-number="12.1">
-<h2 data-number="12.1" class="anchored" data-anchor-id="introduction"><span class="header-section-number">12.1</span> Introduction</h2>
-<p>In this five-minute demonstration, we will work out what a reader should cite to find the materials for a particular analysis. We will inspect the workshop archive and how published GitHub releases can be archived automatically through the Zenodo integration.</p>
-<p>A Git commit identifies a repository revision. A GitHub release gives a tagged revision a name and a place for release notes and assets. Zenodo can archive a copy of selected files and issue a DOI. An archive makes the cited files available under the access conditions of that record <span class="citation" data-cites="zenodo-reserve-doi">(<a href="../4_references.html#ref-zenodo-reserve-doi" role="doc-biblioref">Zenodo, n.d.c</a>)</span>.</p>
+<section id="introduction" class="level2" data-number="10.1">
+<h2 data-number="10.1" class="anchored" data-anchor-id="introduction"><span class="header-section-number">10.1</span> Introduction</h2>
+<p>In this 15-minute activity, you complete and render a short report that reads the summary written by your pipeline. The report is partially completed: its methods are written, and you add the confidence interval, an interpretation, and the provenance fields. By the end, you should be able to explain where each number in the report came from and what a reader needs to recreate it.</p>
+<p>You need the <code>meta-summary.csv</code> file from the <a href="../../pages/workshop/05_targets.html#targets-checkpoint">targets activity</a>.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Get back on track
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>If you arrived late, lost your session, or broke a working file, run this from the project root in the <strong>R Console</strong>. It prepares missing inputs, saves any previous working files as backups in <code>workspace/</code>, restores the reference pipeline and report, and runs the pipeline.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"pipelines/recover_workshop.R"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<p>After recovery, run the render command in Step 1. In a Quarto error, look for the first error and the reported line or chunk in <code>report.qmd</code>.</p>
 </section>
-<section id="inspect-a-record" class="level2" data-number="12.2">
-<h2 data-number="12.2" class="anchored" data-anchor-id="inspect-a-record"><span class="header-section-number">12.2</span> Inspect a record</h2>
-<p>Open the workshop’s archived <code>v0.2.0</code> release <span class="citation" data-cites="workshop-v020">(<a href="../4_references.html#ref-workshop-v020" role="doc-biblioref">Bristow and Liang 2026</a>)</span>. Find the creators, access conditions, and the ZIP of that revision. Compare the Zenodo version DOI with the GitHub release tag and the concept DOI in <code>CITATION.cff</code>. Cite the version DOI for the files supporting a result. Cite the concept DOI when referring to the evolving project. <a href="https://doi.org/10.5281/zenodo.24357028">Version archive</a> · <a href="https://doi.org/10.5281/zenodo.24342489">Concept DOI</a> · <a href="https://github.com/JBris/open-and-reproducible-science-in-r/releases/tag/v0.2.0">GitHub release</a></p>
+<section id="step-1-copy-and-render-the-template" class="level2" data-number="10.2">
+<h2 data-number="10.2" class="anchored" data-anchor-id="step-1-copy-and-render-the-template"><span class="header-section-number">10.2</span> Step 1: copy and render the template</h2>
+<p>Allow about three minutes. In the <strong>R Console</strong> at the project root, copy and render your report. Run the same render command after each edit. It keeps you in the Console and lets you read any errors there.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"pipelines/workshop_support.R"</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">dir.create</span>(<span class="st">"workspace"</span>, <span class="at">showWarnings =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>report <span class="ot">&lt;-</span> <span class="fu">file.path</span>(<span class="st">"workspace"</span>, <span class="st">"report.qmd"</span>)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">file.exists</span>(report)) {</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">file.copy</span>(<span class="st">"pipelines/exercise/health_wellbeing_report.qmd"</span>, report)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="fu">render_workshop_report</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>In the <strong>Files</strong> pane, open the <code>workspace</code> folder, click <code>report.html</code>, and choose <strong>View in Web Browser</strong>. The HTML embeds its resources, so it works as a single file. The pooled estimate appears, along with three <strong>TODO</strong> markers in the template.</p>
 </section>
-<section id="connect-the-website-repository-and-archive" class="level2" data-number="12.3">
-<h2 data-number="12.3" class="anchored" data-anchor-id="connect-the-website-repository-and-archive"><span class="header-section-number">12.3</span> Connect the website, repository, and archive</h2>
-<p>The workshop has three connected locations:</p>
+<section id="step-2-read-the-report-source" class="level2" data-number="10.3">
+<h2 data-number="10.3" class="anchored" data-anchor-id="step-2-read-the-report-source"><span class="header-section-number">10.3</span> Step 2: read the report source</h2>
+<p>Allow about three minutes. Open <code>workspace/report.qmd</code> in RStudio.</p>
+<ul>
+<li>The <strong>YAML header</strong> at the top sets the title and HTML format, and names the summary file in <code>params</code>.</li>
+<li>The hidden <strong>R chunk</strong> reads one row from the summary CSV and checks it. It does not fit any model.</li>
+<li><strong>Inline R code</strong>, written as a backtick, the letter <code>r</code>, an expression, and a closing backtick, puts values from that row into the text when the report renders.</li>
+</ul>
+<p>The pipeline owns the analysis; the report explains its methods and interprets the saved result. Because the report never retypes a number, rerunning the pipeline and rendering again updates every value.</p>
+</section>
+<section id="step-3-complete-the-three-gaps" class="level2" data-number="10.4">
+<h2 data-number="10.4" class="anchored" data-anchor-id="step-3-complete-the-three-gaps"><span class="header-section-number">10.4</span> Step 3: complete the three gaps</h2>
+<p>Allow about six minutes. The Results section reports two 95% intervals that answer different questions:</p>
+<ul>
+<li>The <strong>confidence interval</strong> describes uncertainty in the <em>average</em> association across studies. It usually narrows as studies are added.</li>
+<li>The <strong>prediction interval</strong> describes where the true association in a new, comparable study is likely to fall under the model. It adds the between-study variance, <span class="math inline">\(\tau^2\)</span>, so it stays wide when the studies differ.</li>
+</ul>
+<p>I² is the percentage of variation in the study estimates that is due to between-study heterogeneity rather than sampling error. Use these definitions to write TODO 2 in your own words.</p>
+<p>Edit <code>workspace/report.qmd</code> and save it.</p>
+<ul>
+<li><strong>TODO 1</strong>, in Results: report the confidence interval using inline R code, following the pattern for the pooled correlation.</li>
+<li><strong>TODO 2</strong>, in Results: explain how the prediction interval and confidence interval answer different questions.</li>
+<li><strong>TODO 3</strong>, in Provenance: add list items for the dataset pin version and the pipeline script MD5.</li>
+</ul>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution to TODO 1
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-2" class="callout-2-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Replace the sentence about the pooled correlation and the TODO 1 paragraph with:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>The pooled correlation was <span class="in">`r sprintf("%.3f", result$pooled_r)`</span> with a</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="in">`r sprintf("%.0f%%", 100 * result$confidence_level)`</span> confidence interval</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>from <span class="in">`r sprintf("%.3f", result$ci_lower)`</span> to</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="in">`r sprintf("%.3f", result$ci_upper)`</span>.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Example for TODO 2
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-3" class="callout-3-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>Your wording can differ. For example:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>The confidence interval describes uncertainty in the average association.</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>The prediction interval describes plausible true associations in a</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>comparable setting under the model.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-4-contents" aria-controls="callout-4" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Solution to TODO 3
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-4" class="callout-4-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<div class="sourceCode" id="cb5"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Dataset pin version: <span class="in">`r result$data_version`</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Pipeline script MD5: <span class="in">`r pipeline_md5`</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+<p>The completed reference report is <code>pipelines/health_wellbeing_report.qmd</code>. If you are stuck, compare your copy with it.</p>
+</section>
+<section id="step-4-render-again-and-check-the-numbers" class="level2" data-number="10.5">
+<h2 data-number="10.5" class="anchored" data-anchor-id="step-4-render-again-and-check-the-numbers"><span class="header-section-number">10.5</span> Step 4: render again and check the numbers</h2>
+<p>Allow about three minutes. Render the report again in the <strong>R Console</strong>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">render_workshop_report</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Reload <code>report.html</code> in your browser. Then compare its values with the summary file in the <strong>R Console</strong>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>summary_csv <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">file.path</span>(<span class="fu">workshop_output_dir</span>(), <span class="st">"meta-summary.csv"</span>)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>summary_csv[, <span class="fu">c</span>(<span class="st">"data_version"</span>, <span class="st">"studies"</span>, <span class="st">"pooled_r"</span>, <span class="st">"ci_lower"</span>, <span class="st">"ci_upper"</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>            data_version studies  pooled_r  ci_lower  ci_upper
+1 20261121T102119Z-11d00      29 0.3631912 0.3092394 0.4148126</code></pre>
+</div>
+</div>
+</section>
+<section id="quarto-checkpoint" class="level2" data-number="10.6">
+<h2 data-number="10.6" class="anchored" data-anchor-id="quarto-checkpoint"><span class="header-section-number">10.6</span> Checkpoint</h2>
+<p>Your rendered report shows <strong>29 studies</strong>, a pooled correlation of <strong>0.363</strong>, and a 95% interval from <strong>0.309 to 0.415</strong>. Its provenance names the same pin version as the summary file, the pipeline script checksum, the inclusion rule, and the model version. It reports I² of <strong>99.8%</strong> and a prediction interval of <strong>0.056 to 0.607</strong>. You can point to the CSV column behind each number. No TODO markers remain.</p>
+<p>Next, you will change an analysis setting and reproduce the results. <a href="../../pages/workshop/07_modify_and_reproduce.html">Modify the analysis and reproduce the results</a></p>
+</section>
+<section id="quarto-publishing" class="level2" data-number="10.7">
+<h2 data-number="10.7" class="anchored" data-anchor-id="quarto-publishing"><span class="header-section-number">10.7</span> After the workshop: publishing and journal formats</h2>
+<p>An approved HTML report can be served from a project site or attached to a release. Before sharing, review the report for any content that came from data with reuse conditions. The report source, versioned analysis code, metadata, and environment record help others understand how the published HTML was made.</p>
+<p>Quarto extensions add formats and templates for particular publishing workflows. Browse the <a href="https://quarto.org/docs/extensions/listing-journals.html">Journal Articles extension listing</a> and find a format relevant to your field. Examples include:</p>
 <table class="caption-top table">
 <thead>
 <tr class="header">
-<th>Resource</th>
-<th>Role</th>
+<th>Extension</th>
+<th>Article style or publisher</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td><a href="https://jbris.github.io/open-and-reproducible-science-in-r/">Workshop website</a></td>
-<td>Read the published workshop materials.</td>
+<td><code>apaquarto</code></td>
+<td>American Psychological Association, seventh edition</td>
 </tr>
 <tr class="even">
-<td><a href="https://github.com/JBris/open-and-reproducible-science-in-r">GitHub repository</a></td>
-<td>Find the source files, history, and releases used to publish the site.</td>
+<td><code>elsevier</code></td>
+<td>Elsevier journals</td>
 </tr>
 <tr class="odd">
-<td><a href="https://zenodo.org/records/24357028">Zenodo record 24357028</a></td>
-<td>Find the archived <code>v0.2.0</code> release and its version DOI.</td>
+<td><code>plos</code></td>
+<td>Public Library of Science</td>
+</tr>
+<tr class="even">
+<td><code>jss</code></td>
+<td>Journal of Statistical Software</td>
 </tr>
 </tbody>
 </table>
-<p>The record’s related identifier points to the repository’s <code>v0.2.0</code> tag. Follow that link when comparing the archived files with GitHub. The live website can evolve as the project changes; cite the archived version that supplied the files for a particular result.</p>
+<p>Open an extension’s repository to check its supported formats, required software, author metadata, and usage instructions. Compare the template with the target journal’s current submission guidance.</p>
+<p>To try one, create a separate article directory and start from the <a href="https://github.com/quarto-journals/plos">PLOS template</a>. Run these commands in the Terminal from the project root and follow the prompts:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> health-wellbeing-article</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> health-wellbeing-article</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> use template quarto-journals/plos</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>The template supplies an example QMD, bibliography, and extension files. PLOS supports <code>plos-html</code> and <code>plos-pdf</code>; the PDF format also requires a LaTeX installation. Adapt the article to read the same pipeline summary and retain its methods and provenance fields.</p>
+<p>Extensions are stored locally in <code>_extensions/</code>. Include that folder with the article source in Git. For a release, record the Quarto and extension versions alongside the R package versions in <code>renv.lock</code>. See the Quarto guidance on installing and versioning extensions <span class="citation" data-cites="quarto-managing-extensions">(<a href="../4_references.html#ref-quarto-managing-extensions" role="doc-biblioref">Quarto, n.d.b</a>)</span>.</p>
 </section>
-<section id="zenodo-github-integration" class="level2" data-number="12.4">
-<h2 data-number="12.4" class="anchored" data-anchor-id="zenodo-github-integration"><span class="header-section-number">12.4</span> Automatically archive GitHub releases</h2>
-<p>For an instructor demonstration or follow-up setup, use Zenodo’s <a href="https://help.zenodo.org/docs/github/enable-repository/">Enable a repository guide</a>:</p>
-<ol type="1">
-<li>Connect your GitHub account to Zenodo if it is not already linked.</li>
-<li>In Zenodo’s profile menu, select <strong>GitHub</strong>.</li>
-<li>Select <strong>Sync now</strong> to refresh the list of repositories.</li>
-<li>Find the repository you maintain and enable its slider. For this workshop, inspect the connection for <code>JBris/open-and-reproducible-science-in-r</code>; use your own repository for follow-up practice.</li>
-<li>Refresh the page and check that the repository is enabled.</li>
-</ol>
-<p>Once connected, publishing a new GitHub release triggers automatic ingestion and archiving in Zenodo. Inspect the resulting version record, its DOI, metadata, and downloadable files after each release. The <strong>Sync now</strong> control refreshes the repository list; published releases are the events that create new archives.</p>
-<p>Record <code>24357028</code> identifies <code>v0.2.0</code>. Later archived releases have separate version records and DOIs, connected through the project’s version history and concept DOI. Retain the version DOI in the citation for a specific analysis.</p>
-</section>
-<section id="decide-what-to-archive" class="level2" data-number="12.5">
-<h2 data-number="12.5" class="anchored" data-anchor-id="decide-what-to-archive"><span class="header-section-number">12.5</span> Decide what to archive</h2>
-<p>For the <code>HealthWellbeing</code> analysis, assemble a candidate list:</p>
+<section id="further-reading" class="level2" data-number="10.8">
+<h2 data-number="10.8" class="anchored" data-anchor-id="further-reading"><span class="header-section-number">10.8</span> Further reading</h2>
 <ul>
-<li>The exact code revision, pipeline script, and Quarto report source.</li>
-<li>The report and summary CSV, where upstream terms permit sharing.</li>
-<li>The lockfile, actual environment record, and container digest if the run used a container.</li>
-<li>The source citation, download URL, checksum, pin version and study inclusion rule, plus the relevant metadata and reuse terms.</li>
-</ul>
-<p>The upstream download is publicly accessible. Confirm its reuse terms before including the raw file, pinned copies, or derivatives in a deposit. If you cannot include a copy, document how an authorised reader can obtain the source and recreate the selected input. A pin version identifies an object in a particular board. Preserving a version identifier with the checksum and filter lets another reader understand what that object contained.</p>
-</section>
-<section id="try-it-yourself" class="level2" data-number="12.6">
-<h2 data-number="12.6" class="anchored" data-anchor-id="try-it-yourself"><span class="header-section-number">12.6</span> Try it yourself</h2>
-<p>Point to the DOI you would cite for the files you inspected. Identify one item that would help a reader recreate the precise version of the input. Explain how you would document its access conditions. Follow the record’s related link to the GitHub tag and identify the release event that would create the next archive.</p>
-</section>
-<section id="zenodo-checkpoint" class="level2" data-number="12.7">
-<h2 data-number="12.7" class="anchored" data-anchor-id="zenodo-checkpoint"><span class="header-section-number">12.7</span> Checkpoint</h2>
-<p>You can connect a cited archive to a specific version, distinguish its DOI from a GitHub release tag, and list the files and metadata a reader needs. You can explain how an enabled GitHub repository produces a new Zenodo archive when a release is published. Use the archive’s own citation for the record you inspected and cite the original review separately for the study data.</p>
-<p>We will finish with optional extensions and discussion. <a href="../../pages/workshop/09_extras_and_discussion.html">Optional extras and concluding discussion</a></p>
-</section>
-<section id="further-reading" class="level2" data-number="12.8">
-<h2 data-number="12.8" class="anchored" data-anchor-id="further-reading"><span class="header-section-number">12.8</span> Further reading</h2>
-<ul>
-<li>Enabling GitHub–Zenodo integration <span class="citation" data-cites="zenodo-enable-repository">(<a href="../4_references.html#ref-zenodo-enable-repository" role="doc-biblioref">Zenodo, n.d.a</a>)</span>.</li>
-<li>Managing versions on Zenodo <span class="citation" data-cites="zenodo-manage-versions">(<a href="../4_references.html#ref-zenodo-manage-versions" role="doc-biblioref">Zenodo, n.d.b</a>)</span>.</li>
-<li>Archiving and citing a GitHub repository <span class="citation" data-cites="github-archiving">(<a href="../4_references.html#ref-github-archiving" role="doc-biblioref">GitHub, n.d.</a>)</span>.</li>
+<li>Working with R in Quarto <span class="citation" data-cites="quarto-r">(<a href="../4_references.html#ref-quarto-r" role="doc-biblioref">Quarto, n.d.d</a>)</span>.</li>
+<li>Publishing Quarto documents <span class="citation" data-cites="quarto-publishing">(<a href="../4_references.html#ref-quarto-publishing" role="doc-biblioref">Quarto, n.d.c</a>)</span>.</li>
+<li>Journal article formats and templates <span class="citation" data-cites="quarto-journal-extensions">(<a href="../4_references.html#ref-quarto-journal-extensions" role="doc-biblioref">Quarto, n.d.a</a>)</span>.</li>
 </ul>
 
 
 <div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
-<div id="ref-workshop-v020" class="csl-entry" role="listitem">
-Bristow, James, and Hana Liang. 2026. <span>“Open and Reproducible Science in <span>R</span>.”</span> Zenodo. <a href="https://doi.org/10.5281/zenodo.24357028">https://doi.org/10.5281/zenodo.24357028</a>.
+<div id="ref-quarto-journal-extensions" class="csl-entry" role="listitem">
+Quarto. n.d.a. <span>“Journal Articles.”</span> <a href="https://quarto.org/docs/extensions/listing-journals.html">https://quarto.org/docs/extensions/listing-journals.html</a>.
 </div>
-<div id="ref-github-archiving" class="csl-entry" role="listitem">
-GitHub. n.d. <span>“Referencing and Citing Content.”</span> <a href="https://docs.github.com/en/repositories/archiving-a-github-repository/referencing-and-citing-content">https://docs.github.com/en/repositories/archiving-a-github-repository/referencing-and-citing-content</a>.
+<div id="ref-quarto-managing-extensions" class="csl-entry" role="listitem">
+———. n.d.b. <span>“Managing Extensions.”</span> <a href="https://quarto.org/docs/extensions/managing.html">https://quarto.org/docs/extensions/managing.html</a>.
 </div>
-<div id="ref-zenodo-enable-repository" class="csl-entry" role="listitem">
-Zenodo. n.d.a. <span>“Enable a Repository.”</span> <a href="https://help.zenodo.org/docs/github/enable-repository/">https://help.zenodo.org/docs/github/enable-repository/</a>.
+<div id="ref-quarto-publishing" class="csl-entry" role="listitem">
+———. n.d.c. <span>“Publishing.”</span> <a href="https://quarto.org/docs/publishing/">https://quarto.org/docs/publishing/</a>.
 </div>
-<div id="ref-zenodo-manage-versions" class="csl-entry" role="listitem">
-———. n.d.b. <span>“Manage Versions.”</span> <a href="https://help.zenodo.org/docs/deposit/manage-versions/">https://help.zenodo.org/docs/deposit/manage-versions/</a>.
-</div>
-<div id="ref-zenodo-reserve-doi" class="csl-entry" role="listitem">
-———. n.d.c. <span>“Reserve a <span>DOI</span>.”</span> <a href="https://help.zenodo.org/docs/deposit/describe-records/reserve-doi/">https://help.zenodo.org/docs/deposit/describe-records/reserve-doi/</a>.
+<div id="ref-quarto-r" class="csl-entry" role="listitem">
+———. n.d.d. <span>“Using <span>R</span>.”</span> <a href="https://quarto.org/docs/computations/r.html">https://quarto.org/docs/computations/r.html</a>.
 </div>
 </div>
 </section>
@@ -1021,13 +1206,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../../pages/workshop/07_quarto.html" class="pagination-link" aria-label="Reproducible reporting and publishing">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Reproducible reporting and publishing</span></span>
+      <a href="../../pages/workshop/05_targets.html" class="pagination-link" aria-label="Build and execute a targets meta-analysis pipeline">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Build and execute a targets meta-analysis pipeline</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../pages/workshop/09_extras_and_discussion.html" class="pagination-link" aria-label="Optional extras and concluding discussion">
-        <span class="nav-page-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Optional extras and concluding discussion</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../pages/workshop/07_modify_and_reproduce.html" class="pagination-link" aria-label="Modify the analysis and reproduce the results">
+        <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Modify the analysis and reproduce the results</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

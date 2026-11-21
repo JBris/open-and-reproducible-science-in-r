@@ -8,7 +8,7 @@
 
 <meta name="description" content="Content for the Open and Reproducible Science in R workshop.">
 
-<title>8&nbsp; Dataset documentation and FAIR metadata – Open and Reproducible Science in R</title>
+<title>13&nbsp; Questions and discussion – Open and Reproducible Science in R</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -21,61 +21,7 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
-/* CSS for citations */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-  margin-bottom: 0em;
-}
-.hanging-indent div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}</style>
+</style>
 
 
 <script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -85,8 +31,8 @@ div.csl-indent {
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
-<link href="../../pages/workshop/05_pins.html" rel="next">
-<link href="../../pages/workshop/03_environments.html" rel="prev">
+<link href="../../pages/workshop/10_synthetic_data.html" rel="next">
+<link href="../../pages/workshop/08_archiving.html" rel="prev">
 <script src="../../site_libs/quarto-html/quarto.js"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -139,10 +85,10 @@ div.csl-indent {
 
 
 <link rel="stylesheet" href="../../styles.css">
-<meta property="og:title" content="8&nbsp; Dataset documentation and FAIR metadata – Open and Reproducible Science in R">
+<meta property="og:title" content="13&nbsp; Questions and discussion – Open and Reproducible Science in R">
 <meta property="og:description" content="Content for the Open and Reproducible Science in R workshop.">
 <meta property="og:site_name" content="Open and Reproducible Science in R">
-<meta name="twitter:title" content="8&nbsp; Dataset documentation and FAIR metadata – Open and Reproducible Science in R">
+<meta name="twitter:title" content="13&nbsp; Questions and discussion – Open and Reproducible Science in R">
 <meta name="twitter:description" content="Content for the Open and Reproducible Science in R workshop.">
 <meta name="twitter:card" content="summary">
 </head>
@@ -156,7 +102,7 @@ div.csl-indent {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../pages/workshop/00_preparation.html">Workshop</a></li><li class="breadcrumb-item"><a href="../../pages/workshop/04_data_documentation.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Dataset documentation and FAIR metadata</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../pages/workshop/00_preparation.html">Workshop</a></li><li class="breadcrumb-item"><a href="../../pages/workshop/09_discussion.html"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Questions and discussion</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -235,55 +181,55 @@ div.csl-indent {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../pages/workshop/01_open_science.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Open and reproducible science</span></span></a>
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Introduction, reproducibility principles, Git and GitHub</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../pages/workshop/02_git_github.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Version control, collaboration and sharing</span></span></a>
+  <a href="../../pages/workshop/02_environments.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Computational reproducibility</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../pages/workshop/03_environments.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Reproducible computational environments</span></span></a>
+  <a href="../../pages/workshop/03_data_documentation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">FAIR data documentation and assessment</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../pages/workshop/04_data_documentation.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Dataset documentation and FAIR metadata</span></span></a>
+  <a href="../../pages/workshop/04_versioning.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Data and model versioning</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../pages/workshop/05_pins.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Dataset storage and versioning</span></span></a>
+  <a href="../../pages/workshop/05_targets.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Build and execute a targets meta-analysis pipeline</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../pages/workshop/06_targets.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Reproducible analytical pipelines</span></span></a>
+  <a href="../../pages/workshop/06_quarto.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Create and render a reproducible Quarto report</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../pages/workshop/07_quarto.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Reproducible reporting and publishing</span></span></a>
+  <a href="../../pages/workshop/07_modify_and_reproduce.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Modify the analysis and reproduce the results</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../pages/workshop/08_zenodo.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Research archiving and persistent identifiers</span></span></a>
+  <a href="../../pages/workshop/08_archiving.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">GitHub releases, Zenodo and archiving</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../pages/workshop/09_extras_and_discussion.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Optional extras and concluding discussion</span></span></a>
+  <a href="../../pages/workshop/09_discussion.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Questions and discussion</span></span></a>
   </div>
 </li>
       </ul>
@@ -291,7 +237,7 @@ div.csl-indent {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
- <span class="menu-text">Communications and Community</span></a>
+ <span class="menu-text">Supplementary exercises</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Toggle section">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -299,44 +245,61 @@ div.csl-indent {
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
+  <a href="../../pages/workshop/10_synthetic_data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Supplementary exercise: synthetic data with synthpop</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true">
+ <span class="menu-text">Communications and Community</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
   <a href="../../ANNOUNCEMENTS.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Announcements</span></span></a>
+ <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Announcements</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../CODE_OF_CONDUCT.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">15</span>&nbsp; <span class="chapter-title">Contributor Covenant Code of Conduct</span></span></a>
+ <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Contributor Covenant Code of Conduct</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../CONTRIBUTING.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">16</span>&nbsp; <span class="chapter-title">Contributing</span></span></a>
+ <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Contributing</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../ACCESSIBILITY.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">17</span>&nbsp; <span class="chapter-title">Accessibility</span></span></a>
+ <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Accessibility</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../SECURITY.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">18</span>&nbsp; <span class="chapter-title">Security Policy</span></span></a>
+ <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">Security Policy</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../AI_POLICY.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">19</span>&nbsp; <span class="chapter-title">AI-assisted development policy</span></span></a>
+ <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">AI-assisted development policy</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../CHANGELOG.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">20</span>&nbsp; <span class="chapter-title">Changelog</span></span></a>
+ <span class="menu-text"><span class="chapter-number">21</span>&nbsp; <span class="chapter-title">Changelog</span></span></a>
   </div>
 </li>
       </ul>
@@ -357,22 +320,21 @@ div.csl-indent {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">8.1</span> Introduction</a></li>
-  <li><a href="#data-dictionary" id="toc-data-dictionary" class="nav-link" data-scroll-target="#data-dictionary"><span class="header-section-number">8.2</span> Data dictionary</a></li>
-  <li><a href="#dataset-metadata" id="toc-dataset-metadata" class="nav-link" data-scroll-target="#dataset-metadata"><span class="header-section-number">8.3</span> Dataset metadata</a></li>
-  <li><a href="#try-it-yourself" id="toc-try-it-yourself" class="nav-link" data-scroll-target="#try-it-yourself"><span class="header-section-number">8.4</span> Try it yourself</a></li>
-  <li><a href="#metadata-checkpoint" id="toc-metadata-checkpoint" class="nav-link" data-scroll-target="#metadata-checkpoint"><span class="header-section-number">8.5</span> Checkpoint</a></li>
-  <li><a href="#further-reading" id="toc-further-reading" class="nav-link" data-scroll-target="#further-reading"><span class="header-section-number">8.6</span> Further reading</a></li>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">13.1</span> Introduction</a></li>
+  <li><a href="#the-workflow-you-used" id="toc-the-workflow-you-used" class="nav-link" data-scroll-target="#the-workflow-you-used"><span class="header-section-number">13.2</span> The workflow you used</a></li>
+  <li><a href="#extras-discussion" id="toc-extras-discussion" class="nav-link" data-scroll-target="#extras-discussion"><span class="header-section-number">13.3</span> Discussion</a></li>
+  <li><a href="#export-work" id="toc-export-work" class="nav-link" data-scroll-target="#export-work"><span class="header-section-number">13.4</span> Before you leave</a></li>
+  <li><a href="#follow-up-resources" id="toc-follow-up-resources" class="nav-link" data-scroll-target="#follow-up-resources"><span class="header-section-number">13.5</span> Follow-up resources</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/JBris/open-and-reproducible-science-in-r/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../pages/workshop/00_preparation.html">Workshop</a></li><li class="breadcrumb-item"><a href="../../pages/workshop/04_data_documentation.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Dataset documentation and FAIR metadata</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../pages/workshop/00_preparation.html">Workshop</a></li><li class="breadcrumb-item"><a href="../../pages/workshop/09_discussion.html"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Questions and discussion</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Dataset documentation and FAIR metadata</span></h1>
-<p class="subtitle lead">30–42 minutes · codebook and dataspice</p>
+<h1 class="title"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Questions and discussion</span></h1>
+<p class="subtitle lead">82–90 minutes · Interactive</p>
 </div>
 
 
@@ -389,41 +351,13 @@ div.csl-indent {
 </header>
 
 
-<section id="introduction" class="level2" data-number="8.1">
-<h2 data-number="8.1" class="anchored" data-anchor-id="introduction"><span class="header-section-number">8.1</span> Introduction</h2>
-<p>We will describe the <code>HealthWellbeing</code> dataset so a collaborator can interpret the five columns and find the original teaching file. By the end of these 12 minutes, you should be able to read a data dictionary and explain what the dataset metadata adds.</p>
-<p>FAIR stands for <strong>Findable, Accessible, Interoperable, and Reusable</strong> <span class="citation" data-cites="gofair-principles">(<a href="../4_references.html#ref-gofair-principles" role="doc-biblioref">GO FAIR, n.d.</a>)</span>. An identifiable source helps people find the data. Access instructions explain how to obtain it. Structured metadata helps software interpret it. Definitions, provenance, and reuse terms help people work out whether the data suit their question. Access can have conditions.</p>
-<p>Start with the verified raw file from the preparation lesson. This page loads its own <code>health</code> object so it can render in a fresh R session. Run the chunks in the Console from the project root with <em>box</em>, <em>codebook</em>, and <em>dataspice</em> available. Your instructor can provide the completed CSV and JSON-LD files for discussion. <a href="../../pages/workshop/00_preparation.html#preparation-data">Preparation</a></p>
+<section id="introduction" class="level2" data-number="13.1">
+<h2 data-number="13.1" class="anchored" data-anchor-id="introduction"><span class="header-section-number">13.1</span> Introduction</h2>
+<p>In the final eight minutes, we look back at the workflow you used, take questions, and discuss how to apply it in your own work. The aim of the session was to experience an end-to-end reproducible research workflow, not to master every package.</p>
 </section>
-<section id="data-dictionary" class="level2" data-number="8.2">
-<h2 data-number="8.2" class="anchored" data-anchor-id="data-dictionary"><span class="header-section-number">8.2</span> Data dictionary</h2>
-<p>We first load the functions used in this lesson. We label a copy of the table and keep the downloaded file unchanged.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>box<span class="sc">::</span><span class="fu">use</span>(</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  codebook[codebook_table],</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  dataspice[create_spice, write_spice],</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  utils[read.csv, write.csv]</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>raw_file <span class="ot">&lt;-</span> <span class="fu">file.path</span>(<span class="st">"data"</span>, <span class="st">"raw"</span>, <span class="st">"healthwellbeing.rda"</span>)</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">file.exists</span>(raw_file),</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">identical</span>(</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">unname</span>(tools<span class="sc">::</span><span class="fu">md5sum</span>(raw_file)),</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">"0d74964b0b7168379a2b015cb648b326"</span></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>data_env <span class="ot">&lt;-</span> <span class="fu">new.env</span>(<span class="at">parent =</span> <span class="fu">baseenv</span>())</span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>loaded_names <span class="ot">&lt;-</span> <span class="fu">load</span>(raw_file, <span class="at">envir =</span> data_env)</span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(<span class="fu">identical</span>(loaded_names, <span class="st">"HealthWellbeing"</span>))</span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>health <span class="ot">&lt;-</span> data_env[[<span class="st">"HealthWellbeing"</span>]]</span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(</span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">is.data.frame</span>(health),</span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">nrow</span>(health) <span class="sc">==</span> <span class="dv">29</span>L,</span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">identical</span>(<span class="fu">names</span>(health), <span class="fu">c</span>(<span class="st">"author"</span>, <span class="st">"cor"</span>, <span class="st">"n"</span>, <span class="st">"population"</span>, <span class="st">"country"</span>)),</span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>  <span class="sc">!</span><span class="fu">anyNA</span>(health)</span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
+<section id="the-workflow-you-used" class="level2" data-number="13.2">
+<h2 data-number="13.2" class="anchored" data-anchor-id="the-workflow-you-used"><span class="header-section-number">13.2</span> The workflow you used</h2>
+<p>Allow about one minute. Each stage recorded something another researcher needs to understand, rerun, or cite the result.</p>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 33%">
@@ -432,169 +366,85 @@ div.csl-indent {
 </colgroup>
 <thead>
 <tr class="header">
-<th>Column</th>
-<th>What it records</th>
-<th>Unit or values</th>
+<th>Stage</th>
+<th>What it recorded</th>
+<th>Where to find it</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td><code>author</code></td>
-<td>Study label with first author and year</td>
-<td>Text</td>
+<td>Git and GitHub</td>
+<td>Change history and review</td>
+<td>Commits and pull requests</td>
 </tr>
 <tr class="even">
-<td><code>cor</code></td>
-<td>Pearson correlation of health and well-being</td>
-<td>Unitless</td>
+<td>renv, Docker, Binder</td>
+<td>Package versions and computing environment</td>
+<td><code>renv.lock</code>, <code>VERSION</code>, <code>outputs/health-wellbeing/session-info.txt</code>, and the Dockerfiles on GitHub</td>
 </tr>
 <tr class="odd">
-<td><code>n</code></td>
-<td>Study sample size</td>
-<td>Count of observations</td>
+<td>dataspice, rfair</td>
+<td>Variable meanings, source and licence, plus evidence from an automated FAIR assessment</td>
+<td><code>data/metadata/health-wellbeing/dataspice.json</code>, and <code>outputs/health-wellbeing/metadata/</code> if you ran the demonstration</td>
 </tr>
 <tr class="even">
-<td><code>population</code></td>
-<td>Type of study sample</td>
-<td>Chronic condition or general population</td>
+<td>pins, vetiver</td>
+<td>Exact input and predictive model versions</td>
+<td><code>dataset-versions.csv</code>, <code>predictive-model-version.txt</code>, pin metadata</td>
 </tr>
 <tr class="odd">
-<td><code>country</code></td>
-<td>Country where the study was conducted</td>
-<td>Country name</td>
+<td>targets</td>
+<td>The steps from input to summary, and their dependencies</td>
+<td><code>workspace/_targets.R</code>, <code>meta-summary.csv</code></td>
+</tr>
+<tr class="even">
+<td>Quarto</td>
+<td>Methods, results, and provenance in one document</td>
+<td><code>workspace/report.html</code></td>
+</tr>
+<tr class="odd">
+<td>GitHub releases, Zenodo</td>
+<td>A citable, archived version</td>
+<td>Release tag and version DOI</td>
 </tr>
 </tbody>
 </table>
-<p>A row represents one study summary. The supplied snapshot has 29 rows and no missing values. A zero correlation would describe a study result. Use a missing value marker such as <code>NA</code> for unavailable values in a future release. The column definitions and original citation come from the published teaching documentation <span class="citation" data-cites="healthwellbeing">(<a href="../4_references.html#ref-healthwellbeing" role="doc-biblioref">Harrer et al., n.d.</a>)</span>.</p>
-<p>In R, <code>codebook_table()</code> combines variable labels with summaries. We will keep the three columns we need for the exercise and save them as a CSV.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>workshop_dir <span class="ot">&lt;-</span> <span class="fu">file.path</span>(<span class="st">"outputs"</span>, <span class="st">"health-wellbeing"</span>)</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">dir.create</span>(workshop_dir, <span class="at">recursive =</span> <span class="cn">TRUE</span>, <span class="at">showWarnings =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>labels <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">author =</span> <span class="st">"Study label (first author and year)"</span>,</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">cor =</span> <span class="st">"Pearson correlation of health and well-being"</span>,</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">n =</span> <span class="st">"Number of observations in the study"</span>,</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">population =</span> <span class="st">"Type of study sample"</span>,</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">country =</span> <span class="st">"Country where the study was conducted"</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>labelled_health <span class="ot">&lt;-</span> health</span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (column <span class="cf">in</span> <span class="fu">names</span>(labels)) {</span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">attr</span>(labelled_health[[column]], <span class="st">"label"</span>) <span class="ot">&lt;-</span> labels[[column]]</span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>dictionary <span class="ot">&lt;-</span> <span class="fu">codebook_table</span>(labelled_health) <span class="sc">|&gt;</span></span>
-<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">subset</span>(<span class="at">select =</span> <span class="fu">c</span>(name, label, n_missing))</span>
-<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(</span>
-<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>  dictionary,</span>
-<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">file.path</span>(workshop_dir, <span class="st">"codebook.csv"</span>),</span>
-<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>  <span class="at">row.names =</span> <span class="cn">FALSE</span></span>
-<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>dictionary</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 5 × 3
-  name       label                                        n_missing
-  &lt;chr&gt;      &lt;chr&gt;                                            &lt;int&gt;
-1 author     Study label (first author and year)                  0
-2 cor        Pearson correlation of health and well-being         0
-3 n          Number of observations in the study                  0
-4 population Type of study sample                                 0
-5 country    Country where the study was conducted                0</code></pre>
-</div>
-</div>
+<p>A useful test of the whole workflow is to point to the exact data version, analysis revision, environment, and archive citation for one reported result.</p>
 </section>
-<section id="dataset-metadata" class="level2" data-number="8.3">
-<h2 data-number="8.3" class="anchored" data-anchor-id="dataset-metadata"><span class="header-section-number">8.3</span> Dataset metadata</h2>
-<p>A dataset record also needs a title, creator, source, access route, and any verified licence. <em>Dataspice</em> produces a Schema.org Dataset description in JSON-LD from four CSV files. We will prepare the worksheets and leave unknown fields blank. The dataset documentation credits Mathias Harrer for the teaching object. Keep the original review citation and the book section with the provenance notes.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>metadata_dir <span class="ot">&lt;-</span> <span class="fu">file.path</span>(workshop_dir, <span class="st">"metadata"</span>)</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">create_spice</span>(<span class="at">dir =</span> workshop_dir)</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>biblio_path <span class="ot">&lt;-</span> <span class="fu">file.path</span>(metadata_dir, <span class="st">"biblio.csv"</span>)</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>biblio <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(biblio_path, <span class="at">fileEncoding =</span> <span class="st">"UTF-8-BOM"</span>)</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>biblio[<span class="dv">1</span>L, ] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>biblio<span class="sc">$</span>title <span class="ot">&lt;-</span> <span class="st">"HealthWellbeing teaching snapshot"</span></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>biblio<span class="sc">$</span>description <span class="ot">&lt;-</span> <span class="fu">paste</span>(</span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Study summaries of health and well-being correlations."</span>,</span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  <span class="st">"Teaching file from section 4.2.4 of Doing Meta-Analysis with R."</span></span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>biblio<span class="sc">$</span>citation <span class="ot">&lt;-</span> <span class="st">"Ngamaba, Panagioti, and Armitage (2017)"</span></span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>biblio<span class="sc">$</span>keywords <span class="ot">&lt;-</span> <span class="st">"health, well-being, meta-analysis"</span></span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(biblio, biblio_path, <span class="at">row.names =</span> <span class="cn">FALSE</span>, <span class="at">na =</span> <span class="st">""</span>)</span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>raw_name <span class="ot">&lt;-</span> <span class="st">"healthwellbeing.rda"</span></span>
-<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>data_url <span class="ot">&lt;-</span> <span class="fu">paste0</span>(</span>
-<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>  <span class="st">"https://www.protectlab.org/meta-analysis-in-r/data/"</span>, raw_name</span>
-<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(</span>
-<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">data.frame</span>(</span>
-<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>    <span class="at">fileName =</span> raw_name,</span>
-<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">name =</span> <span class="st">"HealthWellbeing teaching data"</span>,</span>
-<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">contentUrl =</span> data_url,</span>
-<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>    <span class="at">encodingFormat =</span> <span class="st">"application/octet-stream"</span></span>
-<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>  ),</span>
-<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">file.path</span>(metadata_dir, <span class="st">"access.csv"</span>),</span>
-<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>  <span class="at">row.names =</span> <span class="cn">FALSE</span></span>
-<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(</span>
-<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>  <span class="fu">data.frame</span>(<span class="at">name =</span> <span class="st">"Mathias Harrer"</span>),</span>
-<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a>  <span class="fu">file.path</span>(metadata_dir, <span class="st">"creators.csv"</span>),</span>
-<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a>  <span class="at">row.names =</span> <span class="cn">FALSE</span></span>
-<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a>attributes <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a>  <span class="at">fileName =</span> raw_name,</span>
-<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a>  <span class="at">variableName =</span> <span class="fu">names</span>(labels),</span>
-<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a>  <span class="at">description =</span> <span class="fu">unname</span>(labels),</span>
-<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a>  <span class="at">unitText =</span> <span class="fu">c</span>(<span class="cn">NA</span>, <span class="st">"unitless"</span>, <span class="st">"observations"</span>, <span class="cn">NA</span>, <span class="cn">NA</span>)</span>
-<span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(</span>
-<span id="cb4-43"><a href="#cb4-43" aria-hidden="true" tabindex="-1"></a>  attributes,</span>
-<span id="cb4-44"><a href="#cb4-44" aria-hidden="true" tabindex="-1"></a>  <span class="fu">file.path</span>(metadata_dir, <span class="st">"attributes.csv"</span>),</span>
-<span id="cb4-45"><a href="#cb4-45" aria-hidden="true" tabindex="-1"></a>  <span class="at">row.names =</span> <span class="cn">FALSE</span>,</span>
-<span id="cb4-46"><a href="#cb4-46" aria-hidden="true" tabindex="-1"></a>  <span class="at">na =</span> <span class="st">""</span></span>
-<span id="cb4-47"><a href="#cb4-47" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-<section id="try-it-yourself" class="level2" data-number="8.4">
-<h2 data-number="8.4" class="anchored" data-anchor-id="try-it-yourself"><span class="header-section-number">8.4</span> Try it yourself</h2>
-<p>Open <code>attributes.csv</code> and add the two population categories to the description for <code>population</code>. Save the edited worksheet, then regenerate the JSON-LD. Keep <code>biblio.csv</code> and <code>WORKSHOP_NOTES.md</code> with the JSON-LD so readers have the original citation, source URL, date of retrieval, and checksum.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write_spice</span>(<span class="at">path =</span> metadata_dir)</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">file.exists</span>(<span class="fu">file.path</span>(metadata_dir, <span class="st">"dataspice.json"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] TRUE</code></pre>
-</div>
-</div>
-</section>
-<section id="metadata-checkpoint" class="level2" data-number="8.5">
-<h2 data-number="8.5" class="anchored" data-anchor-id="metadata-checkpoint"><span class="header-section-number">8.5</span> Checkpoint</h2>
-<p>Your codebook has five variables and zero missing values in each. Look for the dataset title, variable descriptions, and source download in <code>metadata/dataspice.json</code>. Review the draft export for template placeholders in the coverage fields. Check the provider’s reuse terms before completing the licence field or sharing the data. With a completed worksheet, explain why someone needs both the meaning of <code>n</code> and the original download link.</p>
-<p>Next we will store and retrieve versions of the documented dataset. <a href="../../pages/workshop/05_pins.html">Dataset storage and versioning</a></p>
-</section>
-<section id="further-reading" class="level2" data-number="8.6">
-<h2 data-number="8.6" class="anchored" data-anchor-id="further-reading"><span class="header-section-number">8.6</span> Further reading</h2>
+<section id="extras-discussion" class="level2" data-number="13.3">
+<h2 data-number="13.3" class="anchored" data-anchor-id="extras-discussion"><span class="header-section-number">13.3</span> Discussion</h2>
+<p>Allow about five minutes. Discuss one or more of these questions with your neighbours or the room.</p>
 <ul>
-<li>Variable summaries with <code>codebook_table()</code> <span class="citation" data-cites="codebook-table">(<a href="../4_references.html#ref-codebook-table" role="doc-biblioref">Arslan, n.d.</a>)</span>.</li>
-<li>Structuring dataset metadata with dataspice <span class="citation" data-cites="dataspice">(<a href="../4_references.html#ref-dataspice" role="doc-biblioref">Boettiger et al. 2026</a>)</span>.</li>
+<li>Which record from today, such as the lockfile, the metadata, the data version, or the report’s provenance, would have saved time in a past project?</li>
+<li>If the original data could not be shared, what could a reader test with a synthetic dataset, and what would require access to the originals?</li>
+<li>Which barrier to reproducibility do you meet most often: undocumented dependencies, manual analysis steps, or assumptions tied to one computer?</li>
+<li>Which single change would make your own research workflow easier for a collaborator to inspect and rerun?</li>
 </ul>
+<p>Use the remaining time for questions.</p>
+</section>
+<section id="export-work" class="level2" data-number="13.4">
+<h2 data-number="13.4" class="anchored" data-anchor-id="export-work"><span class="header-section-number">13.4</span> Before you leave</h2>
+<p>MyBinder files disappear when the session ends. In RStudio’s <strong>Files</strong> pane, select the files or folders below and use <strong>More → Export</strong>. Download each group before closing the browser tab.</p>
+<ol type="1">
+<li><strong>Your work.</strong> Export <code>workspace/</code> for the exact pipeline, report source, and rendered HTML. If you used recovery, any backups are here too.</li>
+<li><strong>Results and provenance.</strong> Open <code>outputs/health-wellbeing/</code> and export <code>meta-summary.csv</code>, <code>analysis-data-version.txt</code>, <code>dataset-versions.csv</code>, and <code>predictive-model-version.txt</code>. Include <code>session-info.txt</code> and <code>metadata/</code> if you ran the demonstrations. Run their short exercises to produce any missing records you want to keep.</li>
+<li><strong>Exact pins.</strong> Export <code>data_store/</code> and <code>model_store/</code> if you want to reopen the same data and model versions later. Keep the <code>data/raw/</code> source and licence record with the teaching snapshot.</li>
+</ol>
+<p>For a public release, review the exported contents first and follow the <a href="../../pages/workshop/08_archiving.html#decide-what-to-archive">archiving checklist</a>.</p>
+</section>
+<section id="follow-up-resources" class="level2" data-number="13.5">
+<h2 data-number="13.5" class="anchored" data-anchor-id="follow-up-resources"><span class="header-section-number">13.5</span> Follow-up resources</h2>
+<ul>
+<li><a href="../../pages/workshop/10_synthetic_data.html">Supplementary exercise: synthetic data with synthpop</a>.</li>
+<li><a href="../../pages/workshop/01_open_science.html#git-practice">Practise Git and GitHub with your own fork</a>.</li>
+<li><a href="../../pages/workshop/06_quarto.html#quarto-publishing">Publishing and journal formats with Quarto</a>.</li>
+<li><a href="../../pages/workshop/08_archiving.html#zenodo-github-integration">Archiving your own releases with Zenodo</a>.</li>
+<li><a href="https://vetiver.posit.co/get-started/deploy.html">Deploying models with vetiver</a>.</li>
+<li>The lessons’ further reading sections and the <a href="../../pages/4_references.html">references</a>.</li>
+</ul>
+<p>Questions after the workshop are welcome in the repository’s <a href="https://github.com/JBris/open-and-reproducible-science-in-r/discussions">GitHub Discussions</a>.</p>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
-<div id="ref-codebook-table" class="csl-entry" role="listitem">
-Arslan, Ruben C. n.d. <span>“<span class="nocase">codebook_table()</span> Reference.”</span> <a href="https://rubenarslan.github.io/codebook/reference/codebook_table.html">https://rubenarslan.github.io/codebook/reference/codebook_table.html</a>.
-</div>
-<div id="ref-dataspice" class="csl-entry" role="listitem">
-Boettiger, Carl, Scott Chamberlain, Auriel Fournier, Kelly Hondula, Anna Krystalli, Bryce Mecum, Maëlle Salmon, Kate Webbink, and Kara Woo. 2026. <em><span class="nocase">dataspice</span>: Create Lightweight <span class="nocase">Schema.org</span> Descriptions of Data</em>. <a href="https://docs.ropensci.org/dataspice/">https://docs.ropensci.org/dataspice/</a>.
-</div>
-<div id="ref-gofair-principles" class="csl-entry" role="listitem">
-GO FAIR. n.d. <span>“<span>FAIR</span> Principles.”</span> <a href="https://www.go-fair.org/fair-principles/">https://www.go-fair.org/fair-principles/</a>.
-</div>
-<div id="ref-healthwellbeing" class="csl-entry" role="listitem">
-Harrer, Mathias, Pim Cuijpers, Toshi A. Furukawa, and David D. Ebert. n.d. <span>“Association of Health and Well-Being Dataset.”</span> dmetar. <a href="https://dmetar.protectlab.org/reference/healthwellbeing">https://dmetar.protectlab.org/reference/healthwellbeing</a>.
-</div>
-</div>
 </section>
 
 </main> <!-- /main -->
@@ -1164,13 +1014,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../../pages/workshop/03_environments.html" class="pagination-link" aria-label="Reproducible computational environments">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Reproducible computational environments</span></span>
+      <a href="../../pages/workshop/08_archiving.html" class="pagination-link" aria-label="GitHub releases, Zenodo and archiving">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">GitHub releases, Zenodo and archiving</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../pages/workshop/05_pins.html" class="pagination-link" aria-label="Dataset storage and versioning">
-        <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Dataset storage and versioning</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../pages/workshop/10_synthetic_data.html" class="pagination-link" aria-label="Supplementary exercise: synthetic data with synthpop">
+        <span class="nav-page-text"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Supplementary exercise: synthetic data with synthpop</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

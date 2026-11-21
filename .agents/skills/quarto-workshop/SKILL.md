@@ -24,9 +24,10 @@ and citations against appropriate sources.
 - Check that referenced lessons exist. Keep chapter paths, headings, links, and
   figure references consistent. Link Markdown references with unique labels
   because PDF rendering combines chapters into one document.
-- Distinguish planned pins/vetiver metadata and versioning exercises and the
-  differential privacy extension from implemented examples. The R and pipeline
-  helpers currently contain no-op placeholders.
+- The dataspice and rfair, pins and vetiver, targets, and Quarto examples are
+  implemented. synthpop is a supplementary exercise, and differential privacy is
+  not implemented. `R/dummy.R` and `pipelines/_targets_dummy.R` remain no-op
+  placeholders.
 - Preserve fenced code languages and Quarto cell options. Use examples compatible
   with the project's pinned environment; avoid hidden session state and installing
   packages inside lessons.

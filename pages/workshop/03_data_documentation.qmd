@@ -18,9 +18,10 @@ use_workshop_book_outputs()
 ## How to follow this segment
 
 This eight-minute segment is an instructor demonstration. Watch the
-screen and answer one question with the room; you do not need to run
-any code. To run the assessment yourself later, use the
-[follow-up section](#fair-follow-up) at the end of this page.
+screen and answer one question with the room. The instructor runs the
+code live; you can run the same chunks in your Console, but you do not
+need to. The [follow-up section](#fair-follow-up) shows how to check an
+unpublished record and save an assessment.
 
 ## What would a collaborator need?
 
@@ -97,19 +98,61 @@ cat(c("```json", readLines(metadata_file, warn = FALSE), "```"), sep = "\n")
 
 Allow about three minutes, including 30 seconds for the question.
 *rfair* takes a URL or persistent identifier and applies a set of tests
-to the metadata it can retrieve [@rfair]. Before the session, the
-instructor assessed the **same data file** twice:
+to the metadata it can retrieve [@rfair]. The instructor assesses the
+**same data file** twice. Each run takes a few seconds and needs
+network access.
 
-1. **Download URL alone.** The upstream URL leads directly to the data
-   file, so the assessor gets a download to check but little context
-   about the dataset.
-2. **With the JSON-LD supplied.** The same URL, with the record above
-   supplied as a separate metadata endpoint.
+First, assess the upstream download URL alone. It leads directly to the
+data file, so the assessor gets a download to check but little context
+about the dataset.
 
-In a prepared run with `rfair` 0.2.0, FAIRsFAIR metrics 0.8, and the
-locally served JSON-LD, the download returned HTTP 200 in both runs.
-The extra metadata supplied the title and MIT licence. One metric
-from each principle shows what changed and what stayed the same.
+```{r health-rfair-baseline, eval = TRUE}
+metadata_file <- file.path("data", "metadata", "health-wellbeing", "dataspice.json")
+metadata <- jsonlite::read_json(metadata_file)
+snapshot_url <- metadata$distribution[[1L]]$contentUrl
+baseline <- rfair::assess_fair(
+  snapshot_url, metric_version = "0.8", timeout = 6, max_time = 30
+)
+baseline$resolution[c("ok", "status")]
+baseline$harvest_errors
+baseline$metadata[c("title", "license")]
+```
+
+Then supply the JSON-LD record as a separate metadata endpoint. The
+repository publishes it at `data/metadata/health-wellbeing/dataspice.json`,
+and we fetch it through [jsDelivr](https://www.jsdelivr.com/), which
+serves files from GitHub repositories labelled as JSON. *rfair* reads a
+metadata endpoint only when the server labels it as JSON, and GitHub's
+raw file links label every file as plain text. Software can use metadata
+only when it recognises the format. Here `@main` follows the latest
+commit; a tag or commit hash in its place would pin one version.
+
+```{r health-rfair-supplement, eval = TRUE}
+metadata_url <- paste0(
+  "https://cdn.jsdelivr.net/gh/JBris/open-and-reproducible-science-in-r@main/",
+  "data/metadata/health-wellbeing/dataspice.json"
+)
+enriched <- rfair::assess_fair(
+  snapshot_url,
+  metric_version = "0.8",
+  metadata_service_endpoint = metadata_url,
+  metadata_service_type = "schema_org",
+  timeout = 6,
+  max_time = 30
+)
+enriched$resolution[c("ok", "status")]
+enriched$harvest_errors
+enriched$metadata[c("title", "license")]
+comparison <- rfair::fair_compare(baseline, enriched)
+metrics <- c("FsF-F1-02MD", "FsF-A1-01M", "FsF-I1-01M", "FsF-R1.1-01M")
+comparison[comparison$metric_identifier %in% metrics,
+           c("metric_identifier", "status_a", "status_b")]
+```
+
+With `rfair` 0.2.0 and FAIRsFAIR metrics 0.8, the download returned
+HTTP 200 in both runs, and the JSON-LD supplied the title and MIT
+licence. One metric from each principle shows what changed and what
+stayed the same.
 
 | Metric | Download URL alone | With the JSON-LD supplied |
 | --- | --- | --- |
@@ -117,6 +160,10 @@ from each principle shows what changed and what stayed the same.
 | Access information in metadata (`FsF-A1-01M`) | Fail | Fail |
 | Formal language for metadata (`FsF-I1-01M`) | Fail | Pass |
 | Licence in metadata (`FsF-R1.1-01M`) | Fail | Pass |
+
+If the title and licence come back empty, the metadata were not
+harvested. Check `resolution` and `harvest_errors`, and use the table
+above if the network is unavailable.
 
 **Question for the room.** The file downloaded successfully in both
 runs, yet the access check failed both times. Why? What would you add
@@ -159,60 +206,12 @@ not say which version of the data produced a given result. Next, we
 identify that version.
 [Data and model versioning](04_versioning.qmd)
 
-## After the workshop: run the assessment yourself {#fair-follow-up}
+## After the workshop: check an unpublished record {#fair-follow-up}
 
-Run these in the **R Console** from the project root. The assessments
-contact the upstream download URL, so they need network access. If a
-live request fails, check `resolution` and `harvest_errors` before
-interpreting the tests.
-
-First, assess the download URL alone.
-
-```{r health-rfair-baseline, eval = FALSE}
-metadata_file <- file.path("data", "metadata", "health-wellbeing", "dataspice.json")
-metadata <- jsonlite::read_json(metadata_file)
-snapshot_url <- metadata$distribution[[1L]]$contentUrl
-baseline <- rfair::assess_fair(
-  snapshot_url, metric_version = "0.8", timeout = 6, max_time = 30
-)
-baseline$resolution[c("ok", "status")]
-baseline$harvest_errors
-baseline$metadata[c("title", "license")]
-```
-
-Then supply the repository's [raw JSON-LD URL](https://raw.githubusercontent.com/JBris/open-and-reproducible-science-in-r/main/data/metadata/health-wellbeing/dataspice.json)
-as a metadata endpoint. This URL works once the file reaches `main`.
-To check an unpublished copy, use the local option below. Compare the
-same data file under the same metric version.
-
-```{r health-rfair-supplement, eval = FALSE}
-metadata_url <- paste0(
-  "https://raw.githubusercontent.com/JBris/open-and-reproducible-science-in-r/main/",
-  "data/metadata/health-wellbeing/dataspice.json"
-)
-enriched <- rfair::assess_fair(
-  snapshot_url,
-  metric_version = "0.8",
-  metadata_service_endpoint = metadata_url,
-  metadata_service_type = "schema_org",
-  timeout = 6,
-  max_time = 30
-)
-enriched$resolution[c("ok", "status")]
-enriched$harvest_errors
-enriched$metadata[c("title", "license")]
-comparison <- rfair::fair_compare(baseline, enriched)
-metrics <- c("FsF-F1-02MD", "FsF-A1-01M", "FsF-I1-01M", "FsF-R1.1-01M")
-comparison[comparison$metric_identifier %in% metrics,
-           c("metric_identifier", "status_a", "status_b")]
-```
-
-### Check an unpublished copy
-
-To check the repository copy before it is on GitHub, run the following
-in the RStudio **Terminal** from the project root. This example uses
-Python 3 and serves only the teaching metadata directory on the local
-machine.
+The live assessments use the copy of the JSON-LD published on GitHub.
+To check a copy that is not on GitHub yet, run the following in the
+RStudio **Terminal** from the project root. This example uses Python 3
+and serves only the teaching metadata directory on the local machine.
 
 ``` bash
 python3 -m http.server 8765 --bind 127.0.0.1 \
@@ -220,7 +219,7 @@ python3 -m http.server 8765 --bind 127.0.0.1 \
 ```
 
 In the **R Console**, run the baseline, then use this assignment in place
-of the GitHub URL in the second assessment. Stop the server with
+of the jsDelivr URL in the second assessment. Stop the server with
 **Ctrl+C** in the Terminal when finished. The comparison still contacts
 the upstream download URL.
 
