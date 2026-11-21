@@ -2,6 +2,8 @@
 
 ## [Unreleased]
 
+## [0.6.0] - 2026-11-21
+
 ### Added
 
 - Claude Code project instructions (`CLAUDE.md`), settings, subagents, lifecycle hooks, and image-publishing approval prompts alongside the existing Codex setup.
@@ -11,8 +13,9 @@
 - Add a supplementary `synthpop` exercise that pools the original and synthetic study summaries.
 - Add an AIMOS2026 attendee subagent for Claude Code and Codex. It critiques workshop material from a participant's perspective without editing files.
 - Record a simulated attendee review of the workshop revision in `draft/`. Record the outcome of the selected fixes in the review.
-- Add prepared metadata for the HealthWellbeing snapshot and lock `rfair`
-  and its dependencies.
+- Add prepared metadata and a reviewed JSON-LD record for the
+  `HealthWellbeing` snapshot. Show the full record in the FAIR lesson and
+  lock `rfair` and its dependencies.
 
 ### Changed
 
@@ -44,6 +47,20 @@
   for the implemented exercises and the MyBinder copy without Git history.
 - Read the report's pipeline summary relative to the project root, so reports render from the project root without an execution-directory option.
 - Revise the introduction, landing page, README, draft teaching plan, and page plan for the final programme.
+- Refresh the published HTML book and PDF for the revised programme.
+
+## [0.5.1] - 2026-11-20
+
+### Changed
+
+- Backfill the workshop release history through `v0.5.0` and publish the
+  changelog in the HTML book and PDF.
+
+### Fixed
+
+- Render the targets and vetiver examples in MyBinder without a Git
+  checkout. Keep the dataset version, pipeline checksum, and software
+  versions in the analysis report.
 
 ## [0.5.0] - 2026-11-20
 
@@ -128,7 +145,9 @@
 - Replaced earlier modelling workshop content with an integrated reproducibility workflow using GitHub, renv, Docker, targets, Quarto, and Zenodo.
 - Generalised the workshop pages for reuse across events, with event-specific details in announcements.
 
-[Unreleased]: https://github.com/JBris/open-and-reproducible-science-in-r/compare/v0.5.0...main
+[Unreleased]: https://github.com/JBris/open-and-reproducible-science-in-r/compare/v0.6.0...main
+[0.6.0]: https://github.com/JBris/open-and-reproducible-science-in-r/releases/tag/v0.6.0
+[0.5.1]: https://github.com/JBris/open-and-reproducible-science-in-r/releases/tag/v0.5.1
 [0.5.0]: https://github.com/JBris/open-and-reproducible-science-in-r/releases/tag/v0.5.0
 [0.4.0]: https://github.com/JBris/open-and-reproducible-science-in-r/releases/tag/v0.4.0
 [0.3.0]: https://github.com/JBris/open-and-reproducible-science-in-r/releases/tag/v0.3.0
