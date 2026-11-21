@@ -60,6 +60,9 @@ Download each group before closing the browser tab.
 
 1. **Your work.** Export `workspace/` for the exact pipeline, report
    source, and rendered HTML. If you used recovery, any backups are here too.
+   Also export `.here` from the project root. Use **More → Show Hidden Files**
+   to find it. Keep `.here` at the root when you unpack the files to rerender
+   the report.
 2. **Results and provenance.** Open `outputs/health-wellbeing/` and
    export `meta-summary.csv`, `analysis-data-version.txt`,
    `dataset-versions.csv`, and `predictive-model-version.txt`. Include

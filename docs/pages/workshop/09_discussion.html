@@ -421,7 +421,7 @@ ul.task-list li input[type="checkbox"] {
 <h2 data-number="13.4" class="anchored" data-anchor-id="export-work"><span class="header-section-number">13.4</span> Before you leave</h2>
 <p>MyBinder files disappear when the session ends. In RStudio’s <strong>Files</strong> pane, select the files or folders below and use <strong>More → Export</strong>. Download each group before closing the browser tab.</p>
 <ol type="1">
-<li><strong>Your work.</strong> Export <code>workspace/</code> for the exact pipeline, report source, and rendered HTML. If you used recovery, any backups are here too.</li>
+<li><strong>Your work.</strong> Export <code>workspace/</code> for the exact pipeline, report source, and rendered HTML. If you used recovery, any backups are here too. Also export <code>.here</code> from the project root. Use <strong>More → Show Hidden Files</strong> to find it. Keep <code>.here</code> at the root when you unpack the files to rerender the report.</li>
 <li><strong>Results and provenance.</strong> Open <code>outputs/health-wellbeing/</code> and export <code>meta-summary.csv</code>, <code>analysis-data-version.txt</code>, <code>dataset-versions.csv</code>, and <code>predictive-model-version.txt</code>. Include <code>session-info.txt</code> and <code>metadata/</code> if you ran the demonstrations. Run their short exercises to produce any missing records you want to keep.</li>
 <li><strong>Exact pins.</strong> Export <code>data_store/</code> and <code>model_store/</code> if you want to reopen the same data and model versions later. Keep the <code>data/raw/</code> source and licence record with the teaching snapshot.</li>
 </ol>

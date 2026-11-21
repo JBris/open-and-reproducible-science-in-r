@@ -4,8 +4,7 @@
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.24342489.svg)](https://doi.org/10.5281/zenodo.24342489)
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/JBris/open-and-reproducible-science-in-r/HEAD?urlpath=rstudio)
-[![Build RStudio](https://github.com/JBris/open-and-reproducible-science-in-r/actions/workflows/build-rstudio.yaml/badge.svg)](https://github.com/JBris/open-and-reproducible-science-in-r/actions/workflows/build-rstudio.yaml)
-[![Build Binder](https://github.com/JBris/open-and-reproducible-science-in-r/actions/workflows/build-binder.yaml/badge.svg)](https://github.com/JBris/open-and-reproducible-science-in-r/actions/workflows/build-binder.yaml)
+[![Release image builds](https://github.com/JBris/open-and-reproducible-science-in-r/actions/workflows/build-rstudio.yaml/badge.svg?event=release)](https://github.com/JBris/open-and-reproducible-science-in-r/actions/workflows/build-rstudio.yaml?query=event%3Arelease)
 
 [**Documentation**](https://jbris.github.io/open-and-reproducible-science-in-r/)
 | [**Changelog**](https://jbris.github.io/open-and-reproducible-science-in-r/CHANGELOG.html)
