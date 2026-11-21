@@ -67,9 +67,10 @@ throughout the session:
 1.  Record the changes in `CHANGELOG.md` and commit that entry.
 2.  Tag the commit and publish a release with notes on the
     [releases page](https://github.com/JBris/open-and-reproducible-science-in-r/releases).
-3.  Publishing the release triggers the workflows that build and push
-    the RStudio and Binder images. With the Zenodo integration enabled
-    for the repository, Zenodo also archives the tagged files.
+3.  Publishing the release builds and pushes the RStudio image first.
+    After it succeeds, the Binder image is built and pushed from the same
+    revision. With the Zenodo integration enabled for the repository,
+    Zenodo also archives the tagged files.
 
 Check the files in each new archive. If an attached output should be
 preserved but is missing, add it to the deposit.

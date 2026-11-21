@@ -107,10 +107,13 @@ image.
 
 ### Follow the GitHub Actions build pipelines
 
-The repository has two workflows that run when a GitHub release is published
-or when a maintainer starts them manually. [Build Binder](https://github.com/JBris/open-and-reproducible-science-in-r/actions/workflows/build-binder.yaml)
-builds the image MyBinder uses. [Build RStudio](https://github.com/JBris/open-and-reproducible-science-in-r/actions/workflows/build-rstudio.yaml)
-builds a separate image for people running RStudio with Docker locally.
+Publishing a GitHub release starts
+[Build RStudio](https://github.com/JBris/open-and-reproducible-science-in-r/actions/workflows/build-rstudio.yaml).
+Once it builds and pushes the image for local Docker use, it starts
+[Build Binder](https://github.com/JBris/open-and-reproducible-science-in-r/actions/workflows/build-binder.yaml)
+from the same release revision. Build Binder publishes the image that
+MyBinder uses. Maintainers can also start either workflow manually to
+build that image on its own.
 
 Each workflow checks out the source, reads `VERSION` into `APP_VERSION`, and
 records a UTC build date. Docker Compose uses `APP_VERSION` to select the

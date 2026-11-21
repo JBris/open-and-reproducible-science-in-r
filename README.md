@@ -144,10 +144,14 @@ Save workshop changes in that directory to keep them in your local checkout.
 and follow the [workshop preparation steps](pages/workshop/00_preparation.qmd#choose-your-computing-environment).
 Allow time to start the session and download your work before it ends.
 
-The [Build Binder workflow](.github/workflows/build-binder.yaml) builds and
-publishes the image selected by the [Binder entry point](binder/Dockerfile).
-The [Build RStudio workflow](.github/workflows/build-rstudio.yaml) publishes the
-image for local Docker use.
+Publishing a GitHub release starts the
+[Build RStudio workflow](.github/workflows/build-rstudio.yaml). Once it
+builds and pushes the local RStudio image, it calls
+[Build Binder](.github/workflows/build-binder.yaml) from the same release
+revision. That workflow publishes the image selected by the
+[Binder entry point](binder/Dockerfile). Both jobs appear in the release's
+Build RStudio run. You can also start either workflow manually to build
+that image on its own.
 
 The [FAIR lesson](pages/workshop/03_data_documentation.qmd) runs `rfair`
 live. It assesses the upstream data URL, then supplies
