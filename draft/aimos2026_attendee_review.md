@@ -257,3 +257,76 @@ findings.
 - **m8:** The interval's computed upper bound is 0.4148. It rounds to 0.41 at
   two decimals and to 0.415 at three, so both checkpoints are correctly
   rounded. Attendees may still compare the two displayed values.
+
+## Codex review of the draft, lessons, and patch
+
+The 90-minute structure is worth keeping. One dataset and one continuous
+exercise give the workshop a clear thread. Templates, expected outputs, and
+collapsed solutions make the hands-on scope plausible. Moving `synthpop` to
+follow-up gives the main exercise more room. Fix the participant workflow
+before delivering the session.
+
+### Findings in priority order
+
+1. **Rendering the book overwrites unfinished participant work.** In a
+   disposable project copy, I added a note to an unfinished
+   `workspace/_targets.R` and rendered the HTML book. The catch-up chunk
+   replaced the script with the reference solution and erased the note.
+   Run the book examples in a separate directory and make participant
+   recovery an explicit action that preserves existing files.
+   [Targets catch-up step](../pages/workshop/05_targets.qmd)
+2. **The recovery instructions fail in a fresh session.** The Quarto lesson
+   sends late arrivals to a chunk that assumes the dataset versions exist
+   and `pipeline_script` has been defined. Give participants one recovery
+   command that prepares missing inputs and gets them to a working report.
+   Rehearse it from the exact MyBinder link participants will receive.
+   [Quarto lesson](../pages/workshop/06_quarto.qmd)
+3. **Make selective rebuilding part of the timed exercise.** The subset
+   switch makes every target outdated. The optional estimator change
+   rebuilds only `fit`, `result`, and `summary_file`, so make that the
+   timed exercise and keep the subset switch as an extension. Describe
+   the estimator comparison as a small change in the pooled estimate for
+   this dataset. [Modify and reproduce](../pages/workshop/07_modify_and_reproduce.qmd)
+4. **Report between-study heterogeneity.** The local run reproduced a
+   pooled correlation of 0.363 and I² of about 99.8%. Include a
+   heterogeneity measure and explain that the confidence interval describes
+   uncertainty in the pooled average.
+   [Reference report](../pipelines/health_wellbeing_report.qmd) ·
+   [Original worked example](https://doing-meta.guide/pooling-es#correlations)
+5. **Show exactly what to export for an archive.** The pin ID identifies
+   a version on the participant's local board. Exporting `workspace/`
+   leaves behind the summary CSV, input selection, and metadata. Give
+   participants one checklist that ties the exact script and report to
+   the summary, source checksum, inclusion rule, and environment record.
+   Document the reuse basis for any data included. The raw file predates
+   this revision, which corrects the claim in M7 that it was newly added.
+   [Archiving lesson](../pages/workshop/08_archiving.qmd) ·
+   [Export instructions](../pages/workshop/09_discussion.qmd)
+
+### Draft and patch
+
+- The schedule matches across the draft, introduction, and lessons. The
+  first 35 minutes cover many tools. Give each demonstration one artifact
+  to inspect and make the second `vetiver` model a follow-up if time is
+  tight. The draft abstract describes the split between demonstrations
+  and hands-on work more accurately than the current announcement.
+  [Draft abstract](workshop_plan.qmd#proposed-revised-abstract) ·
+  [Announcement](../ANNOUNCEMENTS.md#abstract--description)
+- Applying [the patch](../workshop-revision.diff) to `8b88f32` in a
+  temporary Git index recreated `ef8b138` apart from the patch file
+  itself. Consolidate the validation record. The patch and draft report
+  successful renders, while the commit message for `ef8b138` reports
+  parse checks only.
+- GitHub Pages serves `main:/docs`, which still contains the old
+  programme. Refresh the HTML and PDF and add redirects for renamed
+  chapters before announcing the revision.
+  [Quarto redirect guidance](https://quarto.org/docs/websites/website-navigation.html#redirects)
+
+### Verification
+
+Codex reviewed the source and patch and rendered a disposable project
+copy in the local RStudio image with R 4.4.1 and Quarto 1.5.57. All seven
+R scripts parsed. The HTML book and standalone participant report
+rendered, and the synthetic comparison PNG was generated. PDF rendering
+was outside this independent check. A fresh MyBinder launch, timed
+rehearsal, and human review are pending.
