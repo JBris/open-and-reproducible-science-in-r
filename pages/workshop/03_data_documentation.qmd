@@ -1,8 +1,6 @@
 ---
 title: "FAIR data documentation and assessment"
 subtitle: "20–28 minutes · Demonstration · dataspice and rfair"
-aliases:
-  - 04_data_documentation.html
 editor:
   markdown:
     wrap: 72

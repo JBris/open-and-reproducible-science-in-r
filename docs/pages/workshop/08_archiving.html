@@ -21,6 +21,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 /* CSS for citations */
 div.csl-bib-body { }
 div.csl-entry {
@@ -398,8 +432,8 @@ div.csl-indent {
 <tbody>
 <tr class="odd">
 <td>Methods and results</td>
-<td><code>workspace/report.qmd</code> and the <code>meta-summary.csv</code> it reads</td>
-<td>Track the report source. Attach the summary and the rendered HTML.</td>
+<td><code>.here</code>, <code>workspace/report.qmd</code>, and <code>outputs/health-wellbeing/meta-summary.csv</code></td>
+<td>Track the project-root marker and report source. Attach the summary and the rendered HTML.</td>
 </tr>
 <tr class="even">
 <td>Pipeline script MD5, variance estimator, and interval method</td>
@@ -424,6 +458,7 @@ div.csl-indent {
 </tbody>
 </table>
 <p>Track the source that recreates the outputs. Attach the generated outputs and records that show what this particular run produced. The source can rebuild them, but an archive keeps the exact copies behind a reported result.</p>
+<p>Keep <code>.here</code> at the root of the source archive. To render the unpacked report, run Quarto from that root with the attached summary restored to <code>outputs/health-wellbeing/meta-summary.csv</code>.</p>
 <p>In this exercise your edits are in <code>workspace/</code>. Move the exact source files into a tracked location before tagging a release of your own project. Use the <a href="../../pages/workshop/09_discussion.html#export-work">export checklist</a> to collect the session’s outputs. An existing workshop release cannot contain work you created after it was tagged.</p>
 <p>The report records the input checksum and filter so a reader can recreate the input even if rebuilding the board gives the pin a new identifier. The predictive model pin records the training version and checksum. Retain the upstream notice if you include the bundled MIT teaching snapshot. Check reuse terms separately for other data or models before depositing them.</p>
 </section>
@@ -465,7 +500,17 @@ div.csl-indent {
 </tbody>
 </table>
 <p>Each version’s related identifier points to the GitHub release tag it archives. The live website can change as the project changes. Record the tag that identifies the files behind a particular result. New releases add version records under the same concept DOI.</p>
-<p>This answers the question left open in the <a href="../../pages/workshop/03_data_documentation.html#metadata-checkpoint">FAIR demonstration</a>. There, the assessor found the title and licence only when the instructor supplied a separate metadata URL. Zenodo registers the record’s metadata with its DOI, and the DOI resolves to a landing page that shows the metadata and files. A reader or a tool can start from the identifier alone. As a follow-up, pass the concept DOI to <code>rfair::assess_fair()</code> and check what the repository exposes. That assessment describes the version the DOI resolves to on the day you run it.</p>
+<p>This answers the question left open in the <a href="../../pages/workshop/03_data_documentation.html#metadata-checkpoint">FAIR demonstration</a>. There, the assessor found the title and licence only when the instructor supplied a separate metadata URL. Zenodo registers the record’s metadata with its DOI, and the DOI resolves to a landing page that shows the metadata and files. A reader or a tool can start from the identifier alone.</p>
+<p>As a follow-up, assess the workshop’s software record using the concept DOI. Select the FAIR for Research Software metrics in <em>rfair</em>. The FAIR lesson used research-data metrics for the HealthWellbeing snapshot <span class="citation" data-cites="rfair">(<a href="../4_references.html#ref-rfair" role="doc-biblioref">Sofi-Mahmudi 2026</a>)</span>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>archive <span class="ot">&lt;-</span> rfair<span class="sc">::</span><span class="fu">assess_fair</span>(</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">"https://doi.org/10.5281/zenodo.24342489"</span>,</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">metric_version =</span> <span class="st">"0.7_software"</span>, <span class="at">timeout =</span> <span class="dv">6</span>, <span class="at">max_time =</span> <span class="dv">30</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>archive<span class="sc">$</span>metadata[<span class="fu">c</span>(<span class="st">"title"</span>, <span class="st">"license"</span>)]</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>archive<span class="sc">$</span>harvest_errors</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Check which metadata fields the assessor found and which sources were reachable. Interpret any scores using the software criteria for this record at the time you ran the assessment.</p>
 </section>
 <section id="when-the-data-cannot-be-shared" class="level2" data-number="12.5">
 <h2 data-number="12.5" class="anchored" data-anchor-id="when-the-data-cannot-be-shared"><span class="header-section-number">12.5</span> When the data cannot be shared</h2>
@@ -507,6 +552,9 @@ GitHub. n.d. <span>“Referencing and Citing Content.”</span> <a href="https:/
 </div>
 <div id="ref-near2021-synthetic-data" class="csl-entry" role="listitem">
 Near, Joseph, and David Darais. 2021. <span>“Differentially Private Synthetic Data.”</span> National Institute of Standards; Technology. May 3, 2021. <a href="https://www.nist.gov/blogs/cybersecurity-insights/differentially-private-synthetic-data">https://www.nist.gov/blogs/cybersecurity-insights/differentially-private-synthetic-data</a>.
+</div>
+<div id="ref-rfair" class="csl-entry" role="listitem">
+Sofi-Mahmudi, Ahmad. 2026. <em><span class="nocase">rfair</span>: Assess the <span>FAIR</span>ness of Research Data Objects and Software</em>. <a href="https://cran.r-project.org/package=rfair">https://cran.r-project.org/package=rfair</a>.
 </div>
 <div id="ref-zenodo-enable-repository" class="csl-entry" role="listitem">
 Zenodo. n.d.a. <span>“Enable a Repository.”</span> <a href="https://help.zenodo.org/docs/github/enable-repository/">https://help.zenodo.org/docs/github/enable-repository/</a>.
