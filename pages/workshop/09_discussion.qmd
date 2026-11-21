@@ -23,7 +23,7 @@ researcher needs to understand, rerun, or cite the result.
 | --- | --- | --- |
 | Git and GitHub | Change history and review | Commits and pull requests |
 | renv, Docker, Binder | Package versions and computing environment | `renv.lock`, `VERSION`, `outputs/health-wellbeing/session-info.txt`, and the Dockerfiles on GitHub |
-| dataspice, rfair | Variable meanings, source and licence, plus evidence from an automated FAIR assessment | `data/metadata/health-wellbeing/dataspice.json`, and `outputs/health-wellbeing/metadata/` if you ran the demonstration |
+| dataspice, rfair | Variable meanings, source and licence, plus evidence from an automated FAIR assessment | `data/metadata/health-wellbeing/dataspice.json` and, if saved, `outputs/health-wellbeing/metadata/fair-assessment.rds` |
 | pins, vetiver | Exact input and predictive model versions | `dataset-versions.csv`, `predictive-model-version.txt`, pin metadata |
 | targets | The steps from input to summary, and their dependencies | `workspace/_targets.R`, `meta-summary.csv` |
 | Quarto | Methods, results, and provenance in one document | `workspace/report.html` |
@@ -66,9 +66,10 @@ Download each group before closing the browser tab.
 2. **Results and provenance.** Open `outputs/health-wellbeing/` and
    export `meta-summary.csv`, `analysis-data-version.txt`,
    `dataset-versions.csv`, and `predictive-model-version.txt`. Include
-   `session-info.txt` and `metadata/` if you ran the
-   demonstrations. Run their short exercises to produce any missing
-   records you want to keep.
+   `session-info.txt` if you recorded the session. To keep the FAIR
+   assessment, follow [Save the results](03_data_documentation.qmd#save-the-results)
+   after running both assessments. Export `metadata/` to keep
+   `fair-assessment.rds` alongside the metadata files.
 3. **Exact pins.** Export `data_store/` and `model_store/` if you want
    to reopen the same data and model versions later. Keep the
    `data/raw/` source and licence record with the teaching snapshot.

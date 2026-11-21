@@ -33,8 +33,9 @@ in your MyBinder session are your own.
 
 Allow about four minutes. A *pins* board stores named objects, called
 pins. We use a local folder board with versioning enabled explicitly,
-so each write adds a version instead of replacing the previous one.
-We store the data as RDS, an R format that preserves the column types.
+so writing changed data adds a version and keeps the previous one.
+An identical write is skipped by default. We store the data as RDS,
+an R format that preserves the column types.
 
 The prepared script writes two versions of the `health_wellbeing` pin.
 The first contains all 29 studies, with the source URL and raw-file
