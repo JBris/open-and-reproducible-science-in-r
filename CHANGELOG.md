@@ -2,10 +2,25 @@
 
 ## [Unreleased]
 
+## [0.7.0] - 2026-11-22
+
+### Changed
+
+- On GitHub releases, build and push the RStudio image before building
+  the Binder image from the same revision.
+- Use FAIR for Research Software metrics when assessing the workshop's
+  Zenodo record in the archiving follow-up.
+
 ### Fixed
 
-- Keep the Quarto report exercise available after pipeline recovery.
-- Redirect the former workshop chapter URLs to the revised chapters.
+- Restore the full 29-study REML baseline during recovery and preserve
+  participants' report edits so they can complete the Quarto exercise.
+- Keep former workshop URLs and their section links working. Restore
+  the homepage search links for Getting started and People and community.
+- Link the README directly to the published preparation and Quarto
+  exercises. Explain which `.Rproj` to open in a local Docker session.
+- Document the `.here` marker and summary CSV path needed to rerender
+  an unpacked report.
 - Pin the JSON-LD revision used by the FAIR assessment and link the
   workshop archive through its concept DOI.
 
@@ -152,7 +167,8 @@
 - Replaced earlier modelling workshop content with an integrated reproducibility workflow using GitHub, renv, Docker, targets, Quarto, and Zenodo.
 - Generalised the workshop pages for reuse across events, with event-specific details in announcements.
 
-[Unreleased]: https://github.com/JBris/open-and-reproducible-science-in-r/compare/v0.6.0...main
+[Unreleased]: https://github.com/JBris/open-and-reproducible-science-in-r/compare/v0.7.0...main
+[0.7.0]: https://github.com/JBris/open-and-reproducible-science-in-r/releases/tag/v0.7.0
 [0.6.0]: https://github.com/JBris/open-and-reproducible-science-in-r/releases/tag/v0.6.0
 [0.5.1]: https://github.com/JBris/open-and-reproducible-science-in-r/releases/tag/v0.5.1
 [0.5.0]: https://github.com/JBris/open-and-reproducible-science-in-r/releases/tag/v0.5.0
