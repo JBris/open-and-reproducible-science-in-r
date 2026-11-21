@@ -15,16 +15,24 @@ source("pipelines/workshop_support.R")
 use_workshop_book_outputs()
 ```
 
+## How to follow this segment
+
+This eight-minute segment is an instructor demonstration. Watch the
+screen and answer one question with the room; you do not need to run
+any code. To run the assessment yourself later, use the
+[follow-up section](#fair-follow-up) at the end of this page.
+
 ## What would a collaborator need?
 
-We use the **FAIR** principles to document the `HealthWellbeing` teaching
-snapshot and assess what software can discover about it. The table gives
-one question to ask for each principle [@gofair-principles].
+Allow about one minute. We use the **FAIR** principles to document the
+`HealthWellbeing` teaching snapshot and assess what software can
+discover about it. The table gives one question to ask for each
+principle [@gofair-principles].
 
 | Principle | Ask | Example for this dataset |
 | --- | --- | --- |
 | **Findable** | Can someone locate and identify it? | A named record with a stable identifier and searchable metadata. |
-| **Accessible** | How can someone retrieve it, and on what terms? | A working download link, or clear instructions for requesting access. |
+| **Accessible** | How can someone retrieve it, and on what terms? | A working download link with a statement of the access terms, or clear instructions for requesting access. |
 | **Interoperable** | Can people and software interpret its structure? | Use shared metadata terms such as Schema.org and describe the variables and their units. |
 | **Reusable** | Can someone judge whether it suits their project? | Explain the source, the unit of observation, and the licence. |
 
@@ -33,15 +41,17 @@ conditions while keeping the observations restricted.
 
 ## Describe the snapshot with dataspice {#create-fair-metadata}
 
-The four prepared CSV files under `data/metadata/health-wellbeing/` record
-the title and licence, creator, download link, and variables. Open
-`attributes.csv` and find `n`. Each row describes **one study** and `n` is
-the sample size within that study. The teaching snapshot has 29 rows and
-five variables [@healthwellbeing].
+Allow about three minutes. Four prepared CSV files under
+`data/metadata/health-wellbeing/` record the title and licence, creator,
+download link, and variables. The row for `n` in `attributes.csv` says
+that each row of the data describes **one study** and `n` is the sample
+size within that study. The teaching snapshot has 29 rows and five
+variables [@healthwellbeing].
 
-Run the following in the **R Console** from the project root. *Dataspice*
-combines the CSV files into a Schema.org JSON-LD record. Inspect the title,
-licence, and distribution link in the output [@dataspice].
+*dataspice* combines the CSV files into a Schema.org JSON-LD record
+[@dataspice]. The excerpt shows the title, licence, download link, and
+the entry for `n`, so you can see that its meaning and unit survive the
+export.
 
 ```{r health-dataspice-export, eval = TRUE}
 source("pipelines/workshop_support.R")
@@ -56,7 +66,11 @@ stopifnot(all(file.copy(templates, metadata_dir, overwrite = TRUE)))
 dataspice::write_spice(path = metadata_dir)
 
 record <- jsonlite::read_json(file.path(metadata_dir, "dataspice.json"))
-record[c("name", "license", "distribution")]
+excerpt <- record[c("name", "license", "distribution")]
+excerpt$variableMeasured <- Filter(
+  function(variable) variable$name == "n", record$variableMeasured
+)
+jsonlite::toJSON(excerpt, auto_unbox = TRUE, pretty = TRUE)
 ```
 
 This record describes the [verified teaching file](00_preparation.qmd#preparation-data).
@@ -66,8 +80,9 @@ The DOI in `biblio.csv` identifies the original review. Check for
 placeholder coverage fields before publishing the generated record.
 
 The repository's reviewed copy omits empty publication and coverage
-fields. The full record below comes from the same file the assessment
-uses.
+fields, and writes `type` as `@type`; both mean the same under the
+Schema.org context. The full record below comes from the same file the
+assessment uses.
 
 ::: {.callout-note collapse="true"}
 ## HealthWellbeing JSON-LD
@@ -80,15 +95,78 @@ cat(c("```json", readLines(metadata_file, warn = FALSE), "```"), sep = "\n")
 
 ## Assess the snapshot with rfair {#assess-fair-metadata}
 
+Allow about three minutes, including 30 seconds for the question.
 *rfair* takes a URL or persistent identifier and applies a set of tests
-to metadata it can retrieve [@rfair]. Here the target is the **same file
-described by the JSON-LD**. Start with the upstream download URL. It leads
-directly to the data file, so it gives the assessor a download to check
-but little context about the dataset.
+to the metadata it can retrieve [@rfair]. Before the session, the
+instructor assessed the **same data file** twice:
 
-The instructor prepares this assessment before the session. Use saved
-results if the network is slow. Run the live code in the console when you
-want to refresh them.
+1. **Download URL alone.** The upstream URL leads directly to the data
+   file, so the assessor gets a download to check but little context
+   about the dataset.
+2. **With the JSON-LD supplied.** The same URL, with the record above
+   supplied as a separate metadata endpoint.
+
+In a prepared run with `rfair` 0.2.0, FAIRsFAIR metrics 0.8, and the
+locally served JSON-LD, the download returned HTTP 200 in both runs.
+The extra metadata supplied the title and MIT licence. One metric
+from each principle shows what changed and what stayed the same.
+
+| Metric | Download URL alone | With the JSON-LD supplied |
+| --- | --- | --- |
+| Persistent identifier (`FsF-F1-02MD`) | Fail | Fail |
+| Access information in metadata (`FsF-A1-01M`) | Fail | Fail |
+| Formal language for metadata (`FsF-I1-01M`) | Fail | Pass |
+| Licence in metadata (`FsF-R1.1-01M`) | Fail | Pass |
+
+**Question for the room.** The file downloaded successfully in both
+runs, yet the access check failed both times. Why? What would you add
+to the public record so a reader knows how to get the file?
+
+::: {.callout-tip collapse="true"}
+## One possible answer
+
+This metric looks for access information in the metadata. A working
+link shows that the assessor could download the file at that moment.
+It does not tell a reader whether anyone can download it, whether
+they need to sign in, or whether they must request approval.
+
+For this snapshot, a statement such as "Public download, no sign-in
+required" beside the URL would answer the question. Schema.org has
+`isAccessibleForFree` and `conditionsOfAccess` properties for this.
+For a restricted dataset, the record could say who may access the data
+and how to request it. Rerun the assessment to check whether a
+particular metric version recognises the statement.
+:::
+
+An automated check can recognise JSON-LD and find a licence field.
+The data are still in an R-specific format. A reader must check the
+terms and decide whether the documented measurements and study
+population suit their question. A score alone cannot answer that.
+
+## Checkpoint {#metadata-checkpoint}
+
+- Point to the file's download URL, the definition of `n`, and the
+  licence in the JSON-LD.
+- Explain why a working download did not satisfy the access check,
+  and what statement would.
+- If you gave a colleague only the dataset link, how would they find
+  the metadata the instructor supplied to *rfair*? A dataset landing
+  page or repository record can expose it. The archiving segment
+  returns to this question.
+
+The record now says what the data mean and how to get them. It does
+not say which version of the data produced a given result. Next, we
+identify that version.
+[Data and model versioning](04_versioning.qmd)
+
+## After the workshop: run the assessment yourself {#fair-follow-up}
+
+Run these in the **R Console** from the project root. The assessments
+contact the upstream download URL, so they need network access. If a
+live request fails, check `resolution` and `harvest_errors` before
+interpreting the tests.
+
+First, assess the download URL alone.
 
 ```{r health-rfair-baseline, eval = FALSE}
 metadata_file <- file.path("data", "metadata", "health-wellbeing", "dataspice.json")
@@ -102,7 +180,7 @@ baseline$harvest_errors
 baseline$metadata[c("title", "license")]
 ```
 
-Now supply the repository's [raw JSON-LD URL](https://raw.githubusercontent.com/JBris/open-and-reproducible-science-in-r/main/data/metadata/health-wellbeing/dataspice.json)
+Then supply the repository's [raw JSON-LD URL](https://raw.githubusercontent.com/JBris/open-and-reproducible-science-in-r/main/data/metadata/health-wellbeing/dataspice.json)
 as a metadata endpoint. This URL works once the file reaches `main`.
 To check an unpublished copy, use the local option below. Compare the
 same data file under the same metric version.
@@ -129,38 +207,7 @@ comparison[comparison$metric_identifier %in% metrics,
            c("metric_identifier", "status_a", "status_b")]
 ```
 
-In a prepared run with `rfair` 0.2.0, FAIRsFAIR metrics 0.8, and the
-locally served JSON-LD, the download returned HTTP 200 in both runs.
-The extra metadata supplied the title and MIT licence. One metric
-from each principle shows what changed and what stayed the same.
-
-| Metric | Download URL alone | With the JSON-LD supplied |
-| --- | --- | --- |
-| Persistent identifier (`FsF-F1-02MD`) | Fail | Fail |
-| Access information in metadata (`FsF-A1-01M`) | Fail | Fail |
-| Formal language for metadata (`FsF-I1-01M`) | Fail | Pass |
-| Licence in metadata (`FsF-R1.1-01M`) | Fail | Pass |
-
-A file can be retrievable even when the metadata lacks an explicit
-access statement. If a live request fails, check the resolution and
-harvest errors before interpreting the tests. Providing a separate
-URL tells the assessor where to look. To make the metadata discoverable
-independently, expose it through a dataset landing page or repository
-record.
-
-An automated check can recognise JSON-LD and find a licence field.
-The data are still in an R-specific format. A reader must check the
-terms and decide whether the documented measurements and study
-population suit their question. A score alone cannot answer that.
-
-## Checkpoint {#metadata-checkpoint}
-
-Point to the file's download URL, the definition of `n`, and the
-licence. Explain how someone could find these details independently.
-Then ask which exact dataset version produced a given result.
-[Data and model versioning](04_versioning.qmd)
-
-## Try the comparison locally
+### Check an unpublished copy
 
 To check the repository copy before it is on GitHub, run the following
 in the RStudio **Terminal** from the project root. This example uses
@@ -181,12 +228,17 @@ the upstream download URL.
 metadata_url <- "http://127.0.0.1:8765/dataspice.json"
 ```
 
+### Save the results
+
 To keep an example for an offline demonstration, save both assessment
 objects after a successful run and load them into the console before
 class. Retain the identifiers, package and metric versions, and run date
 when sharing an assessment.
 
 ```{r health-rfair-save-example, eval = FALSE}
+source("pipelines/workshop_support.R")
+metadata_dir <- file.path(workshop_output_dir(), "metadata")
+dir.create(metadata_dir, recursive = TRUE, showWarnings = FALSE)
 saveRDS(
   list(
     run_date = Sys.Date(),

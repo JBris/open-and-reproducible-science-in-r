@@ -29,12 +29,12 @@ teaching text and examples. Human review and a timed rehearsal are pending.
 | `pages/workshop/00_preparation.qmd` | Before the session | Outside the 90 minutes | Preparation; MyBinder, R, Git, renv | Self-paced | Open the prepared MyBinder session; clone the project; check R and the library; verify the raw data; prepare the dataset versions; record the source. | Drafted |
 | `pages/workshop/01_open_science.qmd` | 0–10 min | 10 min | Introduction, reproducibility principles, Git and GitHub | Conceptual | Research question, study-level unit of observation, the workflow as one table, and a demonstration of commits, branches, pull requests, and releases. Hands-on Git practice with a fork is follow-up material. | Drafted |
 | `pages/workshop/02_environments.qmd` | 10–20 min | 10 min | Computational reproducibility; renv, Docker, Binder | Demonstration | Running R version, lockfile versions, `renv::status()`, Dockerfile to GitHub Actions to MyBinder, and a session record. | Drafted |
-| `pages/workshop/03_data_documentation.qmd` | 20–28 min | 8 min | FAIR data documentation and assessment; dataspice, rfair | Demonstration | Export Schema.org JSON-LD from prepared metadata and compare pre-run assessments of the same dataset with and without that metadata supplied. | Drafted |
+| `pages/workshop/03_data_documentation.qmd` | 20–28 min | 8 min | FAIR data documentation and assessment; dataspice, rfair | Demonstration | Participants watch. Export Schema.org JSON-LD from prepared metadata, show an excerpt including `n`, compare pre-run assessments of the same dataset with and without that metadata supplied, and ask why the access check fails. Assessment code is follow-up material. | Drafted |
 | `pages/workshop/04_versioning.qmd` | 28–35 min | 7 min | Data and model versioning; pins, vetiver | Demonstration | Two dataset versions from the prepared script, retrieval by identifier, and a pipeline-produced `vetiver` model with its input prototype and training provenance. | Drafted |
-| `pages/workshop/05_targets.qmd` | 35–50 min | 15 min | Build and execute a targets meta-analysis pipeline | Hands-on | Copy the partially completed pipeline, run it to see where it stops, complete two dependency TODOs, inspect the graph, build, and rerun. | Drafted |
-| `pages/workshop/06_quarto.qmd` | 50–65 min | 15 min | Create and render a reproducible Quarto report | Hands-on | Copy and render the partially completed report, complete the confidence interval, prediction interval interpretation, and provenance TODOs, rerender, and check the values against the summary. | Drafted |
+| `pages/workshop/05_targets.qmd` | 35–50 min | 15 min | Build and execute a targets meta-analysis pipeline | Hands-on | Introduce the pipeline as four stages with the model pin as a second output. Copy the partially completed pipeline, run it to see where it stops, complete two dependency TODOs, inspect the graph, build, and rerun. | Drafted |
+| `pages/workshop/06_quarto.qmd` | 50–65 min | 15 min | Create and render a reproducible Quarto report | Hands-on | Copy and render the partially completed report, define the confidence and prediction intervals, complete the confidence interval, prediction interval interpretation, and provenance TODOs, rerender, and check the values against the summary. | Drafted |
 | `pages/workshop/07_modify_and_reproduce.qmd` | 65–75 min | 10 min | Modify the analysis and reproduce the results; targets, Quarto | Hands-on | Rebuild from the pinned input with an identical summary, change the variance estimator, verify the selective rebuild, and rerender. Optional input change retrains the model. | Drafted |
-| `pages/workshop/08_archiving.qmd` | 75–82 min | 7 min | GitHub releases, Zenodo, archiving and optional synthpop | Conceptual | Releases and their triggered builds, Zenodo version and concept DOIs, archive contents, and a brief mention of synthetic data. | Drafted |
+| `pages/workshop/08_archiving.qmd` | 75–82 min | 7 min | GitHub releases, Zenodo, archiving and optional synthpop | Conceptual | Start from the participant's report to decide archive contents, then releases and their triggered builds, Zenodo version and concept DOIs, and a brief mention of synthetic data. | Drafted |
 | `pages/workshop/09_discussion.qmd` | 82–90 min | 8 min | Questions and discussion | Interactive | Recap of what each stage recorded, discussion prompts, questions, exporting work, and follow-up resources. | Drafted |
 | `pages/workshop/10_synthetic_data.qmd` | After the session | Supplementary | Synthetic data; synthpop | Self-paced | Generate synthetic study summaries, compare distributions, pool both tables, and explain the limits on verification and privacy. | Drafted |
 | **Timed programme total** | **0–90 min** | **90 min** | | | | |
@@ -44,8 +44,9 @@ teaching text and examples. Human review and a timed rehearsal are pending.
 Hands-on pages state learning objectives, give each step a time allocation,
 show a worked example with expected output, and end with a checkpoint and
 further reading. Solutions are in collapsed callouts. Demonstration and
-conceptual pages use the same structure, with the instructor running the code
-and participants following along in their own session.
+conceptual pages use the same structure, with the instructor running the code.
+Participants follow along in their own session unless the page asks them to
+watch.
 
 Complete installations, downloads, and image builds before the session.
 Keep the closing discussion even if earlier segments overrun.

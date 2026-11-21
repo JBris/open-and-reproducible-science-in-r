@@ -83,7 +83,22 @@ value.
 
 ## Step 3: complete the three gaps
 
-Allow about six minutes. Edit `workspace/report.qmd` and save it.
+Allow about six minutes. The Results section reports two 95%
+intervals that answer different questions:
+
+-   The **confidence interval** describes uncertainty in the
+    *average* association across studies. It usually narrows as
+    studies are added.
+-   The **prediction interval** describes where the true association
+    in a new, comparable study is likely to fall under the model. It
+    adds the between-study variance, $\tau^2$, so it stays wide when the
+    studies differ.
+
+I² is the percentage of variation in the study estimates that is due
+to between-study heterogeneity rather than sampling error.
+Use these definitions to write TODO 2 in your own words.
+
+Edit `workspace/report.qmd` and save it.
 
 -   **TODO 1**, in Results: report the confidence interval using inline
     R code, following the pattern for the pooled correlation.
@@ -159,7 +174,7 @@ I² of **99.8%** and a prediction interval of **0.056 to 0.607**.
 You can point to the CSV column behind each number. No TODO markers
 remain.
 
-Next, you will change the analysis input and reproduce the results.
+Next, you will change an analysis setting and reproduce the results.
 [Modify the analysis and reproduce the results](07_modify_and_reproduce.qmd)
 
 ## After the workshop: publishing and journal formats {#quarto-publishing}

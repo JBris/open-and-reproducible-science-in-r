@@ -98,22 +98,28 @@ with `targets` and Quarto.
   lockfile. Explain R package dependencies and the wider computing
   environment. Trace the Dockerfile through GitHub Actions to the MyBinder
   session participants are already using, and save a session record.
-- **20–28 minutes, demonstration:** show how FAIR principles apply to the teaching
-  snapshot. Generate JSON-LD from prepared `dataspice` CSVs. Use a pre-run
-  `rfair` comparison to show how the assessment changes when the same
-  snapshot's metadata is supplied explicitly.
+- **20–28 minutes, demonstration:** tell participants to watch rather than
+  run code. Show how FAIR principles apply to the teaching snapshot. Generate
+  JSON-LD from prepared `dataspice` CSVs and show an excerpt that includes
+  `n`. Show the pre-run `rfair` comparison of the same file with and without
+  that metadata, then ask the room why the access check fails although the
+  download works. Lead from the access statement to identifying the exact
+  dataset version. The assessment code is follow-up material.
 - **28–35 minutes, demonstration:** show the two prepared dataset versions on
   a versioned local `pins` board and retrieve each by its identifier. Before
   class, run `source("pipelines/prepare_versioning_demo.R")` in the
   instructor's session. During the demo, use the saved identifier to
   retrieve the model pin and inspect its input prototype, training version,
   and training checksum.
-- **35–50 minutes, hands-on:** participants copy the partially completed
-  pipeline, run it to see where it stops, and complete two TODOs that create
+- **35–50 minutes, hands-on:** introduce the pipeline as four stages, select
+  input, check studies, fit the meta-analysis, and write the summary, with the
+  model pin as a second output from the checked studies. Participants copy the
+  partially completed pipeline, run it to see where it stops, and complete two TODOs that create
   missing dependencies. They inspect the graph, build the targets, and rerun
   to see that every target is skipped.
 - **50–65 minutes, hands-on:** participants copy and render the partially
-  completed report. They then add the confidence interval with inline R, an
+  completed report. After definitions of the confidence and prediction
+  intervals, they add the confidence interval with inline R, an
   interpretation of the prediction interval, and the provenance fields, and check the rendered values
   against the pipeline summary.
 - **65–75 minutes, hands-on:** participants rebuild everything from the
@@ -121,10 +127,13 @@ with `targets` and Quarto.
   from REML to DL, predict the selective rebuild, and rerender the report.
   Changing the selected dataset version is an optional comparison that
   updates both model branches.
-- **75–82 minutes, conceptual:** explain GitHub releases, the release-triggered
-  image builds, and Zenodo version and concept DOIs. Decide what belongs in a
-  permitted archive. Briefly mention `synthpop` for data that cannot be shared,
-  and point to the supplementary exercise.
+- **75–82 minutes, conceptual:** ask what a colleague would need to rerun the
+  report participants just rendered, and build the archive checklist from its
+  provenance. Then explain GitHub releases and the release-triggered image
+  builds. Show the Zenodo record as an example of how an archive exposes those
+  materials through version and concept DOIs, which answers the FAIR question
+  about finding metadata from an identifier. Briefly mention `synthpop` for
+  data that cannot be shared, and point to the supplementary exercise.
 - **82–90 minutes, interactive:** recap what each stage recorded, discuss
   barriers to reproducibility in participants' own work, take questions, and
   remind participants to export their work, summary, and provenance records.

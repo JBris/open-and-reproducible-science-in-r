@@ -463,3 +463,23 @@ the site link so they can follow the reviewed sequence.
 
 Codex reviewed the lesson sources and checked the GitHub Pages source.
 Live pacing and human review remain pending.
+
+## Follow-up on the FAIR and sequencing feedback
+
+| Feedback | Change |
+| --- | --- |
+| FAIR 1 and sequencing 1 | The FAIR page opens by saying the segment is a demonstration to watch. The prepared `rfair` results come before any assessment code, followed by a 30-second question on why the access check fails although the download works. The assessment code, local server, diagnostics, and saved results are in a marked follow-up section. |
+| FAIR 2 | A collapsed answer suggests an access statement beside the URL, names the Schema.org properties for it, and covers restricted data. The prepared record is unchanged, so the comparison table still describes the prepared run. |
+| FAIR 3 | The JSON-LD excerpt includes the entry for `n`. The checkpoint asks how a colleague would find the metadata from the dataset link alone, and the archiving lesson answers it. |
+| Sequencing 2 | The versioning lesson presents the model pin as a preview. The pipeline lesson introduces four stages mapped to script steps, targets, and TODOs, shows the model pin as a second output, and moves the full dependency list into a collapsed note. |
+| Sequencing 3 | The pipeline lesson names the confidence interval and says the summary also records heterogeneity and a prediction interval. The Quarto lesson defines both intervals and I² before the TODOs, and its handoff now says "change an analysis setting". |
+| Sequencing 4 | The archiving lesson opens by asking what a colleague needs to rerun the attendee's report and builds the checklist from that report. It then covers releases and the Zenodo record, which closes the FAIR discovery question. |
+| Delivery issue | Not changed. The published book in `docs/` was left untouched at the maintainer's request. |
+
+Claude Code implemented the follow-up. In a disposable project copy in the
+local RStudio image `ghcr.io/jbris/open-reproducible-science-r:1.0.0`
+(Quarto 1.5.57), the five edited lessons rendered as HTML and the whole book
+rendered as PDF. The image does not include `rfair`, so the assessments were
+not rerun, and no one has checked whether a metric version recognises the
+suggested access statement. A fresh MyBinder launch, timed rehearsal, and
+human review remain pending.
