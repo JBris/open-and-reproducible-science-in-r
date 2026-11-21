@@ -9,7 +9,7 @@
 #
 # The partially completed template for the hands-on activity is
 # pipelines/exercise/_targets_health_wellbeing.R. Its numbered steps match this
-# file, which serves as the solution and the catch-up copy.
+# file, which serves as the solution and the copy that recover_workshop.R restores.
 
 box::use(
   crew[crew_controller_local],

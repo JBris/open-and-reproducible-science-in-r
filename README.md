@@ -81,13 +81,16 @@ describes how they are delivered.
 By the end of the workshop, participants should be able to:
 
 - Explain how the tools support different parts of a reproducible research workflow.
-- Explain how metadata and data and model versions support provenance.
+- Use FAIR principles to document variables, provenance, licensing, and access
+  conditions, and interpret an automated assessment.
+- Explain how `pins` and `vetiver` link results to specific data and model versions.
 - Complete and run a `targets` pipeline and render a Quarto report from its outputs.
-- Modify an analysis input, rebuild only what is affected, and reproduce the result.
+- Change an analysis setting, rebuild only what is affected, and reproduce the result.
 - Identify the files and metadata needed for a citable release and archive.
 
-The session combines 42 minutes of concepts and demonstrations, 40 minutes of
-hands-on exercises, and 8 minutes of discussion. Participants complete a
+The session combines 40 minutes of concepts and demonstrations, 42 minutes of
+hands-on work, and 8 minutes of discussion. In a two-minute activity,
+participants read the workshop's Git history. They then complete a
 partially prepared pipeline and report in one prepared MyBinder environment,
 so nothing is installed during the session. Some familiarity with R will help
 participants follow the examples.
@@ -146,10 +149,16 @@ publishes the image selected by the [Binder entry point](binder/Dockerfile).
 The [Build RStudio workflow](.github/workflows/build-rstudio.yaml) publishes the
 image for local Docker use.
 
-Before teaching the [FAIR lesson](pages/workshop/03_data_documentation.qmd),
-check that the Binder image has the `rfair` version in `renv.lock`.
-Prepare the two assessment results in advance so the demonstration can use
-them if an upstream request times out.
+The [FAIR lesson](pages/workshop/03_data_documentation.qmd) runs `rfair`
+live. It assesses the upstream data URL, then supplies
+`data/metadata/health-wellbeing/dataspice.json` from `main` through jsDelivr.
+`rfair` 0.2.0 reads a metadata endpoint only when it is served as JSON, and
+GitHub's raw file links serve plain text. jsDelivr caches branch URLs, so
+after changing the file on `main`, purge
+<https://purge.jsdelivr.net/gh/JBris/open-and-reproducible-science-in-r@main/data/metadata/health-wellbeing/dataspice.json>
+or wait for the cache to expire. Before teaching, check that the Binder image
+has the `rfair` version in `renv.lock`, and save both assessment results in
+case a request times out during the session.
 
 ### Prepare the versioning demonstration
 
@@ -188,8 +197,9 @@ PDF download. To build a single format, use `quarto render --to html` or
 `quarto render --to pdf`. Preview the HTML book with `quarto preview --to html`.
 
 Code evaluation is disabled by default in `_quarto.yml`, but workshop R
-example chunks explicitly enable it. Rendering uses the restored library
-and runs the examples. The book uses the reference pipeline and writes its
+example chunks explicitly enable it. Rendering uses the restored library,
+runs the examples, and needs network access: the FAIR lesson runs `rfair`
+against the upstream data URL and jsDelivr. The book uses the reference pipeline and writes its
 generated analysis files under `outputs/health-wellbeing/book/`.
 Participant commands use `workspace/` and `outputs/health-wellbeing/`.
 From the project root, use `source("pipelines/recover_workshop.R")` to

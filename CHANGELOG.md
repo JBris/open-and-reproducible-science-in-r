@@ -18,16 +18,30 @@
 
 - Centre the FAIR lesson on dataset documentation with `dataspice` and
   assessment with `rfair`.
-- Restructure the workshop into the final 90-minute programme, with one lesson per segment: 42 minutes of concepts and demonstrations, 40 minutes of hands-on exercises, and 8 minutes of discussion. Merge Git and GitHub into the conceptual opening and move hands-on Git practice to follow-up material.
+- Restructure the workshop into the final 90-minute programme, with one lesson per segment: 40 minutes of concepts and demonstrations, 42 minutes of hands-on work, and 8 minutes of discussion. Merge Git and GitHub into the conceptual opening and move hands-on Git practice to follow-up material.
 - Demonstrate `vetiver` with a supplementary predictive model in the data and model versioning segment. Add GitHub releases to the archiving segment.
 - Make MyBinder the single prepared participant environment, with no installation during the session.
 - Add explicit recovery for participant work and isolate book rendering from that work.
 - Teach selective rebuilding with an estimator change. Report heterogeneity, prediction intervals, and dataset and model provenance.
 - Connect the vetiver demonstration to a predictive model branch and document the bundled snapshot's upstream MIT licence.
-- Present the FAIR segment as a demonstration with a room question on access
-  statements, introduce the pipeline as four stages, define confidence and
+- Present the FAIR segment as a demonstration that runs `rfair` live against
+  the repository's JSON-LD, served through jsDelivr, with a room question on
+  access statements, introduce the pipeline as four stages, define confidence and
   prediction intervals before the report exercise, and start the archiving
   segment from the participant's report.
+- Add a two-minute Git activity to the opening, in which participants read
+  the public repository's tags and history in MyBinder without cloning it.
+  Participants now use the project already in their MyBinder session.
+- Remove 11 packages left in `renv.lock` after `codebook` was dropped
+  (`GPArotation`, `gridExtra`, `haven`, `labelled`, `likert`, `mnormt`,
+  `psych`, `repr`, `reshape2`, `rmdpartials`, and `skimr`), so
+  `renv::status()` reports a consistent project.
+- Copy `data/raw/` into the RStudio and Binder images, so MyBinder sessions
+  include the teaching snapshot and its licence notice, and the recovery
+  script works in a fresh session.
+- Align lesson titles, objectives, recovery wording, and the coordinator
+  affiliation with the current programme, and update the agent instructions
+  for the implemented exercises and the MyBinder copy without Git history.
 - Read the report's pipeline summary relative to the project root, so reports render from the project root without an execution-directory option.
 - Revise the introduction, landing page, README, draft teaching plan, and page plan for the final programme.
 

@@ -32,26 +32,28 @@ By the end of the workshop, participants should be able to:
     access conditions, and interpret an automated assessment.
 -   Explain how `pins` and `vetiver` link results to specific data and model versions.
 -   Complete and run a `targets` pipeline and render a Quarto report from its outputs.
--   Modify an analysis input, rebuild only what is affected, and reproduce the result.
+-   Change an analysis setting, rebuild only what is affected, and reproduce the result.
 -   Identify the files and metadata needed for a citable release and archive.
 
 ## Programme {#intro-programme}
 
 | Time | Duration | Activity | Format |
 | --- | --- | --- | --- |
-| 0–10 min | 10 min | [Introduction, reproducibility principles, Git and GitHub](workshop/01_open_science.qmd) | Conceptual |
+| 0–10 min | 10 min | [Introduction, reproducibility principles, Git and GitHub](workshop/01_open_science.qmd) | Conceptual and hands-on |
 | 10–20 min | 10 min | [Computational reproducibility: renv, Docker and Binder](workshop/02_environments.qmd) | Demonstration |
 | 20–28 min | 8 min | [FAIR data documentation and assessment: dataspice and rfair](workshop/03_data_documentation.qmd) | Demonstration |
 | 28–35 min | 7 min | [Data and model versioning: pins and vetiver](workshop/04_versioning.qmd) | Demonstration |
 | 35–50 min | 15 min | [Build and execute a targets meta-analysis pipeline](workshop/05_targets.qmd) | Hands-on |
 | 50–65 min | 15 min | [Create and render a reproducible Quarto report](workshop/06_quarto.qmd) | Hands-on |
 | 65–75 min | 10 min | [Modify the analysis and reproduce the results](workshop/07_modify_and_reproduce.qmd) | Hands-on |
-| 75–82 min | 7 min | [GitHub releases, Zenodo, archiving and optional synthpop](workshop/08_archiving.qmd) | Conceptual |
+| 75–82 min | 7 min | [GitHub releases, Zenodo and archiving](workshop/08_archiving.qmd) | Conceptual |
 | 82–90 min | 8 min | [Questions and discussion](workshop/09_discussion.qmd) | Interactive |
 | **Total** | **90 min** | | |
 
-The session combines 42 minutes of concepts and demonstrations, 40
-minutes of hands-on exercises, and 8 minutes of discussion.
+The session combines 40 minutes of concepts and demonstrations, 42
+minutes of hands-on work, and 8 minutes of discussion. The hands-on work
+is a two-minute Git activity in the opening and a 40-minute continuous
+exercise.
 
 ## One dataset, one exercise, one environment
 

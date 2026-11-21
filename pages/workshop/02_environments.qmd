@@ -41,7 +41,7 @@ rerun.
 
 ## Inspect the R environment
 
-Allow about three minutes. In the **R Console**, with the project open:
+Allow about three minutes. In the **R Console**, from the project root:
 
 ```{r health-environments-session, include = TRUE, echo = TRUE, message = FALSE, warning = FALSE, cache = FALSE, output = TRUE, eval = TRUE}
 R.version.string
@@ -166,8 +166,10 @@ writeLines(
 
 `outputs/health-wellbeing/session-info.txt` lists the loaded package versions and platform.
 Later, the pipeline records the R and *meta* versions with its result. For a
-MyBinder run, the image tag in `binder/Dockerfile` and the project revision
-from `git rev-parse HEAD` complete the record.
+MyBinder run, record the image version in the project's `VERSION` file; it
+matches the image tag that `binder/Dockerfile` selects on GitHub. Your
+MyBinder copy has no Git history. In a clone, `git rev-parse HEAD` adds the
+exact project revision.
 
 ## Checkpoint {#environments-checkpoint}
 

@@ -33,7 +33,7 @@ prepared environment, after preparing the dataset versions.
 We read the full 29-study dataset by its recorded pin version, so the
 exercise starts from the same input as the workshop pipeline.
 
-```{r health-extras-data, include = TRUE, echo = TRUE, message = FALSE, warning = FALSE, cache = FALSE, output = TRUE, eval = TRUE}
+```{r health-synthetic-input, include = TRUE, echo = TRUE, message = FALSE, warning = FALSE, cache = FALSE, output = TRUE, eval = TRUE}
 box::use(pins[board_folder, pin_read], utils[read.csv])
 
 source("pipelines/workshop_support.R")

@@ -136,7 +136,7 @@ especially when it was trained on restricted data [@vetiver-pin-write].
   the newest one.
 
 Next, you will build and run the analysis yourself.
-[Build and execute a targets pipeline](05_targets.qmd)
+[Build and execute a targets meta-analysis pipeline](05_targets.qmd)
 
 ## Further reading
 

@@ -1,5 +1,5 @@
 ---
-title: "Build and execute a targets pipeline"
+title: "Build and execute a targets meta-analysis pipeline"
 subtitle: "35–50 minutes · Hands-on · targets"
 editor:
   markdown:
@@ -25,8 +25,8 @@ from scratch. By the end, you should be able to trace the summary back
 to its input and explain which steps *targets* reruns, and why.
 
 Work in your MyBinder session, at the project root, after preparing
-the dataset versions. If you fall behind, the catch-up step gives you
-the completed pipeline so you can continue with the report.
+the dataset versions. If you fall behind, the **Get back on track** step
+below restores a working pipeline and report so you can continue.
 [Prepare the dataset versions](00_preparation.qmd#preparation-versions)
 
 ::: {.callout-tip}

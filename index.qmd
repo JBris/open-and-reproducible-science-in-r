@@ -2,11 +2,13 @@
 
 This book contains the **Open and Reproducible Science in R** workshop materials.
 In 90 minutes, we follow the `HealthWellbeing` dataset through an
-end-to-end reproducible research workflow. Short demonstrations cover
-Git and GitHub, computational environments, FAIR metadata, and data and
-model versioning. In the hands-on exercises, you complete and run a
-`targets` meta-analysis pipeline, render a Quarto report from its
-outputs, then change the analysis and reproduce the results. We finish
+end-to-end reproducible research workflow. We start with Git and
+GitHub, including a short activity in which you read the workshop's
+history. Short demonstrations then cover computational environments, FAIR
+metadata, and data and model versioning. In the hands-on exercises, you
+complete and run a `targets` meta-analysis pipeline, render a Quarto
+report from its outputs, then change the analysis and reproduce the
+results. We finish
 with releases, archiving, and discussion. A supplementary exercise
 covers synthetic data with `synthpop`.
 

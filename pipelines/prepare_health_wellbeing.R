@@ -18,7 +18,7 @@ local({
     "38c9b9bb5f85ea49de33e5d2536f6544d5268517/data/HealthWellbeing.rda"
   )
 
-  # Use the bundled snapshot or retrieve its exact upstream copy.
+  # The project and the workshop images include the raw snapshot; stop if it is missing.
   if (!file.exists(raw_file)) {
     stop("Teaching data missing. Follow the Verify the raw data step in the preparation lesson.")
   }
