@@ -228,3 +228,4 @@ figure-pdf/
 
 # Local Codex session ID
 /.codex-session-id
+/.claude-session-id
