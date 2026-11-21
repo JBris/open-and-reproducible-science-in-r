@@ -33,9 +33,9 @@ You need the `meta-summary.csv` file from the
 ## Get back on track {#recover-report}
 
 If you arrived late, lost your session, or broke a working file, run this
-from the project root in the **R Console**. It prepares missing inputs, backs
-up your working pipeline in `workspace/`, and rebuilds the summary with the
-reference pipeline. Any report edits you have already made are kept.
+from the project root in the **R Console**. It selects the full dataset,
+backs up your working pipeline in `workspace/`, and rebuilds the summary
+with the reference pipeline. Any report edits you have already made are kept.
 
 ``` r
 source("pipelines/recover_workshop.R")

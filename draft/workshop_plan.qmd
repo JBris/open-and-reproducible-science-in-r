@@ -81,7 +81,8 @@ with `targets` and Quarto.
    the workflow rather than build everything from scratch. The templates in
    `pipelines/exercise/` each have short TODOs. Participants copy them to the
    ignored `workspace/` folder. The completed references in `pipelines/` serve
-   as solutions, and the recovery script restores them.
+   as solutions. Recovery restores the full-dataset REML pipeline and keeps
+   participants' report edits so they can complete the Quarto exercise.
 3. **One prepared computational environment.** Use MyBinder to provide the
    required packages, configuration, and data. Avoid live installations
    during the workshop. The repository includes the verified raw file, and
@@ -144,8 +145,8 @@ with `targets` and Quarto.
   remind participants to export their work, summary, and provenance records.
 
 Each hands-on step lists a time allocation, an expected-result checkpoint, and
-a collapsed solution. The recovery script prepares missing inputs,
-backs up working files, and runs the reference pipeline. Keep the discussion even if
+a collapsed solution. The recovery script selects the full dataset, backs
+up the working pipeline, and runs the reference pipeline. Keep the discussion even if
 earlier segments overrun. Dates, venues, and announced session details belong
 in [announcements](../ANNOUNCEMENTS.md).
 

@@ -21,9 +21,11 @@ will run. Continue with your completed `workspace/_targets.R` and
 ## Get back on track {#recover-reproduce}
 
 Run this from the project root in the **R Console** if you need to rebuild
-the summary. It backs up your working pipeline in `workspace/` and runs
-the reference pipeline. If you lost your report, copy your saved
-`report.qmd` back into `workspace/` or complete the
+the starting summary or repeat the exercise after changing the dataset
+or estimator. Recovery selects the full 29-study dataset, backs up your
+working pipeline in `workspace/`, and runs the reference pipeline with
+REML. If you lost your report, copy your saved `report.qmd` back into
+`workspace/` or complete the
 [Quarto report exercise](06_quarto.qmd) before continuing.
 
 ``` r

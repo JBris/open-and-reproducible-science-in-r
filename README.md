@@ -209,8 +209,8 @@ against the upstream data URL and jsDelivr. The book uses the reference pipeline
 generated analysis files under `outputs/health-wellbeing/book/`.
 Participant commands use `workspace/` and `outputs/health-wellbeing/`.
 From the project root, use `source("pipelines/recover_workshop.R")` to
-prepare missing inputs, back up the working pipeline, and rebuild the
-summary with the reference pipeline. Start or resume your report in the
+select the full dataset, back up the working pipeline, and rebuild the
+summary with the reference REML pipeline. Start or resume your report in the
 [Quarto exercise](pages/workshop/06_quarto.qmd#step-1-copy-and-render-the-template).
 The standalone report renders from the project root and
 locates the summary relative to that root. Draft teaching plans are

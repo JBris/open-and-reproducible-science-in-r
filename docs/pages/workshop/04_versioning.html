@@ -432,8 +432,8 @@ div.csl-indent {
 <pre><code># A tibble: 2 × 3
   version                created             hash 
   &lt;chr&gt;                  &lt;dttm&gt;              &lt;chr&gt;
-1 20261121T111741Z-06ae2 2026-11-21 11:17:41 06ae2
-2 20261121T111741Z-11d00 2026-11-21 11:17:41 11d00</code></pre>
+1 20261121T113248Z-06ae2 2026-11-21 11:32:48 06ae2
+2 20261121T113248Z-11d00 2026-11-21 11:32:48 11d00</code></pre>
 </div>
 </div>
 <p>The script also recorded which identifier belongs to which dataset. We retrieve the subset’s metadata and the full dataset by those identifiers.</p>
@@ -461,7 +461,7 @@ $filter
 [1] "population == 'general population'"
 
 $parent_version
-[1] "20261121T111741Z-11d00"</code></pre>
+[1] "20261121T113248Z-11d00"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>health_full <span class="ot">&lt;-</span> <span class="fu">pin_read</span>(</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  data_board, <span class="st">"health_wellbeing"</span>, <span class="at">version =</span> full_version</span>
@@ -483,7 +483,7 @@ $parent_version
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>model_version <span class="ot">&lt;-</span> <span class="fu">readLines</span>(version_file, <span class="at">warn =</span> <span class="cn">FALSE</span>)</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>model_version</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "20261121T111806Z-5259a"</code></pre>
+<pre><code>[1] "20261121T113324Z-5259a"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>model_board <span class="ot">&lt;-</span> pins<span class="sc">::</span><span class="fu">board_folder</span>(<span class="fu">file.path</span>(workshop_dir, <span class="st">"model_store"</span>), <span class="at">versioned =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> vetiver<span class="sc">::</span><span class="fu">vetiver_pin_read</span>(</span>
@@ -496,7 +496,7 @@ $parent_version
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>model<span class="sc">$</span>metadata<span class="sc">$</span>user[<span class="fu">c</span>(<span class="st">"data_version"</span>, <span class="st">"data_file_md5"</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>$data_version
-[1] "20261121T111741Z-11d00"
+[1] "20261121T113248Z-11d00"
 
 $data_file_md5
 [1] "5be036389f4d3f5da5056beef8867d21"</code></pre>
