@@ -1,9 +1,6 @@
 ---
 title: "Data and model versioning"
 subtitle: "28–35 minutes · Demonstration · pins and vetiver"
-aliases:
-  - 05_pins.html
-  - "09_extras_and_discussion.html#model-versioning"
 editor:
   markdown:
     wrap: 72

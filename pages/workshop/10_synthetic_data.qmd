@@ -1,9 +1,6 @@
 ---
 title: "Supplementary exercise: synthetic data with synthpop"
 subtitle: "After the workshop · synthpop"
-aliases:
-  - "09_extras_and_discussion.html#prepare-the-study-summaries"
-  - "09_extras_and_discussion.html#synthetic-study-summaries"
 editor:
   markdown:
     wrap: 72

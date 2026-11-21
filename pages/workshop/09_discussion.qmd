@@ -1,8 +1,6 @@
 ---
 title: "Questions and discussion"
 subtitle: "82–90 minutes · Interactive"
-aliases:
-  - 09_extras_and_discussion.html
 editor:
   markdown:
     wrap: 72

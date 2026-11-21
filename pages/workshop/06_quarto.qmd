@@ -1,8 +1,6 @@
 ---
 title: "Create and render a reproducible Quarto report"
 subtitle: "50–65 minutes · Hands-on · Quarto"
-aliases:
-  - 07_quarto.html
 editor:
   markdown:
     wrap: 72

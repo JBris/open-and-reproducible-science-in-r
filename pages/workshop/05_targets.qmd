@@ -1,8 +1,6 @@
 ---
 title: "Build and execute a targets meta-analysis pipeline"
 subtitle: "35–50 minutes · Hands-on · targets"
-aliases:
-  - 06_targets.html
 editor:
   markdown:
     wrap: 72
