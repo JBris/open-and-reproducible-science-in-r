@@ -31,9 +31,10 @@ task introduces a package.
 - `pages/` contains reusable teaching material. Keep event names, dates, and
   venues in `ANNOUNCEMENTS.md`. `draft/workshop_plan.qmd` is an unpublished
   plan and is excluded from website rendering and navigation.
-- `CONTRIBUTING.md`, `CODE_OF_CONDUCT.md`, `ACCESSIBILITY.md`, `SECURITY.md`, and
-  `AI_POLICY.md` live at the repository root so Quarto can render them. GitHub workflow, issue,
-  and PR templates retain their discovery locations under `.github/`.
+- `ANNOUNCEMENTS.md`, `CODE_OF_CONDUCT.md`, `CONTRIBUTING.md`, `ACCESSIBILITY.md`,
+  `SECURITY.md`, `AI_POLICY.md`, and `CHANGELOG.md` live at the repository root
+  so Quarto can render them. GitHub workflow, issue, and PR templates retain
+  their discovery locations under `.github/`.
 - Both images copy the project files participants need, including `data/raw/`,
   into `/home/rstudio`, the project root in MyBinder. That copy has no Git
   history; lessons must not assume a clone.
