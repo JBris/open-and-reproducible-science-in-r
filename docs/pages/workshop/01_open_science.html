@@ -601,8 +601,8 @@ div.csl-indent {
 <div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone <span class="at">--quiet</span> <span class="at">--bare</span> <span class="at">--filter</span><span class="op">=</span>blob:none <span class="st">"</span><span class="va">$url</span><span class="st">"</span> /tmp/workshop-history.git</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> <span class="at">-C</span> /tmp/workshop-history.git log <span class="at">--oneline</span> <span class="at">--no-merges</span> <span class="at">-5</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> <span class="at">-C</span> /tmp/workshop-history.git log <span class="at">--oneline</span> <span class="at">-3</span> <span class="at">--</span> pipelines/_targets_health_wellbeing.R</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>The first log lists the latest changes, and each message says what changed. The second lists only the commits that changed the reference pipeline you will run later.</p></li>
-<li><p><strong>Is your copy of the pipeline the latest version?</strong> Git identifies each version of a file by a hash of its contents. Compare your copy with the one in the latest commit.</p>
+<p>The first log lists the latest changes, and each message says what changed. The second lists only the commits that changed the reference pipeline, the completed solution to the pipeline exercise later in the session.</p></li>
+<li><p><strong>Is the reference pipeline in your session the latest version?</strong> Git identifies each version of a file by a hash of its contents. Compare the copy in your MyBinder project with the one in the latest commit.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> hash-object pipelines/_targets_health_wellbeing.R</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> <span class="at">-C</span> /tmp/workshop-history.git rev-parse HEAD:pipelines/_targets_health_wellbeing.R</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Matching lines mean identical contents. If they differ, the repository changed after your MyBinder image was built. This is why a result should cite a specific commit or release rather than “the latest version”. The pipeline records checksums of its inputs for the same reason.</p></li>
@@ -622,7 +622,7 @@ div.csl-indent {
 <blockquote class="blockquote">
 <p>To retrace this result, I need the source and version of the study summaries, the analysis decisions and code, and the environment used to run them.</p>
 </blockquote>
-<p>You can also explain the difference between a local commit, a push to a remote, and a pull request. You can say what the hash comparison told you about your copy of the pipeline.</p>
+<p>You can also explain the difference between a local commit, a push to a remote, and a pull request. You can say what the hash comparison told you about the reference pipeline in your session.</p>
 <p><strong>Takeaway:</strong> keep a traceable connection between the input, the decisions, and the output. Next, we record the <a href="../../pages/workshop/02_environments.html">computational environment</a>.</p>
 </section>
 <section id="git-practice" class="level2" data-number="5.8">
