@@ -65,6 +65,19 @@ source and licence notice in `data/raw/` with the metadata.
 The DOI in `biblio.csv` identifies the original review. Check for
 placeholder coverage fields before publishing the generated record.
 
+The repository's reviewed copy omits empty publication and coverage
+fields. The full record below comes from the same file the assessment
+uses.
+
+::: {.callout-note collapse="true"}
+## HealthWellbeing JSON-LD
+
+```{r health-jsonld-record, echo = FALSE, results = "asis", eval = TRUE}
+metadata_file <- file.path("data", "metadata", "health-wellbeing", "dataspice.json")
+cat(c("```json", readLines(metadata_file, warn = FALSE), "```"), sep = "\n")
+```
+:::
+
 ## Assess the snapshot with rfair {#assess-fair-metadata}
 
 *rfair* takes a URL or persistent identifier and applies a set of tests
@@ -78,7 +91,9 @@ results if the network is slow. Run the live code in the console when you
 want to refresh them.
 
 ```{r health-rfair-baseline, eval = FALSE}
-snapshot_url <- record$distribution[[1L]]$contentUrl
+metadata_file <- file.path("data", "metadata", "health-wellbeing", "dataspice.json")
+metadata <- jsonlite::read_json(metadata_file)
+snapshot_url <- metadata$distribution[[1L]]$contentUrl
 baseline <- rfair::assess_fair(
   snapshot_url, metric_version = "0.8", timeout = 6, max_time = 30
 )
@@ -87,15 +102,16 @@ baseline$harvest_errors
 baseline$metadata[c("title", "license")]
 ```
 
-Now supply the generated JSON-LD directly. Use its hosted URL, or serve
-the file from the same machine using the local option below. Compare the
-assessment of the same file under the same metric version.
+Now supply the repository's [raw JSON-LD URL](https://raw.githubusercontent.com/JBris/open-and-reproducible-science-in-r/main/data/metadata/health-wellbeing/dataspice.json)
+as a metadata endpoint. This URL works once the file reaches `main`.
+To check an unpublished copy, use the local option below. Compare the
+same data file under the same metric version.
 
 ```{r health-rfair-supplement, eval = FALSE}
-metadata_url <- Sys.getenv("WORKSHOP_FAIR_METADATA_URL")
-if (!nzchar(metadata_url)) {
-  stop("Set WORKSHOP_FAIR_METADATA_URL to the URL of this snapshot's dataspice.json.")
-}
+metadata_url <- paste0(
+  "https://raw.githubusercontent.com/JBris/open-and-reproducible-science-in-r/main/",
+  "data/metadata/health-wellbeing/dataspice.json"
+)
 enriched <- rfair::assess_fair(
   snapshot_url,
   metric_version = "0.8",
@@ -146,23 +162,23 @@ Then ask which exact dataset version produced a given result.
 
 ## Try the comparison locally
 
-After exporting the JSON-LD in your session, run the following in the
-RStudio **Terminal** from the project root. This example uses Python 3
-and serves only the generated metadata directory on the local machine.
+To check the repository copy before it is on GitHub, run the following
+in the RStudio **Terminal** from the project root. This example uses
+Python 3 and serves only the teaching metadata directory on the local
+machine.
 
 ``` bash
 python3 -m http.server 8765 --bind 127.0.0.1 \
-  --directory outputs/health-wellbeing/metadata
+  --directory data/metadata/health-wellbeing
 ```
 
-In the **R Console** in the same session, set the endpoint and run the
-assessment chunks above. Stop the server with **Ctrl+C** in the Terminal
-when finished. The comparison still contacts the upstream download URL.
+In the **R Console**, run the baseline, then use this assignment in place
+of the GitHub URL in the second assessment. Stop the server with
+**Ctrl+C** in the Terminal when finished. The comparison still contacts
+the upstream download URL.
 
 ```{r health-rfair-local-endpoint, eval = FALSE}
-Sys.setenv(
-  WORKSHOP_FAIR_METADATA_URL = "http://127.0.0.1:8765/dataspice.json"
-)
+metadata_url <- "http://127.0.0.1:8765/dataspice.json"
 ```
 
 To keep an example for an offline demonstration, save both assessment

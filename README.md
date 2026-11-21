@@ -25,6 +25,7 @@
     - [Research objects and responsible sharing](#research-objects-and-responsible-sharing)
   - [Usage with Docker](#usage-with-docker)
   - [Usage with Binder](#usage-with-binder)
+    - [Prepare the versioning demonstration](#prepare-the-versioning-demonstration)
   - [Render the book](#render-the-book)
   - [Coordinators](#coordinators)
   - [Announcements](#announcements)
@@ -149,6 +150,20 @@ Before teaching the [FAIR lesson](pages/workshop/03_data_documentation.qmd),
 check that the Binder image has the `rfair` version in `renv.lock`.
 Prepare the two assessment results in advance so the demonstration can use
 them if an upstream request times out.
+
+### Prepare the versioning demonstration
+
+Before class, run this in the instructor's R session from the project root.
+
+```r
+source("pipelines/prepare_versioning_demo.R")
+```
+
+This prepares the two dataset pins, selects the full dataset, and builds
+the model branch. The [versioning lesson](pages/workshop/04_versioning.qmd)
+reads `outputs/health-wellbeing/predictive-model-version.txt` and opens
+that pin in the same session. The hands-on pipeline lesson introduces
+`targets` afterwards.
 
 ## Render the book
 

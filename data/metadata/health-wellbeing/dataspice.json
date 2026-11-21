@@ -1,0 +1,55 @@
+{
+  "@context": "https://schema.org",
+  "@type": "Dataset",
+  "name": "HealthWellbeing teaching snapshot",
+  "creator": [
+    {
+      "@type": "Person",
+      "name": "Mathias Harrer"
+    }
+  ],
+  "description": "Study-level Pearson correlations between health and well-being. One row per study. Teaching snapshot from section 4.2.4 of Doing Meta-Analysis with R.",
+  "keywords": [
+    "health",
+    "well-being",
+    "meta-analysis"
+  ],
+  "license": "https://opensource.org/license/mit",
+  "variableMeasured": [
+    {
+      "@type": "PropertyValue",
+      "name": "author",
+      "description": "Study label (first author and year)"
+    },
+    {
+      "@type": "PropertyValue",
+      "unitText": "unitless",
+      "name": "cor",
+      "description": "Pearson correlation between health and well-being"
+    },
+    {
+      "@type": "PropertyValue",
+      "unitText": "observations",
+      "name": "n",
+      "description": "Sample size within the study"
+    },
+    {
+      "@type": "PropertyValue",
+      "name": "population",
+      "description": "Type of study sample: chronic condition or general population"
+    },
+    {
+      "@type": "PropertyValue",
+      "name": "country",
+      "description": "Country where the study was conducted"
+    }
+  ],
+  "distribution": [
+    {
+      "@type": "DataDownload",
+      "name": "HealthWellbeing teaching data (R data file)",
+      "contentUrl": "https://raw.githubusercontent.com/MathiasHarrer/dmetar/38c9b9bb5f85ea49de33e5d2536f6544d5268517/data/HealthWellbeing.rda",
+      "encodingFormat": "application/octet-stream"
+    }
+  ]
+}

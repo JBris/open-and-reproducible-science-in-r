@@ -103,9 +103,11 @@ with `targets` and Quarto.
   `rfair` comparison to show how the assessment changes when the same
   snapshot's metadata is supplied explicitly.
 - **28–35 minutes, demonstration:** show the two prepared dataset versions on
-  a versioned local `pins` board and retrieve each by its identifier. Retrieve
-  the predictive model produced by the pipeline and inspect its input
-  prototype, training version, and training checksum.
+  a versioned local `pins` board and retrieve each by its identifier. Before
+  class, run `source("pipelines/prepare_versioning_demo.R")` in the
+  instructor's session. During the demo, use the saved identifier to
+  retrieve the model pin and inspect its input prototype, training version,
+  and training checksum.
 - **35–50 minutes, hands-on:** participants copy the partially completed
   pipeline, run it to see where it stops, and complete two TODOs that create
   missing dependencies. They inspect the graph, build the targets, and rerun

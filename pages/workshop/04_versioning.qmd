@@ -10,9 +10,10 @@ execute:
   message: false
 ---
 
-```{r health-versioning-book-output, include = FALSE, eval = TRUE}
+```{r health-versioning-book-prep, include = FALSE, eval = TRUE}
 source("pipelines/workshop_support.R")
 use_workshop_book_outputs()
+source("pipelines/prepare_versioning_demo.R")
 ```
 
 ## Introduction
@@ -41,10 +42,6 @@ checksum as metadata. The second contains the 18 general-population
 studies. It is read from the exact full version, and its metadata
 records the filter and that parent version. Rerunning the script
 reuses identical versions instead of writing duplicates.
-
-```{r health-versioning-prepare, include = TRUE, echo = FALSE, message = FALSE, warning = FALSE, cache = FALSE, output = TRUE, eval = TRUE}
-source("pipelines/prepare_health_wellbeing.R")
-```
 
 We open the same board and list its versions.
 
@@ -98,22 +95,21 @@ other trains a small illustrative regression of Fisher z on log sample
 size, then stores it with *vetiver*. The regression and the pooled estimate
 answer different questions.
 
-For this demonstration the instructor prepares just the model branch from
-the reference pipeline, using the full dataset.
+The instructor has prepared a model pin from the full dataset. The
+workshop pipeline built it, and the next lesson shows how that pipeline
+runs. If you are trying this demo on your own, first run
+`source("pipelines/prepare_versioning_demo.R")` from the project root.
 
-```{r health-vetiver-pipeline, echo = TRUE, message = FALSE, warning = FALSE, eval = TRUE}
-reference_script <- file.path("pipelines", "_targets_health_wellbeing.R")
-pipeline_store <- file.path(workshop_dir, "_targets")
-targets::tar_make(names = model_version, script = reference_script, store = pipeline_store)
-```
-
-Retrieve that exact model and inspect its input prototype, which lists
-the columns required for prediction. Its metadata points to the training
-data version and checksum. The same model version will appear in the
-summary after you run the completed pipeline against the same input.
+Read the saved version identifier and use it to retrieve the model.
+Its input prototype lists the columns required for prediction. Its
+metadata records the training data version and checksum. When you
+run the completed pipeline against the same input on this board,
+its summary records the same model version.
 
 ```{r health-vetiver-read, echo = TRUE, message = FALSE, warning = FALSE, eval = TRUE}
-model_version <- targets::tar_read(model_version, store = pipeline_store)
+version_file <- file.path(workshop_dir, "predictive-model-version.txt")
+model_version <- readLines(version_file, warn = FALSE)
+model_version
 model_board <- pins::board_folder(file.path(workshop_dir, "model_store"), versioned = TRUE)
 model <- vetiver::vetiver_pin_read(
   model_board, "health_wellbeing_lm", version = model_version
@@ -122,8 +118,8 @@ names(model$prototype)
 model$metadata$user[c("data_version", "data_file_md5")]
 ```
 
-Next, compare the training version with the full dataset identifier you
-read above. Changing the dataset in the pipeline also trains and pins
+The training version should match the full dataset identifier you read
+above. Changing the dataset in the pipeline also trains and pins
 a new model. The [optional input comparison](07_modify_and_reproduce.qmd#change-input)
 lets you see both versions. Review sharing terms for any fitted model,
 especially when it was trained on restricted data [@vetiver-pin-write].
