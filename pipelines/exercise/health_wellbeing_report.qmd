@@ -1,0 +1,120 @@
+---
+title: "Health and well-being across studies"
+format:
+  html:
+    embed-resources: true
+toc: true
+link-citations: true
+editor:
+  markdown:
+    wrap: 72
+execute:
+  warning: false
+  message: false
+  echo: false
+params:
+  summary_file: "outputs/health-wellbeing/meta-summary.csv"
+---
+
+## Introduction
+
+We ask how strongly health and well-being are associated across the
+studies included in the selected `HealthWellbeing` dataset version.
+The input consists of study summaries from the teaching example in
+*Doing Meta-Analysis with R: A Hands-On Guide*.
+[Section 4.2.4, Correlations](https://doing-meta.guide/pooling-es#correlations)
+
+```{r health-report-input, include = FALSE, cache = FALSE}
+# The summary path is relative to the project root, wherever Quarto runs.
+summary_file <- here::here(params$summary_file)
+if (!file.exists(summary_file)) {
+  stop("Summary missing. Run the pipeline or use Get back on track in the Quarto lesson.")
+}
+result <- utils::read.csv(summary_file, colClasses = "character")
+stopifnot(nrow(result) == 1L, result$effect_scale == "ZCOR")
+stopifnot(
+  all(c("tau_method", "interval_method") %in% names(result)),
+  !anyNA(c(result$tau_method, result$interval_method)),
+  all(nzchar(c(result$tau_method, result$interval_method)))
+)
+numeric_fields <- c(
+  "pooled_r", "ci_lower", "ci_upper", "confidence_level",
+  "tau2", "i2_percent", "prediction_lower", "prediction_upper", "prediction_level"
+)
+required_fields <- c(
+  numeric_fields, "prediction_method", "data_source", "raw_md5", "data_file_md5",
+  "data_filter", "data_scope", "predictive_model_version", "pipeline_md5"
+)
+if (!all(required_fields %in% names(result))) {
+  stop("Summary is from an earlier exercise. Run the current pipeline and render again.")
+}
+result[numeric_fields] <- lapply(result[numeric_fields], as.numeric)
+
+tau_method <- switch(
+  result$tau_method,
+  REML = "restricted maximum likelihood (REML)",
+  PM = "the Paule–Mandel method (PM)",
+  DL = "the DerSimonian–Laird method (DL)",
+  result$tau_method
+)
+interval_method <- switch(
+  result$interval_method,
+  HK = "the Hartung–Knapp method (HK)",
+  KR = "the Kenward–Roger method (KR)",
+  classic = "a normal approximation (classic)",
+  result$interval_method
+)
+
+pipeline_md5 <- result[["pipeline_md5"]]
+```
+
+## Methods
+
+The analysis pools Pearson correlations on Fisher's z scale with a
+random-effects model. The pipeline estimates between-study variance
+using `r tau_method` and calculates a confidence interval using
+`r interval_method`. It transforms the estimate and interval limits
+back to the correlation scale. The prediction interval uses the
+`r result$prediction_method` method. Similarity of effect definitions and
+independence of study estimates are assumptions of this analysis.
+
+## Results
+
+The analysis combined `r result$studies` studies. The pooled
+correlation was `r sprintf("%.3f", result$pooled_r)`.
+
+**TODO 1:** Replace this paragraph with the confidence level and the
+interval from `result$ci_lower` to `result$ci_upper`. Use inline R and
+format both limits to three decimals.
+
+Between-study variance was `r sprintf("%.3f", result$tau2)` on the
+Fisher z scale, and I² was `r sprintf("%.1f%%", result$i2_percent)`.
+The `r sprintf("%.0f%%", 100 * result$prediction_level)` prediction interval
+was `r sprintf("%.3f", result$prediction_lower)` to
+`r sprintf("%.3f", result$prediction_upper)`.
+
+**TODO 2:** Explain what the prediction interval says about the association
+in a comparable setting and how it differs from the confidence interval.
+
+## Provenance
+
+-   **TODO 3:** Add the dataset pin version and pipeline script MD5.
+    Use `result$data_version` and `pipeline_md5`.
+-   [Upstream data snapshot](`r result$data_source`)
+-   Raw snapshot MD5: `r result$raw_md5`
+-   Selected input MD5: `r result$data_file_md5`
+-   Inclusion rule: `r result$data_filter` (`r result$data_scope`)
+-   Predictive model pin version: `r result$predictive_model_version`
+-   R version: `r result$r_version`
+-   *meta* version: `r result$meta_version`
+-   Effect scale: `r result$effect_scale`
+-   Variance estimator: `r result$tau_method`
+-   Interval method: `r result$interval_method`
+
+The predictive model is a separately pinned regression trained on the same
+checked data. The meta-analysis uses the study correlations and sample sizes
+directly.
+
+The report reads the CSV produced by the workshop's *targets*
+pipeline. Retain the source data citation, checksum, selection file,
+and environment record with a permitted archive of the analysis.

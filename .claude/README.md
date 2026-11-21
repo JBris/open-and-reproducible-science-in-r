@@ -13,7 +13,7 @@ additional packages.
 | `AGENTS.md` | Project conventions, commands, and verification expectations |
 | `CLAUDE.md` | Imports `AGENTS.md` so Claude Code loads the shared instructions |
 | `AI_POLICY.md` | Human responsibility, AI assistance disclosure, and scientific verification |
-| `.claude/agents/*.md` | R developer, lesson editor, and read-only reviewer subagents |
+| `.claude/agents/*.md` | R developer, lesson editor, read-only reviewer, and AIMOS2026 attendee subagents |
 | `.claude/settings.json` | SessionStart and Stop hooks, and approval prompts for image publishing |
 | `.agents/skills/*/SKILL.md` | Shared R, Quarto, and container procedures (also used by Codex) |
 | `.codex/hooks/project.py` | Shared lifecycle feedback script, which does not modify source files |
@@ -51,7 +51,12 @@ State which checks ran and whether human review is still pending.
 
 Subagents inherit the session's model. The reviewer can use only Read, Grep,
 Glob, and Bash. That limits what it can do, but it is not a sandbox: Bash can
-still write files.
+still write files. The attendee can use only Read, Grep, and Glob. It critiques
+lessons and changes from a workshop participant's perspective. Its simulated
+view does not replace feedback from real participants.
+
+New or changed agent files load when Claude Code starts, so restart the session
+before asking for a newly added agent.
 
 ## Hook behavior and boundaries
 

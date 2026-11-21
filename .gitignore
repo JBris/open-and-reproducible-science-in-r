@@ -214,6 +214,9 @@ cython_debug/
 
 **/_targets
 /outputs/health-wellbeing/
+
+# Participant copies of the workshop exercise templates.
+/workspace/
 figure-html/
 figure-pdf/
 
@@ -222,3 +225,6 @@ figure-pdf/
 
 # Personal Claude Code settings
 .claude/settings.local.json
+
+# Local Codex session ID
+/.codex-session-id

@@ -25,6 +25,11 @@ task introduces a package.
   `binder/Dockerfile` is the Binder repository entry point.
 - `R/dummy.R` and `pipelines/_targets_dummy.R` contain no-op placeholders.
   They are not completed examples or a runnable targets pipeline.
+- `pipelines/_targets_health_wellbeing.R` and `pipelines/health_wellbeing_report.qmd`
+  are the completed reference pipeline and report. `pipelines/exercise/` holds
+  their partially completed participant templates, which lessons copy to the
+  ignored `workspace/` folder. Keep the templates' numbered steps and TODOs
+  aligned with the references.
 - `pages/` contains reusable teaching material. Keep event names, dates, and
   venues in `ANNOUNCEMENTS.md`. `draft/workshop_plan.qmd` is an unpublished
   plan and is excluded from website rendering and navigation.
@@ -118,15 +123,17 @@ Repository skills live in `.agents/skills/`:
 - `container-release`: Compose, RStudio/Binder, and image versioning.
 
 When parallel work is requested, use the custom agents in `.codex/agents/`:
-`r_developer`, `lesson_editor`, and `reproducibility_reviewer`. Give each worker a
-bounded task and explicit file ownership. Independent reviews can run in
-parallel; coordinate shared-file edits. The main agent integrates the results
-and verifies the final change. Use the same role guidance directly if the client
-does not expose custom agents.
+`r_developer`, `lesson_editor`, `reproducibility_reviewer`, and
+`aimos2026_attendee`. Give each worker a bounded task and explicit file
+ownership. Independent reviews can run in parallel; coordinate shared-file edits.
+The main agent integrates the results and verifies the final change. Use the
+same role guidance directly if the client does not expose custom agents.
+`aimos2026_attendee` critiques material from a participant's perspective without
+editing files; its simulated view does not replace real participant feedback.
 
 Claude Code equivalents live in `.claude/agents/` (`r-developer`, `lesson-editor`,
-`reproducibility-reviewer`) and `.claude/settings.json`, which reuses the
-`.codex/` hook and R checker scripts.
+`reproducibility-reviewer`, `aimos2026-attendee`) and `.claude/settings.json`,
+which reuses the `.codex/` hook and R checker scripts.
 
 See `.codex/README.md` and `.claude/README.md` for configuration, hook trust,
 and invocation examples.

@@ -5,6 +5,23 @@
 ### Added
 
 - Claude Code project instructions (`CLAUDE.md`), settings, subagents, lifecycle hooks, and image-publishing approval prompts alongside the existing Codex setup.
+- Add partially completed `targets` pipeline and Quarto report templates in `pipelines/exercise/`. Participants copy them to an ignored `workspace/` folder, and lessons provide collapsed solutions and a pipeline catch-up step.
+- Add `pipelines/prepare_health_wellbeing.R`, which prepares the versioned dataset inputs before the session and reuses matching versions when rerun.
+- Add a hands-on lesson on modifying the analysis and reproducing the results.
+- Add a supplementary `synthpop` exercise that pools the original and synthetic study summaries.
+- Add an AIMOS2026 attendee subagent for Claude Code and Codex. It critiques workshop material from a participant's perspective without editing files.
+- Record a simulated attendee review of the workshop revision in `draft/`. Record the outcome of the selected fixes in the review.
+
+### Changed
+
+- Restructure the workshop into the final 90-minute programme, with one lesson per segment: 42 minutes of concepts and demonstrations, 40 minutes of hands-on exercises, and 8 minutes of discussion. Merge Git and GitHub into the conceptual opening and move hands-on Git practice to follow-up material.
+- Demonstrate `vetiver` with a supplementary predictive model in the data and model versioning segment. Add GitHub releases to the archiving segment.
+- Make MyBinder the single prepared participant environment, with no installation during the session.
+- Add explicit recovery for participant work and isolate book rendering from that work.
+- Teach selective rebuilding with an estimator change. Report heterogeneity, prediction intervals, and dataset and model provenance.
+- Connect the vetiver demonstration to a predictive model branch and document the bundled snapshot's upstream MIT licence.
+- Read the report's pipeline summary relative to the project root, so reports render from the project root without an execution-directory option.
+- Revise the introduction, landing page, README, draft teaching plan, and page plan for the final programme.
 
 ## [0.5.0] - 2026-11-20
 

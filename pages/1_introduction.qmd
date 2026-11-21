@@ -20,46 +20,58 @@ well-being.
 
 The workshop is presented by [James Bristow](2_coordinators.qmd#james-bristow), Massey University, with co-author [Hana Liang](2_coordinators.qmd#hana-liang), Bioeconomy Science Institute.
 
+The main aim is for you to understand and experience an end-to-end
+reproducible research workflow, not to master every individual package.
+
 ## Learning objectives
 
 By the end of the workshop, participants should be able to:
 
 -   Explain how the tools support different parts of a reproducible research workflow.
--   Describe dataset variables, provenance, licensing, and access
-    conditions using a codebook and structured FAIR metadata.
--   Store a dataset with `pins` and retrieve a specific version.
--   Trace a result through a `targets` pipeline and a Quarto report.
--   Identify the files and metadata needed for a citable archive.
+-   Describe how a codebook and structured metadata record variables,
+    provenance, licensing, and access conditions in support of FAIR principles.
+-   Explain how `pins` and `vetiver` link results to specific data and model versions.
+-   Complete and run a `targets` pipeline and render a Quarto report from its outputs.
+-   Modify an analysis input, rebuild only what is affected, and reproduce the result.
+-   Identify the files and metadata needed for a citable release and archive.
 
-## Building a connected workflow
+## Programme {#intro-programme}
 
-1.  Track changes with Git and review a change on GitHub.
-    [Version control and collaboration](workshop/02_git_github.qmd)
-2.  Record R dependencies with renv and inspect the wider environment
-    captured by Docker.
-    [Computational environments](workshop/03_environments.qmd)
-3.  Describe variables with `codebook` and record dataset metadata with
-    `dataspice`.
-    [Dataset documentation and FAIR metadata](workshop/04_data_documentation.qmd)
-4.  Store the full dataset and a teaching subset with `pins`, then
-    retrieve a specific version.
-    [Dataset storage and versioning](workshop/05_pins.qmd)
-5.  Run the correlation meta-analysis with `targets` and inspect what
-    rebuilds when the dataset version changes.
-    [Analytical pipelines](workshop/06_targets.qmd)
-6.  Render and inspect the analysis report in Quarto.
-    [Reporting and publishing](workshop/07_quarto.qmd)
-7.  Find and cite a specific archive version on Zenodo.
-    [Research archiving](workshop/08_zenodo.qmd)
+| Time | Duration | Activity | Format |
+| --- | --- | --- | --- |
+| 0–10 min | 10 min | [Introduction, reproducibility principles, Git and GitHub](workshop/01_open_science.qmd) | Conceptual |
+| 10–20 min | 10 min | [Computational reproducibility: renv, Docker and Binder](workshop/02_environments.qmd) | Demonstration |
+| 20–28 min | 8 min | [FAIR principles and metadata: codebook and dataspice](workshop/03_data_documentation.qmd) | Demonstration |
+| 28–35 min | 7 min | [Data and model versioning: pins and vetiver](workshop/04_versioning.qmd) | Demonstration |
+| 35–50 min | 15 min | [Build and execute a targets meta-analysis pipeline](workshop/05_targets.qmd) | Hands-on |
+| 50–65 min | 15 min | [Create and render a reproducible Quarto report](workshop/06_quarto.qmd) | Hands-on |
+| 65–75 min | 10 min | [Modify the analysis and reproduce the results](workshop/07_modify_and_reproduce.qmd) | Hands-on |
+| 75–82 min | 7 min | [GitHub releases, Zenodo, archiving and optional synthpop](workshop/08_archiving.qmd) | Conceptual |
+| 82–90 min | 8 min | [Questions and discussion](workshop/09_discussion.qmd) | Interactive |
+| **Total** | **90 min** | | |
 
-Together, these tools support a workflow whose history, dependencies, analytical steps, and outputs can be inspected and reused by other researchers.
+The session combines 42 minutes of concepts and demonstrations, 40
+minutes of hands-on exercises, and 8 minutes of discussion.
 
-## Optional closing examples
+## One dataset, one exercise, one environment
 
-The final five minutes include discussion and brief demonstrations if
-time allows. `synthpop` illustrates synthetic study summaries and
-`vetiver` shows how to link model versions to their training data.
-[Optional extras and concluding discussion](workshop/09_extras_and_discussion.qmd)
+-   **One dataset throughout.** Every stage uses `HealthWellbeing`. For
+    `vetiver`, a separate pipeline branch trains and pins a small
+    regression on the same checked input as the meta-analysis.
+-   **One continuous hands-on exercise.** You complete and run a
+    partially completed `targets` pipeline and Quarto report, then
+    change the analysis and reproduce the results, rather than building
+    everything from scratch.
+-   **One prepared computational environment.** MyBinder provides the
+    packages, configuration, and data, so nothing is installed during
+    the workshop. [Preparation](workshop/00_preparation.qmd)
+
+## Supplementary exercise
+
+Synthetic data with `synthpop` is a supplementary exercise for after
+the workshop. The archiving segment mentions it briefly when
+discussing data that cannot be shared.
+[Synthetic data with synthpop](workshop/10_synthetic_data.qmd)
 
 ## Reproducibility when data cannot be shared
 
@@ -70,7 +82,7 @@ findings based on original observations requires access to those
 observations. A differential privacy claim requires a validated
 mechanism and privacy accounting [@near2021-synthetic-data].
 
-## Principles to put into practice
+## Principles to put into practice {#intro-principles}
 
 Throughout the session, consider whether another researcher could:
 
@@ -86,8 +98,9 @@ We will consider common barriers to these goals, including undocumented dependen
 
 ## Getting started
 
-Some familiarity with R will help you follow the examples. Set up the
-environment and verify the teaching dataset before the timed session.
+Some familiarity with R will help you follow the examples. Open the
+prepared environment, verify the teaching dataset, and prepare the
+dataset versions before the timed session.
 [Preparation](workshop/00_preparation.qmd)
 
 For upcoming workshops, dates, and venues, see the [workshop announcements](../ANNOUNCEMENTS.md).

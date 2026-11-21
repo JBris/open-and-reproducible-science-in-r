@@ -1,16 +1,20 @@
 # Welcome {.unnumbered}
 
 This book contains the **Open and Reproducible Science in R** workshop materials.
-In 90 minutes, we document and version the `HealthWellbeing` dataset,
-run a correlation meta-analysis, and trace the result through a
-Quarto report and an archive. The workshop includes a runnable
-`targets` pipeline and a report template. The closing discussion can
-include brief examples of synthetic data and model versioning.
+In 90 minutes, we follow the `HealthWellbeing` dataset through an
+end-to-end reproducible research workflow. Short demonstrations cover
+Git and GitHub, computational environments, FAIR metadata, and data and
+model versioning. In the hands-on exercises, you complete and run a
+`targets` meta-analysis pipeline, render a Quarto report from its
+outputs, then change the analysis and reproduce the results. We finish
+with releases, archiving, and discussion. A supplementary exercise
+covers synthetic data with `synthpop`.
 
 ## Getting started
 
-Read the learning objectives and set up your environment before the
-session. Some familiarity with R will help you follow the material.
+Read the learning objectives and programme, then open the prepared
+MyBinder environment before the session. Some familiarity with R will
+help you follow the material.
 [Introduction](pages/1_introduction.qmd) ·
 [Preparation](pages/workshop/00_preparation.qmd)
 

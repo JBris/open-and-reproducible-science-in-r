@@ -13,7 +13,7 @@ and the R checker uses base R, so neither installs additional packages.
 | `AGENTS.md` | Project conventions, commands, and verification expectations |
 | `AI_POLICY.md` | Human responsibility, AI assistance disclosure, and scientific verification |
 | `.agents/skills/*/SKILL.md` | Reusable R, Quarto, and container workflows |
-| `.codex/agents/*.toml` | R developer, lesson editor, and read-only reviewer |
+| `.codex/agents/*.toml` | R developer, lesson editor, read-only reviewer, and AIMOS2026 attendee |
 | `.codex/config.toml` | Enable hooks and allow up to three concurrent subagents |
 | `.codex/rules/release.rules` | Approval rules for direct Docker image publishing |
 | `.codex/hooks.json` | SessionStart and Stop hook registration |
@@ -53,8 +53,10 @@ whether human review is still pending.
 ```
 
 Agent definitions inherit the session's model and reasoning preferences. The
-reviewer requests a read-only sandbox; live parent permission overrides still
-apply. A client without custom-agent support can follow the same instructions
+reviewer and the attendee request a read-only sandbox; live parent permission
+overrides still apply. The attendee critiques lessons and changes from a
+workshop participant's perspective. Its simulated view does not replace
+feedback from real participants. A client without custom-agent support can follow the same instructions
 directly. No new MCP server, credential, or model subscription is required by
 these files.
 

@@ -1,0 +1,214 @@
+---
+title: "Create and render a reproducible Quarto report"
+subtitle: "50–65 minutes · Hands-on · Quarto"
+editor:
+  markdown:
+    wrap: 72
+link-citations: true
+execute:
+  warning: false
+  message: false
+---
+
+```{r health-quarto-book-output, include = FALSE, eval = TRUE}
+source("pipelines/workshop_support.R")
+use_workshop_book_outputs()
+```
+
+## Introduction
+
+In this 15-minute activity, you complete and render a short report
+that reads the summary written by your pipeline. The report is
+partially completed: its methods are written, and you add the
+confidence interval, an interpretation, and the provenance fields. By
+the end, you should be able to explain where each number in the
+report came from and what a reader needs to recreate it.
+
+You need the `meta-summary.csv` file from the
+[targets activity](05_targets.qmd#targets-checkpoint).
+
+::: {.callout-tip}
+## Get back on track {#recover-report}
+
+If you arrived late, lost your session, or broke a working file, run this
+from the project root in the **R Console**. It prepares missing inputs, saves
+any previous working files as backups in `workspace/`, restores the
+reference pipeline and report, and runs the pipeline.
+
+``` r
+source("pipelines/recover_workshop.R")
+```
+:::
+
+After recovery, run the render command in Step 1. In a Quarto error,
+look for the first error and the reported line or chunk in `report.qmd`.
+
+## Step 1: copy and render the template
+
+Allow about three minutes. In the **R Console** at the project root,
+copy and render your report. Run the same render command after each
+edit. It keeps you in the Console and lets you read any errors there.
+
+```{r health-quarto-render-template, eval = FALSE}
+source("pipelines/workshop_support.R")
+dir.create("workspace", showWarnings = FALSE)
+report <- file.path("workspace", "report.qmd")
+if (!file.exists(report)) {
+  file.copy("pipelines/exercise/health_wellbeing_report.qmd", report)
+}
+render_workshop_report()
+```
+
+In the **Files** pane, open the `workspace` folder, click
+`report.html`, and choose **View in Web Browser**. The HTML embeds its
+resources, so it works as a single file. The pooled estimate appears,
+along with three **TODO** markers in the template.
+
+## Step 2: read the report source
+
+Allow about three minutes. Open `workspace/report.qmd` in RStudio.
+
+-   The **YAML header** at the top sets the title and HTML format, and
+    names the summary file in `params`.
+-   The hidden **R chunk** reads one row from the summary CSV and
+    checks it. It does not fit any model.
+-   **Inline R code**, written as a backtick, the letter `r`, an
+    expression, and a closing backtick, puts values from that row into
+    the text when the report renders.
+
+The pipeline owns the analysis; the report explains its methods and
+interprets the saved result. Because the report never retypes a
+number, rerunning the pipeline and rendering again updates every
+value.
+
+## Step 3: complete the three gaps
+
+Allow about six minutes. Edit `workspace/report.qmd` and save it.
+
+-   **TODO 1**, in Results: report the confidence interval using inline
+    R code, following the pattern for the pooled correlation.
+-   **TODO 2**, in Results: explain how the prediction interval and
+    confidence interval answer different questions.
+-   **TODO 3**, in Provenance: add list items for the dataset pin
+    version and the pipeline script MD5.
+
+::: {.callout-tip collapse="true"}
+## Solution to TODO 1
+
+Replace the sentence about the pooled correlation and the TODO 1
+paragraph with:
+
+```` markdown
+The pooled correlation was `r knitr::inline_expr('sprintf("%.3f", result$pooled_r)')` with a
+`r knitr::inline_expr('sprintf("%.0f%%", 100 * result$confidence_level)')` confidence interval
+from `r knitr::inline_expr('sprintf("%.3f", result$ci_lower)')` to
+`r knitr::inline_expr('sprintf("%.3f", result$ci_upper)')`.
+````
+:::
+
+::: {.callout-tip collapse="true"}
+## Example for TODO 2
+
+Your wording can differ. For example:
+
+```` markdown
+The confidence interval describes uncertainty in the average association.
+The prediction interval describes plausible true associations in a
+comparable setting under the model.
+````
+:::
+
+::: {.callout-tip collapse="true"}
+## Solution to TODO 3
+
+```` markdown
+-   Dataset pin version: `r knitr::inline_expr('result$data_version')`
+-   Pipeline script MD5: `r knitr::inline_expr('pipeline_md5')`
+````
+:::
+
+The completed reference report is
+`pipelines/health_wellbeing_report.qmd`. If you are stuck, compare
+your copy with it.
+
+## Step 4: render again and check the numbers
+
+Allow about three minutes. Render the report again in the **R Console**:
+
+```{r health-quarto-render-final, eval = FALSE}
+render_workshop_report()
+```
+
+Reload `report.html` in your browser. Then compare its values with the
+summary file in the **R Console**:
+
+```{r health-quarto-summary, include = TRUE, echo = TRUE, message = FALSE, warning = FALSE, cache = FALSE, output = TRUE, eval = TRUE}
+summary_csv <- read.csv(
+  file.path(workshop_output_dir(), "meta-summary.csv")
+)
+summary_csv[, c("data_version", "studies", "pooled_r", "ci_lower", "ci_upper")]
+```
+
+## Checkpoint {#quarto-checkpoint}
+
+Your rendered report shows **29 studies**, a pooled correlation of
+**0.363**, and a 95% interval from **0.309 to 0.415**. Its provenance
+names the same pin version as the summary file, the pipeline script
+checksum, the inclusion rule, and the model version. It reports
+I² of **99.8%** and a prediction interval of **0.056 to 0.607**.
+You can point to the CSV column behind each number. No TODO markers
+remain.
+
+Next, you will change the analysis input and reproduce the results.
+[Modify the analysis and reproduce the results](07_modify_and_reproduce.qmd)
+
+## After the workshop: publishing and journal formats {#quarto-publishing}
+
+An approved HTML report can be served from a project site or attached
+to a release. Before sharing, review the report for any content that
+came from data with reuse conditions. The report source, versioned
+analysis code, metadata, and environment record help others
+understand how the published HTML was made.
+
+Quarto extensions add formats and templates for particular publishing
+workflows. Browse the
+[Journal Articles extension listing](https://quarto.org/docs/extensions/listing-journals.html)
+and find a format relevant to your field. Examples include:
+
+| Extension | Article style or publisher |
+| --- | --- |
+| `apaquarto` | American Psychological Association, seventh edition |
+| `elsevier` | Elsevier journals |
+| `plos` | Public Library of Science |
+| `jss` | Journal of Statistical Software |
+
+Open an extension's repository to check its supported formats,
+required software, author metadata, and usage instructions. Compare
+the template with the target journal's current submission guidance.
+
+To try one, create a separate article directory and start from the
+[PLOS template](https://github.com/quarto-journals/plos). Run these
+commands in the Terminal from the project root and follow the prompts:
+
+```bash
+mkdir health-wellbeing-article
+cd health-wellbeing-article
+quarto use template quarto-journals/plos
+```
+
+The template supplies an example QMD, bibliography, and extension
+files. PLOS supports `plos-html` and `plos-pdf`; the PDF format also
+requires a LaTeX installation. Adapt the article to read the same
+pipeline summary and retain its methods and provenance fields.
+
+Extensions are stored locally in `_extensions/`. Include that folder
+with the article source in Git. For a release, record the Quarto and
+extension versions alongside the R package versions in `renv.lock`.
+See the Quarto guidance on installing and versioning extensions
+[@quarto-managing-extensions].
+
+## Further reading
+
+- Working with R in Quarto [@quarto-r].
+- Publishing Quarto documents [@quarto-publishing].
+- Journal article formats and templates [@quarto-journal-extensions].

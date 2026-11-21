@@ -15,25 +15,18 @@
 
 ### Abstract / description
 
-Open and reproducible science is increasingly important for ensuring that research
-can be understood, evaluated, reused, and extended by others. This workshop
-provides a practical introduction to building open and reproducible research
-workflows using R and open-source tools. Participants will develop a workflow
-integrating GitHub, renv, Docker, targets, Quarto, and Zenodo. Rather than focusing
-primarily on the technical details of individual tools, the workshop will
-demonstrate how these tools can work together to support reproducibility
-throughout the research lifecycle.
+Open and reproducible science helps others understand, evaluate, and reuse
+research. This 90-minute workshop follows one prepared R project through
+that workflow.
 
-renv helps manage software dependencies, Docker captures the computational
-environment, and targets provides a structured framework for organising and
-reproducing analytical workflows. Quarto connects code, analysis, results, and
-narrative into reproducible reports, while GitHub supports version control,
-collaboration, and open sharing. Finally, Zenodo provides a mechanism for
-preserving and archiving research outputs and assigning persistent identifiers.
+Short demonstrations cover Git and GitHub, reproducible environments with
+renv, Docker, and MyBinder, FAIR metadata with codebook and dataspice, and
+data and model versioning with pins and vetiver. In the hands-on exercise,
+you will complete and run a targets meta-analysis pipeline, render its
+Quarto report, and change an analysis setting to see which steps rebuild.
+We close by working out what to include in a GitHub release and Zenodo
+archive.
 
-The workshop will emphasise the principles underlying open and reproducible
-science: making research workflows transparent, portable, auditable, reusable, and
-accessible beyond the original researcher or computing environment. Participants
-will gain practical experience developing a workflow that can be shared,
-reproduced, and archived, while considering common barriers to reproducibility
-and strategies for addressing them.
+You will use public teaching data in a prepared browser session. Allow
+time to follow the [preparation steps](pages/workshop/00_preparation.qmd)
+before the workshop. Basic familiarity with R will help.
