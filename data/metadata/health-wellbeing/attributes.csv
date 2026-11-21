@@ -1,0 +1,6 @@
+fileName,variableName,description,unitText
+HealthWellbeing.rda,author,Study label (first author and year),
+HealthWellbeing.rda,cor,Pearson correlation between health and well-being,unitless
+HealthWellbeing.rda,n,Sample size within the study,observations
+HealthWellbeing.rda,population,Type of study sample: chronic condition or general population,
+HealthWellbeing.rda,country,Country where the study was conducted,

@@ -71,7 +71,7 @@ describes how they are delivered.
 | --- | --- |
 | [Git](https://git-scm.com/) and [GitHub](https://github.com/) | Track changes, collaborate, and share code. |
 | [renv](https://rstudio.github.io/renv/), [Docker](https://www.docker.com/), and [Binder](https://mybinder.org/) | Record R dependencies, capture the computing environment, and provide it in a browser. |
-| [codebook](https://cran.r-project.org/package=codebook) and [dataspice](https://docs.ropensci.org/dataspice/) | Describe the variables and record FAIR dataset metadata. |
+| [dataspice](https://docs.ropensci.org/dataspice/) and [rfair](https://cran.r-project.org/package=rfair) | Create structured metadata and assess what software can discover about a dataset. |
 | [pins](https://pins.rstudio.com/articles/pins.html) and [vetiver](https://vetiver.posit.co/) | Store data and model versions with provenance and retrieve a specific version. |
 | [targets](https://docs.ropensci.org/targets/) | Organise the analysis and track what needs to be rebuilt. |
 | [Quarto](https://quarto.org/) | Connect the methods, results, and provenance in a report. |
@@ -144,6 +144,11 @@ The [Build Binder workflow](.github/workflows/build-binder.yaml) builds and
 publishes the image selected by the [Binder entry point](binder/Dockerfile).
 The [Build RStudio workflow](.github/workflows/build-rstudio.yaml) publishes the
 image for local Docker use.
+
+Before teaching the [FAIR lesson](pages/workshop/03_data_documentation.qmd),
+check that the Binder image has the `rfair` version in `renv.lock`.
+Prepare the two assessment results in advance so the demonstration can use
+them if an upstream request times out.
 
 ## Render the book
 

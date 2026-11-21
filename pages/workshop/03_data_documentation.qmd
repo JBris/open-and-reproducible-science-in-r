@@ -1,6 +1,6 @@
 ---
-title: "FAIR principles and metadata"
-subtitle: "20–28 minutes · Demonstration · codebook and dataspice"
+title: "FAIR data documentation and assessment"
+subtitle: "20–28 minutes · Demonstration · dataspice and rfair"
 editor:
   markdown:
     wrap: 72
@@ -15,196 +15,178 @@ source("pipelines/workshop_support.R")
 use_workshop_book_outputs()
 ```
 
-## Introduction
+## What would a collaborator need?
 
-We will describe the `HealthWellbeing` dataset so a collaborator can
-interpret the five columns and find the original teaching file. By the
-end of this eight-minute demonstration, you should be able to read a
-data dictionary and explain what the dataset metadata adds.
+We use the **FAIR** principles to document the `HealthWellbeing` teaching
+snapshot and assess what software can discover about it. The table gives
+one question to ask for each principle [@gofair-principles].
 
-FAIR stands for **Findable, Accessible, Interoperable, and Reusable**
-[@gofair-principles].
-An identifiable source helps people find the data. Access instructions
-explain how to obtain it. Structured metadata helps software interpret
-it. Definitions, provenance, and reuse terms help people work out
-whether the data suit their question. Access can have conditions.
-
-The instructor runs the code from the project root, starting with
-the verified raw file from the preparation lesson. You
-can run the same chunks in your MyBinder session afterwards.
-[Preparation](00_preparation.qmd#preparation-data)
-
-## Data dictionary
-
-We use `box::use()` to make selected functions available by name. We label a copy of
-the table and keep the downloaded file unchanged.
-
-```{r health-metadata-setup, include = TRUE, echo = TRUE, message = FALSE, warning = FALSE, cache = FALSE, output = TRUE, eval = TRUE}
-box::use(
-  codebook[codebook_table],
-  dataspice[create_spice, write_spice],
-  utils[read.csv, write.csv]
-)
-
-raw_file <- file.path("data", "raw", "healthwellbeing.rda")
-stopifnot(
-  file.exists(raw_file),
-  identical(
-    unname(tools::md5sum(raw_file)),
-    "0d74964b0b7168379a2b015cb648b326"
-  )
-)
-data_env <- new.env(parent = baseenv())
-loaded_names <- load(raw_file, envir = data_env)
-stopifnot(identical(loaded_names, "HealthWellbeing"))
-health <- data_env[["HealthWellbeing"]]
-stopifnot(
-  is.data.frame(health),
-  nrow(health) == 29L,
-  identical(names(health), c("author", "cor", "n", "population", "country")),
-  !anyNA(health)
-)
-```
-
-| Column | What it records | Unit or values |
+| Principle | Ask | Example for this dataset |
 | --- | --- | --- |
-| `author` | Study label with first author and year | Text |
-| `cor` | Pearson correlation of health and well-being | Unitless |
-| `n` | Study sample size | Count of observations |
-| `population` | Type of study sample | Chronic condition or general population |
-| `country` | Country where the study was conducted | Country name |
+| **Findable** | Can someone locate and identify it? | A named record with a stable identifier and searchable metadata. |
+| **Accessible** | How can someone retrieve it, and on what terms? | A working download link, or clear instructions for requesting access. |
+| **Interoperable** | Can people and software interpret its structure? | Use shared metadata terms such as Schema.org and describe the variables and their units. |
+| **Reusable** | Can someone judge whether it suits their project? | Explain the source, the unit of observation, and the licence. |
 
-A row represents one study summary. The supplied snapshot has 29 rows
-and no missing values. A zero correlation would describe a study result.
-Use a missing value marker such as `NA` for unavailable values in a
-future release. The column definitions and original citation come
-from the published teaching documentation [@healthwellbeing].
+Access may require authentication or approval. A record can explain those
+conditions while keeping the observations restricted.
 
-In R, `codebook_table()` combines variable labels with summaries. We
-will keep the three columns we need for the exercise and save them as
-a CSV.
+## Describe the snapshot with dataspice {#create-fair-metadata}
 
-```{r health-codebook, include = TRUE, echo = TRUE, message = FALSE, warning = FALSE, cache = FALSE, output = TRUE, eval = TRUE}
+The four prepared CSV files under `data/metadata/health-wellbeing/` record
+the title and licence, creator, download link, and variables. Open
+`attributes.csv` and find `n`. Each row describes **one study** and `n` is
+the sample size within that study. The teaching snapshot has 29 rows and
+five variables [@healthwellbeing].
+
+Run the following in the **R Console** from the project root. *Dataspice*
+combines the CSV files into a Schema.org JSON-LD record. Inspect the title,
+licence, and distribution link in the output [@dataspice].
+
+```{r health-dataspice-export, eval = TRUE}
 source("pipelines/workshop_support.R")
-workshop_dir <- workshop_output_dir()
-dir.create(workshop_dir, recursive = TRUE, showWarnings = FALSE)
+source_dir <- file.path("data", "metadata", "health-wellbeing")
+metadata_dir <- file.path(workshop_output_dir(), "metadata")
+dir.create(metadata_dir, recursive = TRUE, showWarnings = FALSE)
 
-labels <- c(
-  author = "Study label (first author and year)",
-  cor = "Pearson correlation of health and well-being",
-  n = "Number of observations in the study",
-  population = "Type of study sample",
-  country = "Country where the study was conducted"
+templates <- file.path(
+  source_dir, c("biblio.csv", "creators.csv", "access.csv", "attributes.csv")
 )
+stopifnot(all(file.copy(templates, metadata_dir, overwrite = TRUE)))
+dataspice::write_spice(path = metadata_dir)
 
-labelled_health <- health
-for (column in names(labels)) {
-  attr(labelled_health[[column]], "label") <- labels[[column]]
-}
-
-dictionary <- codebook_table(labelled_health) |>
-  subset(select = c(name, label, n_missing))
-write.csv(
-  dictionary,
-  file.path(workshop_dir, "codebook.csv"),
-  row.names = FALSE
-)
-dictionary
-```
-
-## Dataset metadata
-
-A dataset record also needs a title, creator, source, access route, and
-any verified licence. *Dataspice* produces a Schema.org Dataset
-description in JSON-LD from four CSV files. We will prepare the
-worksheets, record the bundled snapshot's licence, and leave unknown fields blank. The dataset documentation
-credits Mathias Harrer for the teaching object. Keep the original
-review citation and the book section with the provenance notes.
-
-```{r health-dataspice-templates, include = TRUE, echo = TRUE, message = FALSE, warning = FALSE, cache = FALSE, output = TRUE, eval = TRUE}
-metadata_dir <- file.path(workshop_dir, "metadata")
-create_spice(dir = workshop_dir)
-
-biblio_path <- file.path(metadata_dir, "biblio.csv")
-biblio <- read.csv(biblio_path, fileEncoding = "UTF-8-BOM")
-biblio[1L, ] <- NA
-biblio$title <- "HealthWellbeing teaching snapshot"
-biblio$description <- paste(
-  "Study summaries of health and well-being correlations.",
-  "Teaching file from section 4.2.4 of Doing Meta-Analysis with R."
-)
-biblio$citation <- "Ngamaba, Panagioti, and Armitage (2017)"
-biblio$keywords <- "health, well-being, meta-analysis"
-biblio$license <- "https://opensource.org/license/mit"
-write.csv(biblio, biblio_path, row.names = FALSE, na = "")
-
-raw_name <- "healthwellbeing.rda"
-data_url <- paste0(
-  "https://raw.githubusercontent.com/MathiasHarrer/dmetar/",
-  "38c9b9bb5f85ea49de33e5d2536f6544d5268517/data/HealthWellbeing.rda"
-)
-write.csv(
-  data.frame(
-    fileName = raw_name,
-    name = "HealthWellbeing teaching data",
-    contentUrl = data_url,
-    encodingFormat = "application/octet-stream"
-  ),
-  file.path(metadata_dir, "access.csv"),
-  row.names = FALSE
-)
-write.csv(
-  data.frame(name = "Mathias Harrer"),
-  file.path(metadata_dir, "creators.csv"),
-  row.names = FALSE
-)
-
-attributes <- data.frame(
-  fileName = raw_name,
-  variableName = names(labels),
-  description = unname(labels),
-  unitText = c(NA, "unitless", "observations", NA, NA)
-)
-attributes$description[attributes$variableName == "population"] <-
-  "Type of study sample: chronic condition or general population."
-write.csv(
-  attributes,
-  file.path(metadata_dir, "attributes.csv"),
-  row.names = FALSE,
-  na = ""
-)
-```
-
-## Generate the JSON-LD
-
-Open `attributes.csv` to see the population categories. The JSON-LD extract
-below shows the title, licence, and download link. Keep `biblio.csv` and
-your provenance notes with the JSON-LD
-so readers have the original citation, source URL, date of retrieval,
-and checksum.
-
-```{r health-dataspice-export, include = TRUE, echo = TRUE, message = FALSE, warning = FALSE, cache = FALSE, output = TRUE, eval = TRUE}
-write_spice(path = metadata_dir)
 record <- jsonlite::read_json(file.path(metadata_dir, "dataspice.json"))
 record[c("name", "license", "distribution")]
 ```
 
+This record describes the [verified teaching file](00_preparation.qmd#preparation-data).
+The link resolves to a particular upstream revision. Keep the
+source and licence notice in `data/raw/` with the metadata.
+The DOI in `biblio.csv` identifies the original review. Check for
+placeholder coverage fields before publishing the generated record.
+
+## Assess the snapshot with rfair {#assess-fair-metadata}
+
+*rfair* takes a URL or persistent identifier and applies a set of tests
+to metadata it can retrieve [@rfair]. Here the target is the **same file
+described by the JSON-LD**. Start with the upstream download URL. It leads
+directly to the data file, so it gives the assessor a download to check
+but little context about the dataset.
+
+The instructor prepares this assessment before the session. Use saved
+results if the network is slow. Run the live code in the console when you
+want to refresh them.
+
+```{r health-rfair-baseline, eval = FALSE}
+snapshot_url <- record$distribution[[1L]]$contentUrl
+baseline <- rfair::assess_fair(
+  snapshot_url, metric_version = "0.8", timeout = 6, max_time = 30
+)
+baseline$resolution[c("ok", "status")]
+baseline$harvest_errors
+baseline$metadata[c("title", "license")]
+```
+
+Now supply the generated JSON-LD directly. Use its hosted URL, or serve
+the file from the same machine using the local option below. Compare the
+assessment of the same file under the same metric version.
+
+```{r health-rfair-supplement, eval = FALSE}
+metadata_url <- Sys.getenv("WORKSHOP_FAIR_METADATA_URL")
+if (!nzchar(metadata_url)) {
+  stop("Set WORKSHOP_FAIR_METADATA_URL to the URL of this snapshot's dataspice.json.")
+}
+enriched <- rfair::assess_fair(
+  snapshot_url,
+  metric_version = "0.8",
+  metadata_service_endpoint = metadata_url,
+  metadata_service_type = "schema_org",
+  timeout = 6,
+  max_time = 30
+)
+enriched$resolution[c("ok", "status")]
+enriched$harvest_errors
+enriched$metadata[c("title", "license")]
+comparison <- rfair::fair_compare(baseline, enriched)
+metrics <- c("FsF-F1-02MD", "FsF-A1-01M", "FsF-I1-01M", "FsF-R1.1-01M")
+comparison[comparison$metric_identifier %in% metrics,
+           c("metric_identifier", "status_a", "status_b")]
+```
+
+In a prepared run with `rfair` 0.2.0, FAIRsFAIR metrics 0.8, and the
+locally served JSON-LD, the download returned HTTP 200 in both runs.
+The extra metadata supplied the title and MIT licence. One metric
+from each principle shows what changed and what stayed the same.
+
+| Metric | Download URL alone | With the JSON-LD supplied |
+| --- | --- | --- |
+| Persistent identifier (`FsF-F1-02MD`) | Fail | Fail |
+| Access information in metadata (`FsF-A1-01M`) | Fail | Fail |
+| Formal language for metadata (`FsF-I1-01M`) | Fail | Pass |
+| Licence in metadata (`FsF-R1.1-01M`) | Fail | Pass |
+
+A file can be retrievable even when the metadata lacks an explicit
+access statement. If a live request fails, check the resolution and
+harvest errors before interpreting the tests. Providing a separate
+URL tells the assessor where to look. To make the metadata discoverable
+independently, expose it through a dataset landing page or repository
+record.
+
+An automated check can recognise JSON-LD and find a licence field.
+The data are still in an R-specific format. A reader must check the
+terms and decide whether the documented measurements and study
+population suit their question. A score alone cannot answer that.
+
 ## Checkpoint {#metadata-checkpoint}
 
-Your codebook has five variables and zero missing values in each.
-Look for the dataset title, variable descriptions, and source
-download in `metadata/dataspice.json`. Review the draft export for
-template placeholders in the coverage fields. Keep the upstream copyright
-notice with any copy of this teaching snapshot.
-You should be able to explain why someone needs both the meaning of
-`n` and the original download link.
-
-These tools support FAIR practices; using them does not by itself
-establish that a dataset meets every FAIR principle. Next we store
-and retrieve versions of the documented dataset and a model.
+Point to the file's download URL, the definition of `n`, and the
+licence. Explain how someone could find these details independently.
+Then ask which exact dataset version produced a given result.
 [Data and model versioning](04_versioning.qmd)
+
+## Try the comparison locally
+
+After exporting the JSON-LD in your session, run the following in the
+RStudio **Terminal** from the project root. This example uses Python 3
+and serves only the generated metadata directory on the local machine.
+
+``` bash
+python3 -m http.server 8765 --bind 127.0.0.1 \
+  --directory outputs/health-wellbeing/metadata
+```
+
+In the **R Console** in the same session, set the endpoint and run the
+assessment chunks above. Stop the server with **Ctrl+C** in the Terminal
+when finished. The comparison still contacts the upstream download URL.
+
+```{r health-rfair-local-endpoint, eval = FALSE}
+Sys.setenv(
+  WORKSHOP_FAIR_METADATA_URL = "http://127.0.0.1:8765/dataspice.json"
+)
+```
+
+To keep an example for an offline demonstration, save both assessment
+objects after a successful run and load them into the console before
+class. Retain the identifiers, package and metric versions, and run date
+when sharing an assessment.
+
+```{r health-rfair-save-example, eval = FALSE}
+saveRDS(
+  list(
+    run_date = Sys.Date(),
+    package_version = as.character(utils::packageVersion("rfair")),
+    metric_version = "0.8",
+    target = snapshot_url,
+    metadata_endpoint = metadata_url,
+    baseline = baseline,
+    enriched = enriched
+  ),
+  file.path(metadata_dir, "fair-assessment.rds")
+)
+```
 
 ## Further reading
 
-- Variable summaries with `codebook_table()` [@codebook-table].
-- Structuring dataset metadata with dataspice [@dataspice].
+- Documenting datasets with dataspice [@dataspice].
+- Assessing what a published identifier exposes with rfair [@rfair].
+- [Inspecting an archived Zenodo record](08_archiving.qmd).

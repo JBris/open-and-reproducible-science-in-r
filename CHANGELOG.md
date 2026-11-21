@@ -11,9 +11,13 @@
 - Add a supplementary `synthpop` exercise that pools the original and synthetic study summaries.
 - Add an AIMOS2026 attendee subagent for Claude Code and Codex. It critiques workshop material from a participant's perspective without editing files.
 - Record a simulated attendee review of the workshop revision in `draft/`. Record the outcome of the selected fixes in the review.
+- Add prepared metadata for the HealthWellbeing snapshot and lock `rfair`
+  and its dependencies.
 
 ### Changed
 
+- Centre the FAIR lesson on dataset documentation with `dataspice` and
+  assessment with `rfair`.
 - Restructure the workshop into the final 90-minute programme, with one lesson per segment: 42 minutes of concepts and demonstrations, 40 minutes of hands-on exercises, and 8 minutes of discussion. Merge Git and GitHub into the conceptual opening and move hands-on Git practice to follow-up material.
 - Demonstrate `vetiver` with a supplementary predictive model in the data and model versioning segment. Add GitHub releases to the archiving segment.
 - Make MyBinder the single prepared participant environment, with no installation during the session.

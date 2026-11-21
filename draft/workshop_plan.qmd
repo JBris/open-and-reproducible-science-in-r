@@ -37,8 +37,8 @@ research workflow. Mastering every individual package is not the aim.
 By the end of the programme, participants should be able to:
 
 - Explain how the tools support different parts of a reproducible research workflow.
-- Describe how a codebook and structured metadata record variables,
-  provenance, licensing, and access conditions in support of FAIR principles.
+- Use FAIR principles to explain variable definitions, provenance, licensing,
+  and access conditions, and interpret an automated assessment.
 - Explain how `pins` and `vetiver` link results to specific data and model versions.
 - Complete and run a `targets` pipeline and render a Quarto report from its outputs.
 - Modify an analysis input, rebuild only what is affected, and reproduce the result.
@@ -50,7 +50,7 @@ By the end of the programme, participants should be able to:
 | --- | --- | --- | --- |
 | 0–10 min | 10 min | Introduction, reproducibility principles, Git and GitHub | Conceptual |
 | 10–20 min | 10 min | Computational reproducibility: renv, Docker and Binder | Demonstration |
-| 20–28 min | 8 min | FAIR principles and metadata: codebook and dataspice | Demonstration |
+| 20–28 min | 8 min | FAIR data documentation and assessment: dataspice and rfair | Demonstration |
 | 28–35 min | 7 min | Data and model versioning: pins and vetiver | Demonstration |
 | 35–50 min | 15 min | Build and execute a targets meta-analysis pipeline | Hands-on |
 | 50–65 min | 15 min | Create and render a reproducible Quarto report | Hands-on |
@@ -98,9 +98,10 @@ with `targets` and Quarto.
   lockfile. Explain R package dependencies and the wider computing
   environment. Trace the Dockerfile through GitHub Actions to the MyBinder
   session participants are already using, and save a session record.
-- **20–28 minutes, demonstration:** show a prepared `codebook` table and
-  `dataspice` templates for creators, access, provenance, and variables.
-  Generate the JSON-LD and discuss licence and access conditions for FAIR data.
+- **20–28 minutes, demonstration:** show how FAIR principles apply to the teaching
+  snapshot. Generate JSON-LD from prepared `dataspice` CSVs. Use a pre-run
+  `rfair` comparison to show how the assessment changes when the same
+  snapshot's metadata is supplied explicitly.
 - **28–35 minutes, demonstration:** show the two prepared dataset versions on
   a versioned local `pins` board and retrieve each by its identifier. Retrieve
   the predictive model produced by the pipeline and inspect its input
@@ -140,7 +141,7 @@ end-to-end research workflow using R and open-source tools.
 
 Short demonstrations follow one prepared project through version control with
 Git and GitHub, reproducible environments with renv, Docker, and Binder, FAIR
-dataset metadata with codebook and dataspice, and data and model versioning
+dataset metadata and assessment with dataspice and rfair, and data and model versioning
 with pins and vetiver. In a continuous hands-on exercise, participants complete
 and run a targets meta-analysis pipeline, render a reproducible Quarto report
 from its outputs, then modify the analysis and reproduce the results. The
@@ -163,11 +164,10 @@ snapshot.
 1. **Track the project and environment.** Provide a Git repository containing
    the pipeline, report, metadata templates, a lockfile, and Docker
    configuration, launched as a prepared MyBinder session.
-2. **Document the dataset.** Use `codebook` to inspect variable descriptions and
-   summaries, and `dataspice` to prepare structured dataset metadata. Record the
-   source, creators, licence, access conditions, units, and processing decisions.
-   These tools support FAIR practices; using them does not by itself establish
-   that a dataset meets every FAIR principle.
+2. **Document and assess the dataset.** Use `dataspice` to describe the source,
+   creators, licence, access conditions, and variables in JSON-LD. Use `rfair`
+   to inspect machine-detectable evidence for the teaching snapshot, first
+   via the download URL and then with the metadata supplied directly.
 3. **Store and retrieve versions.** Store two dataset versions on a local `pins`
    board with versioning enabled explicitly, and retrieve a specified version.
    Retrieve the `vetiver` model pin and match its training version and
@@ -193,8 +193,8 @@ snapshot.
 | [R](https://www.r-project.org/) | Shared language and prepared project | Throughout |
 | [Git](https://git-scm.com/), [GitHub](https://github.com/) | Change history, collaboration, and sharing | Conceptual, within the first 10 minutes |
 | [renv](https://rstudio.github.io/renv/), [Docker](https://www.docker.com/), [Binder](https://mybinder.org/) | R dependencies, the wider computing environment, and the prepared participant session | Demonstration, 10 minutes; setup completed beforehand |
-| [codebook](https://cran.r-project.org/package=codebook) | Variable descriptions, labelled missing values, and summaries | Demonstration, shared 8 minutes |
-| [dataspice](https://docs.ropensci.org/dataspice/) | Structured metadata using CSV templates and Schema.org descriptions | Demonstration, shared 8 minutes |
+| [dataspice](https://docs.ropensci.org/dataspice/) | Dataset documentation from prepared CSV files | Demonstration, shared 8 minutes |
+| [rfair](https://cran.r-project.org/package=rfair) | Automated FAIR assessment and its limits | Demonstration, shared 8 minutes |
 | [pins](https://pins.rstudio.com/articles/pins.html) | Dataset storage, version identifiers, and historical retrieval | Demonstration, shared 7 minutes; pipeline input in the hands-on exercise |
 | [vetiver](https://vetiver.posit.co/get-started/version.html) | Model storage, input prototypes, and training data version | Demonstration, shared 7 minutes; supplementary predictive model |
 | [targets](https://docs.ropensci.org/targets/) | Analysis dependencies, tracked outputs, and selective rebuilding | Hands-on, 15 minutes, and 10 minutes modifying and reproducing |

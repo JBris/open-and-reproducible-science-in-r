@@ -68,7 +68,7 @@ analysis yourself.
 | --- | --- | --- | --- | --- |
 | 0–10 min | Version the work | What changed, why, and who reviewed it? | Git, GitHub | Conceptual |
 | 10–20 min | Record the environment | Which software is needed? | renv, Docker, Binder | Demonstration |
-| 20–28 min | Document the input | What do the data describe, and how may they be reused? | codebook, dataspice | Demonstration |
+| 20–28 min | Document the input | What can a collaborator learn about the data and how to reuse them? | dataspice, rfair | Demonstration |
 | 28–35 min | Version data and models | Which input and model produced this result? | pins, vetiver | Demonstration |
 | 35–50 min | Run the analysis | Which steps depend on this input? | targets | Hands-on |
 | 50–65 min | Report the result | How are methods, results, and provenance connected? | Quarto | Hands-on |
