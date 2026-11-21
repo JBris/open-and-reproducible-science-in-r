@@ -2,6 +2,8 @@
 
 ## [Unreleased]
 
+## [0.9.0] - 2026-11-22
+
 ### Changed
 
 - Recommend the Claude Code extension alongside the Codex extension in the
@@ -20,6 +22,12 @@
 - Show the Massey University contact on the published contribution page.
 - Make clear that the opening Git activity compares the reference pipeline,
   the completed solution to the pipeline exercise.
+- Show the release image workflow status in the README so the badge covers
+  both the RStudio and Binder builds.
+- Include the project-root `.here` file in the export checklist and link to
+  the step that saves `fair-assessment.rds` before export.
+- Explain that versioned pins keep previous versions and skip identical
+  writes by default.
 
 ## [0.8.0] - 2026-11-22
 
@@ -216,7 +224,8 @@
 - Replaced earlier modelling workshop content with an integrated reproducibility workflow using GitHub, renv, Docker, targets, Quarto, and Zenodo.
 - Generalised the workshop pages for reuse across events, with event-specific details in announcements.
 
-[Unreleased]: https://github.com/JBris/open-and-reproducible-science-in-r/compare/v0.8.0...main
+[Unreleased]: https://github.com/JBris/open-and-reproducible-science-in-r/compare/v0.9.0...main
+[0.9.0]: https://github.com/JBris/open-and-reproducible-science-in-r/releases/tag/v0.9.0
 [0.8.0]: https://github.com/JBris/open-and-reproducible-science-in-r/releases/tag/v0.8.0
 [0.7.0]: https://github.com/JBris/open-and-reproducible-science-in-r/releases/tag/v0.7.0
 [0.6.0]: https://github.com/JBris/open-and-reproducible-science-in-r/releases/tag/v0.6.0

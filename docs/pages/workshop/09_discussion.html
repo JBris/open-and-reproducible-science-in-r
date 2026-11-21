@@ -380,7 +380,7 @@ ul.task-list li input[type="checkbox"] {
 <tr class="odd">
 <td>dataspice, rfair</td>
 <td>Variable meanings, source and licence, plus evidence from an automated FAIR assessment</td>
-<td><code>data/metadata/health-wellbeing/dataspice.json</code>, and <code>outputs/health-wellbeing/metadata/</code> if you ran the demonstration</td>
+<td><code>data/metadata/health-wellbeing/dataspice.json</code> and, if saved, <code>outputs/health-wellbeing/metadata/fair-assessment.rds</code></td>
 </tr>
 <tr class="even">
 <td>pins, vetiver</td>
@@ -422,7 +422,7 @@ ul.task-list li input[type="checkbox"] {
 <p>MyBinder files disappear when the session ends. In RStudio’s <strong>Files</strong> pane, select the files or folders below and use <strong>More → Export</strong>. Download each group before closing the browser tab.</p>
 <ol type="1">
 <li><strong>Your work.</strong> Export <code>workspace/</code> for the exact pipeline, report source, and rendered HTML. If you used recovery, any backups are here too. Also export <code>.here</code> from the project root. Use <strong>More → Show Hidden Files</strong> to find it. Keep <code>.here</code> at the root when you unpack the files to rerender the report.</li>
-<li><strong>Results and provenance.</strong> Open <code>outputs/health-wellbeing/</code> and export <code>meta-summary.csv</code>, <code>analysis-data-version.txt</code>, <code>dataset-versions.csv</code>, and <code>predictive-model-version.txt</code>. Include <code>session-info.txt</code> and <code>metadata/</code> if you ran the demonstrations. Run their short exercises to produce any missing records you want to keep.</li>
+<li><strong>Results and provenance.</strong> Open <code>outputs/health-wellbeing/</code> and export <code>meta-summary.csv</code>, <code>analysis-data-version.txt</code>, <code>dataset-versions.csv</code>, and <code>predictive-model-version.txt</code>. Include <code>session-info.txt</code> if you recorded the session. To keep the FAIR assessment, follow <a href="../../pages/workshop/03_data_documentation.html#save-the-results">Save the results</a> after running both assessments. Export <code>metadata/</code> to keep <code>fair-assessment.rds</code> alongside the metadata files.</li>
 <li><strong>Exact pins.</strong> Export <code>data_store/</code> and <code>model_store/</code> if you want to reopen the same data and model versions later. Keep the <code>data/raw/</code> source and licence record with the teaching snapshot.</li>
 </ol>
 <p>For a public release, review the exported contents first and follow the <a href="../../pages/workshop/08_archiving.html#decide-what-to-archive">archiving checklist</a>.</p>
