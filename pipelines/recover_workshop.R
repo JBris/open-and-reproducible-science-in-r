@@ -1,14 +1,8 @@
-# Run from the project root to resume the hands-on exercises.
+# Run from the project root to restore the full-dataset REML baseline.
 local({
   source("pipelines/workshop_support.R", local = TRUE)
   workshop_dir <- workshop_output_dir()
-  selection_file <- file.path(workshop_dir, "analysis-data-version.txt")
-  board_path <- file.path(workshop_dir, "data_store")
-  if (!file.exists(selection_file) ||
-      !file.exists(file.path(workshop_dir, "dataset-versions.csv")) ||
-      !dir.exists(board_path)) {
-    source("pipelines/prepare_health_wellbeing.R", local = TRUE)
-  }
+  source("pipelines/prepare_health_wellbeing.R", local = TRUE)
 
   dir.create("workspace", showWarnings = FALSE)
   restore_reference <- function(reference, working_copy) {

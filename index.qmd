@@ -1,5 +1,13 @@
 # Welcome {.unnumbered}
 
+```{=html}
+<script>
+  if (!window.location.hash) {
+    window.location.replace("pages/1_introduction.html" + window.location.search);
+  }
+</script>
+```
+
 This book contains the **Open and Reproducible Science in R** workshop materials.
 In 90 minutes, we follow the `HealthWellbeing` dataset through an
 end-to-end reproducible research workflow. We start with Git and

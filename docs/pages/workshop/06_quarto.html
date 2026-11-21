@@ -451,7 +451,7 @@ Get back on track
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>If you arrived late, lost your session, or broke a working file, run this from the project root in the <strong>R Console</strong>. It prepares missing inputs, backs up your working pipeline in <code>workspace/</code>, and rebuilds the summary with the reference pipeline. Any report edits you have already made are kept.</p>
+<p>If you arrived late, lost your session, or broke a working file, run this from the project root in the <strong>R Console</strong>. It selects the full dataset, backs up your working pipeline in <code>workspace/</code>, and rebuilds the summary with the reference pipeline. Any report edits you have already made are kept.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"pipelines/recover_workshop.R"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
@@ -567,7 +567,7 @@ Solution to TODO 3
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>summary_csv[, <span class="fu">c</span>(<span class="st">"data_version"</span>, <span class="st">"studies"</span>, <span class="st">"pooled_r"</span>, <span class="st">"ci_lower"</span>, <span class="st">"ci_upper"</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>            data_version studies  pooled_r  ci_lower  ci_upper
-1 20261121T111741Z-11d00      29 0.3631912 0.3092394 0.4148126</code></pre>
+1 20261121T113248Z-11d00      29 0.3631912 0.3092394 0.4148126</code></pre>
 </div>
 </div>
 </section>

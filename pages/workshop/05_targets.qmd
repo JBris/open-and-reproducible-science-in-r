@@ -35,9 +35,9 @@ below restores a working pipeline so you can continue.
 ## Get back on track {#get-back-on-track}
 
 If you arrived late, lost your session, or broke a working file, run this
-from the project root in the **R Console**. It prepares missing inputs, backs
-up your working pipeline in `workspace/`, then restores and runs the
-reference pipeline.
+from the project root in the **R Console**. It selects the full dataset,
+backs up your working pipeline in `workspace/`, then restores and runs
+the reference pipeline.
 
 ``` r
 source("pipelines/recover_workshop.R")

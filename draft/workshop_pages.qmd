@@ -60,7 +60,7 @@ Keep the closing discussion even if earlier segments overrun.
 | `pipelines/exercise/health_wellbeing_report.qmd` | Partially completed report. TODOs add the confidence interval, an interpretation, and the provenance fields. |
 | `pipelines/_targets_health_wellbeing.R` | Completed reference pipeline, used as the solution and restored by the recovery script. |
 | `pipelines/health_wellbeing_report.qmd` | Completed reference report. |
-| `pipelines/recover_workshop.R` | Prepares missing inputs, backs up work, restores the reference files, and runs the pipeline. |
+| `pipelines/recover_workshop.R` | Selects the full dataset, backs up the working pipeline, and runs the reference REML pipeline. Participants keep their report edits. |
 | `workspace/` | Participants' working copies, ignored by Git. |
 
 The targets page copies the template to `workspace/_targets.R` only if no copy
