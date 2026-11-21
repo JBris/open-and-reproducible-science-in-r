@@ -2,6 +2,24 @@
 
 ## [Unreleased]
 
+### Changed
+
+- Describe the workshop archive through its concept DOI, which cites all
+  versions and resolves to the latest one, in the opening, the archiving
+  checkpoint, the README, and the draft plans.
+- Remove the unused `R/dummy.R` and `pipelines/_targets_dummy.R`
+  placeholders, their mentions in the agent instructions, and the `R/` copy
+  in both images.
+
+### Fixed
+
+- Direct participants with a missing report to Step 1 of the Quarto
+  exercise, because recovery no longer restores the report.
+- Mention the opening Git activity in the session overview. Drop the
+  retrieval date from the notes for the commit-pinned teaching snapshot.
+- Update the simulated review record and the draft plan's checklist to
+  match the changes made since.
+
 ## [0.7.0] - 2026-11-22
 
 ### Changed
@@ -29,7 +47,7 @@
 ### Added
 
 - Claude Code project instructions (`CLAUDE.md`), settings, subagents, lifecycle hooks, and image-publishing approval prompts alongside the existing Codex setup.
-- Add partially completed `targets` pipeline and Quarto report templates in `pipelines/exercise/`. Participants copy them to an ignored `workspace/` folder, and lessons provide collapsed solutions and a pipeline catch-up step.
+- Add partially completed `targets` pipeline and Quarto report templates in `pipelines/exercise/`. Participants copy them to an ignored `workspace/` folder, and lessons provide collapsed solutions and a recovery script.
 - Add `pipelines/prepare_health_wellbeing.R`, which prepares the versioned dataset inputs before the session and reuses matching versions when rerun.
 - Add a hands-on lesson on modifying the analysis and reproducing the results.
 - Add a supplementary `synthpop` exercise that pools the original and synthetic study summaries.
@@ -43,7 +61,7 @@
 
 - Centre the FAIR lesson on dataset documentation with `dataspice` and
   assessment with `rfair`.
-- Restructure the workshop into the final 90-minute programme, with one lesson per segment: 40 minutes of concepts and demonstrations, 42 minutes of hands-on work, and 8 minutes of discussion. Merge Git and GitHub into the conceptual opening and move hands-on Git practice to follow-up material.
+- Restructure the workshop into the final 90-minute programme, with one lesson per segment: 40 minutes of concepts and demonstrations, 42 minutes of hands-on work, and 8 minutes of discussion. Merge Git and GitHub into the opening and move the fork, commit, and push practice to follow-up material.
 - Demonstrate `vetiver` with a supplementary predictive model in the data and model versioning segment. Add GitHub releases to the archiving segment.
 - Make MyBinder the single prepared participant environment, with no installation during the session.
 - Add explicit recovery for participant work and isolate book rendering from that work.

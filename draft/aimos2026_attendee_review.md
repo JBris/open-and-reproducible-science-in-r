@@ -5,14 +5,15 @@
 | Reviewed | `workshop-revision.diff`, the revision in `ef8b138` against `8b88f32`. The file has since been removed; read it with `git show ef8b138:workshop-revision.diff`. |
 | Reviewer | The `aimos2026-attendee` subagent in Claude Code (Claude Opus 5.5) |
 | Date | 2026-11-21 |
-| Status | Findings recorded only. No material was changed in response. |
+| Status | Findings recorded. Later sections record the changes made in response. |
 
 An AI subagent produced this review while role-playing an attendee of the
 AIMOS2026 workshop. It read the materials but could not launch MyBinder, run
 code, or see rendered pages. It is not feedback from real participants, and it
-is not human review. Sections 1 to 5 are the subagent's report, unedited. The
-final section records evidence from the revision that the reviewer could not
-see.
+is not human review. Sections 1 to 5 are the subagent's report, unedited.
+*Notes from the main session* records evidence from the revision that the
+reviewer could not see. The sections after it record later reviews and the
+changes made in response.
 
 ## 1. Overall impression
 
@@ -474,7 +475,7 @@ Live pacing and human review remain pending.
 | Sequencing 2 | The versioning lesson presents the model pin as a preview. The pipeline lesson introduces four stages mapped to script steps, targets, and TODOs, shows the model pin as a second output, and moves the full dependency list into a collapsed note. |
 | Sequencing 3 | The pipeline lesson names the confidence interval and says the summary also records heterogeneity and a prediction interval. The Quarto lesson defines both intervals and I² before the TODOs, and its handoff now says "change an analysis setting". |
 | Sequencing 4 | The archiving lesson opens by asking what a colleague needs to rerun the attendee's report and builds the checklist from that report. It then covers releases and the Zenodo record, which closes the FAIR discovery question. |
-| Delivery issue | Not changed. The published book in `docs/` was left untouched at the maintainer's request. |
+| Delivery issue | Not changed in this follow-up. The published book in `docs/` was left untouched at the maintainer's request. It was refreshed later in `0a25284`. |
 
 Claude Code implemented the follow-up. In a disposable project copy in the
 local RStudio image `ghcr.io/jbris/open-reproducible-science-r:1.0.0`
@@ -483,3 +484,7 @@ rendered as PDF. The image does not include `rfair`, so the assessments were
 not rerun, and no one has checked whether a metric version recognises the
 suggested access statement. A fresh MyBinder launch, timed rehearsal, and
 human review remain pending.
+
+The rebuilt images include the locked `rfair`, and the FAIR lesson now runs
+the assessments live against the repository's JSON-LD (`9a98fee`). Whether a
+metric version recognises the suggested access statement is still unchecked.
