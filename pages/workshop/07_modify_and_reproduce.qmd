@@ -20,9 +20,11 @@ will run. Continue with your completed `workspace/_targets.R` and
 ::: {.callout-tip}
 ## Get back on track {#recover-reproduce}
 
-Run this from the project root in the **R Console** if you need a working
-pipeline and report. It prepares missing inputs and backs up your previous
-working files in `workspace/`.
+Run this from the project root in the **R Console** if you need to rebuild
+the summary. It backs up your working pipeline in `workspace/` and runs
+the reference pipeline. If you lost your report, copy your saved
+`report.qmd` back into `workspace/` or complete the
+[Quarto report exercise](06_quarto.qmd) before continuing.
 
 ``` r
 source("pipelines/recover_workshop.R")

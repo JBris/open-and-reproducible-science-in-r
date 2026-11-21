@@ -29,6 +29,5 @@ local({
 
   script <- file.path("workspace", "_targets.R")
   restore_reference("pipelines/_targets_health_wellbeing.R", script)
-  restore_reference("pipelines/health_wellbeing_report.qmd", file.path("workspace", "report.qmd"))
   targets::tar_make(script = script, store = file.path(workshop_dir, "_targets"))
 })

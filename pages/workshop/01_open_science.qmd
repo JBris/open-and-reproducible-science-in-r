@@ -1,6 +1,8 @@
 ---
 title: "Introduction, reproducibility principles, Git and GitHub"
 subtitle: "0–10 minutes · Conceptual and hands-on"
+aliases:
+  - 02_git_github.html
 editor: visual
 ---
 

@@ -1,6 +1,8 @@
 ---
 title: "Create and render a reproducible Quarto report"
 subtitle: "50–65 minutes · Hands-on · Quarto"
+aliases:
+  - 07_quarto.html
 editor:
   markdown:
     wrap: 72
@@ -31,38 +33,40 @@ You need the `meta-summary.csv` file from the
 ## Get back on track {#recover-report}
 
 If you arrived late, lost your session, or broke a working file, run this
-from the project root in the **R Console**. It prepares missing inputs, saves
-any previous working files as backups in `workspace/`, restores the
-reference pipeline and report, and runs the pipeline.
+from the project root in the **R Console**. It prepares missing inputs, backs
+up your working pipeline in `workspace/`, and rebuilds the summary with the
+reference pipeline. Any report edits you have already made are kept.
 
 ``` r
 source("pipelines/recover_workshop.R")
 ```
 :::
 
-After recovery, run the render command in Step 1. In a Quarto error,
-look for the first error and the reported line or chunk in `report.qmd`.
+After recovery, start the report exercise at Step 1. If Quarto reports an
+error, look for the first error and the reported line or chunk in `report.qmd`.
 
 ## Step 1: copy and render the template
 
 Allow about three minutes. In the **R Console** at the project root,
 copy and render your report. Run the same render command after each
 edit. It keeps you in the Console and lets you read any errors there.
+If you want to restart from the template, rename your existing
+`workspace/report.qmd` in the **Files** pane before running this block.
 
 ```{r health-quarto-render-template, eval = FALSE}
 source("pipelines/workshop_support.R")
 dir.create("workspace", showWarnings = FALSE)
 report <- file.path("workspace", "report.qmd")
 if (!file.exists(report)) {
-  file.copy("pipelines/exercise/health_wellbeing_report.qmd", report)
+  stopifnot(file.copy("pipelines/exercise/health_wellbeing_report.qmd", report))
 }
 render_workshop_report()
 ```
 
 In the **Files** pane, open the `workspace` folder, click
 `report.html`, and choose **View in Web Browser**. The HTML embeds its
-resources, so it works as a single file. The pooled estimate appears,
-along with three **TODO** markers in the template.
+resources, so it works as a single file. If you started from the template,
+the pooled estimate appears along with three **TODO** markers.
 
 ## Step 2: read the report source
 

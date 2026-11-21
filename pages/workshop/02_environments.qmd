@@ -1,6 +1,8 @@
 ---
 title: "Computational reproducibility"
 subtitle: "10–20 minutes · Demonstration · renv, Docker and Binder"
+aliases:
+  - 03_environments.html
 editor: visual
 ---
 

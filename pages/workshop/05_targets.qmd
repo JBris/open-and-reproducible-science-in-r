@@ -1,6 +1,8 @@
 ---
 title: "Build and execute a targets meta-analysis pipeline"
 subtitle: "35–50 minutes · Hands-on · targets"
+aliases:
+  - 06_targets.html
 editor:
   markdown:
     wrap: 72
@@ -26,16 +28,16 @@ to its input and explain which steps *targets* reruns, and why.
 
 Work in your MyBinder session, at the project root, after preparing
 the dataset versions. If you fall behind, the **Get back on track** step
-below restores a working pipeline and report so you can continue.
+below restores a working pipeline so you can continue.
 [Prepare the dataset versions](00_preparation.qmd#preparation-versions)
 
 ::: {.callout-tip}
 ## Get back on track {#get-back-on-track}
 
 If you arrived late, lost your session, or broke a working file, run this
-from the project root in the **R Console**. It prepares missing inputs, saves
-any previous working files as backups in `workspace/`, restores the
-reference pipeline and report, and runs the pipeline.
+from the project root in the **R Console**. It prepares missing inputs, backs
+up your working pipeline in `workspace/`, then restores and runs the
+reference pipeline.
 
 ``` r
 source("pipelines/recover_workshop.R")
@@ -43,7 +45,7 @@ source("pipelines/recover_workshop.R")
 
 After recovery, run Step 1 to set the paths and then skip to
 [Step 4](#check-dependencies). You can also go straight to the
-[Quarto report](06_quarto.qmd).
+[Quarto report exercise](06_quarto.qmd#step-1-copy-and-render-the-template).
 :::
 
 ## The pipeline at a glance

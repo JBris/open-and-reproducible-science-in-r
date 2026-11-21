@@ -1,6 +1,8 @@
 ---
 title: "Questions and discussion"
 subtitle: "82–90 minutes · Interactive"
+aliases:
+  - 09_extras_and_discussion.html
 editor:
   markdown:
     wrap: 72
@@ -27,7 +29,7 @@ researcher needs to understand, rerun, or cite the result.
 | pins, vetiver | Exact input and predictive model versions | `dataset-versions.csv`, `predictive-model-version.txt`, pin metadata |
 | targets | The steps from input to summary, and their dependencies | `workspace/_targets.R`, `meta-summary.csv` |
 | Quarto | Methods, results, and provenance in one document | `workspace/report.html` |
-| GitHub releases, Zenodo | A citable, archived version | Release tag and version DOI |
+| GitHub releases, Zenodo | A citable, archived version | Release tag and [concept DOI](https://doi.org/10.5281/zenodo.24342489) |
 
 A useful test of the whole workflow is to point to the exact data
 version, analysis revision, environment, and archive citation for one

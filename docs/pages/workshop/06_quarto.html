@@ -451,25 +451,25 @@ Get back on track
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>If you arrived late, lost your session, or broke a working file, run this from the project root in the <strong>R Console</strong>. It prepares missing inputs, saves any previous working files as backups in <code>workspace/</code>, restores the reference pipeline and report, and runs the pipeline.</p>
+<p>If you arrived late, lost your session, or broke a working file, run this from the project root in the <strong>R Console</strong>. It prepares missing inputs, backs up your working pipeline in <code>workspace/</code>, and rebuilds the summary with the reference pipeline. Any report edits you have already made are kept.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"pipelines/recover_workshop.R"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
-<p>After recovery, run the render command in Step 1. In a Quarto error, look for the first error and the reported line or chunk in <code>report.qmd</code>.</p>
+<p>After recovery, start the report exercise at Step 1. If Quarto reports an error, look for the first error and the reported line or chunk in <code>report.qmd</code>.</p>
 </section>
 <section id="step-1-copy-and-render-the-template" class="level2" data-number="10.2">
 <h2 data-number="10.2" class="anchored" data-anchor-id="step-1-copy-and-render-the-template"><span class="header-section-number">10.2</span> Step 1: copy and render the template</h2>
-<p>Allow about three minutes. In the <strong>R Console</strong> at the project root, copy and render your report. Run the same render command after each edit. It keeps you in the Console and lets you read any errors there.</p>
+<p>Allow about three minutes. In the <strong>R Console</strong> at the project root, copy and render your report. Run the same render command after each edit. It keeps you in the Console and lets you read any errors there. If you want to restart from the template, rename your existing <code>workspace/report.qmd</code> in the <strong>Files</strong> pane before running this block.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"pipelines/workshop_support.R"</span>)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">dir.create</span>(<span class="st">"workspace"</span>, <span class="at">showWarnings =</span> <span class="cn">FALSE</span>)</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>report <span class="ot">&lt;-</span> <span class="fu">file.path</span>(<span class="st">"workspace"</span>, <span class="st">"report.qmd"</span>)</span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">file.exists</span>(report)) {</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">file.copy</span>(<span class="st">"pipelines/exercise/health_wellbeing_report.qmd"</span>, report)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stopifnot</span>(<span class="fu">file.copy</span>(<span class="st">"pipelines/exercise/health_wellbeing_report.qmd"</span>, report))</span>
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="fu">render_workshop_report</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>In the <strong>Files</strong> pane, open the <code>workspace</code> folder, click <code>report.html</code>, and choose <strong>View in Web Browser</strong>. The HTML embeds its resources, so it works as a single file. The pooled estimate appears, along with three <strong>TODO</strong> markers in the template.</p>
+<p>In the <strong>Files</strong> pane, open the <code>workspace</code> folder, click <code>report.html</code>, and choose <strong>View in Web Browser</strong>. The HTML embeds its resources, so it works as a single file. If you started from the template, the pooled estimate appears along with three <strong>TODO</strong> markers.</p>
 </section>
 <section id="step-2-read-the-report-source" class="level2" data-number="10.3">
 <h2 data-number="10.3" class="anchored" data-anchor-id="step-2-read-the-report-source"><span class="header-section-number">10.3</span> Step 2: read the report source</h2>
@@ -567,7 +567,7 @@ Solution to TODO 3
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>summary_csv[, <span class="fu">c</span>(<span class="st">"data_version"</span>, <span class="st">"studies"</span>, <span class="st">"pooled_r"</span>, <span class="st">"ci_lower"</span>, <span class="st">"ci_upper"</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>            data_version studies  pooled_r  ci_lower  ci_upper
-1 20261121T102119Z-11d00      29 0.3631912 0.3092394 0.4148126</code></pre>
+1 20261121T111741Z-11d00      29 0.3631912 0.3092394 0.4148126</code></pre>
 </div>
 </div>
 </section>
