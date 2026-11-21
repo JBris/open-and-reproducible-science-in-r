@@ -24,10 +24,10 @@ Dockerfiles, and the build workflows under `.github/workflows/`.
   tags may differ. Check that Compose passes both values into the final labels.
   Inspect `build.tags` before changing tagging or publication.
 - Compare the container R version with `renv.lock`. Confirm that every `COPY`
-  source exists, including `renv/activate.R` for environment restoration. The
-  bootstrap is committed for renv 1.0.7, but the lockfile currently records only
-  renv. The R and pipeline files remain placeholders. Do not infer that a runnable
-  analysis or restored dependency environment exists from those files.
+  source exists, including `renv/activate.R` for environment restoration and
+  `data/raw/` for the teaching snapshot. The bootstrap is committed for renv
+  1.0.7, and the lockfile records the workshop packages. A successful build does
+  not show that the lessons run; render them or run the pipeline in the image.
 - Preserve the dependency-builder/runtime separation. Runtime images need the
   `index.qmd`, configured book chapters, `_quarto.yml`, styling, metadata, and
   root community documents. `.github/` is excluded by `.dockerignore`, so policy

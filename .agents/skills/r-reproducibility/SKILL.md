@@ -16,7 +16,7 @@ the latter is not a runnable targets pipeline.
 - Use project-relative paths, explicit functions, and reproducible random seeds
   for ordinary stochastic examples. Avoid session-dependent objects, `setwd()`,
   and installing packages inside analysis or lesson code.
-- For the planned pins/vetiver exercises, record dataset versions and explicit
+- For the pins/vetiver exercises, record dataset versions and explicit
   provenance links between data, models, code, parameters, and the software
   environment. Retrieve a specified version when a result depends on it.
 - Use public teaching data in privacy demonstrations. Explain mechanism and
@@ -25,9 +25,9 @@ the latter is not a runnable targets pipeline.
   from ordinary classroom reproducibility before claiming a private release.
 - Follow local style and `.lintr`. Keep code readable for learners and reuse
   existing dependencies when practical.
-- `.Rprofile` uses the committed renv 1.0.7 bootstrap. The lockfile currently
-  records renv only, so workshop dependencies are not yet captured. Inspect
-  bootstrap files and the actual lockfile before relying on project startup.
+- `.Rprofile` uses the committed renv 1.0.7 bootstrap, and the lockfile records
+  the workshop packages. Inspect bootstrap files and the actual lockfile before
+  relying on project startup.
   Restore or add dependencies when assigned and inspect resulting lockfile
   changes. Do not invent package records or initialise renv during unrelated work.
 - Parse affected standalone scripts with
