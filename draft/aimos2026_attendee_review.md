@@ -2,7 +2,7 @@
 
 | Detail | Information |
 | --- | --- |
-| Reviewed | `workshop-revision.diff`, the revision in `ef8b138` against `8b88f32` |
+| Reviewed | `workshop-revision.diff`, the revision in `ef8b138` against `8b88f32`. The file has since been removed; read it with `git show ef8b138:workshop-revision.diff`. |
 | Reviewer | The `aimos2026-attendee` subagent in Claude Code (Claude Opus 5.5) |
 | Date | 2026-11-21 |
 | Status | Findings recorded only. No material was changed in response. |
@@ -312,7 +312,7 @@ before delivering the session.
   and hands-on work more accurately than the current announcement.
   [Draft abstract](workshop_plan.qmd#proposed-revised-abstract) ·
   [Announcement](../ANNOUNCEMENTS.md#abstract--description)
-- Applying [the patch](../workshop-revision.diff) to `8b88f32` in a
+- Applying the patch (`workshop-revision.diff`) to `8b88f32` in a
   temporary Git index recreated `ef8b138` apart from the patch file
   itself. Consolidate the validation record. The patch and draft report
   successful renders, while the commit message for `ef8b138` reports
