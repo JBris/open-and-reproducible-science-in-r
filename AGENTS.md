@@ -54,6 +54,21 @@ not run. Keep fixes to existing infrastructure separate from unrelated tasks.
 For review-only requests, report findings without editing files. When a user
 selects findings to fix, keep unselected findings outside the implementation.
 
+The maintainer has reviewed and accepted these known discrepancies. Do not
+report them in content reviews unless the maintainer asks to revisit them:
+
+- `CONTRIBUTING.md` keeps its template pull request process and its embedded
+  Contributor Covenant 1.4, alongside the separate `CODE_OF_CONDUCT.md`.
+- These instructions and the Quarto workshop skill describe rendered output
+  under `_site/` and do not mention the committed GitHub Pages copy in `docs/`.
+  `.vscode/settings.json` excludes `_site/`, but not `docs/`, from search.
+- The instructions, skills, hook context, and setup READMEs call `VERSION`
+  the release version. It is the image version, and GitHub release tags differ.
+- `CITATION.cff` records version 1.0.0 and a release date of 2026-12-02.
+- The pull request template has no field for AI-assistance disclosure or
+  human review status.
+- The draft page plan lists Git among the preparation tools.
+
 Follow `AI_POLICY.md` when preparing contributions. Agents may perform assigned
 development work; identify which checks actually ran and whether human review
 is complete or pending. Agent verification is not human review.

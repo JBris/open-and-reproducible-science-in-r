@@ -47,10 +47,9 @@ To delegate, ask for named roles and bounded tasks:
 ```text
 Use r_developer to implement the assigned helper in pipelines/workshop_support.R
 and lesson_editor to update its explanation in pages/workshop/06_quarto.qmd.
-Give each agent ownership
-of its file. Then ask reproducibility_reviewer to review the combined change,
-wait for the findings, and verify the final result. State which checks ran and
-whether human review is still pending.
+Give each agent ownership of its file. Then ask reproducibility_reviewer to
+review the combined change, wait for the findings, and verify the final result.
+State which checks ran and whether human review is still pending.
 ```
 
 Agent definitions inherit the session's model and reasoning preferences. The

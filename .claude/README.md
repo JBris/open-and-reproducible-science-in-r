@@ -44,10 +44,10 @@ To delegate, ask for named subagents and bounded tasks:
 ```text
 Use the r-developer agent to implement the assigned helper in
 pipelines/workshop_support.R and the lesson-editor agent to update its
-explanation in pages/workshop/06_quarto.qmd. Give
-each agent ownership of its file. Then ask the reproducibility-reviewer agent to
-review the combined change, wait for the findings, and verify the final result.
-State which checks ran and whether human review is still pending.
+explanation in pages/workshop/06_quarto.qmd. Give each agent ownership of its
+file. Then ask the reproducibility-reviewer agent to review the combined change,
+wait for the findings, and verify the final result. State which checks ran and
+whether human review is still pending.
 ```
 
 Subagents inherit the session's model. The reviewer can use only Read, Grep,
