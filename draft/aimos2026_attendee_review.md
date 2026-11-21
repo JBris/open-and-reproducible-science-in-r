@@ -311,7 +311,7 @@ before delivering the session.
   to inspect and make the second `vetiver` model a follow-up if time is
   tight. The draft abstract describes the split between demonstrations
   and hands-on work more accurately than the current announcement.
-  [Draft abstract](workshop_plan.qmd#proposed-revised-abstract) ·
+  [Draft abstract](workshop_plan.qmd#abstract) ·
   [Announcement](../ANNOUNCEMENTS.md#abstract--description)
 - Applying the patch (`workshop-revision.diff`) to `8b88f32` in a
   temporary Git index recreated `ef8b138` apart from the patch file

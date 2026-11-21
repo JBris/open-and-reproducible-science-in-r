@@ -73,7 +73,7 @@
       "detail": "Preview the HTML book. Use Terminal: Terminate Task to stop it."
     },
     {
-      "label": "Codex: Test project hooks",
+      "label": "Codex and Claude Code: Test project hooks",
       "type": "process",
       "command": "python3",
       "args": [

@@ -9,10 +9,6 @@
       {
         "Name": "CRAN",
         "URL": "https://cloud.r-project.org"
-      },
-      {
-        "Name": "CRANextra",
-        "URL": "https://www.stats.ox.ac.uk/pub/RWin"
       }
     ]
   },

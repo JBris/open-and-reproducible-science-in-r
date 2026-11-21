@@ -128,11 +128,13 @@ from GitHub and change nothing in your project.
 
     The first log lists the latest changes, and each message says what
     changed. The second lists only the commits that changed the
-    reference pipeline you will run later.
+    reference pipeline, the completed solution to the pipeline exercise
+    later in the session.
 
-3.  **Is your copy of the pipeline the latest version?** Git identifies
-    each version of a file by a hash of its contents. Compare your copy
-    with the one in the latest commit.
+3.  **Is the reference pipeline in your session the latest version?**
+    Git identifies each version of a file by a hash of its contents.
+    Compare the copy in your MyBinder project with the one in the latest
+    commit.
 
     ``` bash
     git hash-object pipelines/_targets_health_wellbeing.R
@@ -175,7 +177,7 @@ You should be able to complete this sentence:
 
 You can also explain the difference between a local commit, a push to a
 remote, and a pull request. You can say what the hash comparison told
-you about your copy of the pipeline.
+you about the reference pipeline in your session.
 
 **Takeaway:** keep a traceable connection between the input, the decisions, and
 the output. Next, we record the

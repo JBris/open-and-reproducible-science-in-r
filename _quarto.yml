@@ -2,9 +2,6 @@ project:
   type: book
   execute-dir: project
   output-dir: _site
-  resources:
-    - "pages/workshop/*.html"
-    - pages/workshop/legacy-redirect.js
   preview:
     browser: true
   render:
