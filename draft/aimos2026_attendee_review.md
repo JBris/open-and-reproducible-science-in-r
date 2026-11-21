@@ -358,3 +358,53 @@ left an unfinished participant script and a participant selection file
 untouched.
 
 A fresh MyBinder launch, timed rehearsal, and human review remain pending.
+
+## Simulated attendee feedback on the revised FAIR lesson
+
+**Reviewed revision:** `dde7572`.
+
+I would keep `dataspice` and `rfair`. Using the same
+`HealthWellbeing` file in both assessments makes the comparison easy
+to follow. The strongest moment is that the file downloads successfully
+in both runs, yet the access statement check still fails. I can apply
+that distinction to my own data. The four-row comparison table also
+answers the earlier feedback that attendees should see what the tools
+produce.
+[FAIR assessment results](../pages/workshop/03_data_documentation.qmd#assess-fair-metadata)
+
+### Findings in priority order
+
+1. **Major — Make the eight-minute route obvious.** The page asks me to
+   run the `dataspice` code, then shows two assessment chunks before
+   the prepared results. I would be unsure whether to follow along in
+   RStudio or watch the instructor. State at the start that this is an
+   instructor demonstration, then show one short metadata excerpt and
+   the prepared comparison. Put the environment variable, local server,
+   and diagnostics in a clearly marked follow-up. This matters most for
+   attendees with less R experience.
+   [Demo instructions](../pages/workshop/03_data_documentation.qmd#create-fair-metadata)
+2. **Major — Turn the failed access check into a decision.** Give the
+   room 30 seconds to answer: “The file returned HTTP 200. What would
+   you add to the public record so a reader knows how to get it?” For
+   this example, I would put “Public download, no sign-in required”
+   beside the URL. A restricted dataset could document how to request
+   access. This gives me practice applying FAIR and supports the
+   workshop's stated objective.
+   [Lesson checkpoint](../pages/workshop/03_data_documentation.qmd#metadata-checkpoint) ·
+   [Learning objectives](../pages/1_introduction.qmd#learning-objectives)
+3. **Minor — Show `n` in the generated metadata.** The lesson asks
+   me to find `n` in the input CSV. The JSON-LD excerpt shows the title,
+   licence, and download link. Include the entry for `n` so I can see
+   that its meaning survives the export. As a data steward, I would
+   also want one sentence saying where to expose the record so another
+   tool can discover it without an explicitly supplied URL.
+   [Metadata example](../pages/workshop/03_data_documentation.qmd#create-fair-metadata)
+
+The learning objective is achievable in eight minutes as an instructor
+demonstration with one audience question. I would close by asking:
+“If I gave a colleague only the dataset link, how would they discover
+the metadata you just supplied to `rfair`?” That question leads into
+versioning and archiving.
+
+This was a simulated attendee review of the source. Live pacing,
+MyBinder delivery, and human review remain to be checked.
