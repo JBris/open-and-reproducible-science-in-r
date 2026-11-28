@@ -23,27 +23,7 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for citations */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-  margin-bottom: 0em;
-}
-.hanging-indent div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}</style>
+</style>
 
 
 <script src="../site_libs/quarto-nav/quarto-nav.js"></script>
@@ -345,11 +325,9 @@ div.csl-indent {
   <li><a href="#about-the-workshop" id="toc-about-the-workshop" class="nav-link active" data-scroll-target="#about-the-workshop"><span class="header-section-number">1.1</span> About the workshop</a></li>
   <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link" data-scroll-target="#learning-objectives"><span class="header-section-number">1.2</span> Learning objectives</a></li>
   <li><a href="#intro-programme" id="toc-intro-programme" class="nav-link" data-scroll-target="#intro-programme"><span class="header-section-number">1.3</span> Programme</a></li>
-  <li><a href="#one-dataset-one-exercise-one-environment" id="toc-one-dataset-one-exercise-one-environment" class="nav-link" data-scroll-target="#one-dataset-one-exercise-one-environment"><span class="header-section-number">1.4</span> One dataset, one exercise, one environment</a></li>
-  <li><a href="#supplementary-exercise" id="toc-supplementary-exercise" class="nav-link" data-scroll-target="#supplementary-exercise"><span class="header-section-number">1.5</span> Supplementary exercise</a></li>
-  <li><a href="#reproducibility-when-data-cannot-be-shared" id="toc-reproducibility-when-data-cannot-be-shared" class="nav-link" data-scroll-target="#reproducibility-when-data-cannot-be-shared"><span class="header-section-number">1.6</span> Reproducibility when data cannot be shared</a></li>
-  <li><a href="#intro-principles" id="toc-intro-principles" class="nav-link" data-scroll-target="#intro-principles"><span class="header-section-number">1.7</span> Principles to put into practice</a></li>
-  <li><a href="#getting-started" id="toc-getting-started" class="nav-link" data-scroll-target="#getting-started"><span class="header-section-number">1.8</span> Getting started</a></li>
+  <li><a href="#supplementary-exercise" id="toc-supplementary-exercise" class="nav-link" data-scroll-target="#supplementary-exercise"><span class="header-section-number">1.4</span> Supplementary exercise</a></li>
+  <li><a href="#intro-principles" id="toc-intro-principles" class="nav-link" data-scroll-target="#intro-principles"><span class="header-section-number">1.5</span> Principles to put into practice</a></li>
+  <li><a href="#getting-started" id="toc-getting-started" class="nav-link" data-scroll-target="#getting-started"><span class="header-section-number">1.6</span> Getting started</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/JBris/open-and-reproducible-science-in-r/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div></nav>
     </div>
@@ -399,9 +377,8 @@ div.csl-indent {
 
 <section id="about-the-workshop" class="level2" data-number="1.1">
 <h2 data-number="1.1" class="anchored" data-anchor-id="about-the-workshop"><span class="header-section-number">1.1</span> About the workshop</h2>
-<p>Open and reproducible science helps others understand, evaluate, reuse, and extend research. In this 90-minute workshop, we follow one prepared R project from its source data to an archived result. We use <code>HealthWellbeing</code> to pool published correlations between health and well-being. <a href="../pages/workshop/00_preparation.html#preparation-data">Teaching dataset</a></p>
+<p>Open and reproducible science helps others understand, evaluate, reuse, and extend research. In this 90-minute workshop, we follow one prepared R project from its source data to an archived result.</p>
 <p>The workshop is presented by <a href="../pages/2_coordinators.html#james-bristow">James Bristow</a>, Massey University, with co-author <a href="../pages/2_coordinators.html#hana-liang">Hana Liang</a>, Bioeconomy Science Institute.</p>
-<p>The main aim is for you to understand and experience an end-to-end reproducible research workflow, not to master every individual package.</p>
 </section>
 <section id="learning-objectives" class="level2" data-number="1.2">
 <h2 data-number="1.2" class="anchored" data-anchor-id="learning-objectives"><span class="header-section-number">1.2</span> Learning objectives</h2>
@@ -489,27 +466,14 @@ div.csl-indent {
 </tr>
 </tbody>
 </table>
-<p>The session combines 40 minutes of concepts and demonstrations, 42 minutes of hands-on work, and 8 minutes of discussion. The hands-on work is a two-minute Git activity in the opening and a 40-minute continuous exercise.</p>
 </section>
-<section id="one-dataset-one-exercise-one-environment" class="level2" data-number="1.4">
-<h2 data-number="1.4" class="anchored" data-anchor-id="one-dataset-one-exercise-one-environment"><span class="header-section-number">1.4</span> One dataset, one exercise, one environment</h2>
-<ul>
-<li><strong>One dataset throughout.</strong> Every stage uses <code>HealthWellbeing</code>. For <code>vetiver</code>, a separate pipeline branch trains and pins a small regression on the same checked input as the meta-analysis.</li>
-<li><strong>One continuous hands-on exercise.</strong> You complete and run a partially completed <code>targets</code> pipeline and Quarto report, then change the analysis and reproduce the results, rather than building everything from scratch.</li>
-<li><strong>One prepared computational environment.</strong> MyBinder provides the packages, configuration, and data, so nothing is installed during the workshop. <a href="../pages/workshop/00_preparation.html">Preparation</a></li>
-</ul>
-</section>
-<section id="supplementary-exercise" class="level2" data-number="1.5">
-<h2 data-number="1.5" class="anchored" data-anchor-id="supplementary-exercise"><span class="header-section-number">1.5</span> Supplementary exercise</h2>
-<p>Synthetic data with <code>synthpop</code> is a supplementary exercise for after the workshop. The archiving segment mentions it briefly when discussing data that cannot be shared. <a href="../pages/workshop/10_synthetic_data.html">Synthetic data with synthpop</a></p>
-</section>
-<section id="reproducibility-when-data-cannot-be-shared" class="level2" data-number="1.6">
-<h2 data-number="1.6" class="anchored" data-anchor-id="reproducibility-when-data-cannot-be-shared"><span class="header-section-number">1.6</span> Reproducibility when data cannot be shared</h2>
+<section id="supplementary-exercise" class="level2" data-number="1.4">
+<h2 data-number="1.4" class="anchored" data-anchor-id="supplementary-exercise"><span class="header-section-number">1.4</span> Supplementary exercise</h2>
 <p>Open science can include restricted-access data. Researchers can document their methods, code, and access conditions while restricting the original observations.</p>
-<p>Synthetic data can help readers test whether a workflow runs. Verifying findings based on original observations requires access to those observations. A differential privacy claim requires a validated mechanism and privacy accounting <span class="citation" data-cites="near2021-synthetic-data">(<a href="4_references.html#ref-near2021-synthetic-data" role="doc-biblioref">Near and Darais 2021</a>)</span>.</p>
+<p>Synthetic data can help readers test whether a workflow runs. Synthetic data with <code>synthpop</code> is a supplementary exercise for after the workshop. The archiving segment mentions it briefly when discussing data that cannot be shared. <a href="../pages/workshop/10_synthetic_data.html">Synthetic data with synthpop</a></p>
 </section>
-<section id="intro-principles" class="level2" data-number="1.7">
-<h2 data-number="1.7" class="anchored" data-anchor-id="intro-principles"><span class="header-section-number">1.7</span> Principles to put into practice</h2>
+<section id="intro-principles" class="level2" data-number="1.5">
+<h2 data-number="1.5" class="anchored" data-anchor-id="intro-principles"><span class="header-section-number">1.5</span> Principles to put into practice</h2>
 <p>Throughout the session, consider whether another researcher could:</p>
 <ul>
 <li><strong>Understand</strong> the purpose of the project and follow the analysis decisions.</li>
@@ -522,17 +486,11 @@ div.csl-indent {
 </ul>
 <p>We will consider common barriers to these goals, including undocumented dependencies, manual analysis steps, and assumptions tied to a single computing environment.</p>
 </section>
-<section id="getting-started" class="level2" data-number="1.8">
-<h2 data-number="1.8" class="anchored" data-anchor-id="getting-started"><span class="header-section-number">1.8</span> Getting started</h2>
+<section id="getting-started" class="level2" data-number="1.6">
+<h2 data-number="1.6" class="anchored" data-anchor-id="getting-started"><span class="header-section-number">1.6</span> Getting started</h2>
 <p>Some familiarity with R will help you follow the examples. Open the prepared environment, verify the teaching dataset, and prepare the dataset versions before the timed session. <a href="../pages/workshop/00_preparation.html">Preparation</a></p>
-<p>For upcoming workshops, dates, and venues, see the <a href="../ANNOUNCEMENTS.html">workshop announcements</a>.</p>
 
 
-<div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list" style="display: none">
-<div id="ref-near2021-synthetic-data" class="csl-entry" role="listitem">
-Near, Joseph, and David Darais. 2021. <span>“Differentially Private Synthetic Data.”</span> National Institute of Standards; Technology. May 3, 2021. <a href="https://www.nist.gov/blogs/cybersecurity-insights/differentially-private-synthetic-data">https://www.nist.gov/blogs/cybersecurity-insights/differentially-private-synthetic-data</a>.
-</div>
-</div>
 </section>
 
 </main> <!-- /main -->

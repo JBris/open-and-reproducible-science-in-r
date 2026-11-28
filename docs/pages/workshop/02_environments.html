@@ -380,13 +380,11 @@ div.csl-indent {
   <li><a href="#environments-docker" id="toc-environments-docker" class="nav-link" data-scroll-target="#environments-docker"><span class="header-section-number">6.4</span> From a Dockerfile to RStudio on MyBinder</a>
   <ul class="collapse">
   <li><a href="#read-the-dockerfile" id="toc-read-the-dockerfile" class="nav-link" data-scroll-target="#read-the-dockerfile"><span class="header-section-number">6.4.1</span> Read the Dockerfile</a></li>
-  <li><a href="#follow-the-github-actions-build-pipelines" id="toc-follow-the-github-actions-build-pipelines" class="nav-link" data-scroll-target="#follow-the-github-actions-build-pipelines"><span class="header-section-number">6.4.2</span> Follow the GitHub Actions build pipelines</a></li>
-  <li><a href="#launch-the-published-environment" id="toc-launch-the-published-environment" class="nav-link" data-scroll-target="#launch-the-published-environment"><span class="header-section-number">6.4.3</span> Launch the published environment</a></li>
+  <li><a href="#launch-the-published-environment" id="toc-launch-the-published-environment" class="nav-link" data-scroll-target="#launch-the-published-environment"><span class="header-section-number">6.4.2</span> Launch the published environment</a></li>
   </ul></li>
   <li><a href="#record-the-session" id="toc-record-the-session" class="nav-link" data-scroll-target="#record-the-session"><span class="header-section-number">6.5</span> Record the session</a></li>
   <li><a href="#environments-checkpoint" id="toc-environments-checkpoint" class="nav-link" data-scroll-target="#environments-checkpoint"><span class="header-section-number">6.6</span> Checkpoint</a></li>
-  <li><a href="#after-the-workshop-record-your-own-environment" id="toc-after-the-workshop-record-your-own-environment" class="nav-link" data-scroll-target="#after-the-workshop-record-your-own-environment"><span class="header-section-number">6.7</span> After the workshop: record your own environment</a></li>
-  <li><a href="#further-reading" id="toc-further-reading" class="nav-link" data-scroll-target="#further-reading"><span class="header-section-number">6.8</span> Further reading</a></li>
+  <li><a href="#further-reading" id="toc-further-reading" class="nav-link" data-scroll-target="#further-reading"><span class="header-section-number">6.7</span> Further reading</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/JBris/open-and-reproducible-science-in-r/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div></nav>
     </div>
@@ -396,7 +394,7 @@ div.csl-indent {
 <header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../pages/workshop/00_preparation.html">Workshop</a></li><li class="breadcrumb-item"><a href="../../pages/workshop/02_environments.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Computational reproducibility</span></a></li></ol></nav>
 <div class="quarto-title">
 <h1 class="title"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Computational reproducibility</span></h1>
-<p class="subtitle lead">10–20 minutes · Demonstration · renv, Docker and Binder</p>
+<p class="subtitle lead">Demonstration · renv, Docker and Binder</p>
 </div>
 
 
@@ -416,11 +414,10 @@ div.csl-indent {
 <section id="learning-objectives" class="level2" data-number="6.1">
 <h2 data-number="6.1" class="anchored" data-anchor-id="learning-objectives"><span class="header-section-number">6.1</span> Learning objectives</h2>
 <p>By the end of this demonstration, you should be able to explain what the project’s R lockfile records, how a Docker image becomes your MyBinder session, and why we keep a record of the environment used to run an analysis.</p>
-<p>The instructor runs the commands. You can follow along in the MyBinder session you opened during <a href="../../pages/workshop/00_preparation.html">preparation</a>; nothing needs to be installed.</p>
 </section>
 <section id="why-this-matters" class="level2" data-number="6.2">
 <h2 data-number="6.2" class="anchored" data-anchor-id="why-this-matters"><span class="header-section-number">6.2</span> Why this matters</h2>
-<p>Allow about two minutes. The same script can behave differently when package versions or system libraries change. We need to describe the environment alongside the code and the data version.</p>
+<p>The same script can behave differently when package versions or system libraries change. We need to describe the environment alongside the code and the data version.</p>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 33%">
@@ -462,57 +459,57 @@ div.csl-indent {
 </tr>
 </tbody>
 </table>
-<p>renv restores the R packages described by a lockfile. A Docker image can also include the R interpreter, operating-system libraries, and rendering tools. Binder starts a container from such an image in a browser. Reproducing a result still requires the analysis code, the input data, and a successful rerun.</p>
+<p>renv restores the R packages described by a lockfile. A Docker image can also include the R interpreter, operating-system libraries, and rendering tools. Binder starts a container from such an image in a browser.</p>
 </section>
 <section id="inspect-the-r-environment" class="level2" data-number="6.3">
 <h2 data-number="6.3" class="anchored" data-anchor-id="inspect-the-r-environment"><span class="header-section-number">6.3</span> Inspect the R environment</h2>
-<p>Allow about three minutes. In the <strong>R Console</strong>, from the project root:</p>
+<p>We can next view the contents of the renv.lock file:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>R.version.string</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">file.edit</span>(<span class="st">"renv.lock"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The version of R running with your environment should ideally match the lock file.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"pipelines/workshop_support.R"</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">use_workshop_book_outputs</span>()</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>R.version.string</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "R version 4.4.1 (2024-06-14)"</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">.libPaths</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "/home/rstudio/renv/library/linux-ubuntu-jammy/R-4.4/x86_64-pc-linux-gnu"
-[2] "/usr/local/lib/R/library"                                               </code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">packageVersion</span>(<span class="st">"renv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">packageVersion</span>(<span class="st">"renv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] '1.0.7'</code></pre>
 </div>
 </div>
 <p>Compare the running version with the reference version, <strong>4.4.1</strong>. A lockfile records a version; it does not switch your running R session.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>lock <span class="ot">&lt;-</span> renv<span class="sc">::</span><span class="fu">lockfile_read</span>(<span class="st">"renv.lock"</span>)</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>lock<span class="sc">$</span>R<span class="sc">$</span>Version</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>lock <span class="ot">&lt;-</span> renv<span class="sc">::</span><span class="fu">lockfile_read</span>(<span class="st">"renv.lock"</span>)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>lock<span class="sc">$</span>R<span class="sc">$</span>Version</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "4.4.1"</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>workshop_packages <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">"dataspice"</span>, <span class="st">"meta"</span>, <span class="st">"pins"</span>, <span class="st">"quarto"</span>, <span class="st">"rfair"</span>, <span class="st">"rmarkdown"</span>,</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"synthpop"</span>, <span class="st">"targets"</span>, <span class="st">"vetiver"</span></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="fu">vapply</span>(</span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>  workshop_packages,</span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>  <span class="cf">function</span>(package) {</span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>    record <span class="ot">&lt;-</span> lock<span class="sc">$</span>Packages[[package]]</span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (<span class="fu">is.null</span>(record)) <span class="cn">NA_character_</span> <span class="cf">else</span> record<span class="sc">$</span>Version</span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>  },</span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">character</span>(<span class="dv">1</span>)</span>
-<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>workshop_packages <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">"dataspice"</span>, <span class="st">"meta"</span>, <span class="st">"pins"</span>, <span class="st">"rfair"</span>, <span class="st">"rmarkdown"</span>,</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">"synthpop"</span>, <span class="st">"targets"</span>, <span class="st">"vetiver"</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="fu">vapply</span>(</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  workshop_packages,</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>  <span class="cf">function</span>(package) {</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>    record <span class="ot">&lt;-</span> lock<span class="sc">$</span>Packages[[package]]</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (<span class="fu">is.null</span>(record)) <span class="cn">NA_character_</span> <span class="cf">else</span> record<span class="sc">$</span>Version</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>  },</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">character</span>(<span class="dv">1</span>)</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>dataspice      meta      pins    quarto     rfair rmarkdown  synthpop   targets 
-  "1.2.1"   "9.0-0"   "1.4.2"        NA   "0.2.0"    "2.32"   "1.9-3"  "1.12.0" 
-  vetiver 
-  "0.2.8" </code></pre>
+<pre><code>dataspice      meta      pins     rfair rmarkdown  synthpop   targets   vetiver 
+  "1.2.1"   "9.0-0"   "1.4.2"   "0.2.0"    "2.32"   "1.9-3"  "1.12.0"   "0.2.8" </code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>renv<span class="sc">::</span><span class="fu">status</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>renv<span class="sc">::</span><span class="fu">status</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>No issues found -- the project is in a consistent state.</code></pre>
 </div>
 </div>
-<p>The lockfile records exact package versions for the workshop. A package that is not recorded appears as <code>NA</code>; Quarto, for example, is a command-line tool in the image rather than an R package in the lockfile. <code>renv::status()</code> checks whether the active library matches the lockfile.</p>
+<p>The lockfile records exact package versions for the workshop. <code>renv::status()</code> checks whether the active library matches the lockfile.</p>
 <p>The usual collaboration cycle is:</p>
 <ol type="1">
 <li>A maintainer prepares and tests the required packages.</li>
@@ -524,7 +521,6 @@ div.csl-indent {
 </section>
 <section id="environments-docker" class="level2" data-number="6.4">
 <h2 data-number="6.4" class="anchored" data-anchor-id="environments-docker"><span class="header-section-number">6.4</span> From a Dockerfile to RStudio on MyBinder</h2>
-<p>Allow about four minutes.</p>
 <section id="read-the-dockerfile" class="level3" data-number="6.4.1">
 <h3 data-number="6.4.1" class="anchored" data-anchor-id="read-the-dockerfile"><span class="header-section-number">6.4.1</span> Read the Dockerfile</h3>
 <p>A <strong>Dockerfile</strong> is a set of instructions for building a Docker image. Find these instructions in the workshop’s <a href="https://github.com/JBris/open-and-reproducible-science-in-r/blob/main/dockerfiles/binder/Dockerfile.1.0.0">Binder image Dockerfile</a>.</p>
@@ -556,65 +552,48 @@ div.csl-indent {
 </table>
 <p>A <strong>Docker build</strong> uses these instructions and the repository files to produce an <strong>image</strong>. A <strong>container</strong> is a running instance of an image. Each participant runs the workshop in their own container started from the same image.</p>
 </section>
-<section id="follow-the-github-actions-build-pipelines" class="level3" data-number="6.4.2">
-<h3 data-number="6.4.2" class="anchored" data-anchor-id="follow-the-github-actions-build-pipelines"><span class="header-section-number">6.4.2</span> Follow the GitHub Actions build pipelines</h3>
-<p>Publishing a GitHub release starts <a href="https://github.com/JBris/open-and-reproducible-science-in-r/actions/workflows/build-rstudio.yaml">Build RStudio</a>. Once it builds and pushes the image for local Docker use, it starts <a href="https://github.com/JBris/open-and-reproducible-science-in-r/actions/workflows/build-binder.yaml">Build Binder</a> from the same release revision. Build Binder publishes the image that MyBinder uses. Maintainers can also start either workflow manually to build that image on its own.</p>
-<p>Each workflow checks out the source, reads <code>VERSION</code> into <code>APP_VERSION</code>, and records a UTC build date. Docker Compose uses <code>APP_VERSION</code> to select the Dockerfile and tag the image. The Binder job includes these two steps.</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> compose build binder</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="ex">docker</span> compose push binder</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>The first command builds the image. The second publishes the image with its version tag to GitHub Container Registry (<code>ghcr.io</code>). The image version comes from <code>VERSION</code> and can differ from the GitHub release tag.</p>
-</section>
-<section id="launch-the-published-environment" class="level3" data-number="6.4.3">
-<h3 data-number="6.4.3" class="anchored" data-anchor-id="launch-the-published-environment"><span class="header-section-number">6.4.3</span> Launch the published environment</h3>
-<p>MyBinder reads the small <a href="https://github.com/JBris/open-and-reproducible-science-in-r/blob/main/binder/Dockerfile">Binder entry point</a>, which selects the published Binder image with <code>FROM</code>. MyBinder prepares the launch image and starts a container on its servers. The launch link’s <code>urlpath=rstudio</code> setting opens the RStudio interface in your browser.</p>
-<p>Because everyone starts from the same image, everyone has the same R version, packages, and tools for the hands-on activities.</p>
+<section id="launch-the-published-environment" class="level3" data-number="6.4.2">
+<h3 data-number="6.4.2" class="anchored" data-anchor-id="launch-the-published-environment"><span class="header-section-number">6.4.2</span> Launch the published environment</h3>
+<p>MyBinder prepares the launch image and starts a container on its servers. Because everyone starts from the same image, everyone has the same R version, packages, and tools for the hands-on activities.</p>
 </section>
 </section>
 <section id="record-the-session" class="level2" data-number="6.5">
 <h2 data-number="6.5" class="anchored" data-anchor-id="record-the-session"><span class="header-section-number">6.5</span> Record the session</h2>
-<p>Allow about one minute. Load the data by its explicit path into a separate environment, then save a record of the current R session.</p>
+<p>View and record the details of the current R session.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>raw_file <span class="ot">&lt;-</span> <span class="fu">file.path</span>(<span class="st">"data"</span>, <span class="st">"raw"</span>, <span class="st">"healthwellbeing.rda"</span>)</span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">file.exists</span>(raw_file),</span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">identical</span>(</span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">unname</span>(tools<span class="sc">::</span><span class="fu">md5sum</span>(raw_file)),</span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"0d74964b0b7168379a2b015cb648b326"</span></span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>data_env <span class="ot">&lt;-</span> <span class="fu">new.env</span>(<span class="at">parent =</span> <span class="fu">baseenv</span>())</span>
-<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>loaded_names <span class="ot">&lt;-</span> <span class="fu">load</span>(raw_file, <span class="at">envir =</span> data_env)</span>
-<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(<span class="fu">identical</span>(loaded_names, <span class="st">"HealthWellbeing"</span>))</span>
-<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>health <span class="ot">&lt;-</span> data_env[[<span class="st">"HealthWellbeing"</span>]]</span>
-<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(<span class="fu">nrow</span>(health) <span class="sc">==</span> <span class="dv">29</span>L, <span class="fu">ncol</span>(health) <span class="sc">==</span> <span class="dv">5</span>L)</span>
-<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"pipelines/workshop_support.R"</span>)</span>
-<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>output_dir <span class="ot">&lt;-</span> <span class="fu">workshop_output_dir</span>()</span>
-<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a><span class="fu">dir.create</span>(output_dir, <span class="at">recursive =</span> <span class="cn">TRUE</span>, <span class="at">showWarnings =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a><span class="fu">writeLines</span>(</span>
-<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">capture.output</span>(<span class="fu">sessionInfo</span>()),</span>
-<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">file.path</span>(output_dir, <span class="st">"session-info.txt"</span>)</span>
-<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>raw_file <span class="ot">&lt;-</span> <span class="fu">file.path</span>(<span class="st">"data"</span>, <span class="st">"raw"</span>, <span class="st">"healthwellbeing.rda"</span>)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">file.exists</span>(raw_file),</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">identical</span>(</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">unname</span>(tools<span class="sc">::</span><span class="fu">md5sum</span>(raw_file)),</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"0d74964b0b7168379a2b015cb648b326"</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>data_env <span class="ot">&lt;-</span> <span class="fu">new.env</span>(<span class="at">parent =</span> <span class="fu">baseenv</span>())</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>loaded_names <span class="ot">&lt;-</span> <span class="fu">load</span>(raw_file, <span class="at">envir =</span> data_env)</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(<span class="fu">identical</span>(loaded_names, <span class="st">"HealthWellbeing"</span>))</span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>health <span class="ot">&lt;-</span> data_env[[<span class="st">"HealthWellbeing"</span>]]</span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(<span class="fu">nrow</span>(health) <span class="sc">==</span> <span class="dv">29</span>L, <span class="fu">ncol</span>(health) <span class="sc">==</span> <span class="dv">5</span>L)</span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"pipelines/workshop_support.R"</span>)</span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>output_dir <span class="ot">&lt;-</span> <span class="fu">workshop_output_dir</span>()</span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a><span class="fu">dir.create</span>(output_dir, <span class="at">recursive =</span> <span class="cn">TRUE</span>, <span class="at">showWarnings =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a><span class="fu">writeLines</span>(</span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">capture.output</span>(<span class="fu">sessionInfo</span>()),</span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">file.path</span>(output_dir, <span class="st">"session-info.txt"</span>)</span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a><span class="fu">file.edit</span>(<span class="fu">file.path</span>(output_dir, <span class="st">"session-info.txt"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: error in running command</code></pre>
 </div>
-<p><code>outputs/health-wellbeing/session-info.txt</code> lists the loaded package versions and platform. Later, the pipeline records the R and <em>meta</em> versions with its result. For a MyBinder run, record the image version in the project’s <code>VERSION</code> file; it matches the image tag that <code>binder/Dockerfile</code> selects on GitHub. Your MyBinder copy has no Git history. In a clone, <code>git rev-parse HEAD</code> adds the exact project revision.</p>
+</div>
 </section>
 <section id="environments-checkpoint" class="level2" data-number="6.6">
 <h2 data-number="6.6" class="anchored" data-anchor-id="environments-checkpoint"><span class="header-section-number">6.6</span> Checkpoint</h2>
-<ul>
-<li>You can explain which parts of the environment renv and Docker capture.</li>
-<li>You can trace how GitHub Actions builds and publishes the Binder image and how MyBinder uses it to start RStudio.</li>
-<li>You can distinguish the lockfile’s recorded R version from the running version.</li>
-<li>You know where to find the session record and the package versions.</li>
-</ul>
 <p><strong>Takeaway:</strong> a documented environment supports reproducibility, and a successful rerun supplies evidence. Next, we document the dataset itself. <a href="../../pages/workshop/03_data_documentation.html">FAIR data documentation and assessment</a></p>
 </section>
-<section id="after-the-workshop-record-your-own-environment" class="level2" data-number="6.7">
-<h2 data-number="6.7" class="anchored" data-anchor-id="after-the-workshop-record-your-own-environment"><span class="header-section-number">6.7</span> After the workshop: record your own environment</h2>
-<p>In a new R project, use <code>renv::init()</code> to create the project library. After installing and checking the packages your analysis uses, run <code>renv::snapshot()</code> and review the lockfile. A collaborator can then run <code>renv::restore()</code> with the corresponding R version.</p>
-<p>For a container, start with an R base image such as <code>FROM rocker/r-ver:4.4.1</code>. Add your system dependencies and restore the package library from <code>renv.lock</code> during the build. The <a href="https://github.com/JBris/open-and-reproducible-science-in-r#usage-with-docker">workshop’s Docker setup</a> shows how this fits into a complete project.</p>
-</section>
-<section id="further-reading" class="level2" data-number="6.8">
-<h2 data-number="6.8" class="anchored" data-anchor-id="further-reading"><span class="header-section-number">6.8</span> Further reading</h2>
+<section id="further-reading" class="level2" data-number="6.7">
+<h2 data-number="6.7" class="anchored" data-anchor-id="further-reading"><span class="header-section-number">6.7</span> Further reading</h2>
 <ul>
 <li>Sharing a project environment with renv <span class="citation" data-cites="renv-collaborating">(<a href="../4_references.html#ref-renv-collaborating" role="doc-biblioref">Posit, n.d.</a>)</span>.</li>
 <li>Configuring services with Docker Compose <span class="citation" data-cites="docker-compose">(<a href="../4_references.html#ref-docker-compose" role="doc-biblioref">Docker, n.d.</a>)</span>.</li>

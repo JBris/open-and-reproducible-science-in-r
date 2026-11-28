@@ -5,9 +5,7 @@ format:
     embed-resources: true
 toc: true
 link-citations: true
-editor:
-  markdown:
-    wrap: 72
+editor: visual
 execute:
   warning: false
   message: false

@@ -388,7 +388,7 @@ div.csl-indent {
 <header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../pages/workshop/00_preparation.html">Workshop</a></li><li class="breadcrumb-item"><a href="../../pages/workshop/04_versioning.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Data and model versioning</span></a></li></ol></nav>
 <div class="quarto-title">
 <h1 class="title"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Data and model versioning</span></h1>
-<p class="subtitle lead">28–35 minutes · Demonstration · pins and vetiver</p>
+<p class="subtitle lead">Demonstration · pins and vetiver</p>
 </div>
 
 
@@ -407,110 +407,221 @@ div.csl-indent {
 
 <section id="introduction" class="level2" data-number="8.1">
 <h2 data-number="8.1" class="anchored" data-anchor-id="introduction"><span class="header-section-number">8.1</span> Introduction</h2>
-<p>In this seven-minute demonstration, we store versions of the documented dataset and retrieve a pipeline-produced model by its identifier. By the end, you should be able to explain how a version identifier links a result to the exact input that produced it.</p>
-<p>The pipeline in the hands-on activities reads a pinned dataset version, so you prepared the board before the session. The instructor runs the code below from the project root; the board and identifiers in your MyBinder session are your own. <a href="../../pages/workshop/00_preparation.html#preparation-versions">Prepare the dataset versions</a></p>
+<p>We will store versions of the documented dataset and retrieve a model by its identifier. By the end, you should be able to explain how a version identifier links a result to the exact input that produced it.</p>
 </section>
 <section id="store-dataset-versions-with-pins" class="level2" data-number="8.2">
 <h2 data-number="8.2" class="anchored" data-anchor-id="store-dataset-versions-with-pins"><span class="header-section-number">8.2</span> Store dataset versions with pins</h2>
-<p>Allow about four minutes. A <em>pins</em> board stores named objects, called pins. We use a local folder board with versioning enabled explicitly, so writing changed data adds a version and keeps the previous one. An identical write is skipped by default. We store the data as RDS, an R format that preserves the column types.</p>
-<p>The prepared script writes two versions of the <code>health_wellbeing</code> pin. The first contains all 29 studies, with the source URL and raw-file checksum as metadata. The second contains the 18 general-population studies. It is read from the exact full version, and its metadata records the filter and that parent version. Rerunning the script reuses identical versions instead of writing duplicates.</p>
+<p>A <em>pins</em> board stores named objects (which is usually files), called pins. We use a local folder board to save our pins.</p>
+<p>We will write two versions of the <code>health_wellbeing</code> pin. The first contains all 29 studies, with the data source and hash as metadata. The second contains the 18 general-population studies.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"pipelines/workshop_support.R"</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">use_workshop_book_outputs</span>()</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>box<span class="sc">::</span><span class="fu">use</span>(</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  pins[board_folder, pin_exists, pin_meta, pin_read, pin_versions, board_temp, pin_write],</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  utils[read.csv],</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  vetiver[vetiver_model, vetiver_pin_write, vetiver_pin_read]</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>raw_file <span class="ot">&lt;-</span> <span class="fu">file.path</span>(<span class="st">"data"</span>, <span class="st">"raw"</span>, <span class="st">"healthwellbeing.rda"</span>)</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>source_url <span class="ot">&lt;-</span> <span class="fu">paste0</span>(</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  <span class="st">"https://raw.githubusercontent.com/MathiasHarrer/dmetar/"</span>,</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  <span class="st">"38c9b9bb5f85ea49de33e5d2536f6544d5268517/data/HealthWellbeing.rda"</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="fu">dir.create</span>(<span class="fu">dirname</span>(raw_file), <span class="at">recursive =</span> <span class="cn">TRUE</span>, <span class="at">showWarnings =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">file.exists</span>(raw_file)) {</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">download.file</span>(source_url, <span class="at">destfile =</span> raw_file, <span class="at">mode =</span> <span class="st">"wb"</span>)</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="fu">load</span>(raw_file)</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>all_df <span class="ot">&lt;-</span> HealthWellbeing</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>general_df <span class="ot">&lt;-</span> HealthWellbeing <span class="sc">|&gt;</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">subset</span>(population <span class="sc">==</span> <span class="st">"general population"</span>)</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(general_df, <span class="dv">8</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                author   cor      n         population     country
+1             An, 2008 0.620    121 general population South Korea
+3         Barger, 2009 0.290 350000 general population         USA
+4        Doherty, 2013 0.333   1764 general population     Ireland
+5      Dubrovina, 2012 0.730  42331 general population      Poland
+7           Gana, 2013 0.292    899 general population      France
+8        Garrido, 2013 0.388    870 general population       Spain
+12 Koots-Ausmees, 2015 0.340 285086 general population      Europe
+14        Lacruz, 2012 0.190   2675 general population     Germany</code></pre>
+</div>
+</div>
+<p>We next create 2 pins for each version of the dataset:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>board <span class="ot">&lt;-</span> <span class="fu">board_temp</span>(<span class="at">versioned =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">pin_write</span>(</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  board,</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  all_df,</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">name =</span> <span class="st">"health_wellbeing"</span>,</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">"rds"</span>,</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">title =</span> <span class="st">"HealthWellbeing"</span>,</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">description =</span> <span class="st">"All 29 studies in the teaching snapshot."</span>,</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">metadata =</span> <span class="fu">list</span>(</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">scope =</span> <span class="st">"all"</span>,</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">filter =</span> <span class="st">"all studies"</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="fu">pin_write</span>(</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>  board,</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>  general_df,</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">name =</span> <span class="st">"health_wellbeing"</span>,</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">"rds"</span>,</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>  <span class="at">title =</span> <span class="st">"HealthWellbeing"</span>,</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>  <span class="at">description =</span> <span class="st">"Only studies labelled general population."</span>,</span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>  <span class="at">metadata =</span> <span class="fu">list</span>(</span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a>    <span class="at">scope =</span> <span class="st">"general"</span>,</span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a>    <span class="at">filter =</span> <span class="st">"population == 'general population'"</span></span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <p>We open the same board and list its versions.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>box<span class="sc">::</span><span class="fu">use</span>(</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  pins[board_folder, pin_exists, pin_meta, pin_read, pin_versions],</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  utils[read.csv]</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"pipelines/workshop_support.R"</span>)</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>workshop_dir <span class="ot">&lt;-</span> <span class="fu">workshop_output_dir</span>()</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>data_board <span class="ot">&lt;-</span> <span class="fu">board_folder</span>(</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">file.path</span>(workshop_dir, <span class="st">"data_store"</span>),</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">versioned =</span> <span class="cn">TRUE</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="fu">pin_versions</span>(data_board, <span class="st">"health_wellbeing"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"pipelines/prepare_versioning_demo.R"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    scope                version
+1     all 20261128T054236Z-11d00
+2 general 20261128T054236Z-06ae2
++ version_file dispatched
+✔ version_file completed [0ms, 23 B]
++ data_version dispatched
+✔ data_version completed [4ms, 75 B]
++ dataset_file dispatched
+✔ dataset_file completed [104ms, 931 B]
++ studies dispatched
+✔ studies completed [6ms, 938 B]
++ data_provenance dispatched
+✔ data_provenance completed [18ms, 293 B]
++ predictive_model dispatched
+✔ predictive_model completed [370ms, 2.46 kB]
++ model_pin_files dispatched
+✔ model_pin_files completed [223ms, 2.12 kB]
++ model_version dispatched
+✔ model_version completed [3ms, 75 B]
+✔ ended pipeline [8.4s, 8 completed, 0 skipped]</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>workshop_dir <span class="ot">&lt;-</span> <span class="fu">workshop_output_dir</span>()</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>data_board <span class="ot">&lt;-</span> <span class="fu">board_folder</span>(</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">file.path</span>(workshop_dir, <span class="st">"data_store"</span>),</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">versioned =</span> <span class="cn">TRUE</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="fu">pin_versions</span>(data_board, <span class="st">"health_wellbeing"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 2 × 3
   version                created             hash 
   &lt;chr&gt;                  &lt;dttm&gt;              &lt;chr&gt;
-1 20261121T221847Z-06ae2 2026-11-21 22:18:47 06ae2
-2 20261121T221847Z-11d00 2026-11-21 22:18:47 11d00</code></pre>
+1 20261128T054236Z-06ae2 2026-11-28 05:42:36 06ae2
+2 20261128T054236Z-11d00 2026-11-28 05:42:36 11d00</code></pre>
 </div>
 </div>
-<p>The script also recorded which identifier belongs to which dataset. We retrieve the subset’s metadata and the full dataset by those identifiers.</p>
+<p>The script also recorded which identifier belongs to which dataset (the <code>version</code> column). We retrieve the subset’s metadata and the full dataset by those identifiers.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>versions <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">file.path</span>(workshop_dir, <span class="st">"dataset-versions.csv"</span>),</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">colClasses =</span> <span class="st">"character"</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>full_version <span class="ot">&lt;-</span> versions<span class="sc">$</span>version[versions<span class="sc">$</span>scope <span class="sc">==</span> <span class="st">"all"</span>]</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>general_version <span class="ot">&lt;-</span> versions<span class="sc">$</span>version[versions<span class="sc">$</span>scope <span class="sc">==</span> <span class="st">"general"</span>]</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(<span class="fu">length</span>(full_version) <span class="sc">==</span> <span class="dv">1</span>L, <span class="fu">length</span>(general_version) <span class="sc">==</span> <span class="dv">1</span>L)</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="fu">pin_meta</span>(data_board, <span class="st">"health_wellbeing"</span>, <span class="at">version =</span> general_version)<span class="sc">$</span>user</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>versions <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">file.path</span>(workshop_dir, <span class="st">"dataset-versions.csv"</span>),</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">colClasses =</span> <span class="st">"character"</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>full_version <span class="ot">&lt;-</span> versions<span class="sc">$</span>version[versions<span class="sc">$</span>scope <span class="sc">==</span> <span class="st">"all"</span>]</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>general_version <span class="ot">&lt;-</span> versions<span class="sc">$</span>version[versions<span class="sc">$</span>scope <span class="sc">==</span> <span class="st">"general"</span>]</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="fu">pin_meta</span>(data_board, <span class="st">"health_wellbeing"</span>, <span class="at">version =</span> full_version)<span class="sc">$</span>user[</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(<span class="st">"scope"</span>, <span class="st">"filter"</span>, <span class="st">"source_url"</span>)</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>$source_url
-[1] "https://raw.githubusercontent.com/MathiasHarrer/dmetar/38c9b9bb5f85ea49de33e5d2536f6544d5268517/data/HealthWellbeing.rda"
+<pre><code>$scope
+[1] "all"
 
-$raw_md5
-[1] "0d74964b0b7168379a2b015cb648b326"
+$filter
+[1] "all studies"
 
-$scope
+$source_url
+[1] "https://raw.githubusercontent.com/MathiasHarrer/dmetar/38c9b9bb5f85ea49de33e5d2536f6544d5268517/data/HealthWellbeing.rda"</code></pre>
+</div>
+</div>
+<p>We will also view the filtered dataset.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pin_meta</span>(data_board, <span class="st">"health_wellbeing"</span>, <span class="at">version =</span> general_version)<span class="sc">$</span>user[</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(<span class="st">"scope"</span>, <span class="st">"filter"</span>, <span class="st">"parent_version"</span>, <span class="st">"source_url"</span>)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$scope
 [1] "general"
 
 $filter
 [1] "population == 'general population'"
 
 $parent_version
-[1] "20261121T221847Z-11d00"</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>health_full <span class="ot">&lt;-</span> <span class="fu">pin_read</span>(</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  data_board, <span class="st">"health_wellbeing"</span>, <span class="at">version =</span> full_version</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="fu">nrow</span>(health_full)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 29</code></pre>
+[1] "20261128T054236Z-11d00"
+
+$source_url
+[1] "https://raw.githubusercontent.com/MathiasHarrer/dmetar/38c9b9bb5f85ea49de33e5d2536f6544d5268517/data/HealthWellbeing.rda"</code></pre>
 </div>
 </div>
-<p>A version identifier names a stored object within this board. If you recreate the board elsewhere, it receives new identifiers, so retain the upstream checksum and the filter as well. In the hands-on activities, the pipeline reads the version named in <code>analysis-data-version.txt</code> rather than whichever version is newest.</p>
+<p>A version identifier names a stored object within this board. It is read from the exact full version, and its metadata records the filter and that parent version.</p>
 </section>
 <section id="store-model-versions-with-vetiver" class="level2" data-number="8.3">
 <h2 data-number="8.3" class="anchored" data-anchor-id="store-model-versions-with-vetiver"><span class="header-section-number">8.3</span> Store model versions with vetiver</h2>
-<p>Allow about three minutes. The reference pipeline uses the checked study summaries in two branches. One fits the random-effects meta-analysis. The other trains a small illustrative regression of Fisher z on log sample size, then stores it with <em>vetiver</em>. The regression and the pooled estimate answer different questions.</p>
-<p>This is a preview of one pipeline output. Before the session, the instructor ran the workshop pipeline’s model branch on the full dataset and saved the model pin. The next lesson shows where that branch fits in the pipeline. If you are trying this demo on your own, first run <code>source("pipelines/prepare_versioning_demo.R")</code> from the project root.</p>
-<p>Read the saved version identifier and use it to retrieve the model. Its input prototype lists the columns required for prediction. Its metadata records the training data version and checksum. When you run the completed pipeline against the same input on this board, its summary records the same model version.</p>
+<p>We have assessed whether our dataset adheres to FAIR principles and we have also versioned it. We can next do some statistical modelling. Typically, we might want to use a mixed-effects model to perform a meta-analysis, but for the purposes of this demonstration we shall fit a linear regression model of Fisher z (<code>atanh(cor)</code>) against log sample size, then store it with <em>vetiver</em>.</p>
+<p>We will first process the data.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>version_file <span class="ot">&lt;-</span> <span class="fu">file.path</span>(workshop_dir, <span class="st">"predictive-model-version.txt"</span>)</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>model_version <span class="ot">&lt;-</span> <span class="fu">readLines</span>(version_file, <span class="at">warn =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>model_version</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>health_full <span class="ot">&lt;-</span> <span class="fu">pin_read</span>(</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  data_board, <span class="st">"health_wellbeing"</span>, <span class="at">version =</span> full_version</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>original <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">population =</span> <span class="fu">factor</span>(health_full<span class="sc">$</span>population),</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">z =</span> <span class="fu">atanh</span>(health_full<span class="sc">$</span>cor),</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">log_n =</span> <span class="fu">log</span>(health_full<span class="sc">$</span>n)</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(original, <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "20261121T221917Z-5259a"</code></pre>
+<pre><code>          population         z     log_n
+1 general population 0.7250051  4.795791
+2  chronic condition 0.3907423  5.948035
+3 general population 0.2985663 12.765688
+4 general population 0.3461986  7.475339
+5 general population 0.9287274 10.653275</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>model_board <span class="ot">&lt;-</span> pins<span class="sc">::</span><span class="fu">board_folder</span>(<span class="fu">file.path</span>(workshop_dir, <span class="st">"model_store"</span>), <span class="at">versioned =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> vetiver<span class="sc">::</span><span class="fu">vetiver_pin_read</span>(</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  model_board, <span class="st">"health_wellbeing_lm"</span>, <span class="at">version =</span> model_version</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(model<span class="sc">$</span>prototype)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Subsequently, we fit and save a linear regression.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>lm_model <span class="ot">&lt;-</span> stats<span class="sc">::</span><span class="fu">lm</span>(z <span class="sc">~</span> log_n, <span class="at">data =</span> original)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>v_model <span class="ot">&lt;-</span> <span class="fu">vetiver_model</span>(lm_model, <span class="at">model_name =</span> <span class="st">"health_wellbeing_lm"</span>)</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="fu">vetiver_pin_write</span>(board, v_model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>We will next reload the model from a <code>vetiver</code> pin. Its input prototype lists the columns required for prediction. Its metadata records the training data version and hash.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>version_file <span class="ot">&lt;-</span> <span class="fu">file.path</span>(workshop_dir, <span class="st">"predictive-model-version.txt"</span>)</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>model_version <span class="ot">&lt;-</span> <span class="fu">readLines</span>(version_file, <span class="at">warn =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>model_board <span class="ot">&lt;-</span> pins<span class="sc">::</span><span class="fu">board_folder</span>(<span class="fu">file.path</span>(workshop_dir, <span class="st">"model_store"</span>), <span class="at">versioned =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>model_lm <span class="ot">&lt;-</span> vetiver<span class="sc">::</span><span class="fu">vetiver_pin_read</span>(</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>  model_board, <span class="st">"health_wellbeing_lm"</span>, <span class="at">version =</span> model_version</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>tibble<span class="sc">::</span><span class="fu">tibble</span>(</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">name =</span> model_lm<span class="sc">$</span>model_name,</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">description =</span> model_lm<span class="sc">$</span>description,</span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">version =</span> model_lm<span class="sc">$</span>metadata<span class="sc">$</span>version,</span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">recipe =</span> model_lm<span class="sc">$</span>metadata<span class="sc">$</span>user<span class="sc">$</span>recipe,</span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">r_version =</span> model_lm<span class="sc">$</span>metadata<span class="sc">$</span>user<span class="sc">$</span>r_version,</span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">vetiver_version =</span> model_lm<span class="sc">$</span>metadata<span class="sc">$</span>user<span class="sc">$</span>vetiver_version</span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "log_n"</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>model<span class="sc">$</span>metadata<span class="sc">$</span>user[<span class="fu">c</span>(<span class="st">"data_version"</span>, <span class="st">"data_file_md5"</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>$data_version
-[1] "20261121T221847Z-11d00"
-
-$data_file_md5
-[1] "5be036389f4d3f5da5056beef8867d21"</code></pre>
+<pre><code># A tibble: 1 × 6
+  name                description       version recipe r_version vetiver_version
+  &lt;chr&gt;               &lt;chr&gt;             &lt;chr&gt;   &lt;chr&gt;  &lt;chr&gt;     &lt;chr&gt;          
+1 health_wellbeing_lm An OLS linear re… 202611… Fishe… 4.4.1     0.2.8          </code></pre>
 </div>
 </div>
-<p>The training version should match the full dataset identifier you read above. Changing the dataset in the pipeline also trains and pins a new model. The <a href="../../pages/workshop/07_modify_and_reproduce.html#change-input">optional input comparison</a> lets you see both versions. Review sharing terms for any fitted model, especially when it was trained on restricted data <span class="citation" data-cites="vetiver-pin-write">(<a href="../4_references.html#ref-vetiver-pin-write" role="doc-biblioref">Silge, n.d.</a>)</span>.</p>
+<p>We can save and reload both data and models, which we treat as a versioned artifacts with their respective metadata.</p>
 </section>
 <section id="versioning-checkpoint" class="level2" data-number="8.4">
 <h2 data-number="8.4" class="anchored" data-anchor-id="versioning-checkpoint"><span class="header-section-number">8.4</span> Checkpoint</h2>
-<ul>
-<li>The data board lists two versions of <code>health_wellbeing</code>. The full version returns 29 rows, and the subset’s metadata records its filter and parent version.</li>
-<li>The stored model expects <code>log_n</code> and records the training dataset version and checksum.</li>
-<li>You can explain why the pipeline reads a named version rather than the newest one.</li>
-</ul>
 <p>Next, you will build and run the analysis yourself. <a href="../../pages/workshop/05_targets.html">Build and execute a targets meta-analysis pipeline</a></p>
 </section>
 <section id="further-reading" class="level2" data-number="8.5">

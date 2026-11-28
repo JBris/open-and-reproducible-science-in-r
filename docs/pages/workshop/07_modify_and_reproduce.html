@@ -379,8 +379,7 @@ div.csl-indent {
   <li><a href="#step-2-make-a-change-and-predict-the-rebuild" id="toc-step-2-make-a-change-and-predict-the-rebuild" class="nav-link" data-scroll-target="#step-2-make-a-change-and-predict-the-rebuild"><span class="header-section-number">11.3</span> Step 2: make a change and predict the rebuild</a></li>
   <li><a href="#step-3-update-the-report" id="toc-step-3-update-the-report" class="nav-link" data-scroll-target="#step-3-update-the-report"><span class="header-section-number">11.4</span> Step 3: update the report</a></li>
   <li><a href="#modify-checkpoint" id="toc-modify-checkpoint" class="nav-link" data-scroll-target="#modify-checkpoint"><span class="header-section-number">11.5</span> Checkpoint</a></li>
-  <li><a href="#change-input" id="toc-change-input" class="nav-link" data-scroll-target="#change-input"><span class="header-section-number">11.6</span> Optional: select a different dataset version</a></li>
-  <li><a href="#further-reading" id="toc-further-reading" class="nav-link" data-scroll-target="#further-reading"><span class="header-section-number">11.7</span> Further reading</a></li>
+  <li><a href="#further-reading" id="toc-further-reading" class="nav-link" data-scroll-target="#further-reading"><span class="header-section-number">11.6</span> Further reading</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/JBris/open-and-reproducible-science-in-r/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div></nav>
     </div>
@@ -390,7 +389,7 @@ div.csl-indent {
 <header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../pages/workshop/00_preparation.html">Workshop</a></li><li class="breadcrumb-item"><a href="../../pages/workshop/07_modify_and_reproduce.html"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Modify the analysis and reproduce the results</span></a></li></ol></nav>
 <div class="quarto-title">
 <h1 class="title"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Modify the analysis and reproduce the results</span></h1>
-<p class="subtitle lead">65–75 minutes · Hands-on · targets and Quarto</p>
+<p class="subtitle lead">Hands-on · targets and Quarto</p>
 </div>
 
 
@@ -409,7 +408,7 @@ div.csl-indent {
 
 <section id="introduction" class="level2" data-number="11.1">
 <h2 data-number="11.1" class="anchored" data-anchor-id="introduction"><span class="header-section-number">11.1</span> Introduction</h2>
-<p>In this 10-minute activity, reproduce the summary in your prepared environment, then change a model setting and predict which targets will run. Continue with your completed <code>workspace/_targets.R</code> and <code>workspace/report.qmd</code>, starting from the full dataset and REML.</p>
+<p>In this activity, reproduce the summary in your prepared environment, then change a model setting and predict which targets will run. Continue with your completed <code>workspace/_targets.R</code> and <code>workspace/report.qmd</code>, starting from the full dataset and REML.</p>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -420,14 +419,15 @@ Get back on track
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>Run this from the project root in the <strong>R Console</strong> if you need to rebuild the starting summary or repeat the exercise after changing the dataset or estimator. Recovery selects the full 29-study dataset, backs up your working pipeline in <code>workspace/</code>, and runs the reference pipeline with REML. If you lost your report, copy your saved <code>report.qmd</code> back into <code>workspace/</code> or complete the <a href="../../pages/workshop/06_quarto.html">Quarto report exercise</a> before continuing.</p>
+<p>Run this from the project root if you need to rebuild the starting summary or repeat the exercise after changing the dataset or estimator. Recovery selects the full 29-study dataset, backs up your working pipeline in <code>workspace/</code>, and runs the reference pipeline with REML. If you lost your report, copy your saved <code>report.qmd</code> back into <code>workspace/</code> or complete the <a href="../../pages/workshop/06_quarto.html">Quarto report exercise</a> before continuing.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"pipelines/recover_workshop.R"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </section>
 <section id="step-1-rebuild-from-your-selected-input" class="level2" data-number="11.2">
 <h2 data-number="11.2" class="anchored" data-anchor-id="step-1-rebuild-from-your-selected-input"><span class="header-section-number">11.2</span> Step 1: rebuild from your selected input</h2>
-<p>Allow about three minutes. In the <strong>R Console</strong>, compare your current summary with a rebuild in the same environment and with the same local board. A collaborator who recreates the board can get a new version ID. The raw and selected input checksums identify the data across boards.</p>
+<p>Compare your current <code>meta-summary.csv</code> file with a new rebuild in the same environment and with the same local board by re-running the targets pipeline.</p>
+<p>The <code>identical()</code> function will compare the new summary with the old.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"pipelines/workshop_support.R"</span>)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>workshop_dir <span class="ot">&lt;-</span> <span class="fu">workshop_output_dir</span>()</span>
@@ -443,65 +443,44 @@ Get back on track
 <span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>targets<span class="sc">::</span><span class="fu">tar_make</span>(<span class="at">script =</span> pipeline_script, <span class="at">store =</span> pipeline_store)</span>
 <span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="fu">identical</span>(before, <span class="fu">read.csv</span>(summary_path))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Expect <code>TRUE</code>. Invalidation reruns the analysis and reuses the matching input and model pins. A different R or <em>meta</em> version can change results.</p>
+<p>Expect <code>TRUE</code>, meaning that the two <code>meta-summary.csv</code> files (the original and new file) are identical. <code>tar_invalidate()</code> reruns the analysis and reuses the matching input and model pins.</p>
 </section>
 <section id="step-2-make-a-change-and-predict-the-rebuild" class="level2" data-number="11.3">
 <h2 data-number="11.3" class="anchored" data-anchor-id="step-2-make-a-change-and-predict-the-rebuild"><span class="header-section-number">11.3</span> Step 2: make a change and predict the rebuild</h2>
-<p>Allow about four minutes. In <code>workspace/_targets.R</code>, find the <code>fit</code> target. Change <code>method.tau = "REML"</code> to <code>method.tau = "DL"</code> and save the file. The alternative estimator is called DerSimonian–Laird.</p>
-<p>Predict which targets will rerun. Then compare your prediction with the Console output.</p>
+<p>In <code>workspace/_targets.R</code>, find the <code>fit</code> target. Change <code>method.tau = "REML"</code> to <code>method.tau = "DL"</code> and save the file. The alternative estimator is called DerSimonian–Laird.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>targets<span class="sc">::</span><span class="fu">tar_outdated</span>(<span class="at">script =</span> pipeline_script, <span class="at">store =</span> pipeline_store)</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>targets<span class="sc">::</span><span class="fu">tar_make</span>(<span class="at">script =</span> pipeline_script, <span class="at">store =</span> pipeline_store)</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>after <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(summary_path)</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="fu">rbind</span>(</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">REML =</span> before[, <span class="fu">c</span>(<span class="st">"pooled_r"</span>, <span class="st">"ci_lower"</span>, <span class="st">"ci_upper"</span>, <span class="st">"tau2"</span>)],</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">DL =</span> after[, <span class="fu">c</span>(<span class="st">"pooled_r"</span>, <span class="st">"ci_lower"</span>, <span class="st">"ci_upper"</span>, <span class="st">"tau2"</span>)]</span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>after<span class="sc">$</span>pooled_r <span class="sc">-</span> before<span class="sc">$</span>pooled_r</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">file.edit</span>(pipeline_script)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Expect <code>pipeline_file</code>, <code>fit</code>, <code>result</code>, and <code>summary_file</code>. The input checks and predictive model branch remain up to date. Both pooled estimates round to <strong>0.363</strong>. Switching from REML to DL increases the pooled correlation by about <strong>0.00010</strong> in this dataset. Compare how the reported heterogeneity and intervals change in this example.</p>
-<p>For a quick look at the recorded edit, run the command below in the Console. Git prints a diff. An exit status of 1 means it found a difference.</p>
+<p>We run the targets pipeline, noting that the results of each step are cached. Modifying <code>fit</code> will invalidate the cache for that target and its dependencies. But other targets will not be re-run.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">system2</span>(<span class="st">"git"</span>, <span class="fu">c</span>(<span class="st">"--no-pager"</span>, <span class="st">"diff"</span>, <span class="st">"--no-index"</span>,</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>                 <span class="st">"pipelines/_targets_health_wellbeing.R"</span>, pipeline_script))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>targets<span class="sc">::</span><span class="fu">tar_outdated</span>(<span class="at">script =</span> pipeline_script, <span class="at">store =</span> pipeline_store)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>targets<span class="sc">::</span><span class="fu">tar_make</span>(<span class="at">script =</span> pipeline_script, <span class="at">store =</span> pipeline_store)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>after <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(summary_path)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="fu">rbind</span>(</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">REML =</span> before[, <span class="fu">c</span>(<span class="st">"pooled_r"</span>, <span class="st">"ci_lower"</span>, <span class="st">"ci_upper"</span>, <span class="st">"tau2"</span>)],</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">DL =</span> after[, <span class="fu">c</span>(<span class="st">"pooled_r"</span>, <span class="st">"ci_lower"</span>, <span class="st">"ci_upper"</span>, <span class="st">"tau2"</span>)]</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>after<span class="sc">$</span>pooled_r <span class="sc">-</span> before<span class="sc">$</span>pooled_r</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<p>Expect <code>pipeline_file</code>, <code>fit</code>, <code>result</code>, and <code>summary_file</code> to be run again.</p>
+<p>The input checks and predictive model branch remain up to date. Both pooled estimates round to <strong>0.363</strong>. Switching from REML to DL increases the pooled correlation by about <strong>0.00010</strong> in this dataset. Compare how the reported heterogeneity and intervals change in this</p>
 </section>
 <section id="step-3-update-the-report" class="level2" data-number="11.4">
 <h2 data-number="11.4" class="anchored" data-anchor-id="step-3-update-the-report"><span class="header-section-number">11.4</span> Step 3: update the report</h2>
-<p>Allow about three minutes. Run <code>render_workshop_report()</code> in the <strong>R Console</strong> and reload <code>workspace/report.html</code>. Methods now names the DerSimonian–Laird estimator. Compare the pipeline checksum with the new summary. The dataset ID and predictive model ID stayed the same.</p>
+<p>Run <code>render_workshop_report()</code> and reload <code>workspace/report.html</code>. The methods section now names the DerSimonian–Laird estimator.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">render_workshop_report</span>()</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">browseURL</span>(</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">file.path</span>(<span class="st">"workspace"</span>, <span class="st">"report.html"</span>)</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </section>
 <section id="modify-checkpoint" class="level2" data-number="11.5">
 <h2 data-number="11.5" class="anchored" data-anchor-id="modify-checkpoint"><span class="header-section-number">11.5</span> Checkpoint</h2>
 <p>You reproduced the starting summary, saw a selective rebuild after an estimator change, and rendered a report for the updated analysis. <a href="../../pages/workshop/08_archiving.html">GitHub releases, Zenodo and archiving</a></p>
 </section>
-<section id="change-input" class="level2" data-number="11.6">
-<h2 data-number="11.6" class="anchored" data-anchor-id="change-input"><span class="header-section-number">11.6</span> Optional: select a different dataset version</h2>
-<p>Use the general-population version to see how a new analytical input affects both model branches. Keep your current selection so you can restore it afterwards.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>selection_file <span class="ot">&lt;-</span> <span class="fu">file.path</span>(workshop_dir, <span class="st">"analysis-data-version.txt"</span>)</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>original_version <span class="ot">&lt;-</span> <span class="fu">readLines</span>(selection_file)</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>versions <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="fu">file.path</span>(workshop_dir, <span class="st">"dataset-versions.csv"</span>))</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>general_version <span class="ot">&lt;-</span> versions<span class="sc">$</span>version[versions<span class="sc">$</span>scope <span class="sc">==</span> <span class="st">"general"</span>]</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(<span class="fu">length</span>(general_version) <span class="sc">==</span> <span class="dv">1</span>L)</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="fu">writeLines</span>(general_version, selection_file)</span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>targets<span class="sc">::</span><span class="fu">tar_make</span>(<span class="at">script =</span> pipeline_script, <span class="at">store =</span> pipeline_store)</span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="fu">read.csv</span>(summary_path)[, <span class="fu">c</span>(</span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>  <span class="st">"studies"</span>, <span class="st">"pooled_r"</span>, <span class="st">"ci_lower"</span>, <span class="st">"ci_upper"</span>,</span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>  <span class="st">"data_version"</span>, <span class="st">"predictive_model_version"</span></span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>)]</span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="fu">render_workshop_report</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>The subset has <strong>18 studies</strong> and its own model pin version. The comparison is descriptive. The full set includes these same studies, so use a subgroup analysis to compare populations formally.</p>
-<p>When you finish, restore the selection and render the report again.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">writeLines</span>(original_version, selection_file)</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>targets<span class="sc">::</span><span class="fu">tar_make</span>(<span class="at">script =</span> pipeline_script, <span class="at">store =</span> pipeline_store)</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">render_workshop_report</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-<section id="further-reading" class="level2" data-number="11.7">
-<h2 data-number="11.7" class="anchored" data-anchor-id="further-reading"><span class="header-section-number">11.7</span> Further reading</h2>
+<section id="further-reading" class="level2" data-number="11.6">
+<h2 data-number="11.6" class="anchored" data-anchor-id="further-reading"><span class="header-section-number">11.6</span> Further reading</h2>
 <ul>
 <li>How <em>targets</em> decides what to rerun <span class="citation" data-cites="targets-manual">(<a href="../4_references.html#ref-targets-manual" role="doc-biblioref">Landau, n.d.</a>)</span>.</li>
 <li>Pooling correlations with <code>metacor()</code> <span class="citation" data-cites="meta-metacor">(<a href="../4_references.html#ref-meta-metacor" role="doc-biblioref">Schwarzer, n.d.</a>)</span>.</li>

@@ -379,9 +379,7 @@ div.csl-indent {
   <li><a href="#choose-your-computing-environment" id="toc-choose-your-computing-environment" class="nav-link" data-scroll-target="#choose-your-computing-environment"><span class="header-section-number">4.3</span> Open the prepared environment</a></li>
   <li><a href="#preparation-project" id="toc-preparation-project" class="nav-link" data-scroll-target="#preparation-project"><span class="header-section-number">4.4</span> Check the project</a></li>
   <li><a href="#preparation-data" id="toc-preparation-data" class="nav-link" data-scroll-target="#preparation-data"><span class="header-section-number">4.5</span> Verify the raw data</a></li>
-  <li><a href="#preparation-versions" id="toc-preparation-versions" class="nav-link" data-scroll-target="#preparation-versions"><span class="header-section-number">4.6</span> Prepare the dataset versions</a></li>
-  <li><a href="#record-the-source" id="toc-record-the-source" class="nav-link" data-scroll-target="#record-the-source"><span class="header-section-number">4.7</span> Record the source</a></li>
-  <li><a href="#preparation-checkpoint" id="toc-preparation-checkpoint" class="nav-link" data-scroll-target="#preparation-checkpoint"><span class="header-section-number">4.8</span> Preparation checkpoint</a></li>
+  <li><a href="#preparation-checkpoint" id="toc-preparation-checkpoint" class="nav-link" data-scroll-target="#preparation-checkpoint"><span class="header-section-number">4.6</span> Preparation checkpoint</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/JBris/open-and-reproducible-science-in-r/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div></nav>
     </div>
@@ -410,22 +408,20 @@ div.csl-indent {
 
 <section id="learning-objectives" class="level2" data-number="4.1">
 <h2 data-number="4.1" class="anchored" data-anchor-id="learning-objectives"><span class="header-section-number">4.1</span> Learning objectives</h2>
-<p>On the day, prepare in the MyBinder session you will use for the workshop. You should be able to open the prepared workshop environment, load a verified copy of the teaching data, and prepare the dataset versions used in the hands-on activities. You will use the same project, dataset, and environment throughout the workshop.</p>
-<p>Allow about 15 minutes, including startup time. Some familiarity with R is helpful; you do not need previous experience with meta-analysis.</p>
+<p>We will use MyBinder for this workshop. You should be able to open the prepared workshop environment, load a verified copy of the teaching data, and prepare the dataset versions used in the hands-on activities. You will use the same project, dataset, and environment throughout the workshop.</p>
 </section>
 <section id="our-teaching-dataset" class="level2" data-number="4.2">
 <h2 data-number="4.2" class="anchored" data-anchor-id="our-teaching-dataset"><span class="header-section-number">4.2</span> Our teaching dataset</h2>
 <p>We use <code>HealthWellbeing</code> from the <a href="https://doing-meta.guide/pooling-es#correlations">correlations chapter</a> <span class="citation" data-cites="harrer2021">(<a href="../4_references.html#ref-harrer2021" role="doc-biblioref">Harrer et al. 2021, sec. 4.2.4</a>)</span>. It contains study-level summaries of the association between health and well-being. It is also distributed with the <code>dmetar</code> package.</p>
 <p>The original review is <span class="citation" data-cites="ngamaba2017">Ngamaba, Panagioti, and Armitage (<a href="../4_references.html#ref-ngamaba2017" role="doc-biblioref">2017</a>)</span>. The dataset documentation describes the variables <span class="citation" data-cites="healthwellbeing">(<a href="../4_references.html#ref-healthwellbeing" role="doc-biblioref">Harrer et al., n.d.</a>)</span>.</p>
-<p>The workshop repository includes the authors’ data file at <code>data/raw/healthwellbeing.rda</code>, so you do not need to install <code>dmetar</code> or download anything during the session. Keep the raw file unchanged and record its source separately from any transformations you make later. The bundled file matches the upstream <code>dmetar</code> snapshot byte for byte. The <a href="https://github.com/MathiasHarrer/dmetar/blob/38c9b9bb5f85ea49de33e5d2536f6544d5268517/DESCRIPTION">source and licence record</a> shows the package’s MIT licence. The workshop keeps the upstream notice in <code>data/raw/LICENSE-HealthWellbeing</code>.</p>
+<p>The workshop repository includes the authors’ data file at <code>data/raw/healthwellbeing.rda</code>, so you do not need to install <code>dmetar</code> or download anything during the session. Keep the raw file unchanged and record its source separately from any transformations you make later. The bundled file matches the upstream <code>dmetar</code> snapshot byte for byte.</p>
+<p>The <a href="https://github.com/MathiasHarrer/dmetar/blob/38c9b9bb5f85ea49de33e5d2536f6544d5268517/DESCRIPTION">source and licence record</a> shows the package’s MIT licence. The workshop keeps the upstream notice in <code>data/raw/LICENSE-HealthWellbeing</code>.</p>
 </section>
 <section id="choose-your-computing-environment" class="level2" data-number="4.3">
 <h2 data-number="4.3" class="anchored" data-anchor-id="choose-your-computing-environment"><span class="header-section-number">4.3</span> Open the prepared environment</h2>
-<p>Everyone uses the same prepared environment. MyBinder runs the workshop’s published image in your browser, with RStudio, R 4.4.1, Git, Quarto, and the R packages recorded in the project lockfile already installed. There is nothing to install during the workshop.</p>
+<p>MyBinder runs the workshop’s published image in your browser, with RStudio, R 4.4.1, Git, Quarto, and the R packages recorded in the project lockfile already installed. There is nothing to install during the workshop.</p>
 <ol type="1">
 <li><a href="https://mybinder.org/v2/gh/JBris/open-and-reproducible-science-in-r/HEAD?urlpath=rstudio">Open RStudio on MyBinder</a> or use the link supplied by your instructor. Start it shortly before the workshop and keep the browser tab open; MyBinder stops idle sessions.</li>
-<li>Once RStudio opens, run the setup below and the lesson exercises in the <strong>Console</strong>. One short Git activity uses the <strong>Terminal</strong> tab beside it.</li>
-<li>Keep the lessons and RStudio in separate browser tabs. Switch between them, or place them side by side if that works at your zoom level.</li>
 <li>MyBinder sessions are temporary. Follow the <a href="../../pages/workshop/09_discussion.html#export-work">export checklist</a> before closing yours.</li>
 </ol>
 <p>If MyBinder fails to start, let the instructor know so you can use a prepared alternative.</p>
@@ -436,7 +432,10 @@ div.csl-indent {
 <p>You do not need to clone anything. MyBinder opens RStudio with the workshop project already in your home folder, <code>/home/rstudio</code>. This folder is the project root: the <strong>Files</strong> pane shows <code>pages</code>, <code>pipelines</code>, <code>data</code>, and <code>open-and-reproducible-science-in-r.Rproj</code>. The lessons’ paths, such as <code>pipelines/prepare_health_wellbeing.R</code>, are relative to this folder, so run every command from here.</p>
 <p>The project’s <code>.Rprofile</code> activates renv. Check your R version and whether the library matches the lockfile. If the library in your MyBinder session differs from the lockfile, check with the instructor before proceeding.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>R.version.string</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"pipelines/workshop_support.R"</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">use_workshop_book_outputs</span>()</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>R.version.string</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "R version 4.4.1 (2024-06-14)"</code></pre>
 </div>
@@ -448,8 +447,7 @@ div.csl-indent {
 </section>
 <section id="preparation-data" class="level2" data-number="4.5">
 <h2 data-number="4.5" class="anchored" data-anchor-id="preparation-data"><span class="header-section-number">4.5</span> Verify the raw data</h2>
-<p>Run the following in the <strong>R Console</strong> from the project root.</p>
-<p>The prepared environment and a clone of the repository both include the file, so the download only runs if it is missing. It then retrieves the same file from a fixed upstream revision. The checksum identifies the exact file used to prepare these lessons. If you have a different copy, keep it and ask the instructor to resolve the difference.</p>
+<p>Run the following in the <strong>R Console</strong> from the project root. This will download and inspect the meta-analysis dataset.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>raw_file <span class="ot">&lt;-</span> <span class="fu">file.path</span>(<span class="st">"data"</span>, <span class="st">"raw"</span>, <span class="st">"healthwellbeing.rda"</span>)</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>source_url <span class="ot">&lt;-</span> <span class="fu">paste0</span>(</span>
@@ -462,79 +460,42 @@ div.csl-indent {
 <span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">download.file</span>(source_url, <span class="at">destfile =</span> raw_file, <span class="at">mode =</span> <span class="st">"wb"</span>)</span>
 <span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>expected_md5 <span class="ot">&lt;-</span> <span class="st">"0d74964b0b7168379a2b015cb648b326"</span></span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>actual_md5 <span class="ot">&lt;-</span> <span class="fu">unname</span>(tools<span class="sc">::</span><span class="fu">md5sum</span>(raw_file))</span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(<span class="fu">identical</span>(actual_md5, expected_md5))</span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>actual_md5</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "0d74964b0b7168379a2b015cb648b326"</code></pre>
-</div>
-</div>
-<p>Load into a separate environment so the file does not silently replace objects in your working session. Use an explicit name for the dataset you will inspect.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>data_env <span class="ot">&lt;-</span> <span class="fu">new.env</span>(<span class="at">parent =</span> <span class="fu">baseenv</span>())</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>loaded_names <span class="ot">&lt;-</span> <span class="fu">load</span>(raw_file, <span class="at">envir =</span> data_env)</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(<span class="fu">identical</span>(loaded_names, <span class="st">"HealthWellbeing"</span>))</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>health <span class="ot">&lt;-</span> data_env[[<span class="st">"HealthWellbeing"</span>]]</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>expected_columns <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"author"</span>, <span class="st">"cor"</span>, <span class="st">"n"</span>, <span class="st">"population"</span>, <span class="st">"country"</span>)</span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(</span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">is.data.frame</span>(health),</span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">nrow</span>(health) <span class="sc">==</span> <span class="dv">29</span>L,</span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">identical</span>(<span class="fu">names</span>(health), expected_columns),</span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>  <span class="sc">!</span><span class="fu">anyNA</span>(health),</span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">all</span>(<span class="fu">is.finite</span>(health<span class="sc">$</span>cor)),</span>
-<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">all</span>(<span class="fu">abs</span>(health<span class="sc">$</span>cor) <span class="sc">&lt;</span> <span class="dv">1</span>),</span>
-<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">all</span>(<span class="fu">is.finite</span>(health<span class="sc">$</span>n)),</span>
-<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">all</span>(health<span class="sc">$</span>n <span class="sc">&gt;</span> <span class="dv">3</span>),</span>
-<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">all</span>(health<span class="sc">$</span>n <span class="sc">==</span> <span class="fu">floor</span>(health<span class="sc">$</span>n))</span>
-<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(health, <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>        author   cor      n         population     country
-1     An, 2008 0.620    121 general population South Korea
-2 Angner, 2013 0.372    383  chronic condition         USA
-3 Barger, 2009 0.290 350000 general population         USA</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(health)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 29  5</code></pre>
-</div>
-</div>
-<p>Expected checkpoint: <strong>29 rows and 5 columns</strong>, with no assertion failures. These checks describe this teaching snapshot, not a general rule that all meta-analysis datasets must be complete or have this size.</p>
-</section>
-<section id="preparation-versions" class="level2" data-number="4.6">
-<h2 data-number="4.6" class="anchored" data-anchor-id="preparation-versions"><span class="header-section-number">4.6</span> Prepare the dataset versions</h2>
-<p>The hands-on activities read a specific, versioned copy of the dataset. Run the prepared script once in the <strong>Console</strong>. It checks the raw file, stores two versions on a local <em>pins</em> board, records their identifiers, and selects the full dataset as the starting input for the pipeline.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="fu">file.path</span>(<span class="st">"pipelines"</span>, <span class="st">"prepare_health_wellbeing.R"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>data_env <span class="ot">&lt;-</span> <span class="fu">new.env</span>(<span class="at">parent =</span> <span class="fu">baseenv</span>())</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>loaded_names <span class="ot">&lt;-</span> <span class="fu">load</span>(raw_file, <span class="at">envir =</span> data_env)</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(<span class="fu">identical</span>(loaded_names, <span class="st">"HealthWellbeing"</span>))</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>health <span class="ot">&lt;-</span> data_env[[<span class="st">"HealthWellbeing"</span>]]</span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="fu">file.path</span>(<span class="st">"pipelines"</span>, <span class="st">"prepare_health_wellbeing.R"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>Creating new version '20261121T221847Z-11d00'
+<pre><code>Creating new version '20261128T054236Z-11d00'
 Writing to pin 'health_wellbeing'
-Creating new version '20261121T221847Z-06ae2'
+Creating new version '20261128T054236Z-06ae2'
 Writing to pin 'health_wellbeing'</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
 <pre><code>    scope                version
-1     all 20261121T221847Z-11d00
-2 general 20261121T221847Z-06ae2</code></pre>
+1     all 20261128T054236Z-11d00
+2 general 20261128T054236Z-06ae2</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(health, <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>           author   cor      n         population     country
+1        An, 2008 0.620    121 general population South Korea
+2    Angner, 2013 0.372    383  chronic condition         USA
+3    Barger, 2009 0.290 350000 general population         USA
+4   Doherty, 2013 0.333   1764 general population     Ireland
+5 Dubrovina, 2012 0.730  42331 general population      Poland</code></pre>
 </div>
 </div>
-<p>Expected checkpoint: a table with two rows, <code>all</code> and <code>general</code>, each with a version identifier. Identifiers record when a version was written, so yours will differ from the instructor’s. Running the script again reuses the same versions. The instructor explains the board in the <a href="../../pages/workshop/04_versioning.html">data and model versioning demonstration</a>.</p>
+<p>We should get <strong>29 rows and 5 columns</strong>, with no assertion failures.</p>
 </section>
-<section id="record-the-source" class="level2" data-number="4.7">
-<h2 data-number="4.7" class="anchored" data-anchor-id="record-the-source"><span class="header-section-number">4.7</span> Record the source</h2>
-<p>For your project notes, retain the book section, dataset documentation, download URL, checksum, original study citation, and upstream licence notice. Apply this record to the bundled teaching snapshot. Its download URL names a fixed upstream commit, so it needs no retrieval date. For a source that can change, also record the date you retrieved it. Verify the terms separately for other data or materials.</p>
-</section>
-<section id="preparation-checkpoint" class="level2" data-number="4.8">
-<h2 data-number="4.8" class="anchored" data-anchor-id="preparation-checkpoint"><span class="header-section-number">4.8</span> Preparation checkpoint</h2>
+<section id="preparation-checkpoint" class="level2" data-number="4.6">
+<h2 data-number="4.6" class="anchored" data-anchor-id="preparation-checkpoint"><span class="header-section-number">4.6</span> Preparation checkpoint</h2>
 <p>You are ready when:</p>
 <ul>
 <li>RStudio is open in MyBinder, or in your own prepared setup, at the project root.</li>
 <li>You know your R version and <code>renv::status()</code> reports no problems.</li>
-<li>The raw file’s checksum matches the teaching snapshot.</li>
-<li>The prepared script printed the <code>all</code> and <code>general</code> dataset versions.</li>
+<li>The meta-analysis dataset is downloaded.</li>
 </ul>
 <p>Continue to the <a href="../../pages/workshop/01_open_science.html">introduction, reproducibility principles, Git and GitHub</a>.</p>
 

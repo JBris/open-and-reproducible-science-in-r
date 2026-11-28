@@ -1,30 +1,25 @@
 ---
 title: "Build and execute a targets meta-analysis pipeline"
-subtitle: "35–50 minutes · Hands-on · targets"
-editor:
-  markdown:
-    wrap: 72
+subtitle: "Hands-on · targets"
+editor: visual
 link-citations: true
 execute:
   warning: false
   message: false
 ---
 
-```{r health-targets-book-output, include = FALSE, eval = TRUE}
-source("pipelines/workshop_support.R")
-use_workshop_book_outputs()
-```
-
 ## Introduction
 
-In this 15-minute activity, you complete and run a *targets* pipeline
+In this activity, you complete and run a *targets* pipeline
 that reads the selected `HealthWellbeing` version, pools the study
-correlations, and writes a summary for the report. The pipeline is
+correlations, and writes a summary for the report. 
+
+**The pipeline is
 partially completed: you fill in two short gaps rather than writing it
 from scratch. By the end, you should be able to trace the summary back
-to its input and explain which steps *targets* reruns, and why.
+to its input and explain which steps targets reruns, and why.**
 
-Work in your MyBinder session, at the project root, after preparing
+Work in your MyBinder session, after preparing
 the dataset versions. If you fall behind, the **Get back on track** step
 below restores a working pipeline so you can continue.
 [Prepare the dataset versions](00_preparation.qmd#preparation-versions)
@@ -63,19 +58,13 @@ select input -> check studies -> fit meta-analysis -> write summary
 | Fit meta-analysis | 5 | `fit` | TODO 1 connects `studies` to `fit` |
 | Write summary | 6–7 | `result`, `summary_file` | TODO 2 writes the summary file |
 
-The checked studies also feed a second output: the predictive model
+The checked studies also feed a second output: the linear regression predictive model
 from the versioning demonstration. The summary records that model's
 version.
 
 ``` text
 check studies -> train and pin predictive model -> model version in the summary
 ```
-
-The graph you draw in Step 2 shows every target, including two that
-record provenance for the summary. `data_provenance` holds the source
-URL, checksums, and inclusion rule, and `pipeline_file` tracks the
-script itself. The supplied script uses `crew_controller_local()` to run
-the pipeline in a background R process.
 
 ::: {.callout-note collapse="true"}
 ## Every target and its dependencies
@@ -110,7 +99,7 @@ worked example of pooling reported effects from the supplied studies
 
 ## Step 1: copy the workbook pipeline
 
-Allow about two minutes. Run this in the **R Console**. It loads the
+Run this code. It loads the
 *targets* functions and copies the partially completed template to
 `workspace/_targets.R`, your own working copy. The copy is only made
 if it does not exist yet, so rerunning the chunk keeps your edits.
@@ -118,6 +107,9 @@ Git ignores the `workspace/` folder, so the supplied template stays
 unchanged.
 
 ```{r health-targets-setup, include = TRUE, echo = TRUE, message = FALSE, warning = FALSE, cache = FALSE, output = TRUE, eval = TRUE}
+source("pipelines/workshop_support.R")
+use_workshop_book_outputs()
+
 box::use(
   targets[tar_make, tar_network, tar_outdated, tar_read, tar_visnetwork]
 )
@@ -131,53 +123,48 @@ pipeline_template <- file.path(
 pipeline_script <- file.path("workspace", "_targets.R")
 pipeline_store <- file.path(workshop_dir, "_targets")
 
-readLines(file.path(workshop_dir, "analysis-data-version.txt"))
-```
-
-```{r health-targets-participant-copy, eval = FALSE}
 dir.create("workspace", showWarnings = FALSE)
 if (!file.exists(pipeline_script)) {
   file.copy(pipeline_template, pipeline_script)
 }
-```
 
-```{r health-targets-reference-script, include = FALSE, eval = TRUE}
-pipeline_script <- file.path("pipelines", "_targets_health_wellbeing.R")
 ```
-
-The last line shows the selected dataset version. It should match the
-`all` version from your preparation step.
 
 ## Step 2: run the pipeline before completing it
 
-Allow about three minutes. Open `workspace/_targets.R` in RStudio and
+Open `workspace/_targets.R` in RStudio and
 read the numbered steps. Then draw the dependency graph and
 try to run the pipeline.
 
-```{r health-targets-first-run, include = TRUE, echo = TRUE, eval = FALSE}
+```{r health-targets-first-run, include = TRUE, echo = TRUE, eval = knitr::is_html_output()}
 tar_visnetwork(
   script = pipeline_script,
   store = pipeline_store,
   targets_only = TRUE,
-  outdated = FALSE
+  outdated = TRUE
 )
 tar_make(script = pipeline_script, store = pipeline_store)
 ```
 
-Two arrows are missing from the graph: nothing connects `studies` to
-`fit`, or `result` to `summary_file`. The run stops at a TODO placeholder. *targets* found nothing to link
-those steps because their code does not yet mention the targets they
-need.
+Nothing connects `result` to `summary_file` and the `fit` step has thrown an error. The run stops at a TODO placeholder. 
 
 ## Step 3: complete the two gaps
 
-Allow about four minutes. Edit `workspace/_targets.R` and save it.
+Edit `workspace/_targets.R` and save it.
 
 -   **TODO 1**, in step 5: replace `stop(...)` in `data = stop(...)`
     with the name of the target that holds the checked study
     summaries.
 -   **TODO 2**, in step 7: replace the `stop(...)` line with two lines
     that write `result` to `path` and then return `path`.
+
+Allow up to five minutes. 
+
+```{r health-targets-edit-file, include = TRUE, echo = TRUE, eval = FALSE}
+file.edit(
+  pipeline_script
+)
+```
 
 ::: {.callout-tip collapse="true"}
 ## Solution to TODO 1
@@ -204,17 +191,14 @@ tracks the file's contents and rebuilds it if the file changes.
 
 ## Step 4: inspect the graph and run the pipeline {#check-dependencies}
 
-Allow about four minutes. Check that your own script has both edges.
-The text check works in the Console with a screen reader or alongside
-the PDF. Each expression should return `TRUE`.
+Run the pipeline again and read the result.
 
-```{r health-targets-text-graph, eval = TRUE}
-edges <- tar_network(script = pipeline_script, targets_only = TRUE)$edges
-any(edges$from == "studies" & edges$to == "fit")
-any(edges$from == "result" & edges$to == "summary_file")
+```{r health-targets-run, include = TRUE, echo = TRUE, message = FALSE, warning = FALSE, cache = FALSE, output = TRUE, eval = TRUE}
+tar_make(script = pipeline_script, store = pipeline_store)
+tar_read(result, store = pipeline_store)
 ```
 
-You can also draw the graph again.
+Check that your own pipeline is complete by drawing the graph again.
 
 ```{r health-targets-graph, include = TRUE, echo = TRUE, message = FALSE, warning = FALSE, cache = FALSE, output = TRUE, eval = knitr::is_html_output()}
 tar_visnetwork(
@@ -225,13 +209,6 @@ tar_visnetwork(
 )
 ```
 
-Run the pipeline and read the result.
-
-```{r health-targets-run, include = TRUE, echo = TRUE, message = FALSE, warning = FALSE, cache = FALSE, output = TRUE, eval = TRUE}
-tar_make(script = pipeline_script, store = pipeline_store)
-tar_read(result, store = pipeline_store)
-```
-
 On the first complete run, targets with new or changed inputs report that they completed.
 *targets* saves every result in the pipeline store, here
 `outputs/health-wellbeing/_targets`, and `tar_read()` loads a saved
@@ -239,12 +216,17 @@ result without rerunning anything.
 
 ## Step 5: run it again
 
-Allow about one minute. Run the pipeline a second time and ask which
+Run the pipeline a second time and ask which
 targets are outdated.
 
-```{r health-targets-rerun, include = TRUE, echo = TRUE, message = FALSE, warning = FALSE, cache = FALSE, output = TRUE, eval = TRUE}
+```{r health-targets-rerun, include = TRUE, echo = TRUE, message = FALSE, warning = FALSE, cache = FALSE, output = TRUE, eval = FALSE}
 tar_make(script = pipeline_script, store = pipeline_store)
-tar_outdated(script = pipeline_script, store = pipeline_store)
+tar_visnetwork(
+  script = pipeline_script,
+  store = pipeline_store,
+  targets_only = TRUE,
+  outdated = FALSE
+)
 ```
 
 Nothing runs, and no target is outdated. *targets* reruns a step only
@@ -252,11 +234,21 @@ when its code, its upstream targets, or its tracked files change.
 
 ## Checkpoint {#targets-checkpoint}
 
-The full example combines **29 studies** with a pooled correlation of
-**0.363** and a 95% confidence interval of **0.309 to 0.415**. The file
-`outputs/health-wellbeing/meta-summary.csv` contains the same values,
-the uncertainty measures, dataset and model versions, input checksums,
-and the checksum of your pipeline script. A second run skips every target.
+Refer the bottom two steps of `workspace/_targets.R`. We have fitted a mixed-effect meta-analysis model, and written the results to a csv file: `outputs/health-wellbeing/meta-summary.csv`.
+
+```{r meta-summary-view, include = TRUE, echo = TRUE, message = FALSE, warning = FALSE, cache = FALSE, output = TRUE, eval = FALSE}
+read.csv(file.path(
+  "outputs", "health-wellbeing", "meta-summary.csv"
+)) |> 
+  dplyr::select(c("data_version", "data_scope", "data_filter", "pooled_r", "confidence_level", "tau2", "effect_scale", "tau_method", "meta_version")) |>
+  dplyr::mutate(across(where(is.numeric), ~ round(.x, 3))) |> 
+  tidyr::pivot_longer(
+      cols = everything(),
+      names_to = "metric",
+      values_to = "value",
+      values_transform = list(value = as.character)
+    ) 
+```
 
 Next, you will write a report that reads this summary.
 [Create and render a reproducible Quarto report](06_quarto.qmd)

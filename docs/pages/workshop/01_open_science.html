@@ -384,8 +384,7 @@ div.csl-indent {
   </ul></li>
   <li><a href="#discuss-with-a-neighbour" id="toc-discuss-with-a-neighbour" class="nav-link" data-scroll-target="#discuss-with-a-neighbour"><span class="header-section-number">5.6</span> Discuss with a neighbour</a></li>
   <li><a href="#open-science-checkpoint" id="toc-open-science-checkpoint" class="nav-link" data-scroll-target="#open-science-checkpoint"><span class="header-section-number">5.7</span> Checkpoint</a></li>
-  <li><a href="#git-practice" id="toc-git-practice" class="nav-link" data-scroll-target="#git-practice"><span class="header-section-number">5.8</span> After the workshop: practise Git with your fork</a></li>
-  <li><a href="#further-reading" id="toc-further-reading" class="nav-link" data-scroll-target="#further-reading"><span class="header-section-number">5.9</span> Further reading</a></li>
+  <li><a href="#further-reading" id="toc-further-reading" class="nav-link" data-scroll-target="#further-reading"><span class="header-section-number">5.8</span> Further reading</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/JBris/open-and-reproducible-science-in-r/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div></nav>
     </div>
@@ -395,7 +394,7 @@ div.csl-indent {
 <header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../pages/workshop/00_preparation.html">Workshop</a></li><li class="breadcrumb-item"><a href="../../pages/workshop/01_open_science.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Introduction, reproducibility principles, Git and GitHub</span></a></li></ol></nav>
 <div class="quarto-title">
 <h1 class="title"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Introduction, reproducibility principles, Git and GitHub</span></h1>
-<p class="subtitle lead">0–10 minutes · Conceptual and hands-on</p>
+<p class="subtitle lead">Conceptual and hands-on</p>
 </div>
 
 
@@ -419,14 +418,13 @@ div.csl-indent {
 </section>
 <section id="why-this-matters" class="level2" data-number="5.2">
 <h2 data-number="5.2" class="anchored" data-anchor-id="why-this-matters"><span class="header-section-number">5.2</span> Why this matters</h2>
-<p>Allow about three minutes. A reported result is easier to evaluate when its data, analytical decisions, code, and software environment can be traced. Sharing code helps, but the code also needs identifiable inputs and instructions that work beyond its author’s current R session.</p>
-<p>In this workshop, <strong>reproducibility</strong> means being able to rerun a documented workflow with its specified inputs and environment. <strong>Open science</strong> also concerns how methods and outputs can be inspected, accessed, and reused. Reproducibility does not establish that the scientific assumptions are correct, and openness still needs to respect licences and access conditions.</p>
-<p>Throughout the session, ask whether another researcher could understand, rerun, audit, trace, reuse, and cite the work. The <a href="../../pages/1_introduction.html#intro-principles">introduction</a> lists these principles.</p>
+<p>A reported result is easier to evaluate when its data, analytical decisions, code, and software environment can be traced. Sharing code helps, but the code also needs identifiable inputs and instructions that work beyond its author’s current R session.</p>
+<p>In this workshop, <strong>reproducibility</strong> means being able to rerun a documented workflow with its specified inputs and environment. <strong>Open science</strong> also concerns how methods and outputs can be inspected, accessed, and reused. Throughout the session, ask whether another researcher could understand, rerun, audit, trace, reuse, and cite the work.</p>
 </section>
 <section id="our-example-health-and-well-being" class="level2" data-number="5.3">
 <h2 data-number="5.3" class="anchored" data-anchor-id="our-example-health-and-well-being"><span class="header-section-number">5.3</span> Our example: health and well-being</h2>
-<p>Allow about two minutes. The teaching question is: <strong>What association between health and well-being is reported across the included studies?</strong> We use the <code>HealthWellbeing</code> correlation example <span class="citation" data-cites="harrer2021">(<a href="../4_references.html#ref-harrer2021" role="doc-biblioref">Harrer et al. 2021, sec. 4.2.4</a>)</span>.</p>
-<p>Each row is a <strong>study summary</strong>, not a participant record. The columns are:</p>
+<p><strong>What association between health and well-being is reported across the included studies?</strong> We use the <code>HealthWellbeing</code> correlation example <span class="citation" data-cites="harrer2021">(<a href="../4_references.html#ref-harrer2021" role="doc-biblioref">Harrer et al. 2021, sec. 4.2.4</a>)</span>.</p>
+<p>Each row is a <strong>study summary</strong>. The columns are:</p>
 <table class="caption-top table">
 <thead>
 <tr class="header">
@@ -457,100 +455,14 @@ div.csl-indent {
 </tr>
 </tbody>
 </table>
-<p>The <a href="../../pages/workshop/00_preparation.html#preparation-data">preparation activity</a> verifies the snapshot. There is no need to fit a model during this opening.</p>
-<p>Later, the pipeline pools correlations using Fisher’s z transformation and an explicit random-effects specification. Study independence, comparable effect definitions, and differences between study populations need consideration. A pooled association alone does not establish a causal effect.</p>
 </section>
 <section id="one-workflow-throughout-the-session" class="level2" data-number="5.4">
 <h2 data-number="5.4" class="anchored" data-anchor-id="one-workflow-throughout-the-session"><span class="header-section-number">5.4</span> One workflow throughout the session</h2>
-<p>We follow this dataset through one connected workflow. The first half opens with a short Git activity and continues with demonstrations; in the second half, you complete, run, and change the analysis yourself.</p>
-<table class="caption-top table">
-<colgroup>
-<col style="width: 20%">
-<col style="width: 20%">
-<col style="width: 20%">
-<col style="width: 20%">
-<col style="width: 20%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Time</th>
-<th>Stage</th>
-<th>Question we will answer</th>
-<th>Tools</th>
-<th>Format</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>0–10 min</td>
-<td>Version the work</td>
-<td>What changed, why, and who reviewed it?</td>
-<td>Git, GitHub</td>
-<td>Conceptual and hands-on</td>
-</tr>
-<tr class="even">
-<td>10–20 min</td>
-<td>Record the environment</td>
-<td>Which software is needed?</td>
-<td>renv, Docker, Binder</td>
-<td>Demonstration</td>
-</tr>
-<tr class="odd">
-<td>20–28 min</td>
-<td>Document the input</td>
-<td>What can a collaborator learn about the data and how to reuse them?</td>
-<td>dataspice, rfair</td>
-<td>Demonstration</td>
-</tr>
-<tr class="even">
-<td>28–35 min</td>
-<td>Version data and models</td>
-<td>Which input and model produced this result?</td>
-<td>pins, vetiver</td>
-<td>Demonstration</td>
-</tr>
-<tr class="odd">
-<td>35–50 min</td>
-<td>Run the analysis</td>
-<td>Which steps depend on this input?</td>
-<td>targets</td>
-<td>Hands-on</td>
-</tr>
-<tr class="even">
-<td>50–65 min</td>
-<td>Report the result</td>
-<td>How are methods, results, and provenance connected?</td>
-<td>Quarto</td>
-<td>Hands-on</td>
-</tr>
-<tr class="odd">
-<td>65–75 min</td>
-<td>Modify and reproduce</td>
-<td>What rebuilds when an analysis setting changes, and does the result reproduce?</td>
-<td>targets, Quarto</td>
-<td>Hands-on</td>
-</tr>
-<tr class="even">
-<td>75–82 min</td>
-<td>Release and archive</td>
-<td>How can this version be found and cited?</td>
-<td>GitHub releases, Zenodo</td>
-<td>Conceptual</td>
-</tr>
-<tr class="odd">
-<td>82–90 min</td>
-<td>Questions and discussion</td>
-<td>What would you change in your own work?</td>
-<td></td>
-<td>Interactive</td>
-</tr>
-</tbody>
-</table>
-<p>The aim is to understand and experience the whole workflow, not to master each package.</p>
+<p>We follow this dataset through one connected workflow. The first half opens with a short Git activity; in the second half, you complete, run, and change the analysis yourself to understand and experience the whole workflow.</p>
 </section>
 <section id="git-github" class="level2" data-number="5.5">
 <h2 data-number="5.5" class="anchored" data-anchor-id="git-github"><span class="header-section-number">5.5</span> Version control with Git and GitHub</h2>
-<p>Allow about four minutes. <strong>Git</strong> records the history of a project’s files. <strong>GitHub</strong> hosts Git repositories and adds collaboration tools such as issues, pull requests, and releases.</p>
+<p><strong>Git</strong> records the history of a project’s files. <strong>GitHub</strong> hosts Git repositories and adds collaboration tools such as issues, pull requests, and releases.</p>
 <table class="caption-top table">
 <colgroup>
 <col style="width: 50%">
@@ -591,78 +503,47 @@ div.csl-indent {
 </table>
 <section id="git-history" class="level3" data-number="5.5.1">
 <h3 data-number="5.5.1" class="anchored" data-anchor-id="git-history"><span class="header-section-number">5.5.1</span> Read the workshop’s history</h3>
-<p>Allow about two minutes. The project in your MyBinder session is a copy of the files without their Git history, but Git can read the history of the public repository directly. Open the <strong>Terminal</strong> tab beside the Console and run each block in the same Terminal. The commands only read from GitHub and change nothing in your project.</p>
+<p>The project in your MyBinder session is a copy of the files without their Git history, but Git can read the history of the public repository directly.</p>
 <ol type="1">
-<li><p><strong>Which versions have been released?</strong> List the repository’s tags without downloading anything else.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="va">url</span><span class="op">=</span>https://github.com/JBris/open-and-reproducible-science-in-r.git</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> ls-remote <span class="at">--tags</span> <span class="at">--refs</span> <span class="st">"</span><span class="va">$url</span><span class="st">"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Each line pairs a commit hash with a version tag. A tag gives one commit a permanent name. The archiving segment shows how Zenodo archives each tagged release under one concept DOI, which cites all versions and always resolves to the latest one.</p></li>
-<li><p><strong>What changed recently, and why?</strong> Copy the history into a temporary folder. <code>--filter=blob:none</code> fetches the commits and the lists of files they changed, but not the file contents, so it takes a few seconds.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone <span class="at">--quiet</span> <span class="at">--bare</span> <span class="at">--filter</span><span class="op">=</span>blob:none <span class="st">"</span><span class="va">$url</span><span class="st">"</span> /tmp/workshop-history.git</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> <span class="at">-C</span> /tmp/workshop-history.git log <span class="at">--oneline</span> <span class="at">--no-merges</span> <span class="at">-5</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> <span class="at">-C</span> /tmp/workshop-history.git log <span class="at">--oneline</span> <span class="at">-3</span> <span class="at">--</span> pipelines/_targets_health_wellbeing.R</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>The first log lists the latest changes, and each message says what changed. The second lists only the commits that changed the reference pipeline, the completed solution to the pipeline exercise later in the session.</p></li>
-<li><p><strong>Is the reference pipeline in your session the latest version?</strong> Git identifies each version of a file by a hash of its contents. Compare the copy in your MyBinder project with the one in the latest commit.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> hash-object pipelines/_targets_health_wellbeing.R</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> <span class="at">-C</span> /tmp/workshop-history.git rev-parse HEAD:pipelines/_targets_health_wellbeing.R</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>Matching lines mean identical contents. If they differ, the repository changed after your MyBinder image was built. This is why a result should cite a specific commit or release rather than “the latest version”. The pipeline records checksums of its inputs for the same reason.</p></li>
+<li><strong>Which versions have been released?</strong> List the repository’s tags without downloading anything else.</li>
 </ol>
-<p>If you run the clone again, Git reports that the folder already exists; your first copy is still there, so continue. If GitHub cannot be reached, follow the instructor’s screen.</p>
-<p>The instructor then shows the same history on GitHub: a merged pull request with its <strong>Files changed</strong> view, and the releases page, which turns tags into named releases with notes.</p>
-<p>The lockfile, exercise templates, and reference solutions are tracked. Your edits in <code>workspace/</code> are personal working copies. Save them with your report and provenance records using the <a href="../../pages/workshop/09_discussion.html#export-work">export checklist</a>. The raw teaching snapshot and its licence notice are tracked too.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="va">url</span><span class="op">=</span>https://github.com/JBris/open-and-reproducible-science-in-r.git</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> ls-remote <span class="at">--tags</span> <span class="at">--refs</span> <span class="st">"</span><span class="va">$url</span><span class="st">"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Each line pairs a commit hash with a version tag. A tag gives one commit a permanent name. We will later cover how Zenodo archives each tagged release with its own DOI.</p>
+<ol start="2" type="1">
+<li><strong>What changed recently, and why?</strong> Copy the history into a temporary folder. <code>--filter=blob:none</code> fetches the commits and the lists of files they changed, but not the file contents, so it takes a few seconds.</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> <span class="at">-rf</span> /tmp/workshop-history.git</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="va">url</span><span class="op">=</span>https://github.com/JBris/open-and-reproducible-science-in-r.git</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone <span class="at">--quiet</span> <span class="at">--bare</span> <span class="at">--filter</span><span class="op">=</span>blob:none <span class="st">"</span><span class="va">$url</span><span class="st">"</span> /tmp/workshop-history.git</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> <span class="at">-C</span> /tmp/workshop-history.git log <span class="at">--oneline</span> <span class="at">--no-merges</span> <span class="at">-5</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> <span class="at">-C</span> /tmp/workshop-history.git log <span class="at">--oneline</span> <span class="at">-3</span> <span class="at">--</span> pipelines/_targets_health_wellbeing.R</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The first log lists the latest changes, and each message says what changed. The second lists only the commits that changed the reference pipeline.</p>
+<ol start="3" type="1">
+<li><strong>Is the reference pipeline in your session the latest version?</strong> Git identifies each version of a file by a hash of its contents. Compare the copy in your MyBinder project with the one in the latest commit.</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> hash-object pipelines/_targets_health_wellbeing.R</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> <span class="at">-C</span> /tmp/workshop-history.git rev-parse HEAD:pipelines/_targets_health_wellbeing.R</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Matching lines mean identical contents. If they differ, the repository changed after your MyBinder environment was built. This is why a result should cite a specific commit or release rather than “the latest version”.</p>
 </section>
 </section>
 <section id="discuss-with-a-neighbour" class="level2" data-number="5.6">
 <h2 data-number="5.6" class="anchored" data-anchor-id="discuss-with-a-neighbour"><span class="header-section-number">5.6</span> Discuss with a neighbour</h2>
-<p>Allow about one minute. Name one thing you would ask for if a collaborator sent only a pooled correlation. Choose from the data version, variable definitions, analysis settings, code revision, or software environment, and explain why it would matter.</p>
+<p>Name one thing you would ask for if a collaborator sent you a meta-analysis manuscript for the <code>HealthWellbeing</code> dataset. Choose from the data version, variable definitions, analysis settings, code revision, or software environment, and explain why it would matter.</p>
+<p>Allow about one minute.</p>
 </section>
 <section id="open-science-checkpoint" class="level2" data-number="5.7">
 <h2 data-number="5.7" class="anchored" data-anchor-id="open-science-checkpoint"><span class="header-section-number">5.7</span> Checkpoint</h2>
-<p>You should be able to complete this sentence:</p>
-<blockquote class="blockquote">
-<p>To retrace this result, I need the source and version of the study summaries, the analysis decisions and code, and the environment used to run them.</p>
-</blockquote>
-<p>You can also explain the difference between a local commit, a push to a remote, and a pull request. You can say what the hash comparison told you about the reference pipeline in your session.</p>
 <p><strong>Takeaway:</strong> keep a traceable connection between the input, the decisions, and the output. Next, we record the <a href="../../pages/workshop/02_environments.html">computational environment</a>.</p>
 </section>
-<section id="git-practice" class="level2" data-number="5.8">
-<h2 data-number="5.8" class="anchored" data-anchor-id="git-practice"><span class="header-section-number">5.8</span> After the workshop: practise Git with your fork</h2>
-<p>This optional exercise takes about ten minutes. It needs a GitHub account, a fork of the <a href="https://github.com/JBris/open-and-reproducible-science-in-r">workshop repository</a> cloned as your <code>origin</code>, and GitHub authentication in your environment. Run the commands in the <strong>Terminal</strong> at the root of that clone.</p>
-<ol type="1">
-<li><p>Create a working branch:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> switch <span class="at">-c</span> workshop/health-wellbeing</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
-<li><p>Create <code>WORKSHOP_NOTES.md</code> in the project root as a provenance note. Replace the placeholders with your own information.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu"># Health and well-being: workshop notes</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>Author: YOUR NAME</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="fu">## Data source</span></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Dataset: HealthWellbeing.</span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Book: Harrer, Cuijpers, Furukawa, and Ebert (2021), section 4.2.4.</span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Book URL: https://doing-meta.guide/pooling-es#correlations</span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Dataset documentation: https://dmetar.protectlab.org/reference/healthwellbeing</span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Download: https://raw.githubusercontent.com/MathiasHarrer/dmetar/38c9b9bb5f85ea49de33e5d2536f6544d5268517/data/HealthWellbeing.rda</span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Raw file: data/raw/healthwellbeing.rda</span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>MD5: 0d74964b0b7168379a2b015cb648b326</span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="fu">## Decisions</span></span>
-<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>Preserve the raw file unchanged. Keep derived data and analysis outputs separate.</span>
-<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>Check upstream reuse terms before redistributing data.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
-<li><p>Stage the note explicitly, inspect what will be committed, and commit it. Newly created files appear in <code>git diff --cached</code> after staging.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add WORKSHOP_NOTES.md</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> diff <span class="at">--cached</span> <span class="at">--</span> WORKSHOP_NOTES.md</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">"docs(workshop): record HealthWellbeing data source"</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> log <span class="at">-1</span> <span class="at">--oneline</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>If Git asks for an identity, configure your name and preferred commit email for this repository, then retry.</p></li>
-<li><p>Push the branch to your fork and open a pull request <strong>within your fork</strong>, comparing the branch with its <code>main</code> branch:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> push <span class="at">--set-upstream</span> origin workshop/health-wellbeing</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div></li>
-</ol>
-<p>Ask a colleague to check that the data source is identifiable and the note describes what you actually did. For a substantive contribution to the teaching repository, follow its <a href="https://github.com/JBris/open-and-reproducible-science-in-r/blob/main/CONTRIBUTING.md">contribution guidance</a> and <a href="https://github.com/JBris/open-and-reproducible-science-in-r/blob/main/AI_POLICY.md">AI assistance policy</a>. A pull request provides a place for review; opening one does not mean that human review is complete.</p>
-</section>
-<section id="further-reading" class="level2" data-number="5.9">
-<h2 data-number="5.9" class="anchored" data-anchor-id="further-reading"><span class="header-section-number">5.9</span> Further reading</h2>
+<section id="further-reading" class="level2" data-number="5.8">
+<h2 data-number="5.8" class="anchored" data-anchor-id="further-reading"><span class="header-section-number">5.8</span> Further reading</h2>
 <ul>
 <li>Variable definitions for the teaching dataset <span class="citation" data-cites="healthwellbeing">(<a href="../4_references.html#ref-healthwellbeing" role="doc-biblioref">Harrer et al., n.d.</a>)</span>.</li>
 <li>FAIR principles for scientific data and metadata <span class="citation" data-cites="gofair-principles">(<a href="../4_references.html#ref-gofair-principles" role="doc-biblioref">GO FAIR, n.d.</a>)</span>.</li>
