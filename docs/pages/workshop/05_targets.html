@@ -136,11 +136,6 @@ div.csl-indent {
     document.body.classList.add('hypothesis-enabled');
   });
 </script>
-<link href="../../site_libs/htmltools-fill-0.5.9/fill.css" rel="stylesheet">
-<script src="../../site_libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
-<link href="../../site_libs/vis-9.1.0/vis-network.min.css" rel="stylesheet">
-<script src="../../site_libs/vis-9.1.0/vis-network.min.js"></script>
-<script src="../../site_libs/visNetwork-binding-2.1.4/visNetwork.js"></script>
 
 
 <link rel="stylesheet" href="../../styles.css">
@@ -541,15 +536,8 @@ fit, data_provenance, data_version, model_version, pipeline_file -&gt; result -&
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">store =</span> pipeline_store,</span>
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">targets_only =</span> <span class="cn">TRUE</span>,</span>
 <span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">outdated =</span> <span class="cn">TRUE</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div class="visNetwork html-widget html-fill-item" id="htmlwidget-27084b5463ebf7b79cf8" style="width:100%;height:464px;"></div>
-<script type="application/json" data-for="htmlwidget-27084b5463ebf7b79cf8">{"x":{"nodes":{"name":["data_provenance","data_version","dataset_file","fit","model_pin_files","model_version","pipeline_file","predictive_model","result","studies","summary_file","version_file"],"type":["stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem"],"description":[null,null,null,null,null,null,null,null,null,null,null,null],"status":["uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate","uptodate"],"seconds":[0.018,0.004,0.104,2.148,0.223,0.003,0,0.37,0.003,0.006,0.003,0],"bytes":[293,75,931,4253,2122,75,6377,2465,675,938,831,23],"branches":[null,null,null,null,null,null,null,null,null,null,null,null],"label":["data_provenance","data_version","dataset_file","fit","model_pin_files","model_version","pipeline_file","predictive_model","result","studies","summary_file","version_file"],"color":["#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823"],"id":["data_provenance","data_version","dataset_file","fit","model_pin_files","model_version","pipeline_file","predictive_model","result","studies","summary_file","version_file"],"level":[4,2,3,5,6,7,1,5,8,4,9,1],"shape":["dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot"]},"edges":{"from":["data_version","dataset_file","version_file","data_version","studies","predictive_model","model_pin_files","data_provenance","data_version","studies","data_provenance","model_version","data_version","fit","pipeline_file","dataset_file","result"],"to":["data_provenance","data_provenance","data_version","dataset_file","fit","model_pin_files","model_version","predictive_model","predictive_model","predictive_model","result","result","result","result","result","studies","summary_file"],"color":["#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823","#354823"],"arrows":["to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to"]},"nodesToDataframe":true,"edgesToDataframe":true,"options":{"width":"100%","height":"100%","nodes":{"shape":"dot","physics":false},"manipulation":{"enabled":false},"edges":{"smooth":{"type":"cubicBezier","forceDirection":"horizontal"}},"physics":{"stabilization":false},"interaction":{"zoomSpeed":1},"layout":{"hierarchical":{"enabled":true,"levelSeparation":150,"direction":"LR"}}},"groups":null,"width":null,"height":null,"idselection":{"enabled":false,"style":"width: 150px; height: 26px","useLabels":true,"main":"Select by id"},"byselection":{"enabled":false,"style":"width: 150px; height: 26px","multiple":false,"hideColor":"rgba(200,200,200,0.5)","highlight":false},"main":{"text":"","style":"font-family:Georgia, Times New Roman, Times, serif;font-weight:bold;font-size:20px;text-align:center;"},"submain":null,"footer":null,"background":"rgba(0, 0, 0, 0)","highlight":{"enabled":true,"hoverNearest":false,"degree":{"from":1,"to":1},"algorithm":"hierarchical","hideColor":"rgba(200,200,200,0.5)","labelOnly":true},"collapse":{"enabled":true,"fit":false,"resetHighlight":true,"clusterOptions":null,"keepCoord":true,"labelSuffix":"(cluster)"},"legend":{"width":0.2,"useGroups":false,"position":"right","ncol":1,"stepX":100,"stepY":100,"zoom":true,"nodes":{"label":["Up to date","Regular\ntarget"],"color":["#354823","#899DA4"],"shape":["dot","dot"]},"nodesToDataframe":true},"tooltipStay":300,"tooltipStyle":"position: fixed;visibility:hidden;padding: 5px;white-space: nowrap;font-family: verdana;font-size:14px;font-color:#000000;background-color: #f5f4ed;-moz-border-radius: 3px;-webkit-border-radius: 3px;border-radius: 3px;border: 1px solid #808074;box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);"},"evals":[],"jsHooks":[]}</script>
-</div>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tar_make</span>(<span class="at">script =</span> pipeline_script, <span class="at">store =</span> pipeline_store)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>✔ skipped pipeline [297ms, 12 skipped]</code></pre>
-</div>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="fu">tar_make</span>(<span class="at">script =</span> pipeline_script, <span class="at">store =</span> pipeline_store)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Nothing connects <code>result</code> to <code>summary_file</code> and the <code>fit</code> step has thrown an error. The run stops at a TODO placeholder.</p>
 </section>
@@ -562,9 +550,9 @@ fit, data_provenance, data_version, model_version, pipeline_file -&gt; result -&
 </ul>
 <p>Allow up to five minutes.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">file.edit</span>(</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  pipeline_script</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">file.edit</span>(</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  pipeline_script</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-3-contents" aria-controls="callout-3" aria-expanded="false" aria-label="Toggle callout">
@@ -578,7 +566,7 @@ Solution to TODO 1
 </div>
 <div id="callout-3" class="callout-3-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<div class="sourceCode" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>      data <span class="ot">=</span> studies,</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>      data <span class="ot">=</span> studies,</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>Mentioning <code>studies</code> makes <code>fit</code> depend on it, so the graph gains an arrow from <code>studies</code> to <code>fit</code>.</p>
 </div>
 </div>
@@ -595,8 +583,8 @@ Solution to TODO 2
 </div>
 <div id="callout-4" class="callout-4-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<div class="sourceCode" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>      utils<span class="sc">::</span><span class="fu">write.csv</span>(result, path, <span class="at">row.names =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>      path</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>      utils<span class="sc">::</span><span class="fu">write.csv</span>(result, path, <span class="at">row.names =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>      path</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>A file target returns the path of the file it wrote. <em>targets</em> then tracks the file’s contents and rebuilds it if the file changes.</p>
 </div>
 </div>
@@ -606,40 +594,17 @@ Solution to TODO 2
 <h2 data-number="9.6" class="anchored" data-anchor-id="check-dependencies"><span class="header-section-number">9.6</span> Step 4: inspect the graph and run the pipeline</h2>
 <p>Run the pipeline again and read the result.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tar_make</span>(<span class="at">script =</span> pipeline_script, <span class="at">store =</span> pipeline_store)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>✔ skipped pipeline [373ms, 12 skipped]</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tar_read</span>(result, <span class="at">store =</span> pipeline_store)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>            data_version
-1 20261128T054236Z-11d00
-                                                                                                               data_source
-1 https://raw.githubusercontent.com/MathiasHarrer/dmetar/38c9b9bb5f85ea49de33e5d2536f6544d5268517/data/HealthWellbeing.rda
-                           raw_md5 data_scope data_filter
-1 0d74964b0b7168379a2b015cb648b326        all all studies
-                     data_file_md5 predictive_model_version studies  pooled_r
-1 5be036389f4d3f5da5056beef8867d21   20261128T055354Z-5259a      29 0.3632881
-   ci_lower  ci_upper confidence_level       tau2 i2_percent prediction_lower
-1 0.3094016 0.4148488             0.95 0.02702848   99.82844       0.03758789
-  prediction_upper prediction_level prediction_method effect_scale tau_method
-1        0.6192156             0.95                 V         ZCOR         DL
-  interval_method r_version meta_version                     pipeline_md5
-1              HK     4.4.1        9.0-0 42ec4235e5d934f4644f373d19a4310a</code></pre>
-</div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tar_make</span>(<span class="at">script =</span> pipeline_script, <span class="at">store =</span> pipeline_store)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tar_read</span>(result, <span class="at">store =</span> pipeline_store)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Check that your own pipeline is complete by drawing the graph again.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tar_visnetwork</span>(</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">script =</span> pipeline_script,</span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">store =</span> pipeline_store,</span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">targets_only =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">outdated =</span> <span class="cn">FALSE</span></span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div class="visNetwork html-widget html-fill-item" id="htmlwidget-6e2fc67b1e8136d09ef3" style="width:100%;height:464px;"></div>
-<script type="application/json" data-for="htmlwidget-6e2fc67b1e8136d09ef3">{"x":{"nodes":{"name":["data_provenance","data_version","dataset_file","fit","model_pin_files","model_version","pipeline_file","predictive_model","result","studies","summary_file","version_file"],"type":["stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem","stem"],"description":[null,null,null,null,null,null,null,null,null,null,null,null],"status":["skipped","skipped","skipped","skipped","skipped","skipped","skipped","skipped","skipped","skipped","skipped","skipped"],"seconds":[0.018,0.004,0.104,2.148,0.223,0.003,0,0.37,0.003,0.006,0.003,0],"bytes":[293,75,931,4253,2122,75,6377,2465,675,938,831,23],"branches":[null,null,null,null,null,null,null,null,null,null,null,null],"label":["data_provenance","data_version","dataset_file","fit","model_pin_files","model_version","pipeline_file","predictive_model","result","studies","summary_file","version_file"],"color":["#7500D1","#7500D1","#7500D1","#7500D1","#7500D1","#7500D1","#7500D1","#7500D1","#7500D1","#7500D1","#7500D1","#7500D1"],"id":["data_provenance","data_version","dataset_file","fit","model_pin_files","model_version","pipeline_file","predictive_model","result","studies","summary_file","version_file"],"level":[4,2,3,5,6,7,1,5,8,4,9,1],"shape":["dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot","dot"]},"edges":{"from":["data_version","dataset_file","version_file","data_version","studies","predictive_model","model_pin_files","data_provenance","data_version","studies","data_provenance","model_version","data_version","fit","pipeline_file","dataset_file","result"],"to":["data_provenance","data_provenance","data_version","dataset_file","fit","model_pin_files","model_version","predictive_model","predictive_model","predictive_model","result","result","result","result","result","studies","summary_file"],"color":["#7500D1","#7500D1","#7500D1","#7500D1","#7500D1","#7500D1","#7500D1","#7500D1","#7500D1","#7500D1","#7500D1","#7500D1","#7500D1","#7500D1","#7500D1","#7500D1","#7500D1"],"arrows":["to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to","to"]},"nodesToDataframe":true,"edgesToDataframe":true,"options":{"width":"100%","height":"100%","nodes":{"shape":"dot","physics":false},"manipulation":{"enabled":false},"edges":{"smooth":{"type":"cubicBezier","forceDirection":"horizontal"}},"physics":{"stabilization":false},"interaction":{"zoomSpeed":1},"layout":{"hierarchical":{"enabled":true,"levelSeparation":150,"direction":"LR"}}},"groups":null,"width":null,"height":null,"idselection":{"enabled":false,"style":"width: 150px; height: 26px","useLabels":true,"main":"Select by id"},"byselection":{"enabled":false,"style":"width: 150px; height: 26px","multiple":false,"hideColor":"rgba(200,200,200,0.5)","highlight":false},"main":{"text":"","style":"font-family:Georgia, Times New Roman, Times, serif;font-weight:bold;font-size:20px;text-align:center;"},"submain":null,"footer":null,"background":"rgba(0, 0, 0, 0)","highlight":{"enabled":true,"hoverNearest":false,"degree":{"from":1,"to":1},"algorithm":"hierarchical","hideColor":"rgba(200,200,200,0.5)","labelOnly":true},"collapse":{"enabled":true,"fit":false,"resetHighlight":true,"clusterOptions":null,"keepCoord":true,"labelSuffix":"(cluster)"},"legend":{"width":0.2,"useGroups":false,"position":"right","ncol":1,"stepX":100,"stepY":100,"zoom":true,"nodes":{"label":["Skipped","Regular\ntarget"],"color":["#7500D1","#899DA4"],"shape":["dot","dot"]},"nodesToDataframe":true},"tooltipStay":300,"tooltipStyle":"position: fixed;visibility:hidden;padding: 5px;white-space: nowrap;font-family: verdana;font-size:14px;font-color:#000000;background-color: #f5f4ed;-moz-border-radius: 3px;-webkit-border-radius: 3px;border-radius: 3px;border: 1px solid #808074;box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);"},"evals":[],"jsHooks":[]}</script>
-</div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tar_visnetwork</span>(</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">script =</span> pipeline_script,</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">store =</span> pipeline_store,</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">targets_only =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">outdated =</span> <span class="cn">FALSE</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>On the first complete run, targets with new or changed inputs report that they completed. <em>targets</em> saves every result in the pipeline store, here <code>outputs/health-wellbeing/_targets</code>, and <code>tar_read()</code> loads a saved result without rerunning anything.</p>
 </section>
@@ -647,13 +612,13 @@ Solution to TODO 2
 <h2 data-number="9.7" class="anchored" data-anchor-id="step-5-run-it-again"><span class="header-section-number">9.7</span> Step 5: run it again</h2>
 <p>Run the pipeline a second time and ask which targets are outdated.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tar_make</span>(<span class="at">script =</span> pipeline_script, <span class="at">store =</span> pipeline_store)</span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tar_visnetwork</span>(</span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">script =</span> pipeline_script,</span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">store =</span> pipeline_store,</span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">targets_only =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">outdated =</span> <span class="cn">FALSE</span></span>
-<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">tar_make</span>(<span class="at">script =</span> pipeline_script, <span class="at">store =</span> pipeline_store)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tar_visnetwork</span>(</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">script =</span> pipeline_script,</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">store =</span> pipeline_store,</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">targets_only =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">outdated =</span> <span class="cn">FALSE</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Nothing runs, and no target is outdated. <em>targets</em> reruns a step only when its code, its upstream targets, or its tracked files change.</p>
 </section>
@@ -661,17 +626,17 @@ Solution to TODO 2
 <h2 data-number="9.8" class="anchored" data-anchor-id="targets-checkpoint"><span class="header-section-number">9.8</span> Checkpoint</h2>
 <p>Refer to the bottom two steps of <code>workspace/_targets.R</code>. We have fitted a mixed-effect meta-analysis model and written the results to a CSV file: <code>outputs/health-wellbeing/meta-summary.csv</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">read.csv</span>(<span class="fu">file.path</span>(</span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">"outputs"</span>, <span class="st">"health-wellbeing"</span>, <span class="st">"meta-summary.csv"</span></span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>)) <span class="sc">|&gt;</span> </span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="fu">c</span>(<span class="st">"data_version"</span>, <span class="st">"data_scope"</span>, <span class="st">"data_filter"</span>, <span class="st">"pooled_r"</span>, <span class="st">"confidence_level"</span>, <span class="st">"tau2"</span>, <span class="st">"effect_scale"</span>, <span class="st">"tau_method"</span>, <span class="st">"meta_version"</span>)) <span class="sc">|&gt;</span></span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">where</span>(is.numeric), <span class="sc">~</span> <span class="fu">round</span>(.x, <span class="dv">3</span>))) <span class="sc">|&gt;</span> </span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>  tidyr<span class="sc">::</span><span class="fu">pivot_longer</span>(</span>
-<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>      <span class="at">cols =</span> <span class="fu">everything</span>(),</span>
-<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>      <span class="at">names_to =</span> <span class="st">"metric"</span>,</span>
-<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>      <span class="at">values_to =</span> <span class="st">"value"</span>,</span>
-<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>      <span class="at">values_transform =</span> <span class="fu">list</span>(<span class="at">value =</span> as.character)</span>
-<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>    ) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">read.csv</span>(<span class="fu">file.path</span>(</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">"outputs"</span>, <span class="st">"health-wellbeing"</span>, <span class="st">"meta-summary.csv"</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>)) <span class="sc">|&gt;</span> </span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="fu">c</span>(<span class="st">"data_version"</span>, <span class="st">"data_scope"</span>, <span class="st">"data_filter"</span>, <span class="st">"pooled_r"</span>, <span class="st">"confidence_level"</span>, <span class="st">"tau2"</span>, <span class="st">"effect_scale"</span>, <span class="st">"tau_method"</span>, <span class="st">"meta_version"</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">where</span>(is.numeric), <span class="sc">~</span> <span class="fu">round</span>(.x, <span class="dv">3</span>))) <span class="sc">|&gt;</span> </span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  tidyr<span class="sc">::</span><span class="fu">pivot_longer</span>(</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>      <span class="at">cols =</span> <span class="fu">everything</span>(),</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>      <span class="at">names_to =</span> <span class="st">"metric"</span>,</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>      <span class="at">values_to =</span> <span class="st">"value"</span>,</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>      <span class="at">values_transform =</span> <span class="fu">list</span>(<span class="at">value =</span> as.character)</span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>    ) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Next, you will write a report that reads this summary. <a href="../../pages/workshop/06_quarto.html">Create and render a reproducible Quarto report</a></p>
 </section>
