@@ -1,13 +1,8 @@
 ---
 title: "Computational reproducibility"
-subtitle: "10–20 minutes · Demonstration · renv, Docker and Binder"
+subtitle: "Demonstration · renv, Docker and Binder"
 editor: visual
 ---
-
-```{r health-environments-book-output, include = FALSE, eval = TRUE}
-source("pipelines/workshop_support.R")
-use_workshop_book_outputs()
-```
 
 ## Learning objectives
 
@@ -15,15 +10,9 @@ By the end of this demonstration, you should be able to explain what the
 project's R lockfile records, how a Docker image becomes your MyBinder
 session, and why we keep a record of the environment used to run an analysis.
 
-The instructor runs the commands. You can follow along in the MyBinder session
-you opened during [preparation](00_preparation.qmd); nothing needs to be
-installed.
-
 ## Why this matters
 
-Allow about two minutes. The same script can behave differently when package
-versions or system libraries change. We need to describe the environment
-alongside the code and the data version.
+The same script can behave differently when package versions or system libraries change. We need to describe the environment alongside the code and the data version.
 
 | Layer | What we record | Tool or file |
 | --- | --- | --- |
@@ -35,17 +24,23 @@ alongside the code and the data version.
 
 renv restores the R packages described by a lockfile. A Docker image can also
 include the R interpreter, operating-system libraries, and rendering tools.
-Binder starts a container from such an image in a browser. Reproducing a
-result still requires the analysis code, the input data, and a successful
-rerun.
+Binder starts a container from such an image in a browser. 
 
 ## Inspect the R environment
 
-Allow about three minutes. In the **R Console**, from the project root:
+We can next view the contents of the renv.lock file:
+
+```{r renv-contents, include = TRUE, echo = TRUE, message = FALSE, warning = FALSE, cache = FALSE, output = TRUE, eval = FALSE}
+file.edit("renv.lock")
+```
+
+The version of R running with your environment should ideally match the lock file.
 
 ```{r health-environments-session, include = TRUE, echo = TRUE, message = FALSE, warning = FALSE, cache = FALSE, output = TRUE, eval = TRUE}
+source("pipelines/workshop_support.R")
+use_workshop_book_outputs()
+
 R.version.string
-.libPaths()
 packageVersion("renv")
 ```
 
@@ -56,7 +51,7 @@ records a version; it does not switch your running R session.
 lock <- renv::lockfile_read("renv.lock")
 lock$R$Version
 workshop_packages <- c(
-  "dataspice", "meta", "pins", "quarto", "rfair", "rmarkdown",
+  "dataspice", "meta", "pins", "rfair", "rmarkdown",
   "synthpop", "targets", "vetiver"
 )
 vapply(
@@ -70,10 +65,7 @@ vapply(
 renv::status()
 ```
 
-The lockfile records exact package versions for the workshop. A package that
-is not recorded appears as `NA`; Quarto, for example, is a command-line tool
-in the image rather than an R package in the lockfile. `renv::status()` checks
-whether the active library matches the lockfile.
+The lockfile records exact package versions for the workshop. `renv::status()` checks whether the active library matches the lockfile.
 
 The usual collaboration cycle is:
 
@@ -86,8 +78,6 @@ The workshop's Binder image was built by restoring this lockfile, so you do not
 need to run `renv::restore()` during the session.
 
 ## From a Dockerfile to RStudio on MyBinder {#environments-docker}
-
-Allow about four minutes.
 
 ### Read the Dockerfile
 
@@ -105,43 +95,14 @@ an **image**. A **container** is a running instance of an image. Each
 participant runs the workshop in their own container started from the same
 image.
 
-### Follow the GitHub Actions build pipelines
-
-Publishing a GitHub release starts
-[Build RStudio](https://github.com/JBris/open-and-reproducible-science-in-r/actions/workflows/build-rstudio.yaml).
-Once it builds and pushes the image for local Docker use, it starts
-[Build Binder](https://github.com/JBris/open-and-reproducible-science-in-r/actions/workflows/build-binder.yaml)
-from the same release revision. Build Binder publishes the image that
-MyBinder uses. Maintainers can also start either workflow manually to
-build that image on its own.
-
-Each workflow checks out the source, reads `VERSION` into `APP_VERSION`, and
-records a UTC build date. Docker Compose uses `APP_VERSION` to select the
-Dockerfile and tag the image. The Binder job includes these two steps.
-
-```bash
-docker compose build binder
-docker compose push binder
-```
-
-The first command builds the image. The second publishes the image with its
-version tag to GitHub Container Registry (`ghcr.io`). The image version comes
-from `VERSION` and can differ from the GitHub release tag.
-
 ### Launch the published environment
 
-MyBinder reads the small [Binder entry point](https://github.com/JBris/open-and-reproducible-science-in-r/blob/main/binder/Dockerfile),
-which selects the published Binder image with `FROM`. MyBinder prepares the
-launch image and starts a container on its servers. The launch link’s
-`urlpath=rstudio` setting opens the RStudio interface in your browser.
-
-Because everyone starts from the same image, everyone has the same R version,
+MyBinder prepares the launch image and starts a container on its servers. Because everyone starts from the same image, everyone has the same R version,
 packages, and tools for the hands-on activities.
 
 ## Record the session
 
-Allow about one minute. Load the data by its explicit path into a
-separate environment, then save a record of the current R session.
+View and record the details of the current R session.
 
 ```{r health-environments-reload, include = TRUE, echo = TRUE, message = FALSE, warning = FALSE, cache = FALSE, output = TRUE, eval = TRUE}
 raw_file <- file.path("data", "raw", "healthwellbeing.rda")
@@ -165,39 +126,14 @@ writeLines(
   capture.output(sessionInfo()),
   file.path(output_dir, "session-info.txt")
 )
+file.edit(file.path(output_dir, "session-info.txt"))
 ```
 
-`outputs/health-wellbeing/session-info.txt` lists the loaded package versions and platform.
-Later, the pipeline records the R and *meta* versions with its result. For a
-MyBinder run, record the image version in the project's `VERSION` file; it
-matches the image tag that `binder/Dockerfile` selects on GitHub. Your
-MyBinder copy has no Git history. In a clone, `git rev-parse HEAD` adds the
-exact project revision.
-
 ## Checkpoint {#environments-checkpoint}
-
-- You can explain which parts of the environment renv and Docker capture.
-- You can trace how GitHub Actions builds and publishes the Binder image and
-  how MyBinder uses it to start RStudio.
-- You can distinguish the lockfile's recorded R version from the running version.
-- You know where to find the session record and the package versions.
 
 **Takeaway:** a documented environment supports reproducibility, and a
 successful rerun supplies evidence. Next, we document the dataset itself.
 [FAIR data documentation and assessment](03_data_documentation.qmd)
-
-## After the workshop: record your own environment
-
-In a new R project, use `renv::init()` to create the project library.
-After installing and checking the packages your analysis uses, run
-`renv::snapshot()` and review the lockfile. A collaborator can then run
-`renv::restore()` with the corresponding R version.
-
-For a container, start with an R base image such as
-`FROM rocker/r-ver:4.4.1`. Add your system dependencies and restore the
-package library from `renv.lock` during the build. The
-[workshop's Docker setup](https://github.com/JBris/open-and-reproducible-science-in-r#usage-with-docker)
-shows how this fits into a complete project.
 
 ## Further reading
 

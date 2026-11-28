@@ -1888,6 +1888,13 @@
       ],
       "Hash": "b2453de2d29aa646afe4781defdc7903"
     },
+    "rstudioapi": {
+      "Package": "rstudioapi",
+      "Version": "0.19.0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "db86914207e4e0f112b60ebbc3e1793c"
+    },
     "rvest": {
       "Package": "rvest",
       "Version": "1.0.5",

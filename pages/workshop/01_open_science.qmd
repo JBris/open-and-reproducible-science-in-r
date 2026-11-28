@@ -1,92 +1,46 @@
 ---
 title: "Introduction, reproducibility principles, Git and GitHub"
-subtitle: "0–10 minutes · Conceptual and hands-on"
+subtitle: "Conceptual and hands-on"
 editor: visual
+engine: knitr
 ---
 
 ## Learning objectives
 
-By the end of this opening, you should be able to state the research question,
-identify the unit represented by a row of data, describe what another
-researcher would need to retrace a result, and explain how Git and GitHub
-record, review, and share changes.
+By the end of this opening, you should be able to state the research question, identify the unit represented by a row of data, describe what another researcher would need to retrace a result, and explain how Git and GitHub record, review, and share changes.
 
-You will read the workshop's Git history yourself, then watch the
-environment, metadata, versioning, and archiving demonstrations. In the hands-on segment you will complete and run the pipeline
-and revise its report. If you arrive late, finish
-[preparation](00_preparation.qmd) during the demonstrations.
+You will read the workshop's Git history yourself, then watch the environment, metadata, versioning, and archiving demonstrations. In the hands-on segment you will complete and run the pipeline and revise its report. If you arrive late, finish [preparation](00_preparation.qmd) during the demonstrations.
 
 ## Why this matters
 
-Allow about three minutes. A reported result is easier to evaluate when its
-data, analytical decisions, code, and software environment can be traced.
-Sharing code helps, but the code also needs identifiable inputs and
-instructions that work beyond its author's current R session.
+A reported result is easier to evaluate when its data, analytical decisions, code, and software environment can be traced. Sharing code helps, but the code also needs identifiable inputs and instructions that work beyond its author's current R session.
 
-In this workshop, **reproducibility** means being able to rerun a documented
-workflow with its specified inputs and environment. **Open science** also
-concerns how methods and outputs can be inspected, accessed, and reused.
-Reproducibility does not establish that the scientific assumptions are correct,
-and openness still needs to respect licences and access conditions.
-
-Throughout the session, ask whether another researcher could understand,
-rerun, audit, trace, reuse, and cite the work. The
-[introduction](../1_introduction.qmd#intro-principles) lists
-these principles.
+In this workshop, **reproducibility** means being able to rerun a documented workflow with its specified inputs and environment. **Open science** also concerns how methods and outputs can be inspected, accessed, and reused. Throughout the session, ask whether another researcher could understand, rerun, audit, trace, reuse, and cite the work. 
 
 ## Our example: health and well-being
 
-Allow about two minutes. The teaching question is: **What association between
-health and well-being is reported across the included studies?** We use the
-`HealthWellbeing` correlation example [@harrer2021, sec. 4.2.4].
+**What association between health and well-being is reported across the included studies?** We use the `HealthWellbeing` correlation example [@harrer2021, sec. 4.2.4].
 
-Each row is a **study summary**, not a participant record. The columns are:
+Each row is a **study summary**. The columns are:
 
-| Column | Meaning |
-| --- | --- |
-| `author` | Study label |
-| `cor` | Reported Pearson correlation |
-| `n` | Study sample size |
+| Column       | Meaning                       |
+|--------------|-------------------------------|
+| `author`     | Study label                   |
+| `cor`        | Reported Pearson correlation  |
+| `n`          | Study sample size             |
 | `population` | Sample population description |
-| `country` | Study country |
-
-The [preparation activity](00_preparation.qmd#preparation-data) verifies the
-snapshot. There is no need to fit a model during this opening.
-
-Later, the pipeline pools correlations using Fisher's z transformation and an
-explicit random-effects specification. Study independence, comparable effect
-definitions, and differences between study populations need consideration.
-A pooled association alone does not establish a causal effect.
+| `country`    | Study country                 |
 
 ## One workflow throughout the session
 
-We follow this dataset through one connected workflow. The first half
-opens with a short Git activity and continues with demonstrations; in the
-second half, you complete, run, and change the analysis yourself.
-
-| Time | Stage | Question we will answer | Tools | Format |
-| --- | --- | --- | --- | --- |
-| 0–10 min | Version the work | What changed, why, and who reviewed it? | Git, GitHub | Conceptual and hands-on |
-| 10–20 min | Record the environment | Which software is needed? | renv, Docker, Binder | Demonstration |
-| 20–28 min | Document the input | What can a collaborator learn about the data and how to reuse them? | dataspice, rfair | Demonstration |
-| 28–35 min | Version data and models | Which input and model produced this result? | pins, vetiver | Demonstration |
-| 35–50 min | Run the analysis | Which steps depend on this input? | targets | Hands-on |
-| 50–65 min | Report the result | How are methods, results, and provenance connected? | Quarto | Hands-on |
-| 65–75 min | Modify and reproduce | What rebuilds when an analysis setting changes, and does the result reproduce? | targets, Quarto | Hands-on |
-| 75–82 min | Release and archive | How can this version be found and cited? | GitHub releases, Zenodo | Conceptual |
-| 82–90 min | Questions and discussion | What would you change in your own work? | | Interactive |
-
-The aim is to understand and experience the whole workflow, not to master each
-package.
+We follow this dataset through one connected workflow. The first half opens with a short Git activity; in the second half, you complete, run, and change the analysis yourself to understand and experience the whole workflow.
 
 ## Version control with Git and GitHub {#git-github}
 
-Allow about four minutes. **Git** records the history of
-a project's files. **GitHub** hosts Git repositories and adds collaboration
-tools such as issues, pull requests, and releases.
+**Git** records the history of a project's files. **GitHub** hosts Git repositories and adds collaboration tools such as issues, pull requests, and releases.
 
 | Term | Meaning |
-| --- | --- |
+|------------------------------------|------------------------------------|
 | Commit | A recorded change to one or more files, with a message explaining why |
 | Branch | A line of work that can change without affecting the main version |
 | Remote | A copy of the repository elsewhere, such as on GitHub |
@@ -96,162 +50,53 @@ tools such as issues, pull requests, and releases.
 
 ### Read the workshop's history {#git-history}
 
-Allow about two minutes. The project in your MyBinder session is a copy
-of the files without their Git history, but Git can read the history of
-the public repository directly. Open the **Terminal** tab beside the
-Console and run each block in the same Terminal. The commands only read
-from GitHub and change nothing in your project.
+The project in your MyBinder session is a copy of the files without their Git history, but Git can read the history of the public repository directly.
 
-1.  **Which versions have been released?** List the repository's tags
-    without downloading anything else.
+1. **Which versions have been released?** List the repository's tags without downloading anything else.
 
-    ``` bash
-    url=https://github.com/JBris/open-and-reproducible-science-in-r.git
-    git ls-remote --tags --refs "$url"
-    ```
+```{bash git-versions, include = TRUE, echo = TRUE, message = FALSE, warning = FALSE, cache = FALSE, output = TRUE, eval = FALSE}
+url=https://github.com/JBris/open-and-reproducible-science-in-r.git
+git ls-remote --tags --refs "$url"
+```
 
-    Each line pairs a commit hash with a version tag. A tag gives one
-    commit a permanent name. The archiving segment shows how Zenodo
-    archives each tagged release under one concept DOI, which cites all
-    versions and always resolves to the latest one.
+Each line pairs a commit hash with a version tag. A tag gives one commit a permanent name. We will later cover how Zenodo archives each tagged release with its own DOI.
 
-2.  **What changed recently, and why?** Copy the history into a
-    temporary folder. `--filter=blob:none` fetches the commits and the
-    lists of files they changed, but not the file contents, so it takes
-    a few seconds.
+2. **What changed recently, and why?** Copy the history into a temporary folder. `--filter=blob:none` fetches the commits and the lists of files they changed, but not the file contents, so it takes a few seconds.
 
-    ``` bash
-    git clone --quiet --bare --filter=blob:none "$url" /tmp/workshop-history.git
-    git -C /tmp/workshop-history.git log --oneline --no-merges -5
-    git -C /tmp/workshop-history.git log --oneline -3 -- pipelines/_targets_health_wellbeing.R
-    ```
+```{bash git-clone, include = TRUE, echo = TRUE, message = FALSE, warning = FALSE, cache = FALSE, output = TRUE, eval = FALSE}
+rm -rf /tmp/workshop-history.git
+url=https://github.com/JBris/open-and-reproducible-science-in-r.git
+git clone --quiet --bare --filter=blob:none "$url" /tmp/workshop-history.git
+git -C /tmp/workshop-history.git log --oneline --no-merges -5
+git -C /tmp/workshop-history.git log --oneline -3 -- pipelines/_targets_health_wellbeing.R
+```
 
-    The first log lists the latest changes, and each message says what
-    changed. The second lists only the commits that changed the
-    reference pipeline, the completed solution to the pipeline exercise
-    later in the session.
+The first log lists the latest changes, and each message says what
+changed. The second lists only the commits that changed the
+reference pipeline.
 
-3.  **Is the reference pipeline in your session the latest version?**
-    Git identifies each version of a file by a hash of its contents.
-    Compare the copy in your MyBinder project with the one in the latest
-    commit.
+3. **Is the reference pipeline in your session the latest version?** Git identifies each version of a file by a hash of its contents. Compare the copy in your MyBinder project with the one in the latest commit.
 
-    ``` bash
-    git hash-object pipelines/_targets_health_wellbeing.R
-    git -C /tmp/workshop-history.git rev-parse HEAD:pipelines/_targets_health_wellbeing.R
-    ```
+```{bash git-hash, include = TRUE, echo = TRUE, message = FALSE, warning = FALSE, cache = FALSE, output = TRUE, eval = FALSE}
+git hash-object pipelines/_targets_health_wellbeing.R
+git -C /tmp/workshop-history.git rev-parse HEAD:pipelines/_targets_health_wellbeing.R
+```
 
-    Matching lines mean identical contents. If they differ, the
-    repository changed after your MyBinder image was built. This is why
-    a result should cite a specific commit or release rather than "the
-    latest version". The pipeline records checksums of its inputs for
-    the same reason.
-
-If you run the clone again, Git reports that the folder already exists;
-your first copy is still there, so continue. If GitHub cannot be
-reached, follow the instructor's screen.
-
-The instructor then shows the same history on GitHub: a merged pull
-request with its **Files changed** view, and the releases page, which
-turns tags into named releases with notes.
-
-The lockfile, exercise templates, and reference solutions are tracked.
-Your edits in `workspace/` are personal working copies. Save them with
-your report and provenance records using the
-[export checklist](09_discussion.qmd#export-work). The raw teaching
-snapshot and its licence notice are tracked too.
+Matching lines mean identical contents. If they differ, the repository changed after your MyBinder environment was built. This is why a result should cite a specific commit or release rather than "the latest version". 
 
 ## Discuss with a neighbour
 
-Allow about one minute. Name one thing you would ask for if a collaborator sent
-only a pooled correlation. Choose from the data version, variable definitions,
-analysis settings, code revision, or software environment, and explain why it
-would matter.
+Name one thing you would ask for if a collaborator sent you a meta-analysis manuscript for the `HealthWellbeing` dataset. Choose from the data version, variable definitions, analysis settings, code revision, or software environment, and explain why it would matter.
+
+Allow about one minute. 
 
 ## Checkpoint {#open-science-checkpoint}
 
-You should be able to complete this sentence:
-
-> To retrace this result, I need the source and version of the study summaries,
-> the analysis decisions and code, and the environment used to run them.
-
-You can also explain the difference between a local commit, a push to a
-remote, and a pull request. You can say what the hash comparison told
-you about the reference pipeline in your session.
-
-**Takeaway:** keep a traceable connection between the input, the decisions, and
-the output. Next, we record the
-[computational environment](02_environments.qmd).
-
-## After the workshop: practise Git with your fork {#git-practice}
-
-This optional exercise takes about ten minutes. It needs a GitHub account, a
-fork of the
-[workshop repository](https://github.com/JBris/open-and-reproducible-science-in-r)
-cloned as your `origin`, and GitHub authentication in your environment. Run the
-commands in the **Terminal** at the root of that clone.
-
-1. Create a working branch:
-
-   ```bash
-   git switch -c workshop/health-wellbeing
-   ```
-
-2. Create `WORKSHOP_NOTES.md` in the project root as a provenance note.
-   Replace the placeholders with your own information.
-
-   ```markdown
-   # Health and well-being: workshop notes
-
-   Author: YOUR NAME
-
-   ## Data source
-
-   - Dataset: HealthWellbeing.
-   - Book: Harrer, Cuijpers, Furukawa, and Ebert (2021), section 4.2.4.
-   - Book URL: https://doing-meta.guide/pooling-es#correlations
-   - Dataset documentation: https://dmetar.protectlab.org/reference/healthwellbeing
-   - Download: https://raw.githubusercontent.com/MathiasHarrer/dmetar/38c9b9bb5f85ea49de33e5d2536f6544d5268517/data/HealthWellbeing.rda
-   - Raw file: data/raw/healthwellbeing.rda
-   - MD5: 0d74964b0b7168379a2b015cb648b326
-
-   ## Decisions
-
-   Preserve the raw file unchanged. Keep derived data and analysis outputs separate.
-   Check upstream reuse terms before redistributing data.
-   ```
-
-3. Stage the note explicitly, inspect what will be committed, and commit it.
-   Newly created files appear in `git diff --cached` after staging.
-
-   ```bash
-   git add WORKSHOP_NOTES.md
-   git diff --cached -- WORKSHOP_NOTES.md
-   git commit -m "docs(workshop): record HealthWellbeing data source"
-   git log -1 --oneline
-   ```
-
-   If Git asks for an identity, configure your name and preferred commit email
-   for this repository, then retry.
-
-4. Push the branch to your fork and open a pull request **within your fork**,
-   comparing the branch with its `main` branch:
-
-   ```bash
-   git push --set-upstream origin workshop/health-wellbeing
-   ```
-
-Ask a colleague to check that the data source is identifiable and the note
-describes what you actually did. For a substantive contribution to the teaching
-repository, follow its
-[contribution guidance](https://github.com/JBris/open-and-reproducible-science-in-r/blob/main/CONTRIBUTING.md)
-and [AI assistance policy](https://github.com/JBris/open-and-reproducible-science-in-r/blob/main/AI_POLICY.md).
-A pull request provides a place for review; opening one does not mean that
-human review is complete.
+**Takeaway:** keep a traceable connection between the input, the decisions, and the output. Next, we record the [computational environment](02_environments.qmd).
 
 ## Further reading
 
-- Variable definitions for the teaching dataset [@healthwellbeing].
-- FAIR principles for scientific data and metadata [@gofair-principles].
-- Version control basics [@chacon2014-git, sec. 1.1].
-- Creating a pull request from a fork [@github-pull-request-fork].
+-   Variable definitions for the teaching dataset [@healthwellbeing].
+-   FAIR principles for scientific data and metadata [@gofair-principles].
+-   Version control basics [@chacon2014-git, sec. 1.1].
+-   Creating a pull request from a fork [@github-pull-request-fork].

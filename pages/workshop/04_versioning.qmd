@@ -1,58 +1,92 @@
 ---
 title: "Data and model versioning"
-subtitle: "28–35 minutes · Demonstration · pins and vetiver"
-editor:
-  markdown:
-    wrap: 72
+subtitle: "Demonstration · pins and vetiver"
+editor: visual
 link-citations: true
 execute:
   warning: false
   message: false
 ---
 
-```{r health-versioning-book-prep, include = FALSE, eval = TRUE}
-source("pipelines/workshop_support.R")
-use_workshop_book_outputs()
-source("pipelines/prepare_versioning_demo.R")
-```
-
 ## Introduction
 
-In this seven-minute demonstration, we store versions of the
-documented dataset and retrieve a pipeline-produced model by its
+We will store versions of the
+documented dataset and retrieve a model by its
 identifier. By the end, you should be able to explain how a version
 identifier links a result to the exact input that produced it.
 
-The pipeline in the hands-on activities reads a pinned dataset
-version, so you prepared the board before the session. The instructor
-runs the code below from the project root; the board and identifiers
-in your MyBinder session are your own.
-[Prepare the dataset versions](00_preparation.qmd#preparation-versions)
-
 ## Store dataset versions with pins
 
-Allow about four minutes. A *pins* board stores named objects, called
-pins. We use a local folder board with versioning enabled explicitly,
-so writing changed data adds a version and keeps the previous one.
-An identical write is skipped by default. We store the data as RDS,
-an R format that preserves the column types.
+A *pins* board stores named objects (which is usually files), called
+pins. We use a local folder board to save our pins.
 
-The prepared script writes two versions of the `health_wellbeing` pin.
-The first contains all 29 studies, with the source URL and raw-file
-checksum as metadata. The second contains the 18 general-population
-studies. It is read from the exact full version, and its metadata
-records the filter and that parent version. Rerunning the script
-reuses identical versions instead of writing duplicates.
+We will write two versions of the `health_wellbeing` pin.
+The first contains all 29 studies, with the data source and hash as metadata. The second contains the 18 general-population studies.  
+
+```{r health-versioning-board-load-data, include = TRUE, echo = TRUE, message = FALSE, warning = FALSE, cache = FALSE, output = TRUE, eval = TRUE}
+source("pipelines/workshop_support.R")
+use_workshop_book_outputs()
+
+box::use(
+  pins[board_folder, pin_exists, pin_meta, pin_read, pin_versions, board_temp, pin_write],
+  utils[read.csv],
+  vetiver[vetiver_model, vetiver_pin_write, vetiver_pin_read]
+)
+
+raw_file <- file.path("data", "raw", "healthwellbeing.rda")
+source_url <- paste0(
+  "https://raw.githubusercontent.com/MathiasHarrer/dmetar/",
+  "38c9b9bb5f85ea49de33e5d2536f6544d5268517/data/HealthWellbeing.rda"
+)
+
+dir.create(dirname(raw_file), recursive = TRUE, showWarnings = FALSE)
+if (!file.exists(raw_file)) {
+  download.file(source_url, destfile = raw_file, mode = "wb")
+}
+
+load(raw_file)
+all_df <- HealthWellbeing
+general_df <- HealthWellbeing |>
+  subset(population == "general population")
+
+head(general_df, 8)
+```
+We next create 2 pins for each version of the dataset:
+
+```{r save-health-versioning-board-write, include = TRUE, echo = TRUE, message = FALSE, warning = FALSE, cache = FALSE, output = TRUE, eval = TRUE}
+board <- board_temp(versioned = TRUE)
+pin_write(
+  board,
+  all_df,
+  name = "health_wellbeing",
+  type = "rds",
+  title = "HealthWellbeing",
+  description = "All 29 studies in the teaching snapshot.",
+  metadata = list(
+    scope = "all",
+    filter = "all studies"
+  )
+)
+
+pin_write(
+  board,
+  general_df,
+  name = "health_wellbeing",
+  type = "rds",
+  title = "HealthWellbeing",
+  description = "Only studies labelled general population.",
+  metadata = list(
+    scope = "general",
+    filter = "population == 'general population'"
+  )
+)
+```
 
 We open the same board and list its versions.
 
 ```{r health-versioning-board, include = TRUE, echo = TRUE, message = FALSE, warning = FALSE, cache = FALSE, output = TRUE, eval = TRUE}
-box::use(
-  pins[board_folder, pin_exists, pin_meta, pin_read, pin_versions],
-  utils[read.csv]
-)
+source("pipelines/prepare_versioning_demo.R")
 
-source("pipelines/workshop_support.R")
 workshop_dir <- workshop_output_dir()
 data_board <- board_folder(
   file.path(workshop_dir, "data_store"),
@@ -61,80 +95,86 @@ data_board <- board_folder(
 pin_versions(data_board, "health_wellbeing")
 ```
 
-The script also recorded which identifier belongs to which dataset.
+The script also recorded which identifier belongs to which dataset (the `version` column).
 We retrieve the subset's metadata and the full dataset by those
 identifiers.
 
-```{r health-versioning-read, include = TRUE, echo = TRUE, message = FALSE, warning = FALSE, cache = FALSE, output = TRUE, eval = TRUE}
+```{r health-versioning-read-full, include = TRUE, echo = TRUE, message = FALSE, warning = FALSE, cache = FALSE, output = TRUE, eval = TRUE}
 versions <- read.csv(
   file.path(workshop_dir, "dataset-versions.csv"),
   colClasses = "character"
 )
 full_version <- versions$version[versions$scope == "all"]
 general_version <- versions$version[versions$scope == "general"]
-stopifnot(length(full_version) == 1L, length(general_version) == 1L)
 
-pin_meta(data_board, "health_wellbeing", version = general_version)$user
-
-health_full <- pin_read(
-  data_board, "health_wellbeing", version = full_version
-)
-nrow(health_full)
+pin_meta(data_board, "health_wellbeing", version = full_version)$user[
+  c("scope", "filter", "source_url")
+]
 ```
 
-A version identifier names a stored object within this board. If you
-recreate the board elsewhere, it receives new identifiers, so retain
-the upstream checksum and the filter as well. In the hands-on
-activities, the pipeline reads the version named in
-`analysis-data-version.txt` rather than whichever version is newest.
+We will also view the filtered dataset.
+
+```{r health-versioning-read-general, include = TRUE, echo = TRUE, message = FALSE, warning = FALSE, cache = FALSE, output = TRUE, eval = TRUE}
+pin_meta(data_board, "health_wellbeing", version = general_version)$user[
+  c("scope", "filter", "parent_version", "source_url")
+]
+```
+
+A version identifier names a stored object within this board. It is read from the exact full version, and its metadata
+records the filter and that parent version. 
 
 ## Store model versions with vetiver
 
-Allow about three minutes. The reference pipeline uses the checked study
-summaries in two branches. One fits the random-effects meta-analysis. The
-other trains a small illustrative regression of Fisher z on log sample
-size, then stores it with *vetiver*. The regression and the pooled estimate
-answer different questions.
+We have assessed whether our dataset adheres to FAIR principles and we have also versioned it. We can next do some statistical modelling. Typically, we might want to use a mixed-effects model to perform a meta-analysis, but for the purposes of this demonstration we shall fit a linear regression model of Fisher z (`atanh(cor)`) against log sample
+size, then store it with *vetiver*.  
 
-This is a preview of one pipeline output. Before the session, the
-instructor ran the workshop pipeline's model branch on the full dataset
-and saved the model pin. The next lesson shows where that branch fits
-in the pipeline. If you are trying this demo on your own, first run
-`source("pipelines/prepare_versioning_demo.R")` from the project root.
+We will first process the data.
 
-Read the saved version identifier and use it to retrieve the model.
-Its input prototype lists the columns required for prediction. Its
-metadata records the training data version and checksum. When you
-run the completed pipeline against the same input on this board,
-its summary records the same model version.
+```{r health-original-processing, include = TRUE, echo = TRUE, message = FALSE, warning = FALSE, cache = FALSE, output = TRUE, eval = TRUE}
+health_full <- pin_read(
+  data_board, "health_wellbeing", version = full_version
+)
+
+original <- data.frame(
+  population = factor(health_full$population),
+  z = atanh(health_full$cor),
+  log_n = log(health_full$n)
+)
+head(original, 5)
+```
+
+Subsequently, we fit and save a linear regression.
+
+```{r health-original-lm-pin-write, include = TRUE, echo = TRUE, message = FALSE, warning = FALSE, cache = FALSE, output = TRUE, eval = TRUE}
+lm_model <- stats::lm(z ~ log_n, data = original)
+
+v_model <- vetiver_model(lm_model, model_name = "health_wellbeing_lm")
+vetiver_pin_write(board, v_model)
+```
+
+We will next reload the model from a `vetiver` pin. Its input prototype lists the columns required for prediction. Its
+metadata records the training data version and hash.
 
 ```{r health-vetiver-read, echo = TRUE, message = FALSE, warning = FALSE, eval = TRUE}
 version_file <- file.path(workshop_dir, "predictive-model-version.txt")
 model_version <- readLines(version_file, warn = FALSE)
-model_version
 model_board <- pins::board_folder(file.path(workshop_dir, "model_store"), versioned = TRUE)
-model <- vetiver::vetiver_pin_read(
+model_lm <- vetiver::vetiver_pin_read(
   model_board, "health_wellbeing_lm", version = model_version
 )
-names(model$prototype)
-model$metadata$user[c("data_version", "data_file_md5")]
+tibble::tibble(
+  name = model_lm$model_name,
+  description = model_lm$description,
+  version = model_lm$metadata$version,
+  recipe = model_lm$metadata$user$recipe,
+  r_version = model_lm$metadata$user$r_version,
+  vetiver_version = model_lm$metadata$user$vetiver_version
+)
 ```
 
-The training version should match the full dataset identifier you read
-above. Changing the dataset in the pipeline also trains and pins
-a new model. The [optional input comparison](07_modify_and_reproduce.qmd#change-input)
-lets you see both versions. Review sharing terms for any fitted model,
-especially when it was trained on restricted data [@vetiver-pin-write].
+We can save and reload both data and models, which we treat as a versioned artifacts with their respective metadata.
 
 ## Checkpoint {#versioning-checkpoint}
-
-- The data board lists two versions of `health_wellbeing`. The full
-  version returns 29 rows, and the subset's metadata records its
-  filter and parent version.
-- The stored model expects `log_n` and records the training dataset version
-  and checksum.
-- You can explain why the pipeline reads a named version rather than
-  the newest one.
 
 Next, you will build and run the analysis yourself.
 [Build and execute a targets meta-analysis pipeline](05_targets.qmd)

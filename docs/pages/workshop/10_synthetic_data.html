@@ -409,38 +409,41 @@ div.csl-indent {
 
 <section id="introduction" class="level2" data-number="14.1">
 <h2 data-number="14.1" class="anchored" data-anchor-id="introduction"><span class="header-section-number">14.1</span> Introduction</h2>
-<p>This supplementary exercise is outside the timed programme and takes about 15 minutes. You will generate a synthetic version of the <code>HealthWellbeing</code> study summaries with <em>synthpop</em>, compare it with the original, and run the same pooled analysis on both. By the end, you should be able to explain what a synthetic dataset lets others test and what it cannot establish.</p>
-<p>Run the chunks in the <strong>R Console</strong> from the project root, in the prepared environment, after preparing the dataset versions. <a href="../../pages/workshop/00_preparation.html#preparation-versions">Prepare the dataset versions</a></p>
+<p>This supplementary exercise is outside the timed programme and takes about 15 minutes.</p>
+<p>You will generate a synthetic version of the <code>HealthWellbeing</code> study summaries with <em>synthpop</em>, compare it with the original, and run the same pooled analysis on both. By the end, you should be able to explain what a synthetic dataset lets others test and what it cannot establish.</p>
 </section>
 <section id="prepare-the-study-summaries" class="level2" data-number="14.2">
 <h2 data-number="14.2" class="anchored" data-anchor-id="prepare-the-study-summaries"><span class="header-section-number">14.2</span> Prepare the study summaries</h2>
 <p>We read the full 29-study dataset by its recorded pin version, so the exercise starts from the same input as the workshop pipeline.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>box<span class="sc">::</span><span class="fu">use</span>(pins[board_folder, pin_read], utils[read.csv])</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"pipelines/workshop_support.R"</span>)</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>workshop_dir <span class="ot">&lt;-</span> <span class="fu">workshop_output_dir</span>()</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>versions <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">file.path</span>(workshop_dir, <span class="st">"dataset-versions.csv"</span>),</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">colClasses =</span> <span class="st">"character"</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>full_version <span class="ot">&lt;-</span> versions<span class="sc">$</span>version[versions<span class="sc">$</span>scope <span class="sc">==</span> <span class="st">"all"</span>]</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(<span class="fu">length</span>(full_version) <span class="sc">==</span> <span class="dv">1</span>L)</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>data_board <span class="ot">&lt;-</span> <span class="fu">board_folder</span>(</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">file.path</span>(workshop_dir, <span class="st">"data_store"</span>),</span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">versioned =</span> <span class="cn">TRUE</span></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>health_full <span class="ot">&lt;-</span> <span class="fu">pin_read</span>(</span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>  data_board, <span class="st">"health_wellbeing"</span>, <span class="at">version =</span> full_version</span>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"pipelines/workshop_support.R"</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">use_workshop_book_outputs</span>()</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>box<span class="sc">::</span><span class="fu">use</span>(pins[board_folder, pin_read], utils[read.csv])</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"pipelines/workshop_support.R"</span>)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>workshop_dir <span class="ot">&lt;-</span> <span class="fu">workshop_output_dir</span>()</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>versions <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">file.path</span>(workshop_dir, <span class="st">"dataset-versions.csv"</span>),</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">colClasses =</span> <span class="st">"character"</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>full_version <span class="ot">&lt;-</span> versions<span class="sc">$</span>version[versions<span class="sc">$</span>scope <span class="sc">==</span> <span class="st">"all"</span>]</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(<span class="fu">length</span>(full_version) <span class="sc">==</span> <span class="dv">1</span>L)</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>data_board <span class="ot">&lt;-</span> <span class="fu">board_folder</span>(</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">file.path</span>(workshop_dir, <span class="st">"data_store"</span>),</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">versioned =</span> <span class="cn">TRUE</span></span>
 <span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(<span class="fu">nrow</span>(health_full) <span class="sc">==</span> <span class="dv">29</span>L)</span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>original <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>  <span class="at">population =</span> <span class="fu">factor</span>(health_full<span class="sc">$</span>population),</span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>  <span class="at">z =</span> <span class="fu">atanh</span>(health_full<span class="sc">$</span>cor),</span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>  <span class="at">log_n =</span> <span class="fu">log</span>(health_full<span class="sc">$</span>n)</span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>health_full <span class="ot">&lt;-</span> <span class="fu">pin_read</span>(</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>  data_board, <span class="st">"health_wellbeing"</span>, <span class="at">version =</span> full_version</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="fu">stopifnot</span>(<span class="fu">nrow</span>(health_full) <span class="sc">==</span> <span class="dv">29</span>L)</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>original <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>  <span class="at">population =</span> <span class="fu">factor</span>(health_full<span class="sc">$</span>population),</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>  <span class="at">z =</span> <span class="fu">atanh</span>(health_full<span class="sc">$</span>cor),</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>  <span class="at">log_n =</span> <span class="fu">log</span>(health_full<span class="sc">$</span>n)</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><code>z</code> is the Fisher transformation of the correlation, and <code>log_n</code> is the natural log of the study sample size. The example uses study summaries and leaves out the original study labels and country column.</p>
 </section>
@@ -499,7 +502,7 @@ z          0.011063 1.283333  4
 log_n      0.003539 0.410534  4</code></pre>
 </div>
 </div>
-<p>Inspect the distributions of <code>population</code>, <code>z</code>, and <code>log_n</code>. The comparison describes how closely the two tables resemble each other on these variables. Similar distributions can coexist with differences in the relationships between variables and in downstream estimates. For the synthesis methods, see <span class="citation" data-cites="nowok2016-synthpop">Nowok, Raab, and Dibben (<a href="../4_references.html#ref-nowok2016-synthpop" role="doc-biblioref">2016</a>)</span> and the <a href="https://www.synthpop.org.uk/">synthpop documentation</a>.</p>
+<p>Inspect the distributions of <code>population</code>, <code>z</code>, and <code>log_n</code>. The comparison describes how closely the two tables resemble each other on these variables. For the synthesis methods, see <span class="citation" data-cites="nowok2016-synthpop">Nowok, Raab, and Dibben (<a href="../4_references.html#ref-nowok2016-synthpop" role="doc-biblioref">2016</a>)</span> and the <a href="https://www.synthpop.org.uk/">synthpop documentation</a>.</p>
 </section>
 <section id="try-it-yourself-pool-both-datasets" class="level2" data-number="14.4">
 <h2 data-number="14.4" class="anchored" data-anchor-id="try-it-yourself-pool-both-datasets"><span class="header-section-number">14.4</span> Try it yourself: pool both datasets</h2>
@@ -540,11 +543,12 @@ original       29    0.363    0.309    0.415
 synthetic      29    0.359    0.305    0.411</code></pre>
 </div>
 </div>
-<p>The analysis code runs unchanged on the synthetic table, so a reader without access to restricted originals could test that the workflow works. The synthetic estimate is computed from generated rows. A close match would not verify the original finding, and a difference would not refute it.</p>
+<p>The above code runs on the synthetic table, so a reader without access to restricted data could test that the workflow works. A close match would not verify the original finding, and a difference would not refute it.</p>
 </section>
 <section id="limits-on-interpretation-and-sharing" class="level2" data-number="14.5">
 <h2 data-number="14.5" class="anchored" data-anchor-id="limits-on-interpretation-and-sharing"><span class="header-section-number">14.5</span> Limits on interpretation and sharing</h2>
-<p>Treat this as a public teaching example. Ordinary synthesis with <em>synthpop</em> is not a differential privacy guarantee, and a distribution comparison or utility score does not establish one. A privacy claim requires a validated mechanism and privacy accounting <span class="citation" data-cites="near2021-synthetic-data">(<a href="../4_references.html#ref-near2021-synthetic-data" role="doc-biblioref">Near and Darais 2021</a>)</span>. Synthetic data also does not confer privacy protection on related models, evaluation results, or metadata. Keep generated tables local until you have checked the applicable release terms.</p>
+<p>Ordinary synthesis with <em>synthpop</em> is not a differential privacy guarantee. A privacy claim requires a validated mechanism and privacy accounting <span class="citation" data-cites="near2021-synthetic-data">(<a href="../4_references.html#ref-near2021-synthetic-data" role="doc-biblioref">Near and Darais 2021</a>)</span>.</p>
+<p>Synthetic data also does not confer privacy protection on related models, evaluation results, or metadata.</p>
 </section>
 <section id="synthetic-checkpoint" class="level2" data-number="14.6">
 <h2 data-number="14.6" class="anchored" data-anchor-id="synthetic-checkpoint"><span class="header-section-number">14.6</span> Checkpoint</h2>

@@ -1,22 +1,20 @@
 ---
 title: "Questions and discussion"
-subtitle: "82–90 minutes · Interactive"
-editor:
-  markdown:
-    wrap: 72
+subtitle: "Interactive"
+editor: visual
 link-citations: true
 ---
 
 ## Introduction
 
-In the final eight minutes, we look back at the workflow you used,
-take questions, and discuss how to apply it in your own work. The aim
-of the session was to experience an end-to-end reproducible research
-workflow, not to master every package.
+To close this workshop, we look back at the workflow you used,
+take questions, and discuss how to apply it in your own work. 
+
+The aim of the session was to experience an end-to-end reproducible research workflow, not to master every package.
 
 ## The workflow you used
 
-Allow about one minute. Each stage recorded something another
+Each stage recorded something another
 researcher needs to understand, rerun, or cite the result.
 
 | Stage | What it recorded | Where to find it |
@@ -29,13 +27,9 @@ researcher needs to understand, rerun, or cite the result.
 | Quarto | Methods, results, and provenance in one document | `workspace/report.html` |
 | GitHub releases, Zenodo | A citable, archived version | Release tag and [concept DOI](https://doi.org/10.5281/zenodo.24342489) |
 
-A useful test of the whole workflow is to point to the exact data
-version, analysis revision, environment, and archive citation for one
-reported result.
-
 ## Discussion {#extras-discussion}
 
-Allow about five minutes. Discuss one or more of these questions with
+Discuss one or more of these questions with
 your neighbours or the room.
 
 -   Which record from today, such as the lockfile, the metadata, the
@@ -50,32 +44,7 @@ your neighbours or the room.
 -   Which single change would make your own research workflow easier
     for a collaborator to inspect and rerun?
 
-Use the remaining time for questions.
-
-## Before you leave {#export-work}
-
-MyBinder files disappear when the session ends. In RStudio's **Files**
-pane, select the files or folders below and use **More → Export**.
-Download each group before closing the browser tab.
-
-1. **Your work.** Export `workspace/` for the exact pipeline, report
-   source, and rendered HTML. If you used recovery, any backups are here too.
-   Also export `.here` from the project root. Use **More → Show Hidden Files**
-   to find it. Keep `.here` at the root when you unpack the files to rerender
-   the report.
-2. **Results and provenance.** Open `outputs/health-wellbeing/` and
-   export `meta-summary.csv`, `analysis-data-version.txt`,
-   `dataset-versions.csv`, and `predictive-model-version.txt`. Include
-   `session-info.txt` if you recorded the session. To keep the FAIR
-   assessment, follow [Save the results](03_data_documentation.qmd#save-the-results)
-   after running both assessments. Export `metadata/` to keep
-   `fair-assessment.rds` alongside the metadata files.
-3. **Exact pins.** Export `data_store/` and `model_store/` if you want
-   to reopen the same data and model versions later. Keep the
-   `data/raw/` source and licence record with the teaching snapshot.
-
-For a public release, review the exported contents first and follow
-the [archiving checklist](08_archiving.qmd#decide-what-to-archive).
+In the remaining time, we can cover any questions or comments.
 
 ## Follow-up resources
 
@@ -87,5 +56,5 @@ the [archiving checklist](08_archiving.qmd#decide-what-to-archive).
 -   The lessons' further reading sections and the
     [references](../4_references.qmd).
 
-Questions after the workshop are welcome in the repository's
+Questions, issues, and comments after the workshop are welcome in the repository's
 [GitHub Discussions](https://github.com/JBris/open-and-reproducible-science-in-r/discussions).

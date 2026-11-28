@@ -11,25 +11,16 @@ author:
 
 ## About the workshop
 
-Open and reproducible science helps others understand, evaluate, reuse,
-and extend research. In this 90-minute workshop, we follow one prepared
-R project from its source data to an archived result. We use
-`HealthWellbeing` to pool published correlations between health and
-well-being.
-[Teaching dataset](workshop/00_preparation.qmd#preparation-data)
+Open and reproducible science helps others understand, evaluate, reuse, and extend research. In this 90-minute workshop, we follow one prepared R project from its source data to an archived result.
 
 The workshop is presented by [James Bristow](2_coordinators.qmd#james-bristow), Massey University, with co-author [Hana Liang](2_coordinators.qmd#hana-liang), Bioeconomy Science Institute.
-
-The main aim is for you to understand and experience an end-to-end
-reproducible research workflow, not to master every individual package.
 
 ## Learning objectives
 
 By the end of the workshop, participants should be able to:
 
 -   Explain how the tools support different parts of a reproducible research workflow.
--   Use FAIR principles to document variables, provenance, licensing, and
-    access conditions, and interpret an automated assessment.
+-   Use FAIR principles to document variables, provenance, licensing, and access conditions, and interpret an automated assessment.
 -   Explain how `pins` and `vetiver` link results to specific data and model versions.
 -   Complete and run a `targets` pipeline and render a Quarto report from its outputs.
 -   Change an analysis setting, rebuild only what is affected, and reproduce the result.
@@ -50,39 +41,11 @@ By the end of the workshop, participants should be able to:
 | 82–90 min | 8 min | [Questions and discussion](workshop/09_discussion.qmd) | Interactive |
 | **Total** | **90 min** | | |
 
-The session combines 40 minutes of concepts and demonstrations, 42
-minutes of hands-on work, and 8 minutes of discussion. The hands-on work
-is a two-minute Git activity in the opening and a 40-minute continuous
-exercise.
-
-## One dataset, one exercise, one environment
-
--   **One dataset throughout.** Every stage uses `HealthWellbeing`. For
-    `vetiver`, a separate pipeline branch trains and pins a small
-    regression on the same checked input as the meta-analysis.
--   **One continuous hands-on exercise.** You complete and run a
-    partially completed `targets` pipeline and Quarto report, then
-    change the analysis and reproduce the results, rather than building
-    everything from scratch.
--   **One prepared computational environment.** MyBinder provides the
-    packages, configuration, and data, so nothing is installed during
-    the workshop. [Preparation](workshop/00_preparation.qmd)
-
 ## Supplementary exercise
-
-Synthetic data with `synthpop` is a supplementary exercise for after
-the workshop. The archiving segment mentions it briefly when
-discussing data that cannot be shared.
-[Synthetic data with synthpop](workshop/10_synthetic_data.qmd)
-
-## Reproducibility when data cannot be shared
 
 Open science can include restricted-access data. Researchers can document their methods, code, and access conditions while restricting the original observations.
 
-Synthetic data can help readers test whether a workflow runs. Verifying
-findings based on original observations requires access to those
-observations. A differential privacy claim requires a validated
-mechanism and privacy accounting [@near2021-synthetic-data].
+Synthetic data can help readers test whether a workflow runs. Synthetic data with `synthpop` is a supplementary exercise for after the workshop. The archiving segment mentions it briefly when discussing data that cannot be shared. [Synthetic data with synthpop](workshop/10_synthetic_data.qmd)
 
 ## Principles to put into practice {#intro-principles}
 
@@ -100,9 +63,4 @@ We will consider common barriers to these goals, including undocumented dependen
 
 ## Getting started
 
-Some familiarity with R will help you follow the examples. Open the
-prepared environment, verify the teaching dataset, and prepare the
-dataset versions before the timed session.
-[Preparation](workshop/00_preparation.qmd)
-
-For upcoming workshops, dates, and venues, see the [workshop announcements](../ANNOUNCEMENTS.md).
+Some familiarity with R will help you follow the examples. Open the prepared environment, verify the teaching dataset, and prepare the dataset versions before the timed session. [Preparation](workshop/00_preparation.qmd)

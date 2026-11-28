@@ -323,8 +323,7 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">13.1</span> Introduction</a></li>
   <li><a href="#the-workflow-you-used" id="toc-the-workflow-you-used" class="nav-link" data-scroll-target="#the-workflow-you-used"><span class="header-section-number">13.2</span> The workflow you used</a></li>
   <li><a href="#extras-discussion" id="toc-extras-discussion" class="nav-link" data-scroll-target="#extras-discussion"><span class="header-section-number">13.3</span> Discussion</a></li>
-  <li><a href="#export-work" id="toc-export-work" class="nav-link" data-scroll-target="#export-work"><span class="header-section-number">13.4</span> Before you leave</a></li>
-  <li><a href="#follow-up-resources" id="toc-follow-up-resources" class="nav-link" data-scroll-target="#follow-up-resources"><span class="header-section-number">13.5</span> Follow-up resources</a></li>
+  <li><a href="#follow-up-resources" id="toc-follow-up-resources" class="nav-link" data-scroll-target="#follow-up-resources"><span class="header-section-number">13.4</span> Follow-up resources</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/JBris/open-and-reproducible-science-in-r/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div></nav>
     </div>
@@ -334,7 +333,7 @@ ul.task-list li input[type="checkbox"] {
 <header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../pages/workshop/00_preparation.html">Workshop</a></li><li class="breadcrumb-item"><a href="../../pages/workshop/09_discussion.html"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Questions and discussion</span></a></li></ol></nav>
 <div class="quarto-title">
 <h1 class="title"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Questions and discussion</span></h1>
-<p class="subtitle lead">82–90 minutes · Interactive</p>
+<p class="subtitle lead">Interactive</p>
 </div>
 
 
@@ -353,11 +352,12 @@ ul.task-list li input[type="checkbox"] {
 
 <section id="introduction" class="level2" data-number="13.1">
 <h2 data-number="13.1" class="anchored" data-anchor-id="introduction"><span class="header-section-number">13.1</span> Introduction</h2>
-<p>In the final eight minutes, we look back at the workflow you used, take questions, and discuss how to apply it in your own work. The aim of the session was to experience an end-to-end reproducible research workflow, not to master every package.</p>
+<p>To close this workshop, we look back at the workflow you used, take questions, and discuss how to apply it in your own work.</p>
+<p>The aim of the session was to experience an end-to-end reproducible research workflow, not to master every package.</p>
 </section>
 <section id="the-workflow-you-used" class="level2" data-number="13.2">
 <h2 data-number="13.2" class="anchored" data-anchor-id="the-workflow-you-used"><span class="header-section-number">13.2</span> The workflow you used</h2>
-<p>Allow about one minute. Each stage recorded something another researcher needs to understand, rerun, or cite the result.</p>
+<p>Each stage recorded something another researcher needs to understand, rerun, or cite the result.</p>
 <table class="caption-top table">
 <thead>
 <tr class="header">
@@ -404,31 +404,20 @@ ul.task-list li input[type="checkbox"] {
 </tr>
 </tbody>
 </table>
-<p>A useful test of the whole workflow is to point to the exact data version, analysis revision, environment, and archive citation for one reported result.</p>
 </section>
 <section id="extras-discussion" class="level2" data-number="13.3">
 <h2 data-number="13.3" class="anchored" data-anchor-id="extras-discussion"><span class="header-section-number">13.3</span> Discussion</h2>
-<p>Allow about five minutes. Discuss one or more of these questions with your neighbours or the room.</p>
+<p>Discuss one or more of these questions with your neighbours or the room.</p>
 <ul>
 <li>Which record from today, such as the lockfile, the metadata, the data version, or the report’s provenance, would have saved time in a past project?</li>
 <li>If the original data could not be shared, what could a reader test with a synthetic dataset, and what would require access to the originals?</li>
 <li>Which barrier to reproducibility do you meet most often: undocumented dependencies, manual analysis steps, or assumptions tied to one computer?</li>
 <li>Which single change would make your own research workflow easier for a collaborator to inspect and rerun?</li>
 </ul>
-<p>Use the remaining time for questions.</p>
+<p>In the remaining time, we can cover any questions or comments.</p>
 </section>
-<section id="export-work" class="level2" data-number="13.4">
-<h2 data-number="13.4" class="anchored" data-anchor-id="export-work"><span class="header-section-number">13.4</span> Before you leave</h2>
-<p>MyBinder files disappear when the session ends. In RStudio’s <strong>Files</strong> pane, select the files or folders below and use <strong>More → Export</strong>. Download each group before closing the browser tab.</p>
-<ol type="1">
-<li><strong>Your work.</strong> Export <code>workspace/</code> for the exact pipeline, report source, and rendered HTML. If you used recovery, any backups are here too. Also export <code>.here</code> from the project root. Use <strong>More → Show Hidden Files</strong> to find it. Keep <code>.here</code> at the root when you unpack the files to rerender the report.</li>
-<li><strong>Results and provenance.</strong> Open <code>outputs/health-wellbeing/</code> and export <code>meta-summary.csv</code>, <code>analysis-data-version.txt</code>, <code>dataset-versions.csv</code>, and <code>predictive-model-version.txt</code>. Include <code>session-info.txt</code> if you recorded the session. To keep the FAIR assessment, follow <a href="../../pages/workshop/03_data_documentation.html#save-the-results">Save the results</a> after running both assessments. Export <code>metadata/</code> to keep <code>fair-assessment.rds</code> alongside the metadata files.</li>
-<li><strong>Exact pins.</strong> Export <code>data_store/</code> and <code>model_store/</code> if you want to reopen the same data and model versions later. Keep the <code>data/raw/</code> source and licence record with the teaching snapshot.</li>
-</ol>
-<p>For a public release, review the exported contents first and follow the <a href="../../pages/workshop/08_archiving.html#decide-what-to-archive">archiving checklist</a>.</p>
-</section>
-<section id="follow-up-resources" class="level2" data-number="13.5">
-<h2 data-number="13.5" class="anchored" data-anchor-id="follow-up-resources"><span class="header-section-number">13.5</span> Follow-up resources</h2>
+<section id="follow-up-resources" class="level2" data-number="13.4">
+<h2 data-number="13.4" class="anchored" data-anchor-id="follow-up-resources"><span class="header-section-number">13.4</span> Follow-up resources</h2>
 <ul>
 <li><a href="../../pages/workshop/10_synthetic_data.html">Supplementary exercise: synthetic data with synthpop</a>.</li>
 <li><a href="../../pages/workshop/01_open_science.html#git-practice">Practise Git and GitHub with your own fork</a>.</li>
@@ -437,7 +426,7 @@ ul.task-list li input[type="checkbox"] {
 <li><a href="https://vetiver.posit.co/get-started/deploy.html">Deploying models with vetiver</a>.</li>
 <li>The lessons’ further reading sections and the <a href="../../pages/4_references.html">references</a>.</li>
 </ul>
-<p>Questions after the workshop are welcome in the repository’s <a href="https://github.com/JBris/open-and-reproducible-science-in-r/discussions">GitHub Discussions</a>.</p>
+<p>Questions, issues, and comments after the workshop are welcome in the repository’s <a href="https://github.com/JBris/open-and-reproducible-science-in-r/discussions">GitHub Discussions</a>.</p>
 
 
 </section>

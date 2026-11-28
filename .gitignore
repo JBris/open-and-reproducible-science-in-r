@@ -216,7 +216,6 @@ cython_debug/
 /outputs/health-wellbeing/
 
 # Participant copies of the workshop exercise templates.
-/workspace/
 figure-html/
 figure-pdf/
 
@@ -229,3 +228,8 @@ figure-pdf/
 # Local Codex session ID
 /.codex-session-id
 /.claude-session-id
+
+health-wellbeing-article
+pages/**/*.html
+pages/**/*.rmarkdown
+site_libs/

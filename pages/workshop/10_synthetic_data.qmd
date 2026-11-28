@@ -1,32 +1,23 @@
 ---
 title: "Supplementary exercise: synthetic data with synthpop"
 subtitle: "After the workshop · synthpop"
-editor:
-  markdown:
-    wrap: 72
+editor: visual
 link-citations: true
 execute:
   warning: false
   message: false
 ---
 
-```{r health-synthetic-book-output, include = FALSE, eval = TRUE}
-source("pipelines/workshop_support.R")
-use_workshop_book_outputs()
-```
-
 ## Introduction
 
 This supplementary exercise is outside the timed programme and takes
-about 15 minutes. You will generate a synthetic version of the
+about 15 minutes. 
+
+You will generate a synthetic version of the
 `HealthWellbeing` study summaries with *synthpop*, compare it with the
 original, and run the same pooled analysis on both. By the end, you
 should be able to explain what a synthetic dataset lets others test
 and what it cannot establish.
-
-Run the chunks in the **R Console** from the project root, in the
-prepared environment, after preparing the dataset versions.
-[Prepare the dataset versions](00_preparation.qmd#preparation-versions)
 
 ## Prepare the study summaries
 
@@ -34,6 +25,9 @@ We read the full 29-study dataset by its recorded pin version, so the
 exercise starts from the same input as the workshop pipeline.
 
 ```{r health-synthetic-input, include = TRUE, echo = TRUE, message = FALSE, warning = FALSE, cache = FALSE, output = TRUE, eval = TRUE}
+source("pipelines/workshop_support.R")
+use_workshop_book_outputs()
+
 box::use(pins[board_folder, pin_read], utils[read.csv])
 
 source("pipelines/workshop_support.R")
@@ -95,9 +89,7 @@ compare(synthetic, original)
 
 Inspect the distributions of `population`, `z`, and `log_n`. The
 comparison describes how closely the two tables resemble each other
-on these variables. Similar distributions can coexist with
-differences in the relationships between variables and in downstream
-estimates. For the synthesis methods, see @nowok2016-synthpop and the
+on these variables. For the synthesis methods, see @nowok2016-synthpop and the
 [synthpop documentation](https://www.synthpop.org.uk/).
 
 ## Try it yourself: pool both datasets
@@ -137,22 +129,19 @@ round(
 )
 ```
 
-The analysis code runs unchanged on the synthetic table, so a reader
-without access to restricted originals could test that the workflow
-works. The synthetic estimate is computed from generated rows. A close
-match would not verify the original finding, and a difference would
-not refute it.
+The above code runs on the synthetic table, so a reader
+without access to restricted data could test that the workflow
+works. A close match would not verify the original finding, and a difference would not refute it.
 
 ## Limits on interpretation and sharing
 
-Treat this as a public teaching example. Ordinary synthesis with
-*synthpop* is not a differential privacy guarantee, and a distribution
-comparison or utility score does not establish one. A privacy claim
+Ordinary synthesis with *synthpop* is not a differential privacy guarantee. A privacy claim
 requires a validated mechanism and privacy accounting
-[@near2021-synthetic-data]. Synthetic data also does not confer
+[@near2021-synthetic-data]. 
+
+Synthetic data also does not confer
 privacy protection on related models, evaluation results, or
-metadata. Keep generated tables local until you have checked the
-applicable release terms.
+metadata. 
 
 ## Checkpoint {#synthetic-checkpoint}
 

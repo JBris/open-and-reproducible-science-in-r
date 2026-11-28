@@ -408,8 +408,8 @@ window.Quarto = {
   <li><a href="#step-2-read-the-report-source" id="toc-step-2-read-the-report-source" class="nav-link" data-scroll-target="#step-2-read-the-report-source"><span class="header-section-number">10.3</span> Step 2: read the report source</a></li>
   <li><a href="#step-3-complete-the-three-gaps" id="toc-step-3-complete-the-three-gaps" class="nav-link" data-scroll-target="#step-3-complete-the-three-gaps"><span class="header-section-number">10.4</span> Step 3: complete the three gaps</a></li>
   <li><a href="#step-4-render-again-and-check-the-numbers" id="toc-step-4-render-again-and-check-the-numbers" class="nav-link" data-scroll-target="#step-4-render-again-and-check-the-numbers"><span class="header-section-number">10.5</span> Step 4: render again and check the numbers</a></li>
-  <li><a href="#quarto-checkpoint" id="toc-quarto-checkpoint" class="nav-link" data-scroll-target="#quarto-checkpoint"><span class="header-section-number">10.6</span> Checkpoint</a></li>
-  <li><a href="#quarto-publishing" id="toc-quarto-publishing" class="nav-link" data-scroll-target="#quarto-publishing"><span class="header-section-number">10.7</span> After the workshop: publishing and journal formats</a></li>
+  <li><a href="#quarto-publishing" id="toc-quarto-publishing" class="nav-link" data-scroll-target="#quarto-publishing"><span class="header-section-number">10.6</span> Publishing and journal formats</a></li>
+  <li><a href="#quarto-checkpoint" id="toc-quarto-checkpoint" class="nav-link" data-scroll-target="#quarto-checkpoint"><span class="header-section-number">10.7</span> Checkpoint</a></li>
   <li><a href="#further-reading" id="toc-further-reading" class="nav-link" data-scroll-target="#further-reading"><span class="header-section-number">10.8</span> Further reading</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/JBris/open-and-reproducible-science-in-r/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div></nav>
@@ -420,7 +420,7 @@ window.Quarto = {
 <header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../pages/workshop/00_preparation.html">Workshop</a></li><li class="breadcrumb-item"><a href="../../pages/workshop/06_quarto.html"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Create and render a reproducible Quarto report</span></a></li></ol></nav>
 <div class="quarto-title">
 <h1 class="title"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Create and render a reproducible Quarto report</span></h1>
-<p class="subtitle lead">50–65 minutes · Hands-on · Quarto</p>
+<p class="subtitle lead">Hands-on · Quarto</p>
 </div>
 
 
@@ -439,7 +439,7 @@ window.Quarto = {
 
 <section id="introduction" class="level2" data-number="10.1">
 <h2 data-number="10.1" class="anchored" data-anchor-id="introduction"><span class="header-section-number">10.1</span> Introduction</h2>
-<p>In this 15-minute activity, you complete and render a short report that reads the summary written by your pipeline. The report is partially completed: its methods are written, and you add the confidence interval, an interpretation, and the provenance fields. By the end, you should be able to explain where each number in the report came from and what a reader needs to recreate it.</p>
+<p>In this activity, you complete and render a short report that reads the summary written by your pipeline. The report is partially completed: its methods are written, and you add the confidence interval, an interpretation, and the provenance fields. By the end, you should be able to explain where each number in the report came from and what a reader needs to recreate it.</p>
 <p>You need the <code>meta-summary.csv</code> file from the <a href="../../pages/workshop/05_targets.html#targets-checkpoint">targets activity</a>.</p>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
@@ -459,31 +459,39 @@ Get back on track
 </section>
 <section id="step-1-copy-and-render-the-template" class="level2" data-number="10.2">
 <h2 data-number="10.2" class="anchored" data-anchor-id="step-1-copy-and-render-the-template"><span class="header-section-number">10.2</span> Step 1: copy and render the template</h2>
-<p>Allow about three minutes. In the <strong>R Console</strong> at the project root, copy and render your report. Run the same render command after each edit. It keeps you in the Console and lets you read any errors there. If you want to restart from the template, rename your existing <code>workspace/report.qmd</code> in the <strong>Files</strong> pane before running this block.</p>
+<p>Copy and render your report using the code below. Run the same render command after each edit. If you want to restart from the template, rename your existing <code>workspace/report.qmd</code> in the <strong>Files</strong> pane before running this block.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"pipelines/workshop_support.R"</span>)</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">dir.create</span>(<span class="st">"workspace"</span>, <span class="at">showWarnings =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>report <span class="ot">&lt;-</span> <span class="fu">file.path</span>(<span class="st">"workspace"</span>, <span class="st">"report.qmd"</span>)</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">file.exists</span>(report)) {</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stopifnot</span>(<span class="fu">file.copy</span>(<span class="st">"pipelines/exercise/health_wellbeing_report.qmd"</span>, report))</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="fu">render_workshop_report</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">use_workshop_book_outputs</span>()</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">dir.create</span>(<span class="st">"workspace"</span>, <span class="at">showWarnings =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>report <span class="ot">&lt;-</span> <span class="fu">file.path</span>(<span class="st">"workspace"</span>, <span class="st">"report.qmd"</span>)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">file.exists</span>(report)) {</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stopifnot</span>(<span class="fu">file.copy</span>(<span class="st">"pipelines/exercise/health_wellbeing_report.qmd"</span>, report))</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="fu">render_workshop_report</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>In the <strong>Files</strong> pane, open the <code>workspace</code> folder, click <code>report.html</code>, and choose <strong>View in Web Browser</strong>. The HTML embeds its resources, so it works as a single file. If you started from the template, the pooled estimate appears along with three <strong>TODO</strong> markers.</p>
+<p>Next, open the <code>report.html</code>. If you started from the template, the pooled estimate appears along with three <strong>TODO</strong> markers.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">browseURL</span>(</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">file.path</span>(<span class="st">"workspace"</span>, <span class="st">"report.html"</span>)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </section>
 <section id="step-2-read-the-report-source" class="level2" data-number="10.3">
 <h2 data-number="10.3" class="anchored" data-anchor-id="step-2-read-the-report-source"><span class="header-section-number">10.3</span> Step 2: read the report source</h2>
-<p>Allow about three minutes. Open <code>workspace/report.qmd</code> in RStudio.</p>
-<ul>
-<li>The <strong>YAML header</strong> at the top sets the title and HTML format, and names the summary file in <code>params</code>.</li>
-<li>The hidden <strong>R chunk</strong> reads one row from the summary CSV and checks it. It does not fit any model.</li>
-<li><strong>Inline R code</strong>, written as a backtick, the letter <code>r</code>, an expression, and a closing backtick, puts values from that row into the text when the report renders.</li>
-</ul>
-<p>The pipeline owns the analysis; the report explains its methods and interprets the saved result. Because the report never retypes a number, rerunning the pipeline and rendering again updates every value.</p>
+<p>Allow up to 10 minutes for this activity.</p>
+<p>Open <code>workspace/report.qmd</code> in RStudio.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">file.edit</span>(</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">file.path</span>(<span class="st">"workspace"</span>, <span class="st">"report.qmd"</span>)</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The pipeline performs the analysis, while the report explains its methods and interprets the saved result. Because the report never retypes a number, rerunning the pipeline and rendering again updates every value.</p>
 </section>
 <section id="step-3-complete-the-three-gaps" class="level2" data-number="10.4">
 <h2 data-number="10.4" class="anchored" data-anchor-id="step-3-complete-the-three-gaps"><span class="header-section-number">10.4</span> Step 3: complete the three gaps</h2>
-<p>Allow about six minutes. The Results section reports two 95% intervals that answer different questions:</p>
+<p>The Results section reports two 95% intervals that answer different questions:</p>
 <ul>
 <li>The <strong>confidence interval</strong> describes uncertainty in the <em>average</em> association across studies. It usually narrows as studies are added.</li>
 <li>The <strong>prediction interval</strong> describes where the true association in a new, comparable study is likely to fall under the model. It adds the between-study variance, <span class="math inline">\(\tau^2\)</span>, so it stays wide when the studies differ.</li>
@@ -495,6 +503,14 @@ Get back on track
 <li><strong>TODO 2</strong>, in Results: explain how the prediction interval and confidence interval answer different questions.</li>
 <li><strong>TODO 3</strong>, in Provenance: add list items for the dataset pin version and the pipeline script MD5.</li>
 </ul>
+<p>Render the report again after updating the <code>report.qmd</code> file:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">render_workshop_report</span>()</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">browseURL</span>(</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">file.path</span>(<span class="st">"workspace"</span>, <span class="st">"report.html"</span>)</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Solutions are below:</p>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
 <div class="callout-icon-container">
@@ -508,10 +524,10 @@ Solution to TODO 1
 <div id="callout-2" class="callout-2-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Replace the sentence about the pooled correlation and the TODO 1 paragraph with:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>The pooled correlation was <span class="in">`r sprintf("%.3f", result$pooled_r)`</span> with a</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="in">`r sprintf("%.0f%%", 100 * result$confidence_level)`</span> confidence interval</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>from <span class="in">`r sprintf("%.3f", result$ci_lower)`</span> to</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="in">`r sprintf("%.3f", result$ci_upper)`</span>.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>The pooled correlation was <span class="in">`r sprintf("%.3f", result$pooled_r)`</span> with a</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="in">`r sprintf("%.0f%%", 100 * result$confidence_level)`</span> confidence interval</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>from <span class="in">`r sprintf("%.3f", result$ci_lower)`</span> to</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="in">`r sprintf("%.3f", result$ci_upper)`</span>.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
@@ -528,9 +544,9 @@ Example for TODO 2
 <div id="callout-3" class="callout-3-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
 <p>Your wording can differ. For example:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>The confidence interval describes uncertainty in the average association.</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>The prediction interval describes plausible true associations in a</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>comparable setting under the model.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>The confidence interval describes uncertainty in the average association.</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>The prediction interval describes plausible true associations in a</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>comparable setting under the model.</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
@@ -546,39 +562,38 @@ Solution to TODO 3
 </div>
 <div id="callout-4" class="callout-4-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<div class="sourceCode" id="cb5"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Dataset pin version: <span class="in">`r result$data_version`</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Pipeline script MD5: <span class="in">`r pipeline_md5`</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Dataset pin version: <span class="in">`r result$data_version`</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Pipeline script MD5: <span class="in">`r pipeline_md5`</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </div>
 </div>
 <p>The completed reference report is <code>pipelines/health_wellbeing_report.qmd</code>. If you are stuck, compare your copy with it.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">file.edit</span>(</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">file.path</span>(<span class="st">"pipelines"</span>, <span class="st">"health_wellbeing_report.qmd"</span>)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </section>
 <section id="step-4-render-again-and-check-the-numbers" class="level2" data-number="10.5">
 <h2 data-number="10.5" class="anchored" data-anchor-id="step-4-render-again-and-check-the-numbers"><span class="header-section-number">10.5</span> Step 4: render again and check the numbers</h2>
-<p>Allow about three minutes. Render the report again in the <strong>R Console</strong>:</p>
+<p>Reload <code>report.html</code> in your browser. Then compare its values with the summary file:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">render_workshop_report</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>summary_csv <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">file.path</span>(<span class="fu">workshop_output_dir</span>(), <span class="st">"meta-summary.csv"</span>)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>summary_csv[, <span class="fu">c</span>(<span class="st">"data_version"</span>, <span class="st">"studies"</span>, <span class="st">"pooled_r"</span>, <span class="st">"ci_lower"</span>, <span class="st">"ci_upper"</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Reload <code>report.html</code> in your browser. Then compare its values with the summary file in the <strong>R Console</strong>:</p>
+<p>Run this code to render the report and open it in your browser.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>summary_csv <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">file.path</span>(<span class="fu">workshop_output_dir</span>(), <span class="st">"meta-summary.csv"</span>)</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>summary_csv[, <span class="fu">c</span>(<span class="st">"data_version"</span>, <span class="st">"studies"</span>, <span class="st">"pooled_r"</span>, <span class="st">"ci_lower"</span>, <span class="st">"ci_upper"</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>            data_version studies  pooled_r  ci_lower  ci_upper
-1 20261121T221847Z-11d00      29 0.3631912 0.3092394 0.4148126</code></pre>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">render_workshop_report</span>()</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">browseURL</span>(</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">file.path</span>(<span class="st">"workspace"</span>, <span class="st">"report.html"</span>)</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</div>
-</section>
-<section id="quarto-checkpoint" class="level2" data-number="10.6">
-<h2 data-number="10.6" class="anchored" data-anchor-id="quarto-checkpoint"><span class="header-section-number">10.6</span> Checkpoint</h2>
-<p>Your rendered report shows <strong>29 studies</strong>, a pooled correlation of <strong>0.363</strong>, and a 95% interval from <strong>0.309 to 0.415</strong>. Its provenance names the same pin version as the summary file, the pipeline script checksum, the inclusion rule, and the model version. It reports I² of <strong>99.8%</strong> and a prediction interval of <strong>0.056 to 0.607</strong>. You can point to the CSV column behind each number. No TODO markers remain.</p>
-<p>Next, you will change an analysis setting and reproduce the results. <a href="../../pages/workshop/07_modify_and_reproduce.html">Modify the analysis and reproduce the results</a></p>
-</section>
-<section id="quarto-publishing" class="level2" data-number="10.7">
-<h2 data-number="10.7" class="anchored" data-anchor-id="quarto-publishing"><span class="header-section-number">10.7</span> After the workshop: publishing and journal formats</h2>
 <p>An approved HTML report can be served from a project site or attached to a release. Before sharing, review the report for any content that came from data with reuse conditions. The report source, versioned analysis code, metadata, and environment record help others understand how the published HTML was made.</p>
+</section>
+<section id="quarto-publishing" class="level2" data-number="10.6">
+<h2 data-number="10.6" class="anchored" data-anchor-id="quarto-publishing"><span class="header-section-number">10.6</span> Publishing and journal formats</h2>
 <p>Quarto extensions add formats and templates for particular publishing workflows. Browse the <a href="https://quarto.org/docs/extensions/listing-journals.html">Journal Articles extension listing</a> and find a format relevant to your field. Examples include:</p>
 <table class="caption-top table">
 <thead>
@@ -607,12 +622,34 @@ Solution to TODO 3
 </tbody>
 </table>
 <p>Open an extension’s repository to check its supported formats, required software, author metadata, and usage instructions. Compare the template with the target journal’s current submission guidance.</p>
-<p>To try one, create a separate article directory and start from the <a href="https://github.com/quarto-journals/plos">PLOS template</a>. Run these commands in the Terminal from the project root and follow the prompts:</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> health-wellbeing-article</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> health-wellbeing-article</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> use template quarto-journals/plos</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<p>The template supplies an example QMD, bibliography, and extension files. PLOS supports <code>plos-html</code> and <code>plos-pdf</code>; the PDF format also requires a LaTeX installation. Adapt the article to read the same pipeline summary and retain its methods and provenance fields.</p>
+<p>To try one, create a separate article directory and start from the <a href="https://github.com/quarto-journals/elsevier">Elsevier template</a>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> <span class="at">-rf</span> health-wellbeing-article</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> health-wellbeing-article</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> health-wellbeing-article</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> use template quarto-journals/elsevier <span class="at">--no-prompt</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The template supplies an example QMD, bibliography, and extension files. Elsevier supports <code>elsevier-html</code> and <code>elsevier-pdf</code>; the PDF format also requires a LaTeX installation.</p>
+<p>Open the downloaded Elsevier template file:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>elsevier_path <span class="ot">&lt;-</span> <span class="fu">file.path</span>(<span class="st">"health-wellbeing-article"</span>, <span class="st">"health-wellbeing-article.qmd"</span>)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">file.edit</span>(</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  elsevier_path</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>And we can render this document as a PDF.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">system2</span>(<span class="st">"quarto"</span>, <span class="fu">c</span>(<span class="st">"render"</span>, <span class="fu">shQuote</span>(elsevier_path), <span class="st">"--to"</span>, <span class="st">"elsevier-pdf"</span>))</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="fu">browseURL</span>(</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">file.path</span>(<span class="st">"health-wellbeing-article"</span>, <span class="st">"health-wellbeing-article.pdf"</span>)</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <p>Extensions are stored locally in <code>_extensions/</code>. Include that folder with the article source in Git. For a release, record the Quarto and extension versions alongside the R package versions in <code>renv.lock</code>. See the Quarto guidance on installing and versioning extensions <span class="citation" data-cites="quarto-managing-extensions">(<a href="../4_references.html#ref-quarto-managing-extensions" role="doc-biblioref">Quarto, n.d.b</a>)</span>.</p>
+</section>
+<section id="quarto-checkpoint" class="level2" data-number="10.7">
+<h2 data-number="10.7" class="anchored" data-anchor-id="quarto-checkpoint"><span class="header-section-number">10.7</span> Checkpoint</h2>
+<p>Next, you will change an analysis setting and reproduce the results. <a href="../../pages/workshop/07_modify_and_reproduce.html">Modify the analysis and reproduce the results</a></p>
 </section>
 <section id="further-reading" class="level2" data-number="10.8">
 <h2 data-number="10.8" class="anchored" data-anchor-id="further-reading"><span class="header-section-number">10.8</span> Further reading</h2>
