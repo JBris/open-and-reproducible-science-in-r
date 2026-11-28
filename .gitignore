@@ -232,4 +232,4 @@ figure-pdf/
 health-wellbeing-article
 pages/**/*.html
 pages/**/*.rmarkdown
-site_libs/
+pages/workshop/05_targets_files/
