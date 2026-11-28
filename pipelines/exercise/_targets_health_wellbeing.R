@@ -8,7 +8,10 @@ box::use(
   targets[tar_option_set, tar_path_script, tar_target]
 )
 
-source("pipelines/workshop_support.R", local = TRUE)
+withr::with_dir(
+  here::here(),
+  source("pipelines/workshop_support.R", local = TRUE)
+)
 workshop_dir <- workshop_output_dir()
 pipeline_script <- tar_path_script()
 
@@ -21,7 +24,7 @@ list(
   # 1. The selection file names the pinned dataset version to analyse.
   tar_target(
     version_file,
-    file.path(workshop_dir, "analysis-data-version.txt"),
+    here::here(workshop_dir, "analysis-data-version.txt"),
     format = "file"
   ),
 
@@ -36,7 +39,7 @@ list(
   tar_target(
     dataset_file,
     {
-      board_path <- file.path(workshop_dir, "data_store")
+      board_path <- here::here(workshop_dir, "data_store")
       stopifnot(dir.exists(board_path))
 
       board <- pins::board_folder(board_path, versioned = TRUE)
@@ -52,7 +55,7 @@ list(
   ),
 
   tar_target(data_provenance, {
-    board <- pins::board_folder(file.path(workshop_dir, "data_store"), versioned = TRUE)
+    board <- pins::board_folder(here::here(workshop_dir, "data_store"), versioned = TRUE)
     pin <- pins::pin_meta(board, "health_wellbeing", version = data_version)
     list(
       source_url = pin$user$source_url,
@@ -126,7 +129,7 @@ list(
   }),
 
   tar_target(model_pin_files, {
-    board <- pins::board_folder(file.path(workshop_dir, "model_store"), versioned = TRUE)
+    board <- pins::board_folder(here::here(workshop_dir, "model_store"), versioned = TRUE)
     name <- predictive_model$model_name
     previous <- if (pins::pin_exists(board, name)) {
       pins::pin_versions(board, name)$version
@@ -145,7 +148,7 @@ list(
       stopifnot(length(created) == 1L)
       created
     }
-    model_version_file <- file.path(workshop_dir, "predictive-model-version.txt")
+    model_version_file <- here::here(workshop_dir, "predictive-model-version.txt")
     writeLines(version, model_version_file)
     c(model_version_file, pins::pin_download(board, name, version = version))
   }, format = "file"),
@@ -189,7 +192,7 @@ list(
   tar_target(
     summary_file,
     {
-      path <- file.path(workshop_dir, "meta-summary.csv")
+      path <- here::here(workshop_dir, "meta-summary.csv")
       # TODO 2: write result to path without row names, then return path.
       stop("Complete TODO 2 in the summary_file target.")
     },

@@ -33,7 +33,10 @@ backs up your working pipeline in `workspace/`, then restores and runs
 the reference pipeline.
 
 ``` r
-source("pipelines/recover_workshop.R")
+withr::with_dir(
+  here::here(),
+  source("pipelines/recover_workshop.R")
+)
 ```
 
 After recovery, run Step 1 to set the paths and then skip to
@@ -107,7 +110,10 @@ Git ignores the `workspace/` folder, so the supplied template stays
 unchanged.
 
 ```{r health-targets-setup, include = TRUE, echo = TRUE, message = FALSE, warning = FALSE, cache = FALSE, output = TRUE, eval = TRUE}
-source("pipelines/workshop_support.R")
+withr::with_dir(
+  here::here(),
+  source("pipelines/workshop_support.R")
+)
 use_workshop_book_outputs()
 
 box::use(
@@ -115,13 +121,16 @@ box::use(
 )
 invisible(loadNamespace("visNetwork")) # Load the graph display package quietly.
 
-source("pipelines/workshop_support.R")
+withr::with_dir(
+  here::here(),
+  source("pipelines/workshop_support.R")
+)
 workshop_dir <- workshop_output_dir()
-pipeline_template <- file.path(
+pipeline_template <- here::here(
   "pipelines", "exercise", "_targets_health_wellbeing.R"
 )
-pipeline_script <- file.path("workspace", "_targets.R")
-pipeline_store <- file.path(workshop_dir, "_targets")
+pipeline_script <- here::here("workspace", "_targets.R")
+pipeline_store <- here::here(workshop_dir, "_targets")
 
 dir.create("workspace", showWarnings = FALSE)
 if (!file.exists(pipeline_script)) {
@@ -237,7 +246,7 @@ when its code, its upstream targets, or its tracked files change.
 Refer to the bottom two steps of `workspace/_targets.R`. We have fitted a mixed-effect meta-analysis model and written the results to a CSV file: `outputs/health-wellbeing/meta-summary.csv`.
 
 ```{r meta-summary-view, include = TRUE, echo = TRUE, message = FALSE, warning = FALSE, cache = FALSE, output = TRUE, eval = FALSE}
-read.csv(file.path(
+read.csv(here::here(
   "outputs", "health-wellbeing", "meta-summary.csv"
 )) |> 
   dplyr::select(c("data_version", "data_scope", "data_filter", "pooled_r", "confidence_level", "tau2", "effect_scale", "tau_method", "meta_version")) |>
