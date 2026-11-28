@@ -136,7 +136,7 @@ Open `workspace/_targets.R` in RStudio and
 read the numbered steps. Then draw the dependency graph and
 try to run the pipeline.
 
-```{r health-targets-first-run, include = TRUE, echo = TRUE, eval = knitr::is_html_output()}
+```{r health-targets-first-run, include = TRUE, echo = TRUE, eval = FALSE}
 tar_visnetwork(
   script = pipeline_script,
   store = pipeline_store,
@@ -193,14 +193,14 @@ tracks the file's contents and rebuilds it if the file changes.
 
 Run the pipeline again and read the result.
 
-```{r health-targets-run, include = TRUE, echo = TRUE, message = FALSE, warning = FALSE, cache = FALSE, output = TRUE, eval = TRUE}
+```{r health-targets-run, include = TRUE, echo = TRUE, message = FALSE, warning = FALSE, cache = FALSE, output = TRUE, eval = FALSE}
 tar_make(script = pipeline_script, store = pipeline_store)
 tar_read(result, store = pipeline_store)
 ```
 
 Check that your own pipeline is complete by drawing the graph again.
 
-```{r health-targets-graph, include = TRUE, echo = TRUE, message = FALSE, warning = FALSE, cache = FALSE, output = TRUE, eval = knitr::is_html_output()}
+```{r health-targets-graph, include = TRUE, echo = TRUE, message = FALSE, warning = FALSE, cache = FALSE, output = TRUE, eval = FALSE}
 tar_visnetwork(
   script = pipeline_script,
   store = pipeline_store,

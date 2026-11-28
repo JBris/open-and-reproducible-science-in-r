@@ -63,7 +63,7 @@ COPY --chown=${NB_USER}:${NB_USER} ./data/metadata ${HOME}/data/metadata
 COPY --chown=${NB_USER}:${NB_USER} ./data/raw ${HOME}/data/raw
 
 COPY --chown=${NB_USER}:${NB_USER} \
-    README.md index.qmd _quarto.yml styles.css VERSION CITATION.cff LICENSE .lintr \
+    README.md index.qmd _quarto.yml styles.css VERSION CITATION.cff LICENSE .lintr _dependencies.R \
     ANNOUNCEMENTS.md CHANGELOG.md CONTRIBUTING.md CODE_OF_CONDUCT.md \
     ACCESSIBILITY.md SECURITY.md AI_POLICY.md bibliography.bib ${HOME}/
 
