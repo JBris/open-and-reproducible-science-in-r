@@ -24,9 +24,6 @@ workshop_dir <- workshop_output_dir()
 pipeline_script <- tar_path_script()
 
 # Run the targets in one local background worker.
-tar_option_set(
-  controller = crew_controller_local(workers = 1)
-)
 
 list(
   # 1. The selection file names the pinned dataset version to analyse.
