@@ -22,7 +22,7 @@ to its input and explain which steps targets reruns, and why.**
 Work in your MyBinder session, after preparing
 the dataset versions. If you fall behind, the **Get back on track** step
 below restores a working pipeline so you can continue.
-[Prepare the dataset versions](00_preparation.qmd#preparation-versions)
+[Prepare the dataset versions](00_preparation.qmd#preparation-data)
 
 ::: {.callout-tip}
 ## Get back on track {#get-back-on-track}
