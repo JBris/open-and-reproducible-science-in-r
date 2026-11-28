@@ -11,22 +11,13 @@ We will use MyBinder for this workshop. You should be able to open the prepared 
 ## Our teaching dataset
 
 We use `HealthWellbeing` from the
-[correlations chapter](https://doing-meta.guide/pooling-es#correlations)
+[correlations chapter](https://doing-meta.guide/pooling-es#pooling-cor)
 [@harrer2021, sec. 4.2.4].
 It contains study-level summaries of the association between health and
 well-being. It is also distributed with the `dmetar` package.
 
 The original review is @ngamaba2017. The dataset documentation describes
 the variables [@healthwellbeing].
-
-The workshop repository includes the authors' data file at
-`data/raw/healthwellbeing.rda`, so you do not need to install `dmetar` or
-download anything during the session. Keep the raw file unchanged and record its source separately from any transformations you make later. The
-bundled file matches the upstream `dmetar` snapshot byte for byte.
-
-The [source and licence record](https://github.com/MathiasHarrer/dmetar/blob/38c9b9bb5f85ea49de33e5d2536f6544d5268517/DESCRIPTION)
-shows the package's MIT licence. The workshop keeps the upstream
-notice in `data/raw/LICENSE-HealthWellbeing`.
 
 ## Open the prepared environment {#choose-your-computing-environment}
 
@@ -35,15 +26,7 @@ MyBinder runs the workshop's published image in your browser, with RStudio, R 4.
 1. [Open RStudio on MyBinder](https://mybinder.org/v2/gh/JBris/open-and-reproducible-science-in-r/HEAD?urlpath=rstudio)
    or use the link supplied by your instructor. Start it shortly before the
    workshop and keep the browser tab open; MyBinder stops idle sessions.
-2. MyBinder sessions are temporary. Follow the
-   [export checklist](09_discussion.qmd#export-work) before closing yours.
-
-If MyBinder fails to start, let the instructor know so you can use a prepared alternative.
-
-You can use your own computer instead, but complete the setup before the
-workshop. Clone the
-[workshop repository](https://github.com/JBris/open-and-reproducible-science-in-r), open `open-and-reproducible-science-in-r.Rproj`, and restore the project library with `renv::restore()`, or use the
-[Docker setup](https://github.com/JBris/open-and-reproducible-science-in-r#usage-with-docker). On Linux, building the `dataspice` dependency `jqr` from source needs the jq development library. Record your R version if it differs from 4.4.1.
+2. MyBinder sessions are temporary. Export any important work before closing your session.
 
 ## Check the project {#preparation-project}
 

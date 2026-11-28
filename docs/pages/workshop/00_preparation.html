@@ -412,20 +412,16 @@ div.csl-indent {
 </section>
 <section id="our-teaching-dataset" class="level2" data-number="4.2">
 <h2 data-number="4.2" class="anchored" data-anchor-id="our-teaching-dataset"><span class="header-section-number">4.2</span> Our teaching dataset</h2>
-<p>We use <code>HealthWellbeing</code> from the <a href="https://doing-meta.guide/pooling-es#correlations">correlations chapter</a> <span class="citation" data-cites="harrer2021">(<a href="../4_references.html#ref-harrer2021" role="doc-biblioref">Harrer et al. 2021, sec. 4.2.4</a>)</span>. It contains study-level summaries of the association between health and well-being. It is also distributed with the <code>dmetar</code> package.</p>
+<p>We use <code>HealthWellbeing</code> from the <a href="https://doing-meta.guide/pooling-es#pooling-cor">correlations chapter</a> <span class="citation" data-cites="harrer2021">(<a href="../4_references.html#ref-harrer2021" role="doc-biblioref">Harrer et al. 2021, sec. 4.2.4</a>)</span>. It contains study-level summaries of the association between health and well-being. It is also distributed with the <code>dmetar</code> package.</p>
 <p>The original review is <span class="citation" data-cites="ngamaba2017">Ngamaba, Panagioti, and Armitage (<a href="../4_references.html#ref-ngamaba2017" role="doc-biblioref">2017</a>)</span>. The dataset documentation describes the variables <span class="citation" data-cites="healthwellbeing">(<a href="../4_references.html#ref-healthwellbeing" role="doc-biblioref">Harrer et al., n.d.</a>)</span>.</p>
-<p>The workshop repository includes the authors’ data file at <code>data/raw/healthwellbeing.rda</code>, so you do not need to install <code>dmetar</code> or download anything during the session. Keep the raw file unchanged and record its source separately from any transformations you make later. The bundled file matches the upstream <code>dmetar</code> snapshot byte for byte.</p>
-<p>The <a href="https://github.com/MathiasHarrer/dmetar/blob/38c9b9bb5f85ea49de33e5d2536f6544d5268517/DESCRIPTION">source and licence record</a> shows the package’s MIT licence. The workshop keeps the upstream notice in <code>data/raw/LICENSE-HealthWellbeing</code>.</p>
 </section>
 <section id="choose-your-computing-environment" class="level2" data-number="4.3">
 <h2 data-number="4.3" class="anchored" data-anchor-id="choose-your-computing-environment"><span class="header-section-number">4.3</span> Open the prepared environment</h2>
 <p>MyBinder runs the workshop’s published image in your browser, with RStudio, R 4.4.1, Git, Quarto, and the R packages recorded in the project lockfile already installed. There is nothing to install during the workshop.</p>
 <ol type="1">
 <li><a href="https://mybinder.org/v2/gh/JBris/open-and-reproducible-science-in-r/HEAD?urlpath=rstudio">Open RStudio on MyBinder</a> or use the link supplied by your instructor. Start it shortly before the workshop and keep the browser tab open; MyBinder stops idle sessions.</li>
-<li>MyBinder sessions are temporary. Follow the <a href="../../pages/workshop/09_discussion.html#export-work">export checklist</a> before closing yours.</li>
+<li>MyBinder sessions are temporary. Export any important work before closing your session.</li>
 </ol>
-<p>If MyBinder fails to start, let the instructor know so you can use a prepared alternative.</p>
-<p>You can use your own computer instead, but complete the setup before the workshop. Clone the <a href="https://github.com/JBris/open-and-reproducible-science-in-r">workshop repository</a>, open <code>open-and-reproducible-science-in-r.Rproj</code>, and restore the project library with <code>renv::restore()</code>, or use the <a href="https://github.com/JBris/open-and-reproducible-science-in-r#usage-with-docker">Docker setup</a>. On Linux, building the <code>dataspice</code> dependency <code>jqr</code> from source needs the jq development library. Record your R version if it differs from 4.4.1.</p>
 </section>
 <section id="preparation-project" class="level2" data-number="4.4">
 <h2 data-number="4.4" class="anchored" data-anchor-id="preparation-project"><span class="header-section-number">4.4</span> Check the project</h2>
@@ -466,18 +462,12 @@ div.csl-indent {
 <span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>health <span class="ot">&lt;-</span> data_env[[<span class="st">"HealthWellbeing"</span>]]</span>
 <span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="fu">file.path</span>(<span class="st">"pipelines"</span>, <span class="st">"prepare_health_wellbeing.R"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>Creating new version '20261128T054236Z-11d00'
-Writing to pin 'health_wellbeing'
-Creating new version '20261128T054236Z-06ae2'
-Writing to pin 'health_wellbeing'</code></pre>
-</div>
 <div class="cell-output cell-output-stdout">
 <pre><code>    scope                version
 1     all 20261128T054236Z-11d00
 2 general 20261128T054236Z-06ae2</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(health, <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(health, <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>           author   cor      n         population     country
 1        An, 2008 0.620    121 general population South Korea

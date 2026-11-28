@@ -49,7 +49,6 @@ In the remaining time, we can cover any questions or comments.
 ## Follow-up resources
 
 -   [Supplementary exercise: synthetic data with synthpop](10_synthetic_data.qmd).
--   [Practise Git and GitHub with your own fork](01_open_science.qmd#git-practice).
 -   [Publishing and journal formats with Quarto](06_quarto.qmd#quarto-publishing).
 -   [Archiving your own releases with Zenodo](08_archiving.qmd#zenodo-github-integration).
 -   [Deploying models with vetiver](https://vetiver.posit.co/get-started/deploy.html).
