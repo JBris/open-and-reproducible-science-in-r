@@ -630,9 +630,9 @@ Solution to TODO 3
 <p>Open an extension’s repository to check its supported formats, required software, author metadata, and usage instructions. Compare the template with the target journal’s current submission guidance.</p>
 <p>To try one, create a separate article directory and start from the <a href="https://github.com/quarto-journals/elsevier">Elsevier template</a>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> <span class="at">-rf</span> health-wellbeing-article</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> health-wellbeing-article</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> health-wellbeing-article</span>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> <span class="at">-rf</span> /home/rstudio/health-wellbeing-article</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> /home/rstudio/health-wellbeing-article</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> /home/rstudio/health-wellbeing-article</span>
 <span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> use template quarto-journals/elsevier <span class="at">--no-prompt</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The template supplies an example QMD, bibliography, and extension files. Elsevier supports <code>elsevier-html</code> and <code>elsevier-pdf</code>; the PDF format also requires a LaTeX installation.</p>
