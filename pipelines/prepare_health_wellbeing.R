@@ -1,7 +1,10 @@
 # Prepare the versioned HealthWellbeing inputs for the workshop pipeline.
 #
 # Run from the project root before the hands-on activities:
-#   source(file.path("pipelines", "prepare_health_wellbeing.R"))
+#   withr::with_dir(
+#     here::here(),
+#     source("pipelines/prepare_health_wellbeing.R")
+#   )
 #
 # The script verifies the unchanged raw teaching file, stores two dataset
 # versions on a versioned local pins board, records their identifiers, and
@@ -10,9 +13,12 @@
 # script; its outputs are the files under outputs/health-wellbeing/.
 
 local({
-  source("pipelines/workshop_support.R", local = TRUE)
+  withr::with_dir(
+    here::here(),
+    source("pipelines/workshop_support.R", local = TRUE)
+  )
   workshop_dir <- workshop_output_dir()
-  raw_file <- file.path("data", "raw", "healthwellbeing.rda")
+  raw_file <- here::here("data", "raw", "healthwellbeing.rda")
   source_url <- paste0(
     "https://raw.githubusercontent.com/MathiasHarrer/dmetar/",
     "38c9b9bb5f85ea49de33e5d2536f6544d5268517/data/HealthWellbeing.rda"
@@ -34,7 +40,7 @@ local({
   # Enable versioning explicitly so the board keeps every write.
   dir.create(workshop_dir, recursive = TRUE, showWarnings = FALSE)
   board <- pins::board_folder(
-    file.path(workshop_dir, "data_store"),
+    here::here(workshop_dir, "data_store"),
     versioned = TRUE
   )
   pin_name <- "health_wellbeing"
@@ -104,12 +110,12 @@ local({
   )
   utils::write.csv(
     versions,
-    file.path(workshop_dir, "dataset-versions.csv"),
+    here::here(workshop_dir, "dataset-versions.csv"),
     row.names = FALSE
   )
   writeLines(
     full_version,
-    file.path(workshop_dir, "analysis-data-version.txt")
+    here::here(workshop_dir, "analysis-data-version.txt")
   )
   print(versions)
 })

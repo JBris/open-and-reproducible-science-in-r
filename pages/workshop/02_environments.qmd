@@ -31,13 +31,18 @@ Binder starts a container from such an image in a browser.
 We can next view the contents of the renv.lock file:
 
 ```{r renv-contents, include = TRUE, echo = TRUE, message = FALSE, warning = FALSE, cache = FALSE, output = TRUE, eval = FALSE}
-file.edit("renv.lock")
+file.edit(
+  here::here("renv.lock")
+)
 ```
 
 The version of R running with your environment should ideally match the lock file.
 
 ```{r health-environments-session, include = TRUE, echo = TRUE, message = FALSE, warning = FALSE, cache = FALSE, output = TRUE, eval = TRUE}
-source("pipelines/workshop_support.R")
+withr::with_dir(
+  here::here(),
+  source("pipelines/workshop_support.R")
+)
 use_workshop_book_outputs()
 
 R.version.string
@@ -48,7 +53,9 @@ Compare the running version with the reference version, **4.4.1**. A lockfile
 records a version; it does not switch your running R session.
 
 ```{r health-environments-lockfile, include = TRUE, echo = TRUE, message = FALSE, warning = FALSE, cache = FALSE, output = TRUE, eval = TRUE}
-lock <- renv::lockfile_read("renv.lock")
+lock <- renv::lockfile_read(
+  here::here("renv.lock")
+)
 lock$R$Version
 workshop_packages <- c(
   "dataspice", "meta", "pins", "rfair", "rmarkdown",
@@ -105,7 +112,7 @@ packages, and tools for the hands-on activities.
 View and record the details of the current R session.
 
 ```{r health-environments-reload, include = TRUE, echo = TRUE, message = FALSE, warning = FALSE, cache = FALSE, output = TRUE, eval = FALSE}
-raw_file <- file.path("data", "raw", "healthwellbeing.rda")
+raw_file <- here::here("data", "raw", "healthwellbeing.rda")
 stopifnot(
   file.exists(raw_file),
   identical(
@@ -119,14 +126,17 @@ stopifnot(identical(loaded_names, "HealthWellbeing"))
 health <- data_env[["HealthWellbeing"]]
 stopifnot(nrow(health) == 29L, ncol(health) == 5L)
 
-source("pipelines/workshop_support.R")
+withr::with_dir(
+  here::here(),
+  source("pipelines/workshop_support.R")
+)
 output_dir <- workshop_output_dir()
 dir.create(output_dir, recursive = TRUE, showWarnings = FALSE)
 writeLines(
   capture.output(sessionInfo()),
-  file.path(output_dir, "session-info.txt")
+  here::here(output_dir, "session-info.txt")
 )
-file.edit(file.path(output_dir, "session-info.txt"))
+file.edit(here::here(output_dir, "session-info.txt"))
 ```
 
 ## Checkpoint {#environments-checkpoint}

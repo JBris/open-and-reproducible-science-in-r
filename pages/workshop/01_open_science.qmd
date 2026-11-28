@@ -78,7 +78,7 @@ reference pipeline.
 3. **Is the reference pipeline in your session the latest version?** Git identifies each version of a file by a hash of its contents. Compare the copy in your MyBinder project with the one in the latest commit.
 
 ```{bash git-hash, include = TRUE, echo = TRUE, message = FALSE, warning = FALSE, cache = FALSE, output = TRUE, eval = FALSE}
-git hash-object pipelines/_targets_health_wellbeing.R
+git hash-object /home/rstudio/pipelines/_targets_health_wellbeing.R
 git -C /tmp/workshop-history.git rev-parse HEAD:pipelines/_targets_health_wellbeing.R
 ```
 

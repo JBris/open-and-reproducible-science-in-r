@@ -10,13 +10,10 @@ execute:
 
 ## What would a collaborator need?
 
-We use the **FAIR** principles to document the
-`HealthWellbeing` teaching snapshot and assess what software can
-discover about it. The table gives one question to ask for each
-principle [@gofair-principles].
+We use the **FAIR** principles to document the `HealthWellbeing` teaching snapshot and assess what software can discover about it. The table gives one question to ask for each principle [@gofair-principles].
 
 | Principle | Ask | Example for this dataset |
-| --- | --- | --- |
+|------------------------|------------------------|------------------------|
 | **Findable** | Can someone locate and identify it? | A named record with a stable identifier and searchable metadata. |
 | **Accessible** | How can someone retrieve it, and on what terms? | A working download link with a statement of the access terms, or clear instructions for requesting access. |
 | **Interoperable** | Can people and software interpret its structure? | Use shared metadata terms such as Schema.org and describe the variables and their units. |
@@ -24,40 +21,41 @@ principle [@gofair-principles].
 
 ## Describe the snapshot with dataspice {#create-fair-metadata}
 
-Four prepared CSV files under
-`data/metadata/health-wellbeing/` record the title and licence, creator,
-download link, and variables. `n` in `attributes.csv` (line 4) says
-that each row of the data describes **one study** and `n` is the sample
-size within that study. The teaching snapshot has 29 rows and five
-variables [@healthwellbeing].
+Four prepared CSV files under `data/metadata/health-wellbeing/` record the title and licence, creator, download link, and variables. `n` in `attributes.csv` (line 4) says that each row of the data describes **one study** and `n` is the sample size within that study. The teaching snapshot has 29 rows and five variables [@healthwellbeing].
 
 ```{r health-dataspice-export-edit, eval = FALSE}
 file.edit(
-  file.path("data", "metadata", "health-wellbeing", "attributes.csv")
+  here::here("data", "metadata", "health-wellbeing", "attributes.csv")
 )
 ```
 
-*dataspice* combines the CSV files into a Schema.org JSON-LD record
-[@dataspice]. The excerpt shows the title, licence, download link, and variables, so you can see that its meaning and unit survive the
-export.
+*dataspice* combines the CSV files into a Schema.org JSON-LD record [@dataspice]. The excerpt shows the title, licence, download link, and variables, so you can see that its meaning and unit survive the export.
 
-source("pipelines/workshop_support.R")
+``` r
+withr::with_dir(
+  here::here(),
+  source("pipelines/workshop_support.R")
+)
 use_workshop_book_outputs()
+```
 
 ```{r health-dataspice-export, eval = TRUE}
-source("pipelines/workshop_support.R")
-source_dir <- file.path("data", "metadata", "health-wellbeing")
+withr::with_dir(
+  here::here(),
+  source("pipelines/workshop_support.R")
+)
+source_dir <- here::here("data", "metadata", "health-wellbeing")
 
-metadata_dir <- file.path(workshop_output_dir(), "metadata")
+metadata_dir <- here::here(workshop_output_dir(), "metadata")
 dir.create(metadata_dir, recursive = TRUE, showWarnings = FALSE)
 
-templates <- file.path(
+templates <- here::here(
   source_dir, c("biblio.csv", "creators.csv", "access.csv", "attributes.csv")
 )
 stopifnot(all(file.copy(templates, metadata_dir, overwrite = TRUE)))
 dataspice::write_spice(path = metadata_dir)
 
-record <- jsonlite::read_json(file.path(metadata_dir, "dataspice.json"))
+record <- jsonlite::read_json(here::here(metadata_dir, "dataspice.json"))
 excerpt <- record[c("name", "license", "distribution")]
 excerpt$variableMeasured <- Filter(
   function(variable) variable$name == "n", record$variableMeasured
@@ -65,26 +63,25 @@ excerpt$variableMeasured <- Filter(
 jsonlite::toJSON(excerpt, auto_unbox = TRUE, pretty = TRUE)
 ```
 
-This record describes the [verified teaching file](00_preparation.qmd#preparation-data), detailing the `n` variable. 
+This record describes the [verified teaching file](00_preparation.qmd#preparation-data), detailing the `n` variable.
 
 ::: {.callout-note collapse="true"}
 ## HealthWellbeing JSON-LD
 
 ```{r health-jsonld-record, echo = FALSE, results = "asis", eval = TRUE}
-metadata_file <- file.path("data", "metadata", "health-wellbeing", "dataspice.json")
+metadata_file <- here::here("data", "metadata", "health-wellbeing", "dataspice.json")
 cat(c("```json", readLines(metadata_file, warn = FALSE), "```"), sep = "\n")
 ```
 :::
 
 ## Assess the snapshot with rfair {#assess-fair-metadata}
 
-*rfair* takes a URL or persistent identifier and applies a set of tests
-to the metadata it can retrieve [@rfair]. 
+*rfair* takes a URL or persistent identifier and applies a set of tests to the metadata it can retrieve [@rfair].
 
 First, assess the `HealthWellbeing.rda` file:
 
 ```{r health-rfair-baseline, eval = TRUE}
-metadata_file <- file.path("data", "metadata", "health-wellbeing", "dataspice.json")
+metadata_file <- here::here("data", "metadata", "health-wellbeing", "dataspice.json")
 metadata <- jsonlite::read_json(metadata_file)
 snapshot_url <- metadata$distribution[[1L]]$contentUrl
 baseline <- rfair::assess_fair(
@@ -121,47 +118,33 @@ comparison[comparison$metric_identifier %in% metrics,
            c("metric_identifier", "status_a", "status_b")]
 ```
 
-One metric from each principle shows what changed and what
-stayed the same.
+One metric from each principle shows what changed and what stayed the same.
 
 | Metric | Download URL alone | With the JSON-LD supplied |
-| --- | --- | --- |
+|----|----|----|
 | Persistent identifier (`FsF-F1-02MD`) | Fail | Fail |
 | Access information in metadata (`FsF-A1-01M`) | Fail | Fail |
 | Formal language for metadata (`FsF-I1-01M`) | Fail | Pass |
 | Licence in metadata (`FsF-R1.1-01M`) | Fail | Pass |
 
-The file downloaded successfully in both
-runs, yet the access check (`FsF-A1-01M`) failed both times. Why? What would you add
-to the public record so a reader knows how to get the file?
+The file downloaded successfully in both runs, yet the access check (`FsF-A1-01M`) failed both times. Why? What would you add to the public record so a reader knows how to get the file?
 
 ::: {.callout-tip collapse="true"}
 ## One possible answer
 
-This metric looks for access information in the metadata. A working
-link shows that the assessor could download the file at that moment.
-It does not tell a reader whether anyone can download it, whether
-they need to sign in, or whether they must request approval.
+This metric looks for access information in the metadata. A working link shows that the assessor could download the file at that moment. It does not tell a reader whether anyone can download it, whether they need to sign in, or whether they must request approval.
 
-For this snapshot, a statement such as "Public download, no sign-in
-required" beside the URL would answer the question. Schema.org has
-`isAccessibleForFree` and `conditionsOfAccess` properties for this.
-For a restricted dataset, the record could say who may access the data
-and how to request it. Rerun the assessment to check whether a
-particular metric version recognises the statement.
+For this snapshot, a statement such as "Public download, no sign-in required" beside the URL would answer the question. Schema.org has `isAccessibleForFree` and `conditionsOfAccess` properties for this. For a restricted dataset, the record could say who may access the data and how to request it. Rerun the assessment to check whether a particular metric version recognises the statement.
 :::
 
 ## Checkpoint {#metadata-checkpoint}
 
-The record now says what the data mean and how to get them. It does
-not say which version of the data produced a given result. Next, we
-identify that version.
-[Data and model versioning](04_versioning.qmd)
+The record now says what the data mean and how to get them. It does not say which version of the data produced a given result. Next, we identify that version. [Data and model versioning](04_versioning.qmd)
 
 ## Further reading
 
-- Documenting datasets with dataspice [@dataspice].
-- Assessing what a published identifier exposes with rfair [@rfair].
-- FAIR Principles: [@gofair-principles].
-- CARE Principles: [@gida-care-principles].
-- [Inspecting an archived Zenodo record](08_archiving.qmd).
+-   Documenting datasets with dataspice [@dataspice].
+-   Assessing what a published identifier exposes with rfair [@rfair].
+-   FAIR Principles: [@gofair-principles].
+-   CARE Principles: [@gida-care-principles].
+-   [Inspecting an archived Zenodo record](08_archiving.qmd).

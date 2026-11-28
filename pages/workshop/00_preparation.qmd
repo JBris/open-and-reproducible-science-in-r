@@ -42,7 +42,10 @@ library matches the lockfile. If the library in your MyBinder session differs
 from the lockfile, check with the instructor before proceeding.
 
 ```{r health-preparation-environment, include = TRUE, echo = TRUE, message = FALSE, warning = FALSE, cache = FALSE, output = TRUE, eval = TRUE}
-source("pipelines/workshop_support.R")
+withr::with_dir(
+  here::here(),
+  source("pipelines/workshop_support.R")
+)
 use_workshop_book_outputs()
 
 R.version.string
@@ -54,7 +57,7 @@ renv::status()
 Run the following in the **R Console** from the project root. This will download and inspect the meta-analysis dataset.
 
 ```{r health-preparation-download, include = TRUE, echo = TRUE, message = FALSE, warning = FALSE, cache = FALSE, output = TRUE, eval = TRUE}
-raw_file <- file.path("data", "raw", "healthwellbeing.rda")
+raw_file <- here::here("data", "raw", "healthwellbeing.rda")
 source_url <- paste0(
   "https://raw.githubusercontent.com/MathiasHarrer/dmetar/",
   "38c9b9bb5f85ea49de33e5d2536f6544d5268517/data/HealthWellbeing.rda"
@@ -70,7 +73,10 @@ loaded_names <- load(raw_file, envir = data_env)
 stopifnot(identical(loaded_names, "HealthWellbeing"))
 health <- data_env[["HealthWellbeing"]]
 
-source(file.path("pipelines", "prepare_health_wellbeing.R"))
+withr::with_dir(
+  here::here(),
+  source("pipelines/prepare_health_wellbeing.R")
+)
 
 head(health, 5)
 ```

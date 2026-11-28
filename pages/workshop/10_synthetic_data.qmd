@@ -25,22 +25,28 @@ We read the full 29-study dataset by its recorded pin version, so the
 exercise starts from the same input as the workshop pipeline.
 
 ```{r health-synthetic-input, include = TRUE, echo = TRUE, message = FALSE, warning = FALSE, cache = FALSE, output = TRUE, eval = TRUE}
-source("pipelines/workshop_support.R")
+withr::with_dir(
+  here::here(),
+  source("pipelines/workshop_support.R")
+)
 use_workshop_book_outputs()
 
 box::use(pins[board_folder, pin_read], utils[read.csv])
 
-source("pipelines/workshop_support.R")
+withr::with_dir(
+  here::here(),
+  source("pipelines/workshop_support.R")
+)
 workshop_dir <- workshop_output_dir()
 versions <- read.csv(
-  file.path(workshop_dir, "dataset-versions.csv"),
+  here::here(workshop_dir, "dataset-versions.csv"),
   colClasses = "character"
 )
 full_version <- versions$version[versions$scope == "all"]
 stopifnot(length(full_version) == 1L)
 
 data_board <- board_folder(
-  file.path(workshop_dir, "data_store"),
+  here::here(workshop_dir, "data_store"),
   versioned = TRUE
 )
 health_full <- pin_read(

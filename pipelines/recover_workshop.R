@@ -1,8 +1,14 @@
 # Run from the project root to restore the full-dataset REML baseline.
 local({
-  source("pipelines/workshop_support.R", local = TRUE)
+  withr::with_dir(
+    here::here(),
+    source("pipelines/workshop_support.R", local = TRUE)
+  )
   workshop_dir <- workshop_output_dir()
-  source("pipelines/prepare_health_wellbeing.R", local = TRUE)
+  withr::with_dir(
+    here::here(),
+    source("pipelines/prepare_health_wellbeing.R", local = TRUE)
+  )
 
   dir.create("workspace", showWarnings = FALSE)
   restore_reference <- function(reference, working_copy) {
@@ -21,7 +27,7 @@ local({
     stopifnot(file.copy(reference, working_copy, overwrite = TRUE))
   }
 
-  script <- file.path("workspace", "_targets.R")
+  script <- here::here("workspace", "_targets.R")
   restore_reference("pipelines/_targets_health_wellbeing.R", script)
-  targets::tar_make(script = script, store = file.path(workshop_dir, "_targets"))
+  targets::tar_make(script = script, store = here::here(workshop_dir, "_targets"))
 })

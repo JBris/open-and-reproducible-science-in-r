@@ -425,7 +425,10 @@ Get back on track
 </div>
 <div class="callout-body-container callout-body">
 <p>If you arrived late, lost your session, or broke a working file, run this from the project root in the <strong>R Console</strong>. It selects the full dataset, backs up your working pipeline in <code>workspace/</code>, then restores and runs the reference pipeline.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"pipelines/recover_workshop.R"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>withr<span class="sc">::</span><span class="fu">with_dir</span>(</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  here<span class="sc">::</span><span class="fu">here</span>(),</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">source</span>(<span class="st">"pipelines/recover_workshop.R"</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <p>After recovery, run Step 1 to set the paths and then skip to <a href="#check-dependencies">Step 4</a>. You can also go straight to the <a href="../../pages/workshop/06_quarto.html#step-1-copy-and-render-the-template">Quarto report exercise</a>.</p>
 </div>
 </div>
@@ -505,26 +508,32 @@ fit, data_provenance, data_version, model_version, pipeline_file -&gt; result -&
 <h2 data-number="9.3" class="anchored" data-anchor-id="step-1-copy-the-workbook-pipeline"><span class="header-section-number">9.3</span> Step 1: copy the workbook pipeline</h2>
 <p>Run this code. It loads the <em>targets</em> functions and copies the partially completed template to <code>workspace/_targets.R</code>, your own working copy. The copy is only made if it does not exist yet, so rerunning the chunk keeps your edits. Git ignores the <code>workspace/</code> folder, so the supplied template stays unchanged.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"pipelines/workshop_support.R"</span>)</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">use_workshop_book_outputs</span>()</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>box<span class="sc">::</span><span class="fu">use</span>(</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  targets[tar_make, tar_network, tar_outdated, tar_read, tar_visnetwork]</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="fu">invisible</span>(<span class="fu">loadNamespace</span>(<span class="st">"visNetwork"</span>)) <span class="co"># Load the graph display package quietly.</span></span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"pipelines/workshop_support.R"</span>)</span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>workshop_dir <span class="ot">&lt;-</span> <span class="fu">workshop_output_dir</span>()</span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>pipeline_template <span class="ot">&lt;-</span> <span class="fu">file.path</span>(</span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>  <span class="st">"pipelines"</span>, <span class="st">"exercise"</span>, <span class="st">"_targets_health_wellbeing.R"</span></span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>pipeline_script <span class="ot">&lt;-</span> <span class="fu">file.path</span>(<span class="st">"workspace"</span>, <span class="st">"_targets.R"</span>)</span>
-<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>pipeline_store <span class="ot">&lt;-</span> <span class="fu">file.path</span>(workshop_dir, <span class="st">"_targets"</span>)</span>
-<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a><span class="fu">dir.create</span>(<span class="st">"workspace"</span>, <span class="at">showWarnings =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">file.exists</span>(pipeline_script)) {</span>
-<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">file.copy</span>(pipeline_template, pipeline_script)</span>
-<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>withr<span class="sc">::</span><span class="fu">with_dir</span>(</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  here<span class="sc">::</span><span class="fu">here</span>(),</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">source</span>(<span class="st">"pipelines/workshop_support.R"</span>)</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="fu">use_workshop_book_outputs</span>()</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>box<span class="sc">::</span><span class="fu">use</span>(</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  targets[tar_make, tar_network, tar_outdated, tar_read, tar_visnetwork]</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="fu">invisible</span>(<span class="fu">loadNamespace</span>(<span class="st">"visNetwork"</span>)) <span class="co"># Load the graph display package quietly.</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>withr<span class="sc">::</span><span class="fu">with_dir</span>(</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>  here<span class="sc">::</span><span class="fu">here</span>(),</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">source</span>(<span class="st">"pipelines/workshop_support.R"</span>)</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>workshop_dir <span class="ot">&lt;-</span> <span class="fu">workshop_output_dir</span>()</span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>pipeline_template <span class="ot">&lt;-</span> here<span class="sc">::</span><span class="fu">here</span>(</span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>  <span class="st">"pipelines"</span>, <span class="st">"exercise"</span>, <span class="st">"_targets_health_wellbeing.R"</span></span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>pipeline_script <span class="ot">&lt;-</span> here<span class="sc">::</span><span class="fu">here</span>(<span class="st">"workspace"</span>, <span class="st">"_targets.R"</span>)</span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>pipeline_store <span class="ot">&lt;-</span> here<span class="sc">::</span><span class="fu">here</span>(workshop_dir, <span class="st">"_targets"</span>)</span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a><span class="fu">dir.create</span>(<span class="st">"workspace"</span>, <span class="at">showWarnings =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">file.exists</span>(pipeline_script)) {</span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">file.copy</span>(pipeline_template, pipeline_script)</span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="step-2-run-the-pipeline-before-completing-it" class="level2" data-number="9.4">
@@ -626,7 +635,7 @@ Solution to TODO 2
 <h2 data-number="9.8" class="anchored" data-anchor-id="targets-checkpoint"><span class="header-section-number">9.8</span> Checkpoint</h2>
 <p>Refer to the bottom two steps of <code>workspace/_targets.R</code>. We have fitted a mixed-effect meta-analysis model and written the results to a CSV file: <code>outputs/health-wellbeing/meta-summary.csv</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">read.csv</span>(<span class="fu">file.path</span>(</span>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">read.csv</span>(here<span class="sc">::</span><span class="fu">here</span>(</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">"outputs"</span>, <span class="st">"health-wellbeing"</span>, <span class="st">"meta-summary.csv"</span></span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>)) <span class="sc">|&gt;</span> </span>
 <span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(<span class="fu">c</span>(<span class="st">"data_version"</span>, <span class="st">"data_scope"</span>, <span class="st">"data_filter"</span>, <span class="st">"pooled_r"</span>, <span class="st">"confidence_level"</span>, <span class="st">"tau2"</span>, <span class="st">"effect_scale"</span>, <span class="st">"tau_method"</span>, <span class="st">"meta_version"</span>)) <span class="sc">|&gt;</span></span>

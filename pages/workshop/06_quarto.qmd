@@ -30,7 +30,10 @@ backs up your working pipeline in `workspace/`, and rebuilds the summary
 with the reference pipeline. Any report edits you have already made are kept.
 
 ``` r
-source("pipelines/recover_workshop.R")
+withr::with_dir(
+  here::here(),
+  source("pipelines/recover_workshop.R")
+)
 ```
 :::
 
@@ -44,11 +47,14 @@ edit. If you want to restart from the template, rename your existing
 `workspace/report.qmd` in the **Files** pane before running this block.
 
 ```{r health-quarto-render-template, eval = FALSE}
-source("pipelines/workshop_support.R")
+withr::with_dir(
+  here::here(),
+  source("pipelines/workshop_support.R")
+)
 use_workshop_book_outputs()
 
 dir.create("workspace", showWarnings = FALSE)
-report <- file.path("workspace", "report.qmd")
+report <- here::here("workspace", "report.qmd")
 if (!file.exists(report)) {
   stopifnot(file.copy("pipelines/exercise/health_wellbeing_report.qmd", report))
 }
@@ -60,7 +66,7 @@ the pooled estimate appears along with three **TODO** markers.
 
 ```{r health-quarto-view-rendered-template-view-html, eval = FALSE}
 browseURL(
-  file.path("workspace", "report.html")
+  here::here("workspace", "report.html")
 )
 ```
 
@@ -72,7 +78,7 @@ Open `workspace/report.qmd` in RStudio.
 
 ```{r health-quarto-view-rendered-template-edit, eval = FALSE}
 file.edit(
-  file.path("workspace", "report.qmd")
+  here::here("workspace", "report.qmd")
 )
 ```
 
@@ -112,7 +118,7 @@ Render the report again after updating the `report.qmd` file:
 ```{r health-quarto-render-iterative, eval = FALSE}
 render_workshop_report()
 browseURL(
-  file.path("workspace", "report.html")
+  here::here("workspace", "report.html")
 )
 ```
 
@@ -160,7 +166,7 @@ your copy with it.
 
 ```{r health-quarto-view-rendered-template-edit-complete, eval = FALSE}
 file.edit(
-  file.path("pipelines", "health_wellbeing_report.qmd")
+  here::here("pipelines", "health_wellbeing_report.qmd")
 )
 ```
 
@@ -171,7 +177,7 @@ summary file:
 
 ```{r health-quarto-summary, include = TRUE, echo = TRUE, message = FALSE, warning = FALSE, cache = FALSE, output = TRUE, eval = FALSE}
 summary_csv <- read.csv(
-  file.path(workshop_output_dir(), "meta-summary.csv")
+  here::here(workshop_output_dir(), "meta-summary.csv")
 )
 summary_csv[, c("data_version", "studies", "pooled_r", "ci_lower", "ci_upper")]
 ```
@@ -181,7 +187,7 @@ Run this code to render the report and open it in your browser.
 ```{r health-quarto-render-final, eval = FALSE}
 render_workshop_report()
 browseURL(
-  file.path("workspace", "report.html")
+  here::here("workspace", "report.html")
 )
 ```
 
@@ -213,9 +219,9 @@ To try one, create a separate article directory and start from the
 [Elsevier template](https://github.com/quarto-journals/elsevier): 
 
 ```{bash add-quarto-template, eval = FALSE, output = TRUE, echo = TRUE}
-rm -rf health-wellbeing-article
-mkdir -p health-wellbeing-article
-cd health-wellbeing-article
+rm -rf /home/rstudio/health-wellbeing-article
+mkdir -p /home/rstudio/health-wellbeing-article
+cd /home/rstudio/health-wellbeing-article
 quarto use template quarto-journals/elsevier --no-prompt
 ```
 
@@ -226,7 +232,7 @@ requires a LaTeX installation.
 Open the downloaded Elsevier template file:
 
 ```{r health-quarto-view-rendered-template, eval = FALSE}
-elsevier_path <- file.path("health-wellbeing-article", "health-wellbeing-article.qmd")
+elsevier_path <- here::here("health-wellbeing-article", "health-wellbeing-article.qmd")
 file.edit(
   elsevier_path
 )
@@ -238,7 +244,7 @@ And we can render this document as a PDF.
 system2("quarto", c("render", shQuote(elsevier_path), "--to", "elsevier-pdf"))
 
 browseURL(
-  file.path("health-wellbeing-article", "health-wellbeing-article.pdf")
+  here::here("health-wellbeing-article", "health-wellbeing-article.pdf")
 )
 ```
 

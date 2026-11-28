@@ -527,7 +527,7 @@ div.csl-indent {
 <li><strong>Is the reference pipeline in your session the latest version?</strong> Git identifies each version of a file by a hash of its contents. Compare the copy in your MyBinder project with the one in the latest commit.</li>
 </ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> hash-object pipelines/_targets_health_wellbeing.R</span>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> hash-object /home/rstudio/pipelines/_targets_health_wellbeing.R</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> <span class="at">-C</span> /tmp/workshop-history.git rev-parse HEAD:pipelines/_targets_health_wellbeing.R</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Matching lines mean identical contents. If they differ, the repository changed after your MyBinder environment was built. This is why a result should cite a specific commit or release rather than “the latest version”.</p>

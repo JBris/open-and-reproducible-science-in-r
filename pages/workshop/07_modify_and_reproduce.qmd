@@ -27,7 +27,10 @@ REML. If you lost your report, copy your saved `report.qmd` back into
 [Quarto report exercise](06_quarto.qmd) before continuing.
 
 ``` r
-source("pipelines/recover_workshop.R")
+withr::with_dir(
+  here::here(),
+  source("pipelines/recover_workshop.R")
+)
 ```
 :::
 
@@ -38,11 +41,14 @@ Compare your current `meta-summary.csv` file with a new rebuild in the same envi
 The `identical()` function will compare the new summary with the old.
 
 ```{r health-modify-reproduce, eval = FALSE}
-source("pipelines/workshop_support.R")
+withr::with_dir(
+  here::here(),
+  source("pipelines/workshop_support.R")
+)
 workshop_dir <- workshop_output_dir()
-pipeline_script <- file.path("workspace", "_targets.R")
-pipeline_store <- file.path(workshop_dir, "_targets")
-summary_path <- file.path(workshop_dir, "meta-summary.csv")
+pipeline_script <- here::here("workspace", "_targets.R")
+pipeline_store <- here::here(workshop_dir, "_targets")
+summary_path <- here::here(workshop_dir, "meta-summary.csv")
 if (!file.exists(pipeline_script) || !file.exists(summary_path)) {
   stop("Run the Get back on track command at the top of this lesson.")
 }
@@ -89,7 +95,7 @@ Run `render_workshop_report()` and reload `workspace/report.html`. The methods s
 ```{r health-report-render, eval = FALSE}
 render_workshop_report()
 browseURL(
-  file.path("workspace", "report.html")
+  here::here("workspace", "report.html")
 )
 ```
 
