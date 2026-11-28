@@ -51,7 +51,7 @@ throughout the session:
 2.  Tag the commit and publish a release with notes on the [releases
     page](https://github.com/JBris/open-and-reproducible-science-in-r/releases).
 3.  Publishing the release builds and pushes the RStudio and Binder Docker images.
-4. With  Zenodo integration enabled for the repository, Zenodo also archives the tagged files.
+4. With Zenodo integration enabled for the repository, Zenodo also archives the tagged files.
 
 ## Inspect a Zenodo record
 
@@ -96,7 +96,7 @@ restricting the original observations.
 
 Synthetic data generated with *synthpop* can help others test whether a
 workflow runs. It does not let them verify findings computed from
-inaccessible factors, and not does it guarantee privacy. The [supplementary synthetic data exercise](10_synthetic_data.qmd) works through an example after the workshop.
+data that cannot be accessed, and it does not guarantee privacy. The [supplementary synthetic data exercise](10_synthetic_data.qmd) works through an example after the workshop.
 
 ## Checkpoint {#zenodo-checkpoint}
 

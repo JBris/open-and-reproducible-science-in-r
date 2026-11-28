@@ -80,7 +80,7 @@ after$pooled_r - before$pooled_r
 
 Expect `pipeline_file`, `fit`, `result`, and `summary_file` to be run again.
 
-The input checks and predictive model branch remain up to date. Both pooled estimates round to **0.363**. Switching from REML to DL increases the pooled correlation by about **0.00010** in this dataset. Compare how the reported heterogeneity and intervals change in this 
+The input checks and predictive model branch remain up to date. Both pooled estimates round to **0.363**. Switching from REML to DL increases the pooled correlation by about **0.00010** in this dataset. Compare the reported heterogeneity and intervals for the two estimators.
 
 ## Step 3: update the report
 
