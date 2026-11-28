@@ -1,6 +1,33 @@
 # Changelog
 
-## [Unreleased]
+## [1.0.0] - 2026-11-28
+
+### Added
+
+- Add the CARE Principles for Indigenous Data Governance to the FAIR lesson's
+  further reading.
+- Add a separate Docker Compose configuration for Memgraph, Memgraph Lab, and
+  a read-only Memgraph MCP server.
+
+### Changed
+
+- Streamline MyBinder preparation and the opening Git exercise. Revise the
+  lessons on computational environments, FAIR assessment, and data and model
+  versioning to show the steps used in the workshop demonstrations.
+- Revise the `targets`, Quarto, and reproduction exercises to clarify the
+  dependency graph, report provenance, and comparison of REML and
+  DerSimonian–Laird estimates.
+- Configure RStudio to open the workshop project in the prepared environment
+  when no project is active, and lock the `rstudioapi` dependency.
+- Refresh the published HTML book, PDF, search index, and sitemap.
+
+### Fixed
+
+- Use Knitr for the lessons with Bash examples and skip interactive dependency
+  graphs in PDF renders.
+- Restore the CSS, JavaScript, and widget assets used by the published HTML.
+- Repair the links to the Correlations section and dataset preparation. Remove
+  links to the retired export checklist and Git fork exercise.
 
 ## [0.9.0] - 2026-11-22
 
@@ -224,7 +251,8 @@
 - Replaced earlier modelling workshop content with an integrated reproducibility workflow using GitHub, renv, Docker, targets, Quarto, and Zenodo.
 - Generalised the workshop pages for reuse across events, with event-specific details in announcements.
 
-[Unreleased]: https://github.com/JBris/open-and-reproducible-science-in-r/compare/v0.9.0...main
+[Unreleased]: https://github.com/JBris/open-and-reproducible-science-in-r/compare/v1.0.0...main
+[1.0.0]: https://github.com/JBris/open-and-reproducible-science-in-r/releases/tag/v1.0.0
 [0.9.0]: https://github.com/JBris/open-and-reproducible-science-in-r/releases/tag/v0.9.0
 [0.8.0]: https://github.com/JBris/open-and-reproducible-science-in-r/releases/tag/v0.8.0
 [0.7.0]: https://github.com/JBris/open-and-reproducible-science-in-r/releases/tag/v0.7.0
