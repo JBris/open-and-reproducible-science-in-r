@@ -6,4 +6,7 @@ setHook("rstudio.sessionInit", function(newSession) {
   }
 }, action = "append")
 
-source("renv/activate.R")
+source(file.path(
+  Sys.getenv("HOME"),
+  "renv/activate.R"
+))
