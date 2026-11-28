@@ -234,7 +234,7 @@ when its code, its upstream targets, or its tracked files change.
 
 ## Checkpoint {#targets-checkpoint}
 
-Refer the bottom two steps of `workspace/_targets.R`. We have fitted a mixed-effect meta-analysis model, and written the results to a csv file: `outputs/health-wellbeing/meta-summary.csv`.
+Refer to the bottom two steps of `workspace/_targets.R`. We have fitted a mixed-effect meta-analysis model and written the results to a CSV file: `outputs/health-wellbeing/meta-summary.csv`.
 
 ```{r meta-summary-view, include = TRUE, echo = TRUE, message = FALSE, warning = FALSE, cache = FALSE, output = TRUE, eval = FALSE}
 read.csv(file.path(

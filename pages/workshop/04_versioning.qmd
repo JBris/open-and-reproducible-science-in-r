@@ -17,7 +17,7 @@ identifier links a result to the exact input that produced it.
 
 ## Store dataset versions with pins
 
-A *pins* board stores named objects (which is usually files), called
+A *pins* board stores named objects (which are usually files), called
 pins. We use a local folder board to save our pins.
 
 We will write two versions of the `health_wellbeing` pin.
@@ -51,7 +51,8 @@ general_df <- HealthWellbeing |>
 
 head(general_df, 8)
 ```
-We next create 2 pins for each version of the dataset:
+
+We next create two pins for each version of the dataset:
 
 ```{r save-health-versioning-board-write, include = TRUE, echo = TRUE, message = FALSE, warning = FALSE, cache = FALSE, output = TRUE, eval = TRUE}
 board <- board_temp(versioned = TRUE)
@@ -172,7 +173,7 @@ tibble::tibble(
 )
 ```
 
-We can save and reload both data and models, which we treat as a versioned artifacts with their respective metadata.
+We can save and reload both data and models, which we treat as versioned artifacts with their respective metadata.
 
 ## Checkpoint {#versioning-checkpoint}
 

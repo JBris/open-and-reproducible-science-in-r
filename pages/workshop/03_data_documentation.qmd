@@ -93,7 +93,7 @@ baseline <- rfair::assess_fair(
 baseline
 ```
 
-We will next assess the JSON-D file:
+We will next assess the JSON-LD file:
 
 ```{r health-rfair-enriched, eval = TRUE}
 metadata_url <- paste0(

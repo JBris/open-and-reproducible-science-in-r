@@ -411,7 +411,7 @@ div.csl-indent {
 </section>
 <section id="store-dataset-versions-with-pins" class="level2" data-number="8.2">
 <h2 data-number="8.2" class="anchored" data-anchor-id="store-dataset-versions-with-pins"><span class="header-section-number">8.2</span> Store dataset versions with pins</h2>
-<p>A <em>pins</em> board stores named objects (which is usually files), called pins. We use a local folder board to save our pins.</p>
+<p>A <em>pins</em> board stores named objects (which are usually files), called pins. We use a local folder board to save our pins.</p>
 <p>We will write two versions of the <code>health_wellbeing</code> pin. The first contains all 29 studies, with the data source and hash as metadata. The second contains the 18 general-population studies.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">"pipelines/workshop_support.R"</span>)</span>
@@ -452,7 +452,7 @@ div.csl-indent {
 14        Lacruz, 2012 0.190   2675 general population     Germany</code></pre>
 </div>
 </div>
-<p>We next create 2 pins for each version of the dataset:</p>
+<p>We next create two pins for each version of the dataset:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>board <span class="ot">&lt;-</span> <span class="fu">board_temp</span>(<span class="at">versioned =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">pin_write</span>(</span>
@@ -488,23 +488,7 @@ div.csl-indent {
 <pre><code>    scope                version
 1     all 20261128T054236Z-11d00
 2 general 20261128T054236Z-06ae2
-+ version_file dispatched
-✔ version_file completed [0ms, 23 B]
-+ data_version dispatched
-✔ data_version completed [4ms, 75 B]
-+ dataset_file dispatched
-✔ dataset_file completed [104ms, 931 B]
-+ studies dispatched
-✔ studies completed [6ms, 938 B]
-+ data_provenance dispatched
-✔ data_provenance completed [18ms, 293 B]
-+ predictive_model dispatched
-✔ predictive_model completed [370ms, 2.46 kB]
-+ model_pin_files dispatched
-✔ model_pin_files completed [223ms, 2.12 kB]
-+ model_version dispatched
-✔ model_version completed [3ms, 75 B]
-✔ ended pipeline [8.4s, 8 completed, 0 skipped]</code></pre>
+✔ skipped pipeline [283ms, 8 skipped]</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>workshop_dir <span class="ot">&lt;-</span> <span class="fu">workshop_output_dir</span>()</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>data_board <span class="ot">&lt;-</span> <span class="fu">board_folder</span>(</span>
@@ -618,7 +602,7 @@ $source_url
 1 health_wellbeing_lm An OLS linear re… 202611… Fishe… 4.4.1     0.2.8          </code></pre>
 </div>
 </div>
-<p>We can save and reload both data and models, which we treat as a versioned artifacts with their respective metadata.</p>
+<p>We can save and reload both data and models, which we treat as versioned artifacts with their respective metadata.</p>
 </section>
 <section id="versioning-checkpoint" class="level2" data-number="8.4">
 <h2 data-number="8.4" class="anchored" data-anchor-id="versioning-checkpoint"><span class="header-section-number">8.4</span> Checkpoint</h2>
