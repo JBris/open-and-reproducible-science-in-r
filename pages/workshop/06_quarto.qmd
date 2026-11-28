@@ -56,7 +56,10 @@ use_workshop_book_outputs()
 dir.create("workspace", showWarnings = FALSE)
 report <- here::here("workspace", "report.qmd")
 if (!file.exists(report)) {
-  stopifnot(file.copy("pipelines/exercise/health_wellbeing_report.qmd", report))
+  stopifnot(file.copy(
+    here::here("pipelines/exercise/health_wellbeing_report.qmd"),
+    report
+  ))
 }
 render_workshop_report()
 ```
